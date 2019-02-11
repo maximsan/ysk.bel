@@ -1,0 +1,19 @@
+## System and generated files
+.idea
+.DS_Store
+.sass-cache
+
+## Directories
+log/
+dist/
+scss/
+node_modules/
+bower_components/
+doc/
+temp/
+
+## Files
+result.xml
+npm-debug.log
+package-lock.json
+CNAME
