@@ -18,9 +18,18 @@
     "url": "https://cvgellhorn@github.com/cvgellhorn/webpack-boilerplate.git"
   },
   "dependencies": {
+    "aos": "^2.3.4",
+    "bootstrap": "^4.3.0",
+    "dir-loader": "^0.3.0",
+    "ejs": "^2.6.1",
+    "ejs-locals": "^1.0.2",
+    "ejs-webpack-loader": "^2.2.2",
+    "express": "^4.16.4",
     "gulp": "^4.0.0",
     "gulp-markdown-it": "^0.1.1",
-    "lodash": "4.17.11"
+    "jquery": "^3.3.1",
+    "lodash": "4.17.11",
+    "popper.js": "^1.14.7"
   },
   "devDependencies": {
     "@babel/core": "7.2.2",
