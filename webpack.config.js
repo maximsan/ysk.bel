@@ -6,8 +6,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const IS_DEV = (process.env.NODE_ENV === 'dev');
 
 const dirNode = 'node_modules';
-const dirApp = path.join(__dirname, 'js');
-const dirAssets = path.join(__dirname, 'assets');
+const dirApp = path.resolve(__dirname, 'js');
+const dirAssets = path.resolve(__dirname, 'assets');
 
 //const appHtmlTitle = 'Webpack Boilerplate';
 
@@ -16,6 +16,9 @@ const dirAssets = path.join(__dirname, 'assets');
  */
 module.exports = {
     entry: {
+        vendor: [
+            'AOS'
+        ],
         bundle: path.join(dirApp, 'index')
     },
     resolve: {
@@ -45,6 +48,19 @@ module.exports = {
                 options: {
                     compact: true
                 }
+            },
+            //EJS
+            {
+                test: /\.ejs$/,
+                use: [
+                    {
+                      loader: "ejs-webpack-loader",
+                      options: {
+                        data: {title: "New Title", someVar:"hello world"},
+                        htmlmin: true
+                      }
+                    }
+                ]
             },
 
             // STYLES
