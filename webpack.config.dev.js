@@ -2,17 +2,20 @@ const merge = require('webpack-merge');
 const webpackConfig = require('./webpack.config');
 
 module.exports = merge(webpackConfig, {
+  devtool: 'eval',
 
-    devtool: 'eval',
-
-    output: {
-        pathinfo: true,
-        publicPath: '/',
-        filename: '[name].js'
-    },
-
-    devServer: {
-        host: '0.0.0.0'
-    }
-
+  output: {
+    pathinfo: true,
+    publicPath: '/',
+    filename: '[name].js'
+  },
+  watch: true,
+  watchOptions: {
+    aggregateTimeout: 500,
+    ignored: ['/node_modules/', '/doc/', '/temp/']
+  },
+  devServer: {
+    port: 8008,
+    watchContentBase: true
+  }
 });
