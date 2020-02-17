@@ -12,93 +12,92 @@ const dirAssets = path.resolve(__dirname, 'assets');
 //const appHtmlTitle = 'Webpack Boilerplate';
 
 module.exports = {
-  entry: {
-    vendor: ['AOS'],
-    bundle: path.join(dirApp, 'index')
-  },
-  resolve: {
-    modules: [dirNode, dirApp, dirAssets]
-  },
-  plugins: [
-    new webpack.DefinePlugin({
-      IS_DEV: IS_DEV
-    }),
+    entry: {
+        vendor: ['AOS'],
+        bundle: path.join(dirApp, 'index')
+    },
+    resolve: {
+        modules: [dirNode, dirApp, dirAssets]
+    },
+    plugins: [
+        new webpack.DefinePlugin({
+            IS_DEV: IS_DEV
+        }),
 
-    new HtmlWebpackPlugin({
-      template: path.join(__dirname, 'index.ejs')
-    })
-  ],
-  module: {
-    rules: [
-      // BABEL
-      {
-        test: /\.js$/,
-        loader: 'babel-loader',
-        exclude: /(node_modules)/,
-        options: {
-          compact: true
-        }
-      },
-      //EJS
-      {
-        test: /\.ejs$/,
-        use: [
-          {
-            loader: 'ejs-webpack-loader',
-            options: {
-              data: {
-                title:
-                  'Усадьба серебряный карась. Рыбалка. Баня. Минская Область'
-              },
-              htmlmin: true
+        new HtmlWebpackPlugin({
+            template: path.join(__dirname, 'index.ejs')
+        })
+    ],
+    module: {
+        rules: [
+            // BABEL
+            {
+                test: /\.js$/,
+                loader: 'babel-loader',
+                exclude: /(node_modules)/,
+                options: {
+                    compact: true
+                }
+            },
+            //EJS
+            {
+                test: /\.ejs$/,
+                use: [
+                    {
+                        loader: 'ejs-webpack-loader',
+                        options: {
+                            data: {
+                                title:
+                                    'Усадьба серебряный карась. Рыбалка. Баня. Минская Область'
+                            },
+                            htmlmin: true
+                        }
+                    }
+                ]
+            },
+            // STYLES
+            {
+                test: /\.css$/,
+                use: [
+                    'style-loader',
+                    {
+                        loader: 'css-loader',
+                        options: {
+                            sourceMap: IS_DEV
+                        }
+                    }
+                ]
+            },
+
+            // CSS / SASS
+            {
+                test: /\.scss/,
+                use: [
+                    'style-loader',
+                    {
+                        loader: 'css-loader',
+                        options: {
+                            sourceMap: IS_DEV
+                        }
+                    },
+                    {
+                        loader: 'sass-loader',
+                        options: {
+                            sourceMap: IS_DEV,
+                            includePaths: [dirAssets]
+                        }
+                    }
+                ]
+            },
+
+            // IMAGES
+            {
+                test: /\.(jpe?g|png|gif)$/,
+                loader: 'file-loader',
+                options: {
+                    name: '[path][name].[ext]'
+                }
             }
-          }
         ]
-      },
-
-      // STYLES
-      {
-        test: /\.css$/,
-        use: [
-          'style-loader',
-          {
-            loader: 'css-loader',
-            options: {
-              sourceMap: IS_DEV
-            }
-          }
-        ]
-      },
-
-      // CSS / SASS
-      {
-        test: /\.scss/,
-        use: [
-          'style-loader',
-          {
-            loader: 'css-loader',
-            options: {
-              sourceMap: IS_DEV
-            }
-          },
-          {
-            loader: 'sass-loader',
-            options: {
-              sourceMap: IS_DEV,
-              includePaths: [dirAssets]
-            }
-          }
-        ]
-      },
-
-      // IMAGES
-      {
-        test: /\.(jpe?g|png|gif)$/,
-        loader: 'file-loader',
-        options: {
-          name: '[path][name].[ext]'
-        }
-      }
-    ]
-  }
+    }
 };
