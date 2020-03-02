@@ -1,0 +1,330 @@
+@media (max-width: 767.99px) {
+    html,
+    body {
+        overflow-x: hidden;
+    }
+
+    .navbar {
+        padding: 0.75rem 0rem 0.75rem 0.25rem;
+
+        .container {
+            justify-content: flex-start;
+
+            .navbar-header {
+                margin-bottom: 0.5rem;
+                display: flex;
+                justify-content: center;
+                flex-basis: 330px;
+
+                .fa-angle-double-left.quote {
+                    margin-top: 9px;
+                    margin-right: 4px;
+                }
+
+                .fa-angle-double-right.quote {
+                    margin-top: 9px;
+                    margin-left: 4px;
+                }
+
+                .svg-inline--fa.fa-w-14 {
+                    width: 0.675em;
+                }
+
+                .brand {
+                    position: relative;
+                    top: 6px;
+                    font-size: 1.15rem;
+                    margin: 0;
+
+                    &:hover {
+                        color: $dirty-orange;
+                    }
+
+                    &__item {
+                    }
+                }
+            }
+
+            .sidebar {
+                border-top: 1px solid #333;
+                position: fixed;
+                top: 0;
+                bottom: 0;
+                width: 260px;
+                height: auto;
+                overflow-x: hidden;
+                overflow-y: auto;
+                background-color: $brown;
+                z-index: 999;
+                -webkit-transition: left 0.2s linear;
+                -o-transition: left 0.2s linear;
+                transition: left 0.2s linear;
+                left: -260px;
+                top: 56px;
+                padding: 30px;
+
+                &.open {
+                    left: 0;
+                }
+
+                .navbar-collapse {
+                    padding: 0;
+
+                    .navbar-nav {
+                        padding-left: 0.5rem;
+
+                        .nav-item {
+                            .order {
+                                text-decoration: none;
+                                color: $white;
+                            }
+
+                            .house-order {
+                                font-size: 1.25rem;
+                            }
+
+                            .phones {
+                                margin-top: 1rem;
+
+                                .phone {
+                                    font-size: 1rem;
+
+                                    &:nth-child(2) {
+                                        margin-top: 0.5rem;
+                                    }
+                                }
+                            }
+
+                            .nav-link {
+                                color: #fff;
+                                margin: 0;
+                            }
+
+                            &:nth-child(4) {
+                                margin-top: 1rem;
+                            }
+                        }
+                    }
+
+                    .nav-footer {
+                        position: absolute;
+                        bottom: 0;
+                        padding-bottom: 30px;
+
+                        a {
+                            color: $black;
+                        }
+
+                        p:nth-child(2) {
+                            color: $white;
+                        }
+
+                        .nav-footer-social-buttons {
+                            .fa-icon {
+                                color: $black;
+                                width: 32px;
+                                height: 32px;
+                                display: inline-block;
+                                line-height: 32px;
+                                font-size: 15px;
+                                text-align: center;
+
+                                &:nth-child(2) {
+                                    margin-left: 0.5rem;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .section-container.services {
+        padding-bottom: 2rem;
+        padding-top: 20px;
+
+        h1 {
+            font-size: 2rem;
+        }
+
+        h2 {
+            font-size: 1.75rem;
+        }
+
+        .container {
+            .content {
+                padding-bottom: 0;
+
+                &-text {
+                    font-size: 1rem;
+                }
+
+                &-cell {
+                    margin: 0;
+                    padding: 0;
+
+                    &-header {
+                        margin-bottom: 2rem;
+
+                        .font-big {
+                            font-size: 2rem;
+                        }
+                    }
+
+                    &-element {
+                        .img-fluid {
+                            height: 300px;
+                            margin-bottom: 1rem;
+                        }
+
+                        &:nth-child(2) {
+                            padding: 0;
+                        }
+                    }
+
+                    &-text {
+                        margin-bottom: 0.5rem;
+
+                        .fish-list {
+                            margin-left: -2.75rem;
+                        }
+
+                        .prices-wrapper {
+                            padding: 1rem;
+
+                            .prices {
+                                width: 280px;
+
+                                &-header {
+                                    text-align: center;
+                                }
+
+                                &-period {
+                                    display: inline-block;
+                                }
+
+                                .price-text {
+                                    text-align: center;
+                                }
+
+                                .dash {
+                                    display: none;
+                                }
+
+                                .prices-list {
+                                    padding: 0;
+                                }
+
+                                .price {
+                                    margin-top: 1rem;
+                                    margin-bottom: 1rem;
+                                    text-align: center;
+                                    display: block;
+                                    color: $red;
+                                    font-size: 1.75rem;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .section-container.contacts {
+        margin: 0;
+        padding: 1rem 0rem 2rem 0rem;
+
+        .address {
+            &-desc {
+                font-size: 1.25rem;
+            }
+        }
+
+        .contact-us__phones,
+        .contact-us__mail {
+            font-size: 1.25rem;
+        }
+    }
+
+    .footer-social {
+        display: none;
+    }
+
+    .top-btn {
+        display: none;
+    }
+
+    .packages {
+        margin: 0;
+
+        .package-wrapper {
+            padding: 0;
+
+            .package {
+                width: 345px;
+                display: flex;
+                flex-flow: column wrap;
+                align-items: center;
+                margin: 0 0 0 -12px;
+
+                &-header {
+                    margin: 1.5rem 0rem;
+                }
+
+                &-list {
+                    width: 345px;
+                    padding: 0 0 0 12px;
+                    list-style: none;
+                    margin-bottom: 0;
+
+                    &-item {
+                        position: relative;
+                        line-height: 36px;
+                        letter-spacing: -0.6px;
+                        width: 400px;
+                        margin-bottom: 1rem;
+                        font-size: 1.25rem;
+
+                        .second-row {
+                            margin-left: 2rem;
+                        }
+
+                        &-disc {
+                            position: relative;
+                            top: 3px;
+                            margin-right: 0.25rem;
+                            vertical-align: bottom;
+                        }
+                    }
+
+                    &-item:last-child {
+                        margin: 0;
+                    }
+                }
+            }
+
+            .package-one {
+                height: 30rem;
+                padding: 0;
+            }
+
+            .package-two {
+                height: 41rem;
+                padding: 0;
+            }
+        }
+    }
+
+    .our-contacts {
+        height: 460px;
+        margin: 2rem 0rem;
+        padding: 2rem;
+        max-height: 600px;
+        max-width: 600px;
+        width: 100%;
+        background: $creamy-white;
+        color: $black;
+    }
+}
