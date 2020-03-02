@@ -95,10 +95,10 @@ function redrawSidebar() {
   var navbarChildren = $(".navbar-nav li");
   var firstElem = navbarChildren.first();
   firstElem.children()[0].innerHTML = `<span class="house-order">Заказать 🏠 </span>`;
-  firstElem.children()[2].innerHTML = `<a class="phone text-white dec-none"
+  firstElem.children()[2].innerHTML = `<a class="phone text-white decoration-none"
                                         href="tel:+375295695989">
                                         <span>+375 (29) 569 59 89</span></a>
-                                      <a class="phone text-white dec-none"
+                                      <a class="phone text-white decoration-none"
                                         href="tel:+375291495989">
                                         <span>+375 (29) 149 59 89</span></a>`;
   $(".navbar-nav li")
