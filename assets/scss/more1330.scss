@@ -1,0 +1,44 @@
+@media (min-width: 1330px) {
+    .navbar {
+        &.navbar-expand-md {
+            display: flex;
+            justify-content: center;
+            flex-flow: row nowrap;
+        }
+        .container {
+            max-width: 1516px;
+
+            .navbar-header {
+                &.brand {
+                    font-size: 2.5rem;
+                }
+            }
+
+            .navbar-collapse {
+                .navbar-nav {
+                    .nav-item {
+                        & > *,
+                        .nav-link {
+                            font-size: 1.25rem;
+                        }
+
+                        .order {
+                            .house-order {
+                                font-size: 1.25rem !important;
+                            }
+                        }
+
+                        .nav-link {
+                            padding-left: 0.5rem;
+                            padding-right: 0.5rem;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .font-big {
+        font-size: 2.5rem;
+    }
+}
