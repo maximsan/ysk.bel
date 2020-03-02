@@ -9,8 +9,6 @@ const dirNode = 'node_modules';
 const dirApp = path.resolve(__dirname, 'js');
 const dirAssets = path.resolve(__dirname, 'assets');
 
-//const appHtmlTitle = 'Webpack Boilerplate';
-
 module.exports = {
     entry: {
         vendor: ['AOS'],
@@ -30,7 +28,6 @@ module.exports = {
     ],
     module: {
         rules: [
-            // BABEL
             {
                 test: /\.js$/,
                 loader: 'babel-loader',
@@ -39,7 +36,6 @@ module.exports = {
                     compact: true
                 }
             },
-            //EJS
             {
                 test: /\.ejs$/,
                 use: [
@@ -55,7 +51,6 @@ module.exports = {
                     }
                 ]
             },
-            // STYLES
             {
                 test: /\.css$/,
                 use: [
@@ -68,8 +63,6 @@ module.exports = {
                     }
                 ]
             },
-
-            // CSS / SASS
             {
                 test: /\.scss/,
                 use: [
@@ -89,10 +82,8 @@ module.exports = {
                     }
                 ]
             },
-
-            // IMAGES
             {
-                test: /\.(jpe?g|png|gif)$/,
+                test: /\.(jpe?g|png|gif|svg)$/i,
                 loader: 'file-loader',
                 options: {
                     name: '[path][name].[ext]'
