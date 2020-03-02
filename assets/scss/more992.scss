@@ -1,27 +1,20 @@
 @media (min-width: 992px) {
     .navbar {
+        &.navbar-expand-md {
+            display: flex;
+            justify-content: center;
+            flex-flow: row nowrap;
+        }
         .container {
             max-width: 980px;
             margin: 0px 28px;
 
             .navbar-header {
-                margin-left: 2.5rem;
-
-                h3 {
+                margin-left: 0rem;
+                .brand {
                     font-size: 1.2rem;
+                    margin-bottom: 0;
                 }
-
-                .svg-inline--fa.fa-w-14 {
-                    width: 0.875em;
-                }
-
-                .navbar-brand__name {
-                    font-size: 2rem;
-                }
-            }
-
-            .svg-inline--fa.fa-w-14 {
-                width: 0.675em;
             }
 
             .navbar-collapse {
@@ -29,21 +22,31 @@
                     margin-left: 1rem;
 
                     .nav-item {
-                        margin-right: 0;
+                        &:nth-child(3),
+                        &:nth-child(4) {
+                            margin-left: 10px;
+                        }
+
+                        .nav-link {
+                            margin-right: 0;
+                            font-size: 1rem;
+                            color: $white;
+                        }
 
                         a:hover {
                             text-decoration: none;
                         }
 
                         &:nth-child(1) {
+                            flex: 1 0 auto;
                             margin-top: 0rem;
 
                             .order {
                                 align-self: center;
 
                                 .house-order {
-                                    font-size: 1.15rem;
-                                    margin-right: 1rem;
+                                    font-size: 1rem;
+                                    margin-right: 0.5rem;
                                     align-self: center;
                                 }
                             }
@@ -51,6 +54,7 @@
                             .phones {
                                 margin-left: 1rem;
                                 width: auto;
+                                padding-right: 0;
 
                                 .mobile-icon {
                                     font-size: 1.25rem;
@@ -60,12 +64,6 @@
                                     font-size: 0.9rem;
                                 }
                             }
-                        }
-
-                        .nav-link {
-                            margin-right: 0;
-                            font-size: 1.25rem;
-                            color: $white;
                         }
                     }
                 }

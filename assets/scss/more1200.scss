@@ -1,12 +1,17 @@
 @media (min-width: 1200px) {
     .navbar {
+        &.navbar-expand-md {
+            display: flex;
+            justify-content: center;
+            flex-flow: row nowrap;
+        }
         .container {
             max-width: 1260px;
 
             .navbar-header {
                 margin-left: 2rem;
                 .brand {
-                    font-size: 1.6rem;
+                    font-size: 1.5rem;
                     margin-bottom: 0;
                 }
             }
