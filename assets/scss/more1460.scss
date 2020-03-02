@@ -1,4 +1,4 @@
-@media (min-width: 1330px) {
+@media (min-width: 1460px) {
     .navbar {
         &.navbar-expand-md {
             display: flex;
@@ -7,10 +7,13 @@
         }
         .container {
             max-width: 1516px;
+            flex: 0 1 auto;
 
             .navbar-header {
-                &.brand {
-                    font-size: 2.5rem;
+                margin-left: 2.5rem;
+                .brand {
+                    font-size: 2.25rem;
+                    margin-bottom: 0;
                 }
             }
 
