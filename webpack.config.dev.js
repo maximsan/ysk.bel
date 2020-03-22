@@ -10,7 +10,7 @@ module.exports = merge(webpackConfig, {
     },
     watch: true,
     watchOptions: {
-        aggregateTimeout: 500,
+        aggregateTimeout: 800,
         ignored: ['/node_modules/', '/doc/', '/temp/']
     },
     devServer: {
