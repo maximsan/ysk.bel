@@ -47,11 +47,12 @@
                 -o-transition: left 0.2s linear;
                 transition: left 0.2s linear;
                 left: -260px;
-                top: 56px;
+                top: 68px;
                 padding: 30px;
 
                 &.open {
                     left: 0;
+                    top: 68px;
                 }
 
                 .navbar-collapse {
@@ -155,17 +156,53 @@
                 }
 
                 .packages {
+                    margin: 0;
+
                     .package {
+                        max-width: 260px;
+                        display: flex;
+                        flex-flow: column wrap;
+                        align-items: center;
+                        flex: 1 1 260px;
+                        padding: 0;
+
                         &-header {
+                            margin: 0.5rem 0;
+
                             h3 {
                                 font-size: 1.35rem;
+                                margin-bottom: 0;
+                                text-align: center;
                             }
                         }
-                    }
-                    .package-list {
-                        &-item {
-                            font-size: 0.9rem;
-                            margin-bottom: 0.2rem;
+
+                        &-list {
+                            padding: 0;
+                            list-style: none;
+                            margin-bottom: 0;
+
+                            &-item {
+                                font-size: 0.9rem;
+                                position: relative;
+                                line-height: 30px;
+                                letter-spacing: -0.6px;
+                                margin-bottom: 0.2rem;
+
+                                &-disc {
+                                    position: relative;
+                                    top: 3px;
+                                    margin-right: 0.25rem;
+                                    vertical-align: bottom;
+                                }
+
+                                .second-row {
+                                    margin-left: 2rem;
+                                }
+
+                                &:last-child {
+                                    margin: 0;
+                                }
+                            }
                         }
                     }
                 }
@@ -175,7 +212,8 @@
                     padding: 0;
 
                     &-header {
-                        margin-bottom: 2rem;
+                        font-size: 1.35rem;
+                        margin-bottom: 1rem;
                     }
 
                     &-element {
@@ -190,10 +228,31 @@
                     }
 
                     &-text {
-                        margin-bottom: 0.5rem;
+                        display: flex;
+                        flex-flow: column nowrap;
+                        flex: 1 1 260px;
+                        max-width: 260px;
+                        text-align: center;
+
+                        &-rubric {
+                            font-size: 1rem;
+                            word-wrap: break-word;
+                        }
+
+                        h4 {
+                            font-size: 1.25rem;
+                            font-weight: 400;
+                            margin-bottom: 0;
+                            text-align: center;
+                        }
 
                         .fish-list {
-                            margin-left: -2.75rem;
+                            margin: 0 auto;
+                            padding: 0;
+
+                            li {
+                                margin: 0.5rem 0;
+                            }
                         }
 
                         .prices-wrapper {
@@ -260,62 +319,6 @@
 
     .top-btn {
         display: none;
-    }
-
-    .packages {
-        margin: 0;
-
-        .package-wrapper {
-            padding: 0;
-
-            .package {
-                width: 345px;
-                display: flex;
-                flex-flow: column wrap;
-                align-items: center;
-                margin: 0 0 0 -12px;
-
-                &-header {
-                    margin: 1.5rem 0rem;
-                }
-
-                &-list {
-                    width: 345px;
-                    padding: 0 0 0 12px;
-                    list-style: none;
-                    margin-bottom: 0;
-
-                    &-item {
-                        position: relative;
-                        line-height: 36px;
-                        letter-spacing: -0.6px;
-                        width: 400px;
-                        margin-bottom: 1rem;
-                        font-size: 1.25rem;
-
-                        .second-row {
-                            margin-left: 2rem;
-                        }
-
-                        &-disc {
-                            position: relative;
-                            top: 3px;
-                            margin-right: 0.25rem;
-                            vertical-align: bottom;
-                        }
-                    }
-
-                    &-item:last-child {
-                        margin: 0;
-                    }
-                }
-            }
-
-            .package-one,
-            .package-two {
-                padding: 0;
-            }
-        }
     }
 
     .our-contacts {

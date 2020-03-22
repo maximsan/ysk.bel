@@ -1,3 +1,14 @@
+const items = $('.package > .package-list > .package-list-item'); // packages
+const commonSpan = `<span class="package-list-item-disc"></span>✔️</span>`;
+
+function commonMethods() {
+    addFixedHeader();
+    toggleSideBar();
+    redrawSidebar();
+    hideElementOnClickOutside();
+    closeSideBar();
+}
+
 $(function() {
     if ($(window).width() >= 768) {
         addFixedHeaderOnScroll();
@@ -5,20 +16,14 @@ $(function() {
         scrollFunction();
         goToTopFunction(1000);
     } else if ($(window).width() > 320 && $(window).width() < 768) {
-        addFixedHeader();
-        toggleSideBar();
-        redrawSidebar();
-        hideElementOnClickOutside();
-        closeSideBar();
-        redrawPackages();
+        commonMethods();
+        redrawPackagesForTablets();
         redrawContentCells();
     } else {
-        addFixedHeader();
-        toggleSideBar();
-        redrawSidebar();
-        hideElementOnClickOutside();
-        closeSideBar();
+        commonMethods();
         removePackagesDisk();
+        redrawPackageHeader();
+        redrawPackagesForSmallSmartphones();
     }
 });
 
@@ -79,9 +84,7 @@ function hideElementOnClickOutside(element = '.sidebar', menuWidth = 260) {
     });
 }
 
-function redrawPackages() {
-    const commonSpan = `<span class="package-list-item-disc"></span>✔️</span>`;
-    const items = $('.package > .package-list > .package-list-item');
+function redrawPackagesForTablets() {
     items[3].innerHTML = `${commonSpan} тишина
   и незабываемые виды`;
     items[5].innerHTML = `${commonSpan} скважина с питьевой водой`;
@@ -95,11 +98,32 @@ function redrawPackages() {
 }
 
 function removePackagesDisk() {
-    const items = $('.package > .package-list > .package-list-item');
     for (let item of items) {
         const text = item.innerText;
         const contentWihoutSpan = text.substr('✔️'.length);
         item.innerHTML = contentWihoutSpan;
+    }
+}
+
+function redrawPackagesForSmallSmartphones() {
+    items[0].innerHTML = `рыбалка в клевом месте`;
+    items[3].innerHTML = `тишина и незабываемые виды`;
+    items[5].innerHTML = `скважина с питьевой водой`;
+    items[7].innerHTML = `8 спальных мест, камин`;
+    items[8].innerHTML = `экологически чистое место`;
+    items[10].innerHTML = `рыбалка включена`;
+    items[11].innerHTML = `прогулки по местности`;
+    items[12].innerHTML = `мангалы и беседки`;
+    items[14].innerHTML = `скважина с питьевой водой`;
+}
+
+function redrawPackageHeader() {
+    const items = $('.package.package-one h3, .package.package-two h3');
+    for (let item of items) {
+        const text = item.innerText;
+        const textItems = text.split('-');
+        item.innerHTML = `<h3 style="text-align: center">${textItems[0]}</h3>
+        <h3 style="text-align: center" class="text-danger">${textItems[1]}</h3>`;
     }
 }
 
