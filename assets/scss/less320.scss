@@ -142,9 +142,12 @@
 
         .container {
             .content {
-                padding-bottom: 0;
+                padding: 20px 20px 0 20px;
 
                 &-header {
+                    text-align: center;
+                    margin-bottom: 1rem;
+
                     h2 {
                         font-size: 1.35rem;
                     }
@@ -153,18 +156,20 @@
                 &-text {
                     font-size: 1rem;
                     line-height: 26px;
+                    text-align: center;
                 }
 
                 .packages {
                     margin: 0;
 
                     .package {
-                        max-width: 260px;
+                        max-width: 280px;
                         display: flex;
                         flex-flow: column wrap;
                         align-items: center;
-                        flex: 1 1 260px;
+                        flex: 1 1 280px;
                         padding: 0;
+                        margin: 0;
 
                         &-header {
                             margin: 0.5rem 0;
@@ -236,21 +241,23 @@
                     &-text {
                         display: flex;
                         flex-flow: column nowrap;
-                        flex: 1 1 260px;
-                        max-width: 260px;
+                        align-items: center;
+                        flex: 1 1 280px;
+                        max-width: 280px;
                         padding: 0;
 
                         &-rubric {
                             text-align: center;
                             font-size: 1rem;
                             word-wrap: break-word;
-                            margin-bottom: .25rem;
+                            margin-bottom: 0.25rem;
                             max-width: 240px;
+                            line-height: 20px;
                         }
 
                         h4 {
-                            font-size: 1.25rem;
-                            font-weight: 400;
+                            font-size: 1rem;
+                            font-weight: 500;
                             margin-bottom: 0;
                             text-align: center;
                         }
@@ -258,46 +265,10 @@
                         .fish-list {
                             margin: 0 auto;
                             padding: 0;
+                            font-size: 1rem;
 
                             li {
                                 margin: 0.5rem 0;
-                            }
-                        }
-
-                        .prices-wrapper {
-                            padding: 1rem;
-
-                            .prices {
-                                width: 280px;
-
-                                &-header {
-                                    text-align: center;
-                                }
-
-                                &-period {
-                                    display: inline-block;
-                                }
-
-                                .price-text {
-                                    text-align: center;
-                                }
-
-                                .dash {
-                                    display: none;
-                                }
-
-                                .prices-list {
-                                    padding: 0;
-                                }
-
-                                .price {
-                                    margin-top: 1rem;
-                                    margin-bottom: 1rem;
-                                    text-align: center;
-                                    display: block;
-                                    color: $red;
-                                    font-size: 1.75rem;
-                                }
                             }
                         }
                     }
@@ -307,18 +278,60 @@
     }
 
     .section-container.contacts {
-        margin: 0;
-        padding: 1rem 0rem 2rem 0rem;
+        margin: 0rem;
+        padding: 1rem 0rem;
 
-        .address {
-            &-desc {
-                font-size: 1.25rem;
+        .our-contacts {
+            display: flex;
+            flex-flow: column nowrap;
+            justify-content: center;
+            flex: 1 1 auto;
+            max-width: 300px;
+            margin: 1.5rem auto;
+            padding: 1rem;
+            background: $creamy-white;
+            color: $black;
+
+            .address {
+                display: flex;
+                flex-flow: column nowrap;
+                align-self: center;
+
+                &:nth-child(1) {
+                    margin-bottom: 0.75rem;
+                }
+
+                h4 {
+                    font-size: 1.25rem;
+                    text-align: center;
+                    text-transform: uppercase;
+                    text-decoration: underline;
+                }
+
+                &-desc {
+                    display: flex;
+                    flex-flow: column nowrap;
+                    font-size: 1rem;
+                    max-width: 260px;
+
+                    &-item {
+                        text-align: center;
+                    }
+                }
             }
-        }
 
-        .contact-us__phones,
-        .contact-us__mail {
-            font-size: 1.25rem;
+            .contact-us {
+                &__phones,
+                &__mail {
+                    font-size: 1rem;
+                }
+
+                &__phones {
+                    .phone-number {
+                        font-weight: 400;
+                    }
+                }
+            }
         }
     }
 
@@ -330,14 +343,7 @@
         display: none;
     }
 
-    .our-contacts {
-        height: 460px;
-        margin: 2rem 0rem;
-        padding: 2rem;
-        max-height: 600px;
-        max-width: 600px;
-        width: 100%;
-        background: $creamy-white;
-        color: $black;
+    #map {
+        height: 300px;
     }
 }

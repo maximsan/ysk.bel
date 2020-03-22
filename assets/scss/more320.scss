@@ -190,43 +190,6 @@
                         .fish-list {
                             margin-left: -2.75rem;
                         }
-
-                        .prices-wrapper {
-                            padding: 1rem;
-
-                            .prices {
-                                width: 280px;
-
-                                &-header {
-                                    text-align: center;
-                                }
-
-                                &-period {
-                                    display: inline-block;
-                                }
-
-                                .price-text {
-                                    text-align: center;
-                                }
-
-                                .dash {
-                                    display: none;
-                                }
-
-                                .prices-list {
-                                    padding: 0;
-                                }
-
-                                .price {
-                                    margin-top: 1rem;
-                                    margin-bottom: 1rem;
-                                    text-align: center;
-                                    display: block;
-                                    color: $red;
-                                    font-size: 1.75rem;
-                                }
-                            }
-                        }
                     }
                 }
             }

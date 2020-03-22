@@ -118,37 +118,6 @@
 
                     &-text {
                         padding: 0;
-
-                        .fish-list {
-                        }
-
-                        .prices-wrapper {
-                            .prices {
-                                &-header {
-                                    text-align: center;
-                                }
-
-                                &-period {
-                                }
-
-                                .price-text {
-                                    text-align: center;
-                                }
-
-                                .dash {
-                                    display: inline;
-                                }
-
-                                .prices-list {
-                                }
-
-                                .price {
-                                    display: initial;
-                                    color: $red;
-                                    font-size: 1.75rem;
-                                }
-                            }
-                        }
                     }
                 }
 
