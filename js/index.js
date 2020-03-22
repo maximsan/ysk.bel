@@ -7,7 +7,6 @@
 //Bootstrap core CSS
 import 'css/normalize.css';
 import 'css/bootstrap.min.css';
-import 'css/main.css';
 //Custom styles
 import 'scss/main.scss';
 
