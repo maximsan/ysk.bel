@@ -118,7 +118,7 @@ function redrawPackagesForSmallSmartphones() {
 }
 
 function redrawPackageHeader() {
-    const items = $('.package.package-one h3, .package.package-two h3');
+    const items = $('.package .package-header h3, .package .package-header h3');
     for (let item of items) {
         const text = item.innerText;
         const textItems = text.split('-');

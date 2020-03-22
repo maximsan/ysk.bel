@@ -217,13 +217,19 @@
                     }
 
                     &-element {
+                        display: flex;
+                        justify-content: center;
+                        flex: 1 1 auto;
+
                         .img-fluid {
-                            height: 300px;
+                            max-height: 220px;
+                            max-width: 220px;
                             margin-bottom: 1rem;
                         }
 
                         &:nth-child(2) {
                             padding: 0;
+                            margin-top: 0.5rem;
                         }
                     }
 
@@ -232,11 +238,14 @@
                         flex-flow: column nowrap;
                         flex: 1 1 260px;
                         max-width: 260px;
-                        text-align: center;
+                        padding: 0;
 
                         &-rubric {
+                            text-align: center;
                             font-size: 1rem;
                             word-wrap: break-word;
+                            margin-bottom: .25rem;
+                            max-width: 240px;
                         }
 
                         h4 {
