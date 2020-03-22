@@ -14,7 +14,6 @@
             .navbar-header {
                 margin-left: 0.25rem;
                 margin-bottom: 0.5rem;
-                display: flex;
                 justify-content: center;
                 flex-basis: 330px;
 
@@ -169,7 +168,7 @@
                     &-header {
                         margin-bottom: 2rem;
 
-                        .font-big {
+                        h2 {
                             font-size: 2rem;
                         }
                     }

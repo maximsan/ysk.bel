@@ -1,88 +1,91 @@
 <!DOCTYPE html>
 <html class="no-js" lang="ru">
-  <head>
-    <%- include views/templates/head -%>
-  </head>
-  <body>
-    <!--[if lte IE 9]>
-      <p class="browserupgrade">
-        You are using an <strong>outdated</strong> browser. Please
-        <a href="https://browsehappy.com/">upgrade your browser</a> to improve
-        your experience and security.
-      </p>
-    <![endif]-->
-    <button class="top-btn" id="top-btn" title="Назад к меню">
-      <i class="fas fa-arrow-up"></i>
-    </button>
-    <header>
-      <%- include views/templates/header -%>
-    </header>
-    <main class="" id="main-collapse">
-      <!-- Page Content -->
-      <%- include views/templates/carousel -%>
-      <!-- Services section -->
-      <%- include views/templates/services -%>
-      <!-- Contacts section -->
-      <%- include views/templates/contacts -%>
-    </main>
-    <!-- TODO: раздел про отзывы -->
-    <!-- Thank you page -->
-    <div id="thankyou_message" style="display:none;">
-      <h2>Thanks for contacting us! We will get back to you soon!</h2>
-    </div>
-    <!--Footer navigation start-->
-    <%- include views/templates/footer -%>
-    <!--Footer navigation end-->
-    <script src="js/vendor/modernizr-3.6.0.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
-    <script>
-      window.jQuery ||
-        document.write(
-          '<script src="js/vendor/jquery-3.3.1.min.js"><\/script>'
-        );
-    </script>
-    <script src="js/plugins.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/main.js"></script>
-    <script>
-      $('.carousel').carousel({
-        interval: 4000
-      });
-    </script>
-    <!-- Google maps -->
+    <head>
+        <%- include views/templates/head -%>
+    </head>
+    <body>
+        <!--[if lte IE 9]>
+            <p class="browserupgrade">
+                You are using an <strong>outdated</strong> browser. Please
+                <a href="https://browsehappy.com/">upgrade your browser</a> to
+                improve your experience and security.
+            </p>
+        <![endif]-->
+        <button class="top-btn" id="top-btn" title="Назад к меню">
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        <header>
+            <%- include views/templates/header -%>
+        </header>
+        <main>
+            <!-- Page Content -->
+            <%- include views/templates/carousel -%>
+            <!-- Services section -->
+            <%- include views/templates/services -%>
+            <!-- Contacts section -->
+            <%- include views/templates/contacts -%>
+        </main>
+        <!-- TODO: раздел про отзывы -->
+        <!-- Thank you page -->
+        <div id="thankyou_message" style="display:none;">
+            <h2>Thanks for contacting us! We will get back to you soon!</h2>
+        </div>
+        <!--Footer navigation start-->
+        <%- include views/templates/footer -%>
+        <!--Footer navigation end-->
+        <script src="js/vendor/modernizr-3.6.0.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
+        <script>
+            window.jQuery ||
+                document.write(
+                    '<script src="js/vendor/jquery-3.3.1.min.js"><\/script>'
+                );
+        </script>
+        <script src="js/plugins.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/main.js"></script>
+        <script>
+            $('.carousel').carousel({
+                interval: 4000
+            });
+        </script>
+        <!-- Google maps -->
 
-    <script
-      async
-      defer
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCEjXw1mbGTXw12jnM_YTAveRGb1I4c3gQ&callback=googleMapInit"
-    ></script>
-    <!-- end Google Maps -->
+        <script
+            async
+            defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCEjXw1mbGTXw12jnM_YTAveRGb1I4c3gQ&callback=googleMapInit"
+        ></script>
+        <!-- end Google Maps -->
 
-    <script data-cfasync="false" src="js/form-submission-handler.js"></script>
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script>
-      AOS.init({
-        disable: 'mobile'
-      });
-      AOS.refresh();
-    </script>
+        <script
+            data-cfasync="false"
+            src="js/form-submission-handler.js"
+        ></script>
+        <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+        <script>
+            AOS.init({
+                disable: 'mobile'
+            });
+            AOS.refresh();
+        </script>
 
-    <!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
+        <!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
 
-    <script>
-      window.ga = function() {
-        ga.q.push(arguments);
-      };
-      ga.q = [];
-      ga.l = +new Date();
-      ga('create', 'UA-131113332-1', 'auto');
-      ga('send', 'pageview');
-    </script>
-    <script
-      async
-      defer
-      src="https://www.google-analytics.com/analytics.js"
-    ></script>
-  </body>
+        <script>
+            window.ga = function() {
+                ga.q.push(arguments);
+            };
+            ga.q = [];
+            ga.l = +new Date();
+            ga('create', 'UA-131113332-1', 'auto');
+            ga('send', 'pageview');
+        </script>
+        <script
+            async
+            defer
+            src="https://www.google-analytics.com/analytics.js"
+        ></script>
+    </body>
 </html>

@@ -4,6 +4,8 @@
     }
 
     .navbar {
+        padding: 1rem 0.25rem 1.5rem;
+
         &.navbar-expand-md {
             display: flex;
             justify-content: center;
@@ -100,7 +102,7 @@
                     &-header {
                         margin: 0 0 2rem 0;
 
-                        .font-big {
+                        h2 {
                             font-size: 2rem;
                         }
                     }
