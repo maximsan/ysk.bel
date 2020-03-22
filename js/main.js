@@ -122,7 +122,7 @@ function redrawPackageHeader() {
     for (let item of items) {
         const text = item.innerText;
         const textItems = text.split('-');
-        item.innerHTML = `<h3 style="text-align: center">${textItems[0]}</h3>
+        item.innerHTML = `<h3 style="text-align: center; margin-bottom: 0.5rem;">${textItems[0]}</h3>
         <h3 style="text-align: center" class="text-danger">${textItems[1]}</h3>`;
     }
 }
