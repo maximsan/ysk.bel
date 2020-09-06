@@ -1,7 +1,7 @@
 {
     "name": "yck.surge.sh",
-    "version": "1.0.0",
-    "description": "Silver Crucian Manor",
+    "version": "2.0.0",
+    "description": "Усадьба Серебряный Карась",
     "main": "index.js",
     "directories": {
         "doc": "doc"

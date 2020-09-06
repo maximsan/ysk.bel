@@ -2,7 +2,6 @@ const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-// Check the current build
 const IS_DEV = process.env.NODE_ENV === 'dev';
 
 const dirNode = 'node_modules';
