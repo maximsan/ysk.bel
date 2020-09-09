@@ -129,23 +129,23 @@ function redrawPackageHeader() {
     }
 }
 
-//show top-btn button on scroll
+//show go-up button on scroll
 function scrollFunction() {
     $(window).scroll(function() {
         if (
             document.body.scrollTop > 80 ||
             document.documentElement.scrollTop > 80
         ) {
-            $('.top-btn').show();
+            $('.scroll-up').show();
         } else {
-            $('.top-btn').hide();
+            $('.scroll-up').hide();
         }
     });
 }
 
 // When the user clicks on the button, scroll to the top of the document
 function goToTopFunction(milliseconds) {
-    $('.top-btn').click(function() {
+    $('.scroll-up').click(function() {
         $('html, body').animate(
             {
                 scrollTop: 0
