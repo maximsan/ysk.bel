@@ -10,7 +10,6 @@ const dirAssets = path.resolve(__dirname, 'assets');
 
 module.exports = {
     entry: {
-        vendor: ['AOS'],
         bundle: path.join(dirApp, 'index')
     },
     resolve: {
@@ -22,7 +21,7 @@ module.exports = {
         }),
 
         new HtmlWebpackPlugin({
-            template: path.join(__dirname, 'index.ejs')
+            template: path.join(__dirname, 'index.ejs'),
         })
     ],
     module: {
@@ -33,7 +32,7 @@ module.exports = {
                 exclude: /(node_modules)/,
                 options: {
                     compact: true
-                }
+                },
             },
             {
                 test: /\.ejs$/,
