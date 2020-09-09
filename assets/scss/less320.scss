@@ -6,7 +6,7 @@
     }
 
     .navbar {
-        padding: 0.5rem 0rem;
+        padding: 0.5rem 0;
         .container {
             .navbar-toggler {
                 font-size: 1rem;
@@ -35,18 +35,16 @@
             .sidebar {
                 border-top: 1px solid #333;
                 position: fixed;
-                top: 0;
                 bottom: 0;
-                width: 260px;
+                width: 100%;
                 height: auto;
                 overflow-x: hidden;
                 overflow-y: auto;
-                background-color: $brown;
                 z-index: 999;
                 -webkit-transition: left 0.2s linear;
                 -o-transition: left 0.2s linear;
                 transition: left 0.2s linear;
-                left: -260px;
+                left: -100%;
                 top: 68px;
                 padding: 30px;
 
@@ -278,8 +276,8 @@
     }
 
     .section-container.contacts {
-        margin: 0rem;
-        padding: 1rem 0rem;
+        margin: 0;
+        padding: 1rem 0;
 
         .our-contacts {
             display: flex;

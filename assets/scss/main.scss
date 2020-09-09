@@ -40,6 +40,10 @@ body.down .fixed {
     z-index: 999;
 }
 
+.navbar-close-icon {
+    //background-image: url("");
+}
+
 .navbar {
     .navbar-nav {
         .nav-item.hover {
@@ -196,7 +200,7 @@ body.down .fixed {
                 margin-left: -2rem;
 
                 li {
-                    margin: 1rem 0rem;
+                    margin: 1rem 0;
                 }
             }
         }
@@ -216,21 +220,11 @@ body.down .fixed {
 /*section-container.contacts*/
 
 .section-container.contacts {
-    background: url('../images/stones_1920x1080.jpg') no-repeat center center
-        fixed;
+    background: url('../images/stones_1920x1080.jpg') no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
-
-    .btn-send {
-        background: $dirty-orange;
-
-        &:focus {
-            outline: 0;
-            box-shadow: 0 0 0 0.2rem #9e6132;
-        }
-    }
 }
 
 .modal-button {
@@ -253,7 +247,7 @@ body.down .fixed {
 
 .footer-item {
     list-style: none;
-    padding: 0rem 0.5rem;
+    padding: 0 0.5rem;
 }
 
 .footer-link {
@@ -261,29 +255,37 @@ body.down .fixed {
     align-items: center;
     font-weight: 600;
     padding: 0.5rem;
+
     &:hover {
         text-decoration: none;
     }
+
     &.airbnb {
         color: #fd5c63;
     }
+
     &.booking {
         color: #003382;
     }
+
     &.skype {
         color: #00aff0;
     }
+
     &.viber {
         color: #665cac;
     }
+
     &.whatsApp {
         color: #25d366;
     }
+
     .fa-skype,
     .fa-viber,
     .fa-whatsapp {
         font-size: 30px;
     }
+
     .booking-icon,
     .airbnb-icon {
         width: 30px;
@@ -390,4 +392,40 @@ body.down .fixed {
 
 .contact-us__phones-velcom > .velcom-icon {
     height: 14px;
+}
+
+.contact-with-me {
+    background-color: inherit;
+    color: $white;
+    text-decoration: none;
+    font-size: 1.2rem;
+    border: 2px solid $white;
+    border-radius: 10px;
+    padding: 8px 10px;
+    margin: 10px;
+    position: absolute;
+    right: 100px;
+    top: 50px;
+    cursor: pointer;
+    z-index: 999;
+    box-shadow: 6px 7px 40px -4px rgba(255, 255, 255, 0.4);
+
+    &:hover {
+        color: $dirty-orange;
+        border: 2px solid $dirty-orange;
+    }
+
+    &:focus {
+        outline: none;
+    }
+}
+
+.btn-send {
+    background: $brown;
+    color: $white;
+
+    &:focus {
+        outline: 0;
+        box-shadow: 0 0 0 0.2rem #9e6132;
+    }
 }
