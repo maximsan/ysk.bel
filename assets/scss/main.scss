@@ -2,6 +2,7 @@
 
 @import 'constants';
 @import 'common';
+@import "mixins";
 @import 'less320';
 @import 'more320';
 @import 'more768';
@@ -38,11 +39,7 @@ body.down .fixed {
     left: 0;
     right: 0;
     z-index: 999;
-}
-
-.navbar-close-icon {
-    //background-image: url("");
-}
+}c
 
 .navbar {
     .navbar-nav {
@@ -392,32 +389,6 @@ body.down .fixed {
 
 .contact-us__phones-velcom > .velcom-icon {
     height: 14px;
-}
-
-.contact-with-me {
-    background-color: inherit;
-    color: $white;
-    text-decoration: none;
-    font-size: 1.2rem;
-    border: 2px solid $white;
-    border-radius: 10px;
-    padding: 8px 10px;
-    margin: 10px;
-    position: absolute;
-    right: 100px;
-    top: 50px;
-    cursor: pointer;
-    z-index: 999;
-    box-shadow: 6px 7px 40px -4px rgba(255, 255, 255, 0.4);
-
-    &:hover {
-        color: $dirty-orange;
-        border: 2px solid $dirty-orange;
-    }
-
-    &:focus {
-        outline: none;
-    }
 }
 
 .btn-send {

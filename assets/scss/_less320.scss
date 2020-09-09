@@ -7,9 +7,16 @@
 
     .navbar {
         padding: 0.5rem 0;
+
         .container {
             .navbar-toggler {
                 font-size: 1rem;
+
+                & > .close-icon {
+                    width: 1.2em;
+                    height: 1.2em;
+                    padding-left: 0.4rem;
+                }
             }
 
             .navbar-header {
@@ -67,27 +74,21 @@
 
                             .house-order {
                                 font-size: 1.25rem;
+                                cursor: pointer;
                             }
 
                             .phones {
                                 margin-top: 1rem;
-
-                                .phone {
-                                    font-size: 1rem;
-
-                                    &:nth-child(2) {
-                                        margin-top: 0.5rem;
-                                    }
-                                }
+                                font-size: 1rem;
                             }
 
                             .nav-link {
-                                color: #fff;
+                                color: $white;
                                 margin: 0;
                             }
 
                             &:nth-child(4) {
-                                margin-top: 1rem;
+                                margin-top: 0.5rem;
                             }
                         }
                     }
@@ -95,35 +96,39 @@
                     .nav-footer {
                         position: absolute;
                         bottom: 0;
-                        padding-bottom: 30px;
+                        padding-bottom: 10px;
 
-                        a {
-                            color: $black;
-                        }
-
-                        p:nth-child(2) {
+                        p {
                             color: $white;
                         }
 
-                        .nav-footer-social-buttons {
-                            .fa-icon {
-                                color: $black;
-                                width: 32px;
-                                height: 32px;
-                                display: inline-block;
-                                line-height: 32px;
-                                font-size: 15px;
-                                text-align: center;
+                        .fa-icon {
+                            width: 32px;
+                            height: 32px;
+                            display: inline-block;
+                            line-height: 32px;
+                            font-size: 15px;
+                            text-align: center;
 
-                                &:nth-child(2) {
-                                    margin-left: 0.5rem;
-                                }
+                            &:nth-child(2) {
+                                margin-left: 0.5rem;
                             }
                         }
                     }
                 }
             }
         }
+    }
+
+    .contact-with-me {
+        @include none;
+    }
+
+    .contact {
+        @include contact;
+        position: relative;
+        right: 0.625rem;
+        top: 1rem;
     }
 
     .section-container.services {
@@ -334,7 +339,7 @@
     }
 
     .footer-social {
-        display: none;
+        @include none;
     }
 
     .map {
