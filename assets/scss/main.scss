@@ -4,7 +4,7 @@
 @import 'modules/common';
 @import "modules/mixins";
 @import '_320';
-//@import 'more320';
+@import '_480';
 //@import 'more768';
 //@import 'more992';
 //@import 'more1200';
@@ -367,26 +367,26 @@ body.down .fixed {
     padding-top: 0;
 }
 
-.contact-us__mail > .mail-icon {
+.contact-us-mail > .mail-icon {
     height: 20px;
     width: 20px;
 }
 
-.contact-us__phones .phone-number {
+.contact-us-phones .phone-number {
     font-weight: bolder;
 }
 
-.contact-us__phones,
-.contact-us__phones-mts,
-.contact-us__phones-velcom {
+.contact-us-phones,
+.contact-us-phones-mts,
+.contact-us-phones-velcom {
     padding-top: 0.5rem;
 }
 
-.contact-us__phones-mts > .mts-icon {
+.contact-us-phones-mts > .mts-icon {
     height: 18px;
 }
 
-.contact-us__phones-velcom > .velcom-icon {
+.contact-us-phones-velcom > .velcom-icon {
     height: 14px;
 }
 

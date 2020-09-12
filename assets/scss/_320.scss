@@ -158,11 +158,10 @@
                     margin: 0;
 
                     .package {
-                        max-width: 280px;
                         display: flex;
                         flex-flow: column wrap;
                         align-items: center;
-                        flex: 1 1 280px;
+                        flex: 1 1 auto;
                         padding: 0;
                         margin: 0;
 
@@ -232,21 +231,11 @@
                     }
 
                     &-text {
-                        display: flex;
-                        flex-flow: column nowrap;
+                        @include d-column;
                         align-items: center;
                         flex: 1 1 280px;
                         max-width: 280px;
                         padding: 0;
-
-                        &-rubric {
-                            text-align: center;
-                            font-size: 1.15rem;
-                            word-wrap: break-word;
-                            margin-bottom: 0.25rem;
-                            max-width: 240px;
-                            line-height: 20px;
-                        }
 
                         h4 {
                             font-size: 1rem;
@@ -265,6 +254,15 @@
                             }
                         }
                     }
+
+                    &-rubric {
+                        text-align: center;
+                        font-size: 1.15rem;
+                        word-wrap: break-word;
+                        margin-bottom: 0.25rem;
+                        max-width: 240px;
+                        line-height: 20px;
+                    }
                 }
             }
         }
@@ -275,19 +273,16 @@
         padding: 1rem 0;
 
         .our-contacts {
-            display: flex;
-            flex-flow: column nowrap;
+            @include d-column;
             justify-content: center;
             flex: 1 1 auto;
-            max-width: 300px;
             margin: 1.5rem auto;
             padding: 1rem;
             background: $creamy-white;
             color: $black;
 
             .address {
-                display: flex;
-                flex-flow: column nowrap;
+                @include d-column;
                 align-self: center;
 
                 &:nth-child(1) {
@@ -302,14 +297,9 @@
                 }
 
                 &-desc {
-                    display: flex;
-                    flex-flow: column nowrap;
+                    @include d-column;
+                    align-items: center;
                     font-size: 1rem;
-                    max-width: 260px;
-
-                    &-item {
-                        text-align: center;
-                    }
                 }
             }
 
@@ -333,6 +323,6 @@
     }
 
     .map {
-        height: 300px;
+        height: 400px;
     }
 }

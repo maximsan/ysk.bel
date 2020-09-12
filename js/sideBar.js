@@ -32,7 +32,7 @@ export function drawSidebar() {
     const firstElement = navbarChildren.first();
     const firstElemChildren = firstElement.children();
     firstElemChildren[0].innerHTML = orderBathhouse;
-    firstElemChildren[2].innerHTML = phones;
+    firstElemChildren[1].innerHTML = phones;
 
     navbarChildren
         .first()

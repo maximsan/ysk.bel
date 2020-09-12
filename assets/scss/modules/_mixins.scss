@@ -6,6 +6,11 @@
     display: block;
 }
 
+@mixin d-column {
+    display: flex;
+    flex-flow: column nowrap;
+}
+
 @mixin contact {
     display: block;
     background-color: inherit;
@@ -51,6 +56,5 @@
 
     &.open {
         left: 0;
-        top: 68px;
     }
 }
