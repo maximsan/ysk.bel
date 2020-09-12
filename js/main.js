@@ -6,20 +6,13 @@ import { scrollUp, showScrollUpButton } from './scrollUp';
 import { smoothScroll } from './smoothScroll';
 import { addFixedHeader, addFixedHeaderOnScroll } from './header';
 
-function commonMethods() {
-    addFixedHeader();
-    toggleSideBar();
-    drawSidebar();
-    closeSideBarOnTimeout();
-}
-
 const window = $(window);
 const windowWidth = $(window).width();
 const carousel = $('.carousel');
 
 $(function() {
     googleMapInit();
-    commonMethods();
+    addFixedHeader();
 
     if (windowWidth >= 768) {
         addFixedHeaderOnScroll();
@@ -27,7 +20,11 @@ $(function() {
         showScrollUpButton();
         scrollUp(1000);
     }
-
+    // if (windowWidth < 768) {
+        drawSidebar();
+        toggleSideBar();
+        closeSideBarOnTimeout();
+    // }
 });
 
 carousel.carousel({

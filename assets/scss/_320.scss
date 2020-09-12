@@ -1,5 +1,5 @@
 /***********************Smartphones (portrait)****************************/
-@media only screen and (min-width: 320px) {
+@media only screen and (min-width: 320px) and (max-width: 479.98px) {
     html,
     body {
         overflow-x: hidden;
@@ -68,8 +68,8 @@
                             }
 
                             .phones {
-                                margin-top: 1rem;
                                 font-size: 1rem;
+                                margin-top: 1rem;
                             }
 
                             .nav-link {
@@ -89,24 +89,24 @@
                         bottom: 0;
                         padding-bottom: 10px;
 
-                        .nav-footer-social-buttons {
-                            margin-bottom: 1rem;
-                        }
-
                         p, div {
                             color: $white;
                         }
 
-                        .fa-icon {
-                            width: 32px;
-                            height: 32px;
-                            display: inline-block;
-                            line-height: 32px;
-                            font-size: 15px;
-                            text-align: center;
+                        .nav-footer-social-buttons {
+                            margin-bottom: 1rem;
 
-                            &:nth-child(2) {
-                                margin-left: 0.5rem;
+                            .fa-icon {
+                                width: 32px;
+                                height: 32px;
+                                display: inline-block;
+                                line-height: 32px;
+                                font-size: 15px;
+                                text-align: center;
+
+                                &:nth-child(2) {
+                                    margin-left: 0.5rem;
+                                }
                             }
                         }
                     }

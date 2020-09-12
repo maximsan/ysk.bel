@@ -1,6 +1,6 @@
-@media (min-width: 768px) {
+@media only screen and (min-width: 768px) {
     .nav-footer {
-        display: none;
+        @include none;
     }
 
     .navbar {
@@ -162,9 +162,8 @@
             }
 
             &-list {
-                padding: 0;
                 list-style: none;
-                padding-left: 2rem;
+                padding: 0 0 0 2rem;
 
                 &-item {
                     position: relative;
