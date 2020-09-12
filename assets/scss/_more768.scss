@@ -99,8 +99,8 @@
 
                 &-cell {
                     margin-bottom: 2rem;
-                    margin-left: 0rem;
-                    padding-right: 0rem;
+                    margin-left: 0;
+                    padding-right: 0;
 
                     &-header {
                         margin: 0 0 2rem 0;
@@ -197,5 +197,9 @@
 
     .contact-with-me {
         @include contact;
+    }
+
+    .map {
+        height: 400px;
     }
 }

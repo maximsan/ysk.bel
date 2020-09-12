@@ -2,6 +2,10 @@
     display: none;
 }
 
+@mixin block {
+    display: block;
+}
+
 @mixin contact {
     display: block;
     background-color: inherit;
@@ -26,5 +30,27 @@
 
     &:focus {
         outline: none;
+    }
+}
+
+@mixin sidebar {
+    border-top: 1px solid #333;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: auto;
+    overflow-x: hidden;
+    overflow-y: auto;
+    z-index: 999;
+    -webkit-transition: left 0.2s linear;
+    -o-transition: left 0.2s linear;
+    transition: left 0.2s linear;
+    left: -100%;
+    top: 68px;
+    padding: 30px;
+
+    &.open {
+        left: 0;
+        top: 68px;
     }
 }

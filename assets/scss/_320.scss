@@ -1,8 +1,16 @@
 /***********************Smartphones (portrait)****************************/
-@media only screen and (max-width: 320px) {
+@media only screen and (min-width: 320px) {
     html,
     body {
         overflow-x: hidden;
+    }
+
+    .desktop {
+        @include none;
+    }
+
+    .mobile {
+        @include block;
     }
 
     .navbar {
@@ -40,31 +48,13 @@
             }
 
             .sidebar {
-                border-top: 1px solid #333;
-                position: fixed;
-                bottom: 0;
-                width: 100%;
-                height: auto;
-                overflow-x: hidden;
-                overflow-y: auto;
-                z-index: 999;
-                -webkit-transition: left 0.2s linear;
-                -o-transition: left 0.2s linear;
-                transition: left 0.2s linear;
-                left: -100%;
-                top: 68px;
-                padding: 30px;
-
-                &.open {
-                    left: 0;
-                    top: 68px;
-                }
+                @include sidebar;
+                padding: 10px 30px;
 
                 .navbar-collapse {
                     padding: 0;
 
                     .navbar-nav {
-                        padding-left: 0.5rem;
 
                         .nav-item {
                             .order {
@@ -85,6 +75,7 @@
                             .nav-link {
                                 color: $white;
                                 margin: 0;
+                                padding: 0.2rem 0;
                             }
 
                             &:nth-child(4) {
@@ -98,7 +89,11 @@
                         bottom: 0;
                         padding-bottom: 10px;
 
-                        p {
+                        .nav-footer-social-buttons {
+                            margin-bottom: 1rem;
+                        }
+
+                        p, div {
                             color: $white;
                         }
 
@@ -150,14 +145,11 @@
                 &-header {
                     text-align: center;
                     margin-bottom: 1rem;
-
-                    h2 {
-                        font-size: 1.35rem;
-                    }
                 }
 
                 &-text {
                     font-size: 1rem;
+                    font-weight: 400;
                     line-height: 26px;
                     text-align: center;
                 }
@@ -178,11 +170,11 @@
                             margin: 0.5rem 0;
 
                             h3 {
-                                font-size: 1.35rem;
                                 margin-bottom: 0;
                                 text-align: center;
                             }
                         }
+
 
                         &-list {
                             padding: 0;
@@ -191,8 +183,7 @@
 
                             &-item {
                                 font-size: 1rem;
-                                position: relative;
-                                line-height: 30px;
+                                line-height: 28px;
                                 letter-spacing: -0.6px;
                                 margin-bottom: 0.2rem;
 
@@ -220,7 +211,6 @@
                     padding: 0;
 
                     &-header {
-                        font-size: 1.35rem;
                         margin-bottom: 1rem;
                     }
 

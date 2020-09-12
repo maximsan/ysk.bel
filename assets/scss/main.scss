@@ -1,14 +1,14 @@
 @import url('https://fonts.googleapis.com/css?family=Rubik:400,500,500i,700,700i&display=swap');
 
-@import 'constants';
-@import 'common';
-@import "mixins";
-@import 'less320';
-@import 'more320';
-@import 'more768';
-@import 'more992';
-@import 'more1200';
-@import 'more1460';
+@import 'modules/constants';
+@import 'modules/common';
+@import "modules/mixins";
+@import '_320';
+//@import 'more320';
+//@import 'more768';
+//@import 'more992';
+//@import 'more1200';
+//@import 'more1460';
 
 body {
     font-family: 'Rubik', sans-serif;
@@ -39,7 +39,7 @@ body.down .fixed {
     left: 0;
     right: 0;
     z-index: 999;
-}c
+}
 
 .navbar {
     .navbar-nav {
@@ -309,7 +309,6 @@ body.down .fixed {
 }
 
 .map {
-    height: 400px;
     max-height: 600px;
     max-width: 600px;
     width: 100%;

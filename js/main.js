@@ -1,16 +1,10 @@
 import $ from 'jquery';
 import AOS from 'aos';
 import { closeSideBarOnTimeout, drawSidebar, toggleSideBar } from './sideBar';
-import {
-    redrawPackageHeader,
-    redrawPackagesForSmallSmartphones,
-    redrawPackagesForTablets,
-    removePackagesDisk
-} from './packages';
 import { googleMapInit } from './googleMapInit';
 import { scrollUp, showScrollUpButton } from './scrollUp';
 import { smoothScroll } from './smoothScroll';
-import { addFixedHeader, addFixedHeaderOnScroll } from './fixedHeaderOnScroll';
+import { addFixedHeader, addFixedHeaderOnScroll } from './header';
 
 function commonMethods() {
     addFixedHeader();
@@ -33,13 +27,13 @@ $(function() {
         scrollUp(1000);
     } else if (windowWidth > 320 && windowWidth < 768) {
         commonMethods();
-        redrawPackagesForTablets();
-        redrawContentCells();
+        // redrawPackagesForTablets();
+        // redrawContentCells();
     } else {
         commonMethods();
-        removePackagesDisk();
-        redrawPackageHeader();
-        redrawPackagesForSmallSmartphones();
+        // removePackagesDisk();
+        // redrawPackageHeader();
+        // redrawPackagesForSmallSmartphones();
     }
 });
 

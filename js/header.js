@@ -9,7 +9,7 @@ export function addFixedHeaderOnScroll() {
     fixedElement.before(fixedElement.clone().addClass('fixed'));
 
     $(window).scroll(function() {
-        var fromTop = $(window).scrollTop();
+        const fromTop = $(window).scrollTop();
         $('body').toggleClass('down', fromTop > 480);
     });
 }

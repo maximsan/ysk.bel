@@ -18,111 +18,11 @@
                 <span class="brand__item">Карась&quot;</span>
             </h1>
         </div>
-        <div class="sidebar bg-light-black">
-            <div class="navbar-collapse" id="navbar-collapse">
-                <ul class="navbar-nav">
-                    <li class="nav-item d-flex flex-row flex-wrap">
-                        <a
-                            class="order"
-                            href="https://ru.airbnb.com/rooms/27016634?guests=1&adults=1"
-                            rel="noopener noreferrer"
-                            target="_blank"
-                            ><span class="house-order"
-                                >Заказать домик в усадьбе</span
-                            ></a
-                        >
-                        <span class="sr-only">(current)</span>
-                        <div class="phones">
-                            <div class="phones-numbers">
-                                <a
-                                    class="phone text-white decoration-none"
-                                    href="tel:+375295695989"
-                                    ><span>+375 (29) 569 59 89</span></a
-                                >
-                                <a
-                                    class="phone text-white decoration-none"
-                                    href="tel:+375291495989"
-                                    ><span>+375 (29) 149 59 89</span></a
-                                >
-                            </div>
-                        </div>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#packages">Цены</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#services">Услуги</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#contacts">Контакты</a>
-                    </li>
-                </ul>
-                <nav class="nav-footer">
-                    <p class="nav-footer-social-buttons">
-                        <a
-                            class="fa-icon"
-                            href="https://ru.airbnb.com/rooms/27016634"
-                            rel="noopener noreferrer"
-                            target="_blank"
-                            ><img
-                                alt="airbnb"
-                                class="airbnb-icon"
-                                src="assets/images/icons/airbnb.svg"
-                        /></a>
-                        <a
-                            class="fa-icon"
-                            href="https://www.booking.com/hotel/by/usadba-serebryanny-karas.en-gb.html?aid=898224&app_hotel_id=3839492&checkin=2018-12-9&checkout=2018-12-10&from_sn=ios&group_adults=2&group_children=0&label=Share-FK0oi0%401544365840&no_rooms=1&req_adults=2&req_children=0&room1=A%2CA%2C"
-                            rel="noopener noreferrer"
-                            target="_blank"
-                            ><img
-                                alt="booking"
-                                class="booking-icon"
-                                src="assets/images/icons/booking.svg"
-                        /></a>
-                    </p>
-                    <p>© Untitled | Website created with 🧡 by @maximsan</p>
-                </nav>
-            </div>
-        </div>
+        <%- include sidebar -%>
         <button class="contact-with-me" data-toggle="modal" data-target="#exampleModalCenter">
             Связаться со мной
         </button>
     </div>
 </nav>
 
-<div class="modal" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Форма для связи</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form class="gform reveal-content contact-form" action="https://smartforms.dev/submit/5f575b80b81854118fd3d51d" method="post">
-                    <!-- input id must be honeypot or else it wont work -->
-                    <label class="sr-only">Keep this field blank</label>
-                    <input id="honeypot" type="text" name="honeypot" value="" />
-                    <!-- the rest of your form -->
-                    <div class="form-group">
-                        <input class="form-control" type="name" id="name" name="name" placeholder="Имя" required />
-                    </div>
-                    <div class="form-group">
-                        <input type="email" class="form-control" id="email" name="email" placeholder="Почта" required />
-                    </div>
-                    <div class="form-group">
-                        <input type="tel" class="form-control" id="phone" name="phone" placeholder="Телефон" required />
-                    </div>
-                    <div class="form-group">
-                        <textarea class="form-control" rows="3" id="message" name="message" placeholder="Введите ваше сообщение" required></textarea>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-close" data-dismiss="modal">Закрыть</button>
-                        <button type="submit" class="btn btn-send">Отправить</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
+<%- include modal -%>
