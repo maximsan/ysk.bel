@@ -19,38 +19,16 @@ const carousel = $('.carousel');
 
 $(function() {
     googleMapInit();
+    commonMethods();
 
     if (windowWidth >= 768) {
         addFixedHeaderOnScroll();
         smoothScroll(1500);
         showScrollUpButton();
         scrollUp(1000);
-    } else if (windowWidth > 320 && windowWidth < 768) {
-        commonMethods();
-        // redrawPackagesForTablets();
-        // redrawContentCells();
-    } else {
-        commonMethods();
-        // removePackagesDisk();
-        // redrawPackageHeader();
-        // redrawPackagesForSmallSmartphones();
     }
+
 });
-
-function redrawContentCells() {
-    const cells = $('.section-container.services .content-cell .row');
-    const cellsWithImg = $(
-        '.section-container.services .content-cell .content-cell-element.img'
-    );
-    const cellsWithText = $(
-        '.section-container.services .content-cell .content-cell-element.text'
-    );
-
-    for (let i = 0; i < cells.length; i++) {
-        cells[i].append(cellsWithImg[i]);
-        cells[i].append(cellsWithText[i]);
-    }
-}
 
 carousel.carousel({
     interval: 4000
