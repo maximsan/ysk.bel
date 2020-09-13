@@ -3,8 +3,16 @@
         @include none;
     }
 
+    .desktop {
+        @include block;
+    }
+
+    .mobile {
+        @include none;
+    }
+
     .navbar {
-        padding: 0 0.25rem 1.5rem;
+        padding: 1rem 0;
 
         &.navbar-expand-md {
             display: flex;
@@ -16,9 +24,12 @@
             max-width: 760px;
             padding: 0;
             overflow: hidden;
+            justify-content: space-between;
 
             .navbar-header {
                 margin-left: 0;
+                align-self: flex-start;
+                margin-top: 0.5rem;
 
                 .brand {
                     font-size: 1rem;
@@ -26,7 +37,7 @@
                     flex-flow: row wrap;
                     justify-content: center;
 
-                    &__item {
+                    &-item {
                         &:nth-child(1) {
                             text-align: center;
                             flex: 100%;
@@ -37,28 +48,45 @@
 
             .sidebar {
                 padding: 0 0 0 20px;
-            }
-        }
 
-        .navbar-nav {
-            align-items: center;
+                .navbar-collapse {
+                    .navbar-nav {
+                        align-items: center;
 
-            .nav-item {
-                .phones {
-                    width: 210px;
-                    flex-direction: row;
-                    padding-right: 0;
+                        .nav-item {
+                            .house-order {
+                                &--hide {
+                                    @include none;
+                                }
+                            }
 
-                    p {
-                        margin: 0;
+                            .phones {
+                                width: 210px;
+                                flex-direction: row;
+                                padding-right: 0;
+                                margin-top: 0.4rem;
+
+                                p {
+                                    margin: 0;
+                                }
+
+                                .phone {
+                                    display: inline-block;
+
+                                    &:nth-child(2) {
+                                        margin: 0;
+                                    }
+                                }
+                            }
+
+                            .nav-link {
+                                color: $white;
+                                padding: 0;
+                                margin-right: 1rem;
+                                font-size: 1rem;
+                            }
+                        }
                     }
-                }
-
-                .nav-link {
-                    color: $white;
-                    padding: 0;
-                    margin-right: 1rem;
-                    font-size: 1rem;
                 }
             }
         }
@@ -83,6 +111,14 @@
 
         .container {
             .content {
+                &-header {
+                    margin: 1rem 5rem;
+
+                    h2 {
+                        text-align: center;
+                    }
+                }
+
                 &-text {
                 }
 
@@ -92,8 +128,6 @@
                     padding-right: 0;
 
                     &-header {
-                        margin: 0 0 2rem 0;
-
                         h2 {
                             font-size: 2rem;
                         }
@@ -109,12 +143,63 @@
                     }
 
                     &-text {
+                        @include d-column;
+                        align-items: center;
                         padding: 0;
+                        max-width: 320px;
+                    }
+
+                    &-rubric {
+                        text-align: center;
+                        font-size: 1rem;
+                    }
+
+                    &-subrubric {
+                        * {
+                            font-size: 1rem;
+                        }
                     }
                 }
 
                 .bath {
                     margin-top: 1rem;
+                }
+
+                .packages {
+
+                    .package-wrapper {
+                        .package {
+                            display: flex;
+                            flex-flow: column wrap;
+                            align-items: center;
+
+                            &-header {
+                                margin-bottom: 1rem;
+                            }
+
+                            &-list {
+                                list-style: none;
+                                padding: 0 0 0 1.5rem;
+
+                                &-item {
+                                    position: relative;
+                                    line-height: 36px;
+                                    letter-spacing: -0.6px;
+                                    width: 320px;
+                                    margin-bottom: 0.25rem;
+                                    font-size: 1rem;
+
+                                    &-disc {
+                                        display: inline-block;
+                                        position: relative;
+                                        top: 1px;
+                                        margin-right: 0.5rem;
+                                        vertical-align: bottom;
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -135,44 +220,6 @@
         }
     }
 
-    .packages {
-        margin: 1rem 2rem 2rem 2rem;
-
-        .package {
-            height: 50rem;
-            display: flex;
-            flex-flow: column wrap;
-            align-items: center;
-            border: 2px solid $black;
-            padding: 2rem;
-
-            &-header {
-                margin-bottom: 2rem;
-            }
-
-            &-list {
-                list-style: none;
-                padding: 0 0 0 2rem;
-
-                &-item {
-                    position: relative;
-                    line-height: 36px;
-                    letter-spacing: -0.6px;
-                    width: 400px;
-                    margin-bottom: 1rem;
-                    font-size: 1.25rem;
-
-                    &-disc {
-                        position: relative;
-                        top: 3px;
-                        margin-right: 1rem;
-                        vertical-align: bottom;
-                    }
-                }
-            }
-        }
-    }
-
     .our-contacts {
         padding: 2rem 2rem 2rem 4rem;
         height: 400px;
@@ -183,12 +230,11 @@
         color: $black;
     }
 
-    .contact-with-me {
-        @include contact;
-    }
-
     .contact {
-        @include none;
+        @include contact;
+
+        right: 72px;
+        top: 120px;
     }
 
     .map {

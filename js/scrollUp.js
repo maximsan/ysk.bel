@@ -1,12 +1,12 @@
 //show go-up button on scroll
 import $ from 'jquery';
 
-const window = $(window);
+const w = $(window);
 const button = $('.scroll-up');
 const body = $('html, body');
 
 export function showScrollUpButton() {
-    window.scroll(function() {
+    w.scroll(function() {
         if (
             document.body.scrollTop > 80 ||
             document.documentElement.scrollTop > 80

@@ -173,7 +173,6 @@ body.down .fixed {
         &-text {
             font-size: 1.15rem;
             font-style: italic;
-            font-weight: 300;
             line-height: 30px;
         }
 
@@ -400,6 +399,6 @@ body.down .fixed {
     }
 }
 
-.scroll-up {
-    display: none;
-}
+//.scroll-up {
+//    display: none;
+//}
