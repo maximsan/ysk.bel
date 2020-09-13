@@ -1,16 +1,8 @@
 /***********************Smartphones (landscape) ************************/
-@media only screen and (min-width: 480px) and (max-width: 767.98px) {
+@media only screen and (min-width: 480px) {
     html,
     body {
         overflow-x: hidden;
-    }
-
-    .desktop {
-        @include block;
-    }
-
-    .mobile {
-        @include none;
     }
 
     .navbar {
@@ -134,6 +126,15 @@
                             }
 
                             &-list {
+
+                                &.mobile {
+                                    @include none;
+                                }
+
+                                &.desktop {
+                                    @include block;
+                                }
+
                                 padding: 0 0 0 12px;
                                 list-style: none;
                                 margin-bottom: 0;
