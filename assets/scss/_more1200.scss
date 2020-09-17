@@ -18,18 +18,30 @@
                 }
             }
 
-            .navbar-collapse {
-                .navbar-nav {
-                    margin-left: 2rem;
+            .sidebar {
+                .navbar-collapse {
+                    .navbar-nav {
+                        margin-left: 4rem;
+                        max-width: 800px;
+                        width: 700px;
 
-                    .nav-item {
-                        margin-right: 0;
+                        .nav-item {
+                            margin-right: 0;
 
-                        .nav-link {
-                            font-size: 1.15rem;
-                            margin-right: 0.25rem;
-                            padding-left: 0.5rem;
-                            padding-right: 0.5rem;
+                            &:nth-child(1) {
+                                .order {
+                                    .house-order {
+                                        font-size: 1.25rem;
+                                    }
+                                }
+                            }
+
+                            .nav-link {
+                                font-size: 1.25rem;
+                                margin-right: 0.25rem;
+                                padding-left: 0.5rem;
+                                padding-right: 0.5rem;
+                            }
                         }
                     }
                 }

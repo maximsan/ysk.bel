@@ -324,4 +324,12 @@
     .map {
         height: 400px;
     }
+
+    .contact {
+        @include none;
+    }
+
+    .scroll-up {
+        @include none;
+    }
 }

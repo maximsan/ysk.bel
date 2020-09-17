@@ -70,6 +70,10 @@
                         }
                     }
                 }
+
+                .contact {
+                    max-width: 320px;
+                }
             }
         }
     }
@@ -294,11 +298,7 @@
         }
     }
 
-    .contact {
-        max-width: 320px;
-    }
-
     .footer-social {
-        display: none;
+        @include none;
     }
 }

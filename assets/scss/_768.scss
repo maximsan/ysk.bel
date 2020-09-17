@@ -231,6 +231,8 @@
     }
 
     .section-container.contacts {
+        padding: 6rem 0;
+
         .our-contacts {
             display: flex;
             flex-flow: row wrap;
@@ -242,16 +244,14 @@
             background: $creamy-white;
             color: $black;
         }
-
-        .map {
-
-        }
     }
 
     .footer-social {
+        @include block;
+
         .container {
             .container-flex {
-                justify-content: space-evenly;
+                justify-content: space-between;
 
                 .find-us {
                 }
@@ -277,5 +277,9 @@
             color: $dirty-orange;
             border: 4px solid $dirty-orange;
         }
+    }
+
+    .scroll-up {
+        @include none;
     }
 }
