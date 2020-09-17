@@ -7,7 +7,7 @@ module.exports = merge(webpackConfig, {
         publicPath: '/',
         filename: '[name].js'
     },
-    devtool: 'cheap-eval-source-map',
+    devtool: 'source-map',
     watch: true,
     watchOptions: {
         aggregateTimeout: 800,
@@ -17,7 +17,7 @@ module.exports = merge(webpackConfig, {
         port: 3000,
         watchContentBase: true,
         open: true,
-        compress: true,
+        // compress: true,
         watchOptions: {
             ignored: /node_modules/,
         },
