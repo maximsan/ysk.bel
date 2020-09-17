@@ -1,16 +1,20 @@
 @media (min-width: 992px) {
     .navbar {
+        padding: 1.5rem 0;
+
         &.navbar-expand-md {
             display: flex;
             justify-content: center;
             flex-flow: row nowrap;
         }
+
         .container {
             max-width: 980px;
-            margin: 0px 28px;
+            margin: 0 28px;
 
             .navbar-header {
                 margin-left: 1rem;
+
                 .brand {
                     font-size: 1.2rem;
                     margin-bottom: 0;
@@ -19,57 +23,60 @@
                 }
             }
 
-            .navbar-collapse {
-                .navbar-nav {
-                    margin-left: 1rem;
+            .sidebar {
+                .navbar-collapse {
+                    .navbar-nav {
+                        max-width: 700px;
+                        width: 650px;
+                        justify-content: space-evenly;
 
-                    .nav-item {
-                        &:nth-child(3),
-                        &:nth-child(4) {
-                            margin-left: 10px;
-                        }
-
-                        .nav-link {
-                            margin-right: 0;
-                            font-size: 1rem;
-                            color: $white;
-                        }
-
-                        a:hover {
-                            text-decoration: none;
-                        }
-
-                        &:nth-child(1) {
-                            flex: 1 0 auto;
-                            margin-top: 0rem;
-
-                            .order {
-                                align-self: center;
-
-                                .house-order {
-                                    font-size: 1rem;
-                                    margin-right: 0.5rem;
-                                    align-self: center;
-                                }
+                        .nav-item {
+                            &.desktop {
+                                display: flex;
                             }
 
-                            .phones {
-                                margin-left: 1rem;
-                                width: auto;
-                                padding-right: 0;
+                            .nav-link {
+                                margin-right: 0;
+                                font-size: 1rem;
+                                color: $white;
+                            }
 
-                                .mobile-icon {
-                                    font-size: 1.25rem;
+                            a:hover {
+                                text-decoration: none;
+                            }
+
+                            &:nth-child(1) {
+                                margin-top: 0;
+
+                                .order {
+                                    align-self: center;
+
+                                    .house-order {
+                                        font-size: 1rem;
+                                        margin-right: 0.5rem;
+                                        align-self: center;
+                                    }
                                 }
 
-                                .phone {
-                                    font-size: 0.9rem;
+                                .phones {
+                                    margin-left: 1rem;
+                                    width: auto;
+                                    padding-right: 0;
+
+                                    .mobile-icon {
+                                        font-size: 1.25rem;
+                                    }
+
+                                    .phone {
+                                        font-size: 0.9rem;
+                                    }
                                 }
                             }
                         }
                     }
                 }
             }
+
         }
     }
 
@@ -89,11 +96,12 @@
 
         .container {
             .content {
-                .content-text {
+                &-text {
                     line-height: 32px;
+                    max-width: 800px;
                 }
 
-                .content-cell {
+                &-cell {
                     margin-bottom: 5rem;
 
                     &-header {
@@ -106,37 +114,81 @@
 
                     &-element {
                         .img-fluid {
-                            height: 400px;
+                            max-width: 560px;
+                            max-height: 560px;
                         }
 
-                        &:nth-child(2) {
-                        }
+                        padding: 0;
                     }
 
                     &-text {
+                        h4 {
+                            font-size: 1.75rem;
+                        }
+                    }
+
+                    &-rubric {
+                        font-size: 1.25rem;
+                    }
+
+                    &-subrubric {
+                        * {
+                            font-size: 1.25rem;
+                        }
+                    }
+
+                    &-subheader {
                     }
                 }
 
                 .bath {
                     margin-top: 2rem;
                 }
+
+                .packages {
+                    .package-wrapper {
+                        .package {
+                            &-header {
+
+                            }
+
+                            &-list {
+                                &-item {
+                                    font-size: 1.25rem;
+                                    max-width: 420px;
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
     }
 
     .section-container.contacts {
-        .address {
-            &-desc {
-            }
-        }
+        .col-12 {
+            flex-flow: column nowrap;
+            justify-content: unset;
 
-        .contact-us-phones {
-            &-header {
-                font-size: 1.25rem;
-            }
-        }
+            .our-contacts {
+                margin: 0;
+                min-height: 500px;
+                align-items: center;
 
-        .contact-us-mail {
+                .address {
+                    &-desc {
+                    }
+                }
+
+                .contact-us-phones {
+                    &-header {
+                        font-size: 1.25rem;
+                    }
+                }
+
+                .contact-us-mail {
+                }
+            }
         }
     }
 

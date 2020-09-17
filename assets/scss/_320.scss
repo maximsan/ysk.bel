@@ -86,6 +86,13 @@
                                 margin-top: 0.5rem;
                             }
                         }
+
+                        .contact {
+                            @include contact;
+                            position: relative;
+                            right: 0.625rem;
+                            top: 1rem;
+                        }
                     }
 
                     .nav-footer {
@@ -117,17 +124,6 @@
                 }
             }
         }
-    }
-
-    .contact-with-me {
-        @include none;
-    }
-
-    .contact {
-        @include contact;
-        position: relative;
-        right: 0.625rem;
-        top: 1rem;
     }
 
     .section-container.services {

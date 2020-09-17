@@ -5,11 +5,13 @@
             justify-content: center;
             flex-flow: row nowrap;
         }
+
         .container {
             max-width: 1260px;
 
             .navbar-header {
                 margin-left: 2rem;
+
                 .brand {
                     font-size: 1.5rem;
                     margin-bottom: 0;
@@ -41,6 +43,15 @@
                 &-header {
                     h2 {
                         font-size: 2.5rem;
+                    }
+                }
+
+                &-cell {
+                    &-element {
+                        .img-fluid {
+                            max-width: 720px;
+                            max-height: 720px;
+                        }
                     }
                 }
             }

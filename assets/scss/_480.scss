@@ -74,10 +74,6 @@
         }
     }
 
-    .contact-with-me {
-        display: none;
-    }
-
     .section-container.services {
         padding-bottom: 2rem;
         padding-top: 20px;
@@ -237,51 +233,64 @@
         margin: 0;
         padding: 1rem 0 2rem 0;
 
-        .our-contacts {
-            margin: 2rem 0;
-            padding: 2rem;
-            max-height: 600px;
-            max-width: 600px;
-            width: 100%;
-            background: $creamy-white;
-            color: $black;
+        .col-12 {
+            display: flex;
+            justify-content: center;
 
-            .address {
+            .our-contacts {
+                margin: 2rem 0;
+                padding: 2rem;
+                max-height: 600px;
+                max-width: 600px;
                 width: 100%;
-                align-items: center;
+                background: $creamy-white;
+                color: $black;
 
-                &-desc {
-                    font-size: 1.25rem;
-                    max-width: 100%;
-                }
-
-                .contact-us-phones,
-                .contact-us-mail {
-                    font-size: 1.25rem;
+                .address {
+                    display: flex;
+                    flex-flow: column;
+                    align-items: center;
                     width: 100%;
-                }
 
-                .contact-us-phones {
-                    &-velcom,
-                    &-mts {
-                        img {
-                            height: 1.5rem;
-                            margin-right: 0.5rem;
-                        }
+                    &-desc {
+                        font-size: 1.25rem;
+                        max-width: 100%;
+                        @include d-column;
+                        align-items: center;
                     }
 
-                    &-mts {
-                        .phone-number {
-                            margin-left: 0.5rem;
-                        }
+                    .contact-us-phones,
+                    .contact-us-mail {
+                        font-size: 1.25rem;
+                        width: 100%;
                     }
 
-                    & .phone-number {
-                        font-weight: 500;
-                        font-size: 1.15rem;
+                    .contact-us-phones {
+                        &-velcom,
+                        &-mts {
+                            img {
+                                height: 1.5rem;
+                                margin-right: 0.5rem;
+                            }
+                        }
+
+                        &-mts {
+                            .phone-number {
+                                margin-left: 0.5rem;
+                            }
+                        }
+
+                        & .phone-number {
+                            font-weight: 500;
+                            font-size: 1.15rem;
+                        }
                     }
                 }
             }
+        }
+
+        .map {
+            min-height: 500px;
         }
     }
 
@@ -291,9 +300,5 @@
 
     .footer-social {
         display: none;
-    }
-
-    .map {
-        height: 500px;
     }
 }

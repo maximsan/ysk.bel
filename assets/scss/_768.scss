@@ -51,6 +51,10 @@
 
                 .navbar-collapse {
                     .navbar-nav {
+                        flex: auto;
+                        max-width: 500px;
+                        width: 500px;
+                        justify-content: space-evenly;
                         align-items: center;
 
                         .nav-item {
@@ -61,8 +65,9 @@
                             }
 
                             .phones {
-                                width: 210px;
-                                flex-direction: row;
+                                flex: 150px;
+                                max-width: 150px;
+                                flex-flow: row wrap;
                                 padding-right: 0;
                                 margin-top: 0.4rem;
 
@@ -71,7 +76,7 @@
                                 }
 
                                 .phone {
-                                    display: inline-block;
+                                    display: block;
 
                                     &:nth-child(2) {
                                         margin: 0;
@@ -85,6 +90,10 @@
                                 margin-right: 1rem;
                                 font-size: 1rem;
                             }
+                        }
+
+                        .contact {
+                            @include none;
                         }
                     }
                 }
@@ -111,6 +120,11 @@
 
         .container {
             .content {
+
+                .col-12 {
+
+                }
+
                 &-header {
                     margin: 1rem 5rem;
 
@@ -120,12 +134,17 @@
                 }
 
                 &-text {
+                    max-width: 590px;
                 }
 
                 &-cell {
                     margin-bottom: 2rem;
                     margin-left: 0;
                     padding-right: 0;
+
+                    .row {
+                        align-items: center;
+                    }
 
                     &-header {
                         h2 {
@@ -135,7 +154,8 @@
 
                     &-element {
                         .img-fluid {
-                            height: 350px;
+                            max-width: 300px;
+                            max-height: 300px;
                         }
 
                         &:nth-child(2) {
@@ -147,11 +167,16 @@
                         align-items: center;
                         padding: 0;
                         max-width: 320px;
+
+                        .fish-list {
+                            margin: 0;
+                            padding: 0;
+                        }
                     }
 
                     &-rubric {
                         text-align: center;
-                        font-size: 1rem;
+                        font-size: 1.15rem;
                     }
 
                     &-subrubric {
@@ -185,7 +210,7 @@
                                     position: relative;
                                     line-height: 36px;
                                     letter-spacing: -0.6px;
-                                    width: 320px;
+                                    max-width: 320px;
                                     margin-bottom: 0.25rem;
                                     font-size: 1rem;
 
@@ -205,6 +230,24 @@
         }
     }
 
+    .section-container.contacts {
+        .our-contacts {
+            display: flex;
+            flex-flow: row wrap;
+            padding: 2rem 2rem 2rem 2rem;
+            height: 400px;
+            max-height: 600px;
+            max-width: 600px;
+            width: 100%;
+            background: $creamy-white;
+            color: $black;
+        }
+
+        .map {
+
+        }
+    }
+
     .footer-social {
         .container {
             .container-flex {
@@ -220,24 +263,19 @@
         }
     }
 
-    .our-contacts {
-        padding: 2rem 2rem 2rem 4rem;
-        height: 400px;
-        max-height: 600px;
-        max-width: 600px;
-        width: 100%;
-        background: $creamy-white;
-        color: $black;
-    }
-
     .contact {
         @include contact;
 
-        right: 72px;
+        color: #B47572;
+        border: 4px solid #B47572;
+        background: rgba(180, 117, 114, 0.1);
+        position: fixed;
+        right: 20px;
         top: 120px;
-    }
 
-    .map {
-        height: 400px;
+        &:hover {
+            color: $dirty-orange;
+            border: 4px solid $dirty-orange;
+        }
     }
 }
