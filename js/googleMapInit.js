@@ -1,11 +1,11 @@
 // Change lat and lng
 
 export function googleMapInit() {
-    var lat = {
+    const lat = {
         lat: 54.291195,
         lng: 27.477718
     };
-    var map = new google.maps.Map(document.getElementById('map'), {
+    const map = new google.maps.Map(document.getElementById('map'), {
         zoom: 16,
         center: lat,
         mapTypeId: 'satellite',
@@ -171,7 +171,8 @@ export function googleMapInit() {
         ],
         scrollwheel: false
     });
-    var marker = new google.maps.Marker({
+
+    const marker = new google.maps.Marker({
         position: lat,
         map: map
     });

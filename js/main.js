@@ -37,7 +37,7 @@ const desktopMethods = () => {
 };
 
 $(function() {
-    googleMapInit();
+    setTimeout(() => googleMapInit(), 0);
     toggleSideBar();
     mobile.addEventListener('change', methods);
     window.addEventListener('load', () => {
