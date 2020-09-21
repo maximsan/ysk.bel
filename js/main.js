@@ -1,5 +1,4 @@
 import $ from 'jquery';
-import AOS from 'aos';
 import { closeSideBarOnTimeout, toggleSideBar } from './helpers/sideBar';
 import { googleMapInit } from './helpers/googleMapInit';
 import { scrollUp, showScrollUpButton } from './helpers/scrollUp';
@@ -7,9 +6,9 @@ import { smoothScroll } from './helpers/smoothScroll';
 import { addFixedHeader, addFixedHeaderOnScroll, removeFixedHeader, removeFixedHeaderOnScroll } from './helpers/header';
 import { initPhotoSwipeFromDOM } from './photo/photoSwipeSetup';
 
-const carousel = $('.carousel');
 const w = $(window);
 const wWidth = w.width();
+const gallery = '.gallery';
 
 const mobile = window.matchMedia('(max-width: 768px');
 
@@ -54,14 +53,10 @@ $(function() {
     });
 });
 
-initPhotoSwipeFromDOM('.gallery');
+initPhotoSwipeFromDOM(gallery);
 
-carousel.carousel({
-    interval: 4000
-});
-
-AOS.init({
-    disable: 'mobile'
-});
-
-AOS.refresh();
+// AOS.init({
+//     disable: 'mobile'
+// });
+//
+// AOS.refresh();
