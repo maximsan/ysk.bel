@@ -8,8 +8,9 @@ const body = $('html, body');
 export function showScrollUpButton() {
     w.scroll(function() {
         if (
-            document.body.scrollTop > 80 ||
-            document.documentElement.scrollTop > 80
+            (document.body.scrollTop > 80 ||
+                document.documentElement.scrollTop > 80) &&
+            document.documentElement.scrollHeight - document.documentElement.scrollTop > 880
         ) {
             button.show();
         } else {

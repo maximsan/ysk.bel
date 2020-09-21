@@ -1,10 +1,11 @@
 import $ from 'jquery';
 import AOS from 'aos';
-import { closeSideBarOnTimeout, toggleSideBar } from './sideBar';
-import { googleMapInit } from './googleMapInit';
-import { scrollUp, showScrollUpButton } from './scrollUp';
-import { smoothScroll } from './smoothScroll';
-import { addFixedHeader, addFixedHeaderOnScroll, removeFixedHeader, removeFixedHeaderOnScroll } from './header';
+import { closeSideBarOnTimeout, toggleSideBar } from './helpers/sideBar';
+import { googleMapInit } from './helpers/googleMapInit';
+import { scrollUp, showScrollUpButton } from './helpers/scrollUp';
+import { smoothScroll } from './helpers/smoothScroll';
+import { addFixedHeader, addFixedHeaderOnScroll, removeFixedHeader, removeFixedHeaderOnScroll } from './helpers/header';
+import { initPhotoSwipeFromDOM } from './photo/photoSwipeSetup';
 
 const carousel = $('.carousel');
 const w = $(window);
@@ -37,7 +38,7 @@ const desktopMethods = () => {
 };
 
 $(function() {
-    setTimeout(() => googleMapInit(), 0);
+    setTimeout(() => googleMapInit(), 3000);
     toggleSideBar();
     mobile.addEventListener('change', methods);
     window.addEventListener('load', () => {
@@ -52,6 +53,8 @@ $(function() {
         }
     });
 });
+
+initPhotoSwipeFromDOM('.gallery');
 
 carousel.carousel({
     interval: 4000
