@@ -11,7 +11,7 @@
   "homepage": "www.уск.бел",
   "scripts": {
     "start": "cross-env NODE_ENV=dev webpack-dev-server --mode development --config webpack.config.dev.js",
-    "build": "npm run clean && webpack -p --progress --mode production --config webpack.config.prod.js",
+    "build": "npm run clean && webpack -p --progress --mode production --config webpack.config.prod.js --output dist",
     "deploy": "npm run clean && npm run build && surge dist ysk.surge.sh",
     "clean": "rm -rf dist"
   },
