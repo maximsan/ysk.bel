@@ -104,6 +104,10 @@
                 &-cell {
                     margin-bottom: 2rem;
 
+                    .row {
+                        width: 100%;
+                    }
+
                     &-header {
                         margin-top: 1rem;
 
@@ -124,6 +128,13 @@
                     &-text {
                         h4 {
                             font-size: 1.75rem;
+                        }
+
+                        .fish-list {
+
+                            li {
+                                margin: 1rem 0;
+                            }
                         }
                     }
 
@@ -220,8 +231,8 @@
 
     .scroll-up {
         position: fixed;
-        bottom: 180px;
-        right: 50px;
+        bottom: 100px;
+        right: 28px;
         z-index: 99;
         font-size: 18px;
         border: none;

@@ -1,8 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Rubik:400,500,500i,700,700i&display=swap');
 
-@import "photoswipe/main";
-@import "photoswipe/default-skin";
-
 @import 'modules/constants';
 @import 'modules/common';
 @import "modules/mixins";
@@ -11,6 +8,7 @@
 @import '_768';
 @import 'more992';
 @import 'more1200';
+@import "gallery";
 
 body {
     font-family: 'Rubik', sans-serif;
@@ -163,7 +161,7 @@ body.down .fixed {
 /*section-container.services*/
 
 .section-container.services {
-    background: url('../images/field_1920x1080.jpg') center center fixed;
+    background: url(#{$img__assets-path}field_1920x1080.jpg) no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -199,6 +197,7 @@ body.down .fixed {
             }
 
             .fish-list {
+                text-align: initial;
                 list-style: none;
                 margin-left: -2rem;
 
@@ -223,7 +222,7 @@ body.down .fixed {
 /*section-container.contacts*/
 
 .section-container.contacts {
-    background: url('../images/stones_1920x1080.jpg') no-repeat center center fixed;
+    background: url(#{$img__assets-path}stones_1920x1080.jpg) no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -349,6 +348,10 @@ body.down .fixed {
     height: 400px;
 }
 
+//.card-img-top {
+//    width: 90%;
+//}
+
 .container-fluid > .navbar-collapse,
 .container-fluid > .navbar-header,
 .container > .navbar-collapse,
@@ -408,4 +411,10 @@ body.down .fixed {
 
 .contact-modal {
     padding: 0;
+}
+
+@media only screen and (max-width: 767px) {
+    .contact {
+        content: 'Связаться со мной'
+    }
 }
