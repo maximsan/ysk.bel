@@ -20,6 +20,7 @@ import 'images/icons/booking.svg';
 import 'images/icons/mail.svg';
 import 'images/icons/mts.svg';
 import 'images/icons/velcom.svg';
+import 'images/icons/send-mail.svg';
 import 'images/carousel/view_0_1900x1080.jpg';
 import 'images/carousel/view_1_1900x1080.jpg';
 import 'images/carousel/view_2_1900x1080.jpg';
