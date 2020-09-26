@@ -54,9 +54,3 @@ $(function() {
 });
 
 initPhotoSwipeFromDOM(gallery);
-
-// AOS.init({
-//     disable: 'mobile'
-// });
-//
-// AOS.refresh();

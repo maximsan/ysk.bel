@@ -2,8 +2,8 @@
 
 export function googleMapInit() {
     const lat = {
-        lat: 54.291195,
-        lng: 27.477718
+        lat: 54.291652,
+        lng: 27.480454
     };
     const map = new google.maps.Map(document.getElementById('map'), {
         zoom: 16,

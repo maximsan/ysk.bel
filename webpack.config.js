@@ -21,7 +21,7 @@ module.exports = {
         }),
 
         new HtmlWebpackPlugin({
-            template: path.join(__dirname, 'index.ejs'),
+            template: path.join(__dirname, 'index.ejs')
         })
     ],
     module: {
@@ -32,7 +32,7 @@ module.exports = {
                 exclude: /(node_modules)/,
                 options: {
                     compact: true
-                },
+                }
             },
             {
                 test: /\.ejs$/,
@@ -42,7 +42,9 @@ module.exports = {
                         options: {
                             data: {
                                 title:
-                                    'Усадьба серебряный карась. Рыбалка. Баня. Минская Область'
+                                    'Усадьба серебряный карась. Рыбалка. Баня. Минская Область',
+                                lat: 54.291652,
+                                lng: 27.480454
                             },
                             htmlmin: true
                         }
