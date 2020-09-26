@@ -1,0 +1,60 @@
+/*section-container.services*/
+
+.section-container.services {
+    background: url(#{$img__assets-path}field_1920x1080.jpg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+
+    .content {
+        border-radius: 1%;
+        border: 2px solid $light-brown;
+
+        &-header {
+            font-weight: 400;
+        }
+
+        &-text {
+            font-size: 1.15rem;
+            font-style: italic;
+            line-height: 30px;
+        }
+
+        &-cell-header {
+            font-size: 2rem;
+        }
+
+        &-cell-text {
+            line-height: 26px;
+            padding: 10px 20px;
+            font-size: 1.25rem;
+            align-self: center;
+            color: $lighter-brown;
+
+            &-rubric {
+                margin-bottom: 0.75rem;
+            }
+
+            .fish-list {
+                text-align: initial;
+                list-style: none;
+                margin-left: -2rem;
+
+                li {
+                    margin: 1rem 0;
+                }
+            }
+        }
+    }
+
+    .carousel-indicators {
+        li {
+            background-color: #c9c9c9;
+        }
+
+        .active {
+            background-color: $white;
+        }
+    }
+}

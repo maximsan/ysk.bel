@@ -1,0 +1,60 @@
+/*----------------------- FOOTER ------------------------*/
+
+.footer-social {
+    background-color: #110d0d;
+}
+
+.footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    margin: 0;
+}
+
+.footer-item {
+    list-style: none;
+    padding: 0 0.5rem;
+}
+
+.footer-link {
+    display: flex;
+    align-items: center;
+    font-weight: 600;
+    padding: 0.5rem;
+
+    &:hover {
+        text-decoration: none;
+    }
+
+    &.airbnb {
+        color: #fd5c63;
+    }
+
+    &.booking {
+        color: #003382;
+    }
+
+    &.skype {
+        color: #00aff0;
+    }
+
+    &.viber {
+        color: #665cac;
+    }
+
+    &.whatsApp {
+        color: #25d366;
+    }
+
+    .fa-skype,
+    .fa-viber,
+    .fa-whatsapp {
+        font-size: 30px;
+    }
+
+    .booking-icon,
+    .airbnb-icon {
+        width: 30px;
+    }
+}

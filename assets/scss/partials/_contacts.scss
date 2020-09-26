@@ -1,0 +1,61 @@
+/******************************contacts******************************/
+.section-container.contacts {
+    &.contacts {
+        background: url(#{$img__assets-path}stones_1920x1080.jpg) no-repeat center center fixed;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+
+        .our-contacts {
+            .address {
+                &-desc {
+                    &-item {
+                        text-align: center;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.section-container.no-padding {
+    padding-top: 0;
+}
+
+.contact-us-mail > .mail-icon {
+    height: 20px;
+    width: 20px;
+}
+
+.contact-us-phones .phone-number {
+    font-weight: bolder;
+}
+
+.contact-us-phones,
+.contact-us-phones-mts,
+.contact-us-phones-velcom {
+    padding-top: 0.5rem;
+}
+
+.contact-us-phones-mts > .mts-icon {
+    height: 18px;
+}
+
+.contact-us-phones-velcom > .velcom-icon {
+    height: 14px;
+}
+
+.btn-send {
+    background: $brown;
+    color: $white;
+
+    &:focus {
+        outline: 0;
+        box-shadow: 0 0 0 0.2rem #9e6132;
+    }
+}
+
+.contact-modal {
+    padding: 0;
+}

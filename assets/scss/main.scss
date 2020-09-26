@@ -6,9 +6,11 @@
 @import '_320';
 @import '_480';
 @import '_768';
-@import 'more992';
-@import 'more1200';
+@import '_992';
+@import '_1200';
 @import "gallery";
+@import "partials/footer";
+@import "partials/contacts";
 
 body {
     font-family: 'Rubik', sans-serif;
@@ -158,140 +160,9 @@ body.down .fixed {
     margin-right: 1.25rem;
 }
 
-/*section-container.services*/
-
-.section-container.services {
-    background: url(#{$img__assets-path}field_1920x1080.jpg) no-repeat center center fixed;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-
-    .content {
-        border-radius: 1%;
-        border: 2px solid $light-brown;
-
-        &-header {
-            font-weight: 400;
-        }
-
-        &-text {
-            font-size: 1.15rem;
-            font-style: italic;
-            line-height: 30px;
-        }
-
-        &-cell-header {
-            font-size: 2rem;
-        }
-
-        &-cell-text {
-            line-height: 26px;
-            padding: 10px 20px;
-            font-size: 1.25rem;
-            align-self: center;
-            color: $lighter-brown;
-
-            &-rubric {
-                margin-bottom: 0.75rem;
-            }
-
-            .fish-list {
-                text-align: initial;
-                list-style: none;
-                margin-left: -2rem;
-
-                li {
-                    margin: 1rem 0;
-                }
-            }
-        }
-    }
-
-    .carousel-indicators {
-        li {
-            background-color: #c9c9c9;
-        }
-
-        .active {
-            background-color: $white;
-        }
-    }
-}
-
-/*section-container.contacts*/
-
-.section-container.contacts {
-    background: url(#{$img__assets-path}stones_1920x1080.jpg) no-repeat center center fixed;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-}
 
 .modal-button {
     margin-top: 1rem;
-}
-
-/*----------------------- FOOTER ------------------------*/
-
-.footer-social {
-    background-color: #110d0d;
-}
-
-.footer {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
-    align-items: center;
-    margin: 0;
-}
-
-.footer-item {
-    list-style: none;
-    padding: 0 0.5rem;
-}
-
-.footer-link {
-    display: flex;
-    align-items: center;
-    font-weight: 600;
-    padding: 0.5rem;
-
-    &:hover {
-        text-decoration: none;
-    }
-
-    &.airbnb {
-        color: #fd5c63;
-    }
-
-    &.booking {
-        color: #003382;
-    }
-
-    &.skype {
-        color: #00aff0;
-    }
-
-    &.viber {
-        color: #665cac;
-    }
-
-    &.whatsApp {
-        color: #25d366;
-    }
-
-    .fa-skype,
-    .fa-viber,
-    .fa-whatsapp {
-        font-size: 30px;
-    }
-
-    .booking-icon,
-    .airbnb-icon {
-        width: 30px;
-    }
 }
 
 .icon-text {
@@ -328,30 +199,6 @@ body.down .fixed {
     /* makes the field not visible to humans */
 }
 
-.carousel-item {
-    height: 100vh;
-    min-height: 300px;
-    background: no-repeat center center scroll;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-}
-
-.carousel-indicators li {
-    border-radius: 12px;
-    width: 12px;
-    height: 12px;
-}
-
-.img-fluid {
-    height: 400px;
-}
-
-//.card-img-top {
-//    width: 90%;
-//}
-
 .container-fluid > .navbar-collapse,
 .container-fluid > .navbar-header,
 .container > .navbar-collapse,
@@ -368,53 +215,4 @@ body.down .fixed {
 
     height: 6rem;
     margin-top: -3rem;
-}
-
-/******************************contacts******************************/
-
-.section-container.no-padding {
-    padding-top: 0;
-}
-
-.contact-us-mail > .mail-icon {
-    height: 20px;
-    width: 20px;
-}
-
-.contact-us-phones .phone-number {
-    font-weight: bolder;
-}
-
-.contact-us-phones,
-.contact-us-phones-mts,
-.contact-us-phones-velcom {
-    padding-top: 0.5rem;
-}
-
-.contact-us-phones-mts > .mts-icon {
-    height: 18px;
-}
-
-.contact-us-phones-velcom > .velcom-icon {
-    height: 14px;
-}
-
-.btn-send {
-    background: $brown;
-    color: $white;
-
-    &:focus {
-        outline: 0;
-        box-shadow: 0 0 0 0.2rem #9e6132;
-    }
-}
-
-.contact-modal {
-    padding: 0;
-}
-
-@media only screen and (max-width: 767px) {
-    .contact {
-        content: 'Связаться со мной'
-    }
 }
