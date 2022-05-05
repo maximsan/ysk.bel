@@ -216,3 +216,98 @@ body.down .fixed {
     height: 6rem;
     margin-top: -3rem;
 }
+
+.intro {
+    display: flex;
+    justify-content: center;
+    > * {
+        width: 100%;
+    }
+}
+
+.fishing, .house {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    min-height: 6rem;
+}
+
+//.info-banner {
+//    display: none;
+//    padding: 3rem;
+//    color: #B47572;
+//    width: 50rem;
+//
+//    position: fixed;
+//    top: 50%;
+//    left: 50%;
+//    transform: translate(-50%, -50%);
+//
+//    border: 4px solid #B47572;
+//    -moz-border-radius: 8px;
+//    -webkit-border-radius: 8px;
+//    background-color: #FFFFFF;
+//    z-index: 1000;
+//
+//    &__header {
+//        font-size: 1.75rem;
+//    }
+//
+//    &__text {
+//        font-size: 1.5rem;
+//    }
+//}
+
+.hide-banner {
+    animation: fadeOutAnimation ease 1.5s;
+}
+
+//.show-banner {
+//    animation: fadeInAnimation ease 1s;
+//
+//    display: flex;
+//    flex-flow: column;
+//    align-items: center;
+//    justify-content: center;
+//}
+
+.overlay {
+    display: none;
+    opacity: 0.5;
+    background-color: black;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 999;
+}
+
+.cross {
+    display: flex;
+    font-size: 2em;
+    cursor: pointer;
+    position: absolute;
+    right: 15px;
+    top: 0;
+}
+
+@keyframes fadeInAnimation {
+    0% {
+        opacity: 0;
+        visibility: hidden;
+    }
+    100% {
+        opacity: 1;
+        visibility: visible;
+    }
+}
+
+@keyframes fadeOutAnimation {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}

@@ -1,7 +1,7 @@
 import $ from 'jquery';
 import { closeSideBarOnTimeout, toggleSideBar } from './helpers/sideBar';
 import { googleMapInit } from './helpers/googleMapInit';
-import { scrollUp, showScrollUpButton } from './helpers/scrollUp';
+import { addInfoBanner, hideInfoBannerOnScroll, scrollUp, showScrollUpButton } from './helpers/scrollUp';
 import { smoothScroll } from './helpers/smoothScroll';
 import { addFixedHeader, addFixedHeaderOnScroll, removeFixedHeader, removeFixedHeaderOnScroll } from './helpers/header';
 import { initPhotoSwipeFromDOM } from './photo/photoSwipeSetup';
@@ -9,6 +9,7 @@ import { initPhotoSwipeFromDOM } from './photo/photoSwipeSetup';
 const w = $(window);
 const wWidth = w.width();
 const gallery = '.gallery';
+
 
 const mobile = window.matchMedia('(max-width: 768px');
 
@@ -22,18 +23,18 @@ const methods = (e) => {
 
 const mobileMethods = () => {
     removeFixedHeaderOnScroll();
-
     closeSideBarOnTimeout();
     addFixedHeader();
 };
 
 const desktopMethods = () => {
     removeFixedHeader();
-
     addFixedHeaderOnScroll();
     smoothScroll(1500);
     showScrollUpButton();
     scrollUp(1000);
+    addInfoBanner();
+    hideInfoBannerOnScroll();
 };
 
 $(function() {
@@ -50,7 +51,12 @@ $(function() {
         if (wWidth < 768) {
             closeSideBarOnTimeout();
         }
+        addInfoBanner();
+        hideInfoBannerOnScroll();
     });
 });
 
 initPhotoSwipeFromDOM(gallery);
+
+
+
