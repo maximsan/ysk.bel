@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="no-js" lang="ru">
-    <head>
-        <!-- meta info-->
+<head>
+    <!-- meta info-->
 <meta charset="utf-8" />
 <meta content="ie=edge" http-equiv="X-UA-Compatible" />
 <meta
@@ -79,20 +79,20 @@
 </script>
 <noscript><div><img src="https://mc.yandex.ru/watch/67016224" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
 <!-- /Yandex.Metrika counter -->
-    </head>
-    <body>
-        <!--[if lte IE 9]>
-            <p class="browserupgrade">
-                You are using an <strong>outdated</strong> browser. Please
-                <a href="https://browsehappy.com/">upgrade your browser</a> to
-                improve your experience and security.
-            </p>
-        <![endif]-->
-        <button class="scroll-up" id="scroll-up" title="Назад к меню">
-            <i class="fas fa-arrow-up"></i>
-        </button>
-        <header>
-            <!-- Navigation -->
+</head>
+<body>
+<!--[if lte IE 9]>
+<p class='browserupgrade'>
+    You are using an <strong>outdated</strong> browser. Please
+    <a href='https://browsehappy.com/'>upgrade your browser</a> to
+    improve your experience and security.
+</p>
+<![endif]-->
+<button class="scroll-up" id="scroll-up" title="Назад к меню">
+    <i class="fas fa-arrow-up"></i>
+</button>
+<header>
+    <!-- Navigation -->
 <nav class="navbar navbar-expand-md navbar-dark header bg-light-black">
     <div class="container">
         <button
@@ -270,17 +270,29 @@
         </div>
     </div>
 </div>
-        </header>
-        <main>
-            <!-- Page Content -->
-            <section>
+</header>
+<main>
+    <!-- Banner with important info-->
+    <div class="overlay"></div>
+<div class="section-container info-banner">
+    <div class="cross">
+        <span class="cross-icon">&times;</span>
+    </div>
+    <h3 class="info-banner__header">Приглашаем к нам на рыбалку!</h3>
+    <div class="info-banner__text">Совсем недавно, 20.04.2022, зарыбили водоем!</div>
+    <div class="info-banner__text">Карп 300-500г - 250кг.</div>
+    <div class="info-banner__text">Карась 200-350г - 250кг.</div>
+</div>
+
+    <!-- Page Content -->
+    <section class='intro'>
     <a data-flickr-embed="true" href="https://www.flickr.com/photos/190342295@N08/50382027352/in/dateposted/"
        title="Усадьба Серебряный Карась"><img src="https://live.staticflickr.com/31337/50382027352_c4b489ba17_o.jpg"
                                               width="1920" height="1080" alt="Усадьба Серебряный Карась"></a>
     <script async src="//embedr.flickr.com/assets/client-code.js" charset="utf-8"></script>
 </section>
-            <!-- Services section -->
-            <section class="section-container services py-10rem" id="desc">
+    <!-- Services section -->
+    <section class="section-container services py-10rem" id="desc">
     <div class="container">
         <div class="content bg-creamy-white">
             <div class="row">
@@ -307,8 +319,10 @@
         <div class="col-12 col-sm-12 col-md-6 package-wrapper">
             <div class="package">
                 <div class="package-header">
-                    <h3>
-                        Рыбалка&nbsp;-&nbsp;<span class="text-danger">20BYN<span class="desktop">/сутки</span></span>
+                    <h3 class="fishing">
+                        Рыбалка<br />
+                        <span class="text-danger">35BYN&nbsp;<span>сутки</span></span>
+                        <span class="text-danger">30BYN&nbsp;<span>световой день</span></span>
                     </h3>
                 </div>
 
@@ -380,8 +394,9 @@
         <div class="col-12 col-sm-12 col-md-6 package-wrapper">
             <div class="package">
                 <div class="package-header">
-                    <h3>
-                        Усадьба&nbsp;-&nbsp;<span class="text-danger">100BYN<span class="desktop">/сутки</span></span>
+                    <h3 class="house">
+                        Усадьба<br />
+                        <span class="text-danger">100BYN&nbsp;<span>сутки</span></span>
                     </h3>
                 </div>
 
@@ -863,8 +878,8 @@
         </div>
     </div>
 </section>
-            <!-- Contacts section -->
-            <section class="section-container contacts" id="contacts">
+    <!-- Contacts section -->
+    <section class="section-container contacts" id="contacts">
     <div class="container">
         <div class="row">
             <div class="col-12">
@@ -947,16 +962,16 @@
         </div>
     </div>
 </section>
-        </main>
+</main>
 
-        <!-- TODO: раздел про отзывы -->
-        <!-- Thank you page -->
-        <div id="thankyou_message" style="display:none;">
-            <h2>Thanks for contacting us! We will get back to you soon!</h2>
-        </div>
+<!-- TODO: раздел про отзывы -->
+<!-- Thank you page -->
+<div id="thankyou_message" style="display:none;">
+    <h2>Thanks for contacting us! We will get back to you soon!</h2>
+</div>
 
-        <!--Footer navigation start-->
-        <footer class="footer-social">
+<!--Footer navigation start-->
+<footer class="footer-social">
   <div class="container">
     <div class="container-flex">
       <ul class="footer">
@@ -1014,10 +1029,10 @@
     </div>
   </div>
 </footer>
-        <!--Footer navigation end-->
+<!--Footer navigation end-->
 
-        <!--Photo swipe start-->
-        <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<!--Photo swipe start-->
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
 <div class="pswp" data-pswp-uid="1" tabindex="-1" role="dialog" aria-hidden="true">
 
     <!-- Background of PhotoSwipe.
@@ -1084,18 +1099,22 @@
     </div>
 
 </div>
-        <!--Photo swipe end-->
+<!--Photo swipe end-->
 
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-0MVEPHZ43W"></script>
-        <script>
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-0MVEPHZ43W');
-        </script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-0MVEPHZ43W"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
 
-        <!-- Google maps -->
-        <script async defer="defer" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCEjXw1mbGTXw12jnM_YTAveRGb1I4c3gQ"></script>
-        <!-- end Google Maps -->
-    <script type="text/javascript" src="bundle.2943fa263b3e247ed95c.js"></script></body>
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+    gtag('config', 'G-0MVEPHZ43W');
+</script>
+
+<!-- Google maps -->
+<script async defer="defer" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCEjXw1mbGTXw12jnM_YTAveRGb1I4c3gQ"></script>
+<!-- end Google Maps -->
+<script type="text/javascript" src="bundle.c0ec02449c83a5f1259e.js"></script></body>
 </html>
