@@ -10,7 +10,7 @@ module.exports = merge(webpackConfig, {
     devtool: 'source-map',
     watch: true,
     watchOptions: {
-        aggregateTimeout: 800,
+        // aggregateTimeout: 800,
         ignored: ['/node_modules/', '/doc/', '/temp/']
     },
     devServer: {

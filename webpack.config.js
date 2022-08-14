@@ -4,24 +4,24 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const IS_DEV = process.env.NODE_ENV === 'dev';
 
-const dirNode = 'node_modules';
-const dirApp = path.resolve(__dirname, 'js');
-const dirAssets = path.resolve(__dirname, 'assets');
+// const dirNode = 'node_modules';
+const dirApp = path.resolve(__dirname, 'src/js');
+const dirAssets = path.resolve(__dirname, 'src/assets');
 
 module.exports = {
     entry: {
-        bundle: path.join(dirApp, 'index')
+        bundle: path.resolve(dirApp, 'index')
     },
-    resolve: {
-        modules: [dirNode, dirApp, dirAssets]
-    },
+    // resolve: {
+    //     modules: [dirNode, dirApp, dirAssets]
+    // },
     plugins: [
         new webpack.DefinePlugin({
-            IS_DEV: IS_DEV
+            IS_DEV
         }),
 
         new HtmlWebpackPlugin({
-            template: path.join(__dirname, 'index.ejs')
+            template: path.resolve(__dirname, 'src/index.ejs')
         })
     ],
     module: {
