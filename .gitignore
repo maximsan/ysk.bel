@@ -5,7 +5,7 @@
 
 ## Directories
 log/
-#dist/ - commented as for now
+dist/
 node_modules/
 doc/
 temp/
