@@ -10,7 +10,6 @@ export function redrawPackagesForTablets() {
     items[7].innerHTML = `${commonSpan} аренда деревянной усадьбы
   <div class="second-row">(8 спален, камин, пруд)</div>`;
     items[8].innerHTML = `${commonSpan} экологически чистое место`;
-    items[10].innerHTML = `${commonSpan} рыбалка включена`;
     items[11].innerHTML = `${commonSpan} прогулки по местности, <div class="second-row">фотографирование</div>`;
     items[12].innerHTML = `${commonSpan} мангалы для шашлыков, <div class="second-row">беседки</div>`;
     items[14].innerHTML = `${commonSpan} скважина с питьевой водой`;
@@ -29,7 +28,6 @@ export function redrawPackagesForSmallSmartphones() {
     items[5].innerHTML = `скважина с питьевой водой`;
     items[7].innerHTML = `8 спальных мест, камин`;
     items[8].innerHTML = `экологически чистое место`;
-    items[10].innerHTML = `рыбалка включена`;
     items[11].innerHTML = `прогулки по местности`;
     items[12].innerHTML = `мангалы и беседки`;
     items[14].innerHTML = `скважина с питьевой водой`;
