@@ -1,10 +1,11 @@
-# Main features used in project
+# Main technologies used in project
 
-## babel-plugin-syntax-dynamic-import
+### babel-plugin-syntax-dynamic-import
 ```
 Allow parsing of import()
 ```
-## ejs
+### ejs
 ```
 Allow to reuse html partial components
 ```
+### yarn
