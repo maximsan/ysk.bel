@@ -1,4 +1,4 @@
-const merge = require('webpack-merge');
+const { merge } = require('webpack-merge');
 const webpackConfig = require('./webpack.config');
 
 module.exports = merge(webpackConfig, {
@@ -15,11 +15,11 @@ module.exports = merge(webpackConfig, {
     },
     devServer: {
         port: 3000,
-        watchContentBase: true,
+        // watchContentBase: true,
         open: true,
         // compress: true,
-        watchOptions: {
-            ignored: /node_modules/,
-        },
+        // watchOptions: {
+        //     ignored: /node_modules/,
+        // },
     }
 });
