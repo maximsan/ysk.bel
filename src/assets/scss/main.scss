@@ -257,6 +257,15 @@ body.down .fixed {
     top: 0;
 }
 
+.button-link {
+    background: inherit;
+    position: relative;
+    color: $white;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+}
+
 @keyframes fadeInAnimation {
     0% {
         opacity: 0;

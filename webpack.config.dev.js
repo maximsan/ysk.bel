@@ -15,7 +15,6 @@ module.exports = merge(webpackConfig, {
     devServer: {
         port: 3000,
         // watchContentBase: true,
-        open: true,
         // compress: true,
         // watchOptions: {
         //     ignored: /node_modules/,
