@@ -6,14 +6,16 @@ const IS_DEV = process.env.NODE_ENV === 'dev';
 
 // const dirNode = 'node_modules';
 const dirApp = path.resolve(__dirname, 'src/js');
-const dirAssets = path.resolve(__dirname, 'src/assets');
+const dirStyles = path.resolve(__dirname, 'src/assets/scss');
+
+const TITLE = 'Усадьба серебряный карась. Рыбалка. Баня. Минская Область';
 
 module.exports = {
     entry: {
         bundle: path.resolve(dirApp, 'index')
     },
     // resolve: {
-    //     modules: [dirNode, dirApp, dirAssets]
+    //     modules: [dirNode, dirApp, dirStyles]
     // },
     plugins: [
         new webpack.DefinePlugin({
@@ -41,8 +43,7 @@ module.exports = {
                         loader: 'ejs-webpack-loader',
                         options: {
                             data: {
-                                title:
-                                    'Усадьба серебряный карась. Рыбалка. Баня. Минская Область',
+                                title: TITLE,
                                 lat: 54.291652,
                                 lng: 27.480454
                             },
@@ -77,7 +78,9 @@ module.exports = {
                         loader: 'sass-loader',
                         options: {
                             sourceMap: IS_DEV,
-                            includePaths: [dirAssets]
+                            sassOptions: {
+                                includePaths: [dirStyles]
+                            }
                         }
                     }
                 ]

@@ -8,7 +8,6 @@ module.exports = merge(webpackConfig, {
         filename: '[name].js'
     },
     devtool: 'source-map',
-    watch: true,
     watchOptions: {
         // aggregateTimeout: 800,
         ignored: ['/node_modules/', '/doc/', '/temp/']
@@ -21,5 +20,6 @@ module.exports = merge(webpackConfig, {
         // watchOptions: {
         //     ignored: /node_modules/,
         // },
+        hot: true,
     }
 });
