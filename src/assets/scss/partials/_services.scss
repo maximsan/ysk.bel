@@ -39,10 +39,12 @@
             .fish-list {
                 text-align: initial;
                 margin-left: -2rem;
-                list-style-type: 🔸;
 
                 li {
                     margin: 1rem 0;
+                    &::marker {
+                        content: "🔸";
+                    }
                 }
             }
         }
