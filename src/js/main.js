@@ -5,6 +5,9 @@ import { addInfoBanner, hideInfoBannerOnScroll, scrollUp, showScrollUpButton } f
 import { smoothScroll } from './helpers/smoothScroll';
 import { addFixedHeader, addFixedHeaderOnScroll, removeFixedHeader, removeFixedHeaderOnScroll } from './helpers/header';
 import { initPhotoSwipeFromDOM } from './photo/photoSwipeSetup';
+import { documentHeight } from './helpers/calculateDocumentHeight';
+
+documentHeight();
 
 const w = $(window);
 const wWidth = w.width();

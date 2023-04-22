@@ -13,9 +13,8 @@ a[href$='packages']
 `)
 
 function openSideBar() {
-    sidebar.toggleClass('open');
+    sidebar.addClass('open');
     document.body.style.overflow = 'hidden';
-    document.body.style.height = '100vh';
 
     sidebarOpenIcon.addClass('hidden');
     sidebarCloseIcon.removeClass('hidden');
@@ -24,7 +23,6 @@ function openSideBar() {
 function closeSideBar() {
     sidebar.removeClass('open');
     document.body.style.overflow = null;
-    document.body.style.height = null;
 
     sidebarCloseIcon.addClass('hidden');
     sidebarOpenIcon.removeClass('hidden');

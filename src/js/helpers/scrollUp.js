@@ -29,19 +29,15 @@ const overlay = document.querySelector('.overlay');
 const crossIcon = document.querySelector('.cross-icon');
 
 function hideInfoBanner() {
-    // setTimeout(() => {
     overlay.style.display = 'none';
     banner.classList.remove('show-banner');
     banner.classList.add('hide-banner');
-    // }, 200);
 }
 
 function showInfoBanner() {
-    // setTimeout(() => {
     overlay.style.display = 'block';
     banner.classList.remove('hide-banner');
     banner.classList.add('show-banner');
-    // }, 200);
 }
 
 let bannerClosed = false;
