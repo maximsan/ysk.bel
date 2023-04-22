@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="no-js" lang="ru">
 <head>
-    <%- include views/templates/head -%>
+    <%- include('partials/head.ejs', { title: 'Усадьба серебряный карась. Рыбалка. Баня. Минская Область' }) %>
 </head>
 <body>
 <!--[if lte IE 9]>
@@ -15,20 +15,17 @@
     <i class="fas fa-arrow-up"></i>
 </button>
 <header>
-    <%- include views/templates/header -%>
+    <%- include('partials/header.ejs') %>
 </header>
 <main>
     <!-- Banner with important info-->
-    <%- include views/templates/info-banner -%>
+    <%- include('partials/info-banner.ejs') -%>
     <!-- Page Content -->
-    <%- include views/templates/hero-section -%>
+    <%- include('partials/hero-section.ejs') -%>
     <!-- Services section -->
-    <%- include views/templates/services -%>
-    <!--    Videos section-->
-<!--    TODO: videos section, will update it -->
-<!--    <%- include views/templates/videos -%>-->
+    <%- include('partials/services.ejs') -%>
     <!-- Contacts section -->
-    <%- include views/templates/contacts -%>
+    <%- include('partials/contacts.ejs', { lat: '', lng: '' }) -%>
 </main>
 
 <!-- TODO: feedback section -->
@@ -38,11 +35,11 @@
 </div>
 
 <!--Footer navigation start-->
-<%- include views/templates/footer -%>
+<%- include('./partials/footer.ejs') -%>
 <!--Footer navigation end-->
 
 <!--Photo swipe start-->
-<%- include views/templates/photoSwipe -%>
+<%- include('./partials/photoSwipe.ejs') -%>
 <!--Photo swipe end-->
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-0MVEPHZ43W"></script>

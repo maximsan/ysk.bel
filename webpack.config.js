@@ -4,25 +4,22 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const IS_DEV = process.env.NODE_ENV === 'dev';
 
-// const dirNode = 'node_modules';
-const dirApp = path.resolve(__dirname, 'src/js');
-const dirStyles = path.resolve(__dirname, 'src/assets/scss');
-
-const TITLE = 'Усадьба серебряный карась. Рыбалка. Баня. Минская Область';
+const dirStyles = path.resolve(__dirname, 'src/assets');
 
 module.exports = {
     entry: {
-        bundle: path.resolve(dirApp, 'index')
+        bundle: path.resolve(__dirname, 'src/js/index.js')
     },
-    // resolve: {
-    //     modules: [dirNode, dirApp, dirStyles]
-    // },
+    output: {
+        assetModuleFilename: 'assets/images/[name][ext]'
+    },
     plugins: [
         new webpack.DefinePlugin({
             IS_DEV
         }),
 
         new HtmlWebpackPlugin({
+            filename: 'index.html',
             template: path.resolve(__dirname, 'src/index.ejs')
         })
     ],
@@ -37,18 +34,19 @@ module.exports = {
                 }
             },
             {
-                test: /\.ejs$/,
+                test: /\.ejs$/i,
                 use: [
+                    'html-loader',
                     {
-                        loader: 'ejs-webpack-loader',
-                        options: {
-                            data: {
-                                title: TITLE,
-                                lat: 54.291652,
-                                lng: 27.480454
-                            },
-                            htmlmin: true
-                        }
+                        loader: 'template-ejs-loader',
+                        // options: {
+                        //     data: {
+                        //         title: TITLE,
+                        //         lat: 54.291652,
+                        //         lng: 27.480454
+                        //     },
+                        //     htmlmin: true
+                        // }
                     }
                 ]
             },
@@ -87,11 +85,8 @@ module.exports = {
             },
             {
                 test: /\.(jpe?g|png|gif|svg)$/i,
-                loader: 'file-loader',
-                options: {
-                    name: '[path][name].[ext]'
-                }
-            }
+                type: 'asset/resource'
+            },
         ]
     }
 };

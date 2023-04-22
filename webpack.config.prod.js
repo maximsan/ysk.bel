@@ -1,6 +1,6 @@
 const path = require('path');
-const merge = require('webpack-merge');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
+const { merge } = require('webpack-merge');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const webpackConfig = require('./webpack.config');
 
 module.exports = merge(webpackConfig, {
@@ -9,5 +9,5 @@ module.exports = merge(webpackConfig, {
         path: path.resolve(__dirname, 'dist'),
         filename: '[name].[chunkhash].js'
     },
-    plugins: [new CleanWebpackPlugin(['dist'])]
+    plugins: [new CleanWebpackPlugin()]
 });

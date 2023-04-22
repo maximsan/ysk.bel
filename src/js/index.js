@@ -15,8 +15,6 @@ import '../assets/scss/photoswipe/photo-swipe.scss';
 import '../assets/scss/photoswipe/default-skin.scss';
 
 //load images
-import '../assets/images/icons/airbnb.svg';
-import '../assets/images/icons/booking.svg';
 import '../assets/images/icons/mail.svg';
 import '../assets/images/icons/mts.svg';
 import '../assets/images/icons/a1.svg';
