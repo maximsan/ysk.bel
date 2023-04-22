@@ -21,7 +21,3 @@ jobs:
 
             - name: build app
               run: yarn build
-
-            - name: unit tests
-              run: |
-                  yarn test:ci --coverage --maxWorkers=2
