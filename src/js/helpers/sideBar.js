@@ -1,44 +1,52 @@
 import $ from 'jquery';
 
-const sideBar = $('.sidebar');
-const navBarToggleBtn = $('.navbar-toggler');
-const togglerIcon = $('.navbar-toggler-icon');
+const sidebar = $('.sidebar');
+const menuIconButton = $('.navbar-toggler');
+const sidebarOpenIcon = $('.navbar-toggler-icon');
+const sidebarCloseIcon = $('.close-icon');
+const menuItemSelectors = $(`
+a[href$='services'],
+a[href$='prices'],
+a[href$='contacts'],
+a[href$='map'],
+a[href$='packages']
+`)
 
 function openSideBar() {
-    sideBar.toggleClass('open');
+    sidebar.toggleClass('open');
     document.body.style.overflow = 'hidden';
     document.body.style.height = '100vh';
+
+    sidebarOpenIcon.addClass('hidden');
+    sidebarCloseIcon.removeClass('hidden');
 }
 
 function closeSideBar() {
-    sideBar.removeClass('open');
+    sidebar.removeClass('open');
     document.body.style.overflow = null;
     document.body.style.height = null;
+
+    sidebarCloseIcon.addClass('hidden');
+    sidebarOpenIcon.removeClass('hidden');
 }
 
 export function toggleSideBar() {
-    navBarToggleBtn.click((e) => {
+    menuIconButton.click((e) => {
         e.preventDefault();
 
-        if(!togglerIcon.hasClass('hidden')) {
+        if(!sidebarOpenIcon.hasClass('hidden')) {
             openSideBar();
         } else {
             closeSideBar();
         }
-
-        togglerIcon.toggleClass('hidden');
-        $('.close-icon').toggleClass('hidden');
     });
 }
 
 export function closeSideBarOnTimeout() {
     /* close sidebar after clicking on menu point */
-    $(`a[href$='services'],
-    a[href$='prices'],
-    a[href$='contacts'],
-    a[href$='map'],
-    a[href$='packages']
-    `).click(() => {
-        setTimeout(() => closeSideBar(), 100);
+    menuItemSelectors.click(() => {
+        setTimeout(() => {
+            closeSideBar()
+        }, 100);
     });
 }
