@@ -5,14 +5,14 @@
 // load styles
 
 //Bootstrap core CSS
-import '../assets/css/normalize.css';
-import '../assets/css/bootstrap.css';
-import '../assets/css/main.css';
+import '../styles/css/normalize.css';
+import '../styles/css/bootstrap.css';
+import '../styles/css/main.css';
 
 //Custom styles
-import '../assets/scss/main.scss';
-import '../assets/scss/photoswipe/photo-swipe.scss';
-import '../assets/scss/photoswipe/default-skin.scss';
+import '../styles/scss/main.scss';
+import '../styles/scss/photoswipe/photo-swipe.scss';
+import '../styles/scss/photoswipe/default-skin.scss';
 
 //load images
 import '../assets/images/icons/mail.svg';

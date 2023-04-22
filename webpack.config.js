@@ -4,7 +4,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const IS_DEV = process.env.NODE_ENV === 'dev';
 
-const dirStyles = path.resolve(__dirname, 'src/assets');
+const dirStyles = path.resolve(__dirname, 'src/styles');
 
 module.exports = {
     entry: {
