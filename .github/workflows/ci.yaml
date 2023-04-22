@@ -1,0 +1,27 @@
+name: CI
+
+on:
+    push:
+        branches: [main]
+    pull_request:
+        branches: [main]
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: checkout code
+              uses: actions/checkout@v3
+
+            - name: install dependencies
+              run: |
+                  yarn set version 3.4.1
+                  yarn install --immutable
+
+            - name: build app
+              run: yarn build
+
+            - name: unit tests
+              run: |
+                  yarn test:ci --coverage --maxWorkers=2

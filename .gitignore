@@ -16,3 +16,12 @@ npm-debug.log
 package-lock.json
 yarn-lock.json
 CNAME
+
+## Yarn
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
