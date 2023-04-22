@@ -39,14 +39,6 @@ module.exports = {
                     'html-loader',
                     {
                         loader: 'template-ejs-loader',
-                        // options: {
-                        //     data: {
-                        //         title: TITLE,
-                        //         lat: 54.291652,
-                        //         lng: 27.480454
-                        //     },
-                        //     htmlmin: true
-                        // }
                     }
                 ]
             },
@@ -88,5 +80,10 @@ module.exports = {
                 type: 'asset/resource'
             },
         ]
-    }
+    },
+    optimization: {
+        splitChunks: {
+            chunks: 'all',
+        },
+    },
 };
