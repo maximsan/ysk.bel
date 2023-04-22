@@ -49,6 +49,20 @@
         }
     }
 
+    .hero {
+        &-content {
+        }
+
+        &-header {
+            margin-left: 24rem;
+            gap: 4rem;
+
+            > * {
+                font-size: 3rem;
+            }
+        }
+    }
+
     .section-container.services {
         .container {
             .content {

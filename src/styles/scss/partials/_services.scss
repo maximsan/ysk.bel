@@ -1,14 +1,11 @@
 /*section-container.services*/
 
 .section-container.services {
-    background: url(#{$images-path}/field_1920x1080.jpg) no-repeat center center fixed;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
+    //background: url(#{$images-path}/field_1920x1080.jpg) no-repeat center center fixed;
+    //background-size: cover;
 
     .content {
-        border-radius: 1%;
+        border-radius: 2rem;
         border: 2px solid $light-brown;
 
         &-header {

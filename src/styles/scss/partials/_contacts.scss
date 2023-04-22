@@ -1,18 +1,13 @@
 /******************************contacts******************************/
 .section-container.contacts {
-    &.contacts {
-        background: url(#{$images-path}/stones_1920x1080.jpg) no-repeat center center fixed;
-        -webkit-background-size: cover;
-        -moz-background-size: cover;
-        -o-background-size: cover;
-        background-size: cover;
+    background: url(#{$images-path}/stones_1920x1080.jpg) no-repeat center center fixed;
+    background-size: cover;
 
-        .our-contacts {
-            .address {
-                &-desc {
-                    &-item {
-                        text-align: center;
-                    }
+    .our-contacts {
+        .address {
+            &-desc {
+                &-item {
+                    text-align: center;
                 }
             }
         }
