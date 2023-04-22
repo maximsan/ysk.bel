@@ -8,7 +8,7 @@ export function redrawPackagesForTablets() {
   и незабываемые виды`;
     items[5].innerHTML = `${commonSpan} скважина с питьевой водой`;
     items[7].innerHTML = `${commonSpan} аренда деревянной усадьбы
-  <div class="second-row">(8 спален, камин, пруд)</div>`;
+  <div class="second-row">(2 спальни, камин, пруд)</div>`;
     items[8].innerHTML = `${commonSpan} экологически чистое место`;
     items[11].innerHTML = `${commonSpan} прогулки по местности, <div class="second-row">фотографирование</div>`;
     items[12].innerHTML = `${commonSpan} мангалы для шашлыков, <div class="second-row">беседки</div>`;
