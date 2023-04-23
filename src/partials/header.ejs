@@ -1,27 +1,30 @@
 <!-- Navigation -->
-<nav class="navbar navbar-expand-md navbar-dark header bg-light-black">
-    <div class="container">
-        <button
-            aria-controls="navbar-collapse"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-            class="navbar-toggler"
-            type="button"
-        >
-            <span class="navbar-toggler-icon"></span>
-            <span class="close-icon hidden">✖</span>
-        </button>
-        <div class="navbar-header">
-            <h1 class="brand">
-                <span class="brand-item">Усадьба&nbsp;</span>
-                <span class="brand-item">Серебряный&nbsp;</span>
-                <span class="brand-item">Карась</span>
-            </h1>
+<header class='header'>
+    <nav class="navbar navbar-expand-md navbar-dark header bg-light-black">
+        <div class="container">
+            <button
+                    aria-controls="navbar-collapse"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation"
+                    class="navbar-toggler"
+                    type="button"
+            >
+                <span class="navbar-toggler-icon"></span>
+                <span class="close-icon hidden">✖</span>
+            </button>
+            <div class="navbar-header">
+                <h1 class="brand">
+                    <span class="brand-item">Усадьба&nbsp;</span>
+                    <span class="brand-item">Серебряный&nbsp;</span>
+                    <span class="brand-item">Карась</span>
+                </h1>
+            </div>
+            <%- include('sidebar.ejs') -%>
         </div>
-        <%- include('sidebar.ejs') -%>
-    </div>
-</nav>
+    </nav>
 
-<%- include('components/contact-button.ejs') -%>
+    <%- include('components/contact-button.ejs') -%>
 
-<%- include('components/modal.ejs') -%>
+    <%- include('components/modal.ejs') -%>
+</header>
+
