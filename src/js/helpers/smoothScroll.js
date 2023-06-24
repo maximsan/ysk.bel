@@ -4,13 +4,13 @@ const body = $('html, body');
 
 export function smoothScroll(milliseconds) {
     const selector = 'a[href^="#"]';
-    $(document).on('click', selector, function(event) {
+    $(document).on('click', selector, function (event) {
         event.preventDefault();
 
         if (event.currentTarget.hash === '#prices') {
             body.animate(
                 {
-                    scrollTop: $($.attr(this, 'href')).offset().top - 200
+                    scrollTop: $($.attr(this, 'href')).offset().top - 200,
                 },
                 milliseconds
             );
@@ -21,7 +21,7 @@ export function smoothScroll(milliseconds) {
         if (event.currentTarget.hash === '#packages' || '#services') {
             body.animate(
                 {
-                    scrollTop: $($.attr(this, 'href')).offset().top - 120
+                    scrollTop: $($.attr(this, 'href')).offset().top - 120,
                 },
                 milliseconds
             );
@@ -31,7 +31,7 @@ export function smoothScroll(milliseconds) {
 
         body.animate(
             {
-                scrollTop: $($.attr(this, 'href')).offset().top
+                scrollTop: $($.attr(this, 'href')).offset().top,
             },
             milliseconds
         );

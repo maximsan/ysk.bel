@@ -13,7 +13,7 @@
     .info-banner {
         display: none;
         padding: 3rem;
-        color: #B47572;
+        color: #b47572;
         width: 90%;
 
         position: fixed;
@@ -21,10 +21,10 @@
         left: 50%;
         transform: translate(-50%, -50%);
 
-        border: 4px solid #B47572;
+        border: 4px solid #b47572;
         -moz-border-radius: 8px;
         -webkit-border-radius: 8px;
-        background-color: #FFFFFF;
+        background-color: #ffffff;
         z-index: 1000;
 
         &__header {
@@ -171,7 +171,6 @@
 
         .container {
             .content {
-
                 &-header {
                     margin: 1rem 5rem;
 
@@ -246,7 +245,6 @@
                 }
 
                 .packages {
-
                     .package-wrapper {
                         .package {
                             display: flex;
@@ -325,8 +323,8 @@
     .contact {
         @include contact;
 
-        color: #B47572;
-        border: 4px solid #B47572;
+        color: #b47572;
+        border: 4px solid #b47572;
         background: rgba(180, 117, 114, 0.1);
         position: fixed;
         right: 20px;
@@ -339,7 +337,7 @@
         & > .message-icon {
             margin: 0;
             width: 26px;
-            color: #B47572;
+            color: #b47572;
         }
 
         &:hover {

@@ -13,7 +13,6 @@ const w = $(window);
 const wWidth = w.width();
 const gallery = '.gallery';
 
-
 const mobile = window.matchMedia('(max-width: 768px');
 
 const methods = (e) => {
@@ -40,7 +39,7 @@ const desktopMethods = () => {
     hideInfoBannerOnScroll();
 };
 
-$(function() {
+$(function () {
     setTimeout(() => googleMapInit(), 3000);
     toggleSideBar();
     mobile.addEventListener('change', methods);
@@ -60,6 +59,3 @@ $(function() {
 });
 
 initPhotoSwipeFromDOM(gallery);
-
-
-

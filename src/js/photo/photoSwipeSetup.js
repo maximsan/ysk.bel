@@ -1,7 +1,7 @@
 import { photoswipeParseHash } from './parseHash';
 import { openPhotoSwipe } from './openPhotoSwipe';
 
-export const initPhotoSwipeFromDOM = function(gallerySelector) {
+export const initPhotoSwipeFromDOM = function (gallerySelector) {
     // select all gallery elements
     const galleryElements = document.querySelectorAll(gallerySelector);
     let prevHeight = 0;
@@ -59,14 +59,14 @@ const closest = function closest(el, fn) {
 };
 
 // attach on click event to whole gallery div component
-const onGalleryThumbNailsClick = function(e) {
-    e.preventDefault ? e.preventDefault() : e.returnValue = false;
+const onGalleryThumbNailsClick = function (e) {
+    e.preventDefault ? e.preventDefault() : (e.returnValue = false);
 
     // check if img item exist
     let eTarget = e.target || e.srcElement;
 
     // check if the closest item is <a></a> tag
-    let clickedListItem = closest(eTarget, el => {
+    let clickedListItem = closest(eTarget, (el) => {
         return el.tagName === 'A';
     });
 
@@ -102,7 +102,3 @@ const onGalleryThumbNailsClick = function(e) {
 
     return false;
 };
-
-
-
-

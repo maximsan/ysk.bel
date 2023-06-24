@@ -27,7 +27,7 @@ export function addFixedHeaderOnScroll() {
     const clone = header.clone().addClass('fixed');
     header.before(clone);
 
-    w.scroll(function() {
+    w.scroll(function () {
         const fromTop = w.scrollTop();
         b.toggleClass('down', fromTop > 480);
     });

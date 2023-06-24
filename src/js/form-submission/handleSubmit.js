@@ -16,15 +16,20 @@ export function handleSubmit(event) {
     body.append('телефон', phone.value);
     body.append('сообщение', message.value);
 
-    Promise.resolve(fetch('https://smartforms.dev/submit/5f575b80b81854118fd3d51d', {
-        method: 'post',
-        body
-    })).then((result) => {
-        console.log(result);
-        $(modal).modal('hide');
-    }).catch((error) => {
-        console.error(error.message);
-    }).finally(() => {
-        $(modal).modal('hide');
-    });
+    Promise.resolve(
+        fetch('https://smartforms.dev/submit/5f575b80b81854118fd3d51d', {
+            method: 'post',
+            body,
+        })
+    )
+        .then((result) => {
+            console.log(result);
+            $(modal).modal('hide');
+        })
+        .catch((error) => {
+            console.error(error.message);
+        })
+        .finally(() => {
+            $(modal).modal('hide');
+        });
 }

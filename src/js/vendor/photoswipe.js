@@ -1,7 +1,7 @@
 /*! PhotoSwipe - v4.1.3 - 2019-01-08
-* http://photoswipe.com
-* Copyright (c) 2019 Dmitry Semenov; */
-(function(root, factory) {
+ * http://photoswipe.com
+ * Copyright (c) 2019 Dmitry Semenov; */
+(function (root, factory) {
     if (typeof define === 'function' && define.amd) {
         define(factory);
     } else if (typeof exports === 'object') {
@@ -9,11 +9,9 @@
     } else {
         root.PhotoSwipe = factory();
     }
-})(this, function() {
-
+})(this, function () {
     'use strict';
-    var PhotoSwipe = function(template, UiClass, items, options) {
-
+    var PhotoSwipe = function (template, UiClass, items, options) {
         /*>>framework-bridge*/
         /**
          *
@@ -24,7 +22,7 @@
          */
         var framework = {
             features: null,
-            bind: function(target, type, listener, unbind) {
+            bind: function (target, type, listener, unbind) {
                 var methodName = (unbind ? 'remove' : 'add') + 'EventListener';
                 type = type.split(' ');
                 for (var i = 0; i < type.length; i++) {
@@ -33,36 +31,39 @@
                     }
                 }
             },
-            isArray: function(obj) {
-                return (obj instanceof Array);
+            isArray: function (obj) {
+                return obj instanceof Array;
             },
-            createEl: function(classes, tag) {
+            createEl: function (classes, tag) {
                 var el = document.createElement(tag || 'div');
                 if (classes) {
                     el.className = classes;
                 }
                 return el;
             },
-            getScrollY: function() {
+            getScrollY: function () {
                 var yOffset = window.pageYOffset;
                 return yOffset !== undefined ? yOffset : document.documentElement.scrollTop;
             },
-            unbind: function(target, type, listener) {
+            unbind: function (target, type, listener) {
                 framework.bind(target, type, listener, true);
             },
-            removeClass: function(el, className) {
+            removeClass: function (el, className) {
                 var reg = new RegExp('(\\s|^)' + className + '(\\s|$)');
-                el.className = el.className.replace(reg, ' ').replace(/^\s\s*/, '').replace(/\s\s*$/, '');
+                el.className = el.className
+                    .replace(reg, ' ')
+                    .replace(/^\s\s*/, '')
+                    .replace(/\s\s*$/, '');
             },
-            addClass: function(el, className) {
+            addClass: function (el, className) {
                 if (!framework.hasClass(el, className)) {
                     el.className += (el.className ? ' ' : '') + className;
                 }
             },
-            hasClass: function(el, className) {
+            hasClass: function (el, className) {
                 return el.className && new RegExp('(^|\\s)' + className + '(\\s|$)').test(el.className);
             },
-            getChildByClass: function(parentEl, childClassName) {
+            getChildByClass: function (parentEl, childClassName) {
                 var node = parentEl.firstChild;
                 while (node) {
                     if (framework.hasClass(node, childClassName)) {
@@ -71,7 +72,7 @@
                     node = node.nextSibling;
                 }
             },
-            arraySearch: function(array, value, key) {
+            arraySearch: function (array, value, key) {
                 var i = array.length;
                 while (i--) {
                     if (array[i][key] === value) {
@@ -80,7 +81,7 @@
                 }
                 return -1;
             },
-            extend: function(o1, o2, preventOverwrite) {
+            extend: function (o1, o2, preventOverwrite) {
                 for (var prop in o2) {
                     if (o2.hasOwnProperty(prop)) {
                         if (preventOverwrite && o1.hasOwnProperty(prop)) {
@@ -92,18 +93,18 @@
             },
             easing: {
                 sine: {
-                    out: function(k) {
+                    out: function (k) {
                         return Math.sin(k * (Math.PI / 2));
                     },
-                    inOut: function(k) {
+                    inOut: function (k) {
                         return -(Math.cos(Math.PI * k) - 1) / 2;
-                    }
+                    },
                 },
                 cubic: {
-                    out: function(k) {
+                    out: function (k) {
                         return --k * k * k + 1;
-                    }
-                }
+                    },
+                },
                 /*
 			elastic: {
 				out: function ( k ) {
@@ -138,7 +139,7 @@
              * }
              *
              */
-            detectFeatures: function() {
+            detectFeatures: function () {
                 if (framework.features) {
                     return framework.features;
                 }
@@ -157,13 +158,12 @@
                     features.caf = window.cancelAnimationFrame;
                 }
 
-                features.pointerEvent = !!(window.PointerEvent) || navigator.msPointerEnabled;
+                features.pointerEvent = !!window.PointerEvent || navigator.msPointerEnabled;
 
                 // fix false-positive detection of old Android in new IE
                 // (IE11 ua string contains "Android 4.0")
 
                 if (!features.pointerEvent) {
-
                     var ua = navigator.userAgent;
 
                     // Detect if device is iPhone or iPod and if it's older than iOS 8
@@ -174,7 +174,7 @@
                     // For more info refer to _isFixedPosition variable in core.js
 
                     if (/iP(hone|od)/.test(navigator.platform)) {
-                        var v = (navigator.appVersion).match(/OS (\d+)_(\d+)_?(\d+)?/);
+                        var v = navigator.appVersion.match(/OS (\d+)_(\d+)_?(\d+)?/);
                         if (v && v.length > 0) {
                             v = parseInt(v[1], 10);
                             if (v >= 1 && v < 8) {
@@ -213,9 +213,11 @@
                         styleCheckItem = styleChecks[a];
 
                         // uppercase first letter of property name, if vendor is present
-                        styleName = vendor + (vendor ?
-                            styleCheckItem.charAt(0).toUpperCase() + styleCheckItem.slice(1) :
-                            styleCheckItem);
+                        styleName =
+                            vendor +
+                            (vendor
+                                ? styleCheckItem.charAt(0).toUpperCase() + styleCheckItem.slice(1)
+                                : styleCheckItem);
 
                         if (!features[styleCheckItem] && styleName in helperStyle) {
                             features[styleCheckItem] = styleName;
@@ -226,7 +228,8 @@
                         vendor = vendor.toLowerCase();
                         features.raf = window[vendor + 'RequestAnimationFrame'];
                         if (features.raf) {
-                            features.caf = window[vendor + 'CancelAnimationFrame'] ||
+                            features.caf =
+                                window[vendor + 'CancelAnimationFrame'] ||
                                 window[vendor + 'CancelRequestAnimationFrame'];
                         }
                     }
@@ -234,49 +237,47 @@
 
                 if (!features.raf) {
                     var lastTime = 0;
-                    features.raf = function(fn) {
+                    features.raf = function (fn) {
                         var currTime = new Date().getTime();
                         var timeToCall = Math.max(0, 16 - (currTime - lastTime));
-                        var id = window.setTimeout(function() {
+                        var id = window.setTimeout(function () {
                             fn(currTime + timeToCall);
                         }, timeToCall);
                         lastTime = currTime + timeToCall;
                         return id;
                     };
-                    features.caf = function(id) {
+                    features.caf = function (id) {
                         clearTimeout(id);
                     };
                 }
 
                 // Detect SVG support
-                features.svg = !!document.createElementNS &&
+                features.svg =
+                    !!document.createElementNS &&
                     !!document.createElementNS('http://www.w3.org/2000/svg', 'svg').createSVGRect;
 
                 framework.features = features;
 
                 return features;
-            }
+            },
         };
 
         framework.detectFeatures();
 
-// Override addEventListener for old versions of IE
+        // Override addEventListener for old versions of IE
         if (framework.features.oldIE) {
-
-            framework.bind = function(target, type, listener, unbind) {
-
+            framework.bind = function (target, type, listener, unbind) {
                 type = type.split(' ');
 
                 var methodName = (unbind ? 'detach' : 'attach') + 'Event',
                     evName,
-                    _handleEv = function() {
+                    _handleEv = function () {
                         listener.handleEvent.call(listener);
                     };
 
                 for (var i = 0; i < type.length; i++) {
                     evName = type[i];
                     if (evName) {
-
                         if (typeof listener === 'object' && listener.handleEvent) {
                             if (!unbind) {
                                 listener['oldIE' + evName] = _handleEv;
@@ -290,17 +291,15 @@
                         } else {
                             target[methodName]('on' + evName, listener);
                         }
-
                     }
                 }
             };
-
         }
 
         /*>>framework-bridge*/
 
         /*>>core*/
-//function(template, UiClass, items, options)
+        //function(template, UiClass, items, options)
 
         var self = this;
 
@@ -331,10 +330,10 @@
             arrowKeys: true,
             mainScrollEndFriction: 0.35,
             panEndFriction: 0.35,
-            isClickableElement: function(el) {
+            isClickableElement: function (el) {
                 return el.tagName === 'A';
             },
-            getDoubleTapZoom: function(isMouseClick, item) {
+            getDoubleTapZoom: function (isMouseClick, item) {
                 if (isMouseClick) {
                     return 1;
                 } else {
@@ -345,16 +344,15 @@
             modal: true,
 
             // not fully implemented yet
-            scaleMode: 'fit' // TODO
+            scaleMode: 'fit', // TODO
         };
         framework.extend(_options, options);
-
 
         /**
          * Private helper variables & functions
          */
 
-        var _getEmptyPoint = function() {
+        var _getEmptyPoint = function () {
             return { x: 0, y: 0 };
         };
 
@@ -402,15 +400,12 @@
             _windowVisibleSize = {},
             _renderMaxResolution = false,
             _orientationChangeTimeout,
-
-
             // Registers PhotoSWipe module (History, Controller ...)
-            _registerModule = function(name, module) {
+            _registerModule = function (name, module) {
                 framework.extend(self, module.publicMethods);
                 _modules.push(name);
             },
-
-            _getLoopedId = function(index) {
+            _getLoopedId = function (index) {
                 var numSlides = _getNumItems();
                 if (index > numSlides - 1) {
                     return index - numSlides;
@@ -419,16 +414,15 @@
                 }
                 return index;
             },
-
             // Micro bind/trigger
             _listeners = {},
-            _listen = function(name, fn) {
+            _listen = function (name, fn) {
                 if (!_listeners[name]) {
                     _listeners[name] = [];
                 }
                 return _listeners[name].push(fn);
             },
-            _shout = function(name) {
+            _shout = function (name) {
                 var listeners = _listeners[name];
 
                 if (listeners) {
@@ -440,25 +434,23 @@
                     }
                 }
             },
-
-            _getCurrentTime = function() {
+            _getCurrentTime = function () {
                 return new Date().getTime();
             },
-            _applyBgOpacity = function(opacity) {
+            _applyBgOpacity = function (opacity) {
                 _bgOpacity = opacity;
                 self.bg.style.opacity = opacity * _options.bgOpacity;
             },
-
-            _applyZoomTransform = function(styleObj, x, y, zoom, item) {
+            _applyZoomTransform = function (styleObj, x, y, zoom, item) {
                 if (!_renderMaxResolution || (item && item !== self.currItem)) {
                     zoom = zoom / (item ? item.fitRatio : self.currItem.fitRatio);
                 }
 
-                styleObj[_transformKey] = _translatePrefix + x + 'px, ' + y + 'px' + _translateSufix + ' scale(' + zoom + ')';
+                styleObj[_transformKey] =
+                    _translatePrefix + x + 'px, ' + y + 'px' + _translateSufix + ' scale(' + zoom + ')';
             },
-            _applyCurrentZoomPan = function(allowRenderResolution) {
+            _applyCurrentZoomPan = function (allowRenderResolution) {
                 if (_currZoomElementStyle) {
-
                     if (allowRenderResolution) {
                         if (_currZoomLevel > self.currItem.fitRatio) {
                             if (!_renderMaxResolution) {
@@ -473,31 +465,33 @@
                         }
                     }
 
-
                     _applyZoomTransform(_currZoomElementStyle, _panOffset.x, _panOffset.y, _currZoomLevel);
                 }
             },
-            _applyZoomPanToItem = function(item) {
+            _applyZoomPanToItem = function (item) {
                 if (item.container) {
-
-                    _applyZoomTransform(item.container.style,
+                    _applyZoomTransform(
+                        item.container.style,
                         item.initialPosition.x,
                         item.initialPosition.y,
                         item.initialZoomLevel,
-                        item);
+                        item
+                    );
                 }
             },
-            _setTranslateX = function(x, elStyle) {
+            _setTranslateX = function (x, elStyle) {
                 elStyle[_transformKey] = _translatePrefix + x + 'px, 0px' + _translateSufix;
             },
-            _moveMainScroll = function(x, dragging) {
-
+            _moveMainScroll = function (x, dragging) {
                 if (!_options.loop && dragging) {
-                    var newSlideIndexOffset = _currentItemIndex + (_slideSize.x * _currPositionIndex - x) / _slideSize.x,
+                    var newSlideIndexOffset =
+                            _currentItemIndex + (_slideSize.x * _currPositionIndex - x) / _slideSize.x,
                         delta = Math.round(x - _mainScrollPos.x);
 
-                    if ((newSlideIndexOffset < 0 && delta > 0) ||
-                        (newSlideIndexOffset >= _getNumItems() - 1 && delta < 0)) {
+                    if (
+                        (newSlideIndexOffset < 0 && delta > 0) ||
+                        (newSlideIndexOffset >= _getNumItems() - 1 && delta < 0)
+                    ) {
                         x = _mainScrollPos.x + delta * _options.mainScrollEndFriction;
                     }
                 }
@@ -505,25 +499,23 @@
                 _mainScrollPos.x = x;
                 _setTranslateX(x, _containerStyle);
             },
-            _calculatePanOffset = function(axis, zoomLevel) {
+            _calculatePanOffset = function (axis, zoomLevel) {
                 var m = _midZoomPoint[axis] - _offset[axis];
                 return _startPanOffset[axis] + _currPanDist[axis] + m - m * (zoomLevel / _startZoomLevel);
             },
-
-            _equalizePoints = function(p1, p2) {
+            _equalizePoints = function (p1, p2) {
                 p1.x = p2.x;
                 p1.y = p2.y;
                 if (p2.id) {
                     p1.id = p2.id;
                 }
             },
-            _roundPoint = function(p) {
+            _roundPoint = function (p) {
                 p.x = Math.round(p.x);
                 p.y = Math.round(p.y);
             },
-
             _mouseMoveTimeout = null,
-            _onFirstMouseMove = function() {
+            _onFirstMouseMove = function () {
                 // Wait until mouse move event is fired at least twice during 100ms
                 // We do this, because some mobile browsers trigger it on touchstart
                 if (_mouseMoveTimeout) {
@@ -532,19 +524,17 @@
                     _options.mouseUsed = true;
                     _shout('mouseUsed');
                 }
-                _mouseMoveTimeout = setTimeout(function() {
+                _mouseMoveTimeout = setTimeout(function () {
                     _mouseMoveTimeout = null;
                 }, 100);
             },
-
-            _bindEvents = function() {
+            _bindEvents = function () {
                 framework.bind(document, 'keydown', self);
 
                 if (_features.transform) {
                     // don't bind click event in browsers that don't support transform (mostly IE8)
                     framework.bind(self.scrollWrap, 'click', self);
                 }
-
 
                 if (!_options.mouseUsed) {
                     framework.bind(document, 'mousemove', _onFirstMouseMove);
@@ -554,8 +544,7 @@
 
                 _shout('bindEvents');
             },
-
-            _unbindEvents = function() {
+            _unbindEvents = function () {
                 framework.unbind(window, 'resize scroll orientationchange', self);
                 framework.unbind(window, 'scroll', _globalEventHandlers.scroll);
                 framework.unbind(document, 'keydown', self);
@@ -573,30 +562,27 @@
 
                 _shout('unbindEvents');
             },
-
-            _calculatePanBounds = function(zoomLevel, update) {
+            _calculatePanBounds = function (zoomLevel, update) {
                 var bounds = _calculateItemSize(self.currItem, _viewportSize, zoomLevel);
                 if (update) {
                     _currPanBounds = bounds;
                 }
                 return bounds;
             },
-
-            _getMinZoomLevel = function(item) {
+            _getMinZoomLevel = function (item) {
                 if (!item) {
                     item = self.currItem;
                 }
                 return item.initialZoomLevel;
             },
-            _getMaxZoomLevel = function(item) {
+            _getMaxZoomLevel = function (item) {
                 if (!item) {
                     item = self.currItem;
                 }
                 return item.w > 0 ? _options.maxSpreadZoom : 1;
             },
-
             // Return true if offset is out of the bounds
-            _modifyDestPanOffset = function(axis, destPanBounds, destPanOffset, destZoomLevel) {
+            _modifyDestPanOffset = function (axis, destPanBounds, destPanOffset, destZoomLevel) {
                 if (destZoomLevel === self.currItem.initialZoomLevel) {
                     destPanOffset[axis] = self.currItem.initialPosition[axis];
                     return true;
@@ -613,9 +599,7 @@
                 }
                 return false;
             },
-
-            _setupTransforms = function() {
-
+            _setupTransforms = function () {
                 if (_transformKey) {
                     // setup 3d transforms
                     var allow3dTransform = _features.perspective && !_likelyTouchDevice;
@@ -630,11 +614,10 @@
                 _transformKey = 'left';
                 framework.addClass(template, 'pswp--ie');
 
-                _setTranslateX = function(x, elStyle) {
+                _setTranslateX = function (x, elStyle) {
                     elStyle.left = x + 'px';
                 };
-                _applyZoomPanToItem = function(item) {
-
+                _applyZoomPanToItem = function (item) {
                     var zoomRatio = item.fitRatio > 1 ? 1 : item.fitRatio,
                         s = item.container.style,
                         w = zoomRatio * item.w,
@@ -644,11 +627,9 @@
                     s.height = h + 'px';
                     s.left = item.initialPosition.x + 'px';
                     s.top = item.initialPosition.y + 'px';
-
                 };
-                _applyCurrentZoomPan = function() {
+                _applyCurrentZoomPan = function () {
                     if (_currZoomElementStyle) {
-
                         var s = _currZoomElementStyle,
                             item = self.currItem,
                             zoomRatio = item.fitRatio > 1 ? 1 : item.fitRatio,
@@ -658,15 +639,12 @@
                         s.width = w + 'px';
                         s.height = h + 'px';
 
-
                         s.left = _panOffset.x + 'px';
                         s.top = _panOffset.y + 'px';
                     }
-
                 };
             },
-
-            _onKeyDown = function(e) {
+            _onKeyDown = function (e) {
                 var keydownAction = '';
                 if (_options.escKey && e.keyCode === 27) {
                     keydownAction = 'close';
@@ -691,8 +669,7 @@
                     }
                 }
             },
-
-            _onGlobalClick = function(e) {
+            _onGlobalClick = function (e) {
                 if (!e) {
                     return;
                 }
@@ -703,16 +680,14 @@
                     e.stopPropagation();
                 }
             },
-
-            _updatePageScrollOffset = function() {
+            _updatePageScrollOffset = function () {
                 self.setScrollOffset(0, framework.getScrollY());
             };
 
-
-// Micro animation engine
+        // Micro animation engine
         var _animations = {},
             _numAnimations = 0,
-            _stopAnimation = function(name) {
+            _stopAnimation = function (name) {
                 if (_animations[name]) {
                     if (_animations[name].raf) {
                         _cancelAF(_animations[name].raf);
@@ -721,7 +696,7 @@
                     delete _animations[name];
                 }
             },
-            _registerStartAnimation = function(name) {
+            _registerStartAnimation = function (name) {
                 if (_animations[name]) {
                     _stopAnimation(name);
                 }
@@ -730,22 +705,20 @@
                     _animations[name] = {};
                 }
             },
-            _stopAllAnimations = function() {
+            _stopAllAnimations = function () {
                 for (var prop in _animations) {
-
                     if (_animations.hasOwnProperty(prop)) {
                         _stopAnimation(prop);
                     }
-
                 }
             },
-            _animateProp = function(name, b, endProp, d, easingFn, onUpdate, onComplete) {
-                var startAnimTime = _getCurrentTime(), t;
+            _animateProp = function (name, b, endProp, d, easingFn, onUpdate, onComplete) {
+                var startAnimTime = _getCurrentTime(),
+                    t;
                 _registerStartAnimation(name);
 
-                var animloop = function() {
+                var animloop = function () {
                     if (_animations[name]) {
-
                         t = _getCurrentTime() - startAnimTime; // time diff
                         //b - beginning (start prop)
                         //d - anim duration
@@ -766,44 +739,41 @@
                 animloop();
             };
 
-
         var publicMethods = {
-
             // make a few local variables and functions public
             shout: _shout,
             listen: _listen,
             viewportSize: _viewportSize,
             options: _options,
 
-            isMainScrollAnimating: function() {
+            isMainScrollAnimating: function () {
                 return _mainScrollAnimating;
             },
-            getZoomLevel: function() {
+            getZoomLevel: function () {
                 return _currZoomLevel;
             },
-            getCurrentIndex: function() {
+            getCurrentIndex: function () {
                 return _currentItemIndex;
             },
-            isDragging: function() {
+            isDragging: function () {
                 return _isDragging;
             },
-            isZooming: function() {
+            isZooming: function () {
                 return _isZooming;
             },
-            setScrollOffset: function(x, y) {
+            setScrollOffset: function (x, y) {
                 _offset.x = x;
                 _currentWindowScrollY = _offset.y = y;
                 _shout('updateScrollOffset', _offset);
             },
-            applyZoomPan: function(zoomLevel, panX, panY, allowRenderResolution) {
+            applyZoomPan: function (zoomLevel, panX, panY, allowRenderResolution) {
                 _panOffset.x = panX;
                 _panOffset.y = panY;
                 _currZoomLevel = zoomLevel;
                 _applyCurrentZoomPan(allowRenderResolution);
             },
 
-            init: function() {
-
+            init: function () {
                 if (_isOpen || _isDestroying) {
                     return;
                 }
@@ -832,7 +802,7 @@
                 self.itemHolders = _itemHolders = [
                     { el: self.container.children[0], wrap: 0, index: -1 },
                     { el: self.container.children[1], wrap: 0, index: -1 },
-                    { el: self.container.children[2], wrap: 0, index: -1 }
+                    { el: self.container.children[2], wrap: 0, index: -1 },
                 ];
 
                 // hide nearby item holders until initial zoom animation finishes (to avoid extra Paints)
@@ -847,9 +817,9 @@
                     // Fixes: iOS 10.3 resize event
                     // does not update scrollWrap.clientWidth instantly after resize
                     // https://github.com/dimsemenov/PhotoSwipe/issues/1315
-                    orientationchange: function() {
+                    orientationchange: function () {
                         clearTimeout(_orientationChangeTimeout);
-                        _orientationChangeTimeout = setTimeout(function() {
+                        _orientationChangeTimeout = setTimeout(function () {
                             if (_viewportSize.x !== self.scrollWrap.clientWidth) {
                                 self.updateSize();
                             }
@@ -857,7 +827,7 @@
                     },
                     scroll: _updatePageScrollOffset,
                     keydown: _onKeyDown,
-                    click: _onGlobalClick
+                    click: _onGlobalClick,
                 };
 
                 // disable show/hide effects on old browsers that don't support CSS animations or transforms,
@@ -874,7 +844,7 @@
 
                 // init
                 if (UiClass) {
-                    var ui = self.ui = new UiClass(self, framework);
+                    var ui = (self.ui = new UiClass(self, framework));
                     ui.init();
                 }
 
@@ -885,7 +855,6 @@
                     _currentItemIndex = 0;
                 }
                 self.currItem = _getItemAt(_currentItemIndex);
-
 
                 if (_features.isOldIOSPhone || _features.isOldAndroid) {
                     _isFixedPosition = false;
@@ -932,7 +901,7 @@
                     framework.bind(self.scrollWrap, _downEvents, self); // no dragging for old IE
                 }
 
-                _listen('initialZoomInEnd', function() {
+                _listen('initialZoomInEnd', function () {
                     self.setContent(_itemHolders[0], _currentItemIndex - 1);
                     self.setContent(_itemHolders[2], _currentItemIndex + 1);
 
@@ -945,7 +914,6 @@
                         template.focus();
                     }
 
-
                     _bindEvents();
                 });
 
@@ -957,7 +925,6 @@
                 _shout('afterInit');
 
                 if (!_isFixedPosition) {
-
                     // On all versions of iOS lower than 8.0, we check size of viewport every second.
                     //
                     // This is done to detect when Safari top & bottom bars appear,
@@ -967,8 +934,13 @@
                     //
                     // 10 Nov 2014: iOS 7 usage ~40%. iOS 8 usage 56%.
 
-                    _updateSizeInterval = setInterval(function() {
-                        if (!_numAnimations && !_isDragging && !_isZooming && (_currZoomLevel === self.currItem.initialZoomLevel)) {
+                    _updateSizeInterval = setInterval(function () {
+                        if (
+                            !_numAnimations &&
+                            !_isDragging &&
+                            !_isZooming &&
+                            _currZoomLevel === self.currItem.initialZoomLevel
+                        ) {
                             self.updateSize();
                         }
                     }, 1000);
@@ -978,7 +950,7 @@
             },
 
             // Close the gallery, then destroy it
-            close: function() {
+            close: function () {
                 if (!_isOpen) {
                     return;
                 }
@@ -992,7 +964,7 @@
             },
 
             // destroys the gallery (unbinds events, cleans up intervals and timeouts to avoid memory leaks)
-            destroy: function() {
+            destroy: function () {
                 _shout('destroy');
 
                 if (_showOrHideTimeout) {
@@ -1024,7 +996,7 @@
              * @param {Number} y
              * @param {Boolean} force Will ignore bounds if set to true.
              */
-            panTo: function(x, y, force) {
+            panTo: function (x, y, force) {
                 if (!force) {
                     if (x > _currPanBounds.min.x) {
                         x = _currPanBounds.min.x;
@@ -1044,16 +1016,14 @@
                 _applyCurrentZoomPan();
             },
 
-            handleEvent: function(e) {
+            handleEvent: function (e) {
                 e = e || window.event;
                 if (_globalEventHandlers[e.type]) {
                     _globalEventHandlers[e.type](e);
                 }
             },
 
-
-            goTo: function(index) {
-
+            goTo: function (index) {
                 index = _getLoopedId(index);
 
                 var diff = index - _currentItemIndex;
@@ -1065,21 +1035,20 @@
 
                 _moveMainScroll(_slideSize.x * _currPositionIndex);
 
-
                 _stopAllAnimations();
                 _mainScrollAnimating = false;
 
                 self.updateCurrItem();
             },
-            next: function() {
+            next: function () {
                 self.goTo(_currentItemIndex + 1);
             },
-            prev: function() {
+            prev: function () {
                 self.goTo(_currentItemIndex - 1);
             },
 
             // update current zoom/pan objects
-            updateCurrZoomItem: function(emulateSetContent) {
+            updateCurrZoomItem: function (emulateSetContent) {
                 if (emulateSetContent) {
                     _shout('beforeChange', 0);
                 }
@@ -1107,8 +1076,7 @@
                 }
             },
 
-
-            invalidateCurrItems: function() {
+            invalidateCurrItems: function () {
                 _itemsNeedUpdate = true;
                 for (var i = 0; i < NUM_HOLDERS; i++) {
                     if (_itemHolders[i].item) {
@@ -1117,8 +1085,7 @@
                 }
             },
 
-            updateCurrItem: function(beforeAnimation) {
-
+            updateCurrItem: function (beforeAnimation) {
                 if (_indexDiff === 0) {
                     return;
                 }
@@ -1129,7 +1096,6 @@
                 if (beforeAnimation && diffAbs < 2) {
                     return;
                 }
-
 
                 self.currItem = _getItemAt(_currentItemIndex);
                 _renderMaxResolution = false;
@@ -1156,19 +1122,16 @@
                         _setTranslateX(_containerShiftIndex * _slideSize.x, tempHolder.el.style);
                         self.setContent(tempHolder, _currentItemIndex + diffAbs - i - 1 - 1);
                     }
-
                 }
 
                 // reset zoom/pan on previous item
                 if (_currZoomElementStyle && Math.abs(_indexDiff) === 1) {
-
                     var prevItem = _getItemAt(_prevItemIndex);
                     if (prevItem.initialZoomLevel !== _currZoomLevel) {
                         _calculateItemSize(prevItem, _viewportSize);
                         _setImageSize(prevItem);
                         _applyZoomPanToItem(prevItem);
                     }
-
                 }
 
                 // reset diff after update
@@ -1179,19 +1142,20 @@
                 _prevItemIndex = _currentItemIndex;
 
                 _shout('afterChange');
-
             },
 
-
-            updateSize: function(force) {
-
+            updateSize: function (force) {
                 if (!_isFixedPosition && _options.modal) {
                     var windowScrollY = framework.getScrollY();
                     if (_currentWindowScrollY !== windowScrollY) {
                         template.style.top = windowScrollY + 'px';
                         _currentWindowScrollY = windowScrollY;
                     }
-                    if (!force && _windowVisibleSize.x === window.innerWidth && _windowVisibleSize.y === window.innerHeight) {
+                    if (
+                        !force &&
+                        _windowVisibleSize.x === window.innerWidth &&
+                        _windowVisibleSize.y === window.innerHeight
+                    ) {
                         return;
                     }
                     _windowVisibleSize.x = window.innerWidth;
@@ -1200,7 +1164,6 @@
                     //template.style.width = _windowVisibleSize.x + 'px';
                     template.style.height = _windowVisibleSize.y + 'px';
                 }
-
 
                 _viewportSize.x = self.scrollWrap.clientWidth;
                 _viewportSize.y = self.scrollWrap.clientHeight;
@@ -1214,13 +1177,9 @@
 
                 _shout('beforeResize'); // even may be used for example to switch image sources
 
-
                 // don't re-calculate size on inital size update
                 if (_containerShiftIndex !== undefined) {
-
-                    var holder,
-                        item,
-                        hIndex;
+                    var holder, item, hIndex;
 
                     for (var i = 0; i < NUM_HOLDERS; i++) {
                         holder = _itemHolders[i];
@@ -1238,7 +1197,6 @@
                         // re-render gallery item if `needsUpdate`,
                         // or doesn't have `bounds` (entirely new slide object)
                         if (item && (_itemsNeedUpdate || item.needsUpdate || !item.bounds)) {
-
                             self.cleanSlide(item);
 
                             self.setContent(holder, hIndex);
@@ -1250,7 +1208,6 @@
                             }
 
                             item.needsUpdate = false;
-
                         } else if (holder.index === -1 && hIndex >= 0) {
                             // add content first time
                             self.setContent(holder, hIndex);
@@ -1260,7 +1217,6 @@
                             _setImageSize(item);
                             _applyZoomPanToItem(item);
                         }
-
                     }
                     _itemsNeedUpdate = false;
                 }
@@ -1278,7 +1234,7 @@
             },
 
             // Zoom current item to
-            zoomTo: function(destZoomLevel, centerPoint, speed, easingFn, updateFn) {
+            zoomTo: function (destZoomLevel, centerPoint, speed, easingFn, updateFn) {
                 /*
 			if(destZoomLevel === 'fit') {
 				destZoomLevel = self.currItem.fitRatio;
@@ -1303,12 +1259,12 @@
                 var initialZoomLevel = _currZoomLevel;
                 var initialPanOffset = {
                     x: _panOffset.x,
-                    y: _panOffset.y
+                    y: _panOffset.y,
                 };
 
                 _roundPoint(destPanOffset);
 
-                var onUpdate = function(now) {
+                var onUpdate = function (now) {
                     if (now === 1) {
                         _currZoomLevel = destZoomLevel;
                         _panOffset.x = destPanOffset.x;
@@ -1331,11 +1287,8 @@
                 } else {
                     onUpdate(1);
                 }
-            }
-
-
+            },
         };
-
 
         /*>>core*/
 
@@ -1351,7 +1304,6 @@
 
         var _gestureStartTime,
             _gestureCheckSpeedTime,
-
             // pool of objects that are used during dragging of zooming
             p = {}, // first point
             p2 = {}, // second point (for zoom gesture)
@@ -1363,7 +1315,6 @@
             _releaseAnimData,
             _posPoints = [], // array of points during dragging, used to determine type of gesture
             _tempPoint = {},
-
             _isZoomingIn,
             _verticalDragInitiated,
             _oldAndroidTouchEndTimeout,
@@ -1391,36 +1342,37 @@
             _opacityChanged,
             _bgOpacity,
             _wasOverInitialZoom,
-
-            _isEqualPoints = function(p1, p2) {
+            _isEqualPoints = function (p1, p2) {
                 return p1.x === p2.x && p1.y === p2.y;
             },
-            _isNearbyPoints = function(touch0, touch1) {
-                return Math.abs(touch0.x - touch1.x) < DOUBLE_TAP_RADIUS && Math.abs(touch0.y - touch1.y) < DOUBLE_TAP_RADIUS;
+            _isNearbyPoints = function (touch0, touch1) {
+                return (
+                    Math.abs(touch0.x - touch1.x) < DOUBLE_TAP_RADIUS &&
+                    Math.abs(touch0.y - touch1.y) < DOUBLE_TAP_RADIUS
+                );
             },
-            _calculatePointsDistance = function(p1, p2) {
+            _calculatePointsDistance = function (p1, p2) {
                 _tempPoint.x = Math.abs(p1.x - p2.x);
                 _tempPoint.y = Math.abs(p1.y - p2.y);
                 return Math.sqrt(_tempPoint.x * _tempPoint.x + _tempPoint.y * _tempPoint.y);
             },
-            _stopDragUpdateLoop = function() {
+            _stopDragUpdateLoop = function () {
                 if (_dragAnimFrame) {
                     _cancelAF(_dragAnimFrame);
                     _dragAnimFrame = null;
                 }
             },
-            _dragUpdateLoop = function() {
+            _dragUpdateLoop = function () {
                 if (_isDragging) {
                     _dragAnimFrame = _requestAF(_dragUpdateLoop);
                     _renderMovement();
                 }
             },
-            _canPan = function() {
+            _canPan = function () {
                 return !(_options.scaleMode === 'fit' && _currZoomLevel === self.currItem.initialZoomLevel);
             },
-
             // find the closest parent DOM element
-            _closestElement = function(el, fn) {
+            _closestElement = function (el, fn) {
                 if (!el || el === document) {
                     return false;
                 }
@@ -1436,26 +1388,24 @@
 
                 return _closestElement(el.parentNode, fn);
             },
-
             _preventObj = {},
-            _preventDefaultEventBehaviour = function(e, isDown) {
+            _preventDefaultEventBehaviour = function (e, isDown) {
                 _preventObj.prevent = !_closestElement(e.target, _options.isClickableElement);
 
                 _shout('preventDragEvent', e, isDown, _preventObj);
                 return _preventObj.prevent;
-
             },
-            _convertTouchToPoint = function(touch, p) {
+            _convertTouchToPoint = function (touch, p) {
                 p.x = touch.pageX;
                 p.y = touch.pageY;
                 p.id = touch.identifier;
                 return p;
             },
-            _findCenterOfPoints = function(p1, p2, pCenter) {
+            _findCenterOfPoints = function (p1, p2, pCenter) {
                 pCenter.x = (p1.x + p2.x) * 0.5;
                 pCenter.y = (p1.y + p2.y) * 0.5;
             },
-            _pushPosPoint = function(time, x, y) {
+            _pushPosPoint = function (time, x, y) {
                 if (time - _gestureCheckSpeedTime > 50) {
                     var o = _posPoints.length > 2 ? _posPoints.shift() : {};
                     o.x = x;
@@ -1464,19 +1414,16 @@
                     _gestureCheckSpeedTime = time;
                 }
             },
-
-            _calculateVerticalDragOpacityRatio = function() {
+            _calculateVerticalDragOpacityRatio = function () {
                 var yOffset = _panOffset.y - self.currItem.initialPosition.y; // difference between initial and current position
                 return 1 - Math.abs(yOffset / (_viewportSize.y / 2));
             },
-
-
             // points pool, reused during touch events
             _ePoint1 = {},
             _ePoint2 = {},
             _tempPointsArr = [],
             _tempCounter,
-            _getTouchPoints = function(e) {
+            _getTouchPoints = function (e) {
                 // clean up previous points, without recreating array
                 while (_tempPointsArr.length > 0) {
                     _tempPointsArr.pop();
@@ -1484,38 +1431,33 @@
 
                 if (!_pointerEventEnabled) {
                     if (e.type.indexOf('touch') > -1) {
-
                         if (e.touches && e.touches.length > 0) {
                             _tempPointsArr[0] = _convertTouchToPoint(e.touches[0], _ePoint1);
                             if (e.touches.length > 1) {
                                 _tempPointsArr[1] = _convertTouchToPoint(e.touches[1], _ePoint2);
                             }
                         }
-
                     } else {
                         _ePoint1.x = e.pageX;
                         _ePoint1.y = e.pageY;
                         _ePoint1.id = '';
-                        _tempPointsArr[0] = _ePoint1;//_ePoint1;
+                        _tempPointsArr[0] = _ePoint1; //_ePoint1;
                     }
                 } else {
                     _tempCounter = 0;
                     // we can use forEach, as pointer events are supported only in modern browsers
-                    _currPointers.forEach(function(p) {
+                    _currPointers.forEach(function (p) {
                         if (_tempCounter === 0) {
                             _tempPointsArr[0] = p;
                         } else if (_tempCounter === 1) {
                             _tempPointsArr[1] = p;
                         }
                         _tempCounter++;
-
                     });
                 }
                 return _tempPointsArr;
             },
-
-            _panOrMoveMainScroll = function(axis, delta) {
-
+            _panOrMoveMainScroll = function (axis, delta) {
                 var panFriction,
                     overDiff = 0,
                     newOffset = _panOffset[axis] + delta[axis],
@@ -1540,14 +1482,9 @@
 
                 // move main scroll or start panning
                 if (_options.allowPanToNext || _currZoomLevel === self.currItem.initialZoomLevel) {
-
-
                     if (!_currZoomElementStyle) {
-
                         newMainScrollPos = newMainScrollPosition;
-
                     } else if (_direction === 'h' && axis === 'x' && !_zoomStarted) {
-
                         if (dir) {
                             if (newOffset > _currPanBounds.min[axis]) {
                                 panFriction = _options.panEndFriction;
@@ -1565,11 +1502,8 @@
                                 if (_currPanBounds.min.x !== _currPanBounds.max.x) {
                                     newPanPos = newOffset;
                                 }
-
                             }
-
                         } else {
-
                             if (newOffset < _currPanBounds.max[axis]) {
                                 panFriction = _options.panEndFriction;
                                 overDiff = newOffset - _currPanBounds.max[axis];
@@ -1582,21 +1516,17 @@
                                 if (mainScrollDiff > 0 && newMainScrollPosition < _startMainScrollPos.x) {
                                     newMainScrollPos = _startMainScrollPos.x;
                                 }
-
                             } else {
                                 if (_currPanBounds.min.x !== _currPanBounds.max.x) {
                                     newPanPos = newOffset;
                                 }
                             }
-
                         }
-
 
                         //
                     }
 
                     if (axis === 'x') {
-
                         if (newMainScrollPos !== undefined) {
                             _moveMainScroll(newMainScrollPos, true);
                             if (newMainScrollPos === _startMainScrollPos.x) {
@@ -1616,26 +1546,18 @@
 
                         return newMainScrollPos !== undefined;
                     }
-
                 }
 
                 if (!_mainScrollAnimating) {
-
                     if (!_mainScrollShifted) {
                         if (_currZoomLevel > self.currItem.fitRatio) {
                             _panOffset[axis] += delta[axis] * panFriction;
-
                         }
                     }
-
-
                 }
-
             },
-
             // Pointerdown/touchstart/mousedown handler
-            _onDragStart = function(e) {
-
+            _onDragStart = function (e) {
                 // Allow dragging only via left mouse button.
                 // As this handler is not added in IE8 - we ignore e.which
                 //
@@ -1658,7 +1580,6 @@
                     e.preventDefault();
                 }
 
-
                 _shout('pointerDown');
 
                 if (_pointerEventEnabled) {
@@ -1669,7 +1590,6 @@
                     _currPointers[pointerIndex] = { x: e.pageX, y: e.pageY, id: e.pointerId };
                 }
 
-
                 var startPointsList = _getTouchPoints(e),
                     numPoints = startPointsList.length;
 
@@ -1679,19 +1599,18 @@
 
                 // init drag
                 if (!_isDragging || numPoints === 1) {
-
-
                     _isDragging = _isFirstMove = true;
                     framework.bind(window, _upMoveEvents, self);
 
                     _isZoomingIn =
                         _wasOverInitialZoom =
-                            _opacityChanged =
-                                _verticalDragInitiated =
-                                    _mainScrollShifted =
-                                        _moved =
-                                            _isMultitouch =
-                                                _zoomStarted = false;
+                        _opacityChanged =
+                        _verticalDragInitiated =
+                        _mainScrollShifted =
+                        _moved =
+                        _isMultitouch =
+                        _zoomStarted =
+                            false;
 
                     _direction = null;
 
@@ -1706,10 +1625,12 @@
                     //_equalizePoints(_startMainScrollPos, _mainScrollPos);
                     _startMainScrollPos.x = _slideSize.x * _currPositionIndex;
 
-                    _posPoints = [{
-                        x: _currPoint.x,
-                        y: _currPoint.y
-                    }];
+                    _posPoints = [
+                        {
+                            x: _currPoint.x,
+                            y: _currPoint.y,
+                        },
+                    ];
 
                     _gestureCheckSpeedTime = _gestureStartTime = _getCurrentTime();
 
@@ -1719,7 +1640,6 @@
                     // Start rendering
                     _stopDragUpdateLoop();
                     _dragUpdateLoop();
-
                 }
 
                 // init zoom
@@ -1741,13 +1661,9 @@
                     _midZoomPoint.y = Math.abs(_currCenterPoint.y) - _panOffset.y;
                     _currPointsDistance = _startPointsDistance = _calculatePointsDistance(p, p2);
                 }
-
-
             },
-
             // Pointermove/touchmove/mousemove handler
-            _onDragMove = function(e) {
-
+            _onDragMove = function (e) {
                 e.preventDefault();
 
                 if (_pointerEventEnabled) {
@@ -1762,27 +1678,25 @@
                 if (_isDragging) {
                     var touchesList = _getTouchPoints(e);
                     if (!_direction && !_moved && !_isZooming) {
-
                         if (_mainScrollPos.x !== _slideSize.x * _currPositionIndex) {
                             // if main scroll position is shifted – direction is always horizontal
                             _direction = 'h';
                         } else {
-                            var diff = Math.abs(touchesList[0].x - _currPoint.x) - Math.abs(touchesList[0].y - _currPoint.y);
+                            var diff =
+                                Math.abs(touchesList[0].x - _currPoint.x) - Math.abs(touchesList[0].y - _currPoint.y);
                             // check the direction of movement
                             if (Math.abs(diff) >= DIRECTION_CHECK_OFFSET) {
                                 _direction = diff > 0 ? 'h' : 'v';
                                 _currentPoints = touchesList;
                             }
                         }
-
                     } else {
                         _currentPoints = touchesList;
                     }
                 }
             },
             //
-            _renderMovement = function() {
-
+            _renderMovement = function () {
                 if (!_currentPoints) {
                     return;
                 }
@@ -1811,7 +1725,6 @@
 
                     _equalizePoints(p2, _currentPoints[1]);
 
-
                     if (!_zoomStarted) {
                         _zoomStarted = true;
                         _shout('zoomGestureStarted');
@@ -1833,8 +1746,11 @@
                         maxZoomLevel = _getMaxZoomLevel();
 
                     if (zoomLevel < minZoomLevel) {
-
-                        if (_options.pinchToClose && !_wasOverInitialZoom && _startZoomLevel <= self.currItem.initialZoomLevel) {
+                        if (
+                            _options.pinchToClose &&
+                            !_wasOverInitialZoom &&
+                            _startZoomLevel <= self.currItem.initialZoomLevel
+                        ) {
                             // fade out background if zooming out
                             var minusDiff = minZoomLevel - zoomLevel;
                             var percent = 1 - minusDiff / (minZoomLevel / 1.2);
@@ -1849,7 +1765,6 @@
                             }
                             zoomLevel = minZoomLevel - zoomFriction * (minZoomLevel / 3);
                         }
-
                     } else if (zoomLevel > maxZoomLevel) {
                         // 1.5 - extra zoom level above the max. E.g. if max is x6, real max 6 + 1.5 = 7.5
                         zoomFriction = (zoomLevel - maxZoomLevel) / (minZoomLevel * 6);
@@ -1880,9 +1795,7 @@
                     _isZoomingIn = zoomLevel > _currZoomLevel;
                     _currZoomLevel = zoomLevel;
                     _applyCurrentZoomPan();
-
                 } else {
-
                     // handle behaviour for one point (dragging or panning)
 
                     if (!_direction) {
@@ -1939,16 +1852,11 @@
                         _roundPoint(_panOffset);
                         _applyCurrentZoomPan();
                     }
-
                 }
-
             },
-
             // Pointerup/pointercancel/touchend/touchcancel/mouseup event handler
-            _onDragRelease = function(e) {
-
+            _onDragRelease = function (e) {
                 if (_features.isOldAndroid) {
-
                     if (_oldAndroidTouchEndTimeout && e.type === 'mouseup') {
                         return;
                     }
@@ -1959,11 +1867,10 @@
                     // so we block mousedown/up for 600ms
                     if (e.type.indexOf('touch') > -1) {
                         clearTimeout(_oldAndroidTouchEndTimeout);
-                        _oldAndroidTouchEndTimeout = setTimeout(function() {
+                        _oldAndroidTouchEndTimeout = setTimeout(function () {
                             _oldAndroidTouchEndTimeout = 0;
                         }, 600);
                     }
-
                 }
 
                 _shout('pointerUp');
@@ -1984,7 +1891,7 @@
                             var MSPOINTER_TYPES = {
                                 4: 'mouse', // event.MSPOINTER_TYPE_MOUSE
                                 2: 'touch', // event.MSPOINTER_TYPE_TOUCH
-                                3: 'pen' // event.MSPOINTER_TYPE_PEN
+                                3: 'pen', // event.MSPOINTER_TYPE_PEN
                             };
                             releasePoint.type = MSPOINTER_TYPES[e.pointerType];
 
@@ -1994,7 +1901,6 @@
                         } else {
                             releasePoint.type = e.pointerType || 'mouse';
                         }
-
                     }
                 }
 
@@ -2017,7 +1923,6 @@
                     _equalizePoints(_startPoint, touchList[0]);
                 }
 
-
                 // pointer hasn't moved, send "tap release" point
                 if (numPoints === 0 && !_direction && !_mainScrollAnimating) {
                     if (!releasePoint) {
@@ -2027,7 +1932,7 @@
                             releasePoint = {
                                 x: e.changedTouches[0].pageX,
                                 y: e.changedTouches[0].pageY,
-                                type: 'touch'
+                                type: 'touch',
                             };
                         }
                     }
@@ -2078,16 +1983,13 @@
 
                 _stopAllAnimations();
 
-
                 if (!_releaseAnimData) {
                     _releaseAnimData = _initDragReleaseAnimationData();
                 }
 
                 _releaseAnimData.calculateSwipeSpeed('x');
 
-
                 if (_verticalDragInitiated) {
-
                     var opacityRatio = _calculateVerticalDragOpacityRatio();
 
                     if (opacityRatio < _options.verticalDragRange) {
@@ -2096,8 +1998,7 @@
                         var initalPanY = _panOffset.y,
                             initialBgOpacity = _bgOpacity;
 
-                        _animateProp('verticalDrag', 0, 1, 300, framework.easing.cubic.out, function(now) {
-
+                        _animateProp('verticalDrag', 0, 1, 300, framework.easing.cubic.out, function (now) {
                             _panOffset.y = (self.currItem.initialPosition.y - initalPanY) * now + initalPanY;
 
                             _applyBgOpacity((1 - initialBgOpacity) * now + initialBgOpacity);
@@ -2109,7 +2010,6 @@
 
                     return;
                 }
-
 
                 // main scroll
                 if ((_mainScrollShifted || _mainScrollAnimating) && numPoints === 0) {
@@ -2136,14 +2036,11 @@
                     _completePanGesture(_releaseAnimData);
                 }
             },
-
-
             // Returns object with data about gesture
             // It's created only once and then reused
-            _initDragReleaseAnimationData = function() {
+            _initDragReleaseAnimationData = function () {
                 // temp local vars
-                var lastFlickDuration,
-                    tempReleasePos;
+                var lastFlickDuration, tempReleasePos;
 
                 // s = this
                 var s = {
@@ -2157,9 +2054,7 @@
                     distanceOffset: {},
                     backAnimDestination: {},
                     backAnimStarted: {},
-                    calculateSwipeSpeed: function(axis) {
-
-
+                    calculateSwipeSpeed: function (axis) {
                         if (_posPoints.length > 1) {
                             lastFlickDuration = _getCurrentTime() - _gestureCheckSpeedTime + 50;
                             tempReleasePos = _posPoints[_posPoints.length - 2][axis];
@@ -2183,12 +2078,10 @@
                         s.speedDecelerationRatio[axis] = 1;
                     },
 
-                    calculateOverBoundsAnimOffset: function(axis, speed) {
+                    calculateOverBoundsAnimOffset: function (axis, speed) {
                         if (!s.backAnimStarted[axis]) {
-
                             if (_panOffset[axis] > _currPanBounds.min[axis]) {
                                 s.backAnimDestination[axis] = _currPanBounds.min[axis];
-
                             } else if (_panOffset[axis] < _currPanBounds.max[axis]) {
                                 s.backAnimDestination[axis] = _currPanBounds.max[axis];
                             }
@@ -2197,40 +2090,44 @@
                                 s.slowDownRatio[axis] = 0.7;
                                 s.slowDownRatioReverse[axis] = 1 - s.slowDownRatio[axis];
                                 if (s.speedDecelerationRatioAbs[axis] < 0.05) {
-
                                     s.lastFlickSpeed[axis] = 0;
                                     s.backAnimStarted[axis] = true;
 
-                                    _animateProp('bounceZoomPan' + axis, _panOffset[axis],
+                                    _animateProp(
+                                        'bounceZoomPan' + axis,
+                                        _panOffset[axis],
                                         s.backAnimDestination[axis],
                                         speed || 300,
                                         framework.easing.sine.out,
-                                        function(pos) {
+                                        function (pos) {
                                             _panOffset[axis] = pos;
                                             _applyCurrentZoomPan();
                                         }
                                     );
-
                                 }
                             }
                         }
                     },
 
                     // Reduces the speed by slowDownRatio (per 10ms)
-                    calculateAnimOffset: function(axis) {
+                    calculateAnimOffset: function (axis) {
                         if (!s.backAnimStarted[axis]) {
-                            s.speedDecelerationRatio[axis] = s.speedDecelerationRatio[axis] * (s.slowDownRatio[axis] +
-                                s.slowDownRatioReverse[axis] -
-                                s.slowDownRatioReverse[axis] * s.timeDiff / 10);
+                            s.speedDecelerationRatio[axis] =
+                                s.speedDecelerationRatio[axis] *
+                                (s.slowDownRatio[axis] +
+                                    s.slowDownRatioReverse[axis] -
+                                    (s.slowDownRatioReverse[axis] * s.timeDiff) / 10);
 
-                            s.speedDecelerationRatioAbs[axis] = Math.abs(s.lastFlickSpeed[axis] * s.speedDecelerationRatio[axis]);
-                            s.distanceOffset[axis] = s.lastFlickSpeed[axis] * s.speedDecelerationRatio[axis] * s.timeDiff;
+                            s.speedDecelerationRatioAbs[axis] = Math.abs(
+                                s.lastFlickSpeed[axis] * s.speedDecelerationRatio[axis]
+                            );
+                            s.distanceOffset[axis] =
+                                s.lastFlickSpeed[axis] * s.speedDecelerationRatio[axis] * s.timeDiff;
                             _panOffset[axis] += s.distanceOffset[axis];
-
                         }
                     },
 
-                    panAnimLoop: function() {
+                    panAnimLoop: function () {
                         if (_animations.zoomPan) {
                             _animations.zoomPan.raf = _requestAF(s.panAnimLoop);
 
@@ -2246,9 +2143,7 @@
                             s.calculateOverBoundsAnimOffset('x');
                             s.calculateOverBoundsAnimOffset('y');
 
-
                             if (s.speedDecelerationRatioAbs.x < 0.05 && s.speedDecelerationRatioAbs.y < 0.05) {
-
                                 // round pan position
                                 _panOffset.x = Math.round(_panOffset.x);
                                 _panOffset.y = Math.round(_panOffset.y);
@@ -2258,13 +2153,11 @@
                                 return;
                             }
                         }
-
-                    }
+                    },
                 };
                 return s;
             },
-
-            _completePanGesture = function(animData) {
+            _completePanGesture = function (animData) {
                 // calculate swipe speed for Y axis (paanning)
                 animData.calculateSwipeSpeed('y');
 
@@ -2288,14 +2181,11 @@
                 animData.lastNow = _getCurrentTime();
                 animData.panAnimLoop();
             },
-
-
-            _finishSwipeMainScrollGesture = function(gestureType, _releaseAnimData) {
+            _finishSwipeMainScrollGesture = function (gestureType, _releaseAnimData) {
                 var itemChanged;
                 if (!_mainScrollAnimating) {
                     _currZoomedItemIndex = _currentItemIndex;
                 }
-
 
                 var itemsDiff;
 
@@ -2305,12 +2195,16 @@
 
                     // if container is shifted for more than MIN_SWIPE_DISTANCE,
                     // and last flick gesture was in right direction
-                    if (totalShiftDist > MIN_SWIPE_DISTANCE &&
-                        (isFastLastFlick || _releaseAnimData.lastFlickOffset.x > 20)) {
+                    if (
+                        totalShiftDist > MIN_SWIPE_DISTANCE &&
+                        (isFastLastFlick || _releaseAnimData.lastFlickOffset.x > 20)
+                    ) {
                         // go to prev item
                         itemsDiff = -1;
-                    } else if (totalShiftDist < -MIN_SWIPE_DISTANCE &&
-                        (isFastLastFlick || _releaseAnimData.lastFlickOffset.x < -20)) {
+                    } else if (
+                        totalShiftDist < -MIN_SWIPE_DISTANCE &&
+                        (isFastLastFlick || _releaseAnimData.lastFlickOffset.x < -20)
+                    ) {
                         // go to next item
                         itemsDiff = 1;
                     }
@@ -2319,7 +2213,6 @@
                 var nextCircle;
 
                 if (itemsDiff) {
-
                     _currentItemIndex += itemsDiff;
 
                     if (_currentItemIndex < 0) {
@@ -2335,22 +2228,20 @@
                         _currPositionIndex -= itemsDiff;
                         itemChanged = true;
                     }
-
-
                 }
 
                 var animateToX = _slideSize.x * _currPositionIndex;
                 var animateToDist = Math.abs(animateToX - _mainScrollPos.x);
                 var finishAnimDuration;
 
-
                 if (!itemChanged && animateToX > _mainScrollPos.x !== _releaseAnimData.lastFlickSpeed.x > 0) {
                     // "return to current" duration, e.g. when dragging from slide 0 to -1
                     finishAnimDuration = 333;
                 } else {
-                    finishAnimDuration = Math.abs(_releaseAnimData.lastFlickSpeed.x) > 0 ?
-                        animateToDist / Math.abs(_releaseAnimData.lastFlickSpeed.x) :
-                        333;
+                    finishAnimDuration =
+                        Math.abs(_releaseAnimData.lastFlickSpeed.x) > 0
+                            ? animateToDist / Math.abs(_releaseAnimData.lastFlickSpeed.x)
+                            : 333;
 
                     finishAnimDuration = Math.min(finishAnimDuration, 400);
                     finishAnimDuration = Math.max(finishAnimDuration, 250);
@@ -2364,9 +2255,14 @@
 
                 _shout('mainScrollAnimStart');
 
-                _animateProp('mainScroll', _mainScrollPos.x, animateToX, finishAnimDuration, framework.easing.cubic.out,
+                _animateProp(
+                    'mainScroll',
+                    _mainScrollPos.x,
+                    animateToX,
+                    finishAnimDuration,
+                    framework.easing.cubic.out,
                     _moveMainScroll,
-                    function() {
+                    function () {
                         _stopAllAnimations();
                         _mainScrollAnimating = false;
                         _currZoomedItemIndex = -1;
@@ -2385,13 +2281,11 @@
 
                 return itemChanged;
             },
-
-            _calculateZoomLevel = function(touchesDistance) {
-                return 1 / _startPointsDistance * touchesDistance * _startZoomLevel;
+            _calculateZoomLevel = function (touchesDistance) {
+                return (1 / _startPointsDistance) * touchesDistance * _startZoomLevel;
             },
-
             // Resets zoom if it's out of bounds
-            _completeZoomGesture = function() {
+            _completeZoomGesture = function () {
                 var destZoomLevel = _currZoomLevel,
                     minZoomLevel = _getMinZoomLevel(),
                     maxZoomLevel = _getMaxZoomLevel();
@@ -2413,7 +2307,7 @@
                 }
 
                 if (_opacityChanged) {
-                    onUpdate = function(now) {
+                    onUpdate = function (now) {
                         _applyBgOpacity((destOpacity - initialOpacity) * now + initialOpacity);
                     };
                 }
@@ -2422,14 +2316,11 @@
                 return true;
             };
 
-
         _registerModule('Gestures', {
             publicMethods: {
-
-                initGestures: function() {
-
+                initGestures: function () {
                     // helper function that builds touch/pointer/mouse events
-                    var addEventNames = function(pref, down, move, up, cancel) {
+                    var addEventNames = function (pref, down, move, up, cancel) {
                         _dragStartEvent = pref + down;
                         _dragMoveEvent = pref + move;
                         _dragEndEvent = pref + up;
@@ -2464,7 +2355,7 @@
                     _downEvents = _dragStartEvent;
 
                     if (_pointerEventEnabled && !_likelyTouchDevice) {
-                        _likelyTouchDevice = (navigator.maxTouchPoints > 1) || (navigator.msMaxTouchPoints > 1);
+                        _likelyTouchDevice = navigator.maxTouchPoints > 1 || navigator.msMaxTouchPoints > 1;
                     }
                     // make variable public
                     self.likelyTouchDevice = _likelyTouchDevice;
@@ -2490,11 +2381,9 @@
                         // don't allow pan to next slide from zoomed state on Desktop
                         _options.allowPanToNext = false;
                     }
-                }
-
-            }
+                },
+            },
         });
-
 
         /*>>gestures*/
 
@@ -2510,10 +2399,8 @@
          *
          */
 
-
         var _showOrHideTimeout,
-            _showOrHide = function(item, img, out, completeFn) {
-
+            _showOrHide = function (item, img, out, completeFn) {
                 if (_showOrHideTimeout) {
                     clearTimeout(_showOrHideTimeout);
                 }
@@ -2533,7 +2420,7 @@
 
                 var duration = out ? _options.hideAnimationDuration : _options.showAnimationDuration;
 
-                var onComplete = function() {
+                var onComplete = function () {
                     _stopAnimation('initialZoom');
                     if (!out) {
                         _applyBgOpacity(1);
@@ -2555,7 +2442,6 @@
 
                 // if bounds aren't provided, just open gallery without animation
                 if (!duration || !thumbBounds || thumbBounds.x === undefined) {
-
                     _shout('initialZoom' + (out ? 'Out' : 'In'));
 
                     _currZoomLevel = item.initialZoomLevel;
@@ -2566,7 +2452,7 @@
                     _applyBgOpacity(1);
 
                     if (duration) {
-                        setTimeout(function() {
+                        setTimeout(function () {
                             onComplete();
                         }, duration);
                     } else {
@@ -2576,7 +2462,7 @@
                     return;
                 }
 
-                var startAnimation = function() {
+                var startAnimation = function () {
                     var closeWithRaf = _closedByScroll,
                         fadeEverything = !self.currItem.src || self.currItem.loadError || _options.showHideOpacity;
 
@@ -2604,81 +2490,88 @@
                         if (out) {
                             framework[(closeWithRaf ? 'remove' : 'add') + 'Class'](template, 'pswp--animate_opacity');
                         } else {
-                            setTimeout(function() {
+                            setTimeout(function () {
                                 framework.addClass(template, 'pswp--animate_opacity');
                             }, 30);
                         }
                     }
 
-                    _showOrHideTimeout = setTimeout(function() {
+                    _showOrHideTimeout = setTimeout(
+                        function () {
+                            _shout('initialZoom' + (out ? 'Out' : 'In'));
 
-                        _shout('initialZoom' + (out ? 'Out' : 'In'));
+                            if (!out) {
+                                // "in" animation always uses CSS transitions (instead of rAF).
+                                // CSS transition work faster here,
+                                // as developer may also want to animate other things,
+                                // like ui on top of sliding area, which can be animated just via CSS
 
-
-                        if (!out) {
-
-                            // "in" animation always uses CSS transitions (instead of rAF).
-                            // CSS transition work faster here,
-                            // as developer may also want to animate other things,
-                            // like ui on top of sliding area, which can be animated just via CSS
-
-                            _currZoomLevel = item.initialZoomLevel;
-                            _equalizePoints(_panOffset, item.initialPosition);
-                            _applyCurrentZoomPan();
-                            _applyBgOpacity(1);
-
-                            if (fadeEverything) {
-                                template.style.opacity = 1;
-                            } else {
+                                _currZoomLevel = item.initialZoomLevel;
+                                _equalizePoints(_panOffset, item.initialPosition);
+                                _applyCurrentZoomPan();
                                 _applyBgOpacity(1);
-                            }
 
-                            _showOrHideTimeout = setTimeout(onComplete, duration + 20);
-                        } else {
+                                if (fadeEverything) {
+                                    template.style.opacity = 1;
+                                } else {
+                                    _applyBgOpacity(1);
+                                }
 
-                            // "out" animation uses rAF only when PhotoSwipe is closed by browser scroll, to recalculate position
-                            var destZoomLevel = thumbBounds.w / item.w,
-                                initialPanOffset = {
-                                    x: _panOffset.x,
-                                    y: _panOffset.y
-                                },
-                                initialZoomLevel = _currZoomLevel,
-                                initalBgOpacity = _bgOpacity,
-                                onUpdate = function(now) {
-
-                                    if (now === 1) {
-                                        _currZoomLevel = destZoomLevel;
-                                        _panOffset.x = thumbBounds.x;
-                                        _panOffset.y = thumbBounds.y - _currentWindowScrollY;
-                                    } else {
-                                        _currZoomLevel = (destZoomLevel - initialZoomLevel) * now + initialZoomLevel;
-                                        _panOffset.x = (thumbBounds.x - initialPanOffset.x) * now + initialPanOffset.x;
-                                        _panOffset.y = (thumbBounds.y - _currentWindowScrollY - initialPanOffset.y) * now + initialPanOffset.y;
-                                    }
-
-                                    _applyCurrentZoomPan();
-                                    if (fadeEverything) {
-                                        template.style.opacity = 1 - now;
-                                    } else {
-                                        _applyBgOpacity(initalBgOpacity - now * initalBgOpacity);
-                                    }
-                                };
-
-                            if (closeWithRaf) {
-                                _animateProp('initialZoom', 0, 1, duration, framework.easing.cubic.out, onUpdate, onComplete);
-                            } else {
-                                onUpdate(1);
                                 _showOrHideTimeout = setTimeout(onComplete, duration + 20);
-                            }
-                        }
+                            } else {
+                                // "out" animation uses rAF only when PhotoSwipe is closed by browser scroll, to recalculate position
+                                var destZoomLevel = thumbBounds.w / item.w,
+                                    initialPanOffset = {
+                                        x: _panOffset.x,
+                                        y: _panOffset.y,
+                                    },
+                                    initialZoomLevel = _currZoomLevel,
+                                    initalBgOpacity = _bgOpacity,
+                                    onUpdate = function (now) {
+                                        if (now === 1) {
+                                            _currZoomLevel = destZoomLevel;
+                                            _panOffset.x = thumbBounds.x;
+                                            _panOffset.y = thumbBounds.y - _currentWindowScrollY;
+                                        } else {
+                                            _currZoomLevel =
+                                                (destZoomLevel - initialZoomLevel) * now + initialZoomLevel;
+                                            _panOffset.x =
+                                                (thumbBounds.x - initialPanOffset.x) * now + initialPanOffset.x;
+                                            _panOffset.y =
+                                                (thumbBounds.y - _currentWindowScrollY - initialPanOffset.y) * now +
+                                                initialPanOffset.y;
+                                        }
 
-                    }, out ? 25 : 90); // Main purpose of this delay is to give browser time to paint and
+                                        _applyCurrentZoomPan();
+                                        if (fadeEverything) {
+                                            template.style.opacity = 1 - now;
+                                        } else {
+                                            _applyBgOpacity(initalBgOpacity - now * initalBgOpacity);
+                                        }
+                                    };
+
+                                if (closeWithRaf) {
+                                    _animateProp(
+                                        'initialZoom',
+                                        0,
+                                        1,
+                                        duration,
+                                        framework.easing.cubic.out,
+                                        onUpdate,
+                                        onComplete
+                                    );
+                                } else {
+                                    onUpdate(1);
+                                    _showOrHideTimeout = setTimeout(onComplete, duration + 20);
+                                }
+                            }
+                        },
+                        out ? 25 : 90
+                    ); // Main purpose of this delay is to give browser time to paint and
                     // create composite layers of PhotoSwipe UI parts (background, controls, caption, arrows).
                     // Which avoids lag at the beginning of scale transition.
                 };
                 startAnimation();
-
-
             };
 
         /*>>show-hide-transition*/
@@ -2697,26 +2590,26 @@
             _initialZoomRunning,
             _controllerDefaultOptions = {
                 index: 0,
-                errorMsg: '<div class="pswp__error-msg"><a href="%url%" target="_blank">The image</a> could not be loaded.</div>',
+                errorMsg:
+                    '<div class="pswp__error-msg"><a href="%url%" target="_blank">The image</a> could not be loaded.</div>',
                 forceProgressiveLoading: false, // TODO
                 preload: [1, 1],
-                getNumItemsFn: function() {
+                getNumItemsFn: function () {
                     return _items.length;
-                }
+                },
             };
-
 
         var _getItemAt,
             _getNumItems,
             _initialIsLoop,
-            _getZeroBounds = function() {
+            _getZeroBounds = function () {
                 return {
                     center: { x: 0, y: 0 },
                     max: { x: 0, y: 0 },
-                    min: { x: 0, y: 0 }
+                    min: { x: 0, y: 0 },
                 };
             },
-            _calculateSingleItemPanBounds = function(item, realPanElementW, realPanElementH) {
+            _calculateSingleItemPanBounds = function (item, realPanElementW, realPanElementH) {
                 var bounds = item.bounds;
 
                 // position of element when it's centered
@@ -2724,20 +2617,21 @@
                 bounds.center.y = Math.round((_tempPanAreaSize.y - realPanElementH) / 2) + item.vGap.top;
 
                 // maximum pan position
-                bounds.max.x = (realPanElementW > _tempPanAreaSize.x) ?
-                    Math.round(_tempPanAreaSize.x - realPanElementW) :
-                    bounds.center.x;
+                bounds.max.x =
+                    realPanElementW > _tempPanAreaSize.x
+                        ? Math.round(_tempPanAreaSize.x - realPanElementW)
+                        : bounds.center.x;
 
-                bounds.max.y = (realPanElementH > _tempPanAreaSize.y) ?
-                    Math.round(_tempPanAreaSize.y - realPanElementH) + item.vGap.top :
-                    bounds.center.y;
+                bounds.max.y =
+                    realPanElementH > _tempPanAreaSize.y
+                        ? Math.round(_tempPanAreaSize.y - realPanElementH) + item.vGap.top
+                        : bounds.center.y;
 
                 // minimum pan position
-                bounds.min.x = (realPanElementW > _tempPanAreaSize.x) ? 0 : bounds.center.x;
-                bounds.min.y = (realPanElementH > _tempPanAreaSize.y) ? item.vGap.top : bounds.center.y;
+                bounds.min.x = realPanElementW > _tempPanAreaSize.x ? 0 : bounds.center.x;
+                bounds.min.y = realPanElementH > _tempPanAreaSize.y ? item.vGap.top : bounds.center.y;
             },
-            _calculateItemSize = function(item, viewportSize, zoomLevel) {
-
+            _calculateItemSize = function (item, viewportSize, zoomLevel) {
                 if (item.src && !item.loadError) {
                     var isInitial = !zoomLevel;
 
@@ -2748,7 +2642,6 @@
                         // allows overriding vertical margin for individual items
                         _shout('parseVerticalMargin', item);
                     }
-
 
                     _tempPanAreaSize.x = viewportSize.x;
                     _tempPanAreaSize.y = viewportSize.y - item.vGap.top - item.vGap.bottom;
@@ -2800,26 +2693,20 @@
                     // if it's not image, we return zero bounds (content is not zoomable)
                     return item.bounds;
                 }
-
             },
-
-
-            _appendImage = function(index, item, baseDiv, img, preventAnimation, keepPlaceholder) {
-
-
+            _appendImage = function (index, item, baseDiv, img, preventAnimation, keepPlaceholder) {
                 if (item.loadError) {
                     return;
                 }
 
                 if (img) {
-
                     item.imageAppended = true;
-                    _setImageSize(item, img, (item === self.currItem && _renderMaxResolution));
+                    _setImageSize(item, img, item === self.currItem && _renderMaxResolution);
 
                     baseDiv.appendChild(img);
 
                     if (keepPlaceholder) {
-                        setTimeout(function() {
+                        setTimeout(function () {
                             if (item && item.loaded && item.placeholder) {
                                 item.placeholder.style.display = 'none';
                                 item.placeholder = null;
@@ -2828,13 +2715,11 @@
                     }
                 }
             },
-
-
-            _preloadImage = function(item) {
+            _preloadImage = function (item) {
                 item.loading = true;
                 item.loaded = false;
-                var img = item.img = framework.createEl('pswp__img', 'img');
-                var onComplete = function() {
+                var img = (item.img = framework.createEl('pswp__img', 'img'));
+                var onComplete = function () {
                     item.loading = false;
                     item.loaded = true;
 
@@ -2847,28 +2732,26 @@
                     img = null;
                 };
                 img.onload = onComplete;
-                img.onerror = function() {
+                img.onerror = function () {
                     item.loadError = true;
                     onComplete();
                 };
 
-                img.src = item.src;// + '?a=' + Math.random();
+                img.src = item.src; // + '?a=' + Math.random();
 
                 return img;
             },
-            _checkForError = function(item, cleanUp) {
+            _checkForError = function (item, cleanUp) {
                 if (item.src && item.loadError && item.container) {
-
                     if (cleanUp) {
                         item.container.innerHTML = '';
                     }
 
                     item.container.innerHTML = _options.errorMsg.replace('%url%', item.src);
                     return true;
-
                 }
             },
-            _setImageSize = function(item, img, maxRes) {
+            _setImageSize = function (item, img, maxRes) {
                 if (!item.src) {
                     return;
                 }
@@ -2888,27 +2771,30 @@
                 img.style.width = w + 'px';
                 img.style.height = h + 'px';
             },
-            _appendImagesPool = function() {
-
+            _appendImagesPool = function () {
                 if (_imagesToAppendPool.length) {
                     var poolItem;
 
                     for (var i = 0; i < _imagesToAppendPool.length; i++) {
                         poolItem = _imagesToAppendPool[i];
                         if (poolItem.holder.index === poolItem.index) {
-                            _appendImage(poolItem.index, poolItem.item, poolItem.baseDiv, poolItem.img, false, poolItem.clearPlaceholder);
+                            _appendImage(
+                                poolItem.index,
+                                poolItem.item,
+                                poolItem.baseDiv,
+                                poolItem.img,
+                                false,
+                                poolItem.clearPlaceholder
+                            );
                         }
                     }
                     _imagesToAppendPool = [];
                 }
             };
 
-
         _registerModule('Controller', {
-
             publicMethods: {
-
-                lazyLoadItem: function(index) {
+                lazyLoadItem: function (index) {
                     index = _getLoopedId(index);
                     var item = _getItemAt(index);
 
@@ -2924,26 +2810,23 @@
 
                     _preloadImage(item);
                 },
-                initController: function() {
+                initController: function () {
                     framework.extend(_options, _controllerDefaultOptions, true);
                     self.items = _items = items;
                     _getItemAt = self.getItemAt;
                     _getNumItems = _options.getNumItemsFn; //self.getNumItems;
-
 
                     _initialIsLoop = _options.loop;
                     if (_getNumItems() < 3) {
                         _options.loop = false; // disable loop if less then 3 items
                     }
 
-                    _listen('beforeChange', function(diff) {
-
+                    _listen('beforeChange', function (diff) {
                         var p = _options.preload,
-                            isNext = diff === null ? true : (diff >= 0),
+                            isNext = diff === null ? true : diff >= 0,
                             preloadBefore = Math.min(p[0], _getNumItems()),
                             preloadAfter = Math.min(p[1], _getNumItems()),
                             i;
-
 
                         for (i = 1; i <= (isNext ? preloadAfter : preloadBefore); i++) {
                             self.lazyLoadItem(_currentItemIndex + i);
@@ -2953,15 +2836,15 @@
                         }
                     });
 
-                    _listen('initialLayout', function() {
-                        self.currItem.initialLayout = _options.getThumbBoundsFn && _options.getThumbBoundsFn(_currentItemIndex);
+                    _listen('initialLayout', function () {
+                        self.currItem.initialLayout =
+                            _options.getThumbBoundsFn && _options.getThumbBoundsFn(_currentItemIndex);
                     });
 
                     _listen('mainScrollAnimComplete', _appendImagesPool);
                     _listen('initialZoomInEnd', _appendImagesPool);
 
-
-                    _listen('destroy', function() {
+                    _listen('destroy', function () {
                         var item;
                         for (var i = 0; i < _items.length; i++) {
                             item = _items[i];
@@ -2986,15 +2869,14 @@
                     });
                 },
 
-
-                getItemAt: function(index) {
+                getItemAt: function (index) {
                     if (index >= 0) {
                         return _items[index] !== undefined ? _items[index] : false;
                     }
                     return false;
                 },
 
-                allowProgressiveImg: function() {
+                allowProgressiveImg: function () {
                     // 1. Progressive image loading isn't working on webkit/blink
                     //    when hw-acceleration (e.g. translateZ) is applied to IMG element.
                     //    That's why in PhotoSwipe parent element gets zoom transform, not image itself.
@@ -3005,12 +2887,16 @@
                     // 3. Progressive image loading sometimes doesn't work in IE (up to 11).
 
                     // Don't allow progressive loading on non-large touch devices
-                    return _options.forceProgressiveLoading || !_likelyTouchDevice || _options.mouseUsed || screen.width > 1200;
+                    return (
+                        _options.forceProgressiveLoading ||
+                        !_likelyTouchDevice ||
+                        _options.mouseUsed ||
+                        screen.width > 1200
+                    );
                     // 1200 - to eliminate touch devices with large screen (like Chromebook Pixel)
                 },
 
-                setContent: function(holder, index) {
-
+                setContent: function (holder, index) {
                     if (_options.loop) {
                         index = _getLoopedId(index);
                     }
@@ -3035,8 +2921,7 @@
                     holder.item = item;
 
                     // base container DIV is created only once for each of 3 holders
-                    var baseDiv = item.container = framework.createEl('pswp__zoom-wrap');
-
+                    var baseDiv = (item.container = framework.createEl('pswp__zoom-wrap'));
 
                     if (!item.src && item.html) {
                         if (item.html.tagName) {
@@ -3051,9 +2936,7 @@
                     _calculateItemSize(item, _viewportSize);
 
                     if (item.src && !item.loadError && !item.loaded) {
-
-                        item.loadComplete = function(item) {
-
+                        item.loadComplete = function (item) {
                             // gallery closed before image finished loading
                             if (!_isOpen) {
                                 return;
@@ -3080,10 +2963,17 @@
                                             img: item.img,
                                             index: index,
                                             holder: holder,
-                                            clearPlaceholder: true
+                                            clearPlaceholder: true,
                                         });
                                     } else {
-                                        _appendImage(index, item, baseDiv, item.img, _mainScrollAnimating || _initialZoomRunning, true);
+                                        _appendImage(
+                                            index,
+                                            item,
+                                            baseDiv,
+                                            item.img,
+                                            _mainScrollAnimating || _initialZoomRunning,
+                                            true
+                                        );
                                     }
                                 } else {
                                     // remove preloader & mini-img
@@ -3101,9 +2991,8 @@
                         };
 
                         if (framework.features.transform) {
-
                             var placeholderClassName = 'pswp__img pswp__img--placeholder';
-                            placeholderClassName += (item.msrc ? '' : ' pswp__img--placeholder--blank');
+                            placeholderClassName += item.msrc ? '' : ' pswp__img--placeholder--blank';
 
                             var placeholder = framework.createEl(placeholderClassName, item.msrc ? 'img' : '');
                             if (item.msrc) {
@@ -3114,14 +3003,11 @@
 
                             baseDiv.appendChild(placeholder);
                             item.placeholder = placeholder;
-
                         }
-
 
                         if (!item.loading) {
                             _preloadImage(item);
                         }
-
 
                         if (self.allowProgressiveImg()) {
                             // just append image
@@ -3131,13 +3017,12 @@
                                     baseDiv: baseDiv,
                                     img: item.img,
                                     index: index,
-                                    holder: holder
+                                    holder: holder,
                                 });
                             } else {
                                 _appendImage(index, item, baseDiv, item.img, true, true);
                             }
                         }
-
                     } else if (item.src && !item.loadError) {
                         // image object is created every time, due to bugs of image loading & delay when switching images
                         img = framework.createEl('pswp__img', 'img');
@@ -3147,10 +3032,9 @@
                         _appendImage(index, item, baseDiv, img, true);
                     }
 
-
                     if (!_initialContentSet && index === _currentItemIndex) {
                         _currZoomElementStyle = baseDiv.style;
-                        _showOrHide(item, (img || item.img));
+                        _showOrHide(item, img || item.img);
                     } else {
                         _applyZoomPanToItem(item);
                     }
@@ -3159,14 +3043,13 @@
                     holder.el.appendChild(baseDiv);
                 },
 
-                cleanSlide: function(item) {
+                cleanSlide: function (item) {
                     if (item.img) {
                         item.img.onload = item.img.onerror = null;
                     }
                     item.loaded = item.loading = item.img = item.imageAppended = false;
-                }
-
-            }
+                },
+            },
         });
 
         /*>>items-controller*/
@@ -3181,13 +3064,13 @@
 
         var tapTimer,
             tapReleasePoint = {},
-            _dispatchTapEvent = function(origEvent, releasePoint, pointerType) {
+            _dispatchTapEvent = function (origEvent, releasePoint, pointerType) {
                 var e = document.createEvent('CustomEvent'),
                     eDetail = {
                         origEvent: origEvent,
                         target: origEvent.target,
                         releasePoint: releasePoint,
-                        pointerType: pointerType || 'touch'
+                        pointerType: pointerType || 'touch',
                     };
 
                 e.initCustomEvent('pswpTap', true, true, eDetail);
@@ -3196,21 +3079,21 @@
 
         _registerModule('Tap', {
             publicMethods: {
-                initTap: function() {
+                initTap: function () {
                     _listen('firstTouchStart', self.onTapStart);
                     _listen('touchRelease', self.onTapRelease);
-                    _listen('destroy', function() {
+                    _listen('destroy', function () {
                         tapReleasePoint = {};
                         tapTimer = null;
                     });
                 },
-                onTapStart: function(touchList) {
+                onTapStart: function (touchList) {
                     if (touchList.length > 1) {
                         clearTimeout(tapTimer);
                         tapTimer = null;
                     }
                 },
-                onTapRelease: function(e, releasePoint) {
+                onTapRelease: function (e, releasePoint) {
                     if (!releasePoint) {
                         return;
                     }
@@ -3242,13 +3125,13 @@
 
                         _equalizePoints(tapReleasePoint, p0);
 
-                        tapTimer = setTimeout(function() {
+                        tapTimer = setTimeout(function () {
                             _dispatchTapEvent(e, releasePoint);
                             tapTimer = null;
                         }, 300);
                     }
-                }
-            }
+                },
+            },
         });
 
         /*>>tap*/
@@ -3268,11 +3151,8 @@
         var _wheelDelta;
 
         _registerModule('DesktopZoom', {
-
             publicMethods: {
-
-                initDesktopZoom: function() {
-
+                initDesktopZoom: function () {
                     if (_oldIE) {
                         // no zoom for old IE (<=8)
                         return;
@@ -3281,26 +3161,24 @@
                     if (_likelyTouchDevice) {
                         // if detected hardware touch support, we wait until mouse is used,
                         // and only then apply desktop-zoom features
-                        _listen('mouseUsed', function() {
+                        _listen('mouseUsed', function () {
                             self.setupDesktopZoom();
                         });
                     } else {
                         self.setupDesktopZoom(true);
                     }
-
                 },
 
-                setupDesktopZoom: function(onInit) {
-
+                setupDesktopZoom: function (onInit) {
                     _wheelDelta = {};
 
                     var events = 'wheel mousewheel DOMMouseScroll';
 
-                    _listen('bindEvents', function() {
+                    _listen('bindEvents', function () {
                         framework.bind(template, events, self.handleMouseWheel);
                     });
 
-                    _listen('unbindEvents', function() {
+                    _listen('unbindEvents', function () {
                         if (_wheelDelta) {
                             framework.unbind(template, events, self.handleMouseWheel);
                         }
@@ -3309,7 +3187,7 @@
                     self.mouseZoomedIn = false;
 
                     var hasDraggingClass,
-                        updateZoomable = function() {
+                        updateZoomable = function () {
                             if (self.mouseZoomedIn) {
                                 framework.removeClass(template, 'pswp--zoomed-in');
                                 self.mouseZoomedIn = false;
@@ -3321,7 +3199,7 @@
                             }
                             removeDraggingClass();
                         },
-                        removeDraggingClass = function() {
+                        removeDraggingClass = function () {
                             if (hasDraggingClass) {
                                 framework.removeClass(template, 'pswp--dragging');
                                 hasDraggingClass = false;
@@ -3330,7 +3208,7 @@
 
                     _listen('resize', updateZoomable);
                     _listen('afterChange', updateZoomable);
-                    _listen('pointerDown', function() {
+                    _listen('pointerDown', function () {
                         if (self.mouseZoomedIn) {
                             hasDraggingClass = true;
                             framework.addClass(template, 'pswp--dragging');
@@ -3341,14 +3219,11 @@
                     if (!onInit) {
                         updateZoomable();
                     }
-
                 },
 
-                handleMouseWheel: function(e) {
-
+                handleMouseWheel: function (e) {
                     if (_currZoomLevel <= self.currItem.fitRatio) {
                         if (_options.modal) {
-
                             if (!_options.closeOnScroll || _numAnimations || _isDragging) {
                                 e.preventDefault();
                             } else if (_transformKey && Math.abs(e.deltaY) > 2) {
@@ -3357,7 +3232,6 @@
                                 _closedByScroll = true;
                                 self.close();
                             }
-
                         }
                         return true;
                     }
@@ -3398,11 +3272,13 @@
                         newPanY = _panOffset.y - _wheelDelta.y;
 
                     // only prevent scrolling in nonmodal mode when not at edges
-                    if (_options.modal ||
-                        (
-                            newPanX <= _currPanBounds.min.x && newPanX >= _currPanBounds.max.x &&
-                            newPanY <= _currPanBounds.min.y && newPanY >= _currPanBounds.max.y
-                        )) {
+                    if (
+                        _options.modal ||
+                        (newPanX <= _currPanBounds.min.x &&
+                            newPanX >= _currPanBounds.max.x &&
+                            newPanY <= _currPanBounds.min.y &&
+                            newPanY >= _currPanBounds.max.y)
+                    ) {
                         e.preventDefault();
                     }
 
@@ -3410,10 +3286,10 @@
                     self.panTo(newPanX, newPanY);
                 },
 
-                toggleDesktopZoom: function(centerPoint) {
+                toggleDesktopZoom: function (centerPoint) {
                     centerPoint = centerPoint || {
                         x: _viewportSize.x / 2 + _offset.x,
-                        y: _viewportSize.y / 2 + _offset.y
+                        y: _viewportSize.y / 2 + _offset.y,
                     };
 
                     var doubleTapZoomLevel = _options.getDoubleTapZoom(true, self.currItem);
@@ -3423,11 +3299,9 @@
 
                     self.zoomTo(zoomOut ? self.currItem.initialZoomLevel : doubleTapZoomLevel, centerPoint, 333);
                     framework[(!zoomOut ? 'add' : 'remove') + 'Class'](template, 'pswp--zoomed-in');
-                }
-
-            }
+                },
+            },
         });
-
 
         /*>>desktop-zoom*/
 
@@ -3445,10 +3319,9 @@
          *
          */
 
-
         var _historyDefaultOptions = {
             history: true,
-            galleryUID: 1
+            galleryUID: 1,
         };
 
         var _historyUpdateTimeout,
@@ -3462,14 +3335,11 @@
             _closedFromURL,
             _urlChangedOnce,
             _windowLoc,
-
             _supportsPushState,
-
-            _getHash = function() {
+            _getHash = function () {
                 return _windowLoc.hash.substring(1);
             },
-            _cleanHistoryTimeouts = function() {
-
+            _cleanHistoryTimeouts = function () {
                 if (_historyUpdateTimeout) {
                     clearTimeout(_historyUpdateTimeout);
                 }
@@ -3478,18 +3348,19 @@
                     clearTimeout(_hashAnimCheckTimeout);
                 }
             },
-
             // pid - Picture index
             // gid - Gallery index
-            _parseItemIndexFromURL = function() {
+            _parseItemIndexFromURL = function () {
                 var hash = _getHash(),
                     params = {};
 
-                if (hash.length < 5) { // pid=1
+                if (hash.length < 5) {
+                    // pid=1
                     return params;
                 }
 
-                var i, vars = hash.split('&');
+                var i,
+                    vars = hash.split('&');
                 for (i = 0; i < vars.length; i++) {
                     if (!vars[i]) {
                         continue;
@@ -3518,12 +3389,10 @@
                 }
                 return params;
             },
-            _updateHash = function() {
-
+            _updateHash = function () {
                 if (_hashAnimCheckTimeout) {
                     clearTimeout(_hashAnimCheckTimeout);
                 }
-
 
                 if (_numAnimations || _isDragging) {
                     // changing browser URL forces layout/paint in some browsers, which causes noticable lag during animation
@@ -3538,8 +3407,7 @@
                     _hashChangedByScript = true;
                 }
 
-
-                var pid = (_currentItemIndex + 1);
+                var pid = _currentItemIndex + 1;
                 var item = _getItemAt(_currentItemIndex);
                 if (item.hasOwnProperty('pid')) {
                     // carry forward any custom pid assigned to the item
@@ -3557,11 +3425,9 @@
                 var newURL = _windowLoc.href.split('#')[0] + '#' + newHash;
 
                 if (_supportsPushState) {
-
                     if ('#' + newHash !== window.location.hash) {
                         history[_historyChanged ? 'replaceState' : 'pushState']('', document.title, newURL);
                     }
-
                 } else {
                     if (_historyChanged) {
                         _windowLoc.replace(newURL);
@@ -3570,60 +3436,48 @@
                     }
                 }
 
-
                 _historyChanged = true;
-                _hashChangeTimeout = setTimeout(function() {
+                _hashChangeTimeout = setTimeout(function () {
                     _hashChangedByScript = false;
                 }, 60);
             };
 
-
         _registerModule('History', {
-
-
             publicMethods: {
-                initHistory: function() {
-
+                initHistory: function () {
                     framework.extend(_options, _historyDefaultOptions, true);
 
                     if (!_options.history) {
                         return;
                     }
 
-
                     _windowLoc = window.location;
                     _urlChangedOnce = false;
                     _closedFromURL = false;
                     _historyChanged = false;
                     _initialHash = _getHash();
-                    _supportsPushState = ('pushState' in history);
-
+                    _supportsPushState = 'pushState' in history;
 
                     if (_initialHash.indexOf('gid=') > -1) {
                         _initialHash = _initialHash.split('&gid=')[0];
                         _initialHash = _initialHash.split('?gid=')[0];
                     }
 
-
                     _listen('afterChange', self.updateURL);
-                    _listen('unbindEvents', function() {
+                    _listen('unbindEvents', function () {
                         framework.unbind(window, 'hashchange', self.onHashChange);
                     });
 
-
-                    var returnToOriginal = function() {
+                    var returnToOriginal = function () {
                         _hashReseted = true;
                         if (!_closedFromURL) {
-
                             if (_urlChangedOnce) {
                                 history.back();
                             } else {
-
                                 if (_initialHash) {
                                     _windowLoc.hash = _initialHash;
                                 } else {
                                     if (_supportsPushState) {
-
                                         // remove hash from url without refreshing it or scrolling to top
                                         history.pushState('', document.title, _windowLoc.pathname + _windowLoc.search);
                                     } else {
@@ -3631,29 +3485,26 @@
                                     }
                                 }
                             }
-
                         }
 
                         _cleanHistoryTimeouts();
                     };
 
-
-                    _listen('unbindEvents', function() {
+                    _listen('unbindEvents', function () {
                         if (_closedByScroll) {
                             // if PhotoSwipe is closed by scroll, we go "back" before the closing animation starts
                             // this is done to keep the scroll position
                             returnToOriginal();
                         }
                     });
-                    _listen('destroy', function() {
+                    _listen('destroy', function () {
                         if (!_hashReseted) {
                             returnToOriginal();
                         }
                     });
-                    _listen('firstUpdate', function() {
+                    _listen('firstUpdate', function () {
                         _currentItemIndex = _parseItemIndexFromURL().pid;
                     });
-
 
                     var index = _initialHash.indexOf('pid=');
                     if (index > -1) {
@@ -3663,37 +3514,30 @@
                         }
                     }
 
-
-                    setTimeout(function() {
-                        if (_isOpen) { // hasn't destroyed yet
+                    setTimeout(function () {
+                        if (_isOpen) {
+                            // hasn't destroyed yet
                             framework.bind(window, 'hashchange', self.onHashChange);
                         }
                     }, 40);
-
                 },
-                onHashChange: function() {
-
+                onHashChange: function () {
                     if (_getHash() === _initialHash) {
-
                         _closedFromURL = true;
                         self.close();
                         return;
                     }
                     if (!_hashChangedByScript) {
-
                         _hashChangedByHistory = true;
                         self.goTo(_parseItemIndexFromURL().pid);
                         _hashChangedByHistory = false;
                     }
-
                 },
-                updateURL: function() {
-
+                updateURL: function () {
                     // Delay the update of URL, to avoid lag during transition,
                     // and to not to trigger actions like "refresh page sound" or "blinking favicon" to often
 
                     _cleanHistoryTimeouts();
-
 
                     if (_hashChangedByHistory) {
                         return;
@@ -3704,11 +3548,9 @@
                     } else {
                         _historyUpdateTimeout = setTimeout(_updateHash, 800);
                     }
-                }
-
-            }
+                },
+            },
         });
-
 
         /*>>history*/
         framework.extend(self, publicMethods);

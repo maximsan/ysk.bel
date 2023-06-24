@@ -4,7 +4,9 @@ const sidebar = $('.sidebar');
 const menuIconButton = $('.navbar-toggler');
 const sidebarOpenIcon = $('.navbar-toggler-icon');
 const sidebarCloseIcon = $('.close-icon');
-const menuItemSelectors = $(`a[href$='services'], a[href$='prices'], a[href$='contacts'], a[href$='map'], a[href$='packages']`);
+const menuItemSelectors = $(
+    `a[href$='services'], a[href$='prices'], a[href$='contacts'], a[href$='map'], a[href$='packages']`
+);
 
 function openSideBar() {
     sidebar.addClass('open');

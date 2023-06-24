@@ -1,7 +1,7 @@
 import PhotoSwipe from 'photoswipe';
 import PhotoSwipeUI_Default from 'photoswipe/dist/photoswipe-ui-default';
 
-export const openPhotoSwipe = function(index, galleryElement, disableAnimation, fromURL) {
+export const openPhotoSwipe = function (index, galleryElement, disableAnimation, fromURL) {
     let pswpElement = document.querySelectorAll('.pswp')[0],
         gallery,
         options,
@@ -11,10 +11,9 @@ export const openPhotoSwipe = function(index, galleryElement, disableAnimation, 
 
     // define options (if needed)
     options = {
-
         galleryUID: galleryElement.getAttribute('data-pswp-uid'),
 
-        getThumbBoundsFn: function(index) {
+        getThumbBoundsFn: function (index) {
             // See Options->getThumbBoundsFn section of docs for more info
             let thumbnail = items[index].el.children[0],
                 pageYScroll = window.pageYOffset || document.documentElement.scrollTop,
@@ -23,17 +22,15 @@ export const openPhotoSwipe = function(index, galleryElement, disableAnimation, 
             return { x: rect.left, y: rect.top + pageYScroll, w: rect.width };
         },
 
-        addCaptionHTMLFn: function(item, captionEl, isFake) {
+        addCaptionHTMLFn: function (item, captionEl, isFake) {
             if (!item.title) {
                 captionEl.children[0].innerText = '';
                 return false;
             }
             // captionEl.children[0].innerHTML = item.title + '<br/><small>Photo: ' + item.author + '</small>';
             return true;
-        }
-
+        },
     };
-
 
     if (fromURL) {
         if (options.galleryPIDs) {
@@ -70,19 +67,20 @@ export const openPhotoSwipe = function(index, galleryElement, disableAnimation, 
         firstResize = true,
         imageSrcWillChange;
 
-    gallery.listen('beforeResize', function() {
-
+    gallery.listen('beforeResize', function () {
         let dpiRatio = window.devicePixelRatio ? window.devicePixelRatio : 1;
         dpiRatio = Math.min(dpiRatio, 2.5);
         realViewportWidth = gallery.viewportSize.x * dpiRatio;
 
-
-        if (realViewportWidth >= 1200 || (!gallery.likelyTouchDevice && realViewportWidth > 800) || screen.width > 1200) {
+        if (
+            realViewportWidth >= 1200 ||
+            (!gallery.likelyTouchDevice && realViewportWidth > 800) ||
+            screen.width > 1200
+        ) {
             if (!useLargeImages) {
                 useLargeImages = true;
                 imageSrcWillChange = true;
             }
-
         } else {
             if (useLargeImages) {
                 useLargeImages = false;
@@ -99,10 +97,9 @@ export const openPhotoSwipe = function(index, galleryElement, disableAnimation, 
         }
 
         imageSrcWillChange = false;
-
     });
 
-    gallery.listen('gettingData', function(index, item) {
+    gallery.listen('gettingData', function (index, item) {
         if (useLargeImages) {
             item.src = item.o.src;
             item.w = item.o.w;
@@ -117,7 +114,7 @@ export const openPhotoSwipe = function(index, galleryElement, disableAnimation, 
     gallery.init();
 };
 
-const parseThumbnailElements = function(element) {
+const parseThumbnailElements = function (element) {
     let thumbElements = element.childNodes,
         numNodes = thumbElements.length,
         items = [],
@@ -143,7 +140,7 @@ const parseThumbnailElements = function(element) {
             src: el.getAttribute('href'),
             w: parseInt(size[0], 10),
             h: parseInt(size[1], 10),
-            author: el.getAttribute('data-author')
+            author: el.getAttribute('data-author'),
         };
 
         item.el = el; // save link to element for getThumbBoundsFn
@@ -155,7 +152,6 @@ const parseThumbnailElements = function(element) {
             }
         }
 
-
         const mediumSrc = el.getAttribute('data-med');
         if (mediumSrc) {
             size = el.getAttribute('data-med-size').split('x');
@@ -163,14 +159,14 @@ const parseThumbnailElements = function(element) {
             item.m = {
                 src: mediumSrc,
                 w: parseInt(size[0], 10),
-                h: parseInt(size[1], 10)
+                h: parseInt(size[1], 10),
             };
         }
         // original image
         item.o = {
             src: item.src,
             w: item.w,
-            h: item.h
+            h: item.h,
         };
 
         items.push(item);

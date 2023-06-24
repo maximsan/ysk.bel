@@ -1,8 +1,9 @@
-export const photoswipeParseHash = function() {
+export const photoswipeParseHash = function () {
     let hash = window.location.hash.substring(1),
         params = {};
 
-    if (hash.length < 5) { // pid=1
+    if (hash.length < 5) {
+        // pid=1
         return params;
     }
 

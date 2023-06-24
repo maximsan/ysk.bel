@@ -6,8 +6,11 @@ const button = $('.scroll-up');
 const body = $('html, body');
 
 export function showScrollUpButton() {
-    w.scroll(function() {
-        if ((document.body.scrollTop > 80 || document.documentElement.scrollTop > 80) && document.documentElement.scrollHeight - document.documentElement.scrollTop > 880) {
+    w.scroll(function () {
+        if (
+            (document.body.scrollTop > 80 || document.documentElement.scrollTop > 80) &&
+            document.documentElement.scrollHeight - document.documentElement.scrollTop > 880
+        ) {
             button.show();
         } else {
             button.hide();
@@ -17,10 +20,13 @@ export function showScrollUpButton() {
 
 // When the user clicks on the button, scroll to the top of the document
 export function scrollUp(milliseconds) {
-    button.click(function() {
-        body.animate({
-            scrollTop: 0
-        }, milliseconds);
+    button.click(function () {
+        body.animate(
+            {
+                scrollTop: 0,
+            },
+            milliseconds
+        );
     });
 }
 
@@ -55,10 +61,10 @@ const carouselSize = document.querySelector('.intro').offsetHeight / 2;
 const bannerBottom = carouselSize + banner.offsetHeight;
 
 export function hideInfoBannerOnScroll() {
-    w.scroll(function() {
+    w.scroll(function () {
         const currentScrollPos = window.scrollY;
         if (!bannerClosed) {
-            if ((currentScrollPos < prevScrollPos || currentScrollPos < bannerBottom)) {
+            if (currentScrollPos < prevScrollPos || currentScrollPos < bannerBottom) {
                 showInfoBanner();
             } else {
                 hideInfoBanner();
@@ -66,4 +72,3 @@ export function hideInfoBannerOnScroll() {
         }
     });
 }
-
