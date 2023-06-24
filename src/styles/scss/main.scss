@@ -176,7 +176,7 @@ body.down .fixed {
 
 .advertisement {
     font-weight: 500;
-    color: #f66f30;
+    color: $orange;
 }
 
 .tooltip-inner {
@@ -233,7 +233,27 @@ body.down .fixed {
     display: flex;
     flex-flow: column;
     align-items: center;
-    min-height: 6rem;
+    gap: 0.5rem;
+}
+
+.package-header {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    line-height: 1.2;
+
+    &--gutter-bottom {
+        padding-bottom: 2.25rem;
+    }
+}
+
+.accommodation {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: $orange;
+    font-size: 1.75rem;
+    font-width: bold;
 }
 
 .hide-banner {
