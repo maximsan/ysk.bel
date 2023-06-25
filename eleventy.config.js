@@ -28,7 +28,7 @@ module.exports = function (eleventyConfig) {
             input: "src",          // default: "."
             output: 'dist',
             // includes: 'includes',
-            // layouts: 'layouts',
+            layouts: 'layouts',
             // data: 'data'
         }
     }
