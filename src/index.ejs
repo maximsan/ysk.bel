@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html class="no-js" lang="ru">
+<html class="no-js" lang=<%= meta.lang %>>
 <head>
-    <%- include('partials/head.ejs', { title: 'Усадьба серебряный карась. Рыбалка. Баня. Минская Область' }) %>
+    <%- include('/head', { title: 'Усадьба серебряный карась. Рыбалка. Баня. Минская Область' }) -%>
 </head>
 <body>
 
@@ -22,17 +22,17 @@
     <i class="fas fa-arrow-up"></i>
 </button>
 
-<%- include('partials/header.ejs') %>
+<%- include('/header') -%>
 
 <main>
     <!-- Banner with important info-->
-    <%- include('partials/components/info-banner.ejs') -%>
+    <%- include('/components/info-banner') -%>
     <!-- Page Content -->
-    <%- include('partials/hero-section.ejs') -%>
+    <%- include('/hero-section') -%>
     <!-- Services section -->
-    <%- include('partials/services.ejs') -%>
+    <%- include('/services') -%>
     <!-- Contacts section -->
-    <%- include('partials/contacts.ejs', { lat: '54.291652', lng: '27.480454' }) -%>
+    <%- include('/contacts', { lat: '54.291652', lng: '27.480454' }) -%>
 </main>
 
 <!-- TODO: feedback section -->
@@ -42,11 +42,11 @@
 </div>
 
 <!--Footer navigation start-->
-<%- include('partials/footer.ejs') -%>
+<%- include('/footer') -%>
 <!--Footer navigation end-->
 
 <!--Photo swipe start-->
-<%- include('partials/components/photo-swipe.ejs') -%>
+<%- include('/components/photo-swipe') -%>
 <!--Photo swipe end-->
 
 
