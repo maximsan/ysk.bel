@@ -1,18 +1,18 @@
 @import url('https://fonts.googleapis.com/css?family=Rubik:400,500,500i,700,700i&display=swap');
 
-@import 'constants';
-@import 'common';
-@import 'mixins';
+@import 'modules/common';
+@import 'modules/mixins';
+@import 'modules/constants';
 @import '320';
 @import '480';
 @import '768';
 @import '992';
 @import '1200';
 @import 'gallery';
-@import 'footer';
-@import 'contacts';
-@import 'services';
-@import 'hero';
+@import 'partials/footer';
+@import 'partials/contacts';
+@import 'partials/services';
+@import 'partials/hero';
 
 :root {
     --doc-height: 100%;

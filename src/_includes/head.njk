@@ -7,21 +7,21 @@
 />
 <meta
   name="keywords"
-  content='<%= meta.keywords %>'
+  content='{{ meta.keywords }}'
 />
 <meta
-  content='<%= meta.description %>'
+  content='{{ meta.description }}'
   name="description"
 />
 <meta
   property="og:title"
-  content='<%= meta.ogTitle %>'
+  content='{{ meta.ogTitle }}'
 />
 <meta
   property="og:description"
-  content='<%= meta.ogDescription %>'
+  content='{{ meta.ogDescription }}'
 />
-<meta content='<%= meta.author %>' name="author" />
+<meta content='{{ meta.author }}' name="author" />
 
 <!-- favicon -->
 <link rel="apple-touch-icon" sizes="180x180" href="assets/icons/apple-touch-icon.png">
@@ -53,7 +53,7 @@
   rel="stylesheet"
 />
 <!-- Document Title -->
-<title><%= title %></title>
+<title>{{ title }}</title>
 
 <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -78,3 +78,5 @@
 </script>
 <noscript><div><img src="https://mc.yandex.ru/watch/67016224" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
 <!-- /Yandex.Metrika counter -->
+
+<link rel='stylesheet' type='text/css' href='{{ 'styles/scss/main.scss' | hashed }}'>
