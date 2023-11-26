@@ -2,28 +2,17 @@
   <div class="container">
     <div class="container-flex">
       <ul class="footer">
-        <li class="footer-item">
-          <a
-            class="footer-link viber"
-            href="viber://chat?number=%2B375291495989"
-            ><i class="fab fa-viber"></i>
-            <span class="icon-text">Viber</span></a
-          >
-        </li>
-        <li class="footer-item">
-          <a
-            class="footer-link whatsApp"
-            href="https://api.whatsapp.com/send?phone=375291495989"
-            ><i class="fab fa-whatsapp"></i>
-            <span class="icon-text">WhatsApp</span></a
-          >
-        </li>
-        <li class="footer-item">
-          <a class="footer-link skype" href="skype:oleg_miskevich?chat"
-            ><i class=" fab fa-skype"></i>
-            <span class="icon-text">Skype</span></a
-          >
-        </li>
+          {% for link in footer.links %}
+              <li class="footer-item">
+                  <a
+                      class="footer-link {{ link.class }}"
+                      href="{{ link.href }}"
+                  >
+                      <i class="fab fa-{{ link.class }}"></i>
+                      <span class="icon-text">{{ link.text }}</span>
+                  </a>
+              </li>
+          {% endfor %}
       </ul>
     </div>
   </div>
