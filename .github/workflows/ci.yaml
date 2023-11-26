@@ -16,7 +16,7 @@ jobs:
 
             - name: install dependencies
               run: |
-                  yarn set version 3.4.1
+                  yarn set version 4.0.2
                   yarn install --immutable
 
             - name: build app
