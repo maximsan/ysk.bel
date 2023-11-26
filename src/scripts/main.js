@@ -29,9 +29,10 @@ const mobileMethods = () => {
     addFixedHeader();
 };
 
+// TODO: review all code
 const desktopMethods = () => {
     removeFixedHeader();
-    addFixedHeaderOnScroll();
+    // addFixedHeaderOnScroll();
     smoothScroll(1500);
     showScrollUpButton();
     scrollUp(1000);
@@ -45,7 +46,7 @@ $(function () {
     mobile.addEventListener('change', methods);
     window.addEventListener('load', () => {
         if (wWidth >= 768) {
-            addFixedHeaderOnScroll();
+            // addFixedHeaderOnScroll();
             smoothScroll(1500);
             showScrollUpButton();
             scrollUp(1000);
