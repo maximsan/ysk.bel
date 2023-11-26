@@ -4,7 +4,8 @@
     }
 
     .navbar {
-        padding: 1.5rem 0;
+        // TODO: fix it later
+        padding: 1.5rem 0 !important;
 
         &.navbar-expand-md {
             display: flex;
