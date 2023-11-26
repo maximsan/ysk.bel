@@ -104,15 +104,16 @@ module.exports = function (config) {
     });
 
     return {
-        templateFormats: [
-            "md",
-            "html",
-            "ejs",
-            "njk"
-        ],
         dir: {
             input: "src",
             output: 'dist',
-        }
+            includes: 'includes',
+            layouts: 'layouts',
+            data: 'data',
+        },
+        templateFormats: [
+            "md",
+            "njk"
+        ],
     }
 }
