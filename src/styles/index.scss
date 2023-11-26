@@ -14,6 +14,9 @@
 @import 'partials/services';
 @import 'partials/hero';
 
+@import 'photoswipe/photo-swipe.scss';
+@import 'photoswipe/default-skin.scss';
+
 :root {
     --doc-height: 100%;
 }
