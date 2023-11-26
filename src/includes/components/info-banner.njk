@@ -3,8 +3,8 @@
     <div class="cross">
         <span class="cross-icon">&times;</span>
     </div>
-    <h3 class="info-banner__header">Приглашаем к нам на рыбалку!</h3>
-    <div class="info-banner__text">Водоем был зарыблен 20.04.2022!</div>
-    <div class="info-banner__text">Карп 300-500г - 250кг.</div>
-    <div class="info-banner__text">Карась 200-350г - 250кг.</div>
+    <h3 class="info-banner__header">{{ banner.intro }}</h3>
+    {% for message in banner.messages %}
+        <div class="info-banner__text">{{ message }}</div>
+    {% endfor %}
 </div>
