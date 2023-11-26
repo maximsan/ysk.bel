@@ -24,7 +24,6 @@
 // import '../assets/icons/favicon-32x32.png';
 
 //load js files
-import './vendor/modernizr-3.11.2.min';
-import 'bootstrap/dist/js/bootstrap.min';
+import 'bootstrap';
 import './helpers/plugins';
 import './main';
