@@ -1382,17 +1382,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"aos@npm:2.3.4":
-  version: 2.3.4
-  resolution: "aos@npm:2.3.4"
-  dependencies:
-    classlist-polyfill: "npm:^1.0.3"
-    lodash.debounce: "npm:^4.0.6"
-    lodash.throttle: "npm:^4.0.1"
-  checksum: 5f8d1883aeb1db6084e455fb2d789204d93f64994576afb1dc8513b1f580f26d06cd805b5d5957d16ce1fa638cf6864c30b9e056657dfab54ac7a82e701a3ec3
-  languageName: node
-  linkType: hard
-
 "aproba@npm:^1.0.3 || ^2.0.0":
   version: 2.0.0
   resolution: "aproba@npm:2.0.0"
@@ -1782,13 +1771,6 @@ __metadata:
   version: 2.0.0
   resolution: "chownr@npm:2.0.0"
   checksum: c57cf9dd0791e2f18a5ee9c1a299ae6e801ff58fee96dc8bfd0dcb4738a6ce58dd252a3605b1c93c6418fe4f9d5093b28ffbf4d66648cb2a9c67eaef9679be2f
-  languageName: node
-  linkType: hard
-
-"classlist-polyfill@npm:^1.0.3":
-  version: 1.2.0
-  resolution: "classlist-polyfill@npm:1.2.0"
-  checksum: dd7211ca016eaa1fa1ae3f7c65680fce8815b1e5b7541b524c3762ab98ce73e1a782cf71819a07e1e2614385f082bbd0285b1a34f389daf16bed23a11efe06a1
   languageName: node
   linkType: hard
 
@@ -3423,24 +3405,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lodash.debounce@npm:^4.0.6":
-  version: 4.0.8
-  resolution: "lodash.debounce@npm:4.0.8"
-  checksum: cd0b2819786e6e80cb9f5cda26b1a8fc073daaf04e48d4cb462fa4663ec9adb3a5387aa22d7129e48eed1afa05b482e2a6b79bfc99b86886364449500cbb00fd
-  languageName: node
-  linkType: hard
-
 "lodash.deburr@npm:^4.1.0":
   version: 4.1.0
   resolution: "lodash.deburr@npm:4.1.0"
   checksum: 165ce8f8a051360f98ce977f12bd645fe3faf3cc2452aa36f5a8849e3e69463e2252ff952ed6b7cc33c8f608fcbe56e7d13baf524818da95cb53849d366b62be
-  languageName: node
-  linkType: hard
-
-"lodash.throttle@npm:^4.0.1":
-  version: 4.1.1
-  resolution: "lodash.throttle@npm:4.1.1"
-  checksum: 9be9fb2ffd686c20543167883305542f4564062a5f712a40e8c6f2f0d9fd8254a6e9d801c2470b1b24e0cdf2ae83c1277b55aa0fb4799a2db6daf545f53820e1
   languageName: node
   linkType: hard
 
@@ -5427,7 +5395,6 @@ __metadata:
     "@babel/core": "npm:^7.21.4"
     "@babel/preset-env": "npm:7.2.3"
     "@esbuild/darwin-arm64": "npm:^0.20.0"
-    aos: "npm:2.3.4"
     babel-loader: "npm:8.0.5"
     babel-plugin-syntax-dynamic-import: "npm:6.18.0"
     bootstrap: "npm:4.5.3"
