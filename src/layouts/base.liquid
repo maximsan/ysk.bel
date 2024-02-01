@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html class="no-js" lang={{ meta.lang }}>
 <head>
-    {% include 'head.liquid' %}
+    {% render 'head' %}
 </head>
 <body>
 
 <!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5W4KDDW"
-                  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<noscript>
+    <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5W4KDDW"
+            height="0" width="0" style="display:none;visibility:hidden"></iframe>
+</noscript>
 <!-- End Google Tag Manager (noscript) -->
 
 <!--[if lte IE 9]>
@@ -22,22 +24,22 @@
     <i class="fas fa-arrow-up"></i>
 </button>
 
-{% include "header.liquid" %}
+{% render "header" %}
 
 <main>
 
     {{ content }}
 
-<!-- Banner with important info-->
-    {% include 'components/info-banner.liquid' %}
-<!-- Page Content -->
-    {% include 'hero-section.liquid' %}
-<!-- Services section -->
-    {% include 'services.liquid' %}
-<!-- Contacts section -->
+    <!-- Banner with important info-->
+    {% render 'components/info-banner' %}
+    <!-- Page Content -->
+    {% render 'hero-section' %}
+    <!-- Services section -->
+    {% render 'services' %}
+    <!-- Contacts section -->
     {% assign lat = '54.291652' %}
     {% assign lng = '27.480454' %}
-    {% include 'contacts.liquid' %}
+    {% render 'contacts' %}
 </main>
 
 <!-- TODO: feedback section -->
@@ -47,11 +49,11 @@
 </div>
 
 <!--Footer navigation start-->
-{% include 'footer.liquid' %}
+{% render 'footer' %}
 <!--Footer navigation end-->
 
 <!--Photo swipe start-->
-{%- include 'components/photo-swipe.liquid' %}
+{%- render 'components/photo-swipe' %}
 <!--Photo swipe end-->
 
 
@@ -69,9 +71,9 @@
 
 <!-- Google maps -->
 <script
-        async
-        defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCEjXw1mbGTXw12jnM_YTAveRGb1I4c3gQ"
+    async
+    defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCEjXw1mbGTXw12jnM_YTAveRGb1I4c3gQ"
 ></script>
 <!-- end Google Maps -->
 </body>

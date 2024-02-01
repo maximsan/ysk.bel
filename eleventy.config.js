@@ -2,6 +2,10 @@ const sass = require("sass");
 const path = require("node:path");
 const { createHash } = require('node:crypto');
 const esbuild = require('esbuild');
+const banner = require('./src/data/banner.js');
+const footer = require('./src/data/footer.js');
+const meta = require('./src/data/meta.js');
+const packages = require('./src/data/packages.js');
 
 /* For the given `content` string, generate an MD5 hash of `length` chars. */
 function getHash(content, length = 8) {
@@ -103,6 +107,17 @@ module.exports = function (config) {
         }
     });
 
+    config.setLiquidOptions({
+        extname: ".liquid",
+        strict_filters: true,
+        globals: {
+            banner,
+            footer,
+            meta,
+            packages
+        }
+    })
+
     return {
         dir: {
             input: "src",
@@ -112,6 +127,7 @@ module.exports = function (config) {
             data: 'data',
         },
         templateFormats: [
+            "html",
             "md",
             "njk",
             "liquid",
