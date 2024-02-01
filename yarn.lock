@@ -3228,10 +3228,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jquery@npm:^3.6.4":
-  version: 3.6.4
-  resolution: "jquery@npm:3.6.4"
-  checksum: 6526ec120bb64cb710804d4f1046c099e8e0c329369888e76d17cdbaae57caa9bde445e7088067638c923fff57bf22170693052cdc93db1db390317fbcf45602
+"jquery@npm:3.7.0":
+  version: 3.7.0
+  resolution: "jquery@npm:3.7.0"
+  checksum: ff4c075740048157e0cd131c83b9359b4608b13c4493ab41a5459144a85c06450ae1a254b281a0d56d785d995fd9ad03d2caae17a3b408c53862241fd8ada494
   languageName: node
   linkType: hard
 
@@ -5400,7 +5400,7 @@ __metadata:
     bootstrap: "npm:4.5.3"
     cross-env: "npm:5.2.0"
     esbuild: "npm:^0.20.0"
-    jquery: "npm:^3.6.4"
+    jquery: "npm:3.7.0"
     npm-run-all: "npm:^4.1.5"
     photoswipe: "npm:4.1.3"
     popper.js: "npm:1.16.1"
