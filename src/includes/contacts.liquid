@@ -6,66 +6,66 @@
                     <div class="col-12 col-sm-12 col-md-12 col-lg-6">
                         <div class="our-contacts">
                             <div class="address">
-                                <h4>Наш адрес:</h4>
+                                <h4>{{ contacts.header }}</h4>
                                 <div class="address-desc">
                                     <div class="address-desc-item">
-                                        Минская обл., Логойский р-н
+                                        {{ contacts.region }}
                                     </div>
                                     <div class="address-desc-item">
-                                        д. Вепраты, ул. Тихая 3а,
+                                        {{ contacts.address }}
                                     </div>
                                     <div class="address-desc-item">
-                                        ЗАО "Усадьба Серебряный Карась"
+                                        {{ contacts.companyName }}
                                     </div>
                                     <div class="address-desc-item">
-                                        GPS координаты:
+                                        {{ contacts.coordinates.header }}
                                     </div>
                                     <div class="address-desc-item">
-                                        lat: {{ lat }}
+                                        {{ contacts.coordinates.lat }}
                                     </div>
                                     <div class="address-desc-item">
-                                        lng: {{ lng }}
+                                        {{ contacts.coordinates.lng }}
                                     </div>
                                 </div>
                             </div>
                             <div class="address">
-                                <h4>Контакты:</h4>
+                                <h4>{{ contacts.contacts.header }}</h4>
                                 <div class="address-desc contact-us">
                                     <div class="contact-us-mail">
                                         <img
-                                                alt="почта"
-                                                class="mail-icon"
-                                                src="assets/images/icons/mail.svg"
+                                            alt="почта"
+                                            class="mail-icon"
+                                            src="assets/images/icons/mail.svg"
                                         />
                                         <a
-                                                class=""
-                                                href="mailto:oleg-magnat@tut.by"
-                                        >oleg-magnat@tut.by</a
+                                            class=""
+                                            href="mailto:oleg-magnat@tut.by"
+                                        >{{ contacts.contacts.email }}</a
                                         >
                                     </div>
                                     <div class="contact-us-phones">
                                         <div class="contact-us-phones-header">
-                                            Телефоны для связи:
+                                            {{ contacts.contacts.phones.header }}
                                         </div>
                                         <div class="contact-us-phones-mts">
                                             <img
-                                                    alt="mts"
-                                                    class="mts-icon"
-                                                    src="assets/images/icons/mts.svg"
+                                                alt="mts"
+                                                class="mts-icon"
+                                                src="assets/images/icons/mts.svg"
                                             />
-                                            <span href="tel:+375295695989" class="phone-number"
-                                            >+375 29 569 59 89</span
+                                            <span href="{{ contacts.contacts.phones.href1 }}" class="phone-number"
+                                            >{{ contacts.contacts.phones.phone1 }}</span
                                             >
                                         </div>
                                         <div class="contact-us-phones-velcom">
                                             <img
-                                                    alt="velcom"
-                                                    class="velcom-icon"
-                                                    src="assets/images/icons/a1.svg"
-                                                    style="-webkit-user-select: none;"
+                                                alt="velcom"
+                                                class="velcom-icon"
+                                                src="assets/images/icons/a1.svg"
+                                                style="-webkit-user-select: none;"
                                             />
-                                            <span href="tel:+375291495989" class="phone-number"
-                                            >+375 29 149 59 89</span
+                                            <span href="{{ contacts.contacts.phones.href2 }}" class="phone-number"
+                                            >{{ contacts.contacts.phones.phone2 }}</span
                                             >
                                         </div>
                                     </div>

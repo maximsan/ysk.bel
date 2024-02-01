@@ -1,11 +1,12 @@
-const sass = require("sass");
-const path = require("node:path");
+const sass = require('sass');
+const path = require('node:path');
 const { createHash } = require('node:crypto');
 const esbuild = require('esbuild');
 const banner = require('./src/data/banner.js');
 const footer = require('./src/data/footer.js');
 const meta = require('./src/data/meta.js');
 const packages = require('./src/data/packages.js');
+const contacts = require('./src/data/contacts.js');
 
 /* For the given `content` string, generate an MD5 hash of `length` chars. */
 function getHash(content, length = 8) {
@@ -15,18 +16,18 @@ function getHash(content, length = 8) {
         .substr(0, length);
 }
 
-module.exports = function (config) {
+module.exports = function(config) {
     // Copy the contents of the `public` folder to the output folder
     // For example, `./public/css/` ends up in `_site/css/`
     config.addPassthroughCopy({
-        "src/assets/public": "/",
-        "src/assets/vendors/bootstrap.css": "/assets/bootstrap.css",
-        "src/assets/vendors/main.css": "/assets/main.css",
-        "src/assets/vendors/normalize.css": "/assets/normalize.css",
+        'src/assets/public': '/',
+        'src/assets/vendors/bootstrap.css': '/assets/bootstrap.css',
+        'src/assets/vendors/main.css': '/assets/main.css',
+        'src/assets/vendors/normalize.css': '/assets/normalize.css'
         // "./node_modules/prismjs/themes/prism-okaidia.css": "/css/prism-okaidia.css"
     });
-    config.addPassthroughCopy("src/assets/images")
-    config.addPassthroughCopy("src/assets/icons")
+    config.addPassthroughCopy('src/assets/images');
+    config.addPassthroughCopy('src/assets/icons');
 
     // css
     /* Watch for changes in .scss files. */
@@ -38,7 +39,7 @@ module.exports = function (config) {
         /* We're feeding the `inputPath` to sass directly, so we don't need Eleventy to read the content of `.scss` files. */
         read: false,
         /* Produce the data for each `.scss` file, including its processed CSS content and its MD5 content hash. */
-        getData: async function (inputPath) {
+        getData: async function(inputPath) {
             /* Don't process .scss files that start with an underscore as standalone. */
             if (path.basename(inputPath).startsWith('_')) {
                 return false;
@@ -54,7 +55,7 @@ module.exports = function (config) {
         compileOptions: {
             /* Disable caching of `.scss` files, for good measure. */
             cache: false,
-            permalink: function (permalink, inputPath) {
+            permalink: function(permalink, inputPath) {
                 /* Don't output .scss files that start with an underscore, as per Sass conventions… */
                 if (path.basename(inputPath).startsWith('_')) {
                     return false;
@@ -65,18 +66,18 @@ module.exports = function (config) {
         },
         /* Read the processed CSS content from the data object produced with `.getData()`. */
         compile: () => data => {
-            return data._content
+            return data._content;
         }
     });
 
     const outputMap = {};
-    config.addTransform('outputMap', function (content) {
+    config.addTransform('outputMap', function(content) {
         const filepath = path.relative('src', this.page.inputPath);
         outputMap[filepath] = this.page.url;
         return content;
     });
 
-    config.addFilter('hashed', function (filepath) {
+    config.addFilter('hashed', function(filepath) {
         if (!outputMap[filepath]) {
             throw new Error(`hashed: ${filepath} not found in map.`);
         }
@@ -99,38 +100,45 @@ module.exports = function (config) {
                     entryPoints: [path],
                     minify: true,
                     bundle: true,
-                    write: false,
+                    write: false
                 });
 
                 return output.outputFiles[0].text;
-            }
+            };
         }
     });
 
     config.setLiquidOptions({
-        extname: ".liquid",
+        extname: '.liquid',
         strict_filters: true,
         globals: {
             banner,
             footer,
             meta,
-            packages
+            packages,
+            contacts
         }
-    })
+    });
+
+    // config.setServerOptions({
+    //     watch: ['data/**/*']
+    // });
+
+    config.addWatchTarget("./src/data/**");
 
     return {
         dir: {
-            input: "src",
+            input: 'src',
             output: 'dist',
             includes: 'includes',
             layouts: 'layouts',
-            data: 'data',
+            data: 'data'
         },
         templateFormats: [
-            "html",
-            "md",
-            "njk",
-            "liquid",
-        ],
-    }
-}
+            'html',
+            'md',
+            'njk',
+            'liquid'
+        ]
+    };
+};
