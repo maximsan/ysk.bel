@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="no-js" lang={{ meta.lang }}>
 <head>
-    {% include('head.njk') %}
+    {% include 'head.liquid' %}
 </head>
 <body>
 
@@ -22,22 +22,22 @@
     <i class="fas fa-arrow-up"></i>
 </button>
 
-{% include("header.njk") %}
+{% include "header.liquid" %}
 
 <main>
 
-    {{ content | safe }}
+    {{ content }}
 
-{#    <!-- Banner with important info-->#}
-    {% include('components/info-banner.njk') %}
-{#    <!-- Page Content -->#}
-    {% include('hero-section.njk') %}
-{#    <!-- Services section -->#}
-    {% include('services.njk') %}
-{#    <!-- Contacts section -->#}
-    {% set lat = '54.291652' %}
-    {% set lng = '27.480454' %}
-    {% include('contacts.njk') %}
+<!-- Banner with important info-->
+    {% include 'components/info-banner.liquid' %}
+<!-- Page Content -->
+    {% include 'hero-section.liquid' %}
+<!-- Services section -->
+    {% include 'services.liquid' %}
+<!-- Contacts section -->
+    {% assign lat = '54.291652' %}
+    {% assign lng = '27.480454' %}
+    {% include 'contacts.liquid' %}
 </main>
 
 <!-- TODO: feedback section -->
@@ -46,13 +46,13 @@
     <h2>Thanks for contacting us! We will get back to you soon!</h2>
 </div>
 
-{#<!--Footer navigation start-->#}
-{% include('footer.njk') %}
-{#<!--Footer navigation end-->#}
+<!--Footer navigation start-->
+{% include 'footer.liquid' %}
+<!--Footer navigation end-->
 
-{#<!--Photo swipe start-->#}
-{%- include('components/photo-swipe.njk') %}
-{#<!--Photo swipe end-->#}
+<!--Photo swipe start-->
+{%- include 'components/photo-swipe.liquid' %}
+<!--Photo swipe end-->
 
 
 <script>

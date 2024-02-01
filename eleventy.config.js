@@ -113,7 +113,8 @@ module.exports = function (config) {
         },
         templateFormats: [
             "md",
-            "njk"
+            "njk",
+            "liquid",
         ],
     }
 }

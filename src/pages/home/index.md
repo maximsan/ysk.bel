@@ -1,6 +1,6 @@
 ---
 title: 'Усадьба серебряный карась. Рыбалка. Баня. Минская Область'
-layout: 'base.njk'
+layout: 'base.liquid'
 permalink: index.html
 eleventyNavigation: ''
 ---
