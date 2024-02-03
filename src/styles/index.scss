@@ -31,6 +31,13 @@ body {
     height: var(--doc-height);
 }
 
+
+@supports (scroll-behavior: smooth) {
+    *, html {
+        scroll-behavior: smooth !important;
+    }
+}
+
 /***************fixed element on scroll smoothly ********************/
 
 .fixed {

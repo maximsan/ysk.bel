@@ -20,7 +20,6 @@ const mobileMethods = () => {
 const desktopMethods = () => {
     // removeFixedHeader();
     // addFixedHeaderOnScroll();
-    // smoothScroll(1500);
     // showScrollUpButton();
     // scrollUp(1000);
     addInfoBanner();
@@ -54,7 +53,6 @@ toggleSideBar();
 
 if (windowWidth >= 768) {
     // addFixedHeaderOnScroll();
-    // smoothScroll(1500);
     // showScrollUpButton();
     // scrollUp(1000);
 }
