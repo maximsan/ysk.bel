@@ -3,92 +3,80 @@
         <ul class="navbar-nav">
 
             <li class="nav-item desktop">
-<!--                <button class="button-link order" data-toggle="modal" data-target="#contact-with-modal">-->
-<!--                    Заказать домик-->
-<!--                </button>-->
+                <!--                <button class="button-link order" data-toggle="modal" data-target="#contact-with-modal">-->
+                <!--                    Заказать домик-->
+                <!--                </button>-->
 
                 <div class="phones">
-                    <a
-                            class="phone text-white decoration-none"
-                            href="tel:+375295695989"
-                    ><span>+375 (29) 569 59 89</span></a
-                    >
-                    <a
-                            class="phone text-white decoration-none"
-                            href="tel:+375291495989"
-                    ><span>+375 (29) 149 59 89</span></a
-                    >
+                    {% for phone in sidebar.phones %}
+                        <a class="phone text-white decoration-none"
+                           href="{{ phone.href }}">
+                            <span>{{ phone.text }}</span>
+                        </a>
+                    {% endfor %}
                 </div>
             </li>
 
-            <li class="nav-item">
-                <a class="nav-link" href="#packages">Цены</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#services">Услуги</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#contacts">Контакты</a>
-            </li>
+            {% for menu in sidebar.menus %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ menu.href }}">{{ menu.text }}</a>
+                </li>
+            {% endfor %}
 
             <li class="nav-item mobile">
-<!--                <button class="button-link order" data-toggle="modal" data-target="#contact-with-modal">-->
-<!--                    Заказать баню-->
-<!--                </button>-->
+                <!--                <button class="button-link order" data-toggle="modal" data-target="#contact-with-modal">-->
+                <!--                    Заказать баню-->
+                <!--                </button>-->
                 <button class="button-link order">
-                    Заказать баню
+                    {{ sidebar.button.text }}
                 </button>
                 <div class="phones">
-                    <p>
-                        <a class="phone text-white decoration-none"
-                           href="tel:+375295695989">
-                            +375 (29) 569 59 89
-                        </a>
-                    </p>
-                    <p>
-                        <a class="phone text-white decoration-none"
-                           href="tel:+375291495989">
-                            +375 (29) 149 59 89
-                        </a>
-                    </p>
+                    {% for phone in sidebar.phones %}
+                        <p>
+                            <a class="phone text-white decoration-none"
+                               href="{{ phone.href }}">
+                                {{ phone.text }}
+                            </a>
+                        </p>
+                    {% endfor %}
                 </div>
             </li>
 
             <li class="nav-item mobile">
                 <a class="nav-link" href="#map">
-                    Как к нам добраться?
+                    {{ sidebar.howTo }}
                 </a>
             </li>
 
-<!--            <% render 'components/contact-button.ejs' %>-->
+            <!--            <% render 'components/contact-button.ejs' %>-->
 
         </ul>
         <nav class="nav-footer">
-<!--            <div class="nav-footer-social-buttons">-->
-<!--                <a-->
-<!--                        class="fa-icon"-->
-<!--                        href="https://ru.airbnb.com/rooms/27016634"-->
-<!--                        rel="noopener noreferrer"-->
-<!--                        target="_blank"-->
-<!--                ><img-->
-<!--                            alt="airbnb"-->
-<!--                            class="airbnb-icon"-->
-<!--                            src="images/icons/airbnb.svg"-->
-<!--                    /></a>-->
-<!--                <a-->
-<!--                        class="fa-icon"-->
-<!--                        href="https://www.booking.com/hotel/by/usadba-serebryanny-karas.en-gb.html?aid=898224&app_hotel_id=3839492&checkin=2018-12-9&checkout=2018-12-10&from_sn=ios&group_adults=2&group_children=0&label=Share-FK0oi0%401544365840&no_rooms=1&req_adults=2&req_children=0&room1=A%2CA%2C"-->
-<!--                        rel="noopener noreferrer"-->
-<!--                        target="_blank"-->
-<!--                ><img-->
-<!--                            alt="booking"-->
-<!--                            class="booking-icon"-->
-<!--                            src="images/icons/booking.svg"-->
-<!--                    />-->
-<!--                </a>-->
-<!--            </div>-->
-            <div>© Untitled | Website created with 🍺</div>
-            <div>by @maximsan</div>
+            <!--            <div class="nav-footer-social-buttons">-->
+            <!--                <a-->
+            <!--                        class="fa-icon"-->
+            <!--                        href="https://ru.airbnb.com/rooms/27016634"-->
+            <!--                        rel="noopener noreferrer"-->
+            <!--                        target="_blank"-->
+            <!--                ><img-->
+            <!--                            alt="airbnb"-->
+            <!--                            class="airbnb-icon"-->
+            <!--                            src="images/icons/airbnb.svg"-->
+            <!--                    /></a>-->
+            <!--                <a-->
+            <!--                        class="fa-icon"-->
+            <!--                        href="https://www.booking.com/hotel/by/usadba-serebryanny-karas.en-gb.html?aid=898224&app_hotel_id=3839492&checkin=2018-12-9&checkout=2018-12-10&from_sn=ios&group_adults=2&group_children=0&label=Share-FK0oi0%401544365840&no_rooms=1&req_adults=2&req_children=0&room1=A%2CA%2C"-->
+            <!--                        rel="noopener noreferrer"-->
+            <!--                        target="_blank"-->
+            <!--                ><img-->
+            <!--                            alt="booking"-->
+            <!--                            class="booking-icon"-->
+            <!--                            src="images/icons/booking.svg"-->
+            <!--                    />-->
+            <!--                </a>-->
+            <!--            </div>-->
+            <div>{{ sidebar.author.co }}</div>
+            <div>{{ sidebar.author.by }}</div>
         </nav>
     </div>
 </div>

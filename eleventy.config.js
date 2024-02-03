@@ -7,6 +7,7 @@ const footer = require('./src/data/footer.js');
 const meta = require('./src/data/meta.js');
 const packages = require('./src/data/packages.js');
 const contacts = require('./src/data/contacts.js');
+const sidebar = require('./src/data/sidebar.js');
 
 /* For the given `content` string, generate an MD5 hash of `length` chars. */
 function getHash(content, length = 8) {
@@ -116,7 +117,8 @@ module.exports = function(config) {
             footer,
             meta,
             packages,
-            contacts
+            contacts,
+            sidebar
         }
     });
 
