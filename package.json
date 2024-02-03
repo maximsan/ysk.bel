@@ -6,7 +6,7 @@
   "scripts": {
     "watch:eleventy": "eleventy --serve",
     "build:eleventy": "eleventy",
-    "debug": "DEBUG=* eleventy",
+    "debug": "DEBUG=* eleventy --serve",
     "dev": "npm-run-all clean watch:eleventy",
     "build": "npm-run-all clean build:eleventy",
     "clean": "rm -rf dist",

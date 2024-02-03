@@ -1,62 +1,72 @@
-import $ from 'jquery';
-import { closeSideBarOnTimeout, toggleSideBar } from './helpers/sideBar';
+import { closeSideBarOnTimeout, toggleSideBar, addVideo, addInfoBanner, hideInfoBannerOnScroll } from './helpers';
 import { googleMapInit } from './helpers/googleMapInit';
-import { addInfoBanner, hideInfoBannerOnScroll, scrollUp, showScrollUpButton } from './helpers/scrollUp';
-import { smoothScroll } from './helpers/smoothScroll';
-import { addFixedHeader, addFixedHeaderOnScroll, removeFixedHeader, removeFixedHeaderOnScroll } from './helpers/header';
+// import { hideInfoBannerOnScroll, scrollUp } from './helpers/scrollUp';
+// import { addFixedHeader, removeFixedHeader, removeFixedHeaderOnScroll } from './helpers/header';
 import { initPhotoSwipeFromDOM } from './photo/photoSwipeSetup';
 import { documentHeight } from './helpers/calculateDocumentHeight';
 
-documentHeight();
 
-const w = $(window);
-const wWidth = w.width();
-const gallery = '.gallery';
+const MOBILE_BREAKPOINT = '(max-width: 768px)';
 
-const mobile = window.matchMedia('(max-width: 768px');
-
-const methods = (e) => {
-    if (e.matches) {
-        mobileMethods();
-    } else {
-        desktopMethods();
-    }
-};
+const mobile = window.matchMedia(MOBILE_BREAKPOINT);
 
 const mobileMethods = () => {
-    removeFixedHeaderOnScroll();
+    // removeFixedHeaderOnScroll();
     closeSideBarOnTimeout();
-    addFixedHeader();
+    // addFixedHeader();
 };
 
 // TODO: review all code
 const desktopMethods = () => {
-    removeFixedHeader();
+    // removeFixedHeader();
     // addFixedHeaderOnScroll();
-    smoothScroll(1500);
-    showScrollUpButton();
-    scrollUp(1000);
+    // smoothScroll(1500);
+    // showScrollUpButton();
+    // scrollUp(1000);
     addInfoBanner();
     hideInfoBannerOnScroll();
 };
 
-$(function () {
-    setTimeout(() => googleMapInit(), 3000);
-    toggleSideBar();
-    mobile.addEventListener('change', methods);
-    window.addEventListener('load', () => {
-        if (wWidth >= 768) {
-            // addFixedHeaderOnScroll();
-            smoothScroll(1500);
-            showScrollUpButton();
-            scrollUp(1000);
-        }
-        if (wWidth < 768) {
-            closeSideBarOnTimeout();
-        }
-        addInfoBanner();
-        hideInfoBannerOnScroll();
-    });
+mobile.addEventListener('change', (event) => {
+    if (event.matches) {
+        mobileMethods();
+    } else {
+        desktopMethods();
+    }
 });
 
+const gallery = '.gallery';
+
+const windowWidth = window.innerWidth;
+
+console.log('window width', windowWidth);
+
+
+console.log('mobile', mobile);
+
+// TODO: Do we need it ?
+documentHeight();
+
+setTimeout(() => googleMapInit(), 3000);
+
+toggleSideBar();
+
+
+if (windowWidth >= 768) {
+    // addFixedHeaderOnScroll();
+    // smoothScroll(1500);
+    // showScrollUpButton();
+    // scrollUp(1000);
+}
+if (windowWidth < 768) {
+    closeSideBarOnTimeout();
+}
+
+addVideo();
+
+addInfoBanner();
+hideInfoBannerOnScroll();
+
 initPhotoSwipeFromDOM(gallery);
+
+

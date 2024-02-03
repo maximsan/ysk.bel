@@ -1,10 +1,8 @@
-import $ from 'jquery';
-
-const sidebar = $('.sidebar');
-const menuIconButton = $('.navbar-toggler');
-const sidebarOpenIcon = $('.navbar-toggler-icon');
-const sidebarCloseIcon = $('.close-icon');
-const menuItemSelectors = $(
+const sidebar = document.querySelector('.sidebar');
+const menuIconButton = document.querySelector('.navbar-toggler');
+const sidebarOpenIcon = document.querySelector('.navbar-toggler-icon');
+const sidebarCloseIcon = document.querySelector('.close-icon');
+const menuItemSelectors = document.querySelector(
     `a[href$='services'], a[href$='prices'], a[href$='contacts'], a[href$='map'], a[href$='packages']`
 );
 

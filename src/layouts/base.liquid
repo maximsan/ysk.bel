@@ -31,11 +31,13 @@
     {{ content }}
 
     <!-- Banner with important info-->
-    {% render 'components/info-banner' %}
+    {% comment %}{% render 'components/info-banner' %}{% endcomment %}
     <!-- Page Content -->
     {% render 'hero-section' %}
     <!-- Services section -->
     {% render 'services' %}
+    <!-- Video section -->
+    {% render 'videos' %}
     <!-- Contacts section -->
     {% render 'contacts' %}
 </main>
@@ -74,5 +76,8 @@
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCEjXw1mbGTXw12jnM_YTAveRGb1I4c3gQ"
 ></script>
 <!-- end Google Maps -->
+
+<script src="https://vjs.zencdn.net/8.10.0/video.min.js"></script>
+
 </body>
 </html>

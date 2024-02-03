@@ -23,7 +23,8 @@ module.exports = function(config) {
         'src/assets/public': '/',
         'src/assets/vendors/bootstrap.css': '/assets/bootstrap.css',
         'src/assets/vendors/main.css': '/assets/main.css',
-        'src/assets/vendors/normalize.css': '/assets/normalize.css'
+        'src/assets/vendors/normalize.css': '/assets/normalize.css',
+        'src/assets/videos': '/assets/videos'
         // "./node_modules/prismjs/themes/prism-okaidia.css": "/css/prism-okaidia.css"
     });
     config.addPassthroughCopy('src/assets/images');
@@ -100,7 +101,8 @@ module.exports = function(config) {
                     entryPoints: [path],
                     minify: true,
                     bundle: true,
-                    write: false
+                    write: false,
+                    sourcemap: true
                 });
 
                 return output.outputFiles[0].text;
