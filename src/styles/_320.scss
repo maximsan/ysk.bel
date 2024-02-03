@@ -5,50 +5,16 @@
         overflow-x: hidden;
     }
 
-    .show-banner {
-        animation: fadeInAnimation ease 1s;
-
-        display: flex !important;
-        flex-flow: column;
-        align-items: center;
-        justify-content: center;
-
-        text-align: center;
-    }
-
-    .info-banner {
-        display: none;
-        padding: 3rem;
-        color: #b47572;
-        width: 90%;
-
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-
-        border: 4px solid #b47572;
-        -moz-border-radius: 8px;
-        -webkit-border-radius: 8px;
-        background-color: #ffffff;
-        z-index: 1000;
-
-        &__header {
-            font-size: 1.5rem;
-        }
-
-        &__text {
-            font-size: 1rem;
-            margin-bottom: 0.5em;
-        }
-    }
-
     .desktop {
         @include none;
     }
 
     .mobile {
         @include block;
+    }
+
+    .info-banner {
+        width: 90%;
     }
 
     .navbar {

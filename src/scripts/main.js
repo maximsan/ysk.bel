@@ -4,6 +4,7 @@ import { googleMapInit } from './helpers/googleMapInit';
 // import { addFixedHeader, removeFixedHeader, removeFixedHeaderOnScroll } from './helpers/header';
 import { initPhotoSwipeFromDOM } from './photo/photoSwipeSetup';
 import { documentHeight } from './helpers/calculateDocumentHeight';
+import { scrollUp, showScrollUpButton } from './helpers/scrollUp';
 // import { showScrollUpButton } from './helpers/scrollUp';
 
 const MOBILE_BREAKPOINT = '(max-width: 768px)';
@@ -28,10 +29,12 @@ const mobileMethods = () => {
 const desktopMethods = () => {
     // removeFixedHeader();
     // addFixedHeaderOnScroll();
-    // showScrollUpButton();
-    // scrollUp(1000);
-    addInfoBanner();
-    hideInfoBannerOnScroll();
+    showScrollUpButton();
+    scrollUp(1000);
+    if (banner) {
+        addInfoBanner();
+        hideInfoBannerOnScroll();
+    }
 };
 
 mobile.addEventListener('change', (event) => {
@@ -43,12 +46,12 @@ mobile.addEventListener('change', (event) => {
 });
 
 
-if(mobile.matches) {
+if (mobile.matches) {
     closeSideBarOnTimeout();
 } else {
     // addFixedHeaderOnScroll();
-    // showScrollUpButton();
-    // scrollUp(1000);
+    showScrollUpButton();
+    scrollUp(1000);
 }
 
 // TODO: Do we need it ?
@@ -60,7 +63,7 @@ toggleSideBar();
 
 addVideo();
 
-if(banner) {
+if (banner) {
     addInfoBanner();
     hideInfoBannerOnScroll();
 }
