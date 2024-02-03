@@ -17,40 +17,32 @@
     padding-top: 0;
 }
 
-.contact-us-phones-header {
-    display: flex;
-    justify-content: center;
-}
-
-.contact-us-mail > .mail-icon {
+.contact-us__mail > .mail-icon {
     height: 20px;
     width: 20px;
 }
 
-.contact-us-phones .phone-number {
+.contact-us__phones .phone-number {
     font-weight: bolder;
 }
 
-.contact-us-mail,
-.contact-us-phones-mts,
-.contact-us-phones-velcom{
+.contact-us__mail,
+.contact-us__mts,
+.contact-us__a1 {
     display: flex;
     align-items: center;
     gap: 0.5em;
 }
 
-.contact-us-phones,
-.contact-us-phones-mts,
-.contact-us-phones-velcom {
+.contact-us,
+.contact-us__mts,
+.contact-us__a1 {
     padding-top: 0.5rem;
 }
 
-.contact-us-phones-mts > .mts-icon {
+.contact-us__mts > .mts-icon,
+.contact-us__a1 > .a1-icon {
     height: 18px;
-}
-
-.contact-us-phones-velcom > .velcom-icon {
-    height: 14px;
 }
 
 .btn-send {

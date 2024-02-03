@@ -29,45 +29,21 @@
                                 </div>
                             </div>
                             <div class="address">
-                                <h4>{{ contacts.contacts.header }}</h4>
-                                <div class="address-desc contact-us">
-                                    <div class="contact-us-mail">
-                                        <img
-                                            alt="почта"
-                                            class="mail-icon"
-                                            src="assets/images/icons/mail.svg"
-                                        />
-                                        <a
-                                            class=""
-                                            href="mailto:oleg-magnat@tut.by"
-                                        >{{ contacts.contacts.email }}</a
-                                        >
-                                    </div>
-                                    <div class="contact-us-phones">
-                                        <div class="contact-us-phones-header">
-                                            {{ contacts.contacts.phones.header }}
-                                        </div>
-                                        <div class="contact-us-phones-mts">
-                                            <img
-                                                alt="mts"
-                                                class="mts-icon"
-                                                src="assets/images/icons/mts.svg"
-                                            />
-                                            <span href="{{ contacts.contacts.phones.href1 }}" class="phone-number"
-                                            >{{ contacts.contacts.phones.phone1 }}</span
-                                            >
-                                        </div>
-                                        <div class="contact-us-phones-velcom">
-                                            <img
-                                                alt="velcom"
-                                                class="velcom-icon"
-                                                src="assets/images/icons/a1.svg"
-                                                style="-webkit-user-select: none;"
-                                            />
-                                            <span href="{{ contacts.contacts.phones.href2 }}" class="phone-number"
-                                            >{{ contacts.contacts.phones.phone2 }}</span
-                                            >
-                                        </div>
+                                <h4>{{ contacts.contactus.header }}</h4>
+                                <div class="address-desc">
+                                    <div class="contact-us">
+                                        {% for phone in contacts.contactus.phones %}
+                                            <div class="contact-us__{{ phone.operator }}">
+                                                <img
+                                                    alt="{{ phone.operator }}"
+                                                    class="{{ phone.operator }}-icon"
+                                                    src="{{ phone.iconUrl }}"
+                                                />
+                                                <span href="{{ phone.href }}" class="phone-number"
+                                                >{{ phone.text }}</span
+                                                >
+                                            </div>
+                                        {% endfor %}
                                     </div>
                                 </div>
                             </div>

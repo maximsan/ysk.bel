@@ -259,15 +259,15 @@
                         align-items: center;
                     }
 
-                    .contact-us-phones,
-                    .contact-us-mail {
+                    .contact-us,
+                    .contact-us__mail {
                         font-size: 1.25rem;
                         width: 100%;
                     }
 
-                    .contact-us-phones {
-                        &-velcom,
-                        &-mts {
+                    .contact-us {
+                        &__a1,
+                        &__mts {
                             img {
                                 height: 1.15em;
                             }

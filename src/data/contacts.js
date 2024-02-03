@@ -11,15 +11,27 @@ module.exports = {
         lat: `lat: ${lat}`,
         lng: `lng: ${lng}`
     },
-    contacts: {
+    contactus: {
         header: 'Контакты:',
-        email: 'oleg-magnat@tut.by',
-        phones: {
-            header: 'Телефоны для связи:',
-            href1: 'tel:+375291495989',
-            phone1: '+375 29 569 59 89',
-            href2: 'tel:+375291495989',
-            phone2: '+375 29 149 59 89'
-        }
+        phones: [
+            {
+                text: 'oleg-magnat@tut.by',
+                href: 'mailto:oleg-magnat@tut.by',
+                operator: 'mail',
+                iconUrl: 'assets/images/icons/mail.svg'
+            },
+            {
+                text: '+375 (29) 569 59 89',
+                href: 'tel:+375295695989',
+                operator: 'mts',
+                iconUrl: 'assets/images/icons/mts.svg'
+            },
+            {
+                text: '+375 (29) 149 59 89',
+                href: 'tel:+375291495989',
+                operator: 'a1',
+                iconUrl: 'assets/images/icons/a1.svg'
+            }
+        ]
     }
 };
