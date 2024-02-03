@@ -1,32 +1,31 @@
 const sidebar = document.querySelector('.sidebar');
-const menuIconButton = document.querySelector('.navbar-toggler');
+const navButton = document.querySelector('.navbar-toggler');
 const sidebarOpenIcon = document.querySelector('.navbar-toggler-icon');
 const sidebarCloseIcon = document.querySelector('.close-icon');
-const menuItemSelectors = document.querySelector(
-    `a[href$='services'], a[href$='prices'], a[href$='contacts'], a[href$='map'], a[href$='packages']`
-);
+const menuSelectors = [`a[href$='services']`, `a[href$='prices']`, `a[href$='contacts']`, `a[href$='map']`, `a[href$='packages']`];
+const menuItemSelectors = menuSelectors.map(selector => document.querySelector(selector));
 
 function openSideBar() {
-    sidebar.addClass('open');
+    sidebar.classList.add('open');
     document.body.style.overflow = 'hidden';
 
-    sidebarOpenIcon.addClass('hidden');
-    sidebarCloseIcon.removeClass('hidden');
+    sidebarOpenIcon.classList.add('hidden');
+    sidebarCloseIcon.classList.remove('hidden');
 }
 
 function closeSideBar() {
-    sidebar.removeClass('open');
+    sidebar.classList.remove('open');
     document.body.style.overflow = null;
 
-    sidebarCloseIcon.addClass('hidden');
-    sidebarOpenIcon.removeClass('hidden');
+    sidebarCloseIcon.classList.add('hidden');
+    sidebarOpenIcon.classList.remove('hidden');
 }
 
 export function toggleSideBar() {
-    menuIconButton.click((e) => {
-        e.preventDefault();
+    navButton.addEventListener('click', function(event) {
+        event.preventDefault();
 
-        if (!sidebarOpenIcon.hasClass('hidden')) {
+        if (!sidebarOpenIcon.classList.contains('hidden')) {
             openSideBar();
         } else {
             closeSideBar();
@@ -36,9 +35,12 @@ export function toggleSideBar() {
 
 export function closeSideBarOnTimeout() {
     /* close sidebar after clicking on menu point */
-    menuItemSelectors.click(() => {
-        setTimeout(() => {
+    menuItemSelectors.forEach(selector => {
+        if (!selector) {
+            return;
+        }
+        selector.addEventListener('click', function() {
             closeSideBar();
-        }, 100);
+        });
     });
 }

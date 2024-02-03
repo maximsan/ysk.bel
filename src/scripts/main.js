@@ -4,11 +4,19 @@ import { googleMapInit } from './helpers/googleMapInit';
 // import { addFixedHeader, removeFixedHeader, removeFixedHeaderOnScroll } from './helpers/header';
 import { initPhotoSwipeFromDOM } from './photo/photoSwipeSetup';
 import { documentHeight } from './helpers/calculateDocumentHeight';
-
+// import { showScrollUpButton } from './helpers/scrollUp';
 
 const MOBILE_BREAKPOINT = '(max-width: 768px)';
-
 const mobile = window.matchMedia(MOBILE_BREAKPOINT);
+
+const gallerySelector = '.gallery';
+const banner = document.querySelector('.info-banner');
+const windowWidth = window.innerWidth;
+
+console.log('window width', windowWidth);
+
+
+console.log('mobile', mobile);
 
 const mobileMethods = () => {
     // removeFixedHeaderOnScroll();
@@ -34,14 +42,14 @@ mobile.addEventListener('change', (event) => {
     }
 });
 
-const gallery = '.gallery';
 
-const windowWidth = window.innerWidth;
-
-console.log('window width', windowWidth);
-
-
-console.log('mobile', mobile);
+if(mobile.matches) {
+    closeSideBarOnTimeout();
+} else {
+    // addFixedHeaderOnScroll();
+    // showScrollUpButton();
+    // scrollUp(1000);
+}
 
 // TODO: Do we need it ?
 documentHeight();
@@ -50,21 +58,14 @@ setTimeout(() => googleMapInit(), 3000);
 
 toggleSideBar();
 
-
-if (windowWidth >= 768) {
-    // addFixedHeaderOnScroll();
-    // showScrollUpButton();
-    // scrollUp(1000);
-}
-if (windowWidth < 768) {
-    closeSideBarOnTimeout();
-}
-
 addVideo();
 
-addInfoBanner();
-hideInfoBannerOnScroll();
+if(banner) {
+    addInfoBanner();
+    hideInfoBannerOnScroll();
+}
 
-initPhotoSwipeFromDOM(gallery);
+
+initPhotoSwipeFromDOM(gallerySelector);
 
 

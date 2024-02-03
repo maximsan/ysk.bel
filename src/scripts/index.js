@@ -1,3 +1,3 @@
 import 'bootstrap';
-import './helpers/plugins';
+import './plugins';
 import './main';

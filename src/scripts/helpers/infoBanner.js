@@ -21,6 +21,7 @@ function hideInfoBanner() {
 let bannerClosed = false;
 export function addInfoBanner() {
     showInfoBanner();
+
     crossIcon.addEventListener('click', () => {
         hideInfoBanner();
         bannerClosed = true;
