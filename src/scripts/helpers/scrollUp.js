@@ -2,16 +2,10 @@ const button = document.querySelector('.scroll-up');
 
 function showScrollButton() {
     button.style.display = 'block';
-    // overlay.style.display = 'block';
-    // button.classList.remove(BANNER_CLASS.hide);
-    // button.classList.add(BANNER_CLASS.show);
 }
 
 function hideScrollButton() {
     button.style.display = 'none';
-    // overlay.style.display = 'none';
-    // button.classList.remove(BANNER_CLASS.show);
-    // button.classList.add(BANNER_CLASS.hide);
 }
 
 let lastKnownScrollTopPosition = 0;
@@ -29,30 +23,20 @@ export function showScrollUpButton() {
         lastKnownElementScrollTopPosition = document.documentElement.scrollTop;
         lastKnownScrollHeightPosition = document.documentElement.scrollHeight;
 
-        // if(!ticking) {
-        //     window.requestAnimationFrame(function() {
-        //         if (
-        //             (lastKnownScrollTopPosition > 80 || lastKnownElementScrollTopPosition > 80) &&
-        //             lastKnownScrollHeightPosition - lastKnownElementScrollTopPosition > 880
-        //         ) {
-        //             showScrollButton();
-        //         } else {
-        //             hideScrollButton();
-        //         }
-        //         ticking = false
-        //     })
-        //
-        //     ticking = true;
-        // }
+        if(!ticking) {
+            window.requestAnimationFrame(function() {
+                if (
+                    (lastKnownScrollTopPosition > TOP_OFFSET || lastKnownElementScrollTopPosition > TOP_OFFSET) &&
+                    lastKnownScrollHeightPosition - lastKnownElementScrollTopPosition > BOTTOM_OFFSET
+                ) {
+                    showScrollButton();
+                } else {
+                    hideScrollButton();
+                }
+                ticking = false
+            })
 
-
-        if (
-            (lastKnownScrollTopPosition > TOP_OFFSET || lastKnownElementScrollTopPosition > TOP_OFFSET) &&
-            lastKnownScrollHeightPosition - lastKnownElementScrollTopPosition > BOTTOM_OFFSET
-        ) {
-            showScrollButton();
-        } else {
-            hideScrollButton();
+            ticking = true;
         }
     });
 }
