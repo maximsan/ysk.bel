@@ -335,6 +335,15 @@ body.down .fixed {
     cursor: pointer;
 }
 
+.close-menu,
+.open-menu {
+    color: $lighter-brown;
+}
+
+.navbar .navbar-toggler {
+    border-color: $lighter-brown !important;
+}
+
 @keyframes fadeInAnimation {
     0% {
         opacity: 0;

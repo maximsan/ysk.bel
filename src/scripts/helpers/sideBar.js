@@ -1,7 +1,7 @@
 const sidebar = document.querySelector('.sidebar');
 const navButton = document.querySelector('.navbar-toggler');
-const sidebarOpenIcon = document.querySelector('.navbar-toggler-icon');
-const sidebarCloseIcon = document.querySelector('.close-icon');
+const sidebarOpenIcon = document.querySelector('.open-menu');
+const sidebarCloseIcon = document.querySelector('.close-menu');
 const menuSelectors = [`a[href$='services']`, `a[href$='prices']`, `a[href$='contacts']`, `a[href$='map']`, `a[href$='packages']`];
 const menuItemSelectors = menuSelectors.map(selector => document.querySelector(selector));
 
