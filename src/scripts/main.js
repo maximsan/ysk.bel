@@ -1,11 +1,9 @@
 import { closeSideBarOnTimeout, toggleSideBar, addVideo, addInfoBanner, hideInfoBannerOnScroll } from './helpers';
 import { googleMapInit } from './helpers/googleMapInit';
-// import { hideInfoBannerOnScroll, scrollUp } from './helpers/scrollUp';
 // import { addFixedHeader, removeFixedHeader, removeFixedHeaderOnScroll } from './helpers/header';
 import { initPhotoSwipeFromDOM } from './photo/photoSwipeSetup';
 import { documentHeight } from './helpers/calculateDocumentHeight';
 import { scrollUp, showScrollUpButton } from './helpers/scrollUp';
-// import { showScrollUpButton } from './helpers/scrollUp';
 
 const MOBILE_BREAKPOINT = '(max-width: 768px)';
 const mobile = window.matchMedia(MOBILE_BREAKPOINT);
@@ -30,7 +28,7 @@ const desktopMethods = () => {
     // removeFixedHeader();
     // addFixedHeaderOnScroll();
     showScrollUpButton();
-    scrollUp(1000);
+    scrollUp();
     if (banner) {
         addInfoBanner();
         hideInfoBannerOnScroll();
@@ -51,7 +49,7 @@ if (mobile.matches) {
 } else {
     // addFixedHeaderOnScroll();
     showScrollUpButton();
-    scrollUp(1000);
+    scrollUp();
 }
 
 // TODO: Do we need it ?

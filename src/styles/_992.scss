@@ -1,6 +1,10 @@
 @media (min-width: 992px) {
     .info-banner {
         width: 50rem;
+
+        &__text {
+            font-size: 1.5rem;
+        }
     }
 
     .navbar {

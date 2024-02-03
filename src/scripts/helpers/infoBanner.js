@@ -33,7 +33,7 @@ const carouselSize = document.querySelector('.intro').offsetHeight / 2;
 const bannerBottom = carouselSize + banner?.offsetHeight;
 
 export function hideInfoBannerOnScroll() {
-    document.body.addEventListener('scroll', function () {
+    window.addEventListener('scroll', function () {
         const currentScrollPos = window.scrollY;
         if (!bannerClosed) {
             if (currentScrollPos < prevScrollPos || currentScrollPos < bannerBottom) {

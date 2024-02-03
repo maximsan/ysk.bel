@@ -55,7 +55,7 @@ export function showScrollUpButton() {
 }
 
 // When the user clicks on the button, scroll to the top of the document
-export function scrollUp(milliseconds) {
+export function scrollUp() {
     button.addEventListener('click', function() {
         document.body.scrollTo({ top: 0, behavior: 'smooth' })
     });
