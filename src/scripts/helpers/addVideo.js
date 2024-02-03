@@ -10,7 +10,6 @@ export const addVideo = () => {
     video.muted = false;
     video.loop = true
     video.preload = 'auto';
-
     source.src = 'assets/videos/main-video.mp4';
     source.type = 'video/mp4'
     noJs.innerHTML = 'Your browser does not support the video tag.'

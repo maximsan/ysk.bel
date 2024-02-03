@@ -21,11 +21,9 @@ module.exports = function(config) {
     // For example, `./public/css/` ends up in `_site/css/`
     config.addPassthroughCopy({
         'src/assets/public': '/',
-        'src/assets/vendors/bootstrap.css': '/assets/bootstrap.css',
-        'src/assets/vendors/main.css': '/assets/main.css',
-        'src/assets/vendors/normalize.css': '/assets/normalize.css',
+        'src/styles/bootstrap.css': '/assets/bootstrap.css',
+        'src/styles/main.css': '/assets/main.css',
         'src/assets/videos': '/assets/videos'
-        // "./node_modules/prismjs/themes/prism-okaidia.css": "/css/prism-okaidia.css"
     });
     config.addPassthroughCopy('src/assets/images');
     config.addPassthroughCopy('src/assets/icons');

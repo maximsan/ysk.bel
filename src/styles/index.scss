@@ -226,8 +226,11 @@ body.down .fixed {
 .video-section {
     display: flex;
     justify-content: center;
-    > * {
-        width: 100%;
+    padding: 2rem 0 4rem;
+
+    video {
+        border: 2px solid #704936;
+        box-sizing: content-box;
     }
 }
 
