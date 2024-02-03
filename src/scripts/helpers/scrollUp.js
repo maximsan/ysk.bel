@@ -19,8 +19,11 @@ let lastKnownElementScrollTopPosition = 0;
 let lastKnownScrollHeightPosition = 0;
 let ticking = false;
 
+const TOP_OFFSET = 320;
+const BOTTOM_OFFSET = 880;
+
 export function showScrollUpButton() {
-    document.body.addEventListener('scroll', function() {
+    window.addEventListener('scroll', function() {
         console.log('inside');
         lastKnownScrollTopPosition = document.body.scrollTop;
         lastKnownElementScrollTopPosition = document.documentElement.scrollTop;
@@ -44,8 +47,8 @@ export function showScrollUpButton() {
 
 
         if (
-            (lastKnownScrollTopPosition > 80 || lastKnownElementScrollTopPosition > 80) &&
-            lastKnownScrollHeightPosition - lastKnownElementScrollTopPosition > 880
+            (lastKnownScrollTopPosition > TOP_OFFSET || lastKnownElementScrollTopPosition > TOP_OFFSET) &&
+            lastKnownScrollHeightPosition - lastKnownElementScrollTopPosition > BOTTOM_OFFSET
         ) {
             showScrollButton();
         } else {
@@ -57,7 +60,7 @@ export function showScrollUpButton() {
 // When the user clicks on the button, scroll to the top of the document
 export function scrollUp() {
     button.addEventListener('click', function() {
-        document.body.scrollTo({ top: 0, behavior: 'smooth' })
+        window.scrollTo({ top: 0, behavior: 'smooth' })
     });
 }
 
