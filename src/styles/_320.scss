@@ -76,25 +76,6 @@
                                 margin-top: 0.5rem;
                             }
                         }
-
-                        .contact {
-                            @include contact;
-                            position: relative;
-                            right: 0.625rem;
-                            top: 1rem;
-                            color: #b47572;
-                            border: 4px solid #b47572;
-
-                            & > .message-icon {
-                                width: 26px;
-                                color: #b47572;
-                                margin-right: 0.75rem;
-                            }
-
-                            & > .message-text {
-                                display: inline-block;
-                            }
-                        }
                     }
 
                     .nav-footer {
@@ -327,10 +308,6 @@
 
     .map {
         height: 400px;
-    }
-
-    .contact {
-        display: none;;
     }
 
     .scroll-up {
