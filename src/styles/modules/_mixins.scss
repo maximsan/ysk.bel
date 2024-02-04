@@ -1,12 +1,4 @@
-@mixin none {
-    display: none;
-}
-
-@mixin block {
-    display: block;
-}
-
-@mixin d-column {
+@mixin column {
     display: flex;
     flex-flow: column nowrap;
 }

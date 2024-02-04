@@ -96,7 +96,7 @@
                 padding-bottom: 0;
 
                 .col-12 {
-                    @include d-column;
+                    @include column;
                     align-items: center;
                 }
 
@@ -122,17 +122,17 @@
                                 margin: 1.5rem 0;
 
                                 & .desktop {
-                                    @include none;
+                                    display: none;;
                                 }
                             }
 
                             &-list {
                                 &.mobile {
-                                    @include none;
+                                    display: none;;
                                 }
 
                                 &.desktop {
-                                    @include block;
+                                    display: block;
                                 }
 
                                 padding: 0 0 0 12px;
@@ -219,7 +219,7 @@
                     }
 
                     &-subrubric {
-                        @include d-column;
+                        @include column;
                         align-items: center;
                         margin: 1rem 0;
                     }
@@ -258,7 +258,7 @@
                     &-desc {
                         font-size: 1.25rem;
                         max-width: 100%;
-                        @include d-column;
+                        @include column;
                         align-items: center;
                     }
 
@@ -291,6 +291,6 @@
     }
 
     .footer-social {
-        @include none;
+        display: none;;
     }
 }
