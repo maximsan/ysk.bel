@@ -114,24 +114,6 @@
         margin-left: 0;
     }
 
-    .hero {
-        &-content {
-            display: flex;
-            justify-content: flex-end;
-        }
-
-        &-header {
-            margin: 6rem 4rem 0 4rem;
-            display: flex;
-            flex-direction: column;
-            gap: 0.75rem;
-
-            > * {
-                font-size: 2rem;
-            }
-        }
-    }
-
     .section-container.services {
         h1 {
             font-size: 2rem;
