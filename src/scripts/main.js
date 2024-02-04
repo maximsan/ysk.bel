@@ -6,10 +6,13 @@ import { documentHeight } from './helpers/calculateDocumentHeight';
 import { scrollUp, showScrollUpButton } from './helpers/scrollUp';
 
 const MOBILE_BREAKPOINT = '(max-width: 768px)';
+const IPAD_BREAKPOINT = window.matchMedia('(min-width: 768px)');
 const mobile = window.matchMedia(MOBILE_BREAKPOINT);
 
-const gallerySelector = '.gallery';
+const videoSection = document.querySelector('.video-section');
 const banner = document.querySelector('.info-banner');
+
+const gallerySelector = '.gallery';
 const windowWidth = window.innerWidth;
 
 console.log('window width', windowWidth);
@@ -19,16 +22,22 @@ console.log('mobile', mobile);
 
 const mobileMethods = () => {
     // removeFixedHeaderOnScroll();
-    closeSideBarOnTimeout();
     // addFixedHeader();
+
+    closeSideBarOnTimeout();
+    videoSection.style.display = 'none';
 };
 
 // TODO: review all code
 const desktopMethods = () => {
     // removeFixedHeader();
     // addFixedHeaderOnScroll();
+
     showScrollUpButton();
     scrollUp();
+
+    videoSection.style.display = 'flex';
+
     if (banner) {
         addInfoBanner();
         hideInfoBannerOnScroll();

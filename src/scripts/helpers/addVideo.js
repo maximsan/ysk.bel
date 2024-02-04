@@ -1,13 +1,7 @@
 export const addVideo = () => {
     console.log('*** init video ***');
 
-    const match = window.matchMedia('(min-width: 768px)');
     const videoSection = document.querySelector('.video-section');
-
-    if(!match.matches) {
-        videoSection.style.display = 'none';
-        return;
-    }
 
     const video = document.createElement('video');
     const source = document.createElement('source');
