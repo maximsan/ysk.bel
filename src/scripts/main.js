@@ -17,7 +17,6 @@ const windowWidth = window.innerWidth;
 
 console.log('window width', windowWidth);
 
-
 console.log('mobile', mobile);
 
 const mobileMethods = () => {
