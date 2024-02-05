@@ -1,0 +1,67 @@
+@media only screen and (min-width: 320px) and (max-width: 767.98px) {
+    .brand {
+        font-size: 1.15rem;
+        display: flex;
+        justify-content: center;
+        flex-flow: row wrap;
+        flex: 0 1 200px;
+        position: relative;
+        top: 6px;
+        margin: 0 auto;
+
+        &:hover {
+            color: $dirty-orange;
+        }
+    }
+}
+
+@media only screen and (min-width: 480px) {
+    .brand {
+        font-size: 1.15rem;
+        position: relative;
+        top: 6px;
+        margin: 0;
+        flex-flow: row nowrap;
+
+        &:hover {
+            color: $dirty-orange;
+        }
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    .brand {
+        font-size: 1rem;
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: center;
+
+        &-item {
+            &:nth-child(1) {
+                text-align: center;
+                flex: 100%;
+            }
+        }
+    }
+}
+
+@media (min-width: 992px) {
+    .brand {
+        font-size: 1.2rem;
+        margin-bottom: 0;
+        display: flex;
+        flex-flow: row nowrap;
+    }
+}
+
+@media (min-width: 1200px) {
+    .brand {
+        font-size: 1.5rem;
+        margin-bottom: 0;
+    }
+}
+
+.brand {
+    cursor: context-menu;
+    color: $dirty-orange;
+}

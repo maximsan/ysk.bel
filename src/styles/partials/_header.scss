@@ -4,21 +4,6 @@
             .navbar-header {
                 margin: 0 auto 0.5rem auto;
                 flex: 0 1 240px;
-
-                .brand {
-                    font-size: 1.15rem;
-                    display: flex;
-                    justify-content: center;
-                    flex-flow: row wrap;
-                    flex: 0 1 200px;
-                    position: relative;
-                    top: 6px;
-                    margin: 0 auto;
-
-                    &:hover {
-                        color: $dirty-orange;
-                    }
-                }
             }
 
             .sidebar {
@@ -115,18 +100,6 @@
                 .svg-inline--fa.fa-w-14 {
                     width: 0.675em;
                 }
-
-                .brand {
-                    font-size: 1.15rem;
-                    position: relative;
-                    top: 6px;
-                    margin: 0;
-                    flex-flow: row nowrap;
-
-                    &:hover {
-                        color: $dirty-orange;
-                    }
-                }
             }
 
             .sidebar {
@@ -182,20 +155,6 @@
                 margin-left: 0;
                 align-self: flex-start;
                 margin-top: 0.5rem;
-
-                .brand {
-                    font-size: 1rem;
-                    display: flex;
-                    flex-flow: row wrap;
-                    justify-content: center;
-
-                    &-item {
-                        &:nth-child(1) {
-                            text-align: center;
-                            flex: 100%;
-                        }
-                    }
-                }
             }
 
             .sidebar {
@@ -272,13 +231,6 @@
 
             .navbar-header {
                 margin-left: 1rem;
-
-                .brand {
-                    font-size: 1.2rem;
-                    margin-bottom: 0;
-                    display: flex;
-                    flex-flow: row nowrap;
-                }
             }
 
             .sidebar {
@@ -356,11 +308,6 @@
 
             .navbar-header {
                 margin-left: 2rem;
-
-                .brand {
-                    font-size: 1.5rem;
-                    margin-bottom: 0;
-                }
             }
 
             .sidebar {
@@ -484,11 +431,6 @@
 .navbar-toggler-icon {
     width: 1.2em;
     height: 1.2em;
-}
-
-.brand {
-    cursor: context-menu;
-    color: #bf8c63;
 }
 
 .nav-link {
