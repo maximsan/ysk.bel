@@ -1,8 +1,9 @@
 @import url('https://fonts.googleapis.com/css?family=Rubik:400,500,500i,700,700i&display=swap');
 
+@import 'modules/constants';
+@import 'modules/animations';
 @import 'modules/common';
 @import 'modules/mixins';
-@import 'modules/constants';
 @import '320';
 @import '480';
 @import '768';
@@ -17,6 +18,7 @@
 @import 'partials/video';
 @import 'partials/header';
 @import 'partials/brand';
+@import 'partials/info-banner';
 
 @import 'photoswipe/photo-swipe.scss';
 @import 'photoswipe/default-skin.scss';
@@ -148,42 +150,6 @@ body.down .fixed {
     font-width: bold;
 }
 
-.info-banner {
-    display: none;
-    padding: 3rem;
-    color: #b47572;
-
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-
-    border: 4px solid #b47572;
-    -moz-border-radius: 8px;
-    -webkit-border-radius: 8px;
-    background-color: #ffffff;
-    z-index: 1000;
-
-    &__header {
-        font-size: 1.75rem;
-    }
-}
-
-.hide-banner {
-    animation: fadeOutAnimation ease 1.5s;
-}
-
-.show-banner {
-    animation: fadeInAnimation ease 1s;
-
-    display: flex !important;
-    flex-flow: column;
-    align-items: center;
-    justify-content: center;
-
-    text-align: center;
-}
-
 .overlay {
     display: none;
     opacity: 0.5;
@@ -217,24 +183,4 @@ body.down .fixed {
 .close-menu,
 .open-menu {
     color: $lighter-brown;
-}
-
-@keyframes fadeInAnimation {
-    0% {
-        opacity: 0;
-        visibility: hidden;
-    }
-    100% {
-        opacity: 1;
-        visibility: visible;
-    }
-}
-
-@keyframes fadeOutAnimation {
-    0% {
-        opacity: 1;
-    }
-    100% {
-        opacity: 0;
-    }
 }
