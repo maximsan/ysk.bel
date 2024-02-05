@@ -1,7 +1,7 @@
 /*----------------------- FOOTER ------------------------*/
 
 .footer-social {
-    background-color: #110d0d;
+    background-color: $light-black;
 }
 
 .footer {
@@ -28,33 +28,33 @@
     }
 
     &.airbnb {
-        color: #fd5c63;
+        color: $airbnb;
     }
 
     &.booking {
-        color: #003382;
+        color: $booking;
     }
 
     &.skype {
-        color: #00aff0;
+        color: $skype;
     }
 
     &.viber {
-        color: #665cac;
+        color: $viber;
     }
 
     &.whatsapp {
-        color: #25d366;
+        color: $whatsapp;
     }
 
     .fa-skype,
     .fa-viber,
     .fa-whatsapp {
-        font-size: 30px;
+        font-size: 1.875rem;
     }
 
     .booking-icon,
     .airbnb-icon {
-        width: 30px;
+        width: 1.875rem;
     }
 }

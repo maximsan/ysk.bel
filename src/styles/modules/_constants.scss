@@ -11,6 +11,11 @@ $blue-white: #e6e7f2;
 $dirty-orange: #bf8c63;
 $orange: #f66f30;
 $red: #dc3545;
+$airbnb: #fd5c63;
+$booking: #003382;
+$skype: #00aff0;
+$viber: #665cac;
+$whatsapp: #25d366;
 
 $images-path: '../../assets/images' !default;
 
@@ -26,11 +31,11 @@ $images-path: '../../assets/images' !default;
     background-color: $creamy-white;
 }
 
-.text-black {
+.t-black {
     color: $black;
 }
 
-.text-white {
+.t-white {
     color: $white;
 }
 
