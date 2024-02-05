@@ -19,6 +19,7 @@
 @import 'partials/header';
 @import 'partials/brand';
 @import 'partials/info-banner';
+@import 'partials/map';
 
 @import 'photoswipe/photo-swipe.scss';
 @import 'photoswipe/default-skin.scss';
@@ -95,16 +96,6 @@ body.down .fixed {
     text-align: center;
     background-color: #000;
     border-radius: 0.25rem;
-}
-
-.map {
-    max-height: 600px;
-    max-width: 600px;
-    width: 100%;
-    background-color: grey;
-    overflow-y: hidden;
-    overflow-x: hidden;
-    margin-bottom: 30px;
 }
 
 #honeypot {
