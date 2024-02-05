@@ -13,6 +13,8 @@
 @import 'partials/contacts';
 @import 'partials/services';
 @import 'partials/hero';
+@import 'partials/contact-button';
+@import 'partials/video';
 
 @import 'photoswipe/photo-swipe.scss';
 @import 'photoswipe/default-skin.scss';
@@ -228,17 +230,6 @@ body.down .fixed {
 
     height: 6rem;
     margin-top: -3rem;
-}
-
-.video-section {
-    display: flex;
-    justify-content: center;
-    padding: 2rem 0 6rem;
-
-    video {
-        border: 2px solid #704936;
-        box-sizing: content-box;
-    }
 }
 
 .fishing,

@@ -1,0 +1,22 @@
+@media only screen and (min-width: 320px) and (max-width: 767.98px) {
+    .video-section {
+        display: none;
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    .video-section {
+        display: flex;
+    }
+}
+
+.video-section {
+    display: flex;
+    justify-content: center;
+    padding: 2rem 0 6rem;
+
+    video {
+        border: 2px solid #704936;
+        box-sizing: content-box;
+    }
+}
