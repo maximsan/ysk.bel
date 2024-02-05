@@ -49,24 +49,5 @@
         }
     }
 
-    .section-container.services {
-        .container {
-            .content {
-                &-header {
-                    h2 {
-                        font-size: 2.5rem;
-                    }
-                }
 
-                &-cell {
-                    &-element {
-                        .img-fluid {
-                            max-width: 720px;
-                            max-height: 720px;
-                        }
-                    }
-                }
-            }
-        }
-    }
 }

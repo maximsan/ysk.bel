@@ -1,3 +1,544 @@
+@media only screen and (min-width: 320px) and (max-width: 767.98px) {
+    .section-container.services {
+        padding-bottom: 2rem;
+        padding-top: 20px;
+
+        h1 {
+            font-size: 2rem;
+        }
+
+        h2 {
+            font-size: 1.75rem;
+        }
+
+        .container {
+            .content {
+                padding: 20px 20px 0 20px;
+
+                &-header {
+                    text-align: center;
+                    margin-bottom: 1rem;
+                }
+
+                &-text {
+                    font-size: 1rem;
+                    line-height: 26px;
+                    text-align: center;
+                }
+
+                .packages {
+                    margin: 0;
+
+                    .package {
+                        display: flex;
+                        flex-flow: column wrap;
+                        align-items: center;
+                        flex: 1 1 auto;
+                        padding: 0;
+                        margin: 0;
+
+                        &-header {
+                            margin: 0.5rem 0;
+
+                            h3 {
+                                margin-bottom: 0;
+                                text-align: center;
+                            }
+                        }
+
+                        &-list {
+                            padding: 0;
+                            list-style: none;
+                            margin-bottom: 0;
+
+                            &-item {
+                                font-size: 1rem;
+                                line-height: 28px;
+                                letter-spacing: -0.6px;
+                                margin-bottom: 0.2rem;
+
+                                &-disc {
+                                    position: relative;
+                                    top: 3px;
+                                    margin-right: 0.25rem;
+                                    vertical-align: bottom;
+                                }
+
+                                .second-row {
+                                    margin-left: 2rem;
+                                }
+
+                                &:last-child {
+                                    margin: 0;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                &-cell {
+                    padding: 0;
+                    margin: 0 0 1.5rem 0;
+
+                    &-header {
+                        margin-bottom: 1rem;
+                    }
+
+                    &:nth-child(5),
+                    &:nth-child(8) {
+                        .row {
+                            flex-flow: column-reverse;
+                        }
+                    }
+
+                    &-element {
+                        display: flex;
+                        justify-content: center;
+                        flex: 1 1 auto;
+                        margin-top: 1.5rem;
+
+                        &:nth-child(2) {
+                            padding: 0;
+                        }
+                    }
+
+                    &-text {
+                        @include column;
+                        align-items: center;
+                        flex: 1 1 280px;
+                        max-width: 280px;
+                        padding: 0;
+
+                        h4 {
+                            font-size: 1rem;
+                            font-weight: 500;
+                            margin-bottom: 0;
+                            text-align: center;
+                        }
+
+                        .fish-list {
+                            margin: 0 auto;
+                            padding: 0;
+                            font-size: 1.15rem;
+                            text-align: center;
+
+                            li {
+                                margin: 0.5rem 0;
+                            }
+                        }
+                    }
+
+                    &-rubric {
+                        text-align: center;
+                        font-size: 1.15rem;
+                        word-wrap: break-word;
+                        margin-bottom: 0.25rem;
+                        max-width: 240px;
+                        line-height: 20px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (min-width: 480px) {
+    .section-container.services {
+        padding: 4rem 0;
+
+        h1 {
+            font-size: 2rem;
+        }
+
+        h2 {
+            font-size: 1.75rem;
+        }
+
+        .container {
+            .content {
+                padding-bottom: 0;
+
+                .col-12 {
+                    @include column;
+                    align-items: center;
+                }
+
+                &-text {
+                    font-size: 1.15rem;
+                    margin-bottom: 0;
+                    max-width: 440px;
+                }
+
+                .packages {
+                    margin: 0;
+
+                    .package-wrapper {
+                        padding: 0;
+
+                        .package {
+                            display: flex;
+                            flex-flow: column wrap;
+                            align-items: center;
+                            margin: 0 0 0 -12px;
+
+                            &-header {
+                                margin: 1.5rem 0;
+
+                                & .desktop {
+                                    display: none;;
+                                }
+                            }
+
+                            &-list {
+                                &.mobile {
+                                    display: none;;
+                                }
+
+                                &.desktop {
+                                    display: block;
+                                }
+
+                                padding: 0 0 0 12px;
+                                list-style: none;
+                                margin-bottom: 0;
+
+                                &-item {
+                                    position: relative;
+                                    line-height: 36px;
+                                    letter-spacing: -0.6px;
+                                    width: 400px;
+                                    margin-bottom: 1rem;
+                                    font-size: 1.25rem;
+
+                                    .second-row {
+                                        margin-left: 2rem;
+                                    }
+
+                                    &-disc {
+                                        position: relative;
+                                        top: 3px;
+                                        margin-right: 0.25rem;
+                                        vertical-align: bottom;
+                                    }
+                                }
+
+                                &-item:last-child {
+                                    margin: 0;
+                                }
+                            }
+                        }
+
+                        .package-one {
+                            padding: 0;
+                        }
+
+                        .package-two {
+                            padding: 0;
+                        }
+                    }
+                }
+
+                &-cell {
+                    margin: 0 0 1.5rem 0;
+                    padding: 0;
+                    justify-content: center;
+
+                    &-header {
+                        margin-bottom: 2rem;
+
+                        h2 {
+                            font-size: 2rem;
+                        }
+                    }
+
+                    &-element {
+                        &.img {
+                            justify-content: center;
+                        }
+
+                        &:nth-child(2) {
+                            padding: 0;
+                        }
+                    }
+
+                    &-text {
+                        flex: 1 1 auto;
+                        max-width: 380px;
+
+                        h4 {
+                            font-size: 1.5rem;
+                        }
+
+                        .fish-list {
+                            font-size: 1.25rem;
+                            margin: 1rem 0 0 0;
+                            text-align: center;
+                        }
+                    }
+
+                    &-rubric {
+                        font-size: 1.25rem;
+                        max-width: 100%;
+                    }
+
+                    &-subrubric {
+                        @include column;
+                        align-items: center;
+                        margin: 1rem 0;
+                    }
+
+                    &-sibheader {
+                        text-decoration: underline;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    .section-container.services {
+        h1 {
+            font-size: 2rem;
+        }
+
+        h2 {
+            font-size: 1.75rem;
+        }
+
+        .container {
+            .content {
+                &-header {
+                    margin: 1rem 5rem;
+
+                    h2 {
+                        text-align: center;
+                    }
+                }
+
+                &-text {
+                    max-width: 590px;
+                }
+
+                &-cell {
+                    margin-bottom: 2rem;
+                    margin-left: 0;
+                    padding-right: 0;
+
+                    .row {
+                        align-items: center;
+                    }
+
+                    &-header {
+                        h2 {
+                            font-size: 2rem;
+                        }
+                    }
+
+                    &:nth-child(5),
+                    &:nth-child(8) {
+                        .img {
+                            margin-left: 4rem;
+                        }
+                    }
+
+                    &-element {
+                        &.text {
+                            margin-right: -4rem;
+                        }
+                    }
+
+                    &-text {
+                        @include column;
+                        align-items: center;
+                        padding: 0;
+                        max-width: 260px;
+
+                        .fish-list {
+                            margin: 0;
+                            padding: 0;
+
+                            li {
+                                margin: 0.25rem 0;
+                                font-size: 1rem;
+                            }
+                        }
+                    }
+
+                    &-rubric {
+                        text-align: center;
+                        font-size: 1.15rem;
+                    }
+
+                    &-subrubric {
+                        * {
+                            font-size: 1rem;
+                        }
+                    }
+                }
+
+                .bath {
+                    margin-top: 1rem;
+                }
+
+                .packages {
+                    .package-wrapper {
+                        .package {
+                            display: flex;
+                            flex-flow: column wrap;
+                            align-items: center;
+
+                            &-header {
+                                margin-bottom: 1rem;
+
+                                & .desktop {
+                                    display: block;;
+                                }
+                            }
+
+                            &-list {
+                                list-style: none;
+                                padding: 0 0 0 1.5rem;
+
+                                &-item {
+                                    position: relative;
+                                    line-height: 36px;
+                                    letter-spacing: -0.6px;
+                                    max-width: 320px;
+                                    margin-bottom: 0.25rem;
+                                    font-size: 1rem;
+
+                                    &-disc {
+                                        display: inline-block;
+                                        position: relative;
+                                        top: 1px;
+                                        margin-right: 0.5rem;
+                                        vertical-align: bottom;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (min-width: 992px) {
+    .section-container.services {
+        h1 {
+            font-size: 2.5rem;
+        }
+
+        h2 {
+            font-size: 2rem;
+        }
+
+        .container {
+            .content {
+                &-text {
+                    line-height: 32px;
+                    max-width: 800px;
+                }
+
+                &-cell {
+                    margin-bottom: 2rem;
+
+                    .row {
+                        width: 100%;
+                    }
+
+                    &-header {
+                        margin-top: 1rem;
+
+                        h2 {
+                            font-size: 2.5rem;
+                        }
+                    }
+
+                    &-element {
+                        .img-fluid {
+                            max-width: 560px;
+                            max-height: 560px;
+                        }
+
+                        padding: 0;
+                    }
+
+                    &-text {
+                        h4 {
+                            font-size: 1.75rem;
+                        }
+
+                        .fish-list {
+                            li {
+                                margin: 1rem 0;
+                            }
+                        }
+                    }
+
+                    &-rubric {
+                        font-size: 1.25rem;
+                    }
+
+                    &-subrubric {
+                        * {
+                            font-size: 1.25rem;
+                        }
+                    }
+
+                    &-subheader {
+                    }
+                }
+
+                .bath {
+                    margin-top: 2rem;
+                }
+
+                .packages {
+                    .package-wrapper {
+                        .package {
+                            &-header {
+                            }
+
+                            &-list {
+                                &-item {
+                                    font-size: 1.25rem;
+                                    max-width: 420px;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (min-width: 1200px) {
+    .section-container.services {
+        .container {
+            .content {
+                &-header {
+                    h2 {
+                        font-size: 2.5rem;
+                    }
+                }
+
+                &-cell {
+                    &-element {
+                        .img-fluid {
+                            max-width: 720px;
+                            max-height: 720px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
 .section-container.services {
     .content {
         border-radius: 2rem;
