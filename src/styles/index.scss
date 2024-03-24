@@ -38,9 +38,9 @@ body {
     height: var(--doc-height);
 }
 
-
 @supports (scroll-behavior: smooth) {
-    *, html {
+    *,
+    html {
         scroll-behavior: smooth !important;
     }
 }

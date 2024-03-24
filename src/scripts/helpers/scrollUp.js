@@ -17,14 +17,14 @@ const TOP_OFFSET = 320;
 const BOTTOM_OFFSET = 880;
 
 export function showScrollUpButton() {
-    window.addEventListener('scroll', function() {
+    window.addEventListener('scroll', function () {
         console.log('inside');
         lastKnownScrollTopPosition = document.body.scrollTop;
         lastKnownElementScrollTopPosition = document.documentElement.scrollTop;
         lastKnownScrollHeightPosition = document.documentElement.scrollHeight;
 
-        if(!ticking) {
-            window.requestAnimationFrame(function() {
+        if (!ticking) {
+            window.requestAnimationFrame(function () {
                 if (
                     (lastKnownScrollTopPosition > TOP_OFFSET || lastKnownElementScrollTopPosition > TOP_OFFSET) &&
                     lastKnownScrollHeightPosition - lastKnownElementScrollTopPosition > BOTTOM_OFFSET
@@ -33,8 +33,8 @@ export function showScrollUpButton() {
                 } else {
                     hideScrollButton();
                 }
-                ticking = false
-            })
+                ticking = false;
+            });
 
             ticking = true;
         }
@@ -43,18 +43,7 @@ export function showScrollUpButton() {
 
 // When the user clicks on the button, scroll to the top of the document
 export function scrollUp() {
-    button.addEventListener('click', function() {
-        window.scrollTo({ top: 0, behavior: 'smooth' })
+    button.addEventListener('click', function () {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 }
-
-
-
-
-
-
-
-
-
-
-

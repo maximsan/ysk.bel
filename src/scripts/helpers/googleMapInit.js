@@ -1,7 +1,7 @@
 export function googleMapInit() {
     const lat = {
         lat: 54.291652,
-        lng: 27.480454
+        lng: 27.480454,
     };
     const map = new google.maps.Map(document.getElementById('map'), {
         zoom: 16,
@@ -12,166 +12,166 @@ export function googleMapInit() {
                 elementType: 'geometry',
                 stylers: [
                     {
-                        color: '#f5f5f5'
-                    }
-                ]
+                        color: '#f5f5f5',
+                    },
+                ],
             },
             {
                 elementType: 'labels.icon',
                 stylers: [
                     {
-                        visibility: 'off'
-                    }
-                ]
+                        visibility: 'off',
+                    },
+                ],
             },
             {
                 elementType: 'labels.text.fill',
                 stylers: [
                     {
-                        color: '#616161'
-                    }
-                ]
+                        color: '#616161',
+                    },
+                ],
             },
             {
                 elementType: 'labels.text.stroke',
                 stylers: [
                     {
-                        color: '#f5f5f5'
-                    }
-                ]
+                        color: '#f5f5f5',
+                    },
+                ],
             },
             {
                 featureType: 'administrative.land_parcel',
                 elementType: 'labels.text.fill',
                 stylers: [
                     {
-                        color: '#bdbdbd'
-                    }
-                ]
+                        color: '#bdbdbd',
+                    },
+                ],
             },
             {
                 featureType: 'poi',
                 elementType: 'geometry',
                 stylers: [
                     {
-                        color: '#eeeeee'
-                    }
-                ]
+                        color: '#eeeeee',
+                    },
+                ],
             },
             {
                 featureType: 'poi',
                 elementType: 'labels.text.fill',
                 stylers: [
                     {
-                        color: '#757575'
-                    }
-                ]
+                        color: '#757575',
+                    },
+                ],
             },
             {
                 featureType: 'poi.park',
                 elementType: 'geometry',
                 stylers: [
                     {
-                        color: '#e5e5e5'
-                    }
-                ]
+                        color: '#e5e5e5',
+                    },
+                ],
             },
             {
                 featureType: 'poi.park',
                 elementType: 'labels.text.fill',
                 stylers: [
                     {
-                        color: '#9e9e9e'
-                    }
-                ]
+                        color: '#9e9e9e',
+                    },
+                ],
             },
             {
                 featureType: 'road',
                 elementType: 'geometry',
                 stylers: [
                     {
-                        color: '#ffffff'
-                    }
-                ]
+                        color: '#ffffff',
+                    },
+                ],
             },
             {
                 featureType: 'road.arterial',
                 elementType: 'labels.text.fill',
                 stylers: [
                     {
-                        color: '#757575'
-                    }
-                ]
+                        color: '#757575',
+                    },
+                ],
             },
             {
                 featureType: 'road.highway',
                 elementType: 'geometry',
                 stylers: [
                     {
-                        color: '#dadada'
-                    }
-                ]
+                        color: '#dadada',
+                    },
+                ],
             },
             {
                 featureType: 'road.highway',
                 elementType: 'labels.text.fill',
                 stylers: [
                     {
-                        color: '#616161'
-                    }
-                ]
+                        color: '#616161',
+                    },
+                ],
             },
             {
                 featureType: 'road.local',
                 elementType: 'labels.text.fill',
                 stylers: [
                     {
-                        color: '#9e9e9e'
-                    }
-                ]
+                        color: '#9e9e9e',
+                    },
+                ],
             },
             {
                 featureType: 'transit.line',
                 elementType: 'geometry',
                 stylers: [
                     {
-                        color: '#e5e5e5'
-                    }
-                ]
+                        color: '#e5e5e5',
+                    },
+                ],
             },
             {
                 featureType: 'transit.station',
                 elementType: 'geometry',
                 stylers: [
                     {
-                        color: '#eeeeee'
-                    }
-                ]
+                        color: '#eeeeee',
+                    },
+                ],
             },
             {
                 featureType: 'water',
                 elementType: 'geometry',
                 stylers: [
                     {
-                        color: '#c9c9c9'
-                    }
-                ]
+                        color: '#c9c9c9',
+                    },
+                ],
             },
             {
                 featureType: 'water',
                 elementType: 'labels.text.fill',
                 stylers: [
                     {
-                        color: '#9e9e9e'
-                    }
-                ]
-            }
+                        color: '#9e9e9e',
+                    },
+                ],
+            },
         ],
-        scrollwheel: false
+        scrollwheel: false,
     });
 
     const marker = new google.maps.Marker({
         position: lat,
-        map
+        map,
     });
 }

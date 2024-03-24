@@ -51,7 +51,6 @@ mobile.addEventListener('change', (event) => {
     }
 });
 
-
 if (mobile.matches) {
     closeSideBarOnTimeout();
 } else {
@@ -74,7 +73,4 @@ if (banner) {
     hideInfoBannerOnScroll();
 }
 
-
 initPhotoSwipeFromDOM(gallerySelector);
-
-
