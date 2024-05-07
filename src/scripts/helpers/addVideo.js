@@ -1,18 +1,18 @@
-export const addVideo = () => {
+export function addVideo({ src, className, poster }) {
     console.log('*** init video ***');
 
-    const videoSection = document.querySelector('.video-section');
+    const videoSection = document.querySelector(className);
 
     const video = document.createElement('video');
     const source = document.createElement('source');
     const noJs = document.createElement('div');
 
-    video.poster = 'assets/images/video-poster.webp';
+    video.poster = poster;
     video.controls = true;
     video.muted = false;
     video.loop = true;
     video.preload = 'auto';
-    source.src = 'assets/videos/main-video-compressed.mp4';
+    source.src = src;
     source.type = 'video/mp4';
     noJs.innerHTML = 'Your browser does not support the video tag.';
 
@@ -20,4 +20,4 @@ export const addVideo = () => {
     video.appendChild(noJs);
 
     videoSection.appendChild(video);
-};
+}

@@ -66,7 +66,21 @@ setTimeout(() => googleMapInit(), 3000);
 
 toggleSideBar();
 
-addVideo();
+addVideo({
+    src: 'assets/videos/main-video-compressed.mp4',
+    className: '.main-video-section',
+    poster: 'assets/images/video-poster.webp',
+});
+addVideo({
+    src: 'assets/videos/fish-1.mp4',
+    className: '.video-section',
+    poster: 'assets/images/video-poster-fish-1.webp',
+});
+addVideo({
+    src: 'assets/videos/fish-2.mp4',
+    className: '.video-section',
+    poster: 'assets/images/video-poster-fish-2.webp',
+});
 
 if (banner) {
     addInfoBanner();
