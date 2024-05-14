@@ -1,37 +1,24 @@
-@media only screen and (min-width: 320px) and (max-width: 767.98px) {
-    .brand {
-        font-size: 1.15rem;
+.brand {
+    cursor: pointer;
+    color: var(--dirty-orange);
+    font-size: var(--font-size-base);
+
+    &:hover {
+        color: var(--dirty-orange-hover);
+    }
+
+    @media only screen and (min-width: 320px) and (max-width: 767.98px) {
         display: flex;
         justify-content: center;
         flex-flow: row wrap;
-        flex: 0 1 200px;
+        flex: auto;
         position: relative;
         top: 6px;
         margin: 0 auto;
-
-        &:hover {
-            color: $dirty-orange;
-        }
     }
-}
 
-@media only screen and (min-width: 480px) {
-    .brand {
-        font-size: 1.15rem;
-        position: relative;
-        top: 6px;
-        margin: 0;
-        flex-flow: row nowrap;
-
-        &:hover {
-            color: $dirty-orange;
-        }
-    }
-}
-
-@media only screen and (min-width: 768px) {
-    .brand {
-        font-size: 1rem;
+    @media only screen and (min-width: 768px) {
+        font-size: var(--font-size-base);
         display: flex;
         flex-flow: row wrap;
         justify-content: center;
@@ -43,25 +30,16 @@
             }
         }
     }
-}
 
-@media (min-width: 992px) {
-    .brand {
-        font-size: 1.2rem;
+    @media (min-width: 992px) {
+        font-size: var(--font-size-md);
         margin-bottom: 0;
         display: flex;
         flex-flow: row nowrap;
     }
-}
 
-@media (min-width: 1200px) {
-    .brand {
-        font-size: 1.5rem;
+    @media (min-width: 1200px) {
+        font-size: var(--font-size-lg);
         margin-bottom: 0;
     }
-}
-
-.brand {
-    cursor: context-menu;
-    color: $dirty-orange;
 }

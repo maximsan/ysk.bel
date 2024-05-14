@@ -1,82 +1,98 @@
-@media only screen and (min-width: 320px) and (max-width: 767.98px) {
-    .navbar {
+.navbar {
+    box-shadow: 0 5px 20px #311f1c;
+    border-radius: 2px;
+
+    .navbar-header {
+        display: flex;
+    }
+
+    .navbar-nav {
+        * {
+            color: var(--white);
+        }
+
+        .nav-item {
+            position: relative;
+
+            .nav-link {
+                font-size: 1.25rem;
+                margin-right: 1.25rem;
+            }
+
+            .house {
+                &-order {
+                    font-size: var(--font-size-base);
+                }
+            }
+
+            .phones {
+                display: flex;
+                flex-direction: column;
+                padding-right: 1.2rem;
+
+                & .phone {
+                    font-size: var(--font-size-base);
+
+                    :hover {
+                        color: var(--dirty-orange);
+                        text-decoration: none;
+                    }
+                }
+            }
+
+            &::before {
+                content: '';
+                position: absolute;
+                width: 100%;
+                height: 2px;
+                bottom: 0;
+                left: 0;
+                background-color: var(--dirty-orange);
+                visibility: hidden;
+                transform: scaleX(0);
+                transition: transform 0.25s ease-out;
+            }
+
+            &:hover::before {
+                visibility: visible;
+                transform: scaleX(1);
+            }
+        }
+    }
+
+    .navbar-toggler {
+        border: none;
+
+        &:focus {
+            outline: none;
+        }
+
+        &-icon {
+            width: 1.2em;
+            height: 1.2em;
+        }
+    }
+
+    @media only screen and (min-width: 320px) and (max-width: 767.98px) {
         .container {
             .navbar-header {
                 margin: 0 auto 0.5rem auto;
                 flex: 0 1 240px;
             }
-
-            .sidebar {
-                @include sidebar;
-                padding: 10px 30px;
-
-                .navbar-collapse {
-                    padding: 0;
-
-                    .navbar-nav {
-                        .nav-item {
-                            .order {
-                                text-decoration: none;
-                                color: $white;
-                            }
-
-                            .house-order {
-                                font-size: 1.25rem;
-                                cursor: pointer;
-                            }
-
-                            .phones {
-                                font-size: 1rem;
-                                margin-top: 0.5rem;
-
-                                p {
-                                    margin-bottom: 0.5rem;
-                                }
-                            }
-
-                            .nav-link {
-                                color: $white;
-                                margin: 0;
-                                padding: 0.2rem 0;
-                            }
-
-                            &:nth-child(5) {
-                                margin-top: 0.5rem;
-                            }
-                        }
-                    }
-
-                    .nav-footer {
-                        position: absolute;
-                        bottom: 0;
-                        padding-bottom: 10px;
-
-                        p,
-                        div {
-                            color: $white;
-                        }
-
-                        .nav-footer-social-buttons {
-                            margin-bottom: 1rem;
-
-                            .fa-icon {
-                                width: 32px;
-                                height: 32px;
-                                display: inline-block;
-                                line-height: 32px;
-                                font-size: 15px;
-                                text-align: center;
-
-                                &:nth-child(2) {
-                                    margin-left: 0.5rem;
-                                }
-                            }
-                        }
-                    }
-                }
-            }
         }
     }
+}
+
+.container-fluid > .navbar-collapse,
+.container-fluid > .navbar-header,
+.container > .navbar-collapse,
+.container > .navbar-header {
+    margin-right: -15px;
+    margin-left: -15px;
+}
+
+.navbar .navbar-toggler {
+    border-color: $lighter-brown !important;
 }
 
 @media only screen and (min-width: 480px) {
@@ -99,35 +115,6 @@
 
                 .svg-inline--fa.fa-w-14 {
                     width: 0.675em;
-                }
-            }
-
-            .sidebar {
-                padding: 30px;
-                margin-top: 3rem;
-
-                .navbar-collapse {
-                    .navbar-nav {
-                        padding-left: 0.5rem;
-
-                        .nav-item {
-                            .phones {
-                                .phone {
-                                    &:nth-child(2) {
-                                        margin-top: 0.5rem;
-                                    }
-                                }
-                            }
-                        }
-                    }
-
-                    .nav-footer {
-                        padding-bottom: 30px;
-
-                        a {
-                            color: $black;
-                        }
-                    }
                 }
             }
         }
@@ -156,60 +143,6 @@
                 align-self: flex-start;
                 margin-top: 0.5rem;
             }
-
-            .sidebar {
-                padding: 0 0 0 20px;
-                margin-top: 0;
-
-                .navbar-collapse {
-                    .navbar-nav {
-                        flex: auto;
-                        max-width: 500px;
-                        width: 500px;
-                        justify-content: space-evenly;
-                        align-items: center;
-
-                        .nav-item {
-                            .house-order {
-                                &--hide {
-                                    display: none;
-                                }
-                            }
-
-                            .phones {
-                                flex: 150px;
-                                max-width: 150px;
-                                flex-flow: row wrap;
-                                padding-right: 0;
-                                margin-top: 0.4rem;
-
-                                p {
-                                    margin: 0;
-                                }
-
-                                .phone {
-                                    display: block;
-
-                                    &:nth-child(2) {
-                                        margin: 0;
-                                    }
-                                }
-                            }
-
-                            .nav-link {
-                                color: $white;
-                                padding: 0;
-                                margin-right: 1rem;
-                                font-size: 1rem;
-                            }
-                        }
-
-                        .contact-btn {
-                            display: none;
-                        }
-                    }
-                }
-            }
         }
     }
 
@@ -236,60 +169,6 @@
             .navbar-header {
                 margin-left: 1rem;
             }
-
-            .sidebar {
-                .navbar-collapse {
-                    .navbar-nav {
-                        max-width: 700px;
-                        width: 650px;
-                        justify-content: space-evenly;
-
-                        .nav-item {
-                            &.desktop {
-                                display: flex;
-                            }
-
-                            .nav-link {
-                                margin-right: 0;
-                                font-size: 1rem;
-                                color: $white;
-                            }
-
-                            a:hover {
-                                text-decoration: none;
-                            }
-
-                            &:nth-child(1) {
-                                margin-top: 0;
-
-                                .order {
-                                    align-self: center;
-
-                                    .house-order {
-                                        font-size: 1rem;
-                                        margin-right: 0.5rem;
-                                        align-self: center;
-                                    }
-                                }
-
-                                .phones {
-                                    margin-left: 1rem;
-                                    width: auto;
-                                    padding-right: 0;
-
-                                    .mobile-icon {
-                                        font-size: 1.25rem;
-                                    }
-
-                                    .phone {
-                                        font-size: 0.9rem;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
         }
     }
 
@@ -313,143 +192,6 @@
             .navbar-header {
                 margin-left: 2rem;
             }
-
-            .sidebar {
-                .navbar-collapse {
-                    .navbar-nav {
-                        margin-left: 4rem;
-                        max-width: 800px;
-                        width: 700px;
-
-                        .nav-item {
-                            margin-right: 0;
-
-                            &:nth-child(1) {
-                                .order {
-                                    .house-order {
-                                        font-size: 1.25rem;
-                                    }
-                                }
-                            }
-
-                            .nav-link {
-                                font-size: 1.25rem;
-                                margin-right: 0.25rem;
-                                padding-left: 0.5rem;
-                                padding-right: 0.5rem;
-                            }
-                        }
-                    }
-                }
-            }
         }
     }
-}
-
-.navbar {
-    .navbar-nav {
-        .nav-item.hover {
-            .nav-link {
-                position: relative;
-                color: $white;
-                text-decoration: none;
-            }
-
-            &:hover {
-                color: $dirty-orange;
-            }
-
-            &:before {
-                content: '';
-                position: absolute;
-                width: 100%;
-                height: 2px;
-                bottom: 0;
-                left: 0;
-                background-color: $dirty-orange;
-                visibility: hidden;
-                transform: scaleX(0);
-                transition: all 0.4s ease-in-out 0s;
-            }
-
-            &:hover:before {
-                visibility: visible;
-                transform: scaleX(1);
-            }
-        }
-
-        .nav-item {
-            .house {
-                &-order {
-                    font-size: 1rem;
-                    color: $white;
-                }
-            }
-
-            .mobile-icon {
-                margin-right: 0.6rem;
-                vertical-align: middle;
-                margin-top: 0.25rem;
-                align-self: center;
-                font-size: 1.4rem;
-            }
-
-            .phones {
-                display: flex;
-                flex-direction: column;
-                padding-right: 1.2rem;
-            }
-
-            .phone {
-                font-size: 0.9rem;
-
-                :hover {
-                    color: $dirty-orange;
-                }
-            }
-
-            .phone:hover {
-                text-decoration: none;
-            }
-        }
-    }
-}
-
-.container > .navbar-header {
-    display: flex;
-}
-
-.navbar {
-    box-shadow: 0 5px 20px #311f1c;
-    border-radius: 2px;
-}
-
-.navbar-toggler {
-    border: none;
-}
-
-.navbar-toggler:focus {
-    outline: none;
-}
-
-.navbar-toggler-icon {
-    width: 1.2em;
-    height: 1.2em;
-}
-
-.nav-link {
-    font-size: 1.25rem;
-    margin-right: 1.25rem;
-}
-
-.container-fluid > .navbar-collapse,
-.container-fluid > .navbar-header,
-.container > .navbar-collapse,
-.container > .navbar-header {
-    margin-right: -15px;
-    margin-left: -15px;
-}
-
-.navbar .navbar-toggler {
-    border-color: $lighter-brown !important;
 }

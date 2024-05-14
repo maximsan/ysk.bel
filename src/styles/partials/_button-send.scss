@@ -1,0 +1,9 @@
+.btn-send {
+    background: $brown;
+    color: $white;
+
+    &:focus {
+        outline: 0;
+        box-shadow: 0 0 0 0.2rem #9e6132;
+    }
+}

@@ -16,8 +16,8 @@
     box-shadow: 6px 7px 40px -4px rgba(255, 255, 255, 0.4);
 
     &:hover {
-        color: $dirty-orange;
-        border: 2px solid $dirty-orange;
+        color: var(--dirty-orange);
+        border: 2px solid var(--dirty-orange);
     }
 
     &:focus {
@@ -78,8 +78,8 @@
         }
 
         &:hover {
-            color: $dirty-orange;
-            border: 4px solid $dirty-orange;
+            color: var(--dirty-orange);
+            border: 4px solid var(--dirty-orange);
         }
     }
 }

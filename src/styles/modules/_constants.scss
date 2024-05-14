@@ -1,5 +1,6 @@
 :root {
     --doc-height: 100%;
+    --font-size-sm: 0.85rem;
     --font-size-base: 1rem;
     --font-size-md: 1.25rem;
     --font-size-lg: 1.5rem;
@@ -9,8 +10,11 @@
     --font-weight-bold: 600;
     --default-black: #000000;
     --black: #222222;
+    --white: #ffffff;
     --light-black: #110d0d;
     --creamy-white: rgba(247, 247, 239, 0.6);
+    --dirty-orange: #ac703f;
+    --dirty-orange-hover: #c76f27;
     --map--desktop-size: 600px;
     --map--mobile-size: 400px;
     --font-base: 'Rubik', sans-serif;
@@ -26,7 +30,6 @@ $lighter-brown: #492c1d;
 $light-brown: #704936;
 $creamy-white: rgba(247, 247, 239, 0.6);
 $blue-white: #e6e7f2;
-$dirty-orange: #bf8c63;
 $orange: #f66f30;
 $red: #dc3545;
 $airbnb: #fd5c63;
