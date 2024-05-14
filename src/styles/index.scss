@@ -24,13 +24,9 @@
 @import 'photoswipe/photo-swipe.scss';
 @import 'photoswipe/default-skin.scss';
 
-:root {
-    --doc-height: 100%;
-}
-
 body {
     font-family: 'Rubik', sans-serif;
-    color: #000;
+    color: var(--black);
     padding: 0 !important;
     margin: 0 !important;
 
@@ -103,14 +99,10 @@ body.down .fixed {
     /* makes the field not visible to humans */
 }
 
-.container-flex {
+.container-flex-center {
     display: flex;
-    justify-content: space-around;
-    align-content: center;
+    justify-content: center;
     align-items: center;
-
-    height: 6rem;
-    margin-top: -3rem;
 }
 
 .fishing,

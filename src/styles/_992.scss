@@ -12,32 +12,6 @@
         }
     }
 
-    .footer-social {
-        .container {
-            .container-flex {
-                .find-us {
-                    &-airbnb {
-                        .airbnb-icon {
-                            height: 22px;
-                            position: relative;
-                            bottom: 2px;
-                        }
-                    }
-
-                    &-booking {
-                        .booking-icon {
-                            height: 22px;
-                        }
-                    }
-                }
-
-                .footer {
-                    padding: 0;
-                }
-            }
-        }
-    }
-
     .scroll-up {
         position: fixed;
         bottom: 176px;

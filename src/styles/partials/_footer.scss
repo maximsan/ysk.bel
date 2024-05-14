@@ -2,59 +2,79 @@
 
 .footer-social {
     background-color: $light-black;
-}
-
-.footer {
     display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
-    align-items: center;
-    margin: 0;
-}
+    min-height: 6rem;
 
-.footer-item {
-    list-style: none;
-    padding: 0 0.5rem;
-}
-
-.footer-link {
-    display: flex;
-    align-items: center;
-    font-weight: 600;
-    padding: 0.5rem;
-
-    &:hover {
-        text-decoration: none;
+    .footer {
+        display: flex;
+        flex-direction: row;
+        margin: 0;
     }
 
-    &.airbnb {
-        color: $airbnb;
+    .footer-item {
+        list-style: none;
+        padding: 0 0.5rem;
     }
 
-    &.booking {
-        color: $booking;
+    .footer-link {
+        display: flex;
+        align-items: center;
+        font-weight: var(--font-weight-bold);
+        padding: 0.5rem;
+
+        &:hover {
+            text-decoration: none;
+        }
+
+        &.airbnb {
+            color: $airbnb;
+        }
+
+        &.booking {
+            color: $booking;
+        }
+
+        &.skype {
+            color: $skype;
+        }
+
+        &.viber {
+            color: $viber;
+        }
+
+        &.whatsapp {
+            color: $whatsapp;
+        }
+
+        .fa-skype,
+        .fa-viber,
+        .fa-whatsapp {
+            font-size: var(--font-size-xl);
+        }
+
+        .booking-icon,
+        .airbnb-icon {
+            width: 1.875rem;
+        }
     }
 
-    &.skype {
-        color: $skype;
+    @media only screen and (min-width: 320px) and (max-width: 767.98px) {
+        display: none;
     }
 
-    &.viber {
-        color: $viber;
+    @media only screen and (min-width: 768px) {
+        .container-flex-center {
+            justify-content: space-around;
+        }
     }
 
-    &.whatsapp {
-        color: $whatsapp;
-    }
+    @media only screen and (min-width: 992px) {
+        .container-flex-center {
+            justify-content: flex-end;
 
-    .fa-skype,
-    .fa-viber,
-    .fa-whatsapp {
-        font-size: 1.875rem;
-    }
-
-    .booking-icon,
-    .airbnb-icon {
-        width: 1.875rem;
+            .footer {
+                padding: 0;
+            }
+        }
     }
 }

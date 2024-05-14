@@ -11,7 +11,7 @@ module.exports = {
         lat: `lat: ${lat}`,
         lng: `lng: ${lng}`,
     },
-    contactus: {
+    contactUs: {
         header: 'Контакты:',
         phones: [
             {
@@ -19,12 +19,6 @@ module.exports = {
                 href: 'mailto:oleg-magnat@tut.by',
                 operator: 'mail',
                 iconUrl: 'assets/images/icons/mail.svg',
-            },
-            {
-                text: '+375 (29) 569 59 89',
-                href: 'tel:+375295695989',
-                operator: 'mts',
-                iconUrl: 'assets/images/icons/mts.svg',
             },
             {
                 text: '+375 (29) 149 59 89',
