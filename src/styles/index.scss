@@ -4,10 +4,6 @@
 @import 'modules/animations';
 @import 'modules/common';
 @import 'modules/mixins';
-@import '320';
-@import '480';
-@import '768';
-@import '992';
 @import 'gallery';
 @import 'partials/footer';
 @import 'partials/contacts';
@@ -25,7 +21,7 @@
 @import 'photoswipe/default-skin.scss';
 
 body {
-    font-family: 'Rubik', sans-serif;
+    font-family: var(--font-base);
     color: var(--black);
     padding: 0 !important;
     margin: 0 !important;
@@ -130,7 +126,7 @@ body.down .fixed {
     align-items: center;
     color: $orange;
     font-size: 1.75rem;
-    font-width: bold;
+    font-weight: bold;
 }
 
 .overlay {
@@ -166,4 +162,18 @@ body.down .fixed {
 .close-menu,
 .open-menu {
     color: $lighter-brown;
+}
+
+@media only screen and (min-width: 768px) {
+    .mobile {
+        display: none;
+    }
+
+    .container-fluid > .navbar-collapse,
+    .container-fluid > .navbar-header,
+    .container > .navbar-collapse,
+    .container > .navbar-header {
+        margin-right: 0;
+        margin-left: 0;
+    }
 }

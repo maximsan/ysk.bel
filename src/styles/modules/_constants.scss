@@ -9,6 +9,11 @@
     --font-weight-bold: 600;
     --default-black: #000000;
     --black: #222222;
+    --light-black: #110d0d;
+    --creamy-white: rgba(247, 247, 239, 0.6);
+    --map--desktop-size: 600px;
+    --map--mobile-size: 400px;
+    --font-base: 'Rubik', sans-serif;
 }
 
 $white: #fff;
@@ -33,7 +38,7 @@ $whatsapp: #25d366;
 $images-path: '../../assets/images' !default;
 
 .bg-light-black {
-    background-color: $light-black;
+    background-color: var(--light-black);
 }
 
 .bg-brown {
