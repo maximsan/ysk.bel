@@ -59,3 +59,11 @@ $images-path: '../../assets/images' !default;
 .decoration-none {
     text-decoration: none;
 }
+
+.desktop {
+    display: none;
+}
+
+.mobile {
+    display: block;
+}
