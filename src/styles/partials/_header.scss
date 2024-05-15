@@ -14,6 +14,8 @@
         .nav-item {
             position: relative;
 
+            @include linkHoverAnimation;
+
             .nav-link {
                 font-size: 1.25rem;
                 margin-right: 1.25rem;
@@ -39,33 +41,13 @@
                     }
                 }
             }
-
-            &::before {
-                content: '';
-                position: absolute;
-                width: 100%;
-                height: 2px;
-                bottom: 0;
-                left: 0;
-                background-color: var(--dirty-orange);
-                visibility: hidden;
-                transform: scaleX(0);
-                transition: transform 0.25s ease-out;
-            }
-
-            &:hover::before {
-                visibility: visible;
-                transform: scaleX(1);
-            }
         }
     }
 
     .navbar-toggler {
         border: none;
 
-        &:focus {
-            outline: none;
-        }
+        @include outline;
 
         &-icon {
             width: 1.2em;
@@ -81,90 +63,35 @@
             }
         }
     }
-}
 
-.container-fluid > .navbar-collapse,
-.container-fluid > .navbar-header,
-.container > .navbar-collapse,
-.container > .navbar-header {
-    margin-right: -15px;
-    margin-left: -15px;
-}
-
-.navbar .navbar-toggler {
-    border-color: $lighter-brown !important;
-}
-
-@media only screen and (min-width: 480px) {
-    .navbar {
-        .container {
-            justify-content: flex-start;
-
-            .navbar-header {
-                justify-content: center;
-
-                .fa-angle-double-left.quote {
-                    margin-top: 9px;
-                    margin-right: 4px;
-                }
-
-                .fa-angle-double-right.quote {
-                    margin-top: 9px;
-                    margin-left: 4px;
-                }
-
-                .svg-inline--fa.fa-w-14 {
-                    width: 0.675em;
-                }
-            }
-        }
-    }
-}
-
-@media only screen and (min-width: 768px) {
-    .navbar {
-        // TODO: fix it later
+    @media only screen and (min-width: 768px) {
         padding: 1rem 0 !important;
 
         &.navbar-expand-md {
-            display: flex;
             justify-content: center;
-            flex-flow: row nowrap;
         }
 
         .container {
             max-width: 760px;
             padding: 0;
             overflow: hidden;
-            justify-content: space-between;
 
             .navbar-header {
-                margin-left: 0;
-                align-self: flex-start;
                 margin-top: 0.5rem;
             }
         }
-    }
 
-    .nav-footer {
-        display: none;
-    }
-}
-
-@media (min-width: 992px) {
-    .navbar {
-        // TODO: fix it later
-        padding: 1.5rem 0 !important;
-
-        &.navbar-expand-md {
-            display: flex;
-            justify-content: center;
-            flex-flow: row nowrap;
+        .nav-footer {
+            display: none;
         }
+    }
+
+    @media (min-width: 992px) {
+        padding: 1.5rem 0 !important;
 
         .container {
             max-width: 980px;
-            margin: 0 28px;
+            margin: 0 1.75rem;
 
             .navbar-header {
                 margin-left: 1rem;
@@ -172,20 +99,7 @@
         }
     }
 
-    .navbar-expand-sm .navbar-nav .nav-link {
-        padding-left: 0.5rem;
-        padding-right: 0.5rem;
-    }
-}
-
-@media (min-width: 1200px) {
-    .navbar {
-        &.navbar-expand-md {
-            display: flex;
-            justify-content: center;
-            flex-flow: row nowrap;
-        }
-
+    @media (min-width: 1200px) {
         .container {
             max-width: 1260px;
 
