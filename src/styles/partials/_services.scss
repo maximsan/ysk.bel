@@ -325,6 +325,11 @@
                     margin-left: 0;
                     padding-right: 0;
 
+                    &.nature .img,
+                    &.lake .img {
+                        margin-left: 4rem;
+                    }
+
                     .row {
                         align-items: center;
                     }
@@ -332,13 +337,6 @@
                     &-header {
                         h2 {
                             font-size: 2rem;
-                        }
-                    }
-
-                    &:nth-child(5),
-                    &:nth-child(8) {
-                        .img {
-                            margin-left: 4rem;
                         }
                     }
 

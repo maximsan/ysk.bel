@@ -19,387 +19,139 @@
 
                     <div class="col-12">
                         <h3
-                                class="content-cell-header text-center w-100 mb-3rem mt-1rem"
-                                id="services"
+                                class="content-cell-header {{ section.class }} text-center w-100 mb-3rem mt-1rem"
+                                id="{{ section.id }}"
                         >
                             {{ section.header }}
                         </h3>
                     </div>
 
+                        <div class="content-cell {{ section.class }} service col-12 col-md-12 ml-1rem pr-2rem mb-5rem">
+                            <div class="row">
+
+                                {% assign main = section.gallery.main %}
+                                {% assign galleryItems = section.gallery.items %}
+
+                                {% if section.side == 'left' %}
+
+                                <div class="content-cell-element img col-12 col-sm-12 col-md-8 gallery">
+
+                                        <div class="gallery__desk--{{ section.side }}-side {% if section.isFirst %} first {% endif %}">
+                                            {% for item in galleryItems  %}
+                                                        <a
+                                                            href="{{ item.link.src }}"
+                                                            data-pswp-width="{{ item.link.width }}"
+                                                            data-pswp-height="{{ item.link.height }}"
+                                                            target="{{ item.link.target }}"
+                                                            data-cropped="{{ item.link.isCropped }}"
+                                                            class="gallery__url"
+                                                        >
+                                                            <img src="{{ item.img.srcSet[0] }}"
+                                                                alt="{{ item.img.alt }}"
+                                                                class="gallery__img card-img-top">
+                                                            <figure class="gallery__figure">{{ item.img.caption }}</figure>
+                                                        </a>
+                                            {% endfor %}
+                                        </div>
+
+                                        <div class="gallery__item--main">
+                                            <a  href="{{ main.link.src }}"
+                                                data-pswp-width="{{ main.link.width }}"
+                                                data-pswp-height="{{ main.link.height }}"
+                                                class="gallery__url">
+                                                <img
+                                                    srcset="{{ main.img.srcSet | join: ', ' }}"
+                                                    sizes="{{  main.img.sizes | join: ', ' }}"
+                                                    alt="{{ main.img.alt }}"
+                                                    class="gallery__img card-img-top">
+                                                <figure class="gallery__figure">{{ main.img.caption }}</figure>
+                                            </a>
+
+                                        </div>
+
+
+                                </div>
+
+                                <div class="content-cell-element text col-12 col-sm-12 col-md-4">
+                                    <div class="content-cell-text">
+                                        <div class="content-cell-rubric">
+                                            <p>
+                                            <ul class="fish-list">
+
+                                            {% for item in section.offer.items %}
+                                                <li>
+                                                    <span class="fish-name">{{ item }}</span>
+                                                </li>
+                                            {% endfor %}
+                                            </ul>
+                                            </p>
+                                            {{ section.offer.description }}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {% else  %}
+
+                                <div class="content-cell-element text col-12 col-sm-12 col-md-4">
+                                    <div class="content-cell-text">
+                                        <div class="content-cell-rubric">
+                                            <p>
+                                            <ul class="fish-list">
+
+                                            {% for item in section.offer.items %}
+                                                <li>
+                                                    <span class="fish-name">{{ item }}</span>
+                                                </li>
+                                            {% endfor %}
+                                            </ul>
+                                            </p>
+                                            {{ section.offer.description }}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="content-cell-element img col-12 col-sm-12 col-md-8 gallery">
+
+                                    <div class="gallery__item--main">
+                                        <a  href="{{ main.link.src }}"
+                                            data-pswp-width="{{ main.link.width }}"
+                                            data-pswp-height="{{ main.link.height }}"
+                                            class="gallery__url">
+                                            <img
+                                                srcset="{{ main.img.srcSet | join: ', ' }}"
+                                                sizes="{{  main.img.sizes | join: ', ' }}"
+                                                alt="{{ main.img.alt }}"
+                                                class="gallery__img card-img-top">
+                                            <figure class="gallery__figure">{{ main.img.caption }}</figure>
+                                        </a>
+
+                                    </div>
+
+                                    <div class="gallery__desk--{{ section.side }}-side {% if section.isFirst %} first {% endif %}">
+                                        {% for item in galleryItems  %}
+                                                    <a
+                                                        href="{{ item.link.src }}"
+                                                        data-pswp-width="{{ item.link.width }}"
+                                                        data-pswp-height="{{ item.link.height }}"
+                                                        target="{{ item.link.target }}"
+                                                        data-cropped="{{ item.link.isCropped }}"
+                                                        class="gallery__url"
+                                                    >
+                                                        <img src="{{ item.img.srcSet[0] }}"
+                                                            alt="{{ item.img.alt }}"
+                                                            class="gallery__img card-img-top">
+                                                        <figure class="gallery__figure">{{ item.img.caption }}</figure>
+                                                    </a>
+                                        {% endfor %}
+                                    </div>
+
+                                </div>
+
+                                {% endif %}
+                            </div>
+                        </div>
+
                 {% endfor %}
 
-                <div class="col-12">
-                    <h3
-                            class="content-cell-header text-center w-100 mb-3rem mt-1rem"
-                            id="services"
-                    >
-                        Рыбалка
-                    </h3>
-
-                </div>
-
-                <div class="content-cell service col-12 col-md-12 ml-1rem pr-2rem mb-5rem">
-                    <div class="row">
-                        <div class="content-cell-element img col-12 col-sm-12 col-md-8 gallery">
-                            <div class="gallery__desk--left-side first">
-                                <a
-                                    href="assets/images/man-with-fish-2/man-with-fish-1600x1200.webp"
-                                    data-pswp-width="1600"
-                                    data-pswp-height="1200"
-                                    target="_blank"
-                                    data-cropped="true"
-                                    class="gallery__url"
-                                >
-                                    <img src="assets/images/man-with-fish-2/thumbnail-75x100.webp"
-                                        alt="Man with fish in hands 1"
-                                        class="gallery__img card-img-top">
-                                    <figure class="gallery__figure">Рыбак с уловом 1</figure>
-                                </a>
-
-                                <a href="assets/images/man-with-fish-1/man-with-fish-1013x1800.webp"
-                                    data-pswp-width="1013"
-                                    data-pswp-height="1800"
-                                    class="gallery__url"
-                                >
-                                    <img src="assets/images/man-with-fish-1/thumbnail-75x100.webp"
-                                        alt="Man with fish in hands 2"
-                                        class="gallery__img card-img-top">
-                                    <figure class="gallery__figure">Рыбак с уловом 2</figure>
-                                </a>
-
-                                <a href="assets/images/man-with-fish-3/man-with-fish-1200x1600.webp"
-                                    data-pswp-width="1200"
-                                    data-pswp-height="1600"
-                                    class="gallery__url"
-                                >
-                                    <img src="assets/images/man-with-fish-3/thumbnail-75x100.webp"
-                                        alt="Man with fish in hands 3"
-                                        class="gallery__img card-img-top">
-                                    <figure class="gallery__figure">Рыбак с уловом 3</figure>
-                                </a>
-
-                                <a
-                                    href="https://live.staticflickr.com/65535/50365463911_4bbcc8fd21_o.jpg"
-                                    data-pswp-width="960"
-                                    data-pswp-height="1280"
-                                    class="gallery__url"
-                                >
-                                    <img src="https://live.staticflickr.com/65535/50365463911_178aa89654_t.jpg"
-                                         alt="fisher man"
-                                         class="gallery__img card-img-top">
-                                    <figure class="gallery__figure">Рыбак с уловом 4</figure>
-                                </a>
-                            </div>
-
-                            <div class="gallery__item--main">
-                                <a  href="assets/images/child/pike-1200x1600.webp"
-                                    data-pswp-width="1200"
-                                    data-pswp-height="1600"
-                                    class="gallery__url">
-                                    <img
-                                        srcset="assets/images/child/pike-240x320.webp 320w,
-                                                assets/images/child/pike-480x640.webp 640w,
-                                                assets/images/child/pike-600x800.webp 800w"
-                                        sizes="(max-width: 480px) 220px,
-                                                (max-width: 768px) 360px,
-                                                (max-width: 992px) 360px,
-                                                (max-width: 1200px) 460px,
-                                                580px"
-                                        alt="Pike as child"
-                                        class="gallery__img card-img-top">
-                                    <figure class="gallery__figure">Pike as child</figure>
-                                </a>
-
-                            </div>
-                        </div>
-                        <div class="content-cell-element text col-12 col-sm-12 col-md-4">
-                            <div class="content-cell-text">
-                                <div class="content-cell-rubric">
-                                    <p>
-                                    <ul class="fish-list">
-                                        <li>
-                                            <span class="fish-name">карп&nbsp;0.5&nbsp;-&nbsp;1.0&nbsp;кг</span>
-                                        </li>
-                                        <li>
-                                            <span class="fish-name">амур&nbsp;1.0&nbsp;-&nbsp;1.2&nbsp;кг</span>
-                                        </li>
-                                        <li>
-                                            <span class="fish-name">щука&nbsp;0.2&nbsp;-&nbsp;12.5&nbsp;кг</span>
-                                        </li>
-                                        <li>
-                                            <span class="fish-name">окунь&nbsp;0.05&nbsp;-&nbsp;2.0&nbsp;кг</span>
-                                        </li>
-                                        <li>
-                                            <span class="fish-name">платва&nbsp;0.1&nbsp;-&nbsp;1.2&nbsp;кг</span>
-                                        </li>
-                                        <li>
-                                            <span class="fish-name">карась&nbsp;0.05&nbsp;-&nbsp;0.6&nbsp;кг</span>
-                                        </li>
-                                    </ul>
-                                    </p>
-                                    Услуга платной рыбалки доступна в течение
-                                    <span class="font-weight-bold">всего</span> года.
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!--4-->
-
-                <div class="content-cell service col-12 col-md-12 ml-1rem pr-2rem mb-5rem">
-                    <div class="row">
-                        <div class="content-cell-element text col-12 col-sm-12 col-md-4">
-                            <div class="content-cell-text">
-                                <div class="content-cell-rubric">
-                                    Прекрасные виды, завораживающа тишина.
-                                    Места для костров и мангалов.
-                                    Чистота и порядок
-                                </div>
-                            </div>
-                        </div>
-                        <div class="content-cell-element img col-12 col-sm-12 col-md-8 gallery">
-                            <div class="gallery__item--main">
-                                <a href="https://live.staticflickr.com/65535/50361180451_03092fbc9e_o.jpg"
-                                    data-pswp-width="1200"
-                                    data-pswp-height="800"
-                                    class="gallery__url--main"
-                                >
-                                    <img srcset="https://live.staticflickr.com/65535/50361180451_cbe9a08b71_n.jpg 320w,
-                                                 https://live.staticflickr.com/65535/50361180451_cbe9a08b71_z.jpg 640w,
-                                                 https://live.staticflickr.com/65535/50361180451_cbe9a08b71_c.jpg 800w"
-                                         sizes="(max-width: 480px) 220px,
-                                                (max-width: 768px) 360px,
-                                                (max-width: 992px) 360px,
-                                                (max-width: 1200px) 460px,
-                                                580px"
-                                         src="https://live.staticflickr.com/65535/50361180451_cbe9a08b71_c.jpg"
-                                         alt="view 1"
-                                         class="gallery__img card-img-top">
-                                    <figure class="gallery__figure">Вид на озеро</figure>
-                                </a>
-                            </div>
-                            <div class="gallery__desk--right-side">
-                                <a href="https://live.staticflickr.com/65535/50360482948_ec85c0c6f7_o.jpg"
-                                    data-pswp-width="1200"
-                                    data-pswp-height="800"
-                                    class="gallery__url"
-                                >
-                                    <img src="https://live.staticflickr.com/65535/50360482948_ed74ebaf91_t.jpg"
-                                         alt="view 2"
-                                         class="gallery__img card-img-top">
-                                    <figure class="gallery__figure">Вид на озеро</figure>
-                                </a>
-
-                                <a href="https://live.staticflickr.com/65535/50361345967_aa9884bc6c_o.jpg"
-                                    data-pswp-width="1200"
-                                    data-pswp-height="800"
-                                    class="gallery__url"
-                                >
-                                    <img src="https://live.staticflickr.com/65535/50361345967_a8e801962a_t.jpg"
-                                         alt="house window"
-                                         class="gallery__img card-img-top">
-                                    <figure class="gallery__figure">Вид на дамбу</figure>
-                                </a>
-
-                                <a href="https://live.staticflickr.com/65535/50361345327_1f78975a75_o.jpg"
-                                    data-pswp-width="1200"
-                                    data-pswp-height="800"
-                                    class="gallery__url"
-                                >
-                                    <img src="https://live.staticflickr.com/65535/50361345327_728a825d79_t.jpg"
-                                         alt="view 3"
-                                         class="gallery__img card-img-top">
-                                    <figure class="gallery__figure">Лес с грибами</figure>
-                                </a>
-
-                                <a href="https://live.staticflickr.com/65535/50360481958_c67586a8b6_o.jpg"
-                                    data-pswp-width="1200"
-                                    data-pswp-height="800"
-                                    class="gallery__url"
-                                >
-                                    <img src="https://live.staticflickr.com/65535/50360481958_c522434877_t.jpg"
-                                         alt="bye-bye"
-                                         class="gallery__img card-img-top">
-                                    <figure class="gallery__figure">Знак д.Вяпраты</figure>
-                                </a>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-12">
-                    <h3 class="content-cell-header bath text-center w-100 mb-3rem">
-                        Усадьба
-                    </h3>
-                </div>
-
-                <!--1-->
-
-                <div class="content-cell service col-12 col-md-12 ml-1rem pr-2rem mb-5rem">
-                    <div class="row">
-                        <div class="content-cell-element img col-12 col-sm-12 col-md-8 gallery">
-                            <div class="gallery__desk--left-side">
-                                <a href="https://live.staticflickr.com/65535/50361345907_b53f9518d7_o.jpg"
-                                    data-pswp-width="1200"
-                                    data-pswp-height="800"
-                                   class="gallery__url"
-                                >
-                                    <img src="https://live.staticflickr.com/65535/50361345907_db88327615_t.jpg"
-                                         alt="living room"
-                                         class="gallery__img card-img-top">
-                                    <figure class="gallery__figure">Гостинная, 1-ый этаж</figure>
-                                </a>
-
-                                <a href="https://live.staticflickr.com/65535/50361345682_c1af17c759_o.jpg"
-                                    data-pswp-width="1200"
-                                    data-pswp-height="800"
-                                   class="gallery__url"
-                                >
-                                    <img src="https://live.staticflickr.com/65535/50361345682_bab8504d89_t.jpg"
-                                         alt="house window"
-                                         class="gallery__img card-img-top">
-                                    <figure class="gallery__figure">Комната на 2-м этаже</figure>
-                                </a>
-
-                                <a href="https://live.staticflickr.com/65535/50361180181_b20ececfb3_o.jpg"
-                                    data-pswp-width="1200"
-                                    data-pswp-height="800"
-                                    class="gallery__url"
-                                >
-                                    <img src="https://live.staticflickr.com/65535/50361180181_e64b528883_t.jpg"
-                                         alt="steam room"
-                                         class="gallery__img card-img-top">
-                                    <figure class="gallery__figure">Парилка</figure>
-                                </a>
-
-                                <a href="https://live.staticflickr.com/65535/50360482768_de04358d8e_o.jpg"
-                                    data-pswp-width="1200"
-                                    data-pswp-height="800"
-                                    class="gallery__url"
-                                >
-                                    <img src="https://live.staticflickr.com/65535/50360482768_f597727093_t.jpg"
-                                         alt="bucket scoop"
-                                         class="gallery__img card-img-top">
-                                    <figure class="gallery__figure">Ведро с черпаком</figure>
-                                </a>
-                            </div>
-                            <div class="gallery__item--main">
-                                <a href="https://live.staticflickr.com/65535/50361180511_7b692dbf69_o.jpg"
-                                    data-pswp-width="1200"
-                                    data-pswp-height="800"
-                                    class="gallery__url--main"
-                                >
-                                    <img srcset="https://live.staticflickr.com/65535/50361180511_fb25cc5c69_n.jpg 320w,
-                                                 https://live.staticflickr.com/65535/50361180511_fb25cc5c69_z.jpg 640w,
-                                                 https://live.staticflickr.com/65535/50361180511_fb25cc5c69_c.jpg 800w"
-                                         sizes="(max-width: 480px) 220px,
-                                                (max-width: 768px) 360px,
-                                                (max-width: 992px) 360px,
-                                                (max-width: 1200px) 460px,
-                                                580px"
-                                         src="https://live.staticflickr.com/65535/50361180511_fb25cc5c69_c.jpg"
-                                         alt="bath house"
-                                         class="gallery__img card-img-top">
-                                    <figure class="gallery__figure">Баня</figure>
-                                </a>
-
-                            </div>
-                        </div>
-                        <div class="content-cell-element text col-12 col-sm-12 col-md-4">
-                            <div class="content-cell-text">
-                                <div class="content-cell-rubric">
-                                    Русская баня с парилкой и всеми удобствами.
-                                    Гостиная, 2 спальни, возможность разместить до 8 человек
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!--2-->
-
-                <div class="content-cell service col-12 col-md-12 ml-1rem pr-2rem mb-5rem">
-                    <div class="row">
-                        <div class="content-cell-element text col-12 col-sm-12 col-md-4">
-                            <div class="content-cell-text">
-                                <div class="content-cell-rubric">
-                                    Огороженная, охраняемая территория с парковкой.
-                                    Своя скважина с артезианской водой
-                                </div>
-                            </div>
-                        </div>
-                        <div class="content-cell-element img col-12 col-sm-12 col-md-8 gallery">
-                            <div class="gallery__item--main">
-                                <a href="https://live.staticflickr.com/65535/50361180676_101392a4f4_o.jpg"
-                                    data-pswp-width="1200"
-                                    data-pswp-height="800"
-                                    class="gallery__url--main"
-                                >
-                                    <img srcset="https://live.staticflickr.com/65535/50361180676_f09a8e9137_n.jpg 320w,
-                                                 https://live.staticflickr.com/65535/50361180676_f09a8e9137_z.jpg 640w,
-                                                 https://live.staticflickr.com/65535/50361180676_f09a8e9137_c.jpg 800w"
-                                         sizes="(max-width: 480px) 220px,
-                                                (max-width: 768px) 360px,
-                                                (max-width: 992px) 360px,
-                                                (max-width: 1200px) 460px,
-                                                580px"
-                                         src="https://live.staticflickr.com/65535/50361180511_fb25cc5c69_c.jpg"
-                                         alt="bath-house"
-                                         class="gallery__img card-img-top">
-                                    <figure class="gallery__figure">Баня</figure>
-                                </a>
-
-                            </div>
-                            <div class="gallery__desk--right-side">
-                                <a href="https://live.staticflickr.com/65535/50361347217_5abd7e6406_o.jpg"
-                                    data-pswp-width="1200"
-                                    data-pswp-height="600"
-                                    class="gallery__url"
-                                >
-                                    <img src="https://live.staticflickr.com/65535/50361347217_5582a695cb_t.jpg"
-                                         alt="parking"
-                                         class="gallery__img card-img-top">
-                                    <figure class="gallery__figure">Парковочная территория</figure>
-                                </a>
-
-                                <a href="https://live.staticflickr.com/65535/50361180946_3073723418_o.jpg"
-                                    data-pswp-width="1200"
-                                    data-pswp-height="800"
-                                    class="gallery__url"
-                                >
-                                    <img src="https://live.staticflickr.com/65535/50361180946_cf3549919c_t.jpg"
-                                         alt="house"
-                                         class="gallery__img card-img-top">
-                                    <figure class="gallery__figure">Ночлежка без отопления</figure>
-                                </a>
-
-                                <a href="https://live.staticflickr.com/65535/50361346522_4d5950908b_o.jpg"
-                                    data-pswp-width="1200"
-                                    data-pswp-height="800"
-                                    class="gallery__url"
-                                >
-                                    <img src="https://live.staticflickr.com/65535/50361346522_8fc1134ed2_t.jpg"
-                                         alt="protected area"
-                                         class="gallery__img card-img-top">
-                                    <figure class="gallery__figure">Охраняемая территория</figure>
-                                </a>
-
-                                <a href="https://live.staticflickr.com/65535/50361181391_c5b2939eb8_o.jpg"
-                                    data-pswp-width="1200"
-                                    data-pswp-height="800"
-                                    class="gallery__url"
-                                >
-                                    <img src="https://live.staticflickr.com/65535/50361181391_a96455272d_t.jpg"
-                                         alt="own well"
-                                         class="gallery__img card-img-top">
-                                    <figure class="gallery__figure">Скважина с питьевой водой</figure>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
