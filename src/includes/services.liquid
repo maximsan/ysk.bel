@@ -53,6 +53,7 @@
                                                             <figure class="gallery-caption">
                                                                 <img
                                                                     src="{{ imgItem.srcSet[0] }}"
+                                                                    srcSet="{{ imgItem.srcSet | join: ', ' }}"
                                                                     alt="{{ imgItem.alt }}"
                                                                     class="gallery__img card-img-top"
                                                                 >
@@ -67,6 +68,7 @@
                                                 href="{{ main.link.src }}"
                                                 data-pswp-width="{{ main.link.width }}"
                                                 data-pswp-height="{{ main.link.height }}"
+                                                data-cropped="{{ main.link.isCropped }}"
                                                 class="gallery__url"
                                             >
                                                 <figure class="gallery-caption">
@@ -89,14 +91,14 @@
                                     <div class="content-cell-text">
                                         <div class="content-cell-rubric">
                                             <p>
-                                            <ul class="fish-list">
+                                                <ul class="fish-list">
 
-                                            {% for item in section.offer.items %}
-                                                <li>
-                                                    <span class="fish-name">{{ item }}</span>
-                                                </li>
-                                            {% endfor %}
-                                            </ul>
+                                                {% for item in section.offer.items %}
+                                                    <li class="fish-list__item">
+                                                        <span class="fish-name">{{ item }}</span>
+                                                    </li>
+                                                {% endfor %}
+                                                </ul>
                                             </p>
                                             {{ section.offer.description }}
                                         </div>
@@ -109,14 +111,14 @@
                                     <div class="content-cell-text">
                                         <div class="content-cell-rubric">
                                             <p>
-                                            <ul class="fish-list">
-
-                                            {% for item in section.offer.items %}
-                                                <li>
-                                                    <span class="fish-name">{{ item }}</span>
-                                                </li>
-                                            {% endfor %}
-                                            </ul>
+                                                <ul class="fish-list">
+                                                {% for item in section.offer.items %}
+                                                    <li>
+                                                        <div>🔸</div>
+                                                        <span class="fish-name">{{ item }}</span>
+                                                    </li>
+                                                {% endfor %}
+                                                </ul>
                                             </p>
                                             {{ section.offer.description }}
                                         </div>
@@ -128,6 +130,7 @@
                                         <a  href="{{ main.link.src }}"
                                             data-pswp-width="{{ main.link.width }}"
                                             data-pswp-height="{{ main.link.height }}"
+                                            data-cropped="{{ main.link.isCropped }}"
                                             class="gallery__url">
                                             <figure class="gallery-caption">
                                                 <img
@@ -154,6 +157,7 @@
                                                         <figure class="gallery-caption">
                                                             <img
                                                                 src="{{ item.img.srcSet[0] }}"
+                                                                srcSet="{{ item.img.srcSet | join: ', ' }}"
                                                                 alt="{{ item.img.alt }}"
                                                                 class="gallery__img card-img-top">
                                                             <figcaption class="gallery-caption__text">{{ item.img.caption }}</figcaption>

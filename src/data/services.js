@@ -26,9 +26,10 @@ const services = {
                             target: '',
                         },
                         img: {
+                            src: 'assets/images/man-with-fish-2/thumbnail-75x100.webp',
                             srcSet: ['assets/images/man-with-fish-2/thumbnail-75x100.webp'],
                             alt: 'Man with fish in hands 1',
-                            caption: 'Рыбак с весенним уловом',
+                            caption: 'Весенний улов',
                         },
                     },
                     {
@@ -36,13 +37,14 @@ const services = {
                             src: 'assets/images/man-with-fish-1/man-with-fish-1013x1800.webp',
                             width: 1013,
                             height: 1800,
-                            isCropped: false,
+                            isCropped: true,
                             target: '',
                         },
                         img: {
+                            src: 'assets/images/man-with-fish-1/thumbnail-75x100.webp',
                             srcSet: ['assets/images/man-with-fish-1/thumbnail-75x100.webp'],
                             alt: 'Man with fish in hands 2',
-                            caption: 'Рыбак с весенним уловом',
+                            caption: 'Весенний улов',
                         },
                     },
                     {
@@ -54,6 +56,7 @@ const services = {
                             target: '',
                         },
                         img: {
+                            src: 'assets/images/man-with-fish-3/thumbnail-75x100.webp',
                             srcSet: ['assets/images/man-with-fish-3/thumbnail-75x100.webp'],
                             alt: 'Man with fish in hands 3',
                             caption: 'Зимняя рыбалка',
@@ -68,6 +71,7 @@ const services = {
                             target: '',
                         },
                         img: {
+                            src: 'https://live.staticflickr.com/65535/50365463911_178aa89654_t.jpg',
                             srcSet: ['https://live.staticflickr.com/65535/50365463911_178aa89654_t.jpg'],
                             alt: 'Man with fish in hands 4',
                             caption: 'Летняя рыбалка',
@@ -83,16 +87,17 @@ const services = {
                         target: '',
                     },
                     img: {
+                        src: 'assets/images/child/pike-480x640.webp',
                         srcSet: [
-                            'assets/images/child/pike-240x320.webp 320w',
-                            'assets/images/child/pike-480x640.webp 640w',
-                            'assets/images/child/pike-600x800.webp 800w',
+                            'assets/images/child/pike-240x320.webp 240w',
+                            'assets/images/child/pike-480x640.webp 480w',
+                            'assets/images/child/pike-600x800.webp 600w',
                         ],
                         sizes: [
-                            '(max-width: 480px) 220px',
+                            '(max-width: 480px) 300px',
                             '(max-width: 768px) 360px',
                             '(max-width: 992px) 360px',
-                            '(max-width: 1200px) 460px',
+                            '(max-width: 1200px) 500px',
                             '580px',
                         ],
                         alt: 'Pike as child',
@@ -128,16 +133,17 @@ const services = {
                         target: '',
                     },
                     img: {
+                        src: 'https://live.staticflickr.com/65535/50361180451_cbe9a08b71_z.jpg',
                         srcSet: [
                             'https://live.staticflickr.com/65535/50361180451_cbe9a08b71_n.jpg 320w',
                             'https://live.staticflickr.com/65535/50361180451_cbe9a08b71_z.jpg 640w',
                             'https://live.staticflickr.com/65535/50361180451_cbe9a08b71_c.jpg 800w',
                         ],
                         sizes: [
-                            '(max-width: 480px) 220px',
+                            '(max-width: 480px) 300px',
                             '(max-width: 768px) 360px',
                             '(max-width: 992px) 360px',
-                            '(max-width: 1200px) 460px',
+                            '(max-width: 1200px) 500px',
                             '580px',
                         ],
                         alt: 'view 1',
@@ -150,10 +156,11 @@ const services = {
                             src: 'https://live.staticflickr.com/65535/50360482948_ec85c0c6f7_o.jpg',
                             width: 1200,
                             height: 800,
-                            isCropped: false,
+                            isCropped: true,
                             target: '',
                         },
                         img: {
+                            src: 'https://live.staticflickr.com/65535/50360482948_ed74ebaf91_t.jpg',
                             srcSet: ['https://live.staticflickr.com/65535/50360482948_ed74ebaf91_t.jpg'],
                             alt: 'view 2',
                             caption: 'Вид на дамбу',
@@ -164,10 +171,11 @@ const services = {
                             src: 'https://live.staticflickr.com/65535/50361345967_aa9884bc6c_o.jpg',
                             width: 1200,
                             height: 800,
-                            isCropped: false,
+                            isCropped: true,
                             target: '',
                         },
                         img: {
+                            src: 'https://live.staticflickr.com/65535/50361345967_a8e801962a_t.jpg',
                             srcSet: ['https://live.staticflickr.com/65535/50361345967_a8e801962a_t.jpg'],
                             alt: 'view',
                             caption: 'Вид на дамбу',
@@ -182,6 +190,7 @@ const services = {
                             target: '',
                         },
                         img: {
+                            src: 'https://live.staticflickr.com/65535/50361345327_728a825d79_t.jpg',
                             srcSet: ['https://live.staticflickr.com/65535/50361345327_728a825d79_t.jpg'],
                             alt: 'forest with mushrooms',
                             caption: 'Лес вокруг озера с грибами',
@@ -196,6 +205,7 @@ const services = {
                             target: '',
                         },
                         img: {
+                            src: 'https://live.staticflickr.com/65535/50360481958_c522434877_t.jpg',
                             srcSet: ['https://live.staticflickr.com/65535/50360481958_c522434877_t.jpg'],
                             alt: 'sign',
                             caption: 'Знак д.Вяпраты',
@@ -224,6 +234,7 @@ const services = {
                             target: '',
                         },
                         img: {
+                            src: 'https://live.staticflickr.com/65535/50361345907_db88327615_t.jpg',
                             srcSet: ['https://live.staticflickr.com/65535/50361345907_db88327615_t.jpg'],
                             alt: 'living room',
                             caption: 'Гостинная, 1-ый этаж',
@@ -238,6 +249,7 @@ const services = {
                             target: '',
                         },
                         img: {
+                            src: 'https://live.staticflickr.com/65535/50361345682_bab8504d89_t.jpg',
                             srcSet: ['https://live.staticflickr.com/65535/50361345682_bab8504d89_t.jpg'],
                             alt: 'house window',
                             caption: 'Спальная комната на 2-м этаже',
@@ -252,6 +264,7 @@ const services = {
                             target: '',
                         },
                         img: {
+                            src: 'https://live.staticflickr.com/65535/50361180181_e64b528883_t.jpg',
                             srcSet: ['https://live.staticflickr.com/65535/50361180181_e64b528883_t.jpg'],
                             alt: 'steam room',
                             caption: 'Парилка',
@@ -288,10 +301,10 @@ const services = {
                             'https://live.staticflickr.com/65535/50361180511_fb25cc5c69_c.jpg 800w',
                         ],
                         sizes: [
-                            '(max-width: 480px) 220px',
+                            '(max-width: 480px) 300px',
                             '(max-width: 768px) 360px',
                             '(max-width: 992px) 360px',
-                            '(max-width: 1200px) 460px',
+                            '(max-width: 1200px) 500px',
                             '580px',
                         ],
                         alt: 'bath house',
@@ -326,10 +339,10 @@ const services = {
                             'https://live.staticflickr.com/65535/50361180676_f09a8e9137_c.jpg 800w',
                         ],
                         sizes: [
-                            '(max-width: 480px) 220px',
+                            '(max-width: 480px) 300px',
                             '(max-width: 768px) 360px',
                             '(max-width: 992px) 360px',
-                            '(max-width: 1200px) 460px',
+                            '(max-width: 1200px) 500px',
                             '580px',
                         ],
                         alt: 'lake',
