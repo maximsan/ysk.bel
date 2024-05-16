@@ -1,4 +1,4 @@
-module.exports = {
+const services = {
     header: 'Живописный уголок природы в 40км от Минска',
     description: `Усадьба "Серебряный Карась" - это кемпинг под Минском в Логойском районе в деревне Вепраты
     (трасса Р58).
@@ -22,13 +22,13 @@ module.exports = {
                             src: 'assets/images/man-with-fish-2/man-with-fish-1600x1200.webp',
                             width: 1600,
                             height: 1200,
-                            isisCropped: false,
+                            isCropped: true,
                             target: '',
                         },
                         img: {
                             srcSet: ['assets/images/man-with-fish-2/thumbnail-75x100.webp'],
                             alt: 'Man with fish in hands 1',
-                            caption: 'Рыбак с уловом 1',
+                            caption: 'Рыбак с весенним уловом',
                         },
                     },
                     {
@@ -42,7 +42,7 @@ module.exports = {
                         img: {
                             srcSet: ['assets/images/man-with-fish-1/thumbnail-75x100.webp'],
                             alt: 'Man with fish in hands 2',
-                            caption: 'Рыбак с уловом 2',
+                            caption: 'Рыбак с весенним уловом',
                         },
                     },
                     {
@@ -56,7 +56,7 @@ module.exports = {
                         img: {
                             srcSet: ['assets/images/man-with-fish-3/thumbnail-75x100.webp'],
                             alt: 'Man with fish in hands 3',
-                            caption: 'Рыбак с уловом 3',
+                            caption: 'Зимняя рыбалка',
                         },
                     },
                     {
@@ -64,13 +64,13 @@ module.exports = {
                             src: 'https://live.staticflickr.com/65535/50365463911_4bbcc8fd21_o.jpg',
                             width: 960,
                             height: 1280,
-                            isCropped: false,
+                            isCropped: true,
                             target: '',
                         },
                         img: {
                             srcSet: ['https://live.staticflickr.com/65535/50365463911_178aa89654_t.jpg'],
                             alt: 'Man with fish in hands 4',
-                            caption: 'Рыбак с уловом 4',
+                            caption: 'Летняя рыбалка',
                         },
                     },
                 ],
@@ -96,7 +96,7 @@ module.exports = {
                             '580px',
                         ],
                         alt: 'Pike as child',
-                        caption: 'Pike as child',
+                        caption: 'Крупный улов',
                     },
                 },
             },
@@ -156,7 +156,7 @@ module.exports = {
                         img: {
                             srcSet: ['https://live.staticflickr.com/65535/50360482948_ed74ebaf91_t.jpg'],
                             alt: 'view 2',
-                            caption: 'Вид на озеро',
+                            caption: 'Вид на дамбу',
                         },
                     },
                     {
@@ -184,7 +184,7 @@ module.exports = {
                         img: {
                             srcSet: ['https://live.staticflickr.com/65535/50361345327_728a825d79_t.jpg'],
                             alt: 'forest with mushrooms',
-                            caption: 'Лес с грибами',
+                            caption: 'Лес вокруг озера с грибами',
                         },
                     },
                     {
@@ -240,7 +240,7 @@ module.exports = {
                         img: {
                             srcSet: ['https://live.staticflickr.com/65535/50361345682_bab8504d89_t.jpg'],
                             alt: 'house window',
-                            caption: 'Комната на 2-м этаже',
+                            caption: 'Спальная комната на 2-м этаже',
                         },
                     },
                     {
@@ -268,7 +268,7 @@ module.exports = {
                         img: {
                             srcSet: ['https://live.staticflickr.com/65535/50360482768_f597727093_t.jpg'],
                             alt: 'bucket scoop',
-                            caption: 'Ведро с черпаком',
+                            caption: 'Парилка',
                         },
                     },
                 ],
@@ -296,6 +296,7 @@ module.exports = {
                         ],
                         alt: 'bath house',
                         caption: 'Баня',
+                        caption: 'Вид на домик с баней и беседку с мангалом',
                     },
                 },
             },
@@ -332,7 +333,7 @@ module.exports = {
                             '580px',
                         ],
                         alt: 'lake',
-                        caption: 'Озеро',
+                        caption: 'Вид на озеро',
                     },
                 },
                 items: [
@@ -361,7 +362,7 @@ module.exports = {
                         img: {
                             srcSet: ['https://live.staticflickr.com/65535/50361180946_cf3549919c_t.jpg'],
                             alt: 'house',
-                            caption: 'Ночлежка без отопления',
+                            caption: 'Домик рыбака',
                         },
                     },
                     {
@@ -375,7 +376,7 @@ module.exports = {
                         img: {
                             srcSet: ['https://live.staticflickr.com/65535/50361346522_8fc1134ed2_t.jpg'],
                             alt: 'protected area',
-                            caption: 'Охраняемая территория',
+                            caption: 'Огороженная, охраняемая территория',
                         },
                     },
                     {
@@ -389,7 +390,7 @@ module.exports = {
                         img: {
                             srcSet: ['https://live.staticflickr.com/65535/50361181391_a96455272d_t.jpg'],
                             alt: 'own well',
-                            caption: 'Скважина с питьевой водой',
+                            caption: 'Скважина с артезианской водой',
                         },
                     },
                 ],
@@ -401,3 +402,5 @@ module.exports = {
         },
     ],
 };
+
+module.exports = services;

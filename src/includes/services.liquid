@@ -38,33 +38,46 @@
 
                                         <div class="gallery__desk--{{ section.side }}-side {% if section.isFirst %} first {% endif %}">
                                             {% for item in galleryItems  %}
+
+                                                {% assign linkItem = item.link %}
+                                                {% assign imgItem = item.img %}
+
                                                         <a
-                                                            href="{{ item.link.src }}"
-                                                            data-pswp-width="{{ item.link.width }}"
-                                                            data-pswp-height="{{ item.link.height }}"
-                                                            target="{{ item.link.target }}"
-                                                            data-cropped="{{ item.link.isCropped }}"
+                                                            href="{{ linkItem.src }}"
+                                                            data-pswp-width="{{ linkItem.width }}"
+                                                            data-pswp-height="{{ linkItem.height }}"
+                                                            target="{{ linkItem.target }}"
+                                                            data-cropped="{{ linkItem.isCropped }}"
                                                             class="gallery__url"
                                                         >
-                                                            <img src="{{ item.img.srcSet[0] }}"
-                                                                alt="{{ item.img.alt }}"
-                                                                class="gallery__img card-img-top">
-                                                            <figure class="gallery__figure">{{ item.img.caption }}</figure>
+                                                            <figure class="gallery-caption">
+                                                                <img
+                                                                    src="{{ imgItem.srcSet[0] }}"
+                                                                    alt="{{ imgItem.alt }}"
+                                                                    class="gallery__img card-img-top"
+                                                                >
+                                                                <figcaption class="gallery-caption__text">{{ imgItem.caption }}</figcaption>
+                                                            </figure>
                                                         </a>
                                             {% endfor %}
                                         </div>
 
                                         <div class="gallery__item--main">
-                                            <a  href="{{ main.link.src }}"
+                                            <a
+                                                href="{{ main.link.src }}"
                                                 data-pswp-width="{{ main.link.width }}"
                                                 data-pswp-height="{{ main.link.height }}"
-                                                class="gallery__url">
-                                                <img
-                                                    srcset="{{ main.img.srcSet | join: ', ' }}"
-                                                    sizes="{{  main.img.sizes | join: ', ' }}"
-                                                    alt="{{ main.img.alt }}"
-                                                    class="gallery__img card-img-top">
-                                                <figure class="gallery__figure">{{ main.img.caption }}</figure>
+                                                class="gallery__url"
+                                            >
+                                                <figure class="gallery-caption">
+                                                    <img
+                                                        srcset="{{ main.img.srcSet | join: ', ' }}"
+                                                        sizes="{{  main.img.sizes | join: ', ' }}"
+                                                        alt="{{ main.img.alt }}"
+                                                        class="gallery__img card-img-top"
+                                                    >
+                                                    <figcaption class="gallery-caption__text">{{ main.img.caption }}</figcaption>
+                                                </figure>
                                             </a>
 
                                         </div>
@@ -116,12 +129,14 @@
                                             data-pswp-width="{{ main.link.width }}"
                                             data-pswp-height="{{ main.link.height }}"
                                             class="gallery__url">
-                                            <img
-                                                srcset="{{ main.img.srcSet | join: ', ' }}"
-                                                sizes="{{  main.img.sizes | join: ', ' }}"
-                                                alt="{{ main.img.alt }}"
-                                                class="gallery__img card-img-top">
-                                            <figure class="gallery__figure">{{ main.img.caption }}</figure>
+                                            <figure class="gallery-caption">
+                                                <img
+                                                    srcset="{{ main.img.srcSet | join: ', ' }}"
+                                                    sizes="{{  main.img.sizes | join: ', ' }}"
+                                                    alt="{{ main.img.alt }}"
+                                                    class="gallery__img card-img-top">
+                                                <figcaption class="gallery-caption__text">{{ main.img.caption }}</figcaption>
+                                            </figure>
                                         </a>
 
                                     </div>
@@ -136,10 +151,13 @@
                                                         data-cropped="{{ item.link.isCropped }}"
                                                         class="gallery__url"
                                                     >
-                                                        <img src="{{ item.img.srcSet[0] }}"
-                                                            alt="{{ item.img.alt }}"
-                                                            class="gallery__img card-img-top">
-                                                        <figure class="gallery__figure">{{ item.img.caption }}</figure>
+                                                        <figure class="gallery-caption">
+                                                            <img
+                                                                src="{{ item.img.srcSet[0] }}"
+                                                                alt="{{ item.img.alt }}"
+                                                                class="gallery__img card-img-top">
+                                                            <figcaption class="gallery-caption__text">{{ item.img.caption }}</figcaption>
+                                                        </figure>
                                                     </a>
                                         {% endfor %}
                                     </div>

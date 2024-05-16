@@ -4,3 +4,5 @@ layout: 'base.liquid'
 permalink: index.html
 eleventyNavigation: ''
 ---
+
+{{ services.header }}

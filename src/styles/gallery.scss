@@ -46,15 +46,48 @@
 
     &__url {
         margin-bottom: 0.5rem;
-
-        &--main {
-        }
     }
 
-    &__img {
-    }
-
-    &__figure {
+    &-caption__text {
         display: none;
+    }
+}
+
+.pswp__custom-caption {
+    background: #704936;
+    font-size: var(--font-size-lg);
+    font-weight: 600;
+    color: var(--white);
+    width: calc(100% - 2em);
+    max-width: 25rem;
+    padding: 0.25em 0.5em;
+    border-radius: 4px;
+    position: absolute;
+    left: 50%;
+    bottom: 4em;
+    transform: translateX(-50%);
+    text-align: center;
+}
+
+.pswp__bullets-indicator {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    position: absolute;
+    bottom: 2.5rem;
+    left: 50%;
+    transform: translate(-50%, 0);
+}
+
+.pswp__bullet {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #fff;
+    margin: 0 4px;
+
+    &--active {
+        background: var(--dirty-orange);
     }
 }

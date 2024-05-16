@@ -132,8 +132,8 @@ module.exports = function (config) {
     //     watch: ['data/**/*']
     // });
 
-    config.addWatchTarget('./src/data/**');
-    config.addWatchTarget('./src/scripts/**');
+    // config.addWatchTarget('./src/data/');
+    config.addWatchTarget('./src/includes/');
 
     return {
         dir: {
@@ -144,5 +144,7 @@ module.exports = function (config) {
             data: 'data',
         },
         templateFormats: ['html', 'md', 'njk', 'liquid'],
+        htmlTemplateEngine: 'liquid',
+        markdownTemplateEngine: 'liquid',
     };
 };
