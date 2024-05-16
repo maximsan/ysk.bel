@@ -1,7 +1,7 @@
 import { closeSideBarOnTimeout, toggleSideBar, addVideo, addInfoBanner, hideInfoBannerOnScroll } from './helpers';
 import { googleMapInit } from './helpers/googleMapInit';
 // import { addFixedHeader, removeFixedHeader, removeFixedHeaderOnScroll } from './helpers/header';
-import { initPhotoSwipeFromDOM } from './photo/photoSwipeSetup';
+// import { initPhotoSwipeFromDOM } from './photo/photoSwipeSetup';
 import { documentHeight } from './helpers/calculateDocumentHeight';
 import { scrollUp, showScrollUpButton } from './helpers/scrollUp';
 
@@ -12,7 +12,6 @@ const mobile = window.matchMedia(MOBILE_BREAKPOINT);
 const videoSection = document.querySelector('.video-section');
 const banner = document.querySelector('.info-banner');
 
-const gallerySelector = '.gallery';
 const windowWidth = window.innerWidth;
 
 console.log('window width', windowWidth);
@@ -87,4 +86,4 @@ if (banner) {
     hideInfoBannerOnScroll();
 }
 
-initPhotoSwipeFromDOM(gallerySelector);
+// initPhotoSwipeFromDOM(gallerySelector);

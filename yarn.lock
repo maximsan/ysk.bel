@@ -4044,10 +4044,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"photoswipe@npm:4.1.3":
-  version: 4.1.3
-  resolution: "photoswipe@npm:4.1.3"
-  checksum: dc0f0babf25c63510ab0ca47588e8840c0707e5646aff2bb51db16bcc53dc37414b148831cff028bb954c448c259244915dc704157b0e40fd0ea225dd12b1365
+"photoswipe@npm:^5.4.3":
+  version: 5.4.3
+  resolution: "photoswipe@npm:5.4.3"
+  checksum: 72179a1099362cbbb971bbb3c67b1e87bd7eafc66a4ac4ee2cc7384c9ecf48bb1c0e57892cfdff50370b2c854242a3d18f443fccc23169c363e67f53ae998cae
   languageName: node
   linkType: hard
 
@@ -5402,7 +5402,7 @@ __metadata:
     esbuild: "npm:^0.20.0"
     jquery: "npm:^3.7.1"
     npm-run-all: "npm:^4.1.5"
-    photoswipe: "npm:4.1.3"
+    photoswipe: "npm:^5.4.3"
     popper.js: "npm:1.16.1"
     prettier: "npm:^2.8.8"
     sass: "npm:1.69.5"

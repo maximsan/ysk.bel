@@ -2,29 +2,30 @@ const sass = require('sass');
 const path = require('node:path');
 const { createHash } = require('node:crypto');
 const esbuild = require('esbuild');
+
 const banner = require('./src/data/banner.js');
 const footer = require('./src/data/footer.js');
 const meta = require('./src/data/meta.js');
 const packages = require('./src/data/packages.js');
 const contacts = require('./src/data/contacts.js');
 const sidebar = require('./src/data/sidebar.js');
+const services = require('./src/data/services.js');
 
 /* For the given `content` string, generate an MD5 hash of `length` chars. */
 function getHash(content, length = 8) {
-    return createHash('md5')
-        .update(content)
-        .digest('hex')
-        .substr(0, length);
+    return createHash('md5').update(content).digest('hex').substr(0, length);
 }
 
-module.exports = function(config) {
+module.exports = function (config) {
     // Copy the contents of the `public` folder to the output folder
     // For example, `./public/css/` ends up in `_site/css/`
     config.addPassthroughCopy({
         'src/assets/public': '/',
         'src/styles/bootstrap.css': '/assets/bootstrap.css',
         'src/styles/main.css': '/assets/main.css',
-        'src/assets/videos': '/assets/videos'
+        'src/assets/videos': '/assets/videos',
+        // How to solve it without copying the file?
+        'node_modules/photoswipe/dist/photoswipe.css': '/assets/photoswipe.css',
     });
     config.addPassthroughCopy('src/assets/images');
     config.addPassthroughCopy('src/assets/icons');
@@ -39,7 +40,7 @@ module.exports = function(config) {
         /* We're feeding the `inputPath` to sass directly, so we don't need Eleventy to read the content of `.scss` files. */
         read: false,
         /* Produce the data for each `.scss` file, including its processed CSS content and its MD5 content hash. */
-        getData: async function(inputPath) {
+        getData: async function (inputPath) {
             /* Don't process .scss files that start with an underscore as standalone. */
             if (path.basename(inputPath).startsWith('_')) {
                 return false;
@@ -49,35 +50,35 @@ module.exports = function(config) {
                 /* Exclude .scss files from `collections.all` so they don't show up in sitemaps, RSS feeds, etc. */
                 eleventyExcludeFromCollections: true,
                 _content: css,
-                _hash: getHash(css)
+                _hash: getHash(css),
             };
         },
         compileOptions: {
             /* Disable caching of `.scss` files, for good measure. */
             cache: false,
-            permalink: function(permalink, inputPath) {
+            permalink: function (permalink, inputPath) {
                 /* Don't output .scss files that start with an underscore, as per Sass conventions… */
                 if (path.basename(inputPath).startsWith('_')) {
                     return false;
                 }
                 /* …and for other .scss files include the MD5 content hash produced in the `.getData()` method in the output file path. */
-                return data => `${data.page.filePathStem}.${data._hash}.css`;
-            }
+                return (data) => `${data.page.filePathStem}.${data._hash}.css`;
+            },
         },
         /* Read the processed CSS content from the data object produced with `.getData()`. */
-        compile: () => data => {
+        compile: () => (data) => {
             return data._content;
-        }
+        },
     });
 
     const outputMap = {};
-    config.addTransform('outputMap', function(content) {
+    config.addTransform('outputMap', function (content) {
         const filepath = path.relative('src', this.page.inputPath);
         outputMap[filepath] = this.page.url;
         return content;
     });
 
-    config.addFilter('hashed', function(filepath) {
+    config.addFilter('hashed', function (filepath) {
         if (!outputMap[filepath]) {
             throw new Error(`hashed: ${filepath} not found in map.`);
         }
@@ -94,6 +95,9 @@ module.exports = function(config) {
                 return;
             }
 
+            console.log('js path', path);
+            console.log('js content', content);
+
             return async () => {
                 let output = await esbuild.build({
                     target: 'es2020',
@@ -101,12 +105,12 @@ module.exports = function(config) {
                     minify: true,
                     bundle: true,
                     write: false,
-                    sourcemap: true
+                    sourcemap: true,
                 });
 
                 return output.outputFiles[0].text;
             };
-        }
+        },
     });
 
     config.setLiquidOptions({
@@ -118,15 +122,17 @@ module.exports = function(config) {
             meta,
             packages,
             contacts,
-            sidebar
-        }
+            sidebar,
+            services,
+        },
     });
 
     // config.setServerOptions({
     //     watch: ['data/**/*']
     // });
 
-    config.addWatchTarget("./src/data/**");
+    // config.addWatchTarget('./src/data/');
+    config.addWatchTarget('./src/includes/');
 
     return {
         dir: {
@@ -134,13 +140,10 @@ module.exports = function(config) {
             output: 'dist',
             includes: 'includes',
             layouts: 'layouts',
-            data: 'data'
+            data: 'data',
         },
-        templateFormats: [
-            'html',
-            'md',
-            'njk',
-            'liquid'
-        ]
+        templateFormats: ['html', 'md', 'njk', 'liquid'],
+        htmlTemplateEngine: 'liquid',
+        markdownTemplateEngine: 'liquid',
     };
 };
