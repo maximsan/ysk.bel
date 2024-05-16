@@ -1,4 +1,89 @@
-<section class='main-video-section container'>
+{% comment %} <section class='main-video-section container'>
 </section>
 <section class='video-section container'>
+</section> {% endcomment %}
+
+<section class='video-gallery'>
+    <div class="container">
+        <div class="content bg-creamy-white">
+            <div class="row">
+
+                {%  for section in videos %}
+
+                    <div class="col-12">
+                        <h3
+                                class="content-cell-header {{ section.class }} text-center w-100 mb-3rem mt-1rem"
+                                id="{{ section.id }}"
+                        >
+                            {{ section.header }}
+                        </h3>
+                    </div>
+
+                        <div class="content-cell {{ section.class }} col-12 col-md-12 ml-1rem pr-2rem mb-5rem">
+                            <div class="row">
+
+                                {% assign main = section.gallery.main %}
+                                {% assign galleryItems = section.gallery.items %}
+
+                                <div class="content-cell-element img col-12 col-sm-12 col-md-8 video-gallery">
+
+                                        <div class="video-gallery__desk--thumbnails">
+                                            {% for item in galleryItems  %}
+
+                                                {% assign linkItem = item.link %}
+                                                {% assign imgItem = item.img %}
+
+                                                        <a
+                                                            href="{{ linkItem.src }}"
+                                                            data-pswp-width="{{ linkItem.width }}"
+                                                            data-pswp-height="{{ linkItem.height }}"
+                                                            target="{{ linkItem.target }}"
+                                                            data-cropped="{{ linkItem.isCropped }}"
+                                                            class="video-gallery__url"
+                                                        >
+                                                            <figure class="video-gallery-caption">
+                                                                <img
+                                                                    src="{{ imgItem.srcSet[0] }}"
+                                                                    srcSet="{{ imgItem.srcSet | join: ', ' }}"
+                                                                    alt="{{ imgItem.alt }}"
+                                                                    class="video-gallery__img card-img-top"
+                                                                >
+                                                                <figcaption class="video-gallery-caption__text">{{ imgItem.caption }}</figcaption>
+                                                            </figure>
+                                                        </a>
+                                            {% endfor %}
+                                        </div>
+
+                                        <div class="video-gallery__item--main">
+                                            <a
+                                                href="{{ main.link.src }}"
+                                                data-pswp-width="{{ main.link.width }}"
+                                                data-pswp-height="{{ main.link.height }}"
+                                                data-cropped="{{ main.link.isCropped }}"
+                                                class="video-gallery__url"
+                                            >
+                                                <figure class="video-gallery-caption">
+                                                    <img
+                                                        srcset="{{ main.img.srcSet | join: ', ' }}"
+                                                        sizes="{{  main.img.sizes | join: ', ' }}"
+                                                        alt="{{ main.img.alt }}"
+                                                        class="video-gallery__img card-img-top"
+                                                    >
+                                                    <figcaption class="video-gallery-caption__text">{{ main.img.caption }}</figcaption>
+                                                </figure>
+                                            </a>
+
+                                        </div>
+
+
+                                </div>
+
+                            </div>
+                        </div>
+
+                {% endfor %}
+
+            </div>
+        </div>
+    </div>
 </section>

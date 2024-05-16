@@ -1,0 +1,17 @@
+.video-gallery {
+    &__desk {
+        &--thumbnails {
+            display: flex;
+            justify-content: center;
+            gap: 1em;
+        }
+    }
+
+    &__img {
+        border-radius: 0.25em;
+    }
+
+    &-caption__text {
+        display: none;
+    }
+}
