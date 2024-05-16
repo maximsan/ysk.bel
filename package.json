@@ -19,7 +19,6 @@
     "url": "https://github.com/maximsan/ysk.bel"
   },
   "dependencies": {
-    "esbuild-plugin-css-modules": "^0.3.0",
     "jquery": "^3.7.1",
     "photoswipe": "^5.4.3",
     "popper.js": "1.16.1"

@@ -2,7 +2,6 @@ const sass = require('sass');
 const path = require('node:path');
 const { createHash } = require('node:crypto');
 const esbuild = require('esbuild');
-const cssModulesPlugin = require('esbuild-plugin-css-modules');
 
 const banner = require('./src/data/banner.js');
 const footer = require('./src/data/footer.js');
