@@ -1,9 +1,10 @@
-export function addVideo({ src, className, poster }) {
+export function addVideo({ src, className, itemClassName, poster }) {
     console.log('*** init video ***');
 
-    const videoSection = document.querySelector(className);
+    const videoSection = document.querySelector(`.${className}`);
 
     const video = document.createElement('video');
+    video.className = itemClassName;
     const source = document.createElement('source');
     const noJs = document.createElement('div');
 
