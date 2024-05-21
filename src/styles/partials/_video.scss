@@ -3,6 +3,12 @@
         flex-direction: column;
         gap: 1rem;
         padding: 1rem 0;
+
+        video,
+        .secondary-video-wrapper {
+            min-height: fit-content;
+            max-height: 60dvh;
+        }
     }
 }
 
@@ -11,6 +17,11 @@
         flex-direction: row;
         gap: 3rem;
         padding: 4rem 0;
+
+        video,
+        .secondary-video-wrapper {
+            min-height: 572px;
+        }
     }
 }
 
