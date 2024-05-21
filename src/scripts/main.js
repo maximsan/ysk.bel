@@ -3,6 +3,7 @@ import { googleMapInit } from './helpers/googleMapInit';
 // import { addFixedHeader, removeFixedHeader, removeFixedHeaderOnScroll } from './helpers/header';
 import { documentHeight } from './helpers/calculateDocumentHeight';
 import { addScrollUpButton } from './helpers/scrollUp';
+import { initVideoSection } from './helpers/addVideo';
 
 const MOBILE_BREAKPOINT = '(max-width: 768px)';
 const mobile = window.matchMedia(MOBILE_BREAKPOINT);
@@ -62,20 +63,13 @@ setTimeout(() => googleMapInit(), 3000);
 
 toggleSideBar();
 
-addVideo({
-    src: 'assets/videos/main-video-compressed.mp4',
-    className: 'main-video-section',
-    poster: 'assets/images/video-poster.webp',
-});
-addVideo({
-    src: 'assets/videos/fish-1.mp4',
-    className: 'video-section',
-    itemClassName: 'video-1',
-    poster: 'assets/images/video-poster-fish-1.webp',
-});
-addVideo({
-    src: 'assets/videos/fish-2.mp4',
-    className: 'video-section',
-    itemClassName: 'video-2',
-    poster: 'assets/images/video-poster-fish-2.webp',
-});
+function initVideoSections() {
+    initVideoSection({ sectionName: 'primary', className: 'video-section', removeWrappers: true });
+    initVideoSection({ sectionName: 'secondary', className: 'video-section', removeWrappers: true });
+}
+
+if (document.readyState !== 'loading') {
+    initVideoSections();
+} else {
+    document.addEventListener('DOMContentLoaded', initVideoSections);
+}
