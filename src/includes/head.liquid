@@ -1,83 +1,99 @@
-<!-- meta info-->
-<meta charset="utf-8" />
-<meta content="ie=edge" http-equiv="X-UA-Compatible" />
+<!-- meta info -->
+<meta charset='utf-8'>
+<meta content='ie=edge' http-equiv='X-UA-Compatible'>
 <meta
-  content="width=device-width, initial-scale=1, shrink-to-fit=no"
-  name="viewport"
-/>
+    content='width=device-width, initial-scale=1, shrink-to-fit=no'
+    name='viewport'
+>
 <meta
-  name="keywords"
-  content='{{ meta.keywords }}'
-/>
+    name='keywords'
+    content='{{ meta.keywords }}'
+>
 <meta
-  name="description"
-  content='{{ meta.description }}'
-/>
+    name='description'
+    content='{{ meta.description }}'
+>
 <meta
-  property="og:title"
-  content='{{ meta.ogTitle }}'
-/>
+    property='og:title'
+    content='{{ meta.ogTitle }}'
+>
 <meta
-  property="og:description"
-  content='{{ meta.ogDescription }}'
-/>
-<meta name="author" content='{{ meta.author }}'  />
+    property='og:description'
+    content='{{ meta.ogDescription }}'
+>
+<meta name='author' content='{{ meta.author }}'>
 
 <!-- favicon -->
-<link rel="apple-touch-icon" sizes="180x180" href="assets/icons/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="assets/icons/favicon-16x16.png">
-<link rel="manifest" href="assets/icons/site.webmanifest">
+<link rel='apple-touch-icon' sizes='180x180' href='assets/icons/apple-touch-icon.png'>
+<link rel='icon' type='image/png' sizes='32x32' href='assets/icons/favicon-32x32.png'>
+<link rel='icon' type='image/png' sizes='16x16' href='assets/icons/favicon-16x16.png'>
+<link rel='manifest' href='assets/icons/site.webmanifest'>
 
-<meta content="#ffffff" name="theme-color" />
+<meta content='#ffffff' name='theme-color'>
 <!-- To run web application in full-screen -->
-<meta content="yes" name="apple-mobile-web-app-capable" />
+<meta content='yes' name='apple-mobile-web-app-capable'>
 <!-- Status Bar Style (see Supported Meta Tags below for available values) -->
 <!-- Has no effect unless you have the previous meta tag -->
-<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+<meta content='black' name='apple-mobile-web-app-status-bar-style'>
 
 <!-- Bootstrap core CSS -->
 
-
-
 <!-- Icons -->
 <script
-  defer
-  src="https://use.fontawesome.com/releases/v5.5.0/js/all.js"
+    defer
+    src='https://use.fontawesome.com/releases/v5.5.0/js/all.js'
 ></script>
 
-
-<!--Fonts-->
+<!-- Fonts -->
 <link
-  href="https://fonts.googleapis.com/css?family=Rubik:300i,400,500,500i,700"
-  rel="stylesheet"
-/>
+    href='https://fonts.googleapis.com/css?family=Rubik:300i,400,500,500i,700'
+    rel='stylesheet'
+>
 
 <!-- Document Title -->
 <title>{{ title }}</title>
 
 <!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-5W4KDDW');</script>
+<script>
+    (function (w, d, s, l, i) {
+        w[l] = w[l] || [];
+        w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+        var f = d.getElementsByTagName(s)[0],
+            j = d.createElement(s),
+            dl = l != 'dataLayer' ? '&l=' + l : '';
+        j.async = true;
+        j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+        f.parentNode.insertBefore(j, f);
+    })(window, document, 'script', 'dataLayer', 'GTM-5W4KDDW');
+</script>
 <!-- End Google Tag Manager -->
 
 <!-- Yandex.Metrika counter -->
-<script type="text/javascript" >
-    (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
-    (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+<script type='text/javascript'>
+    (function (m, e, t, r, i, k, a) {
+        m[i] =
+            m[i] ||
+            function () {
+                (m[i].a = m[i].a || []).push(arguments);
+            };
+        m[i].l = 1 * new Date();
+        (k = e.createElement(t)),
+            (a = e.getElementsByTagName(t)[0]),
+            (k.async = 1),
+            (k.src = r),
+            a.parentNode.insertBefore(k, a);
+    })(window, document, 'script', 'https://mc.yandex.ru/metrika/tag.js', 'ym');
 
-    ym(67016224, "init", {
-        clickmap:true,
-        trackLinks:true,
-        accurateTrackBounce:true,
-        webvisor:true
+    ym(67016224, 'init', {
+        clickmap: true,
+        trackLinks: true,
+        accurateTrackBounce: true,
+        webvisor: true,
     });
 </script>
-<noscript><div><img src="https://mc.yandex.ru/watch/67016224" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<noscript>
+    <div><img src='https://mc.yandex.ru/watch/67016224' style='position:absolute; left:-9999px;' alt=''></div>
+</noscript>
 <!-- /Yandex.Metrika counter -->
 
 <link rel='stylesheet' type='text/css' href='{{ 'styles/index.scss' | hashed }}'>

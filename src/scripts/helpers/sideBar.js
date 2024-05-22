@@ -9,7 +9,9 @@ const menuSelectors = [
     `a[href$='map']`,
     `a[href$='packages']`,
 ];
-const menuItemSelectors = menuSelectors.map((selector) => document.querySelector(selector));
+const menuItemSelectors = menuSelectors.map((selector) =>
+    document.querySelector(selector),
+);
 
 function openSideBar() {
     sidebar.classList.add('open');

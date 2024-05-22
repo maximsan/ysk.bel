@@ -1,5 +1,6 @@
 .section-container.contacts {
-    background: url(#{$images-path}/stones_1920x1080.webp) no-repeat center center fixed;
+    background: url(#{$images-path}/stones_1920x1080.webp) no-repeat center
+        center fixed;
     background-size: cover;
     --icon-size: 1.125em;
     --icon-size-md: 1.25em;

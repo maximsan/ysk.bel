@@ -13,7 +13,9 @@ function showInfoBanner() {
 }
 
 function showCookieInfoBanner() {
-    const hasInfoBannerCookie = document.cookie.split(';').filter((c) => c.includes('info-banner=')).length > 0;
+    const hasInfoBannerCookie =
+        document.cookie.split(';').filter((c) => c.includes('info-banner='))
+            .length > 0;
     console.log(`hasInfoBannerCookie ${hasInfoBannerCookie}`);
     if (!hasInfoBannerCookie) {
         // show banner if cookie has been expired
@@ -49,7 +51,10 @@ export function hideInfoBannerOnScroll() {
     window.addEventListener('scroll', function () {
         const currentScrollPos = window.scrollY;
         if (!bannerClosed) {
-            if (currentScrollPos < prevScrollPos || currentScrollPos < bannerBottom) {
+            if (
+                currentScrollPos < prevScrollPos ||
+                currentScrollPos < bannerBottom
+            ) {
                 showCookieInfoBanner();
             } else {
                 hideInfoBanner();

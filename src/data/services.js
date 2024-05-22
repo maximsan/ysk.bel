@@ -27,7 +27,9 @@ const services = {
                         },
                         img: {
                             src: 'assets/images/man-with-fish-2/thumbnail-75x100.webp',
-                            srcSet: ['assets/images/man-with-fish-2/thumbnail-75x100.webp'],
+                            srcSet: [
+                                'assets/images/man-with-fish-2/thumbnail-75x100.webp',
+                            ],
                             alt: 'Man with fish in hands 1',
                             caption: 'Весенний улов',
                         },
@@ -42,7 +44,9 @@ const services = {
                         },
                         img: {
                             src: 'assets/images/man-with-fish-1/thumbnail-75x100.webp',
-                            srcSet: ['assets/images/man-with-fish-1/thumbnail-75x100.webp'],
+                            srcSet: [
+                                'assets/images/man-with-fish-1/thumbnail-75x100.webp',
+                            ],
                             alt: 'Man with fish in hands 2',
                             caption: 'Весенний улов',
                         },
@@ -57,7 +61,9 @@ const services = {
                         },
                         img: {
                             src: 'assets/images/man-with-fish-3/thumbnail-75x100.webp',
-                            srcSet: ['assets/images/man-with-fish-3/thumbnail-75x100.webp'],
+                            srcSet: [
+                                'assets/images/man-with-fish-3/thumbnail-75x100.webp',
+                            ],
                             alt: 'Man with fish in hands 3',
                             caption: 'Зимняя рыбалка',
                         },
@@ -72,7 +78,9 @@ const services = {
                         },
                         img: {
                             src: 'https://live.staticflickr.com/65535/50365463911_178aa89654_t.jpg',
-                            srcSet: ['https://live.staticflickr.com/65535/50365463911_178aa89654_t.jpg'],
+                            srcSet: [
+                                'https://live.staticflickr.com/65535/50365463911_178aa89654_t.jpg',
+                            ],
                             alt: 'Man with fish in hands 4',
                             caption: 'Летняя рыбалка',
                         },
@@ -161,7 +169,9 @@ const services = {
                         },
                         img: {
                             src: 'https://live.staticflickr.com/65535/50360482948_ed74ebaf91_t.jpg',
-                            srcSet: ['https://live.staticflickr.com/65535/50360482948_ed74ebaf91_t.jpg'],
+                            srcSet: [
+                                'https://live.staticflickr.com/65535/50360482948_ed74ebaf91_t.jpg',
+                            ],
                             alt: 'view 2',
                             caption: 'Вид на дамбу',
                         },
@@ -176,7 +186,9 @@ const services = {
                         },
                         img: {
                             src: 'https://live.staticflickr.com/65535/50361345967_a8e801962a_t.jpg',
-                            srcSet: ['https://live.staticflickr.com/65535/50361345967_a8e801962a_t.jpg'],
+                            srcSet: [
+                                'https://live.staticflickr.com/65535/50361345967_a8e801962a_t.jpg',
+                            ],
                             alt: 'view',
                             caption: 'Вид на дамбу',
                         },
@@ -191,7 +203,9 @@ const services = {
                         },
                         img: {
                             src: 'https://live.staticflickr.com/65535/50361345327_728a825d79_t.jpg',
-                            srcSet: ['https://live.staticflickr.com/65535/50361345327_728a825d79_t.jpg'],
+                            srcSet: [
+                                'https://live.staticflickr.com/65535/50361345327_728a825d79_t.jpg',
+                            ],
                             alt: 'forest with mushrooms',
                             caption: 'Лес вокруг озера с грибами',
                         },
@@ -206,7 +220,9 @@ const services = {
                         },
                         img: {
                             src: 'https://live.staticflickr.com/65535/50360481958_c522434877_t.jpg',
-                            srcSet: ['https://live.staticflickr.com/65535/50360481958_c522434877_t.jpg'],
+                            srcSet: [
+                                'https://live.staticflickr.com/65535/50360481958_c522434877_t.jpg',
+                            ],
                             alt: 'sign',
                             caption: 'Знак д.Вяпраты',
                         },
@@ -235,7 +251,9 @@ const services = {
                         },
                         img: {
                             src: 'https://live.staticflickr.com/65535/50361345907_db88327615_t.jpg',
-                            srcSet: ['https://live.staticflickr.com/65535/50361345907_db88327615_t.jpg'],
+                            srcSet: [
+                                'https://live.staticflickr.com/65535/50361345907_db88327615_t.jpg',
+                            ],
                             alt: 'living room',
                             caption: 'Гостинная, 1-ый этаж',
                         },
@@ -250,7 +268,9 @@ const services = {
                         },
                         img: {
                             src: 'https://live.staticflickr.com/65535/50361345682_bab8504d89_t.jpg',
-                            srcSet: ['https://live.staticflickr.com/65535/50361345682_bab8504d89_t.jpg'],
+                            srcSet: [
+                                'https://live.staticflickr.com/65535/50361345682_bab8504d89_t.jpg',
+                            ],
                             alt: 'house window',
                             caption: 'Спальная комната на 2-м этаже',
                         },
@@ -265,7 +285,9 @@ const services = {
                         },
                         img: {
                             src: 'https://live.staticflickr.com/65535/50361180181_e64b528883_t.jpg',
-                            srcSet: ['https://live.staticflickr.com/65535/50361180181_e64b528883_t.jpg'],
+                            srcSet: [
+                                'https://live.staticflickr.com/65535/50361180181_e64b528883_t.jpg',
+                            ],
                             alt: 'steam room',
                             caption: 'Парилка',
                         },
@@ -279,7 +301,9 @@ const services = {
                             target: '',
                         },
                         img: {
-                            srcSet: ['https://live.staticflickr.com/65535/50360482768_f597727093_t.jpg'],
+                            srcSet: [
+                                'https://live.staticflickr.com/65535/50360482768_f597727093_t.jpg',
+                            ],
                             alt: 'bucket scoop',
                             caption: 'Парилка',
                         },
@@ -359,7 +383,9 @@ const services = {
                             target: '',
                         },
                         img: {
-                            srcSet: ['https://live.staticflickr.com/65535/50361347217_5582a695cb_t.jpg'],
+                            srcSet: [
+                                'https://live.staticflickr.com/65535/50361347217_5582a695cb_t.jpg',
+                            ],
                             alt: 'parking',
                             caption: 'Парковочная территория',
                         },
@@ -373,7 +399,9 @@ const services = {
                             target: '',
                         },
                         img: {
-                            srcSet: ['https://live.staticflickr.com/65535/50361180946_cf3549919c_t.jpg'],
+                            srcSet: [
+                                'https://live.staticflickr.com/65535/50361180946_cf3549919c_t.jpg',
+                            ],
                             alt: 'house',
                             caption: 'Домик рыбака',
                         },
@@ -387,7 +415,9 @@ const services = {
                             target: '',
                         },
                         img: {
-                            srcSet: ['https://live.staticflickr.com/65535/50361346522_8fc1134ed2_t.jpg'],
+                            srcSet: [
+                                'https://live.staticflickr.com/65535/50361346522_8fc1134ed2_t.jpg',
+                            ],
                             alt: 'protected area',
                             caption: 'Огороженная, охраняемая территория',
                         },
@@ -401,7 +431,9 @@ const services = {
                             target: '',
                         },
                         img: {
-                            srcSet: ['https://live.staticflickr.com/65535/50361181391_a96455272d_t.jpg'],
+                            srcSet: [
+                                'https://live.staticflickr.com/65535/50361181391_a96455272d_t.jpg',
+                            ],
                             alt: 'own well',
                             caption: 'Скважина с артезианской водой',
                         },

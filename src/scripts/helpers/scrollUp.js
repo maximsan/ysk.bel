@@ -26,8 +26,11 @@ export function showScrollUpButton() {
         if (!ticking) {
             window.requestAnimationFrame(function () {
                 if (
-                    (lastKnownScrollTopPosition > TOP_OFFSET || lastKnownElementScrollTopPosition > TOP_OFFSET) &&
-                    lastKnownScrollHeightPosition - lastKnownElementScrollTopPosition > BOTTOM_OFFSET
+                    (lastKnownScrollTopPosition > TOP_OFFSET ||
+                        lastKnownElementScrollTopPosition > TOP_OFFSET) &&
+                    lastKnownScrollHeightPosition -
+                        lastKnownElementScrollTopPosition >
+                        BOTTOM_OFFSET
                 ) {
                     showScrollButton();
                 } else {

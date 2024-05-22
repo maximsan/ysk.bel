@@ -1253,6 +1253,28 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@shopify/liquid-html-parser@npm:^2.0.3":
+  version: 2.0.3
+  resolution: "@shopify/liquid-html-parser@npm:2.0.3"
+  dependencies:
+    line-column: "npm:^1.0.2"
+    ohm-js: "npm:^16.3.0"
+  checksum: f2c3230b476d157b6116bc1fa938aa7f06513c734376f4da78729880929d19928eed0fbcdcdd15503270c446fdde6afd2b96df910bf4d0d953cb847b0b5fc01f
+  languageName: node
+  linkType: hard
+
+"@shopify/prettier-plugin-liquid@npm:^1.5.0":
+  version: 1.5.0
+  resolution: "@shopify/prettier-plugin-liquid@npm:1.5.0"
+  dependencies:
+    "@shopify/liquid-html-parser": "npm:^2.0.3"
+    html-styles: "npm:^1.0.0"
+  peerDependencies:
+    prettier: ^2.0.0 || ^3.0.0
+  checksum: ec5a776cb3e560038430d0d65651867797a13448a2fe59df6c8b4c8bd4991feb094011f50ab1616b9c83891ed55f389f618f9fbdefbb7e506aa49582e78ad3c3
+  languageName: node
+  linkType: hard
+
 "@sindresorhus/slugify@npm:^1.1.2":
   version: 1.1.2
   resolution: "@sindresorhus/slugify@npm:1.1.2"
@@ -2793,6 +2815,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"html-styles@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "html-styles@npm:1.0.0"
+  checksum: 076d295f15cdb8c576cea171cf7603ad550c168d6e0c5bbd2e70a4031fac718f2227c677d0f101d05c8194a8291322c3f82fa8a0180fdcdd8e1228af76a3af97
+  languageName: node
+  linkType: hard
+
 "htmlparser2@npm:^7.1.1":
   version: 7.2.0
   resolution: "htmlparser2@npm:7.2.0"
@@ -3193,6 +3222,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"isarray@npm:1.0.0, isarray@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "isarray@npm:1.0.0"
+  checksum: f032df8e02dce8ec565cf2eb605ea939bdccea528dbcf565cdf92bfa2da9110461159d86a537388ef1acef8815a330642d7885b29010e8f7eac967c9993b65ab
+  languageName: node
+  linkType: hard
+
 "isarray@npm:^2.0.5":
   version: 2.0.5
   resolution: "isarray@npm:2.0.5"
@@ -3211,6 +3247,15 @@ __metadata:
   version: 2.1.15
   resolution: "iso-639-1@npm:2.1.15"
   checksum: 32f6cfdfa5e85eef54cb2df77829e6678e9479e9b6a7fdb7e75ba0005957d4da35ff315b69c354e216ba46044e4437b1823362d27dff14bcefbb408b2a66e2f8
+  languageName: node
+  linkType: hard
+
+"isobject@npm:^2.0.0":
+  version: 2.1.0
+  resolution: "isobject@npm:2.1.0"
+  dependencies:
+    isarray: "npm:1.0.0"
+  checksum: 811c6f5a866877d31f0606a88af4a45f282544de886bf29f6a34c46616a1ae2ed17076cc6bf34c0128f33eecf7e1fcaa2c82cf3770560d3e26810894e96ae79f
   languageName: node
   linkType: hard
 
@@ -3341,6 +3386,16 @@ __metadata:
   version: 4.1.5
   resolution: "kleur@npm:4.1.5"
   checksum: 44d84cc4eedd4311099402ef6d4acd9b2d16e08e499d6ef3bb92389bd4692d7ef09e35248c26e27f98acac532122acb12a1bfee645994ae3af4f0a37996da7df
+  languageName: node
+  linkType: hard
+
+"line-column@npm:^1.0.2":
+  version: 1.0.2
+  resolution: "line-column@npm:1.0.2"
+  dependencies:
+    isarray: "npm:^1.0.0"
+    isobject: "npm:^2.0.0"
+  checksum: 955c60d175e18d925057fa8a29f051eb8bf363d07bd2a7237a421442368855725ff2868690add1add1884833621f18873c228e2d17ba859d6c69ab0a53e88868
   languageName: node
   linkType: hard
 
@@ -3917,6 +3972,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"ohm-js@npm:^16.3.0":
+  version: 16.6.0
+  resolution: "ohm-js@npm:16.6.0"
+  checksum: 75c63616d278faca6748bada1f095f47ee7d16eafc32612bdd8a697eda892a5c9c389cac7988f2cc53ff3a03bfeb8f0ade45f91bdfb0968b0d4b53454fd2629e
+  languageName: node
+  linkType: hard
+
 "on-finished@npm:2.4.1":
   version: 2.4.1
   resolution: "on-finished@npm:2.4.1"
@@ -4160,12 +4222,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prettier@npm:^2.8.8":
-  version: 2.8.8
-  resolution: "prettier@npm:2.8.8"
+"prettier@npm:^3.2.5":
+  version: 3.2.5
+  resolution: "prettier@npm:3.2.5"
   bin:
-    prettier: bin-prettier.js
-  checksum: 00cdb6ab0281f98306cd1847425c24cbaaa48a5ff03633945ab4c701901b8e96ad558eb0777364ffc312f437af9b5a07d0f45346266e8245beaf6247b9c62b24
+    prettier: bin/prettier.cjs
+  checksum: d509f9da0b70e8cacc561a1911c0d99ec75117faed27b95cc8534cb2349667dee6351b0ca83fa9d5703f14127faa52b798de40f5705f02d843da133fc3aa416a
   languageName: node
   linkType: hard
 
@@ -5395,6 +5457,7 @@ __metadata:
     "@babel/core": "npm:^7.21.4"
     "@babel/preset-env": "npm:7.2.3"
     "@esbuild/darwin-arm64": "npm:^0.20.0"
+    "@shopify/prettier-plugin-liquid": "npm:^1.5.0"
     babel-loader: "npm:8.0.5"
     babel-plugin-syntax-dynamic-import: "npm:6.18.0"
     bootstrap: "npm:4.5.3"
@@ -5404,7 +5467,7 @@ __metadata:
     npm-run-all: "npm:^4.1.5"
     photoswipe: "npm:^5.4.3"
     popper.js: "npm:1.16.1"
-    prettier: "npm:^2.8.8"
+    prettier: "npm:^3.2.5"
     sass: "npm:1.69.5"
   languageName: unknown
   linkType: soft

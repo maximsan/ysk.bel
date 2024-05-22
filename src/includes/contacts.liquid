@@ -1,54 +1,52 @@
-<section class="section-container contacts" id="contacts">
-    <div class="container">
-        <div class="row">
-            <div class="col-12 col-lg-6">
-                <div class="our-contacts">
-                            <div class="address">
-                                <h4 class="address-header">{{ contacts.header }}</h4>
-                                <div class="address-desc">
-                                    <div class="address-desc-item">
-                                        {{ contacts.region }}
-                                    </div>
-                                    <div class="address-desc-item">
-                                        {{ contacts.address }}
-                                    </div>
-                                    <div class="address-desc-item">
-                                        {{ contacts.companyName }}
-                                    </div>
-                                    <div class="address-desc-item">
-                                        {{ contacts.coordinates.header }}
-                                    </div>
-                                    <div class="address-desc-item">
-                                        {{ contacts.coordinates.lat }}
-                                    </div>
-                                    <div class="address-desc-item">
-                                        {{ contacts.coordinates.lng }}
-                                    </div>
-                                </div>
+<section class='section-container contacts' id='contacts'>
+    <div class='container'>
+        <div class='row'>
+            <div class='col-12 col-lg-6'>
+                <div class='our-contacts'>
+                    <div class='address'>
+                        <h4 class='address-header'>{{ contacts.header }}</h4>
+                        <div class='address-desc'>
+                            <div class='address-desc-item'>
+                                {{ contacts.region }}
                             </div>
-                            <div class="address">
-                                <h4 class="address-header">{{ contacts.contactUs.header }}</h4>
-                                <div class="address-desc">
-                                    <div class="contact-us">
-                                        {% for phone in contacts.contactUs.phones %}
-                                            <div class="contact-us__{{ phone.operator }}">
-                                                <img
-                                                    alt="{{ phone.operator }}"
-                                                    class="{{ phone.operator }}-icon"
-                                                    src="{{ phone.iconUrl }}"
-                                                />
-                                                <span href="{{ phone.href }}" class="phone-number"
-                                                >{{ phone.text }}</span
-                                                >
-                                            </div>
-                                        {% endfor %}
-                                    </div>
-                                </div>
+                            <div class='address-desc-item'>
+                                {{ contacts.address }}
+                            </div>
+                            <div class='address-desc-item'>
+                                {{ contacts.companyName }}
+                            </div>
+                            <div class='address-desc-item'>
+                                {{ contacts.coordinates.header }}
+                            </div>
+                            <div class='address-desc-item'>
+                                {{ contacts.coordinates.lat }}
+                            </div>
+                            <div class='address-desc-item'>
+                                {{ contacts.coordinates.lng }}
                             </div>
                         </div>
                     </div>
-            <div class="col-12 col-lg-6">
-                <div class="map" id="map"></div>
+                    <div class='address'>
+                        <h4 class='address-header'>{{ contacts.contactUs.header }}</h4>
+                        <div class='address-desc'>
+                            <div class='contact-us'>
+                                {% for phone in contacts.contactUs.phones %}
+                                    <div class='contact-us__{{ phone.operator }}'>
+                                        <img
+                                            alt='{{ phone.operator }}'
+                                            class='{{ phone.operator }}-icon'
+                                            src='{{ phone.iconUrl }}'
+                                        >
+                                        <span href='{{ phone.href }}' class='phone-number'>{{ phone.text }}</span>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class='col-12 col-lg-6'>
+                <div class='map' id='map'></div>
             </div>
         </div>
     </div>

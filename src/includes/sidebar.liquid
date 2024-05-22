@@ -1,16 +1,17 @@
-<div class="sidebar bg-light-black">
-    <div class="navbar-collapse" id="navbar-collapse">
-        <ul class="navbar-nav">
+<div class='sidebar bg-light-black'>
+    <div class='navbar-collapse' id='navbar-collapse'>
+        <ul class='navbar-nav'>
+            <li class='nav-item desktop'>
+                <!-- <button class="button-link order" data-toggle="modal" data-target="#contact-with-modal"> -->
+                <!-- Заказать домик -->
+                <!-- </button> -->
 
-            <li class="nav-item desktop">
-                <!--                <button class="button-link order" data-toggle="modal" data-target="#contact-with-modal">-->
-                <!--                    Заказать домик-->
-                <!--                </button>-->
-
-                <div class="phones">
+                <div class='phones'>
                     {% for phone in sidebar.phones %}
-                        <a class="phone"
-                           href="{{ phone.href }}">
+                        <a
+                            class='phone'
+                            href='{{ phone.href }}'
+                        >
                             <span>{{ phone.text }}</span>
                         </a>
                     {% endfor %}
@@ -18,23 +19,25 @@
             </li>
 
             {% for menu in sidebar.menus %}
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ menu.href }}">{{ menu.text }}</a>
+                <li class='nav-item'>
+                    <a class='nav-link' href='{{ menu.href }}'>{{ menu.text }}</a>
                 </li>
             {% endfor %}
 
-            <li class="nav-item mobile">
-                <!--                <button class="button-link order" data-toggle="modal" data-target="#contact-with-modal">-->
-                <!--                    Заказать баню-->
-                <!--                </button>-->
-                <button class="button-link order">
+            <li class='nav-item mobile'>
+                <!-- <button class="button-link order" data-toggle="modal" data-target="#contact-with-modal"> -->
+                <!-- Заказать баню -->
+                <!-- </button> -->
+                <button class='button-link order'>
                     {{ sidebar.button.text }}
                 </button>
-                <div class="phones">
+                <div class='phones'>
                     {% for phone in sidebar.phones %}
                         <p>
-                            <a class="button-link phone"
-                               href="{{ phone.href }}">
+                            <a
+                                class='button-link phone'
+                                href='{{ phone.href }}'
+                            >
                                 {{ phone.text }}
                             </a>
                         </p>
@@ -42,39 +45,40 @@
                 </div>
             </li>
 
-            <li class="nav-item mobile">
-                <a class="nav-link" href="#map">
+            <li class='nav-item mobile'>
+                <a class='nav-link' href='#map'>
                     {{ sidebar.howTo }}
                 </a>
             </li>
 
-            <!--            <% render 'components/contact-button.ejs' %>-->
-
+            <!-- <% render 'components/contact-button.ejs' %> -->
         </ul>
-        <nav class="nav-footer">
-            <!--            <div class="nav-footer-social-buttons">-->
-            <!--                <a-->
-            <!--                        class="fa-icon"-->
-            <!--                        href="https://ru.airbnb.com/rooms/27016634"-->
-            <!--                        rel="noopener noreferrer"-->
-            <!--                        target="_blank"-->
-            <!--                ><img-->
-            <!--                            alt="airbnb"-->
-            <!--                            class="airbnb-icon"-->
-            <!--                            src="images/icons/airbnb.svg"-->
-            <!--                    /></a>-->
-            <!--                <a-->
-            <!--                        class="fa-icon"-->
-            <!--                        href="https://www.booking.com/hotel/by/usadba-serebryanny-karas.en-gb.html?aid=898224&app_hotel_id=3839492&checkin=2018-12-9&checkout=2018-12-10&from_sn=ios&group_adults=2&group_children=0&label=Share-FK0oi0%401544365840&no_rooms=1&req_adults=2&req_children=0&room1=A%2CA%2C"-->
-            <!--                        rel="noopener noreferrer"-->
-            <!--                        target="_blank"-->
-            <!--                ><img-->
-            <!--                            alt="booking"-->
-            <!--                            class="booking-icon"-->
-            <!--                            src="images/icons/booking.svg"-->
-            <!--                    />-->
-            <!--                </a>-->
-            <!--            </div>-->
+        <nav class='nav-footer'>
+            <!-- <div class="nav-footer-social-buttons"> -->
+            <!-- <a -->
+            <!-- class="fa-icon" -->
+            <!-- href="https://ru.airbnb.com/rooms/27016634" -->
+            <!-- rel="noopener noreferrer" -->
+            <!-- target="_blank" -->
+            <!-- ><img -->
+            <!-- alt="airbnb" -->
+            <!-- class="airbnb-icon" -->
+            <!-- src="images/icons/airbnb.svg" -->
+            <!-- /></a> -->
+            <!-- <a -->
+            <!-- class="fa-icon" -->
+            <!--
+                href="https://www.booking.com/hotel/by/usadba-serebryanny-karas.en-gb.html?aid=898224&app_hotel_id=3839492&checkin=2018-12-9&checkout=2018-12-10&from_sn=ios&group_adults=2&group_children=0&label=Share-FK0oi0%401544365840&no_rooms=1&req_adults=2&req_children=0&room1=A%2CA%2C"
+            -->
+            <!-- rel="noopener noreferrer" -->
+            <!-- target="_blank" -->
+            <!-- ><img -->
+            <!-- alt="booking" -->
+            <!-- class="booking-icon" -->
+            <!-- src="images/icons/booking.svg" -->
+            <!-- /> -->
+            <!-- </a> -->
+            <!-- </div> -->
             <div>{{ sidebar.author.co }}</div>
             <div>{{ sidebar.author.by }}</div>
         </nav>

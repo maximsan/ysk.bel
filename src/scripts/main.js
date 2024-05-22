@@ -1,4 +1,10 @@
-import { closeSideBarOnTimeout, toggleSideBar, addVideo, addInfoBanner, hideInfoBannerOnScroll } from './helpers';
+import {
+    closeSideBarOnTimeout,
+    toggleSideBar,
+    addVideo,
+    addInfoBanner,
+    hideInfoBannerOnScroll,
+} from './helpers';
 import { googleMapInit } from './helpers/googleMapInit';
 // import { addFixedHeader, removeFixedHeader, removeFixedHeaderOnScroll } from './helpers/header';
 // import { initPhotoSwipeFromDOM } from './photo/photoSwipeSetup';

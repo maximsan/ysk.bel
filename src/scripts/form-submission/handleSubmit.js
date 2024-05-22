@@ -20,7 +20,7 @@ export function handleSubmit(event) {
         fetch('https://smartforms.dev/submit/5f575b80b81854118fd3d51d', {
             method: 'post',
             body,
-        })
+        }),
     )
         .then((result) => {
             console.log(result);
