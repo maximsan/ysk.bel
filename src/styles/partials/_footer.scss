@@ -26,14 +26,6 @@
             text-decoration: none;
         }
 
-        &.airbnb {
-            color: $airbnb;
-        }
-
-        &.booking {
-            color: $booking;
-        }
-
         &.skype {
             color: $skype;
         }
@@ -50,11 +42,6 @@
         .fa-viber,
         .fa-whatsapp {
             font-size: var(--font-size-xl);
-        }
-
-        .booking-icon,
-        .airbnb-icon {
-            width: 1.875rem;
         }
     }
 
