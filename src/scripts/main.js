@@ -7,16 +7,14 @@ import {
 } from './helpers';
 import { googleMapInit } from './helpers/googleMapInit';
 // import { addFixedHeader, removeFixedHeader, removeFixedHeaderOnScroll } from './helpers/header';
-// import { initPhotoSwipeFromDOM } from './photo/photoSwipeSetup';
 import { documentHeight } from './helpers/calculateDocumentHeight';
-import { scrollUp, showScrollUpButton } from './helpers/scrollUp';
+import { addScrollUpButton } from './helpers/scrollUp';
+import { initVideoSection } from './helpers/addVideo';
 
 const MOBILE_BREAKPOINT = '(max-width: 768px)';
-const IPAD_BREAKPOINT = window.matchMedia('(min-width: 768px)');
 const mobile = window.matchMedia(MOBILE_BREAKPOINT);
 
-const videoSection = document.querySelector('.video-section');
-const banner = document.querySelector('.info-banner');
+const hasInfoBannerElement = document.querySelector('.info-banner');
 
 const windowWidth = window.innerWidth;
 
@@ -24,25 +22,21 @@ console.log('window width', windowWidth);
 
 console.log('mobile', mobile);
 
-const mobileMethods = () => {
+const mobileOnlyMethods = () => {
     // removeFixedHeaderOnScroll();
     // addFixedHeader();
 
     closeSideBarOnTimeout();
-    videoSection.style.display = 'none';
 };
 
 // TODO: review all code
-const desktopMethods = () => {
+const desktopOnlyMethods = () => {
     // removeFixedHeader();
     // addFixedHeaderOnScroll();
 
-    showScrollUpButton();
-    scrollUp();
+    addScrollUpButton();
 
-    videoSection.style.display = 'flex';
-
-    if (banner) {
+    if (hasInfoBannerElement) {
         addInfoBanner();
         hideInfoBannerOnScroll();
     }
@@ -50,18 +44,22 @@ const desktopMethods = () => {
 
 mobile.addEventListener('change', (event) => {
     if (event.matches) {
-        mobileMethods();
+        mobileOnlyMethods();
     } else {
-        desktopMethods();
+        desktopOnlyMethods();
     }
 });
 
 if (mobile.matches) {
-    closeSideBarOnTimeout();
+    mobileOnlyMethods();
 } else {
     // addFixedHeaderOnScroll();
-    showScrollUpButton();
-    scrollUp();
+    desktopOnlyMethods();
+}
+
+if (hasInfoBannerElement) {
+    addInfoBanner();
+    hideInfoBannerOnScroll();
 }
 
 // TODO: Do we need it ?
@@ -71,25 +69,13 @@ setTimeout(() => googleMapInit(), 3000);
 
 toggleSideBar();
 
-addVideo({
-    src: 'assets/videos/main-video-compressed.mp4',
-    className: '.main-video-section',
-    poster: 'assets/images/video-poster.webp',
-});
-addVideo({
-    src: 'assets/videos/fish-1.mp4',
-    className: '.video-section',
-    poster: 'assets/images/video-poster-fish-1.webp',
-});
-addVideo({
-    src: 'assets/videos/fish-2.mp4',
-    className: '.video-section',
-    poster: 'assets/images/video-poster-fish-2.webp',
-});
-
-if (banner) {
-    addInfoBanner();
-    hideInfoBannerOnScroll();
+function initVideoSections() {
+    initVideoSection({ sectionName: 'primary', className: 'video-section', removeWrappers: true });
+    initVideoSection({ sectionName: 'secondary', className: 'video-section', removeWrappers: true });
 }
 
-// initPhotoSwipeFromDOM(gallerySelector);
+if (document.readyState !== 'loading') {
+    initVideoSections();
+} else {
+    document.addEventListener('DOMContentLoaded', initVideoSections);
+}

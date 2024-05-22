@@ -16,7 +16,7 @@ let ticking = false;
 const TOP_OFFSET = 320;
 const BOTTOM_OFFSET = 880;
 
-export function showScrollUpButton() {
+function showScrollUpButton() {
     window.addEventListener('scroll', function () {
         console.log('inside');
         lastKnownScrollTopPosition = document.body.scrollTop;
@@ -44,9 +44,13 @@ export function showScrollUpButton() {
     });
 }
 
-// When the user clicks on the button, scroll to the top of the document
-export function scrollUp() {
+function addScrollUpOnClick() {
     button.addEventListener('click', function () {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     });
+}
+
+export function addScrollUpButton() {
+    showScrollUpButton();
+    addScrollUpOnClick();
 }
