@@ -21,3 +21,24 @@ jobs:
 
             - name: build app
               run: yarn build
+
+    deploy:
+        if: github.ref == 'refs/heads/main'
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: checkout code
+              uses: actions/checkout@v3
+
+            - name: Set up SSH
+              uses: webfactory/ssh-agent@v0.5.4
+              with:
+                ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+            - name: Run deploy script
+              run: ./deploy.sh
+              env:
+                REMOTE_USER: ${{ secrets.REMOTE_USER }}
+                REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
+                REMOTE_PATH: ${{ secrets.REMOTE_PATH }}
+                LOCAL_PATH: ${{ secrets.LOCAL_PATH }}
