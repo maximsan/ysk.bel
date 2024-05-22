@@ -12,7 +12,9 @@
     "clean": "rm -rf dist",
     "format": "prettier --write src",
     "deploy:sh": "npx surge dist ysk.surge.sh",
-    "deploy": "npm-run-all clean build:eleventy deploy:sh"
+    "deploy": "npm-run-all clean build:eleventy deploy:sh",
+    "deploy:rb": "./deploy.sh",
+    "deploy:all": "npm-run-all clean build:eleventy deploy:rb"
   },
   "repository": {
     "type": "git",
