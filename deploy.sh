@@ -8,8 +8,13 @@
 
 echo "Reading variables from .env file..."
 
+# if [ -f .env ]; then
+#   export $(cat .env | xargs)
+# fi
+
 if [ -f .env ]; then
-  export $(cat .env | xargs)
+    # Загружаем только нужные переменные окружения из файла .env
+    export $(grep -E "^(REMOTE_USER|REMOTE_HOST|REMOTE_PATH|LOCAL_PATH)=" .env | xargs)
 fi
 
 echo "Starting deploy..."
