@@ -131,7 +131,7 @@ body {
 
 .close-menu,
 .open-menu {
-    color: $lighter-brown;
+    color: var(--lighter-brown);
 }
 
 @media only screen and (min-width: 768px) {
