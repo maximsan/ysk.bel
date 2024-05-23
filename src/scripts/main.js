@@ -1,15 +1,14 @@
 import {
     closeSideBarOnTimeout,
     toggleSideBar,
-    addVideo,
     addInfoBanner,
     hideInfoBannerOnScroll,
+    googleMapInit,
+    documentHeight,
+    addScrollUpButton,
+    initVideoSection,
 } from './helpers';
-import { googleMapInit } from './helpers/googleMapInit';
 // import { addFixedHeader, removeFixedHeader, removeFixedHeaderOnScroll } from './helpers/header';
-import { documentHeight } from './helpers/calculateDocumentHeight';
-import { addScrollUpButton } from './helpers/scrollUp';
-import { initVideoSection } from './helpers/addVideo';
 
 const MOBILE_BREAKPOINT = '(max-width: 768px)';
 const mobile = window.matchMedia(MOBILE_BREAKPOINT);
@@ -70,8 +69,16 @@ setTimeout(() => googleMapInit(), 3000);
 toggleSideBar();
 
 function initVideoSections() {
-    initVideoSection({ sectionName: 'primary', className: 'video-section', removeWrappers: true });
-    initVideoSection({ sectionName: 'secondary', className: 'video-section', removeWrappers: true });
+    initVideoSection({
+        sectionName: 'primary',
+        className: 'video-section',
+        removeWrappers: true,
+    });
+    initVideoSection({
+        sectionName: 'secondary',
+        className: 'video-section',
+        removeWrappers: true,
+    });
 }
 
 if (document.readyState !== 'loading') {

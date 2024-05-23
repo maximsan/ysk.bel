@@ -23,9 +23,15 @@ function setNotSupportJS({ parentNode }) {
     parentNode.appendChild(noJs);
 }
 
-export function initVideoSection({ sectionName, className, removeWrappers = false }) {
+export function initVideoSection({
+    sectionName,
+    className,
+    removeWrappers = false,
+}) {
     const videoSection = document.querySelector(`.${sectionName}-${className}`);
-    const videoWraps = document.querySelectorAll(`.${sectionName}-video-wrapper`);
+    const videoWraps = document.querySelectorAll(
+        `.${sectionName}-video-wrapper`,
+    );
     const videoStateMap = new Map();
 
     const observer = new IntersectionObserver((entries) => {
@@ -33,7 +39,9 @@ export function initVideoSection({ sectionName, className, removeWrappers = fals
             if (isIntersecting && !videoStateMap.get(target)) {
                 const url = target.getAttribute('data-video-url');
                 const poster = target.getAttribute('data-video-poster');
-                const extensions = target.getAttribute('data-video-extensions').split(',');
+                const extensions = target
+                    .getAttribute('data-video-extensions')
+                    .split(',');
 
                 const videoTag = createVideoTag({ poster });
                 setVideoResources({ url, extensions, videoTag });
