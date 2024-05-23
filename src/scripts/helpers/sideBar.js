@@ -16,6 +16,8 @@ const menuItemSelectors = menuSelectors.map((selector) =>
 function openSideBar() {
     sidebar.classList.add('open');
     document.body.style.overflow = 'hidden';
+    // this prevents scrolling om mobile devices
+    document.body.style.position = 'fixed';
 
     sidebarOpenIcon.classList.add('hidden');
     sidebarCloseIcon.classList.remove('hidden');
@@ -23,7 +25,8 @@ function openSideBar() {
 
 function closeSideBar() {
     sidebar.classList.remove('open');
-    document.body.style.overflow = null;
+    document.body.style.overflow = 'auto';
+    document.body.style.position = '';
 
     sidebarCloseIcon.classList.add('hidden');
     sidebarOpenIcon.classList.remove('hidden');
