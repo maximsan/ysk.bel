@@ -1,9 +1,9 @@
 @import url('https://fonts.googleapis.com/css?family=Rubik:400,500,500i,700,700i&display=swap');
 
 @import 'modules/constants';
-@import 'modules/animations';
 @import 'modules/common';
 @import 'modules/mixins';
+@import 'modules/animations';
 @import 'gallery';
 @import 'partials/footer';
 @import 'partials/contacts';
@@ -97,18 +97,6 @@ body {
     color: $orange;
     font-size: 1.75rem;
     font-weight: bold;
-}
-
-.overlay {
-    display: none;
-    opacity: 0.5;
-    background-color: black;
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    z-index: 999;
 }
 
 .cross {
