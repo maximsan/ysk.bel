@@ -8,19 +8,29 @@
         padding: 10px 30px;
         top: 5rem;
 
-        // margin-top: 3rem;
-
         *,
         .navbar-nav .nav-item .nav-link {
-            color: var(--white);
             font-size: var(--font-size-base);
+        }
+
+        .button-link:hover {
+            color: var(--white-hover);
+            text-decoration: none;
         }
 
         .navbar-collapse {
             padding: 0;
 
             .navbar-nav {
+                gap: 0.5rem;
+
                 .nav-item {
+                    max-width: max-content;
+
+                    &::before {
+                        bottom: 0px;
+                    }
+
                     .house-order {
                         font-size: var(--font-size-md);
                         cursor: pointer;
@@ -30,6 +40,11 @@
                         font-size: 1rem;
                         margin-top: 0.5rem;
 
+                        p {
+                            padding: 0;
+                            margin : 0;
+                        }
+
                         .phone {
                             margin-bottom: 0.5rem;
                         }
@@ -38,10 +53,6 @@
                     .nav-link {
                         margin: 0;
                         padding: 0.2rem 0;
-                    }
-
-                    &:last-child {
-                        margin-top: 0.5rem;
                     }
                 }
             }
@@ -82,11 +93,6 @@
     @media only screen and (min-width: 768px) {
         padding: 0;
         margin-top: 0;
-
-        *,
-        .navbar-nav .nav-item .nav-link {
-            color: var(--white);
-        }
 
         .navbar-collapse {
             .navbar-nav {

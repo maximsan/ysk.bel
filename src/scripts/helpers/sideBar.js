@@ -1,3 +1,4 @@
+const header = document.querySelector('.header');
 const sidebar = document.querySelector('.sidebar');
 const navButton = document.querySelector('.navbar-toggler');
 const sidebarOpenIcon = document.querySelector('.open-menu');
@@ -19,6 +20,9 @@ function openSideBar() {
     // this prevents scrolling om mobile devices
     document.body.style.position = 'fixed';
 
+    header.style.position = 'fixed';
+    header.style.inset = '0';
+
     sidebarOpenIcon.classList.add('hidden');
     sidebarCloseIcon.classList.remove('hidden');
 }
@@ -27,6 +31,9 @@ function closeSideBar() {
     sidebar.classList.remove('open');
     document.body.style.overflow = 'auto';
     document.body.style.position = '';
+
+    header.style.position = 'sticky';
+    // header.style.inset = 'auto';
 
     sidebarCloseIcon.classList.add('hidden');
     sidebarOpenIcon.classList.remove('hidden');

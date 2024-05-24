@@ -26,8 +26,8 @@ body {
     padding: 0 !important;
     margin: 0 !important;
 
-    height: 100vh; /* fallback for Js load */
-    height: var(--doc-height);
+    // height: 100vh; /* fallback for Js load */
+    // height: var(--doc-height);
 }
 
 @supports (scroll-behavior: smooth) {
@@ -123,10 +123,12 @@ body {
 .button-link {
     background: inherit;
     position: relative;
-    color: $white;
+    color: var(--white);
     text-decoration: none;
     border: none;
     cursor: pointer;
+    margin: 0;
+    padding: 0;
 }
 
 .close-menu,

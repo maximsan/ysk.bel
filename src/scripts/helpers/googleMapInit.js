@@ -3,6 +3,7 @@ export function googleMapInit() {
         lat: 54.291652,
         lng: 27.480454,
     };
+
     const map = new google.maps.Map(document.getElementById('map'), {
         zoom: 16,
         center: lat,

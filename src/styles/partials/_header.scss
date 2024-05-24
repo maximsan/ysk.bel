@@ -26,7 +26,7 @@
     --_animationStartsAfter: 50vh;
     --_animationDistance: 500px;
     --_backgroundColorStart: var(--light-black);
-    --_backgroundColorEnd: hsl(var(--light-black) / 0.1);
+    --_backgroundColorEnd: var(--light-black);
     --_textColorStart: var(--white);
     --_textColorEnd: var(--white);
 
@@ -45,7 +45,7 @@
     @supports (animation-timeline: view()) {
         top: -5.5rem;
 
-        backdrop-filter: blur(0.35rem);
+        // backdrop-filter: blur(0.35rem);
 
         animation: stickyNavigation linear forwards;
         animation-timeline: view();
@@ -88,6 +88,11 @@
             .nav-link {
                 font-size: 1.25rem;
                 margin-right: 1.25rem;
+
+                &:hover,
+                &:focus {
+                    color: var(--white-hover);
+                }
             }
 
             .house {
@@ -115,6 +120,7 @@
 
     .navbar-toggler {
         border: none;
+        padding: 0.25rem;
 
         @include outline;
 
@@ -125,6 +131,9 @@
     }
 
     @media only screen and (min-width: 320px) and (max-width: 767.98px) {
+        gap: 0.5rem;
+        padding: 1.5rem;
+
         .navbar-nav {
             flex-direction: column;
         }
@@ -142,16 +151,6 @@
             justify-content: center;
         }
 
-        // .container {
-        //     max-width: 760px;
-        //     padding: 0;
-        //     overflow: hidden;
-        // }
-
-        .navbar-header {
-            // margin-inline-end: auto
-        }
-
         .nav-footer {
             display: none;
         }
@@ -164,24 +163,15 @@
     @media (min-width: 992px) {
         padding: 1.5rem 1rem;
 
-        // .container {
-        //     max-width: 980px;
-        //     margin: 0 1.75rem;
-
         .navbar-header {
             margin-left: 1rem;
             margin-inline-end: auto;
         }
-        // }
     }
 
     @media (min-width: 1200px) {
-        // .container {
-        //     max-width: 1260px;
-
         .navbar-header {
             margin-left: 2rem;
         }
-        // }
     }
 }

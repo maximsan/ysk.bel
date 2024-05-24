@@ -15,7 +15,8 @@
 /*
   3. Allow percentage-based heights in the application
 */
-html,
+/* it doesn't work with position sticky for some reason */
+/* html, */
 body {
     height: 100%;
 }
