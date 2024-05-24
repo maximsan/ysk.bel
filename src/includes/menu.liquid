@@ -8,14 +8,14 @@
             {% comment %} </li> {% endcomment %}
 
             {% for menu in sidebar.menus %}
-            {% assign showOnlyOn = menu.showOnlyOn %}
-            <li class='nav-item {{ showOnlyOn }}'>
+                {% assign showOnlyOn = menu.showOnlyOn %}
+                <li class='nav-item {{ showOnlyOn }}'>
                     {% if menu.type == 'link' %}
                         <a class='nav-link' href='{{ menu.href }}'>
                             {{ menu.text }}
                         </a>
                     {% elsif menu.type == 'phone' %}
-                        <div class="{{ showOnlyOn }}">
+                        <div class='{{ showOnlyOn }}'>
                             {{ sidebar.cta.text }}
                         </div>
                         <a class='nav-link phone' href='{{ menu.href }}'>
