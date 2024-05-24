@@ -1,22 +1,24 @@
 module.exports = {
-    phones: [
+    menus: [
         {
             text: '+375 (29) 149 59 89',
             href: 'tel:+375291495989',
+            type: 'phone',
         },
-    ],
-    menus: [
         {
             text: 'Цены',
             href: '#prices',
+            type: 'link',
         },
         {
             text: 'Услуги',
             href: '#services',
+            type: 'link',
         },
         {
             text: 'Контакты',
             href: '#contacts',
+            type: 'link',
         },
     ],
     button: {

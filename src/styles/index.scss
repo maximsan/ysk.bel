@@ -12,13 +12,13 @@
 @import 'partials/contact-button';
 @import 'partials/video';
 @import 'partials/header';
-@import 'partials/brand';
+@import 'partials/logo';
 @import 'partials/info-banner';
 @import 'partials/map';
 @import 'partials/scroll-up';
 @import 'partials/button-send';
 @import 'partials/modal';
-@import 'partials/sidebar';
+@import 'partials/menu';
 
 body {
     font-family: var(--font-base);
@@ -142,9 +142,9 @@ body {
     }
 
     .container-fluid > .navbar-collapse,
-    .container-fluid > .navbar-header,
+    .container-fluid > .navbar-logo,
     .container > .navbar-collapse,
-    .container > .navbar-header {
+    .container > .navbar-logo {
         margin-right: 0;
         margin-left: 0;
     }

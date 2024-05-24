@@ -1,5 +1,5 @@
 const header = document.querySelector('.header');
-const sidebar = document.querySelector('.sidebar');
+const sidebar = document.querySelector('.menu');
 const navButton = document.querySelector('.navbar-toggler');
 const sidebarOpenIcon = document.querySelector('.open-menu');
 const sidebarCloseIcon = document.querySelector('.close-menu');

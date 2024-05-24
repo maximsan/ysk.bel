@@ -3,7 +3,7 @@
     flex-flow: column nowrap;
 }
 
-@mixin sidebar {
+@mixin menu {
     display: block;
     border-top: 1px solid #333;
     position: fixed;
