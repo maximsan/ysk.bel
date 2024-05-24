@@ -8,12 +8,16 @@
             {% comment %} </li> {% endcomment %}
 
             {% for menu in sidebar.menus %}
-                <li class='nav-item'>
+            {% assign showOnlyOn = menu.showOnlyOn %}
+            <li class='nav-item {{ showOnlyOn }}'>
                     {% if menu.type == 'link' %}
                         <a class='nav-link' href='{{ menu.href }}'>
                             {{ menu.text }}
                         </a>
-                    {% else %}
+                    {% elsif menu.type == 'phone' %}
+                        <div class="{{ showOnlyOn }}">
+                            {{ sidebar.cta.text }}
+                        </div>
                         <a class='nav-link phone' href='{{ menu.href }}'>
                             <span>{{ menu.text }}</span>
                         </a>
@@ -21,35 +25,7 @@
                 </li>
             {% endfor %}
 
-            <li class='nav-item mobile'>
-                <!-- <button class="button-link order" data-toggle="modal" data-target="#contact-with-modal"> -->
-                <!-- Заказать баню -->
-                <!-- </button> -->
-
-                <div>
-                    {{ sidebar.button.text }}
-                </div>
-                <div class='phones'>
-                    {% for phone in sidebar.phones %}
-                        <p>
-                            <a
-                                class='button-link phone'
-                                href='{{ phone.href }}'
-                            >
-                                {{ phone.text }}
-                            </a>
-                        </p>
-                    {% endfor %}
-                </div>
-            </li>
-
-            <li class='nav-item mobile'>
-                <a class='nav-link' href='#map'>
-                    {{ sidebar.howTo }}
-                </a>
-            </li>
-
-            <!-- <% render 'components/contact-button.ejs' %> -->
+            {% comment %} {% render 'components/contact-button' %} {% endcomment %}
         </ul>
 
         {% render 'components/mobile-menu-footer' %}
