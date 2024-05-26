@@ -1,4 +1,5 @@
-const sidebar = document.querySelector('.sidebar');
+const header = document.querySelector('.header');
+const sidebar = document.querySelector('.menu');
 const navButton = document.querySelector('.navbar-toggler');
 const sidebarOpenIcon = document.querySelector('.open-menu');
 const sidebarCloseIcon = document.querySelector('.close-menu');
@@ -16,29 +17,26 @@ const menuItemSelectors = menuSelectors.map((selector) =>
 function openSideBar() {
     sidebar.classList.add('open');
     document.body.style.overflow = 'hidden';
+    // this prevents scrolling om mobile devices
+    document.body.style.position = 'fixed';
+
+    header.style.position = 'fixed';
+    header.style.inset = '0';
 
     sidebarOpenIcon.classList.add('hidden');
     sidebarCloseIcon.classList.remove('hidden');
 }
 
+
 function closeSideBar() {
     sidebar.classList.remove('open');
-    document.body.style.overflow = null;
+    document.body.style.overflow = 'auto';
+    document.body.style.position = '';
+
+    header.style.position = 'sticky';
 
     sidebarCloseIcon.classList.add('hidden');
     sidebarOpenIcon.classList.remove('hidden');
-}
-
-export function toggleSideBar() {
-    navButton.addEventListener('click', function (event) {
-        event.preventDefault();
-
-        if (!sidebarOpenIcon.classList.contains('hidden')) {
-            openSideBar();
-        } else {
-            closeSideBar();
-        }
-    });
 }
 
 export function closeSideBarOnTimeout() {
@@ -50,5 +48,17 @@ export function closeSideBarOnTimeout() {
         selector.addEventListener('click', function () {
             closeSideBar();
         });
+    });
+}
+
+export function toggleSideBar() {
+    navButton.addEventListener('click', function (event) {
+        event.preventDefault();
+
+        if (!sidebarOpenIcon.classList.contains('hidden')) {
+            openSideBar();
+        } else {
+            closeSideBar();
+        }
     });
 }

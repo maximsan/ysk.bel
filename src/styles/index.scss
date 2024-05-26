@@ -1,9 +1,9 @@
 @import url('https://fonts.googleapis.com/css?family=Rubik:400,500,500i,700,700i&display=swap');
 
 @import 'modules/constants';
-@import 'modules/animations';
 @import 'modules/common';
 @import 'modules/mixins';
+@import 'modules/animations';
 @import 'gallery';
 @import 'partials/footer';
 @import 'partials/contacts';
@@ -12,13 +12,13 @@
 @import 'partials/contact-button';
 @import 'partials/video';
 @import 'partials/header';
-@import 'partials/brand';
+@import 'partials/logo';
 @import 'partials/info-banner';
 @import 'partials/map';
 @import 'partials/scroll-up';
 @import 'partials/button-send';
 @import 'partials/modal';
-@import 'partials/sidebar';
+@import 'partials/menu';
 
 body {
     font-family: var(--font-base);
@@ -26,8 +26,8 @@ body {
     padding: 0 !important;
     margin: 0 !important;
 
-    height: 100vh; /* fallback for Js load */
-    height: var(--doc-height);
+    // height: 100vh; /* fallback for Js load */
+    // height: var(--doc-height);
 }
 
 @supports (scroll-behavior: smooth) {
@@ -35,36 +35,6 @@ body {
     html {
         scroll-behavior: smooth !important;
     }
-}
-
-/***************fixed element on scroll smoothly ********************/
-
-.fixed {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 999;
-    transform: translateY(-100%);
-    transition: 0.2s transform cubic-bezier(0.3, 0.73, 0.3, 0.74);
-
-    .contact-btn {
-        display: none;
-    }
-}
-
-body.down .fixed {
-    transform: translateY(0);
-}
-
-/* fixed element on scroll smoothly */
-
-.just-fixed {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 999;
 }
 
 .modal-button {
@@ -129,18 +99,6 @@ body.down .fixed {
     font-weight: bold;
 }
 
-.overlay {
-    display: none;
-    opacity: 0.5;
-    background-color: black;
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    z-index: 999;
-}
-
 .cross {
     display: flex;
     font-size: 2em;
@@ -153,15 +111,17 @@ body.down .fixed {
 .button-link {
     background: inherit;
     position: relative;
-    color: $white;
+    color: var(--white);
     text-decoration: none;
     border: none;
     cursor: pointer;
+    margin: 0;
+    padding: 0;
 }
 
 .close-menu,
 .open-menu {
-    color: $lighter-brown;
+    color: var(--lighter-brown);
 }
 
 @media only screen and (min-width: 768px) {
@@ -170,9 +130,9 @@ body.down .fixed {
     }
 
     .container-fluid > .navbar-collapse,
-    .container-fluid > .navbar-header,
+    .container-fluid > .navbar-logo,
     .container > .navbar-collapse,
-    .container > .navbar-header {
+    .container > .navbar-logo {
         margin-right: 0;
         margin-left: 0;
     }

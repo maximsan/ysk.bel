@@ -1,28 +1,43 @@
 module.exports = {
-    phones: [
+    menus: [
         {
             text: '+375 (29) 149 59 89',
             href: 'tel:+375291495989',
+            type: 'phone',
+            showOnlyOn: 'desktop',
         },
-    ],
-    menus: [
         {
             text: 'Цены',
             href: '#prices',
+            type: 'link',
         },
         {
             text: 'Услуги',
             href: '#services',
+            type: 'link',
         },
         {
             text: 'Контакты',
             href: '#contacts',
+            type: 'link',
+        },
+
+        {
+            text: '+375 (29) 149 59 89',
+            href: 'tel:+375291495989',
+            type: 'phone',
+            showOnlyOn: 'mobile',
+        },
+        {
+            text: 'Как к нам добраться?',
+            href: '#map',
+            type: 'link',
+            showOnlyOn: 'mobile',
         },
     ],
-    button: {
+    cta: {
         text: 'Заказать баню',
     },
-    howTo: 'Как к нам добраться?',
     author: {
         co: '© Untitled | Website created with 🍺',
         by: 'by @maximsan',

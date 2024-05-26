@@ -1,4 +1,4 @@
-.brand {
+.logo {
     cursor: pointer;
     color: var(--dirty-orange);
     font-size: var(--font-size-base);
@@ -14,7 +14,7 @@
         flex: auto;
         position: relative;
         top: 6px;
-        margin: 0 auto;
+        // margin: 0 auto;
     }
 
     @media only screen and (min-width: 768px) {

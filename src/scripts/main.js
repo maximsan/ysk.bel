@@ -62,7 +62,7 @@ if (hasInfoBannerElement) {
 }
 
 // TODO: Do we need it ?
-documentHeight();
+// documentHeight();
 
 setTimeout(() => googleMapInit(), 3000);
 

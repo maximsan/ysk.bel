@@ -11,7 +11,9 @@
     --default-black: #000000;
     --black: #222222;
     --white: #ffffff;
+    --white-hover: rgba(255, 255, 255, 0.75);
     --light-black: #110d0d;
+    --lighter-black: #1c1818;
     --creamy-white: rgba(247, 247, 239, 0.6);
     --dirty-orange: #ac703f;
     --dirty-orange-hover: #c76f27;
@@ -19,6 +21,7 @@
     --orange: #f66f30;
     --light-orange: #f99262;
     --light-brown: #704936;
+    --lighter-brown: #492c1d;
     --map--desktop-size: 600px;
     --map--mobile-size: 400px;
     --font-base: 'Rubik', sans-serif;
@@ -26,11 +29,9 @@
 
 $white: #fff;
 $black: #222;
-$light-black: #110d0d;
 $light-grey: #a5a5a5;
 $light-blue: #a4acc7;
 $brown: #2b1910;
-$lighter-brown: #492c1d;
 $light-brown: #704936;
 $creamy-white: rgba(247, 247, 239, 0.6);
 $blue-white: #e6e7f2;
