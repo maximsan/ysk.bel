@@ -17,9 +17,9 @@ const DEFAULT_FILE_EXTENSION = '.webp';
 function concatenateFlags (pathToInputFile, pathToOutputFile, quality, resize) {
     let commands = ``
     if(resize) {
-        commands += `${FLAG.resize} ${resize} 0 `;
+        commands += `${FLAG.RESIZE} ${resize} 0 `;
     } else if (quality) {
-        commands += `${FLAG.quality} ${quality} `;
+        commands += `${FLAG.QUALITY} ${quality} `;
     }
     return commands += `${pathToInputFile} ${FLAG.OUTPUT_FILE} ${pathToOutputFile}`
 }
@@ -65,6 +65,8 @@ async function convertImages() {
     if (outputFile) {
         pathToOutputFile = path.join(fromFolder, outputFile);
     }
+
+    console.log('command', `cwebp ${concatenateFlags(pathToInputFile, pathToOutputFile, quality, resize)}`);
 
     try {
         const { stdout, stderr } = await exec(

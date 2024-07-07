@@ -374,6 +374,40 @@ const services = {
                     },
                 },
                 items: [
+                    // {
+                    //     link: {
+                    //         src: 'assets/images/outside/view-from-house-1-1200x1600.webp',
+                    //         width: 1200,
+                    //         height: 600,
+                    //         isCropped: false,
+                    //         target: '',
+                    //     },
+                    //     img: {
+                    //         src: 'assets/images/outside/view-from-house-1-75x100.webp',
+                    //         srcSet: [
+                    //             'assets/images/outside/view-from-house-1-75x100.webp',
+                    //         ],
+                    //         alt: 'parking',
+                    //         caption: 'Парковочная территория',
+                    //     },
+                    // },
+                    // {
+                    //     link: {
+                    //         src: 'assets/images/outside/view-from-house-2-1200x1600.webp',
+                    //         width: 1200,
+                    //         height: 600,
+                    //         isCropped: false,
+                    //         target: '',
+                    //     },
+                    //     img: {
+                    //         src: 'assets/images/outside/view-from-house-2-75x100.webp',
+                    //         srcSet: [
+                    //             'assets/images/outside/view-from-house-2-75x100.webp',
+                    //         ],
+                    //         alt: 'parking',
+                    //         caption: 'Парковочная территория',
+                    //     },
+                    // },
                     {
                         link: {
                             src: 'https://live.staticflickr.com/65535/50361347217_5abd7e6406_o.jpg',
