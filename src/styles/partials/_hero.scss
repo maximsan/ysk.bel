@@ -8,8 +8,8 @@
         color: $brown;
         text-align: center;
 
-        height: 50rem;
-        // height: var(--doc-height);
+        // height: 50rem;
+        height: max(50rem, var(--doc-height));
 
         &-content {
             position: static;
@@ -42,8 +42,8 @@
         color: $brown;
         text-align: center;
 
-        height: 50rem;
-        // height: var(--doc-height);
+        // height: 50rem;
+        min-height: max(50rem, var(--doc-height));
 
         &-content {
             display: flex;
