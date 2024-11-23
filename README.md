@@ -1,4 +1,25 @@
-# Main technologies used in project
+# уск.бел website
+
+## Main scripts
+
+### Start application in dev mode
+```bash
+    yarn run dev
+```
+
+### Build application
+```bash
+    yarn run build
+```
+
+### Deploy to the hosting server
+```bash
+    yarn run deploy:all
+```
+
+## Main technologies used in project
+
+### package manager - yarn berry
 
 ### SSG - [Eleventy](https://www.11ty.dev/)
 
