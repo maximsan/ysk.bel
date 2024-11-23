@@ -51,8 +51,8 @@
         margin: 0;
 
         .our-contacts {
-            background: $creamy-white;
-            color: $black;
+            background: var(--creamy-white);
+            color: var(--black);
 
             @include flex-column;
 

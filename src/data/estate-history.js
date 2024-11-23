@@ -1,5 +1,3 @@
-const { title } = require("./meta");
-
 module.exports = {
     history: [
         {

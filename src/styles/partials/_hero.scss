@@ -8,7 +8,6 @@
         color: $brown;
         text-align: center;
 
-        // height: 50rem;
         height: max(50rem, var(--doc-height));
 
         &-content {
@@ -26,7 +25,7 @@
             gap: 0.75rem;
 
             > * {
-                font-size: 1.5rem;
+                font-size: var(--font-size-lg);
             }
         }
     }
@@ -42,7 +41,6 @@
         color: $brown;
         text-align: center;
 
-        // height: 50rem;
         min-height: max(50rem, var(--doc-height));
 
         &-content {
@@ -57,7 +55,7 @@
             gap: 0.75rem;
 
             > * {
-                font-size: 2rem;
+                font-size: --font-size-2xl;
             }
         }
     }
@@ -80,7 +78,7 @@
             margin: 4rem auto 0;
 
             > * {
-                font-size: 2.5rem;
+                font-size: var(--font-size-3xl);
             }
         }
     }
