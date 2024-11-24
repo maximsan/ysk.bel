@@ -1,6 +1,6 @@
 .btn-send {
     background: $brown;
-    color: $white;
+    color: var(--white);
 
     &:focus {
         outline: 0;

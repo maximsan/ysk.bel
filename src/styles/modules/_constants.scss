@@ -28,8 +28,6 @@
     --font-base: 'Rubik', sans-serif;
 }
 
-$white: #fff;
-$black: #222;
 $light-grey: #a5a5a5;
 $light-blue: #a4acc7;
 $brown: #2b1910;
@@ -56,11 +54,11 @@ $images-path: '../../assets/images' !default;
 }
 
 .t-black {
-    color: $black;
+    color: var(--black);
 }
 
 .t-white {
-    color: $white;
+    color: var(--white);
 }
 
 .outline-none {
