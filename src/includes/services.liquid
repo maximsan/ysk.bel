@@ -1,176 +1,176 @@
 <section class='section-container services py-10rem' id='desc'>
-    <div class='container'>
-        <div class='content bg-creamy-white'>
+  <div class='container'>
+    <div class='content bg-creamy-white'>
+      <div class='row'>
+        <div class='col-12'>
+          <div class='content-header'>
+            <h2>
+              {{ services.header }}
+            </h2>
+          </div>
+          <p class='content-text'>
+            {{ services.description }}
+          </p>
+        </div>
+
+        {% render 'packages' %}
+
+        {% for section in services.sections %}
+          <div class='col-12'>
+            <h3
+              class='content-cell-header {{ section.class }} text-center w-100 mb-3rem mt-1rem'
+              id='{{ section.id }}'
+            >
+              {{ section.header }}
+            </h3>
+          </div>
+
+          <div class='content-cell {{ section.class }} service col-12 col-md-12 ml-1rem pr-2rem mb-5rem'>
             <div class='row'>
-                <div class='col-12'>
-                    <div class='content-header'>
-                        <h2>
-                            {{ services.header }}
-                        </h2>
-                    </div>
-                    <p class='content-text'>
-                        {{ services.description }}
-                    </p>
+              {% assign main = section.gallery.main %}
+              {% assign galleryItems = section.gallery.items %}
+
+              {% if section.side == 'left' %}
+                <div class='content-cell-element img col-12 col-sm-12 col-md-8 gallery'>
+                  <div class='gallery__desk--{{ section.side }}-side {% if section.isFirst %} first {% endif %}'>
+                    {% for item in galleryItems %}
+                      {% assign linkItem = item.link %}
+                      {% assign imgItem = item.img %}
+
+                      <a
+                        href='{{ linkItem.src }}'
+                        data-pswp-width='{{ linkItem.width }}'
+                        data-pswp-height='{{ linkItem.height }}'
+                        target='{{ linkItem.target }}'
+                        data-cropped='{{ linkItem.isCropped }}'
+                        class='gallery__url'
+                      >
+                        <figure class='gallery-caption'>
+                          <img
+                            src='{{ imgItem.srcSet[0] }}'
+                            srcSet='{{ imgItem.srcSet | join: ', ' }}'
+                            alt='{{ imgItem.alt }}'
+                            class='gallery__img card-img-top'
+                          >
+                          <figcaption class='gallery-caption__text'>
+                            {{ imgItem.caption }}
+                          </figcaption>
+                        </figure>
+                      </a>
+                    {% endfor %}
+                  </div>
+
+                  <div class='gallery__item--main'>
+                    <a
+                      href='{{ main.link.src }}'
+                      data-pswp-width='{{ main.link.width }}'
+                      data-pswp-height='{{ main.link.height }}'
+                      data-cropped='{{ main.link.isCropped }}'
+                      class='gallery__url'
+                    >
+                      <figure class='gallery-caption'>
+                        <img
+                          srcset='{{ main.img.srcSet | join: ', ' }}'
+                          sizes='{{  main.img.sizes | join: ', ' }}'
+                          alt='{{ main.img.alt }}'
+                          class='gallery__img card-img-top'
+                        >
+                        <figcaption class='gallery-caption__text'>
+                          {{ main.img.caption }}
+                        </figcaption>
+                      </figure>
+                    </a>
+                  </div>
                 </div>
 
-                {% render 'packages' %}
+                <div class='content-cell-element text col-12 col-sm-12 col-md-4'>
+                  <div class='content-cell-text'>
+                    <div class='content-cell-rubric'>
+                      <p>
+                        <ul class='fish-list'>
+                          {% for item in section.offer.items %}
+                            <li class='fish-list__item'>
+                              <span class='fish-name'>{{ item }}</span>
+                            </li>
+                          {% endfor %}
+                        </ul>
+                      </p>
+                      {{ section.offer.description }}
+                    </div>
+                  </div>
+                </div>
 
-                {% for section in services.sections %}
-                    <div class='col-12'>
-                        <h3
-                            class='content-cell-header {{ section.class }} text-center w-100 mb-3rem mt-1rem'
-                            id='{{ section.id }}'
+              {% else %}
+                <div class='content-cell-element text col-12 col-sm-12 col-md-4'>
+                  <div class='content-cell-text'>
+                    <div class='content-cell-rubric'>
+                      <p>
+                        <ul class='fish-list'>
+                          {% for item in section.offer.items %}
+                            <li>
+                              <div>🔸</div>
+                              <span class='fish-name'>{{ item }}</span>
+                            </li>
+                          {% endfor %}
+                        </ul>
+                      </p>
+                      {{ section.offer.description }}
+                    </div>
+                  </div>
+                </div>
+                <div class='content-cell-element img col-12 col-sm-12 col-md-8 gallery'>
+                  <div class='gallery__item--main'>
+                    <a
+                      href='{{ main.link.src }}'
+                      data-pswp-width='{{ main.link.width }}'
+                      data-pswp-height='{{ main.link.height }}'
+                      data-cropped='{{ main.link.isCropped }}'
+                      class='gallery__url'
+                    >
+                      <figure class='gallery-caption'>
+                        <img
+                          srcset='{{ main.img.srcSet | join: ', ' }}'
+                          sizes='{{  main.img.sizes | join: ', ' }}'
+                          alt='{{ main.img.alt }}'
+                          class='gallery__img card-img-top'
                         >
-                            {{ section.header }}
-                        </h3>
-                    </div>
+                        <figcaption class='gallery-caption__text'>
+                          {{ main.img.caption }}
+                        </figcaption>
+                      </figure>
+                    </a>
+                  </div>
 
-                    <div class='content-cell {{ section.class }} service col-12 col-md-12 ml-1rem pr-2rem mb-5rem'>
-                        <div class='row'>
-                            {% assign main = section.gallery.main %}
-                            {% assign galleryItems = section.gallery.items %}
-
-                            {% if section.side == 'left' %}
-                                <div class='content-cell-element img col-12 col-sm-12 col-md-8 gallery'>
-                                    <div class='gallery__desk--{{ section.side }}-side {% if section.isFirst %} first {% endif %}'>
-                                        {% for item in galleryItems %}
-                                            {% assign linkItem = item.link %}
-                                            {% assign imgItem = item.img %}
-
-                                            <a
-                                                href='{{ linkItem.src }}'
-                                                data-pswp-width='{{ linkItem.width }}'
-                                                data-pswp-height='{{ linkItem.height }}'
-                                                target='{{ linkItem.target }}'
-                                                data-cropped='{{ linkItem.isCropped }}'
-                                                class='gallery__url'
-                                            >
-                                                <figure class='gallery-caption'>
-                                                    <img
-                                                        src='{{ imgItem.srcSet[0] }}'
-                                                        srcSet='{{ imgItem.srcSet | join: ', ' }}'
-                                                        alt='{{ imgItem.alt }}'
-                                                        class='gallery__img card-img-top'
-                                                    >
-                                                    <figcaption class='gallery-caption__text'>
-                                                        {{ imgItem.caption }}
-                                                    </figcaption>
-                                                </figure>
-                                            </a>
-                                        {% endfor %}
-                                    </div>
-
-                                    <div class='gallery__item--main'>
-                                        <a
-                                            href='{{ main.link.src }}'
-                                            data-pswp-width='{{ main.link.width }}'
-                                            data-pswp-height='{{ main.link.height }}'
-                                            data-cropped='{{ main.link.isCropped }}'
-                                            class='gallery__url'
-                                        >
-                                            <figure class='gallery-caption'>
-                                                <img
-                                                    srcset='{{ main.img.srcSet | join: ', ' }}'
-                                                    sizes='{{  main.img.sizes | join: ', ' }}'
-                                                    alt='{{ main.img.alt }}'
-                                                    class='gallery__img card-img-top'
-                                                >
-                                                <figcaption class='gallery-caption__text'>
-                                                    {{ main.img.caption }}
-                                                </figcaption>
-                                            </figure>
-                                        </a>
-                                    </div>
-                                </div>
-
-                                <div class='content-cell-element text col-12 col-sm-12 col-md-4'>
-                                    <div class='content-cell-text'>
-                                        <div class='content-cell-rubric'>
-                                            <p>
-                                                <ul class='fish-list'>
-                                                    {% for item in section.offer.items %}
-                                                        <li class='fish-list__item'>
-                                                            <span class='fish-name'>{{ item }}</span>
-                                                        </li>
-                                                    {% endfor %}
-                                                </ul>
-                                            </p>
-                                            {{ section.offer.description }}
-                                        </div>
-                                    </div>
-                                </div>
-
-                            {% else %}
-                                <div class='content-cell-element text col-12 col-sm-12 col-md-4'>
-                                    <div class='content-cell-text'>
-                                        <div class='content-cell-rubric'>
-                                            <p>
-                                                <ul class='fish-list'>
-                                                    {% for item in section.offer.items %}
-                                                        <li>
-                                                            <div>🔸</div>
-                                                            <span class='fish-name'>{{ item }}</span>
-                                                        </li>
-                                                    {% endfor %}
-                                                </ul>
-                                            </p>
-                                            {{ section.offer.description }}
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class='content-cell-element img col-12 col-sm-12 col-md-8 gallery'>
-                                    <div class='gallery__item--main'>
-                                        <a
-                                            href='{{ main.link.src }}'
-                                            data-pswp-width='{{ main.link.width }}'
-                                            data-pswp-height='{{ main.link.height }}'
-                                            data-cropped='{{ main.link.isCropped }}'
-                                            class='gallery__url'
-                                        >
-                                            <figure class='gallery-caption'>
-                                                <img
-                                                    srcset='{{ main.img.srcSet | join: ', ' }}'
-                                                    sizes='{{  main.img.sizes | join: ', ' }}'
-                                                    alt='{{ main.img.alt }}'
-                                                    class='gallery__img card-img-top'
-                                                >
-                                                <figcaption class='gallery-caption__text'>
-                                                    {{ main.img.caption }}
-                                                </figcaption>
-                                            </figure>
-                                        </a>
-                                    </div>
-
-                                    <div class='gallery__desk--{{ section.side }}-side {% if section.isFirst %} first {% endif %}'>
-                                        {% for item in galleryItems %}
-                                            <a
-                                                href='{{ item.link.src }}'
-                                                data-pswp-width='{{ item.link.width }}'
-                                                data-pswp-height='{{ item.link.height }}'
-                                                target='{{ item.link.target }}'
-                                                data-cropped='{{ item.link.isCropped }}'
-                                                class='gallery__url'
-                                            >
-                                                <figure class='gallery-caption'>
-                                                    <img
-                                                        src='{{ item.img.srcSet[0] }}'
-                                                        srcSet='{{ item.img.srcSet | join: ', ' }}'
-                                                        alt='{{ item.img.alt }}'
-                                                        class='gallery__img card-img-top'
-                                                    >
-                                                    <figcaption class='gallery-caption__text'>
-                                                        {{ item.img.caption }}
-                                                    </figcaption>
-                                                </figure>
-                                            </a>
-                                        {% endfor %}
-                                    </div>
-                                </div>
-                            {% endif %}
-                        </div>
-                    </div>
-                {% endfor %}
+                  <div class='gallery__desk--{{ section.side }}-side {% if section.isFirst %} first {% endif %}'>
+                    {% for item in galleryItems %}
+                      <a
+                        href='{{ item.link.src }}'
+                        data-pswp-width='{{ item.link.width }}'
+                        data-pswp-height='{{ item.link.height }}'
+                        target='{{ item.link.target }}'
+                        data-cropped='{{ item.link.isCropped }}'
+                        class='gallery__url'
+                      >
+                        <figure class='gallery-caption'>
+                          <img
+                            src='{{ item.img.srcSet[0] }}'
+                            srcSet='{{ item.img.srcSet | join: ', ' }}'
+                            alt='{{ item.img.alt }}'
+                            class='gallery__img card-img-top'
+                          >
+                          <figcaption class='gallery-caption__text'>
+                            {{ item.img.caption }}
+                          </figcaption>
+                        </figure>
+                      </a>
+                    {% endfor %}
+                  </div>
+                </div>
+              {% endif %}
             </div>
-        </div>
+          </div>
+        {% endfor %}
+      </div>
     </div>
+  </div>
 </section>

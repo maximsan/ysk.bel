@@ -1,11 +1,11 @@
 const button = document.querySelector('.scroll-up');
 
 function showScrollButton() {
-    button.style.display = 'block';
+  button.style.display = 'block';
 }
 
 function hideScrollButton() {
-    button.style.display = 'none';
+  button.style.display = 'none';
 }
 
 let lastKnownScrollTopPosition = 0;
@@ -17,40 +17,39 @@ const TOP_OFFSET = 320;
 const BOTTOM_OFFSET = 880;
 
 function showScrollUpButton() {
-    window.addEventListener('scroll', function () {
-        console.log('inside');
-        lastKnownScrollTopPosition = document.body.scrollTop;
-        lastKnownElementScrollTopPosition = document.documentElement.scrollTop;
-        lastKnownScrollHeightPosition = document.documentElement.scrollHeight;
+  window.addEventListener('scroll', function () {
+    console.log('inside');
+    lastKnownScrollTopPosition = document.body.scrollTop;
+    lastKnownElementScrollTopPosition = document.documentElement.scrollTop;
+    lastKnownScrollHeightPosition = document.documentElement.scrollHeight;
 
-        if (!ticking) {
-            window.requestAnimationFrame(function () {
-                if (
-                    (lastKnownScrollTopPosition > TOP_OFFSET ||
-                        lastKnownElementScrollTopPosition > TOP_OFFSET) &&
-                    lastKnownScrollHeightPosition -
-                        lastKnownElementScrollTopPosition >
-                        BOTTOM_OFFSET
-                ) {
-                    showScrollButton();
-                } else {
-                    hideScrollButton();
-                }
-                ticking = false;
-            });
-
-            ticking = true;
+    if (!ticking) {
+      window.requestAnimationFrame(function () {
+        if (
+          (lastKnownScrollTopPosition > TOP_OFFSET ||
+            lastKnownElementScrollTopPosition > TOP_OFFSET) &&
+          lastKnownScrollHeightPosition - lastKnownElementScrollTopPosition >
+            BOTTOM_OFFSET
+        ) {
+          showScrollButton();
+        } else {
+          hideScrollButton();
         }
-    });
+        ticking = false;
+      });
+
+      ticking = true;
+    }
+  });
 }
 
 function addScrollUpOnClick() {
-    button.addEventListener('click', function () {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
+  button.addEventListener('click', function () {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
 }
 
 export function addScrollUpButton() {
-    showScrollUpButton();
-    addScrollUpOnClick();
+  showScrollUpButton();
+  addScrollUpOnClick();
 }

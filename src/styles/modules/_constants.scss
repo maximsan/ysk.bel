@@ -1,31 +1,31 @@
 :root {
-    --doc-height: 100%;
-    --font-size-sm: 0.85rem;
-    --font-size-base: 1rem;
-    --font-size-md: 1.25rem;
-    --font-size-lg: 1.5rem;
-    --font-size-xl: 1.75rem;
-    --font-size-2xl: 2rem;
-    --font-size-3xl: 2.5rem;
-    --font-weight-semibold: 500;
-    --font-weight-bold: 600;
-    --default-black: #000000;
-    --black: #222222;
-    --white: #ffffff;
-    --white-hover: rgba(255, 255, 255, 0.75);
-    --light-black: #110d0d;
-    --lighter-black: #1c1818;
-    --creamy-white: rgba(247, 247, 239, 0.6);
-    --dirty-orange: #ac703f;
-    --dirty-orange-hover: #c76f27;
-    --orange-shadow: #9e6132;
-    --orange: #f66f30;
-    --light-orange: #f99262;
-    --light-brown: #704936;
-    --lighter-brown: #492c1d;
-    --map--desktop-size: 600px;
-    --map--mobile-size: 400px;
-    --font-base: 'Rubik', sans-serif;
+  --doc-height: 100%;
+  --font-size-sm: 0.85rem;
+  --font-size-base: 1rem;
+  --font-size-md: 1.25rem;
+  --font-size-lg: 1.5rem;
+  --font-size-xl: 1.75rem;
+  --font-size-2xl: 2rem;
+  --font-size-3xl: 2.5rem;
+  --font-weight-semibold: 500;
+  --font-weight-bold: 600;
+  --default-black: #000000;
+  --black: #222222;
+  --white: #ffffff;
+  --white-hover: rgba(255, 255, 255, 0.75);
+  --light-black: #110d0d;
+  --lighter-black: #1c1818;
+  --creamy-white: rgba(247, 247, 239, 0.6);
+  --dirty-orange: #ac703f;
+  --dirty-orange-hover: #c76f27;
+  --orange-shadow: #9e6132;
+  --orange: #f66f30;
+  --light-orange: #f99262;
+  --light-brown: #704936;
+  --lighter-brown: #492c1d;
+  --map--desktop-size: 600px;
+  --map--mobile-size: 400px;
+  --font-base: 'Rubik', sans-serif;
 }
 
 $light-grey: #a5a5a5;
@@ -42,37 +42,37 @@ $whatsapp: #25d366;
 $images-path: '../../assets/images' !default;
 
 .bg-light-black {
-    background-color: var(--light-black);
+  background-color: var(--light-black);
 }
 
 .bg-brown {
-    background-color: $brown;
+  background-color: $brown;
 }
 
 .bg-creamy-white {
-    background-color: var(--creamy-white);
+  background-color: var(--creamy-white);
 }
 
 .t-black {
-    color: var(--black);
+  color: var(--black);
 }
 
 .t-white {
-    color: var(--white);
+  color: var(--white);
 }
 
 .outline-none {
-    outline: none;
+  outline: none;
 }
 
 .decoration-none {
-    text-decoration: none;
+  text-decoration: none;
 }
 
 .desktop {
-    display: none;
+  display: none;
 }
 
 .mobile {
-    display: block;
+  display: block;
 }

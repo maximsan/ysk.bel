@@ -1,79 +1,79 @@
 @for $i from 1 through 10 {
-    .ml-#{$i}rem {
-        margin-left: $i * 1rem;
-    }
+  .ml-#{$i}rem {
+    margin-left: $i * 1rem;
+  }
 }
 
 @for $i from 1 through 10 {
-    .mr-#{$i}rem {
-        margin-right: $i * 1rem;
-    }
+  .mr-#{$i}rem {
+    margin-right: $i * 1rem;
+  }
 }
 
 @for $i from 1 through 10 {
-    .mb-#{$i}rem {
-        margin-bottom: $i * 1rem;
-    }
+  .mb-#{$i}rem {
+    margin-bottom: $i * 1rem;
+  }
 }
 
 @for $i from 1 through 10 {
-    .mt-#{$i}rem {
-        margin-top: $i * 1rem;
-    }
+  .mt-#{$i}rem {
+    margin-top: $i * 1rem;
+  }
 }
 
 @for $i from 1 through 10 {
-    .pb-#{$i}rem {
-        padding-bottom: $i * 1rem;
-    }
+  .pb-#{$i}rem {
+    padding-bottom: $i * 1rem;
+  }
 }
 
 @for $i from 1 through 10 {
-    .pt-#{$i}rem {
-        padding-top: $i * 1rem;
-    }
+  .pt-#{$i}rem {
+    padding-top: $i * 1rem;
+  }
 }
 
 @for $i from 1 through 10 {
-    .pr-#{$i}rem {
-        padding-right: $i * 1rem;
-    }
+  .pr-#{$i}rem {
+    padding-right: $i * 1rem;
+  }
 }
 
 @for $i from 1 through 10 {
-    .pl-#{$i}rem {
-        padding-left: $i * 1rem;
-    }
+  .pl-#{$i}rem {
+    padding-left: $i * 1rem;
+  }
 }
 
 @for $i from 1 through 10 {
-    .py-#{$i}rem {
-        padding-top: $i * 1rem;
-        padding-bottom: $i * 1rem;
-    }
+  .py-#{$i}rem {
+    padding-top: $i * 1rem;
+    padding-bottom: $i * 1rem;
+  }
 }
 
 @for $i from 1 through 10 {
-    .px-#{$i}rem {
-        padding-left: $i * 1rem;
-        padding-right: $i * 1rem;
-    }
+  .px-#{$i}rem {
+    padding-left: $i * 1rem;
+    padding-right: $i * 1rem;
+  }
 }
 
 @for $i from 1 through 10 {
-    .h-#{$i}rem {
-        height: $i * 1rem;
-    }
+  .h-#{$i}rem {
+    height: $i * 1rem;
+  }
 }
 
 @for $i from 1 through 10 {
-    .h-#{$i*100}px {
-        height: $i * 100px;
-    }
+  .h-#{$i*100}px {
+    height: $i * 100px;
+  }
 }
 
 @for $i from 20 through 40 {
-    .p-#{$i}px {
-        padding: $i * 1px;
-    }
+  .p-#{$i}px {
+    padding: $i * 1px;
+  }
 }

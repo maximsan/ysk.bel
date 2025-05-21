@@ -1,45 +1,45 @@
 .logo {
-    cursor: pointer;
-    color: var(--dirty-orange);
+  cursor: pointer;
+  color: var(--dirty-orange);
+  font-size: var(--font-size-base);
+
+  &:hover {
+    color: var(--dirty-orange-hover);
+  }
+
+  @media only screen and (min-width: 320px) and (max-width: 767.98px) {
+    display: flex;
+    justify-content: center;
+    flex-flow: row wrap;
+    flex: auto;
+    position: relative;
+    top: 6px;
+    // margin: 0 auto;
+  }
+
+  @media only screen and (min-width: 768px) {
     font-size: var(--font-size-base);
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
 
-    &:hover {
-        color: var(--dirty-orange-hover);
+    &-item {
+      &:nth-child(1) {
+        text-align: center;
+        flex: 100%;
+      }
     }
+  }
 
-    @media only screen and (min-width: 320px) and (max-width: 767.98px) {
-        display: flex;
-        justify-content: center;
-        flex-flow: row wrap;
-        flex: auto;
-        position: relative;
-        top: 6px;
-        // margin: 0 auto;
-    }
+  @media (min-width: 992px) {
+    font-size: var(--font-size-md);
+    margin-bottom: 0;
+    display: flex;
+    flex-flow: row nowrap;
+  }
 
-    @media only screen and (min-width: 768px) {
-        font-size: var(--font-size-base);
-        display: flex;
-        flex-flow: row wrap;
-        justify-content: center;
-
-        &-item {
-            &:nth-child(1) {
-                text-align: center;
-                flex: 100%;
-            }
-        }
-    }
-
-    @media (min-width: 992px) {
-        font-size: var(--font-size-md);
-        margin-bottom: 0;
-        display: flex;
-        flex-flow: row nowrap;
-    }
-
-    @media (min-width: 1200px) {
-        font-size: var(--font-size-lg);
-        margin-bottom: 0;
-    }
+  @media (min-width: 1200px) {
+    font-size: var(--font-size-lg);
+    margin-bottom: 0;
+  }
 }

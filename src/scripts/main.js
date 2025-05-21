@@ -1,12 +1,12 @@
 import {
-    closeSideBarOnTimeout,
-    toggleSideBar,
-    addInfoBanner,
-    hideInfoBannerOnScroll,
-    googleMapInit,
-    documentHeight,
-    addScrollUpButton,
-    initVideoSection,
+  closeSideBarOnTimeout,
+  toggleSideBar,
+  addInfoBanner,
+  hideInfoBannerOnScroll,
+  googleMapInit,
+  documentHeight,
+  addScrollUpButton,
+  initVideoSection,
 } from './helpers';
 // import { addFixedHeader, removeFixedHeader, removeFixedHeaderOnScroll } from './helpers/header';
 
@@ -22,43 +22,43 @@ console.log('window width', windowWidth);
 console.log('mobile', mobile);
 
 const mobileOnlyMethods = () => {
-    // removeFixedHeaderOnScroll();
-    // addFixedHeader();
+  // removeFixedHeaderOnScroll();
+  // addFixedHeader();
 
-    closeSideBarOnTimeout();
+  closeSideBarOnTimeout();
 };
 
 // TODO: review all code
 const desktopOnlyMethods = () => {
-    // removeFixedHeader();
-    // addFixedHeaderOnScroll();
+  // removeFixedHeader();
+  // addFixedHeaderOnScroll();
 
-    addScrollUpButton();
+  addScrollUpButton();
 
-    if (hasInfoBannerElement) {
-        addInfoBanner();
-        hideInfoBannerOnScroll();
-    }
+  if (hasInfoBannerElement) {
+    addInfoBanner();
+    hideInfoBannerOnScroll();
+  }
 };
 
 mobile.addEventListener('change', (event) => {
-    if (event.matches) {
-        mobileOnlyMethods();
-    } else {
-        desktopOnlyMethods();
-    }
+  if (event.matches) {
+    mobileOnlyMethods();
+  } else {
+    desktopOnlyMethods();
+  }
 });
 
 if (mobile.matches) {
-    mobileOnlyMethods();
+  mobileOnlyMethods();
 } else {
-    // addFixedHeaderOnScroll();
-    desktopOnlyMethods();
+  // addFixedHeaderOnScroll();
+  desktopOnlyMethods();
 }
 
 if (hasInfoBannerElement) {
-    addInfoBanner();
-    hideInfoBannerOnScroll();
+  addInfoBanner();
+  hideInfoBannerOnScroll();
 }
 
 // TODO: Do we need it ?
@@ -69,20 +69,20 @@ setTimeout(() => googleMapInit(), 3000);
 toggleSideBar();
 
 function initVideoSections() {
-    initVideoSection({
-        sectionName: 'primary',
-        className: 'video-section',
-        removeWrappers: true,
-    });
-    initVideoSection({
-        sectionName: 'secondary',
-        className: 'video-section',
-        removeWrappers: true,
-    });
+  initVideoSection({
+    sectionName: 'primary',
+    className: 'video-section',
+    removeWrappers: true,
+  });
+  initVideoSection({
+    sectionName: 'secondary',
+    className: 'video-section',
+    removeWrappers: true,
+  });
 }
 
 if (document.readyState !== 'loading') {
-    initVideoSections();
+  initVideoSections();
 } else {
-    document.addEventListener('DOMContentLoaded', initVideoSections);
+  document.addEventListener('DOMContentLoaded', initVideoSections);
 }

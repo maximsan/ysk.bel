@@ -1,33 +1,33 @@
 <div class='menu'>
-    <div class='navbar-collapse' id='navbar-collapse'>
-        <ul class='navbar-nav'>
-            {% comment %} <li class='nav-item desktop'> {% endcomment %}
-            <!-- <button class="button-link order" data-toggle="modal" data-target="#contact-with-modal"> -->
-            <!-- Заказать домик -->
-            <!-- </button> -->
-            {% comment %} </li> {% endcomment %}
+  <div class='navbar-collapse' id='navbar-collapse'>
+    <ul class='navbar-nav'>
+      {% comment %} <li class='nav-item desktop'> {% endcomment %}
+      <!-- <button class="button-link order" data-toggle="modal" data-target="#contact-with-modal"> -->
+      <!-- Заказать домик -->
+      <!-- </button> -->
+      {% comment %} </li> {% endcomment %}
 
-            {% for menu in sidebar.menus %}
-                {% assign showOnlyOn = menu.showOnlyOn %}
-                <li class='nav-item {{ showOnlyOn }}'>
-                    {% if menu.type == 'link' %}
-                        <a class='nav-link' href='{{ menu.href }}'>
-                            {{ menu.text }}
-                        </a>
-                    {% elsif menu.type == 'phone' %}
-                        <div class='{{ showOnlyOn }}'>
-                            {{ sidebar.cta.text }}
-                        </div>
-                        <a class='nav-link phone' href='{{ menu.href }}'>
-                            <span>{{ menu.text }}</span>
-                        </a>
-                    {% endif %}
-                </li>
-            {% endfor %}
+      {% for menu in sidebar.menus %}
+        {% assign showOnlyOn = menu.showOnlyOn %}
+        <li class='nav-item {{ showOnlyOn }}'>
+          {% if menu.type == 'link' %}
+            <a class='nav-link' href='{{ menu.href }}'>
+              {{ menu.text }}
+            </a>
+          {% elsif menu.type == 'phone' %}
+            <div class='{{ showOnlyOn }}'>
+              {{ sidebar.cta.text }}
+            </div>
+            <a class='nav-link phone' href='{{ menu.href }}'>
+              <span>{{ menu.text }}</span>
+            </a>
+          {% endif %}
+        </li>
+      {% endfor %}
 
-            {% comment %} {% render 'components/contact-button' %} {% endcomment %}
-        </ul>
+      {% comment %} {% render 'components/contact-button' %} {% endcomment %}
+    </ul>
 
-        {% render 'components/mobile-menu-footer' %}
-    </div>
+    {% render 'components/mobile-menu-footer' %}
+  </div>
 </div>

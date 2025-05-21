@@ -1,54 +1,54 @@
 <div
-    class='modal contact-modal'
-    id='contact-with-modal'
-    tabindex='-1'
-    role='dialog'
-    aria-labelledby='contact-with-modal-title'
-    aria-hidden='true'
+  class='modal contact-modal'
+  id='contact-with-modal'
+  tabindex='-1'
+  role='dialog'
+  aria-labelledby='contact-with-modal-title'
+  aria-hidden='true'
 >
-    <div class='modal-dialog modal-dialog-centered' role='document'>
-        <div class='modal-content'>
-            <div class='modal-header'>
-                <h5 class='modal-title'>Форма для связи</h5>
-                <button type='button' class='close' data-dismiss='modal' aria-label='Close'>
-                    <span aria-hidden='true'>&times;</span>
-                </button>
-            </div>
-            <div class='modal-body'>
-                <form
-                    class='gform reveal-content contact-form'
-                    action='https://smartforms.dev/submit/5f575b80b81854118fd3d51d'
-                    method='post'
-                >
-                    <!-- input id must be honeypot or else it wont work -->
-                    <label class='sr-only'>Keep this field blank</label>
-                    <input id='honeypot' type='text' name='honeypot' value=''>
-                    <!-- the rest of your form -->
-                    <div class='form-group'>
-                        <input class='form-control' type='name' id='name' name='name' placeholder='Имя' required>
-                    </div>
-                    <div class='form-group'>
-                        <input type='email' class='form-control' id='email' name='email' placeholder='Почта' required>
-                    </div>
-                    <div class='form-group'>
-                        <input type='tel' class='form-control' id='phone' name='phone' placeholder='Телефон' required>
-                    </div>
-                    <div class='form-group'>
-                        <textarea
-                            class='form-control'
-                            rows='3'
-                            id='message'
-                            name='message'
-                            placeholder='Введите ваше сообщение'
-                            required
-                        ></textarea>
-                    </div>
-                    <div class='modal-footer'>
-                        <button type='button' class='btn btn-close' data-dismiss='modal'>Закрыть</button>
-                        <button type='submit' class='btn btn-send'>Отправить</button>
-                    </div>
-                </form>
-            </div>
-        </div>
+  <div class='modal-dialog modal-dialog-centered' role='document'>
+    <div class='modal-content'>
+      <div class='modal-header'>
+        <h5 class='modal-title'>Форма для связи</h5>
+        <button type='button' class='close' data-dismiss='modal' aria-label='Close'>
+          <span aria-hidden='true'>&times;</span>
+        </button>
+      </div>
+      <div class='modal-body'>
+        <form
+          class='gform reveal-content contact-form'
+          action='https://smartforms.dev/submit/5f575b80b81854118fd3d51d'
+          method='post'
+        >
+          <!-- input id must be honeypot or else it wont work -->
+          <label class='sr-only'>Keep this field blank</label>
+          <input id='honeypot' type='text' name='honeypot' value=''>
+          <!-- the rest of your form -->
+          <div class='form-group'>
+            <input class='form-control' type='name' id='name' name='name' placeholder='Имя' required>
+          </div>
+          <div class='form-group'>
+            <input type='email' class='form-control' id='email' name='email' placeholder='Почта' required>
+          </div>
+          <div class='form-group'>
+            <input type='tel' class='form-control' id='phone' name='phone' placeholder='Телефон' required>
+          </div>
+          <div class='form-group'>
+            <textarea
+              class='form-control'
+              rows='3'
+              id='message'
+              name='message'
+              placeholder='Введите ваше сообщение'
+              required
+            ></textarea>
+          </div>
+          <div class='modal-footer'>
+            <button type='button' class='btn btn-close' data-dismiss='modal'>Закрыть</button>
+            <button type='submit' class='btn btn-send'>Отправить</button>
+          </div>
+        </form>
+      </div>
     </div>
+  </div>
 </div>

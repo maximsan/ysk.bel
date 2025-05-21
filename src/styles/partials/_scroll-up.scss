@@ -1,27 +1,27 @@
 .scroll-up {
-    display: block;
-    position: fixed;
-    bottom: 176px;
-    right: 142px;
-    z-index: 99;
-    font-size: 18px;
-    border: none;
+  display: block;
+  position: fixed;
+  bottom: 176px;
+  right: 142px;
+  z-index: 99;
+  font-size: 18px;
+  border: none;
+  outline: none;
+  background-color: var(--lighter-brown);
+  color: white;
+  cursor: pointer;
+  padding: 15px 20px;
+  border-radius: 14px;
+
+  &:hover {
+    background-color: var(--black);
+  }
+
+  &:focus {
     outline: none;
-    background-color: var(--lighter-brown);
-    color: white;
-    cursor: pointer;
-    padding: 15px 20px;
-    border-radius: 14px;
+  }
 
-    &:hover {
-        background-color: var(--black);
-    }
-
-    &:focus {
-        outline: none;
-    }
-
-    @media only screen and (min-width: 320px) and (max-width: 992px) {
-        display: none !important;
-    }
+  @media only screen and (min-width: 320px) and (max-width: 992px) {
+    display: none !important;
+  }
 }

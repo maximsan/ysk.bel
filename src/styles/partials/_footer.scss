@@ -1,67 +1,67 @@
 /*----------------------- FOOTER ------------------------*/
 
 .footer-social {
-    background-color: var(--light-black);
+  background-color: var(--light-black);
+  display: flex;
+  min-height: 6rem;
+
+  .footer {
     display: flex;
-    min-height: 6rem;
+    flex-direction: row;
+    margin: 0;
+  }
 
-    .footer {
-        display: flex;
-        flex-direction: row;
-        margin: 0;
+  .footer-item {
+    list-style: none;
+    padding: 0 0.5rem;
+  }
+
+  .footer-link {
+    display: flex;
+    align-items: center;
+    font-weight: var(--font-weight-bold);
+    padding: 0.5rem;
+
+    &:hover {
+      text-decoration: none;
     }
 
-    .footer-item {
-        list-style: none;
-        padding: 0 0.5rem;
+    &.skype {
+      color: $skype;
     }
 
-    .footer-link {
-        display: flex;
-        align-items: center;
-        font-weight: var(--font-weight-bold);
-        padding: 0.5rem;
-
-        &:hover {
-            text-decoration: none;
-        }
-
-        &.skype {
-            color: $skype;
-        }
-
-        &.viber {
-            color: $viber;
-        }
-
-        &.whatsapp {
-            color: $whatsapp;
-        }
-
-        .fa-skype,
-        .fa-viber,
-        .fa-whatsapp {
-            font-size: var(--font-size-xl);
-        }
+    &.viber {
+      color: $viber;
     }
 
-    @media only screen and (min-width: 320px) and (max-width: 767.98px) {
-        display: none;
+    &.whatsapp {
+      color: $whatsapp;
     }
 
-    @media only screen and (min-width: 768px) {
-        .container-flex-center {
-            justify-content: space-around;
-        }
+    .fa-skype,
+    .fa-viber,
+    .fa-whatsapp {
+      font-size: var(--font-size-xl);
     }
+  }
 
-    @media only screen and (min-width: 992px) {
-        .container-flex-center {
-            justify-content: flex-end;
+  @media only screen and (min-width: 320px) and (max-width: 767.98px) {
+    display: none;
+  }
 
-            .footer {
-                padding: 0;
-            }
-        }
+  @media only screen and (min-width: 768px) {
+    .container-flex-center {
+      justify-content: space-around;
     }
+  }
+
+  @media only screen and (min-width: 992px) {
+    .container-flex-center {
+      justify-content: flex-end;
+
+      .footer {
+        padding: 0;
+      }
+    }
+  }
 }

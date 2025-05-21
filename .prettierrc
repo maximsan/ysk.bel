@@ -2,6 +2,6 @@
     "plugins": ["@shopify/prettier-plugin-liquid"],
     "singleQuote": true,
     "arrowParens": "always",
-    "tabWidth": 4,
+    "tabWidth": 2,
     "useTabs": false
 }

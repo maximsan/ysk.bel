@@ -1,9 +1,9 @@
 .btn-send {
-    background: $brown;
-    color: var(--white);
+  background: $brown;
+  color: var(--white);
 
-    &:focus {
-        outline: 0;
-        box-shadow: 0 0 0 0.2rem var(--orange-shadow);
-    }
+  &:focus {
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem var(--orange-shadow);
+  }
 }

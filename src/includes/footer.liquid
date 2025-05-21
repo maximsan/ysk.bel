@@ -1,17 +1,17 @@
 <footer class='footer-social'>
-    <div class='container container-flex-center'>
-        <ul class='footer'>
-            {% for link in footer.links %}
-                <li class='footer-item'>
-                    <a
-                        class='footer-link {{ link.class }}'
-                        href='{{ link.href }}'
-                    >
-                        <i class='fab fa-{{ link.class }}'></i>
-                        <span class='icon-text'>{{ link.text }}</span>
-                    </a>
-                </li>
-            {% endfor %}
-        </ul>
-    </div>
+  <div class='container container-flex-center'>
+    <ul class='footer'>
+      {% for link in footer.links %}
+        <li class='footer-item'>
+          <a
+            class='footer-link {{ link.class }}'
+            href='{{ link.href }}'
+          >
+            <i class='fab fa-{{ link.class }}'></i>
+            <span class='icon-text'>{{ link.text }}</span>
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
 </footer>

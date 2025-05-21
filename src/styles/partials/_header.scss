@@ -23,156 +23,156 @@
 // }
 
 .header {
-    --_animationStartsAfter: 50vh;
-    --_animationDistance: 500px;
-    --_backgroundColorStart: var(--light-black);
-    --_backgroundColorEnd: var(--light-black);
-    --_textColorStart: var(--white);
-    --_textColorEnd: var(--white);
+  --_animationStartsAfter: 50vh;
+  --_animationDistance: 500px;
+  --_backgroundColorStart: var(--light-black);
+  --_backgroundColorEnd: var(--light-black);
+  --_textColorStart: var(--white);
+  --_textColorEnd: var(--white);
 
-    width: var(--_headerWidth, auto);
-    margin-inline: auto;
+  width: var(--_headerWidth, auto);
+  margin-inline: auto;
 
-    color: var(--_textColorStart);
-    background-color: var(--_backgroundColorStart);
-    position: sticky;
-    top: 0rem;
-    z-index: 999;
-    border-radius: 0px;
+  color: var(--_textColorStart);
+  background-color: var(--_backgroundColorStart);
+  position: sticky;
+  top: 0rem;
+  z-index: 999;
+  border-radius: 0px;
 
-    box-shadow: 0 5px 20px #311f1c;
+  box-shadow: 0 5px 20px #311f1c;
 
-    @supports (animation-timeline: view()) {
-        top: -5.5rem;
+  @supports (animation-timeline: view()) {
+    top: -5.5rem;
 
-        // backdrop-filter: blur(0.35rem);
+    // backdrop-filter: blur(0.35rem);
 
-        animation: stickyNavigation linear forwards;
-        animation-timeline: view();
-        animation-range-start: calc(100vh + var(--_animationStartsAfter));
-        animation-range-end: calc(
-            100vh + var(--_animationStartsAfter) + var(--_animationDistance)
-        );
+    animation: stickyNavigation linear forwards;
+    animation-timeline: view();
+    animation-range-start: calc(100vh + var(--_animationStartsAfter));
+    animation-range-end: calc(
+      100vh + var(--_animationStartsAfter) + var(--_animationDistance)
+    );
+  }
+
+  @keyframes stickyNavigation {
+    0%,
+    100% {
+      --_headerWidth: fit-content;
     }
-
-    @keyframes stickyNavigation {
-        0%,
-        100% {
-            --_headerWidth: fit-content;
-        }
-        100% {
-            top: 1rem;
-            color: var(--_textColorEnd);
-            background-color: var(--_backgroundColorEnd);
-            border-radius: 100vw;
-        }
+    100% {
+      top: 1rem;
+      color: var(--_textColorEnd);
+      background-color: var(--_backgroundColorEnd);
+      border-radius: 100vw;
     }
+  }
 }
 
 .navbar {
-    border-radius: 100vw;
-    padding: 1.5rem 1rem;
+  border-radius: 100vw;
+  padding: 1.5rem 1rem;
 
-    .navbar-logo {
-        display: flex;
+  .navbar-logo {
+    display: flex;
+  }
+
+  .navbar-nav {
+    flex-direction: row;
+    align-items: center;
+
+    .nav-item {
+      position: relative;
+
+      @include linkHoverAnimation;
+
+      .nav-link {
+        font-size: 1.25rem;
+        margin-right: 1.25rem;
+
+        &:hover,
+        &:focus {
+          color: var(--white-hover);
+        }
+      }
+
+      .house {
+        &-order {
+          font-size: var(--font-size-base);
+        }
+      }
+
+      // .phones {
+      //     display: flex;
+      //     flex-direction: column;
+      //     padding-right: 1.2rem;
+
+      & .phone {
+        font-size: var(--font-size-base);
+
+        :hover {
+          color: var(--dirty-orange);
+          text-decoration: none;
+        }
+      }
+      // }
     }
+  }
+
+  .navbar-toggler {
+    border: none;
+    padding: 0.25rem;
+
+    @include outline;
+
+    &-icon {
+      width: 1.2em;
+      height: 1.2em;
+    }
+  }
+
+  @media only screen and (min-width: 320px) and (max-width: 767.98px) {
+    gap: 0.5rem;
+    padding: 1.5rem;
 
     .navbar-nav {
-        flex-direction: row;
-        align-items: center;
+      flex-direction: column;
+    }
 
-        .nav-item {
-            position: relative;
+    .navbar-logo {
+      margin: 0 auto;
+      flex: 0 1 240px;
+    }
+  }
 
-            @include linkHoverAnimation;
+  @media only screen and (min-width: 768px) {
+    padding: 1rem 0.5rem;
 
-            .nav-link {
-                font-size: 1.25rem;
-                margin-right: 1.25rem;
+    &.navbar-expand-md {
+      justify-content: center;
+    }
 
-                &:hover,
-                &:focus {
-                    color: var(--white-hover);
-                }
-            }
-
-            .house {
-                &-order {
-                    font-size: var(--font-size-base);
-                }
-            }
-
-            // .phones {
-            //     display: flex;
-            //     flex-direction: column;
-            //     padding-right: 1.2rem;
-
-            & .phone {
-                font-size: var(--font-size-base);
-
-                :hover {
-                    color: var(--dirty-orange);
-                    text-decoration: none;
-                }
-            }
-            // }
-        }
+    .nav-footer {
+      display: none;
     }
 
     .navbar-toggler {
-        border: none;
-        padding: 0.25rem;
-
-        @include outline;
-
-        &-icon {
-            width: 1.2em;
-            height: 1.2em;
-        }
+      visibility: hidden;
     }
+  }
 
-    @media only screen and (min-width: 320px) and (max-width: 767.98px) {
-        gap: 0.5rem;
-        padding: 1.5rem;
+  @media (min-width: 992px) {
+    padding: 1.5rem 1rem;
 
-        .navbar-nav {
-            flex-direction: column;
-        }
-
-        .navbar-logo {
-            margin: 0 auto;
-            flex: 0 1 240px;
-        }
+    .navbar-logo {
+      margin-left: 1rem;
+      margin-inline-end: auto;
     }
+  }
 
-    @media only screen and (min-width: 768px) {
-        padding: 1rem 0.5rem;
-
-        &.navbar-expand-md {
-            justify-content: center;
-        }
-
-        .nav-footer {
-            display: none;
-        }
-
-        .navbar-toggler {
-            visibility: hidden;
-        }
+  @media (min-width: 1200px) {
+    .navbar-logo {
+      margin-left: 2rem;
     }
-
-    @media (min-width: 992px) {
-        padding: 1.5rem 1rem;
-
-        .navbar-logo {
-            margin-left: 1rem;
-            margin-inline-end: auto;
-        }
-    }
-
-    @media (min-width: 1200px) {
-        .navbar-logo {
-            margin-left: 2rem;
-        }
-    }
+  }
 }

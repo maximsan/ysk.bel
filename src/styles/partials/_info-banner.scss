@@ -1,80 +1,78 @@
 .info-banner {
-    display: none;
-    padding: 3rem;
-    color: #b47572;
+  display: none;
+  padding: 3rem;
+  color: #b47572;
 
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 
-    border: 4px solid #b47572;
-    border-radius: 8px;
-    background-color: #ffffff;
-    z-index: 1000;
+  border: 4px solid #b47572;
+  border-radius: 8px;
+  background-color: #ffffff;
+  z-index: 1000;
 
-    &__header {
-        font-size: 1.75rem;
-    }
+  &__header {
+    font-size: 1.75rem;
+  }
 }
 
 .hide-banner {
-    animation: fadeOutAnimation ease 1.5s;
+  animation: fadeOutAnimation ease 1.5s;
 }
 
 .show-banner {
-    animation: fadeInAnimation ease 1s;
+  animation: fadeInAnimation ease 1s;
 
-    display: flex !important;
-    flex-flow: column;
-    align-items: center;
-    justify-content: center;
+  display: flex !important;
+  flex-flow: column;
+  align-items: center;
+  justify-content: center;
 
-    text-align: center;
+  text-align: center;
 }
 
 .overlay {
-    @include overlay
+  @include overlay;
 }
 
 @media only screen and (min-width: 320px) and (max-width: 767.98px) {
-    .info-banner {
-        width: 90%;
+  .info-banner {
+    width: 90%;
 
-        &__text {
-            font-size: 1rem;
-        }
+    &__text {
+      font-size: 1rem;
     }
+  }
 }
 
 @media only screen and (min-width: 480px) {
-    .info-banner {
-        width: 90%;
+  .info-banner {
+    width: 90%;
 
-        &__text {
-            font-size: 1rem;
-        }
+    &__text {
+      font-size: 1rem;
     }
+  }
 }
 
 @media only screen and (min-width: 768px) {
-    .info-banner {
-        width: 90%;
+  .info-banner {
+    width: 90%;
 
-        &__text {
-            font-size: 1rem;
-        }
+    &__text {
+      font-size: 1rem;
     }
+  }
 }
 
 @media (min-width: 992px) {
-    .info-banner {
-        width: 50rem;
+  .info-banner {
+    width: 50rem;
 
-        &__text {
-            font-size: 1.5rem;
-        }
+    &__text {
+      font-size: 1.5rem;
     }
+  }
 }
-
-
