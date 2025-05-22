@@ -3,33 +3,43 @@
 ## Main scripts
 
 ### Start application in dev mode
+
 ```bash
     yarn run dev
 ```
 
 ### Build application
+
 ```bash
     yarn run build
 ```
 
 ### Deploy to the hosting server
+
 ```bash
     yarn run deploy:all
 ```
 
 ## Main technologies used in project
 
-### package manager - yarn berry
+- **Package manager:** yarn berry
+- **SSG:** [Eleventy](https://www.11ty.dev/) (now using ESM modules, see below)
+- **Bundler:** [esbuild](https://esbuild.github.io/)
+- **Babel:** For modern JS compatibility
+- **Sass:** For stylesheets
 
-### SSG - [Eleventy](https://www.11ty.dev/)
+### Directory structure
 
-### [esbuild](https://esbuild.github.io/) for bundling
+- Source: `src/`
+- Data: `src/data/` (ESM modules)
+- Includes: `src/includes/`
+- Layouts: `src/layouts/`
+- Scripts: `src/scripts/` (ESM modules)
+- Styles: `src/styles/`
 
-### babel-plugin-syntax-dynamic-import
+### Requirements
 
-```
-Allow parsing of import()
-```
+- Node.js 20+ required.
 
 ## Optimizations:
 

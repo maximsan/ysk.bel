@@ -31,7 +31,7 @@ This checklist will guide the migration of the project from CommonJS to ESM, cov
   - Run the build and development scripts.
   - Fix any issues related to module resolution or syntax.
   - Test Eleventy site locally.
-- [ ] 9. Update documentation:
+- [x] 9. Update documentation:
   - Document the migration and any changes to the development workflow.
   - Note any breaking changes or new requirements for contributors.
 
