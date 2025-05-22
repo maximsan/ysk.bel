@@ -2,7 +2,7 @@ const PHONE_WITHOUT_PLUS = '375291495989';
 const PHONE_WITH_PLUS = `%2B${PHONE_WITHOUT_PLUS}`;
 const USER_NAME = 'oleg_miskevich';
 
-module.exports = {
+export default {
   links: [
     {
       class: 'viber',

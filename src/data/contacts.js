@@ -1,7 +1,7 @@
 const lat = 54.291652;
 const lng = 27.480454;
 
-module.exports = {
+export default {
   header: 'Наш адрес:',
   region: 'Минская обл., Логойский р-н',
   address: 'д. Вепраты, ул. Тихая 3а,',

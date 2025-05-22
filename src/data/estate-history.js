@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   history: [
     {
       title: 'Bодоем был зарыблен 12.05.2025!',
