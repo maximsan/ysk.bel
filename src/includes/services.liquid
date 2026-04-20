@@ -50,6 +50,8 @@
                             src='{{ imgItem.srcSet[0] }}'
                             srcSet='{{ imgItem.srcSet | join: ', ' }}'
                             alt='{{ imgItem.alt }}'
+                            loading='lazy'
+                            decoding='async'
                             class='gallery__img card-img-top'
                           >
                           <figcaption class='gallery-caption__text'>
@@ -73,6 +75,8 @@
                           srcset='{{ main.img.srcSet | join: ', ' }}'
                           sizes='{{  main.img.sizes | join: ', ' }}'
                           alt='{{ main.img.alt }}'
+                          loading='lazy'
+                          decoding='async'
                           class='gallery__img card-img-top'
                         >
                         <figcaption class='gallery-caption__text'>
@@ -132,6 +136,8 @@
                           srcset='{{ main.img.srcSet | join: ', ' }}'
                           sizes='{{  main.img.sizes | join: ', ' }}'
                           alt='{{ main.img.alt }}'
+                          loading='lazy'
+                          decoding='async'
                           class='gallery__img card-img-top'
                         >
                         <figcaption class='gallery-caption__text'>
@@ -156,6 +162,8 @@
                             src='{{ item.img.srcSet[0] }}'
                             srcSet='{{ item.img.srcSet | join: ', ' }}'
                             alt='{{ item.img.alt }}'
+                            loading='lazy'
+                            decoding='async'
                             class='gallery__img card-img-top'
                           >
                           <figcaption class='gallery-caption__text'>

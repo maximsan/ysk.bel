@@ -32,6 +32,22 @@
   }
 }
 
+.map-shell__skeleton.media-skeleton {
+  background: linear-gradient(
+    110deg,
+    rgba(180, 198, 220, 0.35) 0%,
+    rgba(230, 236, 245, 0.55) 45%,
+    rgba(160, 180, 205, 0.38) 100%
+  );
+  background-size: 200% 100%;
+  animation: media-skeleton-shimmer 1.35s ease-in-out infinite;
+
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+    background: rgba(200, 212, 228, 0.35);
+  }
+}
+
 .videos-showcase__skeleton.media-skeleton {
   background: linear-gradient(
     110deg,

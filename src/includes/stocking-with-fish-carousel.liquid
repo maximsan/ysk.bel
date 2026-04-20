@@ -69,7 +69,8 @@
                         width='{{ image.width }}'
                         height='{{ image.height }}'
                         loading='{% if forloop.first %}eager{% else %}lazy{% endif %}'
-                        decoding='async'
+                        decoding='{% if forloop.first %}sync{% else %}async{% endif %}'
+                        fetchpriority='{% if forloop.first %}high{% else %}low{% endif %}'
                         class='stocking-carousel__img'
                       >
                     </a>
@@ -195,7 +196,8 @@
                           width='{{ image.width }}'
                           height='{{ image.height }}'
                           loading='{% if forloop.first %}eager{% else %}lazy{% endif %}'
-                          decoding='async'
+                          decoding='{% if forloop.first %}sync{% else %}async{% endif %}'
+                          fetchpriority='{% if forloop.first %}high{% else %}low{% endif %}'
                           class='stocking-carousel__img'
                         >
                       </a>

@@ -1,10 +1,17 @@
 export function googleMapInit() {
+  const mapEl = document.getElementById('map-canvas');
+  const shell = document.getElementById('map');
+
+  if (!mapEl || typeof google === 'undefined' || !google.maps) {
+    return;
+  }
+
   const lat = {
     lat: 54.291652,
     lng: 27.480454,
   };
 
-  const map = new google.maps.Map(document.getElementById('map'), {
+  const map = new google.maps.Map(mapEl, {
     zoom: 16,
     center: lat,
     mapTypeId: 'satellite',
@@ -175,4 +182,15 @@ export function googleMapInit() {
     position: lat,
     map,
   });
+
+  function markMapReady() {
+    shell?.classList.add('map-shell--ready');
+    shell?.classList.remove('map-shell--loading');
+  }
+
+  google.maps.event.addListenerOnce(map, 'idle', markMapReady);
+
+  window.setTimeout(() => {
+    markMapReady();
+  }, 15000);
 }
