@@ -34,11 +34,6 @@ const desktopOnlyMethods = () => {
   // addFixedHeaderOnScroll();
 
   addScrollUpButton();
-
-  if (hasInfoBannerElement) {
-    addInfoBanner();
-    hideInfoBannerOnScroll();
-  }
 };
 
 mobile.addEventListener('change', (event) => {

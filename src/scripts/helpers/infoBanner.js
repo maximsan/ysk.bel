@@ -6,6 +6,23 @@ const BANNER_CLASS = {
   show: 'show-banner',
 };
 
+const INFO_BANNER_COOKIE = 'info-banner=false';
+const COOKIE_MAX_AGE = 86400;
+
+function buildDismissCookie() {
+  const parts = [
+    `${INFO_BANNER_COOKIE}`,
+    `max-age=${COOKIE_MAX_AGE}`,
+    'Path=/',
+    'SameSite=Lax',
+  ];
+  if (window.location.protocol === 'https:') {
+    parts.push('Secure');
+  }
+
+  return parts.join('; ');
+}
+
 function showInfoBanner() {
   overlay.style.display = 'block';
   banner.classList.remove(BANNER_CLASS.hide);
@@ -16,9 +33,7 @@ function showCookieInfoBanner() {
   const hasInfoBannerCookie =
     document.cookie.split(';').filter((c) => c.includes('info-banner='))
       .length > 0;
-  console.log(`hasInfoBannerCookie ${hasInfoBannerCookie}`);
   if (!hasInfoBannerCookie) {
-    // show banner if cookie has been expired
     showInfoBanner();
   }
 }
@@ -37,21 +52,24 @@ export function addInfoBanner() {
   crossIcon.addEventListener('click', () => {
     hideInfoBanner();
     bannerClosed = true;
-
-    // set cookie
-    document.cookie = 'info-banner=false; max-age=3600';
+    document.cookie = buildDismissCookie();
   });
 }
 
-const prevScrollPos = window.scrollY;
-const carouselSize = document.querySelector('.intro').offsetHeight / 2;
-const bannerBottom = carouselSize + banner?.offsetHeight;
+const intro = document.querySelector('.intro');
+const carouselSize = intro ? intro.offsetHeight / 2 : 0;
+const bannerBottom = carouselSize + (banner?.offsetHeight ?? 0);
 
 export function hideInfoBannerOnScroll() {
-  window.addEventListener('scroll', function () {
+  let lastScrollY = window.scrollY;
+
+  window.addEventListener('scroll', () => {
     const currentScrollPos = window.scrollY;
+    const scrollingUp = currentScrollPos < lastScrollY;
+    lastScrollY = currentScrollPos;
+
     if (!bannerClosed) {
-      if (currentScrollPos < prevScrollPos || currentScrollPos < bannerBottom) {
+      if (scrollingUp || currentScrollPos < bannerBottom) {
         showCookieInfoBanner();
       } else {
         hideInfoBanner();
