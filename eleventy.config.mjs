@@ -46,7 +46,7 @@ export default function (config) {
       if (path.basename(inputPath).startsWith('_')) {
         return false;
       }
-      const { css, loadedUrls, sourceMap } = sass.compile(inputPath);
+      const { css } = sass.compile(inputPath);
       return {
         /* Exclude .scss files from `collections.all` so they don't show up in sitemaps, RSS feeds, etc. */
         eleventyExcludeFromCollections: true,
@@ -95,9 +95,6 @@ export default function (config) {
       if (path !== './src/scripts/index.js') {
         return;
       }
-
-      console.log('js path', path);
-      console.log('js content', content);
 
       return async () => {
         let output = await esbuild.build({

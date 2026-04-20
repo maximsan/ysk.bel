@@ -31,11 +31,11 @@
 ### Directory structure
 
 - Source: `src/`
-- Data: `src/data/` (ESM modules)
+- Styles: `src/styles/`
+- Data: `src/data/`
 - Includes: `src/includes/`
 - Layouts: `src/layouts/`
-- Scripts: `src/scripts/` (ESM modules)
-- Styles: `src/styles/`
+- Scripts: `src/scripts/`
 
 ### Requirements
 

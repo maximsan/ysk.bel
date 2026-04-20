@@ -14,7 +14,13 @@
     "deploy:sh": "npx surge dist ysk.surge.sh",
     "deploy": "npm-run-all clean build:eleventy deploy:sh",
     "deploy:rb": "./deploy.sh",
-    "deploy:all": "npm-run-all clean build:eleventy deploy:rb"
+    "deploy:all": "npm-run-all clean build:eleventy deploy:rb",
+    "test": "playwright test",
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui"
+  },
+  "engines": {
+    "node": ">=20"
   },
   "repository": {
     "type": "git",
@@ -27,24 +33,20 @@
   },
   "devDependencies": {
     "@11ty/eleventy": "^3.1.0",
-    "@babel/core": "^7.21.4",
-    "@babel/preset-env": "7.2.3",
-    "@esbuild/darwin-arm64": "^0.20.0",
+    "@playwright/test": "^1.52.0",
     "@shopify/prettier-plugin-liquid": "^1.5.0",
-    "babel-loader": "8.0.5",
-    "babel-plugin-syntax-dynamic-import": "6.18.0",
     "bootstrap": "4.5.3",
-    "cross-env": "5.2.0",
     "esbuild": "^0.20.0",
     "npm-run-all": "^4.1.5",
     "prettier": "^3.2.5",
-    "sass": "1.69.5"
+    "sass": "1.69.5",
+    "serve": "^14.2.4"
   },
   "author": "maximsan",
   "license": "MIT",
   "volta": {
     "node": "20.15.0",
-    "yarn": "4.3.1"
+    "yarn": "4.5.2"
   },
   "packageManager": "yarn@4.5.2",
   "type": "module"
