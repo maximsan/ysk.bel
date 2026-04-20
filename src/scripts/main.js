@@ -6,7 +6,9 @@ import {
   googleMapInit,
   documentHeight,
   addScrollUpButton,
-  initVideoSection,
+  initStockingCarousel,
+  initStockingImageSkeletons,
+  initVideosShowcaseCarousel,
 } from './helpers';
 // import { addFixedHeader, removeFixedHeader, removeFixedHeaderOnScroll } from './helpers/header';
 
@@ -63,21 +65,14 @@ setTimeout(() => googleMapInit(), 3000);
 
 toggleSideBar();
 
-function initVideoSections() {
-  initVideoSection({
-    sectionName: 'primary',
-    className: 'video-section',
-    removeWrappers: true,
-  });
-  initVideoSection({
-    sectionName: 'secondary',
-    className: 'video-section',
-    removeWrappers: true,
-  });
-}
-
 if (document.readyState !== 'loading') {
-  initVideoSections();
+  initVideosShowcaseCarousel();
+  initStockingCarousel();
+  initStockingImageSkeletons();
 } else {
-  document.addEventListener('DOMContentLoaded', initVideoSections);
+  document.addEventListener('DOMContentLoaded', () => {
+    initVideosShowcaseCarousel();
+    initStockingCarousel();
+    initStockingImageSkeletons();
+  });
 }

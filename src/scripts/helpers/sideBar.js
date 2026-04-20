@@ -9,6 +9,8 @@ const menuSelectors = [
   `a[href$='contacts']`,
   `a[href$='map']`,
   `a[href$='packages']`,
+  `a[href^='#stocking']`,
+  `a[href='#videos']`,
 ];
 const menuItemSelectors = menuSelectors.map((selector) =>
   document.querySelector(selector),

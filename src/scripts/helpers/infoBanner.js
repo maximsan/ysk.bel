@@ -46,13 +46,23 @@ function hideInfoBanner() {
 
 let bannerClosed = false;
 
+function dismissBannerPermanently() {
+  hideInfoBanner();
+  bannerClosed = true;
+  document.cookie = buildDismissCookie();
+}
+
 export function addInfoBanner() {
   showCookieInfoBanner();
 
-  crossIcon.addEventListener('click', () => {
-    hideInfoBanner();
-    bannerClosed = true;
-    document.cookie = buildDismissCookie();
+  crossIcon?.addEventListener('click', () => {
+    dismissBannerPermanently();
+  });
+
+  banner?.addEventListener('click', (event) => {
+    const link = event.target.closest('a');
+    if (!link || !banner.contains(link)) return;
+    dismissBannerPermanently();
   });
 }
 

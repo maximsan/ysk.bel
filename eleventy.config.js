@@ -11,6 +11,8 @@ const packages = require('./src/data/packages.js');
 const contacts = require('./src/data/contacts.js');
 const sidebar = require('./src/data/sidebar.js');
 const services = require('./src/data/services.js');
+const stockingStories = require('./src/data/stockingStories.js');
+const videosShowcase = require('./src/data/videosShowcase.js');
 
 /* For the given `content` string, generate an MD5 hash of `length` chars. */
 function getHash(content, length = 8) {
@@ -126,6 +128,8 @@ module.exports = function (config) {
             contacts,
             sidebar,
             services,
+            stockingStories,
+            videosShowcase,
         },
     });
 

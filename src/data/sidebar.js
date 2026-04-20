@@ -17,6 +17,16 @@ module.exports = {
       type: 'link',
     },
     {
+      text: 'Зарыбление',
+      href: '#stocking',
+      type: 'link',
+    },
+    {
+      text: 'Видео',
+      href: '#videos',
+      type: 'link',
+    },
+    {
       text: 'Контакты',
       href: '#contacts',
       type: 'link',

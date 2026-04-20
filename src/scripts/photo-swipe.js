@@ -81,3 +81,13 @@ lightbox.on('uiRegister', function () {
 });
 
 lightbox.init();
+
+document.querySelectorAll('.js-stocking-photoswipe').forEach((galleryEl) => {
+  const stockingPhotoSwipe = new PhotoSwipeLightbox({
+    gallery: galleryEl,
+    children: 'a',
+    bgOpacity: 0.92,
+    pswpModule: () => import('photoswipe'),
+  });
+  stockingPhotoSwipe.init();
+});
