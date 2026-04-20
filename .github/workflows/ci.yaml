@@ -32,13 +32,27 @@ jobs:
       - name: Build and E2E tests
         run: yarn test
 
+      - name: Upload dist for deploy
+        if: github.ref == 'refs/heads/main'
+        uses: actions/upload-artifact@v4
+        with:
+          name: site-dist
+          path: dist/
+
   deploy:
     if: github.ref == 'refs/heads/main'
+    needs: build
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Download dist
+        uses: actions/download-artifact@v4
+        with:
+          name: site-dist
+          path: dist
 
       - name: Set up SSH
         uses: webfactory/ssh-agent@v0.9.0

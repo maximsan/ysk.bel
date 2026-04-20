@@ -57,6 +57,8 @@ Build output: **`dist/`** (Vercel uses this via `vercel.json` `outputDirectory`)
 
 Scripts are listed in the table above (`deploy`, `deploy:sh`, `deploy:rb`, `deploy:all`). Do not commit secrets; deployment is environment-specific.
 
+On **GitHub Actions** (`main`), the **deploy** job runs only after the **build** job passes (including Playwright). It downloads the **`dist/`** artifact from that run, then runs `deploy.sh` — ensure `LOCAL_PATH` in secrets matches the artifact layout (typically `dist` or `./dist`).
+
 ## Scope discipline
 
 Match existing patterns (Liquid includes, data modules, Sass structure). Client bundling is only what Eleventy wires for `src/scripts/index.js` plus esbuild in `eleventy.config.mjs`.
