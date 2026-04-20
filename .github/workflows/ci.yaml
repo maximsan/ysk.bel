@@ -1,44 +1,54 @@
 name: CI
 
 on:
-    push:
-        branches: [main]
-    pull_request:
-        branches: [main]
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
 
 jobs:
-    build:
-        runs-on: ubuntu-latest
+  build:
+    runs-on: ubuntu-latest
 
-        steps:
-            - name: checkout code
-              uses: actions/checkout@v3
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
 
-            - name: install dependencies
-              run: |
-                  yarn set version 4.3.1
-                  yarn install --immutable
+      - name: Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: yarn
 
-            - name: build app
-              run: yarn build
+      - name: Enable Corepack (Yarn 4 from package.json)
+        run: corepack enable
 
-    deploy:
-        if: github.ref == 'refs/heads/main'
-        runs-on: ubuntu-latest
+      - name: Install dependencies
+        run: yarn install --immutable
 
-        steps:
-            - name: checkout code
-              uses: actions/checkout@v3
+      - name: Install Playwright Chromium
+        run: yarn playwright install chromium --with-deps
 
-            - name: Set up SSH
-              uses: webfactory/ssh-agent@v0.5.4
-              with:
-                ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+      - name: Build and E2E tests
+        run: yarn test
 
-            - name: Run deploy script
-              run: ./deploy.sh
-              env:
-                REMOTE_USER: ${{ secrets.REMOTE_USER }}
-                REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
-                REMOTE_PATH: ${{ secrets.REMOTE_PATH }}
-                LOCAL_PATH: ${{ secrets.LOCAL_PATH }}
+  deploy:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up SSH
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Run deploy script
+        run: ./deploy.sh
+        env:
+          REMOTE_USER: ${{ secrets.REMOTE_USER }}
+          REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
+          REMOTE_PATH: ${{ secrets.REMOTE_PATH }}
+          LOCAL_PATH: ${{ secrets.LOCAL_PATH }}

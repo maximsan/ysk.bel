@@ -11,7 +11,7 @@ test.describe('Home (built site)', () => {
     const href = page.locator('link[rel="stylesheet"][href*="styles/index."]');
     await expect(href).toHaveCount(1);
     const url = await href.getAttribute('href');
-    expect(url).toMatch(/styles\/index\.[a-f0-9]{8}\.css$/);
+    expect(url).toMatch(/\/?styles\/index\.[a-f0-9]{8}\.css$/);
   });
 
   test('bundled entry script is present and loads', async ({ page }) => {

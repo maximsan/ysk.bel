@@ -14,6 +14,12 @@
     yarn run build
 ```
 
+### Run E2E tests (build + Playwright)
+
+```bash
+    yarn test
+```
+
 ### Deploy to the hosting server
 
 ```bash
@@ -23,10 +29,10 @@
 ## Main technologies used in project
 
 - **Package manager:** yarn berry
-- **SSG:** [Eleventy](https://www.11ty.dev/) (now using ESM modules, see below)
-- **Bundler:** [esbuild](https://esbuild.github.io/)
-- **Babel:** For modern JS compatibility
+- **SSG:** [Eleventy](https://www.11ty.dev/) 3.x (ESM config: `eleventy.config.mjs`)
+- **Bundler:** [esbuild](https://esbuild.github.io/) (via Eleventy for client JS)
 - **Sass:** For stylesheets
+- **E2E:** [Playwright](https://playwright.dev/) — `yarn test` (see `docs/migration-to-esm.md`)
 
 ### Directory structure
 

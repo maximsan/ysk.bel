@@ -7,8 +7,9 @@ Static marketing site for **Усадьба Серебряный Карась** (
 - **SSG:** [Eleventy](https://www.11ty.dev/) 3.x (`eleventy.config.mjs`, ESM)
 - **Templates:** Liquid (primary), Markdown and Nunjucks also allowed
 - **Styles:** Sass/SCSS; entry SCSS files emit hashed filenames (see `eleventy.config.mjs`)
-- **Client JS:** esbuild bundles **`src/scripts/index.js` only**; that file imports Bootstrap, `main`, PhotoSwipe
+- **Client JS:** esbuild (in Eleventy) bundles **`src/scripts/index.js` only**; that file imports Bootstrap, `main`, PhotoSwipe. No Babel in the build pipeline.
 - **Libraries:** Bootstrap 4, jQuery, Popper 1.x, PhotoSwipe 5
+- **E2E:** [Playwright](https://playwright.dev/) (`e2e/`, `playwright.config.mjs`) — builds the site and serves `dist/` via `serve` during tests.
 
 ## npm scripts (`package.json`)
 
@@ -25,8 +26,10 @@ Static marketing site for **Усадьба Серебряный Карась** (
 | `yarn deploy` | `clean` → build → Surge deploy |
 | `yarn deploy:rb` | `./deploy.sh` only (no build) |
 | `yarn deploy:all` | `clean` → build → `deploy:rb` |
+| `yarn test` / `yarn test:e2e` | Playwright against a fresh build (see `playwright.config.mjs`) |
+| `yarn test:e2e:ui` | Playwright UI mode |
 
-Node **20+**; Volta pins Node 20.15.0. **Yarn Berry 4** (`.yarn/releases/`, `nodeLinker: node-modules`).
+Node **20+** (`engines` in `package.json`); Volta pins Node 20.15.0 and Yarn 4.5.x. **Yarn Berry 4** (`.yarn/releases/`, `nodeLinker: node-modules`). After cloning, run `yarn playwright install chromium` once if you run E2E locally outside CI.
 
 ## Layout of `src/`
 
