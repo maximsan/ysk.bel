@@ -30,8 +30,9 @@ function buildProjects() {
 
 export default defineConfig({
   testDir: 'tests/visual',
+  // Shared folder so home specs can be split across files without duplicating PNGs.
   // Omit {platform} so the same baselines work on macOS dev and Linux CI.
-  snapshotPathTemplate: '{testDir}/{testFilePath}-snapshots/{arg}-{projectName}{ext}',
+  snapshotPathTemplate: '{testDir}/home-snapshots/{arg}-{projectName}{ext}',
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,

@@ -10,8 +10,8 @@ Goal: **catch unintended layout and styling changes** across desktop, tablet, an
 | Item              | Location / notes                                                                                                                                                                                                                                                                        |
 | ----------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Playwright config | `playwright.config.mjs` — projects for **Chromium**, **Firefox**, **WebKit** × **mobile / tablet / desktop**; `webServer` runs `yarn build` then serves `dist` on port **4173**; `snapshotPathTemplate` omits `{platform}` so one set of PNGs is shared between macOS dev and Linux CI. |
-| Visual specs      | `tests/visual/home.spec.js` — locator screenshots; Playwright timeouts / blocked URLs in `tests/visual/constants.js`. **DOM ids, `data-*` hooks, and shared class fragments** are defined once in `src/scripts/constants/homePageDom.cjs` (imported by carousel / video / map JS and re-used from tests via `require`). |
-| Baselines         | `tests/visual/home.spec.js-snapshots/*.png` (committed). Footer test is **skipped** on mobile; **header — mobile menu open** is **skipped** on tablet/desktop (drawer only under **768px**).                                                                               |
+| Visual specs      | `tests/visual/home-header.spec.js`, `tests/visual/home-sections.spec.js` — locator screenshots; shared waits in `tests/visual/support/home-snapshot-helpers.cjs`; Playwright timeouts / blocked URLs in `tests/visual/constants.js`. **DOM ids, `data-*` hooks, and shared class fragments** are defined once in `src/scripts/constants/homePageDom.cjs` (imported by carousel / video / map JS and re-used from tests via `require`). |
+| Baselines         | `tests/visual/home-snapshots/*.png` (committed). `snapshotPathTemplate` in `playwright.config.mjs` keeps one folder for all home specs. Footer test is **skipped** on mobile; **header — mobile menu open** is **skipped** on tablet/desktop (drawer only under **768px**).                                                                               |
 | Yarn scripts      | `yarn test:visual`, `yarn test:visual:update`, `yarn test:visual:ui`, `yarn test:visual:report`                                                                                                                                                                                         |
 | CI                | `.github/workflows/ci.yaml` — **`build`** runs on every push/PR; **`visual`** runs **on pull requests only** when changed paths match (see below) or the PR has label **`run-visual`** (not on `push` to `main`). Playwright uploads **playwright-report** on failure.                                                                                                                                        |
 
@@ -26,10 +26,10 @@ Goal: **catch unintended layout and styling changes** across desktop, tablet, an
 | Concern                                              | Recommended tool      | Notes                                                                                                                                                                                                                         |
 | ---------------------------------------------------- | --------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Full-page and section screenshots, cross-browser     | **Playwright**        | `expect(locator).toHaveScreenshot()` with projects for **Chromium**, **Firefox**, and **WebKit** (maps closely to Chrome/Edge, Firefox, and Safari).                                                                          |
-| Unit tests for pure JavaScript (helpers, form logic) | **Vitest** (optional) | Fast, ESM-friendly tests for `src/scripts/helpers/`**, `form-submission/**`, etc. **Vitest does not replace Playwright for full-site visual regression** — use it only if you want automated unit coverage alongside visuals. |
+| Unit tests for pure JavaScript (helpers, form logic) | **Vitest** + **happy-dom** | `yarn test:unit` — `tests/unit/**`; CI runs in the **`build`** job. **Vitest does not replace Playwright** for full-site visual regression. |
 
 
-**Summary:** visual regression is implemented with **Playwright**. Add **Vitest** when you want isolated tests for non-DOM JavaScript; keep visual baselines in Playwright’s snapshot folders, not in Vitest.
+**Summary:** visual regression is implemented with **Playwright**; **Vitest** covers small pure-JS modules (`yarn test:unit`). Keep visual baselines in `tests/visual/home-snapshots/`, not in Vitest.
 
 ---
 
@@ -95,7 +95,7 @@ Third-party **blocked** in tests (layout noise / analytics): GTM, Google Analyti
 ## Developer workflow — detect change, then get approval
 
 1. **Local / CI runs** `yarn test:visual` (visual assertions on committed baselines).
-2. If a change is **intentional**, run `**yarn test:visual:update`** and commit updated PNGs under `tests/visual/home.spec.js-snapshots/`.
+2. If a change is **intentional**, run `**yarn test:visual:update`** and commit updated PNGs under `tests/visual/home-snapshots/`.
 3. **Human review:** PR reviewers inspect image diffs or download the **Playwright HTML report** artifact from a failed CI run.
 4. **Merge policy:** team rule — no merge of snapshot-only changes without reviewer approval of the visual diff.
 
@@ -122,23 +122,23 @@ Optional automation:
 
 - **Output directory:** `dist/`, `baseURL` `http://127.0.0.1:4173`
 - **Snapshot OS policy:** single PNG set without OS suffix; may require occasional Linux regen if CI differs
-- **Blocked third parties:** see `blockThirdPartyNoise` in `tests/visual/home.spec.js`; maps/videos use explicit readiness waits (`tests/visual/constants.js`)
+- **Blocked third parties:** see `blockThirdPartyNoise` in `tests/visual/support/home-snapshot-helpers.cjs`; maps/videos use explicit readiness waits (`tests/visual/constants.js`)
 
 ### Phase 1 — Playwright foundation
 
 - `@playwright/test`, `serve`; `playwright install --with-deps` in CI
-- `playwright.config.mjs` — projects + `webServer`
+- `playwright.config.mjs` — projects + `webServer` + shared `home-snapshots/` path
 - Visual tests target built home page (section screenshots)
 
 ### Phase 2 — Visual snapshots
 
-- `tests/visual/home.spec.js` with `toHaveScreenshot` per section
+- `tests/visual/home-*.spec.js` with `toHaveScreenshot` per section
 - `maxDiffPixels` / `threshold` in config (tune if flaky)
-- Baselines under `tests/visual/home.spec.js-snapshots/`
+- Baselines under `tests/visual/home-snapshots/`
 
 ### Phase 3 — Repository hygiene
 
-- `package.json` scripts: `test:visual`, `test:visual:update`, `test:visual:ui`, `test:visual:report`
+- `package.json` scripts: `test:visual`, `test:visual:update`, `test:visual:ui`, `test:visual:report`, `test:unit`, `test:unit:watch`
 - `.gitignore`: `playwright-report/`, `blob-report/`, `test-results/` — snapshots **not** ignored
 - README section for visual tests (see root `README.md`)
 
@@ -148,11 +148,11 @@ Optional automation:
 - Team / PR policy: reviewer sign-off on intentional snapshot updates (process, not code)
 - HTML report artifact on failure
 
-### Phase 5 — Optional Vitest (unit tests only)
+### Phase 5 — Vitest (unit tests only) ✓
 
-- Add `vitest` + `jsdom` or `happy-dom` if testing DOM-less modules
-- Cover `src/scripts/helpers/`** and critical form logic
-- No screenshot assertions in Vitest unless you adopt a separate strategy
+- `vitest` + `happy-dom`; config: `vitest.config.mjs`; tests: `tests/unit/**/*.test.js`
+- Covers `homePageDom.cjs` selectors, `formSubmissionCore.cjs` (mirror of legacy `form-submission.js` email / honeypot checks), `normalizeVideoPreload` in `addVideo.js`, `documentHeight` in `calculateDocumentHeight.js`
+- No screenshot assertions in Vitest
 
 ---
 
@@ -165,7 +165,7 @@ Optional automation:
 | `yarn test:visual:update` | Regenerate screenshot baselines after intentional UI changes             |
 | `yarn test:visual:ui`     | Playwright UI mode                                                       |
 | `yarn test:visual:report` | Open last HTML report                                                    |
-| `yarn test:unit`          | (Optional, not added) Vitest unit tests                                  |
+| `yarn test:unit`          | Vitest (`tests/unit/**`); `yarn test:unit:watch` for watch mode        |
 
 
 ---
@@ -178,4 +178,4 @@ Optional automation:
 
 ---
 
-*Last updated: 2026-04-20 — Playwright visual regression implemented; Vitest optional.*
+*Last updated: 2026-04-20 — Playwright home specs split; shared `home-snapshots/`; Vitest in CI.*

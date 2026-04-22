@@ -7,6 +7,12 @@ const {
   STATE_CLASS,
 } = homePageDom;
 
+/** Normalizes `preload` attribute for `<video>` (lazy host data attribute). */
+export function normalizeVideoPreload(preloadRaw) {
+  const lower = (preloadRaw || 'metadata').toLowerCase();
+  return ['none', 'metadata', 'auto'].includes(lower) ? lower : 'metadata';
+}
+
 function createVideoTag({ poster = '', preload = 'metadata' }) {
   const video = document.createElement('video');
   video.poster = poster;
@@ -66,14 +72,9 @@ export function mountLazyVideoHost(lazyVideoHostElement) {
   const extensions = extensionsStr
     .split(',')
     .map((extensionToken) => extensionToken.trim());
-  const preloadRaw = (
-    lazyVideoHostElement.getAttribute(
-      LAZY_VIDEO_HOST_DATA_ATTR.videoPreload,
-    ) || 'metadata'
-  ).toLowerCase();
-  const preload = ['none', 'metadata', 'auto'].includes(preloadRaw)
-    ? preloadRaw
-    : 'metadata';
+  const preload = normalizeVideoPreload(
+    lazyVideoHostElement.getAttribute(LAZY_VIDEO_HOST_DATA_ATTR.videoPreload),
+  );
 
   if (!baseUrl) return;
 

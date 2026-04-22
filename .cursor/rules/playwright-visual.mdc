@@ -12,8 +12,10 @@ alwaysApply: false
 
 - **Site DOM** (ids, `data-*`, shared classes): `src/scripts/constants/homePageDom.cjs` — imported by bundled JS (`videoShowcaseCarousel`, `addVideo`, `googleMapInit`) and **reused from tests** via `require()` in `tests/visual/constants.js`.
 - **Test-only**: `tests/visual/constants.js` — `VIEWPORTS`, `BLOCKED_THIRD_PARTY_URL_GLOBS`, screenshot timeouts, `LAYOUT.footerMinVisibleWidthPx`.
-- **Specs**: `tests/visual/home.spec.js`; baselines: `tests/visual/home.spec.js-snapshots/*.png`.
-- **Config**: `playwright.config.mjs` loads `VIEWPORTS` via `createRequire` from `tests/visual/constants.js`. `snapshotPathTemplate` omits `{platform}` (shared macOS/Linux baselines).
+- **Shared waits / routing**: `tests/visual/support/home-snapshot-helpers.cjs`.
+- **Specs**: `tests/visual/home-header.spec.js` (header + mobile drawer), `tests/visual/home-sections.spec.js` (remaining sections).
+- **Baselines**: `tests/visual/home-snapshots/*.png` — `snapshotPathTemplate` in `playwright.config.mjs` uses this single folder for all home specs; omits `{platform}` (shared macOS/Linux baselines).
+- **Config**: `playwright.config.mjs` loads `VIEWPORTS` via `createRequire` from `tests/visual/constants.js`.
 
 ## Commands
 
@@ -24,12 +26,14 @@ alwaysApply: false
 ## Behaviour notes
 
 - Footer screenshot is **skipped** when viewport width `< 768` (`.footer-social` hidden in CSS).
+- **Header — mobile menu open** runs only below 768px; dismiss info-banner overlay first (`dismissInfoBannerForInteraction`) so `.navbar-toggler` is clickable.
 - Waits: stocking zoom `is-loaded`, video host `is-media-ready` / `readyState`, map `#map` → `map-shell--ready`.
 - Third-party blocking for stability: list in `BLOCKED_THIRD_PARTY_URL_GLOBS` (not maps/video CDN).
 
 ## CI
 
-- `.github/workflows/ci.yaml`: `yarn exec playwright install chromium firefox webkit --with-deps`, then `yarn test:visual`; uploads `playwright-report` on failure.
+- **Build** job: `yarn build`, then `yarn test:unit` (Vitest).
+- **Visual** job (PRs only): path filter or `run-visual` label; `yarn exec playwright install …`, `yarn test:visual`; uploads `playwright-report` on failure.
 
 ## Docs
 

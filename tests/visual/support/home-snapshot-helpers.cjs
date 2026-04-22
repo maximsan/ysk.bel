@@ -1,10 +1,10 @@
-const { test, expect } = require('@playwright/test');
+'use strict';
+
 const {
-  LAYOUT,
   HOME_SELECTORS,
   homeActiveVideoHostSelector,
   BLOCKED_THIRD_PARTY_URL_GLOBS,
-} = require('./constants');
+} = require('../constants');
 
 const { locators, classMap, timeouts } = HOME_SELECTORS;
 
@@ -164,117 +164,25 @@ async function dismissInfoBannerForInteraction(page) {
   });
 }
 
-test.beforeEach(async ({ page }) => {
+async function setupHomeVisualPage(page) {
   await blockThirdPartyNoise(page);
   await page.goto('/', { waitUntil: 'domcontentloaded' });
   await page.emulateMedia({ reducedMotion: 'reduce' });
   await waitForLayout(page);
-});
+}
 
-test.describe('home — section screenshots', () => {
-  test('header', async ({ page }) => {
-    const screenshotRegion = page.locator(locators.header);
-    await screenshotRegion.scrollIntoViewIfNeeded();
-    await expect(screenshotRegion).toHaveScreenshot('header.png', {
-      animations: 'disabled',
-    });
-  });
-
-  test('header — mobile menu open', async ({ page }) => {
-    const viewportWidthPx = page.viewportSize()?.width ?? 1440;
-    test.skip(
-      viewportWidthPx >= LAYOUT.footerMinVisibleWidthPx,
-      'Hamburger / slide-out `.menu` is for widths under 768px (`_header.scss`, `_menu.scss`)',
-    );
-
-    await dismissInfoBannerForInteraction(page);
-
-    await page.locator(locators.navbarToggler).click();
-    await waitForSelectorHasClass(
-      page,
-      locators.menu,
-      classMap.menuOpenClass,
-      timeouts.menuDrawerOpenMs,
-    );
-    await page.waitForTimeout(timeouts.menuDrawerTransitionMs);
-
-    const screenshotRegion = page.locator(locators.header);
-    await expect(screenshotRegion).toHaveScreenshot('header-mobile-menu-open.png', {
-      animations: 'disabled',
-    });
-  });
-
-  test('cooperation banner', async ({ page }) => {
-    const screenshotRegion = page.locator(locators.cooperationBanner);
-    await screenshotRegion.scrollIntoViewIfNeeded();
-    await expect(screenshotRegion).toHaveScreenshot('cooperation-banner.png', {
-      animations: 'disabled',
-    });
-  });
-
-  test('info banner', async ({ page }) => {
-    const screenshotRegion = page.locator(locators.infoBanner);
-    await screenshotRegion.scrollIntoViewIfNeeded();
-    await expect(screenshotRegion).toHaveScreenshot('info-banner.png', {
-      animations: 'disabled',
-    });
-  });
-
-  test('hero', async ({ page }) => {
-    const screenshotRegion = page.locator(locators.hero);
-    await screenshotRegion.scrollIntoViewIfNeeded();
-    await expect(screenshotRegion).toHaveScreenshot('hero.png', {
-      animations: 'disabled',
-    });
-  });
-
-  test('services', async ({ page }) => {
-    const screenshotRegion = page.locator(locators.services);
-    await screenshotRegion.scrollIntoViewIfNeeded();
-    await waitForImagesLoaded(page, locators.services);
-    await expect(screenshotRegion).toHaveScreenshot('services.png', {
-      animations: 'disabled',
-    });
-  });
-
-  test('stocking', async ({ page }) => {
-    const screenshotRegion = page.locator(locators.stocking);
-    await screenshotRegion.scrollIntoViewIfNeeded();
-    await waitForStockingCarouselStable(page);
-    await expect(screenshotRegion).toHaveScreenshot('stocking.png', {
-      animations: 'disabled',
-    });
-  });
-
-  test('videos', async ({ page }) => {
-    const screenshotRegion = page.locator(locators.videos);
-    await screenshotRegion.scrollIntoViewIfNeeded();
-    await waitForVideoShowcaseReady(page);
-    await expect(screenshotRegion).toHaveScreenshot('videos.png', {
-      animations: 'disabled',
-    });
-  });
-
-  test('contacts', async ({ page }) => {
-    const screenshotRegion = page.locator(locators.contacts);
-    await screenshotRegion.scrollIntoViewIfNeeded();
-    await waitForMapReady(page);
-    await expect(screenshotRegion).toHaveScreenshot('contacts.png', {
-      animations: 'disabled',
-    });
-  });
-
-  test('footer', async ({ page }) => {
-    const viewportWidthPx = page.viewportSize()?.width ?? 1440;
-    test.skip(
-      viewportWidthPx < LAYOUT.footerMinVisibleWidthPx,
-      '.footer-social is hidden below 768px (see _footer.scss)',
-    );
-
-    const screenshotRegion = page.locator(locators.footer);
-    await screenshotRegion.scrollIntoViewIfNeeded();
-    await expect(screenshotRegion).toHaveScreenshot('footer.png', {
-      animations: 'disabled',
-    });
-  });
-});
+module.exports = {
+  locators,
+  classMap,
+  timeouts,
+  blockThirdPartyNoise,
+  waitForLayout,
+  waitForSelectorHasClass,
+  waitForElementIdHasClass,
+  waitForImagesLoaded,
+  waitForStockingCarouselStable,
+  waitForVideoShowcaseReady,
+  waitForMapReady,
+  dismissInfoBannerForInteraction,
+  setupHomeVisualPage,
+};

@@ -46,6 +46,9 @@ jobs:
             - name: build app
               run: yarn build
 
+            - name: unit tests
+              run: yarn test:unit
+
     visual:
         needs: [changes, build]
         if: |
