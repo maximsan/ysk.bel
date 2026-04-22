@@ -1,3 +1,12 @@
+import homePageDom from '../constants/homePageDom.cjs';
+
+const {
+  LAZY_VIDEO_HOST_DATA_ATTR,
+  LAZY_VIDEO_HOST_DATASET,
+  LAZY_VIDEO_HOST_QUERY,
+  STATE_CLASS,
+} = homePageDom;
+
 function createVideoTag({ poster = '', preload = 'metadata' }) {
   const video = document.createElement('video');
   video.poster = poster;
@@ -9,19 +18,19 @@ function createVideoTag({ poster = '', preload = 'metadata' }) {
   return video;
 }
 
-function setVideoResources({ url, extensions, videoTag }) {
-  extensions.forEach((extension) => {
-    const source = document.createElement('source');
-    source.src = `${url}.${extension}`;
-    source.type = `video/${extension}`;
-    videoTag.appendChild(source);
+function setVideoResources({ url, extensions, videoTag: videoElement }) {
+  extensions.forEach((fileExtension) => {
+    const sourceElement = document.createElement('source');
+    sourceElement.src = `${url}.${fileExtension}`;
+    sourceElement.type = `video/${fileExtension}`;
+    videoElement.appendChild(sourceElement);
   });
 }
 
-function setNotSupportJS({ parentNode }) {
-  const noJs = document.createElement('div');
-  noJs.innerHTML = 'Your browser does not support the video tag.';
-  parentNode.appendChild(noJs);
+function setNotSupportJS({ parentNode: videoParentNode }) {
+  const fallbackMessage = document.createElement('div');
+  fallbackMessage.innerHTML = 'Your browser does not support the video tag.';
+  videoParentNode.appendChild(fallbackMessage);
 }
 
 /**
@@ -30,43 +39,63 @@ function setNotSupportJS({ parentNode }) {
  * optional data-poster-webp (preferred for video.poster when set),
  * data-video-preload: none | metadata | auto.
  */
-export function mountLazyVideoHost(hostEl) {
-  if (!hostEl || hostEl.dataset.videoMounted === 'true') {
+export function mountLazyVideoHost(lazyVideoHostElement) {
+  const mountedKey = LAZY_VIDEO_HOST_DATASET.videoMounted;
+  if (
+    !lazyVideoHostElement ||
+    lazyVideoHostElement.dataset[mountedKey] === 'true'
+  ) {
     return;
   }
 
-  const url = hostEl.getAttribute('data-video-url');
-  const posterFallback = hostEl.getAttribute('data-video-poster') || '';
-  const posterWebp = hostEl.getAttribute('data-poster-webp');
+  const baseUrl = lazyVideoHostElement.getAttribute(
+    LAZY_VIDEO_HOST_DATA_ATTR.videoUrl,
+  );
+  const posterFallback =
+    lazyVideoHostElement.getAttribute(
+      LAZY_VIDEO_HOST_DATA_ATTR.videoPoster,
+    ) || '';
+  const posterWebp = lazyVideoHostElement.getAttribute(
+    LAZY_VIDEO_HOST_DATA_ATTR.posterWebp,
+  );
   const posterForVideo = posterWebp || posterFallback;
-  const extensionsStr = hostEl.getAttribute('data-video-extensions') || 'webm,mp4';
-  const extensions = extensionsStr.split(',').map((s) => s.trim());
+  const extensionsStr =
+    lazyVideoHostElement.getAttribute(
+      LAZY_VIDEO_HOST_DATA_ATTR.videoExtensions,
+    ) || 'webm,mp4';
+  const extensions = extensionsStr
+    .split(',')
+    .map((extensionToken) => extensionToken.trim());
   const preloadRaw = (
-    hostEl.getAttribute('data-video-preload') || 'metadata'
+    lazyVideoHostElement.getAttribute(
+      LAZY_VIDEO_HOST_DATA_ATTR.videoPreload,
+    ) || 'metadata'
   ).toLowerCase();
   const preload = ['none', 'metadata', 'auto'].includes(preloadRaw)
     ? preloadRaw
     : 'metadata';
 
-  if (!url) return;
+  if (!baseUrl) return;
 
-  const videoTag = createVideoTag({ poster: posterForVideo, preload });
-  videoTag.style.cssText =
+  const videoElement = createVideoTag({ poster: posterForVideo, preload });
+  videoElement.style.cssText =
     'position:absolute;left:0;top:0;width:100%;height:100%;object-fit:contain;background:#000;z-index:1;';
-  setVideoResources({ url, extensions, videoTag });
-  setNotSupportJS({ parentNode: videoTag });
+  setVideoResources({ url: baseUrl, extensions, videoTag: videoElement });
+  setNotSupportJS({ parentNode: videoElement });
 
-  hostEl.appendChild(videoTag);
-  hostEl.dataset.videoMounted = 'true';
+  lazyVideoHostElement.appendChild(videoElement);
+  lazyVideoHostElement.dataset[mountedKey] = 'true';
 
-  const skeleton = hostEl.querySelector('[data-video-skeleton]');
+  const skeletonElement = lazyVideoHostElement.querySelector(
+    LAZY_VIDEO_HOST_QUERY.skeleton,
+  );
   const hideSkeleton = () => {
-    skeleton?.remove();
-    hostEl.classList.add('is-media-ready');
+    skeletonElement?.remove();
+    lazyVideoHostElement.classList.add(STATE_CLASS.mediaReady);
   };
 
-  videoTag.addEventListener('loadeddata', hideSkeleton, { once: true });
-  videoTag.addEventListener(
+  videoElement.addEventListener('loadeddata', hideSkeleton, { once: true });
+  videoElement.addEventListener(
     'error',
     () => {
       hideSkeleton();
@@ -85,32 +114,40 @@ export function initVideoSection({
   const videoStateMap = new Map();
 
   const observer = new IntersectionObserver((entries) => {
-    entries.forEach(({ target, isIntersecting }) => {
-      if (isIntersecting && !videoStateMap.get(target)) {
-        const url = target.getAttribute('data-video-url');
-        const poster = target.getAttribute('data-video-poster');
-        const extensions = target
-          .getAttribute('data-video-extensions')
+    entries.forEach(({ target: wrapperElement, isIntersecting }) => {
+      if (isIntersecting && !videoStateMap.get(wrapperElement)) {
+        const mediaBaseUrl = wrapperElement.getAttribute(
+          LAZY_VIDEO_HOST_DATA_ATTR.videoUrl,
+        );
+        const posterUrl = wrapperElement.getAttribute(
+          LAZY_VIDEO_HOST_DATA_ATTR.videoPoster,
+        );
+        const extensions = wrapperElement
+          .getAttribute(LAZY_VIDEO_HOST_DATA_ATTR.videoExtensions)
           .split(',');
 
-        const videoTag = createVideoTag({ poster });
-        setVideoResources({ url, extensions, videoTag });
-        setNotSupportJS({ parentNode: videoTag });
+        const videoElement = createVideoTag({ poster: posterUrl });
+        setVideoResources({
+          url: mediaBaseUrl,
+          extensions,
+          videoTag: videoElement,
+        });
+        setNotSupportJS({ parentNode: videoElement });
 
-        videoSection.appendChild(videoTag);
+        videoSection.appendChild(videoElement);
 
         // remove video wrapper with all data attributes
         if (removeWrappers) {
-          videoSection.removeChild(target);
+          videoSection.removeChild(wrapperElement);
         }
 
-        videoStateMap.set(target, true);
+        videoStateMap.set(wrapperElement, true);
       }
     });
   });
 
-  videoWraps.forEach((videoWrap) => {
-    videoStateMap.set(videoWrap, false);
-    observer.observe(videoWrap);
+  videoWraps.forEach((videoWrapper) => {
+    videoStateMap.set(videoWrapper, false);
+    observer.observe(videoWrapper);
   });
 }

@@ -1,0 +1,65 @@
+'use strict';
+
+const homePageDom = require('../../src/scripts/constants/homePageDom.cjs');
+
+/**
+ * Shared layout breakpoints for visual tests.
+ * Keep in sync with critical CSS where relevant (e.g. footer visibility).
+ */
+const LAYOUT = {
+  /** Viewports at or above this width show `footer.footer-social` (see `_footer.scss`). */
+  footerMinVisibleWidthPx: 768,
+};
+
+/** Viewport sizes for Playwright projects (also used from `playwright.config.mjs`). */
+const VIEWPORTS = {
+  mobile: { width: 390, height: 844 },
+  tablet: { width: 768, height: 1024 },
+  desktop: { width: 1440, height: 900 },
+};
+
+/**
+ * Third-party URLs blocked during screenshots (noise / non-determinism).
+ * Not part of site DOM — lives here next to other test runtime config.
+ */
+const BLOCKED_THIRD_PARTY_URL_GLOBS = [
+  '**/*googletagmanager.com/**',
+  '**/*google-analytics.com/**',
+  '**/*analytics.google.com/**',
+  '**/*mc.yandex.ru/**',
+  '**/*fonts.googleapis.com/**',
+  '**/*fonts.gstatic.com/**',
+  '**/*use.fontawesome.com/**',
+];
+
+const HOME_SELECTORS = {
+  sectionIds: homePageDom.SECTION_IDS,
+  locators: { ...homePageDom.PLAYWRIGHT_HOME_LOCATORS },
+  classMap: {
+    stockingLoadedClass: homePageDom.STATE_CLASS.loaded,
+    videosMediaReadyClass: homePageDom.STATE_CLASS.mediaReady,
+    mapShellId: homePageDom.MAP_ELEMENT.shellId,
+    mapShellReadyClass: homePageDom.MAP_ELEMENT.shellReadyClass,
+  },
+  timeouts: {
+    /** Google Maps: `googleMapInit` is delayed ~3s; tiles need time after `idle`. */
+    mapReadyMs: 45_000,
+    mapTileSettleMs: 750,
+    /** First carousel video: mount + `loadeddata` / poster paint. */
+    videoShowcaseReadyMs: 30_000,
+    stockingCarouselReadyMs: 20_000,
+    imageLoadPerImageMs: 8_000,
+  },
+};
+
+function homeActiveVideoHostSelector() {
+  return homePageDom.buildHomeActiveVideoHostSelector();
+}
+
+module.exports = {
+  LAYOUT,
+  VIEWPORTS,
+  BLOCKED_THIRD_PARTY_URL_GLOBS,
+  HOME_SELECTORS,
+  homeActiveVideoHostSelector,
+};

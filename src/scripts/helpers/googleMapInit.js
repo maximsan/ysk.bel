@@ -1,6 +1,10 @@
+import homePageDom from '../constants/homePageDom.cjs';
+
+const { MAP_ELEMENT } = homePageDom;
+
 export function googleMapInit() {
-  const mapEl = document.getElementById('map-canvas');
-  const shell = document.getElementById('map');
+  const mapEl = document.getElementById(MAP_ELEMENT.canvasId);
+  const shell = document.getElementById(MAP_ELEMENT.shellId);
 
   if (!mapEl || typeof google === 'undefined' || !google.maps) {
     return;
@@ -184,8 +188,8 @@ export function googleMapInit() {
   });
 
   function markMapReady() {
-    shell?.classList.add('map-shell--ready');
-    shell?.classList.remove('map-shell--loading');
+    shell?.classList.add(MAP_ELEMENT.shellReadyClass);
+    shell?.classList.remove(MAP_ELEMENT.shellLoadingClass);
   }
 
   google.maps.event.addListenerOnce(map, 'idle', markMapReady);

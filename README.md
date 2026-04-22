@@ -12,6 +12,17 @@
     yarn run build
 ```
 
+### Visual regression (Playwright)
+
+Runs against a production build served locally. Baselines live in `tests/visual/home.spec.js-snapshots/`.
+
+```bash
+yarn test:visual
+yarn test:visual:update   # after intentional layout/CSS changes; commit updated PNGs
+```
+
+Playwright-only config (timeouts, blocked URLs, viewports) lives in [`tests/visual/constants.js`](tests/visual/constants.js). Shared **DOM ids, `data-*` attributes, and class hooks** for the home page and video carousel are in [`src/scripts/constants/homePageDom.cjs`](src/scripts/constants/homePageDom.cjs) and are imported by the site bundle and by the tests. See [docs/visual-regression-testing-plan.md](docs/visual-regression-testing-plan.md) for the browser × viewport matrix, CI behavior, and review workflow.
+
 ### Deploy to the hosting server
 ```bash
     yarn run deploy:all
