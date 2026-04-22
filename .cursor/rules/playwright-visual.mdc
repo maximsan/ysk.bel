@@ -1,0 +1,36 @@
+---
+description: Playwright visual regression for this repo — config, DOM constants, scripts, CI. @mention this rule when editing or debugging Playwright tests.
+globs:
+  - tests/visual/**
+  - playwright.config.mjs
+alwaysApply: false
+---
+
+# Playwright visual tests (ysk.bel)
+
+## Layout
+
+- **Site DOM** (ids, `data-*`, shared classes): `src/scripts/constants/homePageDom.cjs` — imported by bundled JS (`videoShowcaseCarousel`, `addVideo`, `googleMapInit`) and **reused from tests** via `require()` in `tests/visual/constants.js`.
+- **Test-only**: `tests/visual/constants.js` — `VIEWPORTS`, `BLOCKED_THIRD_PARTY_URL_GLOBS`, screenshot timeouts, `LAYOUT.footerMinVisibleWidthPx`.
+- **Specs**: `tests/visual/home.spec.js`; baselines: `tests/visual/home.spec.js-snapshots/*.png`.
+- **Config**: `playwright.config.mjs` loads `VIEWPORTS` via `createRequire` from `tests/visual/constants.js`. `snapshotPathTemplate` omits `{platform}` (shared macOS/Linux baselines).
+
+## Commands
+
+- `yarn test:visual` — run against `yarn build` + static server (see `webServer` in config).
+- `yarn test:visual:update` — refresh PNGs after **intentional** UI changes; commit diffs for review.
+- `yarn test:visual:ui` / `yarn test:visual:report` — UI mode / HTML report.
+
+## Behaviour notes
+
+- Footer screenshot is **skipped** when viewport width `< 768` (`.footer-social` hidden in CSS).
+- Waits: stocking zoom `is-loaded`, video host `is-media-ready` / `readyState`, map `#map` → `map-shell--ready`.
+- Third-party blocking for stability: list in `BLOCKED_THIRD_PARTY_URL_GLOBS` (not maps/video CDN).
+
+## CI
+
+- `.github/workflows/ci.yaml`: `yarn exec playwright install chromium firefox webkit --with-deps`, then `yarn test:visual`; uploads `playwright-report` on failure.
+
+## Docs
+
+- Full workflow and checklist: `docs/visual-regression-testing-plan.md`.
