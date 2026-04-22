@@ -40,6 +40,7 @@ const HOME_SELECTORS = {
     videosMediaReadyClass: homePageDom.STATE_CLASS.mediaReady,
     mapShellId: homePageDom.MAP_ELEMENT.shellId,
     mapShellReadyClass: homePageDom.MAP_ELEMENT.shellReadyClass,
+    menuOpenClass: homePageDom.MENU_CLASS.open,
   },
   timeouts: {
     /** Google Maps: `googleMapInit` is delayed ~3s; tiles need time after `idle`. */
@@ -49,6 +50,9 @@ const HOME_SELECTORS = {
     videoShowcaseReadyMs: 30_000,
     stockingCarouselReadyMs: 20_000,
     imageLoadPerImageMs: 8_000,
+    menuDrawerOpenMs: 10_000,
+    /** `.menu` uses `transition: left 0.2s` when opening (`_mixins.scss`). */
+    menuDrawerTransitionMs: 300,
   },
 };
 

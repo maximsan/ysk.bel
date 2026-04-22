@@ -5,14 +5,38 @@ on:
         branches: [main]
     pull_request:
         branches: [main]
+        types: [opened, synchronize, reopened, labeled, unlabeled]
 
 jobs:
+    changes:
+        if: github.event_name == 'pull_request'
+        runs-on: ubuntu-latest
+        outputs:
+            visual: ${{ steps.filter.outputs.visual }}
+        steps:
+            - uses: actions/checkout@v4
+            - uses: dorny/paths-filter@v3
+              id: filter
+              with:
+                  filters: |
+                      visual:
+                          - 'src/styles/**'
+                          - 'src/pages/**'
+                          - 'src/data/**'
+                          - 'src/scripts/**'
+                          - 'src/assets/**'
+                          - 'eleventy.config.js'
+                          - '404.html'
+                          - '500.html'
+                          - 'tests/visual/**'
+                          - 'playwright.config.mjs'
+
     build:
         runs-on: ubuntu-latest
 
         steps:
             - name: checkout code
-              uses: actions/checkout@v3
+              uses: actions/checkout@v4
 
             - name: install dependencies
               run: |
@@ -21,6 +45,23 @@ jobs:
 
             - name: build app
               run: yarn build
+
+    visual:
+        needs: [changes, build]
+        if: |
+            github.event_name == 'pull_request' &&
+            (needs.changes.outputs.visual == 'true' ||
+             contains(join(github.event.pull_request.labels.*.name, ','), 'run-visual'))
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: checkout code
+              uses: actions/checkout@v4
+
+            - name: install dependencies
+              run: |
+                  yarn set version 4.3.1
+                  yarn install --immutable
 
             - name: install Playwright browsers
               run: yarn exec playwright install chromium firefox webkit --with-deps
@@ -42,7 +83,7 @@ jobs:
 
         steps:
             - name: checkout code
-              uses: actions/checkout@v3
+              uses: actions/checkout@v4
 
             - name: Set up SSH
               uses: webfactory/ssh-agent@v0.5.4

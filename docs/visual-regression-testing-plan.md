@@ -11,9 +11,9 @@ Goal: **catch unintended layout and styling changes** across desktop, tablet, an
 | ----------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Playwright config | `playwright.config.mjs` — projects for **Chromium**, **Firefox**, **WebKit** × **mobile / tablet / desktop**; `webServer` runs `yarn build` then serves `dist` on port **4173**; `snapshotPathTemplate` omits `{platform}` so one set of PNGs is shared between macOS dev and Linux CI. |
 | Visual specs      | `tests/visual/home.spec.js` — locator screenshots; Playwright timeouts / blocked URLs in `tests/visual/constants.js`. **DOM ids, `data-*` hooks, and shared class fragments** are defined once in `src/scripts/constants/homePageDom.cjs` (imported by carousel / video / map JS and re-used from tests via `require`). |
-| Baselines         | `tests/visual/home.spec.js-snapshots/*.png` (committed). **78** PNGs — footer test is **skipped** on mobile projects (viewport width under **768px**) because `.footer-social` is `display: none` in CSS.                                                                               |
+| Baselines         | `tests/visual/home.spec.js-snapshots/*.png` (committed). Footer test is **skipped** on mobile; **header — mobile menu open** is **skipped** on tablet/desktop (drawer only under **768px**).                                                                               |
 | Yarn scripts      | `yarn test:visual`, `yarn test:visual:update`, `yarn test:visual:ui`, `yarn test:visual:report`                                                                                                                                                                                         |
-| CI                | `.github/workflows/ci.yaml` — after `yarn build`, installs browsers, runs `yarn test:visual`, uploads **playwright-report** artifact on failure.                                                                                                                                        |
+| CI                | `.github/workflows/ci.yaml` — **`build`** runs on every push/PR; **`visual`** runs **on pull requests only** when changed paths match (see below) or the PR has label **`run-visual`** (not on `push` to `main`). Playwright uploads **playwright-report** on failure.                                                                                                                                        |
 
 
 **Linux CI vs local:** If GitHub Actions reports screenshot mismatches against baselines generated on macOS, run `yarn test:visual:update` on a Linux environment that matches CI (or bump `maxDiffPixels` / `threshold` in config after review).
@@ -37,7 +37,7 @@ Goal: **catch unintended layout and styling changes** across desktop, tablet, an
 
 Target the **public home page** (`/` → built as `index.html`) and treat these as first-class visual surfaces (locator screenshots per breakpoint):
 
-- **Header + primary navigation** (open mobile menu not covered yet)
+- **Header + primary navigation** (closed on all breakpoints; **open mobile drawer** on mobile projects only — `header — mobile menu open`)
 - **Cooperation banner** (top strip)
 - **Info banner** (important notice block)
 - **Hero section**
@@ -108,7 +108,9 @@ Optional automation:
 
 ## CI integration
 
-- **CI job** in `.github/workflows/ci.yaml`: `yarn install --immutable`, `yarn build`, `yarn exec playwright install chromium firefox webkit --with-deps`, `yarn test:visual`
+- **Jobs:** `build` (always) — `yarn install --immutable`, `yarn build`. `visual` (conditional, **PRs only**) — same install, then Playwright browsers and `yarn test:visual`. Pushes to `main` run **`build`** (and **`deploy`**) only; run `yarn test:visual` locally or open a PR if you need CI visuals after merge.
+- **When `visual` runs:** `dorny/paths-filter` matches changes under `src/styles/`, `src/pages/`, `src/data/`, `src/scripts/`, `src/assets/`, `eleventy.config.js`, root `404.html` / `500.html`, `tests/visual/`, `playwright.config.mjs`. **Or** any PR labeled **`run-visual`** (use for dependency-only / other changes that might still affect pixels). Create that label in the repo once.
+- **PR events:** `opened`, `synchronize`, `reopened`, `labeled`, `unlabeled` so adding or removing `run-visual` triggers a new run.
 - **Build output:** Eleventy writes to `**dist/`** (see `eleventy.config.js`). Playwright `**webServer**` builds and serves that folder for tests.
 - **Shared baselines:** `snapshotPathTemplate` without `{platform}`; if Linux still drifts from macOS, regenerate on Linux or relax thresholds after review.
 
@@ -172,7 +174,7 @@ Optional automation:
 
 - **Animations:** handled via `prefers-reduced-motion` in tests (no Eleventy `?test=1` flag required for now).
 - Minimum **reviewers** for snapshot-only PRs (team decision)
-- Run visual tests on **every PR** or only when `src/styles/`** / `src/includes/**` changes (path filters)?
+- ~~Run visual tests on every PR vs path filters~~ — **Resolved:** path filters + PR label **`run-visual`** (see CI integration).
 
 ---
 

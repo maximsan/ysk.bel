@@ -73,6 +73,13 @@ const STOCKING_CAROUSEL_CLASS = {
   zoom: 'stocking-carousel__zoom',
 };
 
+/** Mobile nav drawer (`.menu` + `.open` in `sideBar.js`, `menu.liquid`). */
+const MENU_CLASS = {
+  root: 'menu',
+  open: 'open',
+  toggler: 'navbar-toggler',
+};
+
 /** Global layout / landmark class fragments. */
 const LAYOUT_CLASS = {
   headerTag: 'header',
@@ -126,6 +133,8 @@ function buildHomeActiveVideoHostSelector() {
 /** Locator strings for Playwright `page.locator(...)`. */
 const PLAYWRIGHT_HOME_LOCATORS = {
   header: `${LAYOUT_CLASS.headerTag}.${LAYOUT_CLASS.headerBlock}`,
+  menu: `.${MENU_CLASS.root}`,
+  navbarToggler: `.${MENU_CLASS.toggler}`,
   cooperationBanner: `.${LAYOUT_CLASS.cooperationBanner}`,
   infoBanner: `.${LAYOUT_CLASS.infoBannerSection}.${LAYOUT_CLASS.infoBannerBlock}`,
   hero: `${LAYOUT_CLASS.heroTag}.${LAYOUT_CLASS.hero}.${LAYOUT_CLASS.heroIntro}`,
@@ -140,6 +149,7 @@ const PLAYWRIGHT_HOME_LOCATORS = {
 module.exports = {
   SECTION_IDS,
   STATE_CLASS,
+  MENU_CLASS,
   MAP_ELEMENT,
   VIDEO_SHOWCASE_DATA_ATTR,
   VIDEO_SHOWCASE_CLASS,

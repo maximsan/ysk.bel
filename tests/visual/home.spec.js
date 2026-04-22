@@ -139,6 +139,31 @@ async function waitForMapReady(page) {
   }
 }
 
+/**
+ * Info banner + full-screen `.overlay` block clicks (see `infoBanner.js`). Other
+ * section tests only screenshot; this helper is for flows that must click UI
+ * under the overlay. Also hides the modal so a full-viewport `header` shot
+ * (menu open) does not include the centered banner.
+ */
+async function dismissInfoBannerForInteraction(page) {
+  await page.evaluate(() => {
+    document.cookie = ['info-banner=false', 'max-age=86400', 'Path=/', 'SameSite=Lax'].join(
+      '; ',
+    );
+    const overlay = document.querySelector('.overlay');
+    if (overlay) {
+      overlay.style.display = 'none';
+    }
+    const banner = document.querySelector('.info-banner');
+    if (banner) {
+      banner.classList.remove('show-banner');
+      banner.classList.add('hide-banner');
+      banner.style.display = 'none';
+      banner.style.animation = 'none';
+    }
+  });
+}
+
 test.beforeEach(async ({ page }) => {
   await blockThirdPartyNoise(page);
   await page.goto('/', { waitUntil: 'domcontentloaded' });
@@ -151,6 +176,30 @@ test.describe('home — section screenshots', () => {
     const screenshotRegion = page.locator(locators.header);
     await screenshotRegion.scrollIntoViewIfNeeded();
     await expect(screenshotRegion).toHaveScreenshot('header.png', {
+      animations: 'disabled',
+    });
+  });
+
+  test('header — mobile menu open', async ({ page }) => {
+    const viewportWidthPx = page.viewportSize()?.width ?? 1440;
+    test.skip(
+      viewportWidthPx >= LAYOUT.footerMinVisibleWidthPx,
+      'Hamburger / slide-out `.menu` is for widths under 768px (`_header.scss`, `_menu.scss`)',
+    );
+
+    await dismissInfoBannerForInteraction(page);
+
+    await page.locator(locators.navbarToggler).click();
+    await waitForSelectorHasClass(
+      page,
+      locators.menu,
+      classMap.menuOpenClass,
+      timeouts.menuDrawerOpenMs,
+    );
+    await page.waitForTimeout(timeouts.menuDrawerTransitionMs);
+
+    const screenshotRegion = page.locator(locators.header);
+    await expect(screenshotRegion).toHaveScreenshot('header-mobile-menu-open.png', {
       animations: 'disabled',
     });
   });
