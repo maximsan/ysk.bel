@@ -1,14 +1,13 @@
-import { mountLazyVideoHost } from './addVideo';
 import homePageDom from '../constants/homePageDom.cjs';
+import { CAROUSEL_SWIPE_THRESHOLD_PX } from '../constants/carousel';
+import { mountLazyVideoHost } from './addVideo';
+import { stepCarouselIndex } from './carouselIndex';
 
 const {
   VIDEO_SHOWCASE_QUERY,
   VIDEO_SHOWCASE_CLASS_QUERY,
   STATE_CLASS,
 } = homePageDom;
-
-/** Minimum horizontal swipe (px) to change slide on touch devices. */
-const VIDEO_CAROUSEL_SWIPE_THRESHOLD_PX = 56;
 
 function pauseVideosExcept(slides, activeSlideIndex) {
   slides.forEach((slide, slideIndex) => {
@@ -73,8 +72,11 @@ function initOneVideosCarousel(carouselRoot) {
   }
 
   function go(delta) {
-    activeSlideIndex =
-      (activeSlideIndex + delta + slides.length) % slides.length;
+    activeSlideIndex = stepCarouselIndex(
+      activeSlideIndex,
+      delta,
+      slides.length,
+    );
     update();
   }
 
@@ -122,8 +124,8 @@ function initOneVideosCarousel(carouselRoot) {
       if (touchStartX == null) return;
       const horizontalDragPx =
         touchEvent.changedTouches[0].screenX - touchStartX;
-      if (horizontalDragPx > VIDEO_CAROUSEL_SWIPE_THRESHOLD_PX) go(-1);
-      if (horizontalDragPx < -VIDEO_CAROUSEL_SWIPE_THRESHOLD_PX) go(1);
+      if (horizontalDragPx > CAROUSEL_SWIPE_THRESHOLD_PX) go(-1);
+      if (horizontalDragPx < -CAROUSEL_SWIPE_THRESHOLD_PX) go(1);
       touchStartX = null;
     },
     { passive: true },

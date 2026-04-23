@@ -23,23 +23,18 @@ lightbox.on('uiRegister', function () {
         caption.className = 'custom-caption__wrapper';
 
         const oldCaption = el.childNodes?.[0];
-        console.log('oldCaption', oldCaption);
         if (currSlideElement) {
           const hiddenCaption = currSlideElement.querySelector(
             '.gallery-caption__text',
           );
-          console.log('hiddenCaption', hiddenCaption);
           if (hiddenCaption) {
-            // get caption from element with class gallery-caption__text
             captionHTML = hiddenCaption.innerHTML;
           } else {
-            // get caption from alt attribute
             captionHTML = currSlideElement
               .querySelector('img')
-              .getAttribute('alt');
+              ?.getAttribute('alt');
           }
           caption.innerHTML = captionHTML || '';
-          console.log('caption', caption);
           if (oldCaption) {
             el.replaceChild(caption, oldCaption);
           } else {

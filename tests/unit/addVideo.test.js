@@ -1,7 +1,22 @@
 import { describe, it, expect } from 'vitest';
-import { normalizeVideoPreload } from '../../src/scripts/helpers/addVideo.js';
+import {
+  normalizeVideoPreload,
+  parseVideoExtensionTokens,
+} from '../../src/scripts/helpers/addVideo.js';
 
 describe('addVideo', () => {
+  describe('parseVideoExtensionTokens', () => {
+    it('trims tokens and defaults when empty', () => {
+      expect(parseVideoExtensionTokens(null)).toEqual(['webm', 'mp4']);
+      expect(parseVideoExtensionTokens('')).toEqual(['webm', 'mp4']);
+      expect(parseVideoExtensionTokens(' webm , mp4 ')).toEqual(['webm', 'mp4']);
+    });
+
+    it('falls back when only commas or whitespace', () => {
+      expect(parseVideoExtensionTokens(', ,')).toEqual(['webm', 'mp4']);
+    });
+  });
+
   describe('normalizeVideoPreload', () => {
     it('defaults to metadata', () => {
       expect(normalizeVideoPreload(undefined)).toBe('metadata');

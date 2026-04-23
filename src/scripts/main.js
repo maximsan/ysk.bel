@@ -1,3 +1,4 @@
+import { GOOGLE_MAP_INIT_DELAY_MS } from './constants/map';
 import {
   closeSideBarOnTimeout,
   toggleSideBar,
@@ -10,47 +11,32 @@ import {
   initStockingImageSkeletons,
   initVideosShowcaseCarousel,
 } from './helpers';
-// import { addFixedHeader, removeFixedHeader, removeFixedHeaderOnScroll } from './helpers/header';
 
 const MOBILE_BREAKPOINT = '(max-width: 768px)';
-const mobile = window.matchMedia(MOBILE_BREAKPOINT);
+const mobileMediaQuery = window.matchMedia(MOBILE_BREAKPOINT);
 
-const hasInfoBannerElement = document.querySelector('.info-banner');
+const hasInfoBannerElement = Boolean(document.querySelector('.info-banner'));
 
-const windowWidth = window.innerWidth;
-
-console.log('window width', windowWidth);
-
-console.log('mobile', mobile);
-
-const mobileOnlyMethods = () => {
-  // removeFixedHeaderOnScroll();
-  // addFixedHeader();
-
+function runMobileOnlyEnhancements() {
   closeSideBarOnTimeout();
-};
+}
 
-// TODO: review all code
-const desktopOnlyMethods = () => {
-  // removeFixedHeader();
-  // addFixedHeaderOnScroll();
-
+function runDesktopOnlyEnhancements() {
   addScrollUpButton();
-};
+}
 
-mobile.addEventListener('change', (event) => {
+mobileMediaQuery.addEventListener('change', (event) => {
   if (event.matches) {
-    mobileOnlyMethods();
+    runMobileOnlyEnhancements();
   } else {
-    desktopOnlyMethods();
+    runDesktopOnlyEnhancements();
   }
 });
 
-if (mobile.matches) {
-  mobileOnlyMethods();
+if (mobileMediaQuery.matches) {
+  runMobileOnlyEnhancements();
 } else {
-  // addFixedHeaderOnScroll();
-  desktopOnlyMethods();
+  runDesktopOnlyEnhancements();
 }
 
 if (hasInfoBannerElement) {
@@ -58,21 +44,23 @@ if (hasInfoBannerElement) {
   hideInfoBannerOnScroll();
 }
 
-// TODO: Do we need it ?
-// documentHeight();
+documentHeight();
+window.addEventListener('resize', documentHeight);
 
-setTimeout(() => googleMapInit(), 3000);
+window.setTimeout(() => {
+  googleMapInit();
+}, GOOGLE_MAP_INIT_DELAY_MS);
 
 toggleSideBar();
 
-if (document.readyState !== 'loading') {
+function initCarouselsWhenDomReady() {
   initVideosShowcaseCarousel();
   initStockingCarousel();
   initStockingImageSkeletons();
+}
+
+if (document.readyState !== 'loading') {
+  initCarouselsWhenDomReady();
 } else {
-  document.addEventListener('DOMContentLoaded', () => {
-    initVideosShowcaseCarousel();
-    initStockingCarousel();
-    initStockingImageSkeletons();
-  });
+  document.addEventListener('DOMContentLoaded', initCarouselsWhenDomReady);
 }

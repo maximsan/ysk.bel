@@ -13,6 +13,18 @@ export function normalizeVideoPreload(preloadRaw) {
   return ['none', 'metadata', 'auto'].includes(lower) ? lower : 'metadata';
 }
 
+const DEFAULT_VIDEO_EXTENSIONS = 'webm,mp4';
+
+/** Parses comma-separated `data-video-extensions` (e.g. `webm, mp4`). */
+export function parseVideoExtensionTokens(raw) {
+  const source =
+    raw == null || String(raw).trim() === ''
+      ? DEFAULT_VIDEO_EXTENSIONS
+      : String(raw);
+  const tokens = source.split(',').map((t) => t.trim()).filter(Boolean);
+  return tokens.length > 0 ? tokens : ['webm', 'mp4'];
+}
+
 function createVideoTag({ poster = '', preload = 'metadata' }) {
   const video = document.createElement('video');
   video.poster = poster;
@@ -65,13 +77,9 @@ export function mountLazyVideoHost(lazyVideoHostElement) {
     LAZY_VIDEO_HOST_DATA_ATTR.posterWebp,
   );
   const posterForVideo = posterWebp || posterFallback;
-  const extensionsStr =
-    lazyVideoHostElement.getAttribute(
-      LAZY_VIDEO_HOST_DATA_ATTR.videoExtensions,
-    ) || 'webm,mp4';
-  const extensions = extensionsStr
-    .split(',')
-    .map((extensionToken) => extensionToken.trim());
+  const extensions = parseVideoExtensionTokens(
+    lazyVideoHostElement.getAttribute(LAZY_VIDEO_HOST_DATA_ATTR.videoExtensions),
+  );
   const preload = normalizeVideoPreload(
     lazyVideoHostElement.getAttribute(LAZY_VIDEO_HOST_DATA_ATTR.videoPreload),
   );
@@ -111,6 +119,10 @@ export function initVideoSection({
   removeWrappers = false,
 }) {
   const videoSection = document.querySelector(`.${sectionName}-${className}`);
+  if (!videoSection) {
+    return;
+  }
+
   const videoWraps = document.querySelectorAll(`.${sectionName}-video-wrapper`);
   const videoStateMap = new Map();
 
@@ -120,12 +132,15 @@ export function initVideoSection({
         const mediaBaseUrl = wrapperElement.getAttribute(
           LAZY_VIDEO_HOST_DATA_ATTR.videoUrl,
         );
+        if (!mediaBaseUrl) {
+          return;
+        }
         const posterUrl = wrapperElement.getAttribute(
           LAZY_VIDEO_HOST_DATA_ATTR.videoPoster,
         );
-        const extensions = wrapperElement
-          .getAttribute(LAZY_VIDEO_HOST_DATA_ATTR.videoExtensions)
-          .split(',');
+        const extensions = parseVideoExtensionTokens(
+          wrapperElement.getAttribute(LAZY_VIDEO_HOST_DATA_ATTR.videoExtensions),
+        );
 
         const videoElement = createVideoTag({ poster: posterUrl });
         setVideoResources({

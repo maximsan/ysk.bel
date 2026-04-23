@@ -1,3 +1,6 @@
+import { CAROUSEL_SWIPE_THRESHOLD_PX } from '../constants/carousel';
+import { stepCarouselIndex } from './carouselIndex';
+
 function initOneStockingCarousel(root) {
   const slides = [...root.querySelectorAll('[data-stocking-slide]')];
   const dots = [...root.querySelectorAll('[data-stocking-dot]')];
@@ -36,7 +39,7 @@ function initOneStockingCarousel(root) {
   }
 
   function go(delta) {
-    index = (index + delta + slides.length) % slides.length;
+    index = stepCarouselIndex(index, delta, slides.length);
     update();
   }
 
@@ -77,8 +80,8 @@ function initOneStockingCarousel(root) {
     (e) => {
       if (touchStartX == null) return;
       const dx = e.changedTouches[0].screenX - touchStartX;
-      if (dx > 56) go(-1);
-      if (dx < -56) go(1);
+      if (dx > CAROUSEL_SWIPE_THRESHOLD_PX) go(-1);
+      if (dx < -CAROUSEL_SWIPE_THRESHOLD_PX) go(1);
       touchStartX = null;
     },
     { passive: true },

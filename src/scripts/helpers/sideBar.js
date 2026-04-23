@@ -3,7 +3,8 @@ const sidebar = document.querySelector('.menu');
 const navButton = document.querySelector('.navbar-toggler');
 const sidebarOpenIcon = document.querySelector('.open-menu');
 const sidebarCloseIcon = document.querySelector('.close-menu');
-const menuSelectors = [
+
+const MENU_LINK_SELECTORS = [
   `a[href$='services']`,
   `a[href$='prices']`,
   `a[href$='contacts']`,
@@ -12,14 +13,18 @@ const menuSelectors = [
   `a[href^='#stocking']`,
   `a[href='#videos']`,
 ];
-const menuItemSelectors = menuSelectors.map((selector) =>
-  document.querySelector(selector),
+
+const menuLinkElements = MENU_LINK_SELECTORS.map((sel) =>
+  document.querySelector(sel),
 );
 
 function openSideBar() {
+  if (!sidebar || !header || !sidebarOpenIcon || !sidebarCloseIcon) {
+    return;
+  }
   sidebar.classList.add('open');
   document.body.style.overflow = 'hidden';
-  // this prevents scrolling om mobile devices
+  /* Prevents background scroll on mobile when the drawer is open */
   document.body.style.position = 'fixed';
 
   header.style.position = 'fixed';
@@ -30,6 +35,9 @@ function openSideBar() {
 }
 
 function closeSideBar() {
+  if (!sidebar || !header || !sidebarOpenIcon || !sidebarCloseIcon) {
+    return;
+  }
   sidebar.classList.remove('open');
   document.body.style.overflow = 'auto';
   document.body.style.position = '';
@@ -41,19 +49,22 @@ function closeSideBar() {
 }
 
 export function closeSideBarOnTimeout() {
-  /* close sidebar after clicking on menu point */
-  menuItemSelectors.forEach((selector) => {
-    if (!selector) {
+  menuLinkElements.forEach((linkEl) => {
+    if (!linkEl) {
       return;
     }
-    selector.addEventListener('click', function () {
+    linkEl.addEventListener('click', () => {
       closeSideBar();
     });
   });
 }
 
 export function toggleSideBar() {
-  navButton.addEventListener('click', function (event) {
+  if (!navButton || !sidebarOpenIcon || !sidebarCloseIcon) {
+    return;
+  }
+
+  navButton.addEventListener('click', (event) => {
     event.preventDefault();
 
     if (!sidebarOpenIcon.classList.contains('hidden')) {

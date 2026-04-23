@@ -1,15 +1,28 @@
-// contactForm.addEventListener('submit', handleSubmit);
-
 import $ from 'jquery';
 
-const modal = document.querySelector('#exampleModalCenter');
-const contactForm = document.querySelector('.contact-form');
-const name = contactForm.querySelector('#name');
-const email = contactForm.querySelector('#email');
-const phone = contactForm.querySelector('#phone');
-const message = contactForm.querySelector('#message');
+function getContactFormContext() {
+  const modal = document.querySelector('#exampleModalCenter');
+  const contactForm = document.querySelector('.contact-form');
+  if (!modal || !contactForm) {
+    return null;
+  }
+  const name = contactForm.querySelector('#name');
+  const email = contactForm.querySelector('#email');
+  const phone = contactForm.querySelector('#phone');
+  const message = contactForm.querySelector('#message');
+  if (!name || !email || !phone || !message) {
+    return null;
+  }
+  return { modal, name, email, phone, message };
+}
 
 export function handleSubmit(event) {
+  const ctx = getContactFormContext();
+  if (!ctx) {
+    return;
+  }
+
+  const { modal, name, email, phone, message } = ctx;
   const body = new FormData();
   body.append('Имя', name.value);
   body.append('почта', email.value);
