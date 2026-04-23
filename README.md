@@ -21,7 +21,7 @@ yarn test:visual
 yarn test:visual:update   # after intentional layout/CSS changes; commit updated PNGs
 ```
 
-Playwright-only config (timeouts, blocked URLs, viewports) lives in [`tests/visual/constants.js`](tests/visual/constants.js). Shared waits are in [`tests/visual/support/home-snapshot-helpers.cjs`](tests/visual/support/home-snapshot-helpers.cjs). Shared **DOM ids, `data-*` attributes, and class hooks** for the home page and video carousel are in [`src/scripts/constants/homePageDom.cjs`](src/scripts/constants/homePageDom.cjs) and are imported by the site bundle and by the tests. See [docs/visual-regression-testing-plan.md](docs/visual-regression-testing-plan.md) for the browser × viewport matrix, CI behavior (visual job on **PRs only**: path filters + optional **`run-visual`** label), and review workflow.
+Playwright-only config (timeouts, blocked URLs, viewports) lives in [`tests/visual/constants.js`](tests/visual/constants.js). Shared waits are in [`tests/visual/support/home-snapshot-helpers.cjs`](tests/visual/support/home-snapshot-helpers.cjs). Shared **DOM ids, `data-*` attributes, and class hooks** are organized in [`src/scripts/constants/dom/`](src/scripts/constants/dom/) (one module per area); the site bundle imports those files directly. [`src/scripts/constants/homePageDom.cjs`](src/scripts/constants/homePageDom.cjs) re-exports the full flat API for tests and any code that wants a single import. See [docs/visual-regression-testing-plan.md](docs/visual-regression-testing-plan.md) for the browser × viewport matrix, CI behavior (visual job on **PRs only**: path filters + optional **`run-visual`** label), and review workflow.
 
 ### Unit tests (Vitest)
 

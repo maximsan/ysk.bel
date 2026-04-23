@@ -10,7 +10,7 @@ alwaysApply: false
 
 ## Layout
 
-- **Site DOM** (ids, `data-*`, shared classes): `src/scripts/constants/homePageDom.cjs` — imported by bundled JS (`videoShowcaseCarousel`, `addVideo`, `googleMapInit`) and **reused from tests** via `require()` in `tests/visual/constants.js`.
+- **Site DOM** (ids, `data-*`, shared classes): modules under `src/scripts/constants/dom/*.cjs`; bundled JS imports the relevant file per feature. **`homePageDom.cjs`** is a barrel that re-exports the same API — **tests** use it via `require()` in `tests/visual/constants.js` and helpers.
 - **Test-only**: `tests/visual/constants.js` — `VIEWPORTS`, `BLOCKED_THIRD_PARTY_URL_GLOBS`, screenshot timeouts, `LAYOUT.footerMinVisibleWidthPx`.
 - **Shared waits / routing**: `tests/visual/support/home-snapshot-helpers.cjs`.
 - **Specs**: `tests/visual/home-header.spec.js` (header + mobile drawer), `tests/visual/home-sections.spec.js` (remaining sections).

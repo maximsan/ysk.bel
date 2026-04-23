@@ -1,7 +1,5 @@
-import homePageDom from '../constants/homePageDom.cjs';
+import { MAP_ELEMENT } from '../constants/dom/map.cjs';
 import { GOOGLE_MAP_EMBED_STYLES } from './googleMapStyles';
-
-const { MAP_ELEMENT } = homePageDom;
 
 const ESTATE_COORDINATES = { lat: 54.291652, lng: 27.480454 };
 

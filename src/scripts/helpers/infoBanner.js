@@ -1,24 +1,21 @@
+import { INFO_BANNER_STATE_CLASS } from '../constants/dom/infoBanner.cjs';
+import { SITE_SELECTORS } from '../constants/dom/siteSelectors.cjs';
 import {
   buildInfoBannerDismissCookie,
   hasInfoBannerDismissCookie,
 } from './infoBannerCookie';
 
-const banner = document.querySelector('.info-banner');
-const overlay = document.querySelector('.overlay');
-const crossIcon = document.querySelector('.cross-icon');
-
-const BANNER_CLASS = {
-  hide: 'hide-banner',
-  show: 'show-banner',
-};
+const banner = document.querySelector(SITE_SELECTORS.infoBanner);
+const overlay = document.querySelector(SITE_SELECTORS.overlay);
+const crossIcon = document.querySelector(SITE_SELECTORS.crossIcon);
 
 function showInfoBanner() {
   if (!overlay || !banner) {
     return;
   }
   overlay.style.display = 'block';
-  banner.classList.remove(BANNER_CLASS.hide);
-  banner.classList.add(BANNER_CLASS.show);
+  banner.classList.remove(INFO_BANNER_STATE_CLASS.hide);
+  banner.classList.add(INFO_BANNER_STATE_CLASS.show);
 }
 
 function showCookieInfoBanner() {
@@ -33,8 +30,8 @@ function hideInfoBanner() {
     return;
   }
   overlay.style.display = 'none';
-  banner.classList.remove(BANNER_CLASS.show);
-  banner.classList.add(BANNER_CLASS.hide);
+  banner.classList.remove(INFO_BANNER_STATE_CLASS.show);
+  banner.classList.add(INFO_BANNER_STATE_CLASS.hide);
 }
 
 let bannerClosed = false;
@@ -67,7 +64,7 @@ export function addInfoBanner() {
   });
 }
 
-const intro = document.querySelector('.intro');
+const intro = document.querySelector(SITE_SELECTORS.intro);
 const carouselSize = intro ? intro.offsetHeight / 2 : 0;
 const bannerBottom = carouselSize + (banner?.offsetHeight ?? 0);
 

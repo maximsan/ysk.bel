@@ -1,7 +1,7 @@
-const button = document.querySelector('.scroll-up');
+import { SCROLL_UP_THRESHOLDS } from '../constants/dom/scroll.cjs';
+import { SITE_SELECTORS } from '../constants/dom/siteSelectors.cjs';
 
-const TOP_OFFSET = 320;
-const BOTTOM_OFFSET = 880;
+const button = document.querySelector(SITE_SELECTORS.scrollUp);
 
 function showScrollButton() {
   if (button) {
@@ -29,10 +29,10 @@ function showScrollUpButton() {
     if (!ticking) {
       window.requestAnimationFrame(() => {
         if (
-          (lastKnownScrollTopPosition > TOP_OFFSET ||
-            lastKnownElementScrollTopPosition > TOP_OFFSET) &&
+          (lastKnownScrollTopPosition > SCROLL_UP_THRESHOLDS.topPx ||
+            lastKnownElementScrollTopPosition > SCROLL_UP_THRESHOLDS.topPx) &&
           lastKnownScrollHeightPosition - lastKnownElementScrollTopPosition >
-            BOTTOM_OFFSET
+            SCROLL_UP_THRESHOLDS.bottomPx
         ) {
           showScrollButton();
         } else {

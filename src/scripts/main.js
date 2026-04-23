@@ -1,4 +1,6 @@
 import { GOOGLE_MAP_INIT_DELAY_MS } from './constants/map';
+import { SITE_SELECTORS } from './constants/dom/siteSelectors.cjs';
+import { initGoogleFormHandlers } from './form-submission/initGoogleForm';
 import {
   closeSideBarOnTimeout,
   toggleSideBar,
@@ -15,7 +17,9 @@ import {
 const MOBILE_BREAKPOINT = '(max-width: 768px)';
 const mobileMediaQuery = window.matchMedia(MOBILE_BREAKPOINT);
 
-const hasInfoBannerElement = Boolean(document.querySelector('.info-banner'));
+const hasInfoBannerElement = Boolean(
+  document.querySelector(SITE_SELECTORS.infoBanner),
+);
 
 function runMobileOnlyEnhancements() {
   closeSideBarOnTimeout();
@@ -64,3 +68,5 @@ if (document.readyState !== 'loading') {
 } else {
   document.addEventListener('DOMContentLoaded', initCarouselsWhenDomReady);
 }
+
+initGoogleFormHandlers();

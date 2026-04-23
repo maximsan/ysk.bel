@@ -1,13 +1,11 @@
-import homePageDom from '../constants/homePageDom.cjs';
 import { CAROUSEL_SWIPE_THRESHOLD_PX } from '../constants/carousel';
+import {
+  VIDEO_SHOWCASE_CLASS_QUERY,
+  VIDEO_SHOWCASE_QUERY,
+} from '../constants/dom/videoShowcase.cjs';
+import { STATE_CLASS } from '../constants/dom/state.cjs';
 import { mountLazyVideoHost } from './addVideo';
 import { stepCarouselIndex } from './carouselIndex';
-
-const {
-  VIDEO_SHOWCASE_QUERY,
-  VIDEO_SHOWCASE_CLASS_QUERY,
-  STATE_CLASS,
-} = homePageDom;
 
 function pauseVideosExcept(slides, activeSlideIndex) {
   slides.forEach((slide, slideIndex) => {

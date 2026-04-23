@@ -1,8 +1,8 @@
 'use strict';
 
 /**
- * Pure helpers for the legacy `form-submission.js` handler (browser IIFE).
- * Kept in CommonJS so Eleventy / tooling can require it; covered by Vitest.
+ * Pure helpers for `.gform` / Google Sheet–style posts.
+ * Imported by `initGoogleForm.js` (bundle) and by Vitest via `require`.
  */
 
 function validEmail(email) {

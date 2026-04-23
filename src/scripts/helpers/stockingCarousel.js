@@ -1,14 +1,19 @@
 import { CAROUSEL_SWIPE_THRESHOLD_PX } from '../constants/carousel';
+import {
+  STOCKING_CAROUSEL_CLASS,
+  STOCKING_QUERY,
+} from '../constants/dom/stockingCarousel.cjs';
+import { STATE_CLASS } from '../constants/dom/state.cjs';
 import { stepCarouselIndex } from './carouselIndex';
 
 function initOneStockingCarousel(root) {
-  const slides = [...root.querySelectorAll('[data-stocking-slide]')];
-  const dots = [...root.querySelectorAll('[data-stocking-dot]')];
-  const prevBtn = root.querySelector('[data-stocking-prev]');
-  const nextBtn = root.querySelector('[data-stocking-next]');
-  const counterCurrent = root.querySelector('[data-stocking-current]');
-  const counterTotal = root.querySelector('[data-stocking-total]');
-  const live = root.querySelector('[data-stocking-live]');
+  const slides = [...root.querySelectorAll(STOCKING_QUERY.slide)];
+  const dots = [...root.querySelectorAll(STOCKING_QUERY.dot)];
+  const prevBtn = root.querySelector(STOCKING_QUERY.prev);
+  const nextBtn = root.querySelector(STOCKING_QUERY.next);
+  const counterCurrent = root.querySelector(STOCKING_QUERY.counterCurrent);
+  const counterTotal = root.querySelector(STOCKING_QUERY.counterTotal);
+  const live = root.querySelector(STOCKING_QUERY.live);
 
   if (!slides.length) return;
 
@@ -22,13 +27,13 @@ function initOneStockingCarousel(root) {
   function update() {
     slides.forEach((slide, i) => {
       const active = i === index;
-      slide.classList.toggle('is-active', active);
+      slide.classList.toggle(STATE_CLASS.active, active);
       slide.setAttribute('aria-hidden', active ? 'false' : 'true');
     });
 
     dots.forEach((dot, i) => {
       const active = i === index;
-      dot.classList.toggle('is-active', active);
+      dot.classList.toggle(STATE_CLASS.active, active);
       dot.setAttribute('aria-pressed', active ? 'true' : 'false');
     });
 
@@ -67,7 +72,7 @@ function initOneStockingCarousel(root) {
   });
 
   let touchStartX = null;
-  const viewport = root.querySelector('.stocking-carousel__viewport');
+  const viewport = root.querySelector(STOCKING_QUERY.viewport);
   viewport?.addEventListener(
     'touchstart',
     (e) => {
@@ -91,7 +96,7 @@ function initOneStockingCarousel(root) {
 }
 
 export function initStockingCarousel() {
-  document.querySelectorAll('[data-stocking-carousel]').forEach((root) => {
+  document.querySelectorAll(STOCKING_QUERY.carouselRoot).forEach((root) => {
     initOneStockingCarousel(root);
   });
 }
@@ -100,13 +105,13 @@ export function initStockingCarousel() {
  * Hides image skeleton layers after decode/load to avoid layout shift.
  */
 export function initStockingImageSkeletons() {
-  document.querySelectorAll('.stocking-carousel__img').forEach((img) => {
-    const zoom = img.closest('.stocking-carousel__zoom');
-    const skeleton = zoom?.querySelector('[data-stock-skeleton]');
+  document.querySelectorAll(STOCKING_QUERY.img).forEach((img) => {
+    const zoom = img.closest(`.${STOCKING_CAROUSEL_CLASS.zoom}`);
+    const skeleton = zoom?.querySelector(STOCKING_QUERY.skeleton);
     if (!zoom || !skeleton) return;
 
     const markLoaded = () => {
-      zoom.classList.add('is-loaded');
+      zoom.classList.add(STATE_CLASS.loaded);
     };
 
     if (img.complete && img.naturalWidth > 0) {

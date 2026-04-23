@@ -1,11 +1,9 @@
-import homePageDom from '../constants/homePageDom.cjs';
-
-const {
+import {
   LAZY_VIDEO_HOST_DATA_ATTR,
   LAZY_VIDEO_HOST_DATASET,
-  LAZY_VIDEO_HOST_QUERY,
-  STATE_CLASS,
-} = homePageDom;
+} from '../constants/dom/lazyVideoHost.cjs';
+import { LAZY_VIDEO_HOST_QUERY } from '../constants/dom/videoShowcase.cjs';
+import { STATE_CLASS } from '../constants/dom/state.cjs';
 
 /** Normalizes `preload` attribute for `<video>` (lazy host data attribute). */
 export function normalizeVideoPreload(preloadRaw) {
@@ -111,59 +109,4 @@ export function mountLazyVideoHost(lazyVideoHostElement) {
     },
     { once: true },
   );
-}
-
-export function initVideoSection({
-  sectionName,
-  className,
-  removeWrappers = false,
-}) {
-  const videoSection = document.querySelector(`.${sectionName}-${className}`);
-  if (!videoSection) {
-    return;
-  }
-
-  const videoWraps = document.querySelectorAll(`.${sectionName}-video-wrapper`);
-  const videoStateMap = new Map();
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(({ target: wrapperElement, isIntersecting }) => {
-      if (isIntersecting && !videoStateMap.get(wrapperElement)) {
-        const mediaBaseUrl = wrapperElement.getAttribute(
-          LAZY_VIDEO_HOST_DATA_ATTR.videoUrl,
-        );
-        if (!mediaBaseUrl) {
-          return;
-        }
-        const posterUrl = wrapperElement.getAttribute(
-          LAZY_VIDEO_HOST_DATA_ATTR.videoPoster,
-        );
-        const extensions = parseVideoExtensionTokens(
-          wrapperElement.getAttribute(LAZY_VIDEO_HOST_DATA_ATTR.videoExtensions),
-        );
-
-        const videoElement = createVideoTag({ poster: posterUrl });
-        setVideoResources({
-          url: mediaBaseUrl,
-          extensions,
-          videoTag: videoElement,
-        });
-        setNotSupportJS({ parentNode: videoElement });
-
-        videoSection.appendChild(videoElement);
-
-        // remove video wrapper with all data attributes
-        if (removeWrappers) {
-          videoSection.removeChild(wrapperElement);
-        }
-
-        videoStateMap.set(wrapperElement, true);
-      }
-    });
-  });
-
-  videoWraps.forEach((videoWrapper) => {
-    videoStateMap.set(videoWrapper, false);
-    observer.observe(videoWrapper);
-  });
 }

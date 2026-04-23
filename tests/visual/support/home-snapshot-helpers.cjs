@@ -5,6 +5,7 @@ const {
   homeActiveVideoHostSelector,
   BLOCKED_THIRD_PARTY_URL_GLOBS,
 } = require('../constants');
+const homePageDom = require('../../../src/scripts/constants/homePageDom.cjs');
 
 const { locators, classMap, timeouts } = HOME_SELECTORS;
 
@@ -146,22 +147,34 @@ async function waitForMapReady(page) {
  * (menu open) does not include the centered banner.
  */
 async function dismissInfoBannerForInteraction(page) {
-  await page.evaluate(() => {
-    document.cookie = ['info-banner=false', 'max-age=86400', 'Path=/', 'SameSite=Lax'].join(
-      '; ',
-    );
-    const overlay = document.querySelector('.overlay');
-    if (overlay) {
-      overlay.style.display = 'none';
-    }
-    const banner = document.querySelector('.info-banner');
-    if (banner) {
-      banner.classList.remove('show-banner');
-      banner.classList.add('hide-banner');
-      banner.style.display = 'none';
-      banner.style.animation = 'none';
-    }
-  });
+  const { SITE_SELECTORS, INFO_BANNER_STATE_CLASS } = homePageDom;
+  await page.evaluate(
+    ([overlaySelector, bannerSelector, showClass, hideClass]) => {
+      document.cookie = [
+        'info-banner=false',
+        'max-age=86400',
+        'Path=/',
+        'SameSite=Lax',
+      ].join('; ');
+      const overlay = document.querySelector(overlaySelector);
+      if (overlay) {
+        overlay.style.display = 'none';
+      }
+      const banner = document.querySelector(bannerSelector);
+      if (banner) {
+        banner.classList.remove(showClass);
+        banner.classList.add(hideClass);
+        banner.style.display = 'none';
+        banner.style.animation = 'none';
+      }
+    },
+    [
+      SITE_SELECTORS.overlay,
+      SITE_SELECTORS.infoBanner,
+      INFO_BANNER_STATE_CLASS.show,
+      INFO_BANNER_STATE_CLASS.hide,
+    ],
+  );
 }
 
 async function setupHomeVisualPage(page) {

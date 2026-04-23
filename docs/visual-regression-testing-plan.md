@@ -7,13 +7,13 @@ Goal: **catch unintended layout and styling changes** across desktop, tablet, an
 ## Implementation status
 
 
-| Item              | Location / notes                                                                                                                                                                                                                                                                        |
-| ----------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Playwright config | `playwright.config.mjs` — projects for **Chromium**, **Firefox**, **WebKit** × **mobile / tablet / desktop**; `webServer` runs `yarn build` then serves `dist` on port **4173**; `snapshotPathTemplate` omits `{platform}` so one set of PNGs is shared between macOS dev and Linux CI. |
-| Visual specs      | `tests/visual/home-header.spec.js`, `tests/visual/home-sections.spec.js` — locator screenshots; shared waits in `tests/visual/support/home-snapshot-helpers.cjs`; Playwright timeouts / blocked URLs in `tests/visual/constants.js`. **DOM ids, `data-*` hooks, and shared class fragments** are defined once in `src/scripts/constants/homePageDom.cjs` (imported by carousel / video / map JS and re-used from tests via `require`). |
-| Baselines         | `tests/visual/home-snapshots/*.png` (committed). `snapshotPathTemplate` in `playwright.config.mjs` keeps one folder for all home specs. Footer test is **skipped** on mobile; **header — mobile menu open** is **skipped** on tablet/desktop (drawer only under **768px**).                                                                               |
-| Yarn scripts      | `yarn test:visual`, `yarn test:visual:update`, `yarn test:visual:ui`, `yarn test:visual:report`                                                                                                                                                                                         |
-| CI                | `.github/workflows/ci.yaml` — **`build`** runs on every push/PR; **`visual`** runs **on pull requests only** when changed paths match (see below) or the PR has label **`run-visual`** (not on `push` to `main`). Playwright uploads **playwright-report** on failure.                                                                                                                                        |
+| Item              | Location / notes                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| ----------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Playwright config | `playwright.config.mjs` — projects for **Chromium**, **Firefox**, **WebKit** × **mobile / tablet / desktop**; `webServer` runs `yarn build` then serves `dist` on port **4173**; `snapshotPathTemplate` omits `{platform}` so one set of PNGs is shared between macOS dev and Linux CI.                                                                                                                                                |
+| Visual specs      | `tests/visual/home-header.spec.js`, `tests/visual/home-sections.spec.js` — locator screenshots; shared waits in `tests/visual/support/home-snapshot-helpers.cjs`; Playwright timeouts / blocked URLs in `tests/visual/constants.js`. **DOM ids, `data-*` hooks, and shared class fragments** live in `src/scripts/constants/dom/*.cjs` (by area); bundled scripts import those modules directly. **`homePageDom.cjs`** re-exports the same surface for tests and anything that prefers one `require`. |
+| Baselines         | `tests/visual/home-snapshots/*.png` (committed). `snapshotPathTemplate` in `playwright.config.mjs` keeps one folder for all home specs. Footer test is **skipped** on mobile; **header — mobile menu open** is **skipped** on tablet/desktop (drawer only under **768px**).                                                                                                                                                            |
+| Yarn scripts      | `yarn test:visual`, `yarn test:visual:update`, `yarn test:visual:ui`, `yarn test:visual:report`                                                                                                                                                                                                                                                                                                                                        |
+| CI                | `.github/workflows/ci.yaml` — `**build`** runs on every push/PR; `**visual**` runs **on pull requests only** when changed paths match (see below) or the PR has label `**run-visual`** (not on `push` to `main`). Playwright uploads **playwright-report** on failure.                                                                                                                                                                 |
 
 
 **Linux CI vs local:** If GitHub Actions reports screenshot mismatches against baselines generated on macOS, run `yarn test:visual:update` on a Linux environment that matches CI (or bump `maxDiffPixels` / `threshold` in config after review).
@@ -23,10 +23,10 @@ Goal: **catch unintended layout and styling changes** across desktop, tablet, an
 ## Why two tools?
 
 
-| Concern                                              | Recommended tool      | Notes                                                                                                                                                                                                                         |
-| ---------------------------------------------------- | --------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Full-page and section screenshots, cross-browser     | **Playwright**        | `expect(locator).toHaveScreenshot()` with projects for **Chromium**, **Firefox**, and **WebKit** (maps closely to Chrome/Edge, Firefox, and Safari).                                                                          |
-| Unit tests for pure JavaScript (helpers, form logic) | **Vitest** + **happy-dom** | `yarn test:unit` — `tests/unit/**`; CI runs in the **`build`** job. **Vitest does not replace Playwright** for full-site visual regression. |
+| Concern                                              | Recommended tool           | Notes                                                                                                                                                |
+| ---------------------------------------------------- | -------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Full-page and section screenshots, cross-browser     | **Playwright**             | `expect(locator).toHaveScreenshot()` with projects for **Chromium**, **Firefox**, and **WebKit** (maps closely to Chrome/Edge, Firefox, and Safari). |
+| Unit tests for pure JavaScript (helpers, form logic) | **Vitest** + **happy-dom** | `yarn test:unit` — `tests/unit/`**; CI runs in the `**build**` job. **Vitest does not replace Playwright** for full-site visual regression.          |
 
 
 **Summary:** visual regression is implemented with **Playwright**; **Vitest** covers small pure-JS modules (`yarn test:unit`). Keep visual baselines in `tests/visual/home-snapshots/`, not in Vitest.
@@ -108,10 +108,10 @@ Optional automation:
 
 ## CI integration
 
-- **Jobs:** `build` (always) — `yarn install --immutable`, `yarn build`. `visual` (conditional, **PRs only**) — same install, then Playwright browsers and `yarn test:visual`. Pushes to `main` run **`build`** (and **`deploy`**) only; run `yarn test:visual` locally or open a PR if you need CI visuals after merge.
-- **When `visual` runs:** `dorny/paths-filter` matches changes under `src/styles/`, `src/pages/`, `src/data/`, `src/scripts/`, `src/assets/`, `eleventy.config.js`, root `404.html` / `500.html`, `tests/visual/`, `playwright.config.mjs`. **Or** any PR labeled **`run-visual`** (use for dependency-only / other changes that might still affect pixels). Create that label in the repo once.
+- **Jobs:** `build` (always) — `yarn install --immutable`, `yarn build`. `visual` (conditional, **PRs only**) — same install, then Playwright browsers and `yarn test:visual`. Pushes to `main` run `**build`** (and `**deploy**`) only; run `yarn test:visual` locally or open a PR if you need CI visuals after merge.
+- **When `visual` runs:** `dorny/paths-filter` matches changes under `src/styles/`, `src/pages/`, `src/data/`, `src/scripts/`, `src/assets/`, `eleventy.config.js`, root `404.html` / `500.html`, `tests/visual/`, `playwright.config.mjs`. **Or** any PR labeled `**run-visual`** (use for dependency-only / other changes that might still affect pixels). Create that label in the repo once.
 - **PR events:** `opened`, `synchronize`, `reopened`, `labeled`, `unlabeled` so adding or removing `run-visual` triggers a new run.
-- **Build output:** Eleventy writes to `**dist/`** (see `eleventy.config.js`). Playwright `**webServer**` builds and serves that folder for tests.
+- **Build output:** Eleventy writes to `**dist/`** (see `eleventy.config.js`). Playwright `**webServer`** builds and serves that folder for tests.
 - **Shared baselines:** `snapshotPathTemplate` without `{platform}`; if Linux still drifts from macOS, regenerate on Linux or relax thresholds after review.
 
 ---
@@ -151,7 +151,7 @@ Optional automation:
 ### Phase 5 — Vitest (unit tests only) ✓
 
 - `vitest` + `happy-dom`; config: `vitest.config.mjs`; tests: `tests/unit/**/*.test.js`
-- Covers `homePageDom.cjs` selectors, `formSubmissionCore.cjs` (mirror of legacy `form-submission.js` email / honeypot checks), `normalizeVideoPreload` in `addVideo.js`, `documentHeight` in `calculateDocumentHeight.js`
+- Covers DOM constants (barrel `homePageDom.cjs` / underlying `constants/dom/*.cjs`), `formSubmissionCore.cjs` (email / honeypot; used by `initGoogleForm.js` in the bundle), `normalizeVideoPreload` / `parseVideoExtensionTokens` in `addVideo.js`, `documentHeight`, `stepCarouselIndex`, `infoBannerCookie` helpers
 - No screenshot assertions in Vitest
 
 ---
@@ -165,7 +165,7 @@ Optional automation:
 | `yarn test:visual:update` | Regenerate screenshot baselines after intentional UI changes             |
 | `yarn test:visual:ui`     | Playwright UI mode                                                       |
 | `yarn test:visual:report` | Open last HTML report                                                    |
-| `yarn test:unit`          | Vitest (`tests/unit/**`); `yarn test:unit:watch` for watch mode        |
+| `yarn test:unit`          | Vitest (`tests/unit/`**); `yarn test:unit:watch` for watch mode          |
 
 
 ---
@@ -174,7 +174,7 @@ Optional automation:
 
 - **Animations:** handled via `prefers-reduced-motion` in tests (no Eleventy `?test=1` flag required for now).
 - Minimum **reviewers** for snapshot-only PRs (team decision)
-- ~~Run visual tests on every PR vs path filters~~ — **Resolved:** path filters + PR label **`run-visual`** (see CI integration).
+- ~~Run visual tests on every PR vs path filters~~ — **Resolved:** path filters + PR label `**run-visual`** (see CI integration).
 
 ---
 
