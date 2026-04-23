@@ -41,9 +41,7 @@ export default defineConfig({
   expect: {
     timeout: 20_000,
     toHaveScreenshot: {
-      // Absorbs cross-platform anti-aliasing noise (macOS baselines vs Linux CI renderer).
-      // Trade-off: regressions affecting <2% of pixels will not be caught.
-      maxDiffPixelRatio: 0.02,
+      maxDiffPixelRatio: 0.005,
       threshold: 0.25,
     },
   },

@@ -27,9 +27,6 @@ const BLOCKED_THIRD_PARTY_URL_GLOBS = [
   '**/*google-analytics.com/**',
   '**/*analytics.google.com/**',
   '**/*mc.yandex.ru/**',
-  '**/*fonts.googleapis.com/**',
-  '**/*fonts.gstatic.com/**',
-  '**/*use.fontawesome.com/**',
 ];
 
 const HOME_SELECTORS = {
