@@ -1,5 +1,6 @@
 @import 'modules/constants';
 @import 'modules/section-chapter';
+@import 'modules/motion-polish';
 @import 'modules/media-skeleton';
 @import 'modules/common';
 @import 'modules/mixins';
@@ -34,9 +35,18 @@ body {
 }
 
 @supports (scroll-behavior: smooth) {
-  *,
-  html {
-    scroll-behavior: smooth !important;
+  @media (prefers-reduced-motion: no-preference) {
+    *,
+    html {
+      scroll-behavior: smooth !important;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    html {
+      scroll-behavior: auto !important;
+    }
   }
 }
 

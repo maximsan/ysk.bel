@@ -73,7 +73,7 @@ Tune hex values against real photography after Phase 1.
 - [x] **Vertical spacing:** `.section-chapter` + `--section-pad-block` / `--section-scroll-margin` on services, stocking, videos, contacts; removed legacy `py-10rem` and duplicate service paddings.
 - [x] **Title block:** `section-chapter__header` / `__title` / `__subtitle` / `__lede` (Liquid) with tokens `--section-title-color`, `--section-subtitle-color`, `--section-subtitle-max-width`, `--section-header-margin-bottom`.
 - [x] **Surfaces:** two-band Peat & linen via `--surface-page`, `--surface-warm-veil`, `--section-edge-border`, `--section-inset-highlight`; stocking + video sections + carousel chrome use shared `--chrome-*` tokens (not five unrelated gradients).
-- [ ] **Accent discipline:** badges/CTA chrome still use accent family; body headings use `--section-title-color` (ongoing in Phase 4 for nav, packages, etc.).
+- [x] **Accent discipline** — *policy, not a one-off task:* reserve **copper** (`--color-accent*`) for prices (`.text-danger` → `--color-price`), CTA-style badges, carousel controls, and key tooltips; **body/section titles** use `--section-title-color` / nav uses `--nav-link-active-color`. Phases 3–4 applied this; new UI should follow the same tokens.
 
 ---
 
@@ -90,9 +90,9 @@ Tune hex values against real photography after Phase 1.
 
 ## Phase 5 — Motion & polish
 
-- [ ] One light page-load or section-enter pattern (CSS only); stagger **50–80ms** max.
-- [ ] Respect `prefers-reduced-motion`.
-- [ ] One **focus ring** style using `--color-accent`.
+- [x] **Section enter:** `section.section-chapter` uses `section-chapter-in` (opacity + short translate) with sibling stagger `70ms` (max ≈ 210ms for four blocks); `prefers-reduced-motion: reduce` disables it (`_motion-polish.scss`).
+- [x] **`prefers-reduced-motion`:** section animations off; `scroll-behavior: smooth` only when not reduced; nav underline + carousel transitions toned down in mixins / stocking / videos; stocking image zoom off when reduced.
+- [x] **Focus ring:** `--color-focus-ring` (same intent as accent) + `--focus-ring-width` / `--focus-ring-offset` on carousels, info links, and `@mixin outline` (focus-visible + `:focus:not(:focus-visible)`).
 
 ---
 

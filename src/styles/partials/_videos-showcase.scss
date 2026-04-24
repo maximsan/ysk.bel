@@ -173,8 +173,8 @@
     }
 
     &:focus-visible {
-      outline: 3px solid var(--light-orange);
-      outline-offset: 2px;
+      outline: var(--focus-ring-width) solid var(--color-focus-ring);
+      outline-offset: var(--focus-ring-offset);
     }
 
     &--prev {
@@ -239,8 +239,8 @@
     }
 
     &:focus-visible {
-      outline: 2px solid var(--orange);
-      outline-offset: 2px;
+      outline: var(--focus-ring-width) solid var(--color-focus-ring);
+      outline-offset: var(--focus-ring-offset);
     }
 
     &.is-active {
@@ -262,6 +262,10 @@
 
 @media (prefers-reduced-motion: reduce) {
   .videos-showcase__nav {
+    transition: none;
+  }
+
+  .videos-showcase__dot {
     transition: none;
   }
 }

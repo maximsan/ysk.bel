@@ -31,22 +31,42 @@
     height: 2px;
     bottom: -4px;
     left: 0;
-    background-color: var(--dirty-orange);
+    background-color: var(--color-accent-muted);
     box-shadow: 0px 0px 0.3rem 0.1rem var(--orange-shadow);
     visibility: hidden;
     transform: scaleX(0);
-    transition: transform 0.25s ease-out;
+    transition: transform var(--motion-link-hover-duration) var(--motion-ease-out);
   }
 
   &:hover::before {
     visibility: visible;
     transform: scaleX(1);
   }
+
+  @media (prefers-reduced-motion: reduce) {
+    &::before {
+      transition: none;
+    }
+
+    &:hover::before {
+      transform: scaleX(1);
+    }
+  }
 }
 
 @mixin outline {
   &:focus {
-    outline: 2px solid var(--color-focus-ring);
+    outline: var(--focus-ring-width) solid var(--color-focus-ring);
+    outline-offset: var(--focus-ring-offset);
+  }
+
+  &:focus:not(:focus-visible) {
+    outline: none;
+  }
+
+  &:focus-visible {
+    outline: var(--focus-ring-width) solid var(--color-focus-ring);
+    outline-offset: var(--focus-ring-offset);
   }
 }
 
