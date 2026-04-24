@@ -48,7 +48,7 @@
 
   .carousel-indicators {
     li {
-      background-color: #c9c9c9;
+      background-color: var(--color-carousel-indicator-idle);
     }
 
     .active {

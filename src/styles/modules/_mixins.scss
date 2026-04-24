@@ -5,7 +5,7 @@
 
 @mixin menu {
   display: block;
-  border-top: 1px solid #333;
+  border-top: 1px solid var(--color-menu-border);
   position: fixed;
   bottom: 0;
   top: 0;

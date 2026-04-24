@@ -81,7 +81,7 @@
     position: relative;
     border-radius: var(--chrome-radius-inner);
     overflow: hidden;
-    background: #0d1117;
+    background: var(--color-video-viewport-bg);
 
     @media only screen and (min-width: 992px) {
       border-radius: 1rem;
@@ -129,7 +129,7 @@
     padding-top: 56.25%;
     border-radius: 0.55rem;
     overflow: hidden;
-    background: #000;
+    background: var(--default-black);
     box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08);
   }
 
@@ -140,7 +140,7 @@
     height: 100%;
     border-radius: 0.45rem;
     overflow: hidden;
-    background: #0a0c10;
+    background: var(--color-video-host-bg);
   }
 
   &__lazy-host video {

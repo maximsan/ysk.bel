@@ -7,7 +7,12 @@
   --color-text-muted: #5c534a;
   --color-text-inverse: #f2ebe3;
   /* Viber on inverse footer: brand tint mixed toward readable on --color-bg-inverse. */
-  --color-social-viber-on-inverse: color-mix(in srgb, #7360f2 32%, var(--color-text-inverse));
+  --color-social-viber-brand: #7360f2;
+  --color-social-viber-on-inverse: color-mix(
+    in srgb,
+    var(--color-social-viber-brand) 32%,
+    var(--color-text-inverse)
+  );
   /* Copper accent: meet ≥4.5:1 on --color-bg-elevated / cream for body-sized text (axe). */
   --color-accent: #a84d22;
   --color-accent-hover: #8c411c;
@@ -17,6 +22,17 @@
   --color-border: rgba(44, 36, 28, 0.12);
   --color-border-strong: rgba(44, 36, 28, 0.22);
   --color-focus-ring: var(--color-accent);
+  /* Video showcase — letterbox / stage (dark neutrals, not Peat & linen surfaces) */
+  --color-video-viewport-bg: #0d1117;
+  --color-video-host-bg: #0a0c10;
+  /* Mobile nav drawer: top rule on dark overlay */
+  --color-menu-border: #333333;
+  /* Services package carousel — idle dot (Bootstrap indicator) */
+  --color-carousel-indicator-idle: #c9c9c9;
+  /* Floating contact FAB — mauve / rose (mobile + desktop variants) */
+  --color-contact-accent: #b47572;
+  /* PhotoSwipe custom caption bar */
+  --color-gallery-caption-bg: #704936;
   --space-section: 4rem;
   /* Section block padding (vertical rhythm) — replaces ad-hoc per-breakpoint stacks */
   --section-pad-block: clamp(1.75rem, 3.5vw, 3rem);
