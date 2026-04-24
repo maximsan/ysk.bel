@@ -7,6 +7,9 @@
 log/
 dist/
 node_modules/
+playwright-report/
+blob-report/
+test-results/
 doc/
 temp/
 _site/

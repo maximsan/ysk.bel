@@ -1,9 +1,5 @@
-export const documentHeight = () => {
+/** Sets CSS custom property `--doc-height` from `document.documentElement.clientHeight`. */
+export function documentHeight() {
   const doc = document.documentElement;
   doc.style.setProperty('--doc-height', `${doc.clientHeight}px`);
-};
-
-// on load
-documentHeight();
-// on resize
-window.addEventListener('resize', documentHeight);
+}

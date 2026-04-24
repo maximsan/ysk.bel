@@ -1,103 +1,129 @@
+import { CAROUSEL_SWIPE_THRESHOLD_PX } from '../constants/carousel';
+import {
+  VIDEO_SHOWCASE_CLASS_QUERY,
+  VIDEO_SHOWCASE_QUERY,
+} from '../constants/dom/videoShowcase.cjs';
+import { STATE_CLASS } from '../constants/dom/state.cjs';
 import { mountLazyVideoHost } from './addVideo';
+import { stepCarouselIndex } from './carouselIndex';
 
-function pauseVideosExcept(slides, exceptIndex) {
-  slides.forEach((slide, i) => {
-    if (i === exceptIndex) return;
-    const v = slide.querySelector('video');
-    if (v) {
-      v.pause();
+function pauseVideosExcept(slides, activeSlideIndex) {
+  slides.forEach((slide, slideIndex) => {
+    if (slideIndex === activeSlideIndex) return;
+    const videoElement = slide.querySelector('video');
+    if (videoElement) {
+      videoElement.pause();
     }
   });
 }
 
-function initOneVideosCarousel(root) {
-  const slides = [...root.querySelectorAll('[data-videos-slide]')];
-  const dots = [...root.querySelectorAll('[data-videos-dot]')];
-  const prevBtn = root.querySelector('[data-videos-prev]');
-  const nextBtn = root.querySelector('[data-videos-next]');
-  const counterCurrent = root.querySelector('[data-videos-current]');
-  const counterTotal = root.querySelector('[data-videos-total]');
-  const live = root.querySelector('[data-videos-live]');
+function initOneVideosCarousel(carouselRoot) {
+  const slides = [...carouselRoot.querySelectorAll(VIDEO_SHOWCASE_QUERY.slide)];
+  const dots = [...carouselRoot.querySelectorAll(VIDEO_SHOWCASE_QUERY.dot)];
+  const prevBtn = carouselRoot.querySelector(VIDEO_SHOWCASE_QUERY.prev);
+  const nextBtn = carouselRoot.querySelector(VIDEO_SHOWCASE_QUERY.next);
+  const counterCurrent = carouselRoot.querySelector(
+    VIDEO_SHOWCASE_QUERY.counterCurrent,
+  );
+  const counterTotal = carouselRoot.querySelector(
+    VIDEO_SHOWCASE_QUERY.counterTotal,
+  );
+  const live = carouselRoot.querySelector(VIDEO_SHOWCASE_QUERY.live);
 
   if (!slides.length) return;
 
-  let index = 0;
+  let activeSlideIndex = 0;
 
   function announce() {
     if (!live) return;
-    live.textContent = `Видео ${index + 1} из ${slides.length}`;
+    live.textContent = `Видео ${activeSlideIndex + 1} из ${slides.length}`;
   }
 
   function update() {
-    slides.forEach((slide, i) => {
-      const active = i === index;
-      slide.classList.toggle('is-active', active);
-      slide.setAttribute('aria-hidden', active ? 'false' : 'true');
+    slides.forEach((slide, slideIndex) => {
+      const isActiveSlide = slideIndex === activeSlideIndex;
+      slide.classList.toggle(STATE_CLASS.active, isActiveSlide);
+      slide.setAttribute('aria-hidden', isActiveSlide ? 'false' : 'true');
     });
 
-    dots.forEach((dot, i) => {
-      const active = i === index;
-      dot.classList.toggle('is-active', active);
-      dot.setAttribute('aria-pressed', active ? 'true' : 'false');
+    dots.forEach((dot, dotIndex) => {
+      const isActiveDot = dotIndex === activeSlideIndex;
+      dot.classList.toggle(STATE_CLASS.active, isActiveDot);
+      dot.setAttribute('aria-pressed', isActiveDot ? 'true' : 'false');
     });
 
-    if (counterCurrent) counterCurrent.textContent = String(index + 1);
+    if (counterCurrent) {
+      counterCurrent.textContent = String(activeSlideIndex + 1);
+    }
     if (counterTotal) counterTotal.textContent = String(slides.length);
 
-    pauseVideosExcept(slides, index);
-    const activeSlide = slides[index];
-    const host = activeSlide?.querySelector('[data-video-lazy]');
-    if (host) {
-      mountLazyVideoHost(host);
+    pauseVideosExcept(slides, activeSlideIndex);
+    const activeSlide = slides[activeSlideIndex];
+    const lazyVideoHost = activeSlide?.querySelector(
+      VIDEO_SHOWCASE_QUERY.lazyHost,
+    );
+    if (lazyVideoHost) {
+      mountLazyVideoHost(lazyVideoHost);
     }
 
     announce();
   }
 
   function go(delta) {
-    index = (index + delta + slides.length) % slides.length;
+    activeSlideIndex = stepCarouselIndex(
+      activeSlideIndex,
+      delta,
+      slides.length,
+    );
     update();
   }
 
-  function goTo(i) {
-    index = i;
+  function goTo(targetIndex) {
+    activeSlideIndex = targetIndex;
     update();
   }
 
-  prevBtn?.addEventListener('click', () => go(-1));
-  nextBtn?.addEventListener('click', () => go(1));
-
-  dots.forEach((dot, i) => {
-    dot.addEventListener('click', () => goTo(i));
+  prevBtn?.addEventListener('click', () => {
+    go(-1);
+  });
+  nextBtn?.addEventListener('click', () => {
+    go(1);
   });
 
-  root.addEventListener('keydown', (e) => {
-    if (e.key === 'ArrowLeft') {
-      e.preventDefault();
+  dots.forEach((dot, dotIndex) => {
+    dot.addEventListener('click', () => goTo(dotIndex));
+  });
+
+  carouselRoot.addEventListener('keydown', (keyboardEvent) => {
+    if (keyboardEvent.key === 'ArrowLeft') {
+      keyboardEvent.preventDefault();
       go(-1);
     }
-    if (e.key === 'ArrowRight') {
-      e.preventDefault();
+    if (keyboardEvent.key === 'ArrowRight') {
+      keyboardEvent.preventDefault();
       go(1);
     }
   });
 
   let touchStartX = null;
-  const viewport = root.querySelector('.videos-showcase__viewport');
-  viewport?.addEventListener(
+  const carouselViewport = carouselRoot.querySelector(
+    VIDEO_SHOWCASE_CLASS_QUERY.viewport,
+  );
+  carouselViewport?.addEventListener(
     'touchstart',
-    (e) => {
-      touchStartX = e.changedTouches[0].screenX;
+    (touchEvent) => {
+      touchStartX = touchEvent.changedTouches[0].screenX;
     },
     { passive: true },
   );
-  viewport?.addEventListener(
+  carouselViewport?.addEventListener(
     'touchend',
-    (e) => {
+    (touchEvent) => {
       if (touchStartX == null) return;
-      const dx = e.changedTouches[0].screenX - touchStartX;
-      if (dx > 56) go(-1);
-      if (dx < -56) go(1);
+      const horizontalDragPx =
+        touchEvent.changedTouches[0].screenX - touchStartX;
+      if (horizontalDragPx > CAROUSEL_SWIPE_THRESHOLD_PX) go(-1);
+      if (horizontalDragPx < -CAROUSEL_SWIPE_THRESHOLD_PX) go(1);
       touchStartX = null;
     },
     { passive: true },
@@ -107,7 +133,9 @@ function initOneVideosCarousel(root) {
 }
 
 export function initVideosShowcaseCarousel() {
-  document.querySelectorAll('[data-videos-showcase]').forEach((root) => {
-    initOneVideosCarousel(root);
-  });
+  document
+    .querySelectorAll(VIDEO_SHOWCASE_QUERY.showcaseRoot)
+    .forEach((carouselRoot) => {
+      initOneVideosCarousel(carouselRoot);
+    });
 }

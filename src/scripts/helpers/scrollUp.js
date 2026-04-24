@@ -1,11 +1,18 @@
-const button = document.querySelector('.scroll-up');
+import { SCROLL_UP_THRESHOLDS } from '../constants/dom/scroll.cjs';
+import { SITE_SELECTORS } from '../constants/dom/siteSelectors.cjs';
+
+const button = document.querySelector(SITE_SELECTORS.scrollUp);
 
 function showScrollButton() {
-  button.style.display = 'block';
+  if (button) {
+    button.style.display = 'block';
+  }
 }
 
 function hideScrollButton() {
-  button.style.display = 'none';
+  if (button) {
+    button.style.display = 'none';
+  }
 }
 
 let lastKnownScrollTopPosition = 0;
@@ -13,23 +20,19 @@ let lastKnownElementScrollTopPosition = 0;
 let lastKnownScrollHeightPosition = 0;
 let ticking = false;
 
-const TOP_OFFSET = 320;
-const BOTTOM_OFFSET = 880;
-
 function showScrollUpButton() {
-  window.addEventListener('scroll', function () {
-    console.log('inside');
+  window.addEventListener('scroll', () => {
     lastKnownScrollTopPosition = document.body.scrollTop;
     lastKnownElementScrollTopPosition = document.documentElement.scrollTop;
     lastKnownScrollHeightPosition = document.documentElement.scrollHeight;
 
     if (!ticking) {
-      window.requestAnimationFrame(function () {
+      window.requestAnimationFrame(() => {
         if (
-          (lastKnownScrollTopPosition > TOP_OFFSET ||
-            lastKnownElementScrollTopPosition > TOP_OFFSET) &&
+          (lastKnownScrollTopPosition > SCROLL_UP_THRESHOLDS.topPx ||
+            lastKnownElementScrollTopPosition > SCROLL_UP_THRESHOLDS.topPx) &&
           lastKnownScrollHeightPosition - lastKnownElementScrollTopPosition >
-            BOTTOM_OFFSET
+            SCROLL_UP_THRESHOLDS.bottomPx
         ) {
           showScrollButton();
         } else {
@@ -44,12 +47,15 @@ function showScrollUpButton() {
 }
 
 function addScrollUpOnClick() {
-  button.addEventListener('click', function () {
+  button?.addEventListener('click', () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
 }
 
 export function addScrollUpButton() {
+  if (!button) {
+    return;
+  }
   showScrollUpButton();
   addScrollUpOnClick();
 }
