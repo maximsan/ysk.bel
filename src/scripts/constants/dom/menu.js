@@ -1,7 +1,5 @@
-'use strict';
-
 /** Mobile nav drawer (`sideBar.js`, `menu.liquid`). */
-const MENU_CLASS = {
+export const MENU_CLASS = {
   root: 'menu',
   open: 'open',
   toggler: 'navbar-toggler',
@@ -13,7 +11,7 @@ const MENU_CLASS = {
  * Drawer: auto-close when these links are used.
  * Keep in sync with `menu.liquid` / `sidebar` data.
  */
-const SITE_NAV_MENU_LINK_SELECTORS = [
+export const SITE_NAV_MENU_LINK_SELECTORS = [
   `a[href$='services']`,
   `a[href$='prices']`,
   `a[href$='contacts']`,
@@ -22,5 +20,3 @@ const SITE_NAV_MENU_LINK_SELECTORS = [
   `a[href^='#stocking']`,
   `a[href='#videos']`,
 ];
-
-module.exports = { MENU_CLASS, SITE_NAV_MENU_LINK_SELECTORS };

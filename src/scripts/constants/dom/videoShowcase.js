@@ -1,11 +1,9 @@
-'use strict';
-
-const { bracketAttribute } = require('./selectorsShared.cjs');
+import { bracketAttribute } from './selectorsShared.js';
 
 /**
  * Videos showcase carousel (`videos.liquid`, `videoShowcaseCarousel.js`).
  */
-const VIDEO_SHOWCASE_DATA_ATTR = {
+export const VIDEO_SHOWCASE_DATA_ATTR = {
   showcase: 'data-videos-showcase',
   slide: 'data-videos-slide',
   dot: 'data-videos-dot',
@@ -18,13 +16,13 @@ const VIDEO_SHOWCASE_DATA_ATTR = {
   videoSkeleton: 'data-video-skeleton',
 };
 
-const VIDEO_SHOWCASE_CLASS = {
+export const VIDEO_SHOWCASE_CLASS = {
   slide: 'videos-showcase__slide',
   lazyHost: 'videos-showcase__lazy-host',
   viewport: 'videos-showcase__viewport',
 };
 
-const VIDEO_SHOWCASE_QUERY = {
+export const VIDEO_SHOWCASE_QUERY = {
   showcaseRoot: bracketAttribute(VIDEO_SHOWCASE_DATA_ATTR.showcase),
   slide: bracketAttribute(VIDEO_SHOWCASE_DATA_ATTR.slide),
   dot: bracketAttribute(VIDEO_SHOWCASE_DATA_ATTR.dot),
@@ -36,18 +34,10 @@ const VIDEO_SHOWCASE_QUERY = {
   lazyHost: bracketAttribute(VIDEO_SHOWCASE_DATA_ATTR.videoLazy),
 };
 
-const VIDEO_SHOWCASE_CLASS_QUERY = {
+export const VIDEO_SHOWCASE_CLASS_QUERY = {
   viewport: `.${VIDEO_SHOWCASE_CLASS.viewport}`,
 };
 
-const LAZY_VIDEO_HOST_QUERY = {
+export const LAZY_VIDEO_HOST_QUERY = {
   skeleton: bracketAttribute(VIDEO_SHOWCASE_DATA_ATTR.videoSkeleton),
-};
-
-module.exports = {
-  VIDEO_SHOWCASE_DATA_ATTR,
-  VIDEO_SHOWCASE_CLASS,
-  VIDEO_SHOWCASE_QUERY,
-  VIDEO_SHOWCASE_CLASS_QUERY,
-  LAZY_VIDEO_HOST_QUERY,
 };

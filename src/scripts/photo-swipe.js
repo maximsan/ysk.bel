@@ -5,7 +5,7 @@ import {
   PHOTOSWIPE_OPTIONS,
   PHOTOSWIPE_STOCKING_CHILDREN,
   PHOTOSWIPE_UI,
-} from './constants/dom/galleryPhotoswipe.cjs';
+} from './constants/dom/galleryPhotoswipe.js';
 
 const lightbox = new PhotoSwipeLightbox({
   gallery: GALLERY_SELECTORS.mainRoot,

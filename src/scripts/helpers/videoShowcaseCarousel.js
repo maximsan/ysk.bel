@@ -2,8 +2,8 @@ import { CAROUSEL_SWIPE_THRESHOLD_PX } from '../constants/carousel';
 import {
   VIDEO_SHOWCASE_CLASS_QUERY,
   VIDEO_SHOWCASE_QUERY,
-} from '../constants/dom/videoShowcase.cjs';
-import { STATE_CLASS } from '../constants/dom/state.cjs';
+} from '../constants/dom/videoShowcase.js';
+import { STATE_CLASS } from '../constants/dom/state.js';
 import { mountLazyVideoHost } from './addVideo';
 import { stepCarouselIndex } from './carouselIndex';
 

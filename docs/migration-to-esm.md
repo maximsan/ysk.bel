@@ -10,7 +10,7 @@ The site uses **native ESM** (`"type": "module"` in `package.json`), **Eleventy 
 
 - [x] Root `package.json` has `"type": "module"`.
 - [x] No `require(` / `module.exports` / `exports.` in project `.js` / `.mjs` sources (excluding `node_modules`).
-- [x] No stray `.cjs` entrypoints; no `__dirname` / `__filename` without ESM-safe patterns.
+- [x] No project `.cjs` under `src/` or `tests/` (only Yarn’s own `yarnPath` release may be `.cjs`); no `__dirname` / `__filename` without ESM-safe patterns.
 - [x] Eleventy loads `eleventy.config.mjs` with `export default`.
 - [x] `src/data/*.js` use `export default` and match `setLiquidOptions({ globals })`.
 - [x] Client entry `src/scripts/index.js` and imports use ESM.

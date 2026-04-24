@@ -1,5 +1,5 @@
 import { GOOGLE_MAP_INIT_DELAY_MS } from './constants/map';
-import { SITE_SELECTORS } from './constants/dom/siteSelectors.cjs';
+import { SITE_SELECTORS } from './constants/dom/siteSelectors.js';
 import { initGoogleFormHandlers } from './form-submission/initGoogleForm';
 import {
   closeSideBarOnTimeout,

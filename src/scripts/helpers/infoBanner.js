@@ -1,5 +1,5 @@
-import { INFO_BANNER_STATE_CLASS } from '../constants/dom/infoBanner.cjs';
-import { SITE_SELECTORS } from '../constants/dom/siteSelectors.cjs';
+import { INFO_BANNER_STATE_CLASS } from '../constants/dom/infoBanner.js';
+import { SITE_SELECTORS } from '../constants/dom/siteSelectors.js';
 import {
   buildInfoBannerDismissCookie,
   hasInfoBannerDismissCookie,

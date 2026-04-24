@@ -2,8 +2,8 @@ import { CAROUSEL_SWIPE_THRESHOLD_PX } from '../constants/carousel';
 import {
   STOCKING_CAROUSEL_CLASS,
   STOCKING_QUERY,
-} from '../constants/dom/stockingCarousel.cjs';
-import { STATE_CLASS } from '../constants/dom/state.cjs';
+} from '../constants/dom/stockingCarousel.js';
+import { STATE_CLASS } from '../constants/dom/state.js';
 import { stepCarouselIndex } from './carouselIndex';
 
 function initOneStockingCarousel(root) {

@@ -1,8 +1,5 @@
-import { createRequire } from 'node:module';
 import { defineConfig, devices } from '@playwright/test';
-
-const require = createRequire(import.meta.url);
-const { VIEWPORTS: viewports } = require('./tests/visual/constants.js');
+import { VIEWPORTS as viewports } from './tests/visual/constants.js';
 
 function buildProjects() {
   const browserDefinitions = [
