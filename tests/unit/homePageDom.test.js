@@ -41,6 +41,7 @@ describe('homePageDom', () => {
     expect(PLAYWRIGHT_HOME_LOCATORS.header).toBe('header.header');
     expect(PLAYWRIGHT_HOME_LOCATORS.menu).toBe('.menu');
     expect(PLAYWRIGHT_HOME_LOCATORS.navbarToggler).toBe('.navbar-toggler');
+    expect(PLAYWRIGHT_HOME_LOCATORS.services).toBe('section#services');
     expect(PLAYWRIGHT_HOME_LOCATORS.footer).toBe('footer.footer-social');
   });
 
