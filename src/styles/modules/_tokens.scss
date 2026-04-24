@@ -15,7 +15,32 @@
   --color-border-strong: rgba(44, 36, 28, 0.22);
   --color-focus-ring: var(--color-accent);
   --space-section: 4rem;
+  /* Section block padding (vertical rhythm) — replaces ad-hoc per-breakpoint stacks */
+  --section-pad-block: clamp(1.75rem, 3.5vw, 3rem);
+  --section-gap-before: clamp(1.5rem, 2.5vw, 2.5rem);
+  --section-scroll-margin: 4.5rem;
+  --section-header-margin-bottom: clamp(1rem, 2.2vw, 1.75rem);
+  --section-subtitle-max-width: 40rem;
+  --section-title-color: var(--color-text-primary);
+  --section-subtitle-color: var(--color-text-muted);
+  /* Surfaces: two neutral “bands” + optional warm veil (no extra hue families) */
+  --surface-page: var(--color-bg-page);
+  --surface-elevated: var(--color-bg-elevated);
+  --surface-warm-veil: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--color-bg-elevated) 82%, var(--color-bg-page)) 0%,
+    var(--color-bg-page) 72%
+  );
+  --section-edge-border: 1px solid var(--color-border-strong);
+  --section-inset-highlight: inset 0 1px 0 color-mix(in srgb, var(--color-bg-elevated) 75%, transparent);
+  /* Carousel / media chrome (siblings: stocking, videos) */
+  --chrome-radius: 1.15rem;
+  --chrome-radius-lg: 1.35rem;
+  --chrome-radius-inner: 0.8rem;
+  --chrome-border: 2px solid var(--color-border-strong);
+  --chrome-shadow-ambient: 0 8px 32px color-mix(in srgb, var(--color-text-primary) 6%, transparent);
   --radius-md: 0.5rem;
+  --radius-content-card: 2rem;
   --shadow-sm: 0 1px 3px rgba(44, 36, 28, 0.08);
   /* Typography — display / heading stack (body stack set in _constants with --font-base) */
   --font-heading: 'Source Serif 4', 'Times New Roman', serif;

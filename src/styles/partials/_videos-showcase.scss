@@ -1,46 +1,16 @@
 .videos-showcase {
   position: relative;
   overflow: hidden;
-  scroll-margin-top: 4.5rem;
+  /* padding + scroll margin: .section-chapter */
 
   &--section {
-    margin-top: 2rem;
-    padding: 1.75rem 0 2rem;
-    border-block: 1px solid var(--color-border-strong);
-    background:
-      radial-gradient(
-        ellipse 110% 90% at 50% -10%,
-        rgba(255, 252, 248, 0.95) 0%,
-        rgba(246, 240, 232, 0.65) 45%,
-        rgba(230, 222, 214, 0.5) 100%
-      ),
-      linear-gradient(
-        168deg,
-        rgba(60, 48, 40, 0.06) 0%,
-        transparent 50%,
-        rgba(196, 92, 40, 0.05) 100%
-      );
+    margin-top: var(--section-gap-before);
+    border-block: var(--section-edge-border);
+    background-color: var(--surface-page);
+    background-image: var(--surface-warm-veil);
     box-shadow:
-      inset 0 1px 0 rgba(255, 252, 248, 0.75),
-      0 8px 32px rgba(44, 36, 28, 0.06);
-
-    @media only screen and (min-width: 480px) {
-      padding: 2rem 0 2.25rem;
-    }
-
-    @media only screen and (min-width: 768px) {
-      margin-top: 2.5rem;
-      padding: 2.5rem 0 2.75rem;
-    }
-
-    @media only screen and (min-width: 992px) {
-      padding: 2.75rem 0 3rem;
-    }
-
-    @media only screen and (min-width: 1200px) {
-      margin-top: 3rem;
-      padding: 3rem 0 3.25rem;
-    }
+      var(--section-inset-highlight),
+      var(--chrome-shadow-ambient);
   }
 
   &::after {
@@ -61,12 +31,7 @@
   &__header {
     position: relative;
     z-index: 1;
-    margin-bottom: 1.5rem;
-    text-align: center;
-
-    @media only screen and (min-width: 768px) {
-      margin-bottom: 2rem;
-    }
+    /* margin + text-align: .section-chapter__header */
   }
 
   &__title {
@@ -76,15 +41,15 @@
     font-size: clamp(1.75rem, 3.8vw, 2.4rem);
     line-height: 1.15;
     letter-spacing: -0.02em;
-    color: var(--lighter-brown);
+    color: var(--section-title-color);
   }
 
   &__subtitle {
-    max-width: 40rem;
+    max-width: var(--section-subtitle-max-width);
     margin: 0 auto;
     font-size: clamp(0.95rem, 2.2vw, 1.1rem);
     line-height: 1.65;
-    color: var(--color-text-muted);
+    color: var(--section-subtitle-color);
   }
 
   &__carousel {
@@ -94,27 +59,27 @@
 
   &__chrome {
     position: relative;
-    border-radius: 1.15rem;
+    border-radius: var(--chrome-radius);
     padding: 0.45rem;
     background: linear-gradient(
       155deg,
-      rgba(255, 252, 248, 0.95) 0%,
-      rgba(240, 232, 224, 0.6) 100%
+      color-mix(in srgb, var(--color-bg-elevated) 95%, transparent) 0%,
+      color-mix(in srgb, var(--color-text-primary) 6%, var(--color-bg-page)) 100%
     );
-    border: 2px solid var(--color-border-strong);
+    border: var(--chrome-border);
     box-shadow:
-      0 14px 44px rgba(44, 36, 28, 0.08),
-      inset 0 1px 0 rgba(255, 252, 248, 0.9);
+      0 14px 44px color-mix(in srgb, var(--color-text-primary) 8%, transparent),
+      var(--section-inset-highlight);
 
     @media only screen and (min-width: 992px) {
       padding: 0.6rem;
-      border-radius: 1.35rem;
+      border-radius: var(--chrome-radius-lg);
     }
   }
 
   &__viewport {
     position: relative;
-    border-radius: 0.8rem;
+    border-radius: var(--chrome-radius-inner);
     overflow: hidden;
     background: #0d1117;
 

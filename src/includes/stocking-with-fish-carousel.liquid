@@ -1,23 +1,23 @@
 {% assign stories = stockingStories.stories %}
 {% assign storyCount = stories.size %}
 <section
-  class='section-container stocking-with-fish stocking-with-fish--section'
+  class='section-container stocking-with-fish stocking-with-fish--section section-chapter'
   id='stocking'
   aria-labelledby='stocking-heading'
 >
   <div class='container'>
     {% for story in stories %}
       {% if storyCount == 1 %}
-        <header class='stocking-with-fish__header'>
+        <header class='stocking-with-fish__header section-chapter__header'>
           <div class='stocking-with-fish__title-row'>
-            <h2 class='stocking-with-fish__title' id='stocking-heading'>
+            <h2 class='stocking-with-fish__title section-chapter__title' id='stocking-heading'>
               {{ stockingStories.sectionTitle }}
             </h2>
             <span class='stocking-with-fish__badge' title='{{ story.badgeTitleAttr }}'>
               {{ story.badgeLabel }}
             </span>
           </div>
-          <p class='stocking-with-fish__lead'>
+          <p class='stocking-with-fish__lead section-chapter__lede'>
             {{ story.lead.intro -}}
             <span class='stocking-with-fish__lead-accent'>{{ story.lead.highlight }}</span>
             {{- story.lead.outro }}
@@ -121,8 +121,8 @@
 
       {% else %}
         {% if forloop.first %}
-          <header class='stocking-with-fish__section-head'>
-            <h2 class='stocking-with-fish__title' id='stocking-heading'>
+          <header class='stocking-with-fish__section-head section-chapter__header'>
+            <h2 class='stocking-with-fish__title section-chapter__title' id='stocking-heading'>
               {{ stockingStories.sectionTitle }}
             </h2>
             <nav class='stocking-stories-toc' aria-label='События зарыбления'>
@@ -149,7 +149,7 @@
               {{ story.badgeLabel }}
             </span>
           </header>
-          <p class='stocking-with-fish__lead stocking-story__lead'>
+          <p class='stocking-with-fish__lead stocking-story__lead section-chapter__lede'>
             {{ story.lead.intro -}}
             <span class='stocking-with-fish__lead-accent'>{{ story.lead.highlight }}</span>
             {{- story.lead.outro }}

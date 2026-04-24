@@ -70,10 +70,10 @@ Tune hex values against real photography after Phase 1.
 
 ## Phase 3 — Section “chapters” (visual rhythm)
 
-- [ ] Unify **vertical spacing** with `--space-section` (or equivalent) across services, stocking, videos, contacts.
-- [ ] Unify **title block**: optional eyebrow + `h2` + subtitle `max-width`.
-- [ ] Unify **surface rule**: either cards on page bg **or** two alternating subtle bands — avoid five different gradients.
-- [ ] **Accent discipline:** copper accent only for primary actions and key numbers — not every heading.
+- [x] **Vertical spacing:** `.section-chapter` + `--section-pad-block` / `--section-scroll-margin` on services, stocking, videos, contacts; removed legacy `py-10rem` and duplicate service paddings.
+- [x] **Title block:** `section-chapter__header` / `__title` / `__subtitle` / `__lede` (Liquid) with tokens `--section-title-color`, `--section-subtitle-color`, `--section-subtitle-max-width`, `--section-header-margin-bottom`.
+- [x] **Surfaces:** two-band Peat & linen via `--surface-page`, `--surface-warm-veil`, `--section-edge-border`, `--section-inset-highlight`; stocking + video sections + carousel chrome use shared `--chrome-*` tokens (not five unrelated gradients).
+- [ ] **Accent discipline:** badges/CTA chrome still use accent family; body headings use `--section-title-color` (ongoing in Phase 4 for nav, packages, etc.).
 
 ---
 

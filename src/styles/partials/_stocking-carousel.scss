@@ -1,38 +1,12 @@
 .stocking-with-fish {
   position: relative;
   overflow: hidden;
-  scroll-margin-top: 4.5rem;
+  /* padding: .section-chapter (token --section-pad-block) */
 
-  &--section {
-    padding: 1.75rem 0 2rem;
-
-    @media only screen and (min-width: 480px) {
-      padding: 2rem 0 2.25rem;
-    }
-
-    @media only screen and (min-width: 768px) {
-      padding: 2.5rem 0 2.75rem;
-    }
-
-    @media only screen and (min-width: 992px) {
-      padding: 2.75rem 0 3rem;
-    }
-
-    @media only screen and (min-width: 1200px) {
-      padding: 3rem 0 3.25rem;
-    }
-  }
-
-  background:
-    radial-gradient(
-      ellipse 120% 80% at 50% 0%,
-      rgba(247, 247, 239, 0.95) 0%,
-      rgba(230, 218, 205, 0.35) 55%,
-      rgba(112, 73, 54, 0.06) 100%
-    ),
-    linear-gradient(168deg, rgba(73, 44, 29, 0.04) 0%, transparent 42%, rgba(196, 92, 40, 0.06) 100%);
-  border-block: 1px solid rgba(112, 73, 54, 0.2);
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.35);
+  background-color: var(--surface-page);
+  background-image: var(--surface-warm-veil);
+  border-block: var(--section-edge-border);
+  box-shadow: var(--section-inset-highlight);
 
   &::before {
     content: '';
@@ -91,7 +65,7 @@
     font-size: clamp(1.85rem, 4vw, 2.65rem);
     line-height: 1.15;
     letter-spacing: -0.02em;
-    color: var(--lighter-brown);
+    color: var(--section-title-color);
   }
 
   &__badge {
@@ -222,7 +196,7 @@
     font-weight: 600;
     font-size: clamp(1.35rem, 3vw, 1.85rem);
     line-height: 1.2;
-    color: var(--lighter-brown);
+    color: var(--section-title-color);
   }
 
   &__lead {
@@ -240,21 +214,21 @@
 
   &__chrome {
     position: relative;
-    border-radius: 1.25rem;
+    border-radius: var(--chrome-radius);
     padding: 0.5rem;
     background: linear-gradient(
       145deg,
-      rgba(255, 255, 255, 0.9) 0%,
-      rgba(247, 247, 239, 0.5) 100%
+      color-mix(in srgb, var(--color-bg-elevated) 92%, transparent) 0%,
+      color-mix(in srgb, var(--creamy-white) 55%, transparent) 100%
     );
-    border: 2px solid var(--light-brown);
+    border: var(--chrome-border);
     box-shadow:
-      0 12px 40px rgba(43, 25, 16, 0.12),
-      0 2px 0 rgba(255, 255, 255, 0.6) inset;
+      0 12px 40px color-mix(in srgb, var(--color-text-primary) 12%, transparent),
+      var(--section-inset-highlight);
 
     @media only screen and (min-width: 992px) {
       padding: 0.65rem;
-      border-radius: 1.5rem;
+      border-radius: var(--chrome-radius-lg);
     }
   }
 
@@ -262,7 +236,7 @@
     position: relative;
     aspect-ratio: 4 / 3;
     width: 100%;
-    border-radius: 0.85rem;
+    border-radius: var(--chrome-radius-inner);
     overflow: hidden;
     background: var(--lighter-black);
 
