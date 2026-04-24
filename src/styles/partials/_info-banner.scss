@@ -216,3 +216,27 @@
     }
   }
 }
+
+@container (max-width: 36rem) {
+  .info-banner:not(.info-banner--modal) {
+    .info-banner__inner {
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 0.65rem;
+      padding-inline: 1rem;
+    }
+
+    .info-banner__intro {
+      align-items: flex-start;
+    }
+
+    .info-banner__messages {
+      display: grid;
+      gap: 0.55rem;
+    }
+
+    .info-banner__text {
+      display: flex;
+      flex-wrap: wrap;
+    }
+  }
+}

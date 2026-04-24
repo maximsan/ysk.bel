@@ -28,9 +28,15 @@
 
   min-block-size: max(38rem, 80svh);
   color: var(--color-text-inverse);
+  background-color: #5f6f6d; /* Dominant lake/forest tone while hero image loads. */
   overflow: clip;
   padding-block-start: clamp(3rem, 8vh, 6rem);
   padding-block-end: clamp(3rem, 8vh, 6rem);
+
+  &::after {
+    @include paper-grain(0.025);
+    z-index: 1;
+  }
 }
 
 .hero > * {
@@ -197,7 +203,7 @@
   inset-inline: 0;
   z-index: 3;
   justify-self: center;
-  inline-size: 1px;
+  inline-size: var(--cta-min-hit);
   block-size: clamp(2rem, 5vh, 3.25rem);
   margin-inline: auto;
   opacity: 0.85;
@@ -220,7 +226,10 @@
 
 .hero__scroll-cue-line {
   position: absolute;
-  inset: 0;
+  inset-block: 0;
+  inset-inline-start: 50%;
+  inline-size: 1px;
+  transform: translateX(-50%);
   background: linear-gradient(
     to bottom,
     transparent 0%,
@@ -230,7 +239,7 @@
 
 .hero__scroll-cue-dot {
   position: absolute;
-  inset-inline: -3px;
+  inset-inline-start: calc(50% - 3.5px);
   inset-block-start: -2px;
   inline-size: 7px;
   block-size: 7px;
@@ -366,5 +375,28 @@
 
   .hero__title {
     font-size: clamp(3rem, 1.5rem + 2.5vw, 4.75rem);
+  }
+}
+
+@container (max-width: 36rem) {
+  .hero__cta {
+    inline-size: 100%;
+
+    .cta {
+      inline-size: min(100%, 22rem);
+    }
+  }
+
+  .hero__trust {
+    display: grid;
+    gap: 0.35rem;
+  }
+
+  .hero__trust-item {
+    padding-inline-end: 0;
+
+    &::after {
+      content: none;
+    }
   }
 }

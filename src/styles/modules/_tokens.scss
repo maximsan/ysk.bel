@@ -130,3 +130,44 @@
   );
   --motion-hero-stagger: 120ms;
 }
+
+/*
+ * Dark-mode hook — no UI toggle yet.
+ *
+ * The redesign uses semantic tokens, so this preference block can tune the
+ * overall surface/text/accent system without per-component rewrites. Keep the
+ * palette in the same Peat & linen family: peat background, warm inverse text,
+ * copper accents.
+ */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-bg-page: #18130f;
+    --color-bg-elevated: #211a15;
+    --color-bg-inverse: #0f0c09;
+    --color-text-primary: #f2ebe3;
+    --color-text-muted: #d1c4b7;
+    --color-text-inverse: #fff7ee;
+    --color-accent: #d68a58;
+    --color-accent-hover: #e3a174;
+    --color-accent-muted: #c1764c;
+    --color-accent-light: #f0bf93;
+    --color-accent-shadow: #2a1810;
+    --color-border: rgba(242, 235, 227, 0.14);
+    --color-border-strong: rgba(242, 235, 227, 0.24);
+    --color-focus-ring: var(--color-accent-light);
+    --hero-scrim: linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--color-bg-inverse) 28%, transparent) 0%,
+      transparent 38%,
+      color-mix(in srgb, var(--color-bg-inverse) 52%, transparent) 100%
+    );
+    --hero-scrim-radial: radial-gradient(
+      120% 85% at 50% 115%,
+      color-mix(in srgb, var(--color-bg-inverse) 72%, transparent) 0%,
+      transparent 62%
+    );
+    --info-banner-surface: var(--color-bg-elevated);
+    --info-banner-accent: var(--color-accent-light);
+    --paper-grain-opacity: 0.03;
+  }
+}

@@ -88,12 +88,12 @@ Trackable plan for redesigning the three top-of-page sections on the home page. 
 
 ## Group F — Responsive & adaptive polish
 
-- [ ] Add `container-type: inline-size` on `.section-container`; convert hero / info-strip / cooperation-block layout rules to `@container` queries where it improves results
-- [ ] Replace per-breakpoint font-size rules in the three partials with `clamp()` scales; add `font-optical-sizing: auto`
-- [ ] Add a paper-grain SVG overlay (2–4% opacity), gated by `@media (prefers-reduced-transparency: no-preference)`
-- [ ] Add `@media (prefers-color-scheme: dark)` token overrides in `_tokens.scss` (no UI toggle yet)
-- [ ] Confirm 44×44 minimum touch targets on every new interactive element
-- [ ] Hero image: provide AVIF + WebP at 600 / 800 / 1200 / 1600 widths; add a low-quality dominant-colour fallback background
+- [x] Add `container-type: inline-size` on `.section-container`; convert hero / info-strip / cooperation-block layout rules to `@container` queries where it improves results
+- [x] Replace per-breakpoint font-size rules in the three partials with `clamp()` scales; add `font-optical-sizing: auto`
+- [x] Add a paper-grain SVG overlay (2–4% opacity), gated by `@media (prefers-reduced-transparency: no-preference)`
+- [x] Add `@media (prefers-color-scheme: dark)` token overrides in `_tokens.scss` (no UI toggle yet)
+- [x] Confirm 44×44 minimum touch targets on every new interactive element (CTA system, info close button, hero scroll cue hit area)
+- [x] Hero image: provide AVIF + WebP at 600 / 800 / 1200 / 1600 widths; add a low-quality dominant-colour fallback background
 
 ---
 
