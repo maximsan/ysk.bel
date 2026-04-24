@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import * as homePageDom from '../../src/scripts/constants/homePageDom.js';
+import * as homePageDom from '@constants/homePageDom.js';
 
 const {
   SECTION_IDS,

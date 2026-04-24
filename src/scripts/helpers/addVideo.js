@@ -1,9 +1,9 @@
 import {
   LAZY_VIDEO_HOST_DATA_ATTR,
   LAZY_VIDEO_HOST_DATASET,
-} from '../constants/dom/lazyVideoHost.js';
-import { LAZY_VIDEO_HOST_QUERY } from '../constants/dom/videoShowcase.js';
-import { STATE_CLASS } from '../constants/dom/state.js';
+} from '@constants/dom/lazyVideoHost.js';
+import { LAZY_VIDEO_HOST_QUERY } from '@constants/dom/videoShowcase.js';
+import { STATE_CLASS } from '@constants/dom/state.js';
 
 /** Normalizes `preload` attribute for `<video>` (lazy host data attribute). */
 export function normalizeVideoPreload(preloadRaw) {

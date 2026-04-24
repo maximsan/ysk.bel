@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { validEmail, isSpamHoneypot } from '../../src/scripts/form-submission/formSubmissionCore.js';
+import { validEmail, isSpamHoneypot } from '@scripts/form-submission/formSubmissionCore.js';
 
 describe('formSubmissionCore', () => {
   describe('validEmail', () => {

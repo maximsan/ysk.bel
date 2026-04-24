@@ -1,5 +1,5 @@
-import { SCROLL_UP_THRESHOLDS } from '../constants/dom/scroll.js';
-import { SITE_SELECTORS } from '../constants/dom/siteSelectors.js';
+import { SCROLL_UP_THRESHOLDS } from '@constants/dom/scroll.js';
+import { SITE_SELECTORS } from '@constants/dom/siteSelectors.js';
 
 const button = document.querySelector(SITE_SELECTORS.scrollUp);
 

@@ -62,6 +62,7 @@ Tests live under [`tests/unit/`](tests/unit/); config: [`vitest.config.mjs`](vit
 - **Package manager:** yarn berry
 - **SSG:** [Eleventy](https://www.11ty.dev/) 3.x (ESM config: `eleventy.config.mjs`)
 - **Bundler:** [esbuild](https://esbuild.github.io/) (via Eleventy for client JS)
+- **JS path aliases:** `@constants/*` → `src/scripts/constants/*`, `@scripts/*` → `src/scripts/*`, `@data/*` → `src/data/*` (see `jsconfig.json`, `eleventy.config.mjs`, `vitest.config.mjs`; Node loads `import-aliases-register.mjs` via `run-with-import-aliases.mjs` in `package.json` scripts)
 - **Sass:** For stylesheets
 - **Testing:** [Playwright](https://playwright.dev/) — visual regression, a11y, E2E; [Vitest](https://vitest.dev/) for unit tests (see `docs/migration-to-esm.md`)
 

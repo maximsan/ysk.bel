@@ -1,18 +1,41 @@
 import * as sass from 'sass';
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { createHash } from 'node:crypto';
 import esbuild from 'esbuild';
 
-import banner from './src/data/banner.js';
-import history from './src/data/estate-history.js';
-import footer from './src/data/footer.js';
-import meta from './src/data/meta.js';
-import packages from './src/data/packages.js';
-import contacts from './src/data/contacts.js';
-import sidebar from './src/data/sidebar.js';
-import services from './src/data/services.js';
-import stockingStories from './src/data/stockingStories.js';
-import videosShowcase from './src/data/videosShowcase.js';
+const repoRoot = path.dirname(fileURLToPath(import.meta.url));
+
+function pathAliasesEsbuildPlugin() {
+  const constantsRoot = path.join(repoRoot, 'src/scripts/constants');
+  const scriptsRoot = path.join(repoRoot, 'src/scripts');
+  const dataRoot = path.join(repoRoot, 'src/data');
+  return {
+    name: 'path-aliases',
+    setup(build) {
+      build.onResolve({ filter: /^@constants\// }, (args) => ({
+        path: path.join(constantsRoot, args.path.slice('@constants/'.length)),
+      }));
+      build.onResolve({ filter: /^@scripts\// }, (args) => ({
+        path: path.join(scriptsRoot, args.path.slice('@scripts/'.length)),
+      }));
+      build.onResolve({ filter: /^@data\// }, (args) => ({
+        path: path.join(dataRoot, args.path.slice('@data/'.length)),
+      }));
+    },
+  };
+}
+
+import banner from '@data/banner.js';
+import history from '@data/estate-history.js';
+import footer from '@data/footer.js';
+import meta from '@data/meta.js';
+import packages from '@data/packages.js';
+import contacts from '@data/contacts.js';
+import sidebar from '@data/sidebar.js';
+import services from '@data/services.js';
+import stockingStories from '@data/stockingStories.js';
+import videosShowcase from '@data/videosShowcase.js';
 
 /* For the given `content` string, generate an MD5 hash of `length` chars. */
 function getHash(content, length = 8) {
@@ -106,6 +129,7 @@ export default function (config) {
           bundle: true,
           write: false,
           sourcemap: true,
+          plugins: [pathAliasesEsbuildPlugin()],
         });
 
         return output.outputFiles[0].text;

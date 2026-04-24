@@ -1,4 +1,4 @@
-import * as homePageDom from '../../../src/scripts/constants/homePageDom.js';
+import * as homePageDom from '@constants/homePageDom.js';
 import {
   HOME_SELECTORS,
   homeActiveVideoHostSelector,

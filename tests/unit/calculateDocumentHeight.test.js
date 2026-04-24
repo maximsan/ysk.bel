@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { documentHeight } from '../../src/scripts/helpers/calculateDocumentHeight.js';
+import { documentHeight } from '@scripts/helpers/calculateDocumentHeight.js';
 
 describe('calculateDocumentHeight', () => {
   it('sets --doc-height from documentElement.clientHeight', () => {

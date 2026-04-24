@@ -1,6 +1,6 @@
-import { CSS_UTILITY_CLASS } from '../constants/dom/layout.js';
-import { MENU_CLASS, SITE_NAV_MENU_LINK_SELECTORS } from '../constants/dom/menu.js';
-import { SITE_SELECTORS } from '../constants/dom/siteSelectors.js';
+import { CSS_UTILITY_CLASS } from '@constants/dom/layout.js';
+import { MENU_CLASS, SITE_NAV_MENU_LINK_SELECTORS } from '@constants/dom/menu.js';
+import { SITE_SELECTORS } from '@constants/dom/siteSelectors.js';
 
 const header = document.querySelector(SITE_SELECTORS.header);
 const sidebar = document.querySelector(SITE_SELECTORS.menu);

@@ -32,6 +32,11 @@ jobs:
               - 'playwright.config.mjs'
               - 'playwright.a11y.config.mjs'
               - 'playwright.e2e.config.mjs'
+              - 'import-aliases-register.mjs'
+              - 'import-aliases-hooks.mjs'
+              - 'run-with-import-aliases.mjs'
+              - 'jsconfig.json'
+              - 'vitest.config.mjs'
               - 'tests/a11y/**'
               - 'e2e/**'
 

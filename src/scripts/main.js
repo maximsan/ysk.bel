@@ -1,6 +1,6 @@
-import { GOOGLE_MAP_INIT_DELAY_MS } from './constants/map';
-import { SITE_SELECTORS } from './constants/dom/siteSelectors.js';
-import { initGoogleFormHandlers } from './form-submission/initGoogleForm';
+import { GOOGLE_MAP_INIT_DELAY_MS } from '@constants/map.js';
+import { SITE_SELECTORS } from '@constants/dom/siteSelectors.js';
+import { initGoogleFormHandlers } from '@scripts/form-submission/initGoogleForm.js';
 import {
   closeSideBarOnTimeout,
   toggleSideBar,
@@ -13,7 +13,7 @@ import {
   initStockingCarousel,
   initStockingImageSkeletons,
   initVideosShowcaseCarousel,
-} from './helpers';
+} from '@scripts/helpers/index.js';
 
 const MOBILE_BREAKPOINT = '(max-width: 768px)';
 const mobileMediaQuery = window.matchMedia(MOBILE_BREAKPOINT);

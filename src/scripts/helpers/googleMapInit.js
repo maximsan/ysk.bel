@@ -1,4 +1,4 @@
-import { MAP_ELEMENT } from '../constants/dom/map.js';
+import { MAP_ELEMENT } from '@constants/dom/map.js';
 import { GOOGLE_MAP_EMBED_STYLES } from './googleMapStyles';
 
 const ESTATE_COORDINATES = { lat: 54.291652, lng: 27.480454 };

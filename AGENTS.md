@@ -8,6 +8,7 @@ Static marketing site for **Усадьба Серебряный Карась** (
 - **Templates:** Liquid (primary), Markdown and Nunjucks also allowed
 - **Styles:** Sass/SCSS; entry SCSS files emit hashed filenames (see `eleventy.config.mjs`)
 - **Client JS:** esbuild (in Eleventy) bundles **`src/scripts/index.js` only**; that file imports Bootstrap, `main`, PhotoSwipe. No Babel in the build pipeline.
+- **Import aliases:** `@constants/*` → `src/scripts/constants/*`, `@scripts/*` → `src/scripts/*`, `@data/*` → `src/data/*`. Resolved by esbuild (`eleventy.config.mjs`), Vitest (`vitest.config.mjs`), IDE (`jsconfig.json`), and Node’s `--import ./import-aliases-register.mjs`. **npm scripts** run Node CLIs through `node run-with-import-aliases.mjs …` so that flag is set in one place (`package.json`).
 - **Libraries:** Bootstrap 4, jQuery, Popper 1.x, PhotoSwipe 5
 - **E2E:** [Playwright](https://playwright.dev/) (`e2e/`, `playwright.config.mjs`) — builds the site and serves `dist/` via `serve` during tests.
 

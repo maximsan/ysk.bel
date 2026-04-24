@@ -1,3 +1,3 @@
 import 'bootstrap';
-import './main';
-import './photo-swipe';
+import '@scripts/main.js';
+import '@scripts/photo-swipe.js';
