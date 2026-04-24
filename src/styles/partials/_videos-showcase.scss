@@ -6,23 +6,23 @@
   &--section {
     margin-top: 2rem;
     padding: 1.75rem 0 2rem;
-    border-block: 1px solid rgba(56, 78, 108, 0.14);
+    border-block: 1px solid var(--color-border-strong);
     background:
       radial-gradient(
         ellipse 110% 90% at 50% -10%,
-        rgba(255, 255, 255, 0.92) 0%,
-        rgba(228, 236, 247, 0.55) 45%,
-        rgba(210, 224, 240, 0.45) 100%
+        rgba(255, 252, 248, 0.95) 0%,
+        rgba(246, 240, 232, 0.65) 45%,
+        rgba(230, 222, 214, 0.5) 100%
       ),
       linear-gradient(
         168deg,
-        rgba(64, 90, 120, 0.06) 0%,
+        rgba(60, 48, 40, 0.06) 0%,
         transparent 50%,
-        rgba(246, 111, 48, 0.04) 100%
+        rgba(196, 92, 40, 0.05) 100%
       );
     box-shadow:
-      inset 0 1px 0 rgba(255, 255, 255, 0.75),
-      0 8px 32px rgba(30, 42, 58, 0.06);
+      inset 0 1px 0 rgba(255, 252, 248, 0.75),
+      0 8px 32px rgba(44, 36, 28, 0.06);
 
     @media only screen and (min-width: 480px) {
       padding: 2rem 0 2.25rem;
@@ -53,8 +53,8 @@
       -12deg,
       transparent,
       transparent 2px,
-      rgba(64, 90, 120, 0.12) 2px,
-      rgba(64, 90, 120, 0.12) 3px
+      rgba(44, 36, 28, 0.1) 2px,
+      rgba(44, 36, 28, 0.1) 3px
     );
   }
 
@@ -84,7 +84,7 @@
     margin: 0 auto;
     font-size: clamp(0.95rem, 2.2vw, 1.1rem);
     line-height: 1.65;
-    color: rgba(43, 25, 16, 0.82);
+    color: var(--color-text-muted);
   }
 
   &__carousel {
@@ -98,13 +98,13 @@
     padding: 0.45rem;
     background: linear-gradient(
       155deg,
-      rgba(255, 255, 255, 0.88) 0%,
-      rgba(232, 240, 250, 0.55) 100%
+      rgba(255, 252, 248, 0.95) 0%,
+      rgba(240, 232, 224, 0.6) 100%
     );
-    border: 2px solid rgba(90, 118, 150, 0.28);
+    border: 2px solid var(--color-border-strong);
     box-shadow:
-      0 14px 44px rgba(25, 38, 54, 0.1),
-      inset 0 1px 0 rgba(255, 255, 255, 0.85);
+      0 14px 44px rgba(44, 36, 28, 0.08),
+      inset 0 1px 0 rgba(255, 252, 248, 0.9);
 
     @media only screen and (min-width: 992px) {
       padding: 0.6rem;
@@ -143,7 +143,7 @@
     font-size: clamp(0.95rem, 2vw, 1.05rem);
     font-weight: var(--font-weight-bold);
     text-align: center;
-    color: rgba(230, 235, 245, 0.95);
+    color: rgba(242, 235, 227, 0.95);
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
   }
 
@@ -153,7 +153,7 @@
     font-size: clamp(0.82rem, 1.9vw, 0.95rem);
     line-height: 1.45;
     text-align: center;
-    color: rgba(200, 212, 228, 0.88);
+    color: rgba(220, 210, 198, 0.9);
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
   }
 
@@ -196,7 +196,7 @@
     border-radius: 50%;
     cursor: pointer;
     color: var(--white);
-    background: rgba(56, 78, 108, 0.82);
+    background: rgba(60, 48, 40, 0.85);
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.28);
     transition:
       background 0.2s ease,
@@ -264,13 +264,13 @@
     border: none;
     border-radius: 50%;
     cursor: pointer;
-    background: rgba(56, 78, 108, 0.28);
+    background: rgba(196, 92, 40, 0.28);
     transition:
       transform 0.2s ease,
       background 0.2s ease;
 
     &:hover {
-      background: rgba(90, 118, 150, 0.55);
+      background: rgba(196, 92, 40, 0.5);
     }
 
     &:focus-visible {

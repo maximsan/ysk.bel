@@ -4,6 +4,8 @@ North star: a **warm, tactile “dacha premium”** country estate by water — 
 
 **Palette gist:** warm gray surfaces, espresso text, a **single copper / brick accent** (not neon orange).
 
+**On this branch:** [Playwright](https://playwright.dev) **visual regression** is wired for the home page (per-section screenshots, multiple browsers). Any **global color, typography, or layout** work in this plan will likely **invalidate baseline PNGs** — plan time to run `yarn test:visual:update` (or refresh snapshots in CI) and review the diff. See `docs/visual-regression-testing-plan.md`.
+
 ---
 
 ## Production palette skeleton (starting point)
@@ -59,7 +61,7 @@ Tune hex values against real photography after Phase 1.
 
 ## Phase 2 — Typography system
 
-- [ ] Single `@import` (or `<link>` strategy) in one place — e.g. `index.scss` + `head.liquid` — for **Rubik** + **Source Serif 4** (or chosen pair), subset **Cyrillic + Latin**.
+- [ ] Single `@import` (or `<link>` strategy) in one place — e.g. `index.scss` + `head.liquid` — for **Rubik** + **Source Serif 4** (or chosen pair), subset **Cyrillic + Latin** (verify current `head.liquid` / font commits on this branch before adding a second load path).
 - [ ] Define roles: `--font-heading`, `--font-body`; scale `--text-h1` … `--text-caption` (can build on existing `--font-size-*` in `_constants.scss`).
 - [ ] Remove duplicate font requests (serif currently loaded from partial SCSS — consolidate).
 - [ ] Fix hero typo / bug: `--font-size-2xl` on `_hero.scss` (~line 58) as part of cleanup.
@@ -97,7 +99,8 @@ Tune hex values against real photography after Phase 1.
 ## Phase 6 — QA
 
 - [ ] Contrast check (WCAG AA) on all text/background pairs.
-- [ ] Visual regression on **360 / 768 / 1200** breakpoints.
+- [ ] **Playwright visual tests:** run `yarn test:visual` after CSS/token changes; if changes are intentional, update baselines with `yarn test:visual:update` and commit `tests/visual/home-snapshots/*.png`. See `docs/visual-regression-testing-plan.md` (CI, Linux vs local, and `maxDiffPixelRatio` / `threshold` notes).
+- [ ] **Breakpoints covered by baselines** (not the only widths to check manually, but the locked set): **390×844** (mobile), **768×1024** (tablet), **1440×900** (desktop) × Chromium, Firefox, WebKit — defined in `tests/visual/constants.js` / `playwright.config.mjs`.
 - [ ] Lighthouse: CLS + font loading after consolidating font links.
 
 ---
@@ -115,6 +118,7 @@ Tune hex values against real photography after Phase 1.
 - [ ] Every section uses **one accent + two neutrals + clear text hierarchy** (Peat & linen).
 - [ ] No important color exists only as a raw hex in a partial — **tokens everywhere** that matters.
 - [ ] New sections (e.g. another carousel) style in **minutes**, not ad-hoc orange picking.
+- [ ] **`yarn test:visual` passes** after a token/CSS pass (or snapshots are **updated on purpose** and the PNG diff is reviewed).
 
 ---
 
@@ -124,3 +128,6 @@ Tune hex values against real photography after Phase 1.
 - Global styles / imports: `src/styles/index.scss`
 - Fonts: `src/includes/head.liquid` and any `@import` of fonts in partial SCSS
 - Sections called out in audit: `_hero.scss`, `_services.scss`, `_stocking-carousel.scss`, `_videos-showcase.scss`, `_contacts.scss`, `_info-banner.scss`
+- **Visual regression (this branch):** `docs/visual-regression-testing-plan.md`, `playwright.config.mjs`, `tests/visual/home-*.spec.js`, `tests/visual/support/home-snapshot-helpers.cjs`, `tests/visual/constants.js`, baselines under `tests/visual/home-snapshots/`
+- **Shared DOM hooks for tests & scripts:** `src/scripts/constants/homePageDom.cjs`, `src/scripts/constants/dom/*.cjs` (keep selectors stable when restyling so Playwright locators do not break)
+- **Agent rule (Cursor):** `.cursor/rules/playwright-visual.mdc`

@@ -21,7 +21,7 @@ alwaysApply: false
 
 - `yarn test:visual` — run against `yarn build` + static server (see `webServer` in config).
 - `yarn test:visual:update` — refresh **`-darwin.png`** baselines locally after intentional UI changes. Apply the `update-visual-snapshots` label to the PR to regenerate `-linux.png` in CI (see `.github/workflows/update-visual-snapshots.yaml`). Commit both sets together.
-- `yarn test:visual:ui` / `yarn test:visual:report` — UI mode / HTML report.
+- `yarn test:visual:ui` / `yarn test:visual:open-report` (alias: `yarn test:visual:report`) — UI mode / open last HTML report in `playwright-report/` (generate with `playwright test --reporter=html` first).
 
 ## Behaviour notes
 

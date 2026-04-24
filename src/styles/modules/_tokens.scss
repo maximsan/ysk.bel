@@ -1,0 +1,20 @@
+// Peat & linen — semantic design tokens (see docs/design-system-peat-linen-plan.md)
+:root {
+  --color-bg-page: #f6f3ee;
+  --color-bg-elevated: #fffcf8;
+  --color-bg-inverse: #1e1814;
+  --color-text-primary: #2c241c;
+  --color-text-muted: #5c534a;
+  --color-text-inverse: #f2ebe3;
+  --color-accent: #c45c28;
+  --color-accent-hover: #a84d22;
+  --color-accent-muted: #9a5c3a;
+  --color-accent-light: #d4a27a;
+  --color-accent-shadow: #5c3d25;
+  --color-border: rgba(44, 36, 28, 0.12);
+  --color-border-strong: rgba(44, 36, 28, 0.22);
+  --color-focus-ring: var(--color-accent);
+  --space-section: 4rem;
+  --radius-md: 0.5rem;
+  --shadow-sm: 0 1px 3px rgba(44, 36, 28, 0.08);
+}
