@@ -1,9 +1,115 @@
-<section class='section-container hero intro'>
+{%- comment -%}
+  Hero — первый экран на главной.
+
+  Group B редизайна (см. `docs/hero-info-cooperation-redesign-plan.md`):
+    - <picture> с responsive WebP srcset вместо CSS background-image,
+      одновременно элемент LCP (см. preload в `head.liquid`).
+    - Один <h1>, eyebrow-строка с копперной линейкой, CTA-ряд по единому
+      словарю `_cta.scss`, trust strip, скролл-курсор.
+    - Сетка и scrim полностью описаны в `_hero.scss` — здесь только разметка.
+
+  Данные:
+    - `meta.heroEyebrow`      — опциональная строка над заголовком
+    - `meta.brandStory`       — lede под заголовком
+    - `meta.heroCta.primary`  — доминантная кнопка (обычно tel:)
+    - `meta.heroCta.secondary`— ghost-кнопка (обычно #services)
+    - `meta.heroTrustStrip`   — 3 короткие подписи через middle-dot
+{%- endcomment -%}
+<section
+  class='section-container hero intro'
+  aria-labelledby='hero-title'
+>
+  <picture class='hero__picture'>
+    <source
+      type='image/webp'
+      media='(max-width: 767.98px)'
+      srcset='assets/images/fish-600.webp 1x, assets/images/fish-800.webp 2x'
+    >
+    <source
+      type='image/webp'
+      media='(max-width: 1199.98px)'
+      srcset='assets/images/fish-800.webp 1x, assets/images/fish.webp 2x'
+    >
+    <source
+      type='image/webp'
+      srcset='assets/images/fish.webp'
+    >
+    <img
+      class='hero__image'
+      src='assets/images/fish-800.webp'
+      alt=''
+      width='600'
+      height='800'
+      fetchpriority='high'
+      decoding='async'
+      loading='eager'
+    >
+  </picture>
+
+  <div class='hero__scrim' aria-hidden='true'></div>
+
   <div class='container hero-content'>
     <div class='hero-header'>
-      <h2>Мечтали порыбачить и отдохнуть?</h2>
-      <h2>Усадьба Серебряный Карась ждет Вас!</h2>
+      {% if meta.heroEyebrow %}
+        <p class='hero__eyebrow'>
+          <span class='hero__eyebrow-rule' aria-hidden='true'></span>
+          <span class='hero__eyebrow-text'>{{ meta.heroEyebrow }}</span>
+          <span class='hero__eyebrow-rule' aria-hidden='true'></span>
+        </p>
+      {% endif %}
+
+      <h1 id='hero-title' class='hero__title'>
+        <span class='hero__title-line'>Мечтали порыбачить и отдохнуть?</span>
+        <span class='hero__title-line hero__title-line--accent'>
+          Усадьба Серебряный Карась ждёт Вас
+        </span>
+      </h1>
+
       <p class='hero__story'>{{ meta.brandStory }}</p>
+
+      {% if meta.heroCta.primary or meta.heroCta.secondary %}
+        <div
+          class='hero__cta cta-row'
+          role='group'
+          aria-label='Забронировать или посмотреть услуги'
+        >
+          {% if meta.heroCta.primary %}
+            <a
+              class='cta cta--primary hero__cta-primary'
+              href='{{ meta.heroCta.primary.href }}'
+              {% if meta.heroCta.primary.ariaLabel %}
+              aria-label='{{ meta.heroCta.primary.ariaLabel }}'
+              {% endif %}
+            >{{ meta.heroCta.primary.label }}</a>
+          {% endif %}
+          {% if meta.heroCta.secondary %}
+            <a
+              class='cta cta--ghost hero__cta-secondary'
+              href='{{ meta.heroCta.secondary.href }}'
+              {% if meta.heroCta.secondary.ariaLabel %}
+              aria-label='{{ meta.heroCta.secondary.ariaLabel }}'
+              {% endif %}
+            >{{ meta.heroCta.secondary.label }}</a>
+          {% endif %}
+        </div>
+      {% endif %}
+
+      {% if meta.heroTrustStrip.size > 0 %}
+        <ul class='hero__trust' role='list'>
+          {% for item in meta.heroTrustStrip %}
+            <li class='hero__trust-item'>{{ item }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
     </div>
   </div>
+
+  <a
+    class='hero__scroll-cue'
+    href='#services'
+    aria-label='Прокрутить к разделу услуг'
+  >
+    <span class='hero__scroll-cue-line' aria-hidden='true'></span>
+    <span class='hero__scroll-cue-dot' aria-hidden='true'></span>
+  </a>
 </section>

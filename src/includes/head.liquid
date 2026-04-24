@@ -52,6 +52,17 @@
   rel='stylesheet'
 >
 
+<!-- Hero LCP preload — keep in sync with <picture> in `hero-section.liquid`. -->
+<link
+  rel='preload'
+  as='image'
+  type='image/webp'
+  href='assets/images/fish-800.webp'
+  imagesrcset='assets/images/fish-600.webp 480w, assets/images/fish-800.webp 600w, assets/images/fish.webp 1584w'
+  imagesizes='100vw'
+  fetchpriority='high'
+>
+
 <!-- Document Title -->
 <title>{{ meta.title }}</title>
 

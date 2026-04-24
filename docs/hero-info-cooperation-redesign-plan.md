@@ -27,21 +27,23 @@ Trackable plan for redesigning the three top-of-page sections on the home page. 
 
 ## Group B — Hero rebuild
 
-`src/includes/hero-section.liquid`, `src/styles/partials/_hero.scss`
+`src/includes/hero-section.liquid`, `src/styles/partials/_hero.scss`,
+`src/scripts/helpers/heroScrollCue.js`, `src/includes/head.liquid`
 
-- [ ] Replace CSS `background-image` with a `<picture>` element (AVIF + WebP, `srcset`, `sizes`, `fetchpriority="high"`, `decoding="async"`, `loading="eager"`)
-- [ ] Remove `background-attachment: fixed` and the `margin-left: 24rem` layout hack
-- [ ] Switch hero layout to CSS Grid content well (`.hero__well`) with intentional left/centre alignment per breakpoint
-- [ ] Promote the first heading to `<h1>`; add eyebrow `<span>` ("Минская область · с 2012") with copper hairline rule
-- [ ] Apply Source Serif 4 with `font-optical-sizing: auto` + `font-variant-numeric: oldstyle-nums`; scale via `clamp()`
-- [ ] Add primary CTA (`tel:+375291495989`) and secondary CTA (`#services`) using `.cta` system
-- [ ] Add trust strip row ("30 мин от Минска · Рыбалка круглый год · Баня до 8 чел.") with middle-dot separators
-- [ ] Add scroll cue (hairline + animated dot) below content; fade out after first scroll
-- [ ] Strengthen scrim: add radial bottom scrim in addition to current linear gradient (protect mid-band contrast)
-- [ ] Stagger-reveal on load: eyebrow → headline → lede → CTAs (use `--motion-stagger`)
-- [ ] Add subtle Ken Burns zoom-out on the hero image (20s, 1.05 → 1.00)
-- [ ] Gate all motion behind `@media (prefers-reduced-motion: no-preference)`
-- [ ] Verify text contrast ≥ 4.5:1 over the photo at every breakpoint
+- [x] Replace CSS `background-image` with a `<picture>` element (responsive WebP `srcset`, `fetchpriority="high"`, `decoding="async"`, `loading="eager"`). AVIF sources are a follow-up once asset pipeline generates them — see Group H.
+- [x] Remove `background-attachment: fixed` and the `margin-left: 24rem` layout hack
+- [x] Switch hero layout to a CSS Grid single-cell stage (`.hero > * { grid-area: stage }`) — left-anchored well ≥992px, centered on mobile
+- [x] Promote the first heading to `<h1>`; add eyebrow `<p>` ("Минская область · Логойский р-н") with copper hairline rules flanking it
+- [x] Apply Source Serif 4 with `font-optical-sizing: auto` + `font-variant-numeric: oldstyle-nums`; fluid scale via `clamp()`; `text-wrap: balance` on title, `pretty` on lede
+- [x] Add primary CTA (`tel:+375291495989`) and secondary CTA (`#services`) via `.cta` system
+- [x] Add trust strip row ("30 мин от Минска · Рыбалка круглый год · Баня до 8 чел.") with middle-dot `::after` separators
+- [x] Add scroll cue (hairline + animated dot) below content; hides on first scroll via `heroScrollCue.js` (one-shot `passive` listener)
+- [x] Strengthen scrim: radial bottom scrim layered on top of existing linear gradient
+- [x] Stagger-reveal on load: eyebrow → title line 1 → title line 2 → lede → CTAs → trust → cue using `--motion-hero-stagger`
+- [x] Ken Burns zoom on `.hero__image` (24s, 1.07 → 1.00)
+- [x] Gate all motion behind `@media (prefers-reduced-motion: no-preference)`
+- [x] Add hero LCP preload hint (`<link rel="preload" as="image" imagesrcset imagesizes fetchpriority="high">`) in `src/includes/head.liquid`
+- [ ] Verify text contrast ≥ 4.5:1 over the photo at every breakpoint (pending visual + axe pass in Group G)
 
 ---
 

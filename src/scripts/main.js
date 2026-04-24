@@ -13,6 +13,7 @@ import {
   initStockingCarousel,
   initStockingImageSkeletons,
   initVideosShowcaseCarousel,
+  initHeroScrollCue,
 } from './helpers';
 
 const MOBILE_BREAKPOINT = '(max-width: 768px)';
@@ -57,6 +58,8 @@ window.setTimeout(() => {
 }, GOOGLE_MAP_INIT_DELAY_MS);
 
 toggleSideBar();
+
+initHeroScrollCue();
 
 function initCarouselsWhenDomReady() {
   initNavScrollSpy();

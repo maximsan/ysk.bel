@@ -10,6 +10,8 @@ const LAYOUT_CLASS = {
   heroTag: 'section',
   hero: 'hero',
   heroIntro: 'intro',
+  heroScrollCue: 'hero__scroll-cue',
+  heroScrollCueHidden: 'is-hidden',
   footerTag: 'footer',
   footerSocial: 'footer-social',
   scrollUp: 'scroll-up',
