@@ -1,4 +1,39 @@
-<div class='cooperation-banner'>
-  <div>Усадьба ищет инвесторов и компаньонов</div>
-  <div>Телефон для связи: +375 (29) 149 59 89 (WhatsApp , Viber)</div>
-</div>
+<section class='cooperation-banner on-inverse' aria-labelledby='cooperation-title'>
+  <div class='cooperation-banner__inner'>
+    <div class='cooperation-banner__ornament' aria-hidden='true'>
+      {% render 'ornaments/handshake' %}
+    </div>
+
+    {% if cooperation.eyebrow %}
+      <p class='cooperation-banner__eyebrow'>{{ cooperation.eyebrow }}</p>
+    {% endif %}
+
+    <h2 class='cooperation-banner__title' id='cooperation-title'>
+      {{ cooperation.title }}
+    </h2>
+
+    {% if cooperation.lede %}
+      <p class='cooperation-banner__lede'>{{ cooperation.lede }}</p>
+    {% endif %}
+
+    {% if cooperation.cta.size > 0 %}
+      <div
+        class='cooperation-banner__cta cta-row'
+        role='group'
+        aria-label='Контакты для партнёрства'
+      >
+        {% for cta in cooperation.cta %}
+          <a
+            class='cta cta--{{ cta.variant }} cooperation-banner__link cooperation-banner__link--{{ cta.channel }}'
+            href='{{ cta.href }}'
+            {% if cta.ariaLabel %}
+            aria-label='{{ cta.ariaLabel }}'
+            {% endif %}
+          >
+            {{ cta.label }}
+          </a>
+        {% endfor %}
+      </div>
+    {% endif %}
+  </div>
+</section>

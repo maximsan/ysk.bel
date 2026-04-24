@@ -67,13 +67,13 @@ Trackable plan for redesigning the three top-of-page sections on the home page. 
 
 `src/includes/cooperation-banner.liquid`, `src/styles/partials/_cooperation-banner.scss`, `src/layouts/base.liquid`
 
-- [ ] **Relocate** the render call in `src/layouts/base.liquid` from above-header to just above footer
-- [ ] Rewrite markup: serif `<h2>`, one-sentence lede, CTA row (Viber pill, WhatsApp pill, `tel:` pill) using `.cta` system
-- [ ] Restyle on `--color-bg-inverse` (peat) surface with copper hairline top/bottom and `--section-pad-block` vertical rhythm
-- [ ] Add handshake ornament SVG (48px, copper line-art) flanking the heading
-- [ ] Convert phone to real `tel:+375291495989` anchor with `aria-label`; add `viber://chat?number=…` and `https://wa.me/…` anchors
-- [ ] Add WhatsApp + `tel` token entries alongside existing `--color-social-viber-*` tokens
-- [ ] Verify text + CTA contrast ≥ 4.5:1 on peat surface
+- [x] **Relocate** the render call in `src/layouts/base.liquid` from above-header to just above footer
+- [x] Rewrite markup: serif `<h2>`, one-sentence lede, CTA row (Viber pill, WhatsApp pill, `tel:` pill) using `.cta` system
+- [x] Restyle on `--color-bg-inverse` (peat) surface with copper hairline top/bottom and `--section-pad-block` vertical rhythm
+- [x] Add handshake ornament SVG (48px, copper line-art) above the heading
+- [x] Convert phone to real `tel:+375291495989` anchor with `aria-label`; add `viber://chat?number=…` and `https://api.whatsapp.com/send?phone=…` anchors
+- [x] Add WhatsApp + `tel` token entries alongside existing `--color-social-viber-*` tokens
+- [ ] Verify text + CTA contrast ≥ 4.5:1 on peat surface (pending visual / axe pass in Group G)
 
 ---
 

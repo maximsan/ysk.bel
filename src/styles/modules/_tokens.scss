@@ -13,6 +13,17 @@
     var(--color-social-viber-brand) 32%,
     var(--color-text-inverse)
   );
+  --color-social-whatsapp-brand: #25d366;
+  --color-social-whatsapp-on-inverse: color-mix(
+    in srgb,
+    var(--color-social-whatsapp-brand) 34%,
+    var(--color-text-inverse)
+  );
+  --color-social-tel-on-inverse: color-mix(
+    in srgb,
+    var(--color-accent-light) 55%,
+    var(--color-text-inverse)
+  );
   /* Copper accent: meet ≥4.5:1 on --color-bg-elevated / cream for body-sized text (axe). */
   --color-accent: #a84d22;
   --color-accent-hover: #8c411c;
