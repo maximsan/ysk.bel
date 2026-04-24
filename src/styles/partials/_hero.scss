@@ -1,3 +1,32 @@
+.hero {
+  position: relative;
+  isolation: isolate;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background: var(--hero-scrim);
+  }
+
+  .hero-content,
+  .hero-header {
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero__story {
+    font-size: var(--text-lead);
+    font-weight: 500;
+    max-width: 32rem;
+    margin: 0.25rem auto 0;
+    line-height: 1.5;
+    color: var(--color-text-primary);
+  }
+}
+
 @media only screen and (min-width: 320px) and (max-width: 767.98px) {
   .hero {
     background-image: url(#{$images-path}/fish-600.webp);
@@ -5,7 +34,7 @@
     background-attachment: fixed;
     background-size: cover !important;
 
-    color: $brown;
+    color: var(--color-text-primary);
     text-align: center;
 
     height: max(50rem, var(--doc-height));
@@ -24,8 +53,8 @@
       flex-direction: column;
       gap: 0.75rem;
 
-      > * {
-        font-size: var(--font-size-lg);
+      > h2 {
+        font-size: var(--text-hero-tight);
       }
     }
   }
@@ -38,7 +67,7 @@
     background-attachment: fixed;
     background-size: cover !important;
 
-    color: $brown;
+    color: var(--color-text-primary);
     text-align: center;
 
     min-height: max(50rem, var(--doc-height));
@@ -54,8 +83,8 @@
       flex-direction: column;
       gap: 0.75rem;
 
-      > * {
-        font-size: --font-size-2xl;
+      > h2 {
+        font-size: var(--text-hero-medium);
       }
     }
   }
@@ -77,8 +106,8 @@
     &-header {
       margin: 4rem auto 0;
 
-      > * {
-        font-size: var(--font-size-3xl);
+      > h2 {
+        font-size: var(--text-hero-large);
       }
     }
   }
@@ -94,9 +123,9 @@
       margin-left: 24rem;
       gap: 4rem;
 
-      > * {
+      > h2 {
         text-align: center;
-        font-size: 2.75rem;
+        font-size: var(--text-hero-wide);
       }
     }
   }

@@ -30,6 +30,8 @@ jobs:
                           - '500.html'
                           - 'tests/visual/**'
                           - 'playwright.config.mjs'
+                          - 'playwright.a11y.config.mjs'
+                          - 'tests/a11y/**'
 
     build:
         runs-on: ubuntu-latest
@@ -68,6 +70,12 @@ jobs:
 
             - name: unit tests
               run: yarn test:unit
+
+            - name: install Playwright (Chromium for a11y)
+              run: yarn exec playwright install chromium --with-deps
+
+            - name: accessibility tests
+              run: yarn test:a11y
 
     visual:
         needs: [changes, build]

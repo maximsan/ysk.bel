@@ -1,3 +1,5 @@
+@import 'tokens';
+
 :root {
   --doc-height: 100%;
   --font-size-sm: 0.85rem;
@@ -10,33 +12,46 @@
   --font-weight-semibold: 500;
   --font-weight-bold: 600;
   --default-black: #000000;
-  --black: #222222;
+  /* Legacy — map to semantic (Peat & linen); keep names for existing partials */
+  --black: var(--color-text-primary);
   --white: #ffffff;
   --white-hover: rgba(255, 255, 255, 0.75);
-  --light-black: #110d0d;
-  --lighter-black: #1c1818;
-  --creamy-white: rgba(247, 247, 239, 0.6);
-  --dirty-orange: #ac703f;
-  --dirty-orange-hover: #c76f27;
-  --orange-shadow: #9e6132;
-  --orange: #f66f30;
-  --light-orange: #f99262;
-  --light-brown: #704936;
-  --lighter-brown: #492c1d;
+  --light-black: var(--color-bg-inverse);
+  --lighter-black: #2a211c;
+  --creamy-white: rgba(255, 252, 248, 0.78);
+  --dirty-orange: var(--color-accent-muted);
+  --dirty-orange-hover: var(--color-accent-hover);
+  --orange-shadow: var(--color-accent-shadow);
+  --orange: var(--color-accent);
+  --light-orange: var(--color-accent-light);
+  --light-brown: #6b4f3d;
+  --lighter-brown: #3d2f25;
   --map--desktop-size: 600px;
   --map--mobile-size: 400px;
   --font-base: 'Rubik', sans-serif;
+  --font-body: var(--font-base);
+  /* Type scale — use for new/changed rules; existing sizes can migrate gradually */
+  --text-h1: var(--font-size-3xl);
+  --text-h2: var(--font-size-2xl);
+  --text-h3: var(--font-size-xl);
+  --text-body: var(--font-size-base);
+  --text-lead: var(--font-size-md);
+  --text-caption: var(--font-size-sm);
+  --text-hero-tight: var(--font-size-lg);
+  --text-hero-medium: var(--font-size-2xl);
+  --text-hero-large: var(--font-size-3xl);
+  --text-hero-wide: 2.75rem;
 }
 
+// SCSS-only (compile-time); keep in sync with --color-* above
 $light-grey: #a5a5a5;
-$light-blue: #a4acc7;
-$brown: #2b1910;
-$light-brown: #704936;
-$blue-white: #e6e7f2;
-$orange: #f66f30;
+$light-blue: #8a7d72;
+$brown: #2c241c;
+$light-brown: #6b4f3d;
+$blue-white: #ebe6df;
+$orange: #a84d22;
 $red: #dc3545;
 $skype: #00aff0;
-$viber: #665cac;
 $whatsapp: #25d366;
 
 $images-path: '../../assets/images' !default;

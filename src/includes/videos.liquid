@@ -1,16 +1,16 @@
 {% assign videoItems = videosShowcase.videos %}
 {% assign videoTotal = videoItems.size %}
 <section
-  class='section-container videos-showcase videos-showcase--section'
+  class='section-container videos-showcase videos-showcase--section section-chapter'
   id='videos'
   aria-labelledby='videos-showcase-heading'
 >
   <div class='container'>
-    <header class='videos-showcase__header'>
-      <h2 class='videos-showcase__title' id='videos-showcase-heading'>
+    <header class='videos-showcase__header section-chapter__header'>
+      <h2 class='videos-showcase__title section-chapter__title' id='videos-showcase-heading'>
         {{ videosShowcase.sectionTitle }}
       </h2>
-      <p class='videos-showcase__subtitle'>
+      <p class='videos-showcase__subtitle section-chapter__subtitle'>
         {{ videosShowcase.sectionSubtitle }}
       </p>
     </header>

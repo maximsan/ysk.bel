@@ -1,0 +1,40 @@
+/* Motion polish + prefers-reduced-motion (Peat & linen) */
+
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes section-chapter-in {
+    from {
+      opacity: 0;
+      transform: translate3d(0, 0.35rem, 0);
+    }
+
+    to {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+    }
+  }
+
+  section.section-chapter {
+    animation: section-chapter-in var(--motion-section-duration) var(--motion-ease-out) both;
+  }
+
+  section.section-chapter ~ section.section-chapter {
+    animation-delay: var(--motion-stagger);
+  }
+
+  section.section-chapter ~ section.section-chapter ~ section.section-chapter {
+    animation-delay: calc(var(--motion-stagger) * 2);
+  }
+
+  section.section-chapter
+    ~ section.section-chapter
+    ~ section.section-chapter
+    ~ section.section-chapter {
+    animation-delay: calc(var(--motion-stagger) * 3);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  section.section-chapter {
+    animation: none !important;
+  }
+}

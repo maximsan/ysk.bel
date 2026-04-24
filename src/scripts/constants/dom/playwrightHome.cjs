@@ -24,7 +24,8 @@ const PLAYWRIGHT_HOME_LOCATORS = {
   cooperationBanner: `.${LAYOUT_CLASS.cooperationBanner}`,
   infoBanner: `.${LAYOUT_CLASS.infoBannerSection}.${LAYOUT_CLASS.infoBannerBlock}`,
   hero: `${LAYOUT_CLASS.heroTag}.${LAYOUT_CLASS.hero}.${LAYOUT_CLASS.heroIntro}`,
-  services: idSelector(SECTION_IDS.services),
+  // `section#…` avoids strict-mode collisions if a subsection heading reuses the same id as the band.
+  services: `section${idSelector(SECTION_IDS.services)}`,
   stocking: idSelector(SECTION_IDS.stocking),
   videos: idSelector(SECTION_IDS.videos),
   contacts: idSelector(SECTION_IDS.contacts),

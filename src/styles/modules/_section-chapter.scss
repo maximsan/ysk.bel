@@ -1,0 +1,36 @@
+/* Token-driven section “chapters”: rhythm + shared title stack (Phase 3) */
+
+.section-chapter {
+  box-sizing: border-box;
+  padding-block: var(--section-pad-block);
+  scroll-margin-top: var(--section-scroll-margin);
+}
+
+.section-chapter__header {
+  margin-bottom: var(--section-header-margin-bottom);
+  text-align: center;
+}
+
+.section-chapter__title {
+  font-family: var(--font-heading);
+  font-size: var(--text-h2);
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: var(--section-title-color);
+  margin: 0;
+}
+
+.section-chapter__subtitle,
+.section-chapter__lede {
+  margin: 0.75rem auto 0;
+  max-width: var(--section-subtitle-max-width);
+  color: var(--section-subtitle-color);
+  line-height: 1.65;
+  font-size: var(--text-body);
+}
+
+/* Center the services intro; stocking leads stay start-aligned in their partials */
+.services .section-chapter__lede {
+  text-align: center;
+}

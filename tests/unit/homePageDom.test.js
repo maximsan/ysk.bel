@@ -34,13 +34,14 @@ describe('homePageDom', () => {
   });
 
   it('idSelector prefixes hash', () => {
-    expect(idSelector(SECTION_IDS.services)).toBe('#desc');
+    expect(idSelector(SECTION_IDS.services)).toBe('#services');
   });
 
   it('exposes stable Playwright locators', () => {
     expect(PLAYWRIGHT_HOME_LOCATORS.header).toBe('header.header');
     expect(PLAYWRIGHT_HOME_LOCATORS.menu).toBe('.menu');
     expect(PLAYWRIGHT_HOME_LOCATORS.navbarToggler).toBe('.navbar-toggler');
+    expect(PLAYWRIGHT_HOME_LOCATORS.services).toBe('section#services');
     expect(PLAYWRIGHT_HOME_LOCATORS.footer).toBe('footer.footer-social');
   });
 
