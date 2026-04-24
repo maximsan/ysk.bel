@@ -6,8 +6,11 @@
   --color-text-primary: #2c241c;
   --color-text-muted: #5c534a;
   --color-text-inverse: #f2ebe3;
-  --color-accent: #c45c28;
-  --color-accent-hover: #a84d22;
+  /* Viber on inverse footer: brand tint mixed toward readable on --color-bg-inverse. */
+  --color-social-viber-on-inverse: color-mix(in srgb, #7360f2 32%, var(--color-text-inverse));
+  /* Copper accent: meet ≥4.5:1 on --color-bg-elevated / cream for body-sized text (axe). */
+  --color-accent: #a84d22;
+  --color-accent-hover: #8c411c;
   --color-accent-muted: #9a5c3a;
   --color-accent-light: #d4a27a;
   --color-accent-shadow: #5c3d25;

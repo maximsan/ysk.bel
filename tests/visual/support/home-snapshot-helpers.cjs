@@ -104,9 +104,8 @@ async function waitForVideoShowcaseReady(page) {
         return true;
       }
       const videoElement = lazyVideoHostElement.querySelector('video');
-      return Boolean(
-        videoElement && videoElement.readyState >= 2,
-      );
+      /* HAVE_METADATA (1) is enough once `is-media-ready` is driven from `loadedmetadata` in `addVideo.js`. */
+      return Boolean(videoElement && videoElement.readyState >= 1);
     },
     [activeLazyVideoHostSelector, classMap.videosMediaReadyClass],
     { timeout: timeouts.videoShowcaseReadyMs },

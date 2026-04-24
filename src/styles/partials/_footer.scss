@@ -31,7 +31,7 @@
     }
 
     &.viber {
-      color: $viber;
+      color: var(--color-social-viber-on-inverse);
     }
 
     &.whatsapp {

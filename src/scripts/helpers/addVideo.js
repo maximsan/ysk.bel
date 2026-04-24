@@ -27,7 +27,8 @@ function createVideoTag({ poster = '', preload = 'metadata' }) {
   const video = document.createElement('video');
   video.poster = poster;
   video.controls = true;
-  video.muted = false;
+  /* Muted by default: satisfies autoplay policies (incl. Firefox) so `loadeddata` / poster can paint. */
+  video.muted = true;
   video.loop = false;
   video.preload = preload;
   video.playsInline = true;
@@ -101,7 +102,8 @@ export function mountLazyVideoHost(lazyVideoHostElement) {
     lazyVideoHostElement.classList.add(STATE_CLASS.mediaReady);
   };
 
-  videoElement.addEventListener('loadeddata', hideSkeleton, { once: true });
+  /* `loadedmetadata` fires in all target browsers once dimensions/poster are known; `loadeddata` can hang in Firefox with metadata-only decode. */
+  videoElement.addEventListener('loadedmetadata', hideSkeleton, { once: true });
   videoElement.addEventListener(
     'error',
     () => {
