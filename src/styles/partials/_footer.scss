@@ -35,7 +35,7 @@
     }
 
     &.whatsapp {
-      color: $whatsapp;
+      color: var(--color-social-whatsapp-on-inverse);
     }
 
     .fa-skype,

@@ -22,7 +22,7 @@ module.exports = {
     {
       variant: 'primary',
       label: 'Написать в WhatsApp',
-      href: `https://api.whatsapp.com/send?phone=${PHONE_DIGITS}`,
+      href: `https://wa.me/${PHONE_DIGITS}`,
       channel: 'whatsapp',
       ariaLabel: 'Открыть WhatsApp-чат с усадьбой',
     },

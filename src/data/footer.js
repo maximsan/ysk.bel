@@ -8,16 +8,19 @@ module.exports = {
       class: 'viber',
       href: `viber://chat/?number=${PHONE_WITH_PLUS}`,
       text: 'Viber',
+      ariaLabel: 'Открыть Viber-чат с усадьбой',
     },
     {
       class: 'whatsapp',
-      href: `https://api.whatsapp.com/send?phone=${PHONE_WITHOUT_PLUS}`,
+      href: `https://wa.me/${PHONE_WITHOUT_PLUS}`,
       text: 'WhatsApp',
+      ariaLabel: 'Открыть WhatsApp-чат с усадьбой',
     },
     {
       class: 'skype',
       href: `skype:${USER_NAME}?chat`,
       text: 'Skype',
+      ariaLabel: 'Открыть Skype-чат с усадьбой',
     },
   ],
 };

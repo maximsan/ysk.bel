@@ -2,9 +2,16 @@
   cursor: pointer;
   color: var(--dirty-orange);
   font-size: var(--font-size-base);
+  text-decoration: none;
 
   &:hover {
     color: var(--dirty-orange-hover);
+    text-decoration: none;
+  }
+
+  &:focus-visible {
+    outline: var(--focus-ring-width) solid var(--color-focus-ring);
+    outline-offset: var(--focus-ring-offset);
   }
 
   @media only screen and (min-width: 320px) and (max-width: 767.98px) {

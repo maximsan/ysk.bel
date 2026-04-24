@@ -6,6 +6,9 @@
           <a
             class='footer-link {{ link.class }}'
             href='{{ link.href }}'
+            {% if link.ariaLabel %}
+            aria-label='{{ link.ariaLabel }}'
+            {% endif %}
           >
             <i class='fab fa-{{ link.class }}'></i>
             <span class='icon-text'>{{ link.text }}</span>

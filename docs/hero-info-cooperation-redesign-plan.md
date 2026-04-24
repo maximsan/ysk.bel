@@ -79,10 +79,10 @@ Trackable plan for redesigning the three top-of-page sections on the home page. 
 
 ## Group E — Flow, IA, CTA unification
 
-- [ ] Update `src/layouts/base.liquid` render order: header → hero → info-strip → content sections → cooperation-block → footer
-- [ ] Audit every phone / messenger link across the site to use the same anchor scheme (`tel:`, `viber://…`, `https://wa.me/…`) and `aria-label`s
-- [ ] Ensure only `.cta` variants are used as calls-to-action across the three sections (no bespoke buttons)
-- [ ] Single page `<h1>` = hero headline; demote prior `<h2>`s that were acting as page titles
+- [x] Update `src/layouts/base.liquid` render order: header → hero → info-strip → content sections → cooperation-block → footer
+- [x] Audit every phone / messenger link across the site to use the same anchor scheme (`tel:`, `viber://…`, `https://wa.me/…`) and `aria-label`s
+- [x] Ensure only `.cta` variants are used as calls-to-action across the three sections (hero / cooperation use `.cta`; info-banner uses inline news link + close button, not a CTA)
+- [x] Single page `<h1>` = hero headline; header logo demoted from `<h1>` to home link
 
 ---
 

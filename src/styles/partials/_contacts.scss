@@ -27,6 +27,20 @@
       font-weight: bolder;
     }
 
+    .phone-number {
+      color: inherit;
+      text-decoration: underline;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 3px;
+
+      &:hover,
+      &:focus-visible {
+        color: var(--color-accent-hover);
+      }
+
+      @include outline;
+    }
+
     .contact-us__mail,
     .contact-us__mts,
     .contact-us__a1 {

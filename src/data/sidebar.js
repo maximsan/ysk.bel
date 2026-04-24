@@ -3,6 +3,7 @@ module.exports = {
     {
       text: '+375 (29) 149 59 89',
       href: 'tel:+375291495989',
+      ariaLabel: 'Позвонить по номеру +375 (29) 149 59 89',
       type: 'phone',
       showOnlyOn: 'desktop',
     },
@@ -35,6 +36,7 @@ module.exports = {
     {
       text: '+375 (29) 149 59 89',
       href: 'tel:+375291495989',
+      ariaLabel: 'Позвонить по номеру +375 (29) 149 59 89',
       type: 'phone',
       showOnlyOn: 'mobile',
     },
