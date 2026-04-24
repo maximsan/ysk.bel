@@ -4,6 +4,7 @@ const { createHash } = require('node:crypto');
 const esbuild = require('esbuild');
 
 const banner = require('./src/data/banner.js');
+const cooperation = require('./src/data/cooperation.js');
 const history = require('./src/data/estate-history.js');
 const footer = require('./src/data/footer.js');
 const meta = require('./src/data/meta.js');
@@ -121,6 +122,7 @@ module.exports = function (config) {
         strict_filters: true,
         globals: {
             banner,
+            cooperation,
             history,
             footer,
             meta,

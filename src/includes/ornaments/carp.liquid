@@ -1,0 +1,24 @@
+{%- comment -%}
+  Ornament · carp silhouette — single-stroke line art.
+  Inherits colour via `currentColor`; size via `width`/`height` on the CSS class.
+  Usage: {% render 'ornaments/carp' %}
+{%- endcomment -%}
+<svg
+  class='ornament ornament--carp'
+  viewBox='0 0 64 32'
+  width='64'
+  height='32'
+  fill='none'
+  stroke='currentColor'
+  stroke-width='1.25'
+  stroke-linecap='round'
+  stroke-linejoin='round'
+  aria-hidden='true'
+  focusable='false'
+>
+  <path d='M4 16 Q 16 4 34 6 Q 50 8 56 16 Q 50 24 34 26 Q 16 28 4 16 Z' />
+  <path d='M56 16 L 62 10 L 60 16 L 62 22 Z' />
+  <circle cx='46' cy='14' r='1' fill='currentColor' stroke='none' />
+  <path d='M18 12 Q 22 16 18 20' opacity='0.6' />
+  <path d='M26 11 Q 30 16 26 21' opacity='0.45' />
+</svg>
