@@ -31,8 +31,10 @@ function buildProjects() {
 export default defineConfig({
   testDir: 'tests/visual',
   // Shared folder so home specs can be split across files without duplicating PNGs.
-  // Omit {platform} so the same baselines work on macOS dev and Linux CI.
-  snapshotPathTemplate: '{testDir}/home-snapshots/{arg}-{projectName}{ext}',
+  // Platform suffix: macOS and Linux rasterize fonts differently; per-platform
+  // baselines let the suite pass locally (`-darwin`) and in CI (`-linux`).
+  snapshotPathTemplate:
+    '{testDir}/home-snapshots/{arg}-{projectName}-{platform}{ext}',
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,

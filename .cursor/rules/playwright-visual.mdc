@@ -14,13 +14,13 @@ alwaysApply: false
 - **Test-only**: `tests/visual/constants.js` — `VIEWPORTS`, `BLOCKED_THIRD_PARTY_URL_GLOBS`, screenshot timeouts, `LAYOUT.footerMinVisibleWidthPx`.
 - **Shared waits / routing**: `tests/visual/support/home-snapshot-helpers.cjs`.
 - **Specs**: `tests/visual/home-header.spec.js` (header + mobile drawer), `tests/visual/home-sections.spec.js` (remaining sections).
-- **Baselines**: `tests/visual/home-snapshots/*.png` — `snapshotPathTemplate` in `playwright.config.mjs` uses this single folder for all home specs; omits `{platform}` (shared macOS/Linux baselines).
+- **Baselines**: `tests/visual/home-snapshots/*-{darwin,linux}.png` — single folder for all home specs; `snapshotPathTemplate` appends `{platform}` so macOS and Linux have separate PNG sets (font rasterizers differ enough to cross the AA threshold). Keep both sets in sync when UI changes.
 - **Config**: `playwright.config.mjs` loads `VIEWPORTS` via `createRequire` from `tests/visual/constants.js`.
 
 ## Commands
 
 - `yarn test:visual` — run against `yarn build` + static server (see `webServer` in config).
-- `yarn test:visual:update` — refresh PNGs after **intentional** UI changes; commit diffs for review.
+- `yarn test:visual:update` — refresh **`-darwin.png`** baselines locally after intentional UI changes. Apply the `update-visual-snapshots` label to the PR to regenerate `-linux.png` in CI (see `.github/workflows/update-visual-snapshots.yaml`). Commit both sets together.
 - `yarn test:visual:ui` / `yarn test:visual:report` — UI mode / HTML report.
 
 ## Behaviour notes
@@ -28,12 +28,14 @@ alwaysApply: false
 - Footer screenshot is **skipped** when viewport width `< 768` (`.footer-social` hidden in CSS).
 - **Header — mobile menu open** runs only below 768px; dismiss info-banner overlay first (`dismissInfoBannerForInteraction`) so `.navbar-toggler` is clickable.
 - Waits: stocking zoom `is-loaded`, video host `is-media-ready` / `readyState`, map `#map` → `map-shell--ready`.
-- Third-party blocking for stability: list in `BLOCKED_THIRD_PARTY_URL_GLOBS` (not maps/video CDN).
+- `contacts` screenshot **masks `#map`** — Google Maps tiles/labels/watermarks vary by region and API-key usage, so the map region is painted over in the screenshot to keep the gate deterministic. The rest of `#contacts` is still compared.
+- Third-party blocking for stability: list in `BLOCKED_THIRD_PARTY_URL_GLOBS` (analytics only — Google Fonts are **not** blocked so Rubik/Source Serif 4 load in both environments; maps/video CDN also kept unblocked).
 
 ## CI
 
-- **Build** job: `yarn build`, then `yarn test:unit` (Vitest).
+- **Build** job: baseline parity check (every test must have both `-darwin.png` and `-linux.png`), `yarn build`, then `yarn test:unit` (Vitest).
 - **Visual** job (PRs only): path filter or `run-visual` label; `yarn exec playwright install …`, `yarn test:visual`; uploads `playwright-report` on failure.
+- **Update-snapshots** workflow (`.github/workflows/update-visual-snapshots.yaml`): apply the `update-visual-snapshots` label → Linux runner executes `yarn test:visual --update-snapshots` and commits refreshed `*-linux.png` back to the PR branch.
 
 ## Docs
 

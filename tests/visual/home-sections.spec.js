@@ -2,6 +2,7 @@ const { test, expect } = require('@playwright/test');
 const { LAYOUT } = require('./constants');
 const {
   locators,
+  classMap,
   setupHomeVisualPage,
   waitForImagesLoaded,
   waitForStockingCarouselStable,
@@ -69,8 +70,12 @@ test.describe('home — sections', () => {
     const screenshotRegion = page.locator(locators.contacts);
     await screenshotRegion.scrollIntoViewIfNeeded();
     await waitForMapReady(page);
+    // Google Maps tiles, labels and watermarks are non-deterministic across
+    // regions and API-key usage limits. Mask the map so visual regression
+    // covers the rest of `#contacts` without fighting map-render noise.
     await expect(screenshotRegion).toHaveScreenshot('contacts.png', {
       animations: 'disabled',
+      mask: [page.locator(`#${classMap.mapShellId}`)],
     });
   });
 

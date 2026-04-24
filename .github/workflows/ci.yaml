@@ -38,6 +38,21 @@ jobs:
             - name: checkout code
               uses: actions/checkout@v4
 
+            - name: visual baseline parity
+              run: |
+                  cd tests/visual/home-snapshots
+                  darwin=$(ls *-darwin.png 2>/dev/null | sed 's/-darwin\.png$//' | sort)
+                  linux=$(ls *-linux.png 2>/dev/null | sed 's/-linux\.png$//' | sort)
+                  if ! diff <(echo "$darwin") <(echo "$linux") > /tmp/parity.diff; then
+                    echo "::error::Visual baseline mismatch — every test must have both '-darwin.png' and '-linux.png'."
+                    echo "Missing on one side (left = darwin-only, right = linux-only):"
+                    cat /tmp/parity.diff
+                    echo ""
+                    echo "Fix: run 'yarn test:visual:update' locally for '-darwin' and apply the 'update-visual-snapshots' label for '-linux'."
+                    exit 1
+                  fi
+                  echo "Baselines in parity ($(echo "$darwin" | wc -l | tr -d ' ') tests × 2 platforms)."
+
             - name: setup Node.js
               uses: actions/setup-node@v4
               with:
