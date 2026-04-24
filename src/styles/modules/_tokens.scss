@@ -17,4 +17,6 @@
   --space-section: 4rem;
   --radius-md: 0.5rem;
   --shadow-sm: 0 1px 3px rgba(44, 36, 28, 0.08);
+  /* Typography — display / heading stack (body stack set in _constants with --font-base) */
+  --font-heading: 'Source Serif 4', 'Times New Roman', serif;
 }

@@ -61,10 +61,10 @@ Tune hex values against real photography after Phase 1.
 
 ## Phase 2 — Typography system
 
-- [ ] Single `@import` (or `<link>` strategy) in one place — e.g. `index.scss` + `head.liquid` — for **Rubik** + **Source Serif 4** (or chosen pair), subset **Cyrillic + Latin** (verify current `head.liquid` / font commits on this branch before adding a second load path).
-- [ ] Define roles: `--font-heading`, `--font-body`; scale `--text-h1` … `--text-caption` (can build on existing `--font-size-*` in `_constants.scss`).
-- [ ] Remove duplicate font requests (serif currently loaded from partial SCSS — consolidate).
-- [ ] Fix hero typo / bug: `--font-size-2xl` on `_hero.scss` (~line 58) as part of cleanup.
+- [x] Single `<link>` in `head.liquid` for **Rubik** (400/500/700 + 500 italic) + **Source Serif 4** (600, opsz 8–60); `preconnect` to `fonts.googleapis.com` / `fonts.gstatic.com`.
+- [x] Define roles: `--font-heading` in `_tokens.scss`, `--font-body` and `--text-h1` … `--text-hero-wide` in `_constants.scss` (maps to existing `--font-size-*`).
+- [x] Remove duplicate font requests — removed `@import url` from `index.scss` and Source Serif `@import` from `_stocking-carousel.scss`.
+- [x] Fix hero invalid value: `font-size: --font-size-2xl` → `var(--text-hero-medium)`; other breakpoints use `--text-hero-*` tokens.
 
 ---
 

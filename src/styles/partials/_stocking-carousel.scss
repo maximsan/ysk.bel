@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,600&subset=cyrillic&display=swap');
-
 .stocking-with-fish {
   position: relative;
   overflow: hidden;
@@ -88,7 +86,7 @@
 
   &__title {
     margin: 0;
-    font-family: 'Source Serif 4', 'Times New Roman', serif;
+    font-family: var(--font-heading);
     font-weight: 600;
     font-size: clamp(1.85rem, 4vw, 2.65rem);
     line-height: 1.15;
@@ -220,7 +218,7 @@
 
   &__title {
     margin: 0;
-    font-family: 'Source Serif 4', 'Times New Roman', serif;
+    font-family: var(--font-heading);
     font-weight: 600;
     font-size: clamp(1.35rem, 3vw, 1.85rem);
     line-height: 1.2;
@@ -392,7 +390,7 @@
     display: block;
     font-size: 1.75rem;
     line-height: 1;
-    font-weight: 300;
+    font-weight: 400;
     margin-top: -0.1em;
   }
 

@@ -29,7 +29,18 @@
   --map--desktop-size: 600px;
   --map--mobile-size: 400px;
   --font-base: 'Rubik', sans-serif;
-  --font-heading: 'Source Serif 4', 'Times New Roman', serif;
+  --font-body: var(--font-base);
+  /* Type scale — use for new/changed rules; existing sizes can migrate gradually */
+  --text-h1: var(--font-size-3xl);
+  --text-h2: var(--font-size-2xl);
+  --text-h3: var(--font-size-xl);
+  --text-body: var(--font-size-base);
+  --text-lead: var(--font-size-md);
+  --text-caption: var(--font-size-sm);
+  --text-hero-tight: var(--font-size-lg);
+  --text-hero-medium: var(--font-size-2xl);
+  --text-hero-large: var(--font-size-3xl);
+  --text-hero-wide: 2.75rem;
 }
 
 // SCSS-only (compile-time); keep in sync with --color-* above
