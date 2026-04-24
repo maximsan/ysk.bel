@@ -1,16 +1,54 @@
-<div class='overlay'></div>
-<div class='section-container info-banner'>
-  <div class='cross'>
-    <span class='cross-icon'>&times;</span>
-  </div>
-  <h3 class='info-banner__header'>{{ banner.intro }}</h3>
-  {% for message in banner.messages %}
-    <div class='info-banner__text'>
-      {% if message.href %}
-        <a class='info-banner__link' href='{{ message.href }}'>{{ message.text }}</a>
-      {% else %}
-        {{ message.text }}
+{% assign infoBannerVariant = banner.variant | default: 'strip' %}
+
+{% if infoBannerVariant == 'modal' %}
+  <div class='overlay info-banner__overlay' data-info-banner-overlay hidden></div>
+{% endif %}
+
+<section
+  class='section-container info-banner info-banner--{{ infoBannerVariant }}'
+  data-info-banner
+  data-info-banner-variant='{{ infoBannerVariant }}'
+  {% if infoBannerVariant == 'modal' %}
+  role='dialog'
+  aria-modal='true'
+  aria-labelledby='info-banner-title'
+  {% else %}
+  aria-labelledby='info-banner-title'
+  {% endif %}
+  hidden
+>
+  <div class='info-banner__inner'>
+    <div class='info-banner__intro'>
+      {% if infoBannerVariant == 'strip' %}
+        <span class='info-banner__glyph' aria-hidden='true'>
+          {% render 'ornaments/carp' %}
+        </span>
       {% endif %}
+      <h2 class='info-banner__header' id='info-banner-title'>{{ banner.intro }}</h2>
     </div>
-  {% endfor %}
-</div>
+
+    <div class='info-banner__messages'>
+      {% for message in banner.messages %}
+        <p class='info-banner__text'>
+          {% if message.date %}
+            <span class='info-banner__date'>{{ message.date }}</span>
+          {% endif %}
+          {% if message.href %}
+            <a class='info-banner__link' href='{{ message.href }}'>{{ message.text }}</a>
+          {% else %}
+            <span class='info-banner__message'>{{ message.text }}</span>
+          {% endif %}
+        </p>
+      {% endfor %}
+    </div>
+
+    <button
+      class='info-banner__close cross-icon'
+      type='button'
+      aria-label='Закрыть объявление'
+      data-info-banner-close
+    >
+      <span aria-hidden='true'>&times;</span>
+    </button>
+  </div>
+</section>

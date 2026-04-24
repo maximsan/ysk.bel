@@ -8,14 +8,41 @@ import {
 const banner = document.querySelector(SITE_SELECTORS.infoBanner);
 const overlay = document.querySelector(SITE_SELECTORS.overlay);
 const crossIcon = document.querySelector(SITE_SELECTORS.crossIcon);
+const focusableSelector = [
+  'a[href]',
+  'button:not([disabled])',
+  'textarea:not([disabled])',
+  'input:not([disabled])',
+  'select:not([disabled])',
+  '[tabindex]:not([tabindex="-1"])',
+].join(',');
+
+function isModalBanner() {
+  return banner?.dataset.infoBannerVariant === 'modal';
+}
+
+let previouslyFocusedElement = null;
 
 function showInfoBanner() {
-  if (!overlay || !banner) {
+  if (!banner) {
     return;
   }
-  overlay.style.display = 'block';
+  banner.hidden = false;
+  banner.setAttribute('aria-hidden', 'false');
+
+  if (isModalBanner() && overlay) {
+    overlay.hidden = false;
+    overlay.style.display = 'block';
+    previouslyFocusedElement = document.activeElement;
+  }
+
   banner.classList.remove(INFO_BANNER_STATE_CLASS.hide);
   banner.classList.add(INFO_BANNER_STATE_CLASS.show);
+
+  if (isModalBanner()) {
+    const firstFocusable = banner.querySelector(focusableSelector);
+    firstFocusable?.focus();
+  }
 }
 
 function showCookieInfoBanner() {
@@ -26,12 +53,27 @@ function showCookieInfoBanner() {
 }
 
 function hideInfoBanner() {
-  if (!overlay || !banner) {
+  if (!banner) {
     return;
   }
-  overlay.style.display = 'none';
+
+  if (overlay) {
+    overlay.style.display = 'none';
+    overlay.hidden = true;
+  }
+
   banner.classList.remove(INFO_BANNER_STATE_CLASS.show);
   banner.classList.add(INFO_BANNER_STATE_CLASS.hide);
+  banner.setAttribute('aria-hidden', 'true');
+  banner.hidden = true;
+
+  if (
+    previouslyFocusedElement &&
+    typeof previouslyFocusedElement.focus === 'function'
+  ) {
+    previouslyFocusedElement.focus();
+  }
+  previouslyFocusedElement = null;
 }
 
 let bannerClosed = false;
@@ -42,6 +84,44 @@ function dismissBannerPermanently() {
   document.cookie = buildInfoBannerDismissCookie(
     window.location.protocol === 'https:',
   );
+}
+
+function handleModalKeyboard(event) {
+  if (!isModalBanner() || !banner?.classList.contains(INFO_BANNER_STATE_CLASS.show)) {
+    return;
+  }
+
+  if (event.key === 'Escape') {
+    event.preventDefault();
+    dismissBannerPermanently();
+    return;
+  }
+
+  if (event.key !== 'Tab') {
+    return;
+  }
+
+  const focusableElements = Array.from(
+    banner.querySelectorAll(focusableSelector),
+  );
+
+  if (focusableElements.length === 0) {
+    return;
+  }
+
+  const first = focusableElements[0];
+  const last = focusableElements[focusableElements.length - 1];
+
+  if (event.shiftKey && document.activeElement === first) {
+    event.preventDefault();
+    last.focus();
+    return;
+  }
+
+  if (!event.shiftKey && document.activeElement === last) {
+    event.preventDefault();
+    first.focus();
+  }
 }
 
 export function addInfoBanner() {
@@ -62,30 +142,22 @@ export function addInfoBanner() {
     }
     dismissBannerPermanently();
   });
-}
 
-const intro = document.querySelector(SITE_SELECTORS.intro);
-const carouselSize = intro ? intro.offsetHeight / 2 : 0;
-const bannerBottom = carouselSize + (banner?.offsetHeight ?? 0);
-
-export function hideInfoBannerOnScroll() {
-  if (!banner) {
-    return;
-  }
-
-  let lastScrollY = window.scrollY;
-
-  window.addEventListener('scroll', () => {
-    const currentScrollPos = window.scrollY;
-    const scrollingUp = currentScrollPos < lastScrollY;
-    lastScrollY = currentScrollPos;
-
-    if (!bannerClosed) {
-      if (scrollingUp || currentScrollPos < bannerBottom) {
-        showCookieInfoBanner();
-      } else {
-        hideInfoBanner();
-      }
+  overlay?.addEventListener('click', () => {
+    if (isModalBanner()) {
+      dismissBannerPermanently();
     }
   });
+
+  document.addEventListener('keydown', handleModalKeyboard);
+}
+
+/**
+ * Previous behaviour reopened the banner when a user scrolled back up. The
+ * redesigned banner is intentionally one-shot: show if no dismissal cookie,
+ * stay dismissed after close / link click. Kept as a no-op export for any
+ * older import sites while Group C removes the call from `main.js`.
+ */
+export function hideInfoBannerOnScroll() {
+  return undefined;
 }

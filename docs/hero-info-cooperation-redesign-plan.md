@@ -51,15 +51,15 @@ Trackable plan for redesigning the three top-of-page sections on the home page. 
 
 `src/includes/components/info-banner.liquid`, `src/styles/partials/_info-banner.scss`, `src/scripts/helpers/infoBanner.js`
 
-- [ ] Read `banner.variant` in the Liquid partial and branch markup
-- [ ] Build **strip variant**: slim bar under header, slide-down on first paint, one row on ≥tablet / wrap on mobile, copper hairline top+bottom, carp glyph before `banner.intro`
-- [ ] Render each `messages[]` entry as a dated chip (`{{ message.date }} · {{ message.text }}`)
-- [ ] Replace raw `&times;` with a real `<button>` (44×44, copper hover, `aria-label="Закрыть объявление"`, visible focus ring) in both variants
-- [ ] Remove the "re-show on scroll-up" behaviour in `infoBanner.js`; keep one-shot cookie dismissal
-- [ ] **Modal variant:** add `role="dialog"`, `aria-modal="true"`, `aria-labelledby`; implement focus trap, ESC-close, restore-focus-on-close
-- [ ] Modal motion: backdrop-blur on overlay, scale-in (0.96 → 1, 240ms, `--motion-ease-out`) instead of plain opacity
-- [ ] Update / add unit tests if dismissal contract changes (`tests/unit/infoBannerCookie.test.js`)
-- [ ] Verify keyboard-only flow (Tab, Shift+Tab, Esc) for both variants
+- [x] Read `banner.variant` in the Liquid partial and branch markup (`strip` default, `modal` fallback)
+- [x] Build **strip variant**: slim bar under header, slide-down on first paint, one row on ≥tablet / wrap on mobile, copper hairline top+bottom, carp glyph before `banner.intro`
+- [x] Render each `messages[]` entry as a dated chip (`{{ message.date }} · {{ message.text }}`)
+- [x] Replace raw `&times;` with a real `<button>` (44×44, copper hover, `aria-label="Закрыть объявление"`, visible focus ring) in both variants
+- [x] Remove the "re-show on scroll-up" behaviour in `infoBanner.js`; keep one-shot cookie dismissal
+- [x] **Modal variant:** add `role="dialog"`, `aria-modal="true"`, `aria-labelledby`; implement focus trap, ESC-close, restore-focus-on-close
+- [x] Modal motion: backdrop-blur on overlay, scale-in (0.96 → 1, 240ms, `--motion-ease-out`) instead of plain opacity
+- [x] No unit test change needed: cookie contract stayed exactly the same (`tests/unit/infoBannerCookie.test.js` still passes)
+- [ ] Verify keyboard-only flow (Tab, Shift+Tab, Esc) for both variants in browser / a11y pass
 
 ---
 

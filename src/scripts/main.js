@@ -5,7 +5,6 @@ import {
   closeSideBarOnTimeout,
   toggleSideBar,
   addInfoBanner,
-  hideInfoBannerOnScroll,
   googleMapInit,
   documentHeight,
   addScrollUpButton,
@@ -47,7 +46,6 @@ if (mobileMediaQuery.matches) {
 
 if (hasInfoBannerElement) {
   addInfoBanner();
-  hideInfoBannerOnScroll();
 }
 
 documentHeight();

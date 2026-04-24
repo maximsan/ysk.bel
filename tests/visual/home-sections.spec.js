@@ -10,8 +10,10 @@ const {
   waitForMapReady,
 } = require('./support/home-snapshot-helpers.cjs');
 
-test.beforeEach(async ({ page }) => {
-  await setupHomeVisualPage(page);
+test.beforeEach(async ({ page }, testInfo) => {
+  await setupHomeVisualPage(page, {
+    showInfoBanner: testInfo.title === 'info banner',
+  });
 });
 
 test.describe('home — sections', () => {

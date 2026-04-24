@@ -10,7 +10,7 @@ const {
 } = require('./support/home-snapshot-helpers.cjs');
 
 test.beforeEach(async ({ page }) => {
-  await setupHomeVisualPage(page);
+  await setupHomeVisualPage(page, { showHeader: true });
 });
 
 test.describe('home — header', () => {
@@ -41,8 +41,11 @@ test.describe('home — header', () => {
     await page.waitForTimeout(timeouts.menuDrawerTransitionMs);
 
     const screenshotRegion = page.locator(locators.header);
-    await expect(screenshotRegion).toHaveScreenshot('header-mobile-menu-open.png', {
-      animations: 'disabled',
-    });
+    await expect(screenshotRegion).toHaveScreenshot(
+      'header-mobile-menu-open.png',
+      {
+        animations: 'disabled',
+      },
+    );
   });
 });

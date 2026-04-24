@@ -6,6 +6,10 @@ const {
   BLOCKED_THIRD_PARTY_URL_GLOBS,
 } = require('../constants');
 const homePageDom = require('../../../src/scripts/constants/homePageDom.cjs');
+const {
+  applyDisabledMotionStyle,
+  disablePageMotion,
+} = require('../../support/e2e-page-setup.cjs');
 
 const { locators, classMap, timeouts } = HOME_SELECTORS;
 
@@ -19,6 +23,66 @@ async function blockThirdPartyNoise(page) {
 
 async function waitForLayout(page) {
   await page.evaluate(() => document.fonts.ready);
+}
+
+async function dismissInfoBannerBeforePageScripts(page) {
+  await page.addInitScript(() => {
+    document.cookie = [
+      'info-banner=false',
+      'max-age=86400',
+      'Path=/',
+      'SameSite=Lax',
+    ].join('; ');
+  });
+}
+
+async function setHomeChromeVisibility(
+  page,
+  { showHeader = false, showInfoBanner = false } = {},
+) {
+  const { SITE_SELECTORS, INFO_BANNER_STATE_CLASS } = homePageDom;
+  await page.evaluate(
+    ([
+      headerSelector,
+      overlaySelector,
+      bannerSelector,
+      showClass,
+      hideClass,
+      shouldShowHeader,
+      shouldShowInfoBanner,
+    ]) => {
+      const headerElement = document.querySelector(headerSelector);
+      if (headerElement && !shouldShowHeader) {
+        headerElement.style.visibility = 'hidden';
+        headerElement.style.pointerEvents = 'none';
+      }
+
+      const overlayElement = document.querySelector(overlaySelector);
+      if (overlayElement && !shouldShowInfoBanner) {
+        overlayElement.hidden = true;
+        overlayElement.style.display = 'none';
+      }
+
+      const bannerElement = document.querySelector(bannerSelector);
+      if (bannerElement && !shouldShowInfoBanner) {
+        bannerElement.hidden = true;
+        bannerElement.setAttribute('aria-hidden', 'true');
+        bannerElement.classList.remove(showClass);
+        bannerElement.classList.add(hideClass);
+        bannerElement.style.display = 'none';
+        bannerElement.style.animation = 'none';
+      }
+    },
+    [
+      SITE_SELECTORS.header,
+      SITE_SELECTORS.overlay,
+      SITE_SELECTORS.infoBanner,
+      INFO_BANNER_STATE_CLASS.show,
+      INFO_BANNER_STATE_CLASS.hide,
+      showHeader,
+      showInfoBanner,
+    ],
+  );
 }
 
 /** Wait until `document.querySelector(selector)` has `className` in classList. */
@@ -69,9 +133,7 @@ async function waitForImagesLoaded(page, rootSelector) {
             setTimeout(resolve, perImageTimeoutMs);
           }),
         ]);
-      await Promise.all(
-        imageElements.map(waitForImageLoadEventOrTimeout),
-      );
+      await Promise.all(imageElements.map(waitForImageLoadEventOrTimeout));
     },
     {
       rootSelector,
@@ -176,10 +238,15 @@ async function dismissInfoBannerForInteraction(page) {
   );
 }
 
-async function setupHomeVisualPage(page) {
+async function setupHomeVisualPage(page, options = {}) {
   await blockThirdPartyNoise(page);
+  await disablePageMotion(page);
+  if (!options.showInfoBanner) {
+    await dismissInfoBannerBeforePageScripts(page);
+  }
   await page.goto('/', { waitUntil: 'domcontentloaded' });
-  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await applyDisabledMotionStyle(page);
+  await setHomeChromeVisibility(page, options);
   await waitForLayout(page);
 }
 
@@ -188,6 +255,7 @@ module.exports = {
   classMap,
   timeouts,
   blockThirdPartyNoise,
+  setHomeChromeVisibility,
   waitForLayout,
   waitForSelectorHasClass,
   waitForElementIdHasClass,
