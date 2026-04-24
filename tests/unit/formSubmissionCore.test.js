@@ -1,8 +1,5 @@
-import { createRequire } from 'node:module';
 import { describe, it, expect } from 'vitest';
-
-const require = createRequire(import.meta.url);
-const { validEmail, isSpamHoneypot } = require('../../src/scripts/form-submission/formSubmissionCore.cjs');
+import { validEmail, isSpamHoneypot } from '@scripts/form-submission/formSubmissionCore.js';
 
 describe('formSubmissionCore', () => {
   describe('validEmail', () => {

@@ -1,15 +1,13 @@
-'use strict';
+import { bracketAttribute } from './selectorsShared.js';
 
-const { bracketAttribute } = require('./selectorsShared.cjs');
-
-const STOCKING_CAROUSEL_CLASS = {
+export const STOCKING_CAROUSEL_CLASS = {
   slide: 'stocking-carousel__slide',
   zoom: 'stocking-carousel__zoom',
   viewport: 'stocking-carousel__viewport',
   img: 'stocking-carousel__img',
 };
 
-const STOCKING_DATA_ATTR = {
+export const STOCKING_DATA_ATTR = {
   carousel: 'data-stocking-carousel',
   slide: 'data-stocking-slide',
   dot: 'data-stocking-dot',
@@ -21,7 +19,7 @@ const STOCKING_DATA_ATTR = {
   skeleton: 'data-stock-skeleton',
 };
 
-const STOCKING_QUERY = {
+export const STOCKING_QUERY = {
   carouselRoot: bracketAttribute(STOCKING_DATA_ATTR.carousel),
   slide: bracketAttribute(STOCKING_DATA_ATTR.slide),
   dot: bracketAttribute(STOCKING_DATA_ATTR.dot),
@@ -33,10 +31,4 @@ const STOCKING_QUERY = {
   skeleton: bracketAttribute(STOCKING_DATA_ATTR.skeleton),
   viewport: `.${STOCKING_CAROUSEL_CLASS.viewport}`,
   img: `.${STOCKING_CAROUSEL_CLASS.img}`,
-};
-
-module.exports = {
-  STOCKING_CAROUSEL_CLASS,
-  STOCKING_DATA_ATTR,
-  STOCKING_QUERY,
 };

@@ -1,135 +1,160 @@
 name: CI
 
 on:
-    push:
-        branches: [main]
-    pull_request:
-        branches: [main]
-        types: [opened, synchronize, reopened, labeled, unlabeled]
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize, reopened, labeled, unlabeled]
 
 jobs:
-    changes:
-        if: github.event_name == 'pull_request'
-        runs-on: ubuntu-latest
-        outputs:
-            visual: ${{ steps.filter.outputs.visual }}
-        steps:
-            - uses: actions/checkout@v4
-            - uses: dorny/paths-filter@v3
-              id: filter
-              with:
-                  filters: |
-                      visual:
-                          - 'src/styles/**'
-                          - 'src/pages/**'
-                          - 'src/data/**'
-                          - 'src/scripts/**'
-                          - 'src/assets/**'
-                          - 'eleventy.config.js'
-                          - '404.html'
-                          - '500.html'
-                          - 'tests/visual/**'
-                          - 'playwright.config.mjs'
-                          - 'playwright.a11y.config.mjs'
-                          - 'tests/a11y/**'
+  changes:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    outputs:
+      visual: ${{ steps.filter.outputs.visual }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dorny/paths-filter@v3
+        id: filter
+        with:
+          filters: |
+            visual:
+              - 'src/styles/**'
+              - 'src/pages/**'
+              - 'src/data/**'
+              - 'src/scripts/**'
+              - 'src/assets/**'
+              - 'eleventy.config.mjs'
+              - '404.html'
+              - '500.html'
+              - 'tests/visual/**'
+              - 'playwright.config.mjs'
+              - 'playwright.a11y.config.mjs'
+              - 'playwright.e2e.config.mjs'
+              - 'import-aliases-register.mjs'
+              - 'import-aliases-hooks.mjs'
+              - 'run-with-import-aliases.mjs'
+              - 'jsconfig.json'
+              - 'vitest.config.mjs'
+              - 'tests/a11y/**'
+              - 'e2e/**'
 
-    build:
-        runs-on: ubuntu-latest
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
 
-        steps:
-            - name: checkout code
-              uses: actions/checkout@v4
+      - name: Visual baseline parity
+        run: |
+          cd tests/visual/home-snapshots
+          darwin=$(ls *-darwin.png 2>/dev/null | sed 's/-darwin\.png$//' | sort)
+          linux=$(ls *-linux.png 2>/dev/null | sed 's/-linux\.png$//' | sort)
+          if ! diff <(echo "$darwin") <(echo "$linux") > /tmp/parity.diff; then
+            echo "::error::Visual baseline mismatch — every test must have both '-darwin.png' and '-linux.png'."
+            echo "Missing on one side (left = darwin-only, right = linux-only):"
+            cat /tmp/parity.diff
+            echo ""
+            echo "Fix: run 'yarn test:visual:update' locally for '-darwin' and apply the 'update-visual-snapshots' label for '-linux'."
+            exit 1
+          fi
+          echo "Baselines in parity ($(echo "$darwin" | wc -l | tr -d ' ') tests × 2 platforms)."
 
-            - name: visual baseline parity
-              run: |
-                  cd tests/visual/home-snapshots
-                  darwin=$(ls *-darwin.png 2>/dev/null | sed 's/-darwin\.png$//' | sort)
-                  linux=$(ls *-linux.png 2>/dev/null | sed 's/-linux\.png$//' | sort)
-                  if ! diff <(echo "$darwin") <(echo "$linux") > /tmp/parity.diff; then
-                    echo "::error::Visual baseline mismatch — every test must have both '-darwin.png' and '-linux.png'."
-                    echo "Missing on one side (left = darwin-only, right = linux-only):"
-                    cat /tmp/parity.diff
-                    echo ""
-                    echo "Fix: run 'yarn test:visual:update' locally for '-darwin' and apply the 'update-visual-snapshots' label for '-linux'."
-                    exit 1
-                  fi
-                  echo "Baselines in parity ($(echo "$darwin" | wc -l | tr -d ' ') tests × 2 platforms)."
+      - name: Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: yarn
 
-            - name: setup Node.js
-              uses: actions/setup-node@v4
-              with:
-                  node-version: 22.x
+      - name: Enable Corepack
+        run: corepack enable
 
-            - name: install dependencies
-              run: |
-                  yarn set version 4.3.1
-                  yarn install --immutable
+      - name: Install dependencies
+        run: yarn install --immutable
 
-            - name: build app
-              run: yarn build
+      - name: Build
+        run: yarn build
 
-            - name: unit tests
-              run: yarn test:unit
+      - name: Unit tests
+        run: yarn test:unit
 
-            - name: install Playwright (Chromium for a11y)
-              run: yarn exec playwright install chromium --with-deps
+      - name: Install Playwright (Chromium for a11y + e2e)
+        run: yarn exec playwright install chromium --with-deps
 
-            - name: accessibility tests
-              run: yarn test:a11y
+      - name: Accessibility tests
+        run: yarn test:a11y
 
-    visual:
-        needs: [changes, build]
-        if: |
-            github.event_name == 'pull_request' &&
-            (needs.changes.outputs.visual == 'true' ||
-             contains(join(github.event.pull_request.labels.*.name, ','), 'run-visual'))
-        runs-on: ubuntu-latest
+      - name: E2E tests
+        run: yarn test:e2e
 
-        steps:
-            - name: checkout code
-              uses: actions/checkout@v4
-
-            - name: setup Node.js
-              uses: actions/setup-node@v4
-              with:
-                  node-version: 22.x
-
-            - name: install dependencies
-              run: |
-                  yarn set version 4.3.1
-                  yarn install --immutable
-
-            - name: install Playwright browsers
-              run: yarn exec playwright install chromium firefox webkit --with-deps
-
-            - name: visual regression tests
-              run: yarn test:visual
-
-            - name: upload Playwright report
-              if: failure()
-              uses: actions/upload-artifact@v4
-              with:
-                  name: playwright-report
-                  path: playwright-report/
-                  retention-days: 7
-
-    deploy:
+      - name: Upload dist for deploy
         if: github.ref == 'refs/heads/main'
-        runs-on: ubuntu-latest
+        uses: actions/upload-artifact@v4
+        with:
+          name: site-dist
+          path: dist/
 
-        steps:
-            - name: checkout code
-              uses: actions/checkout@v4
+  visual:
+    needs: [changes, build]
+    if: |
+      github.event_name == 'pull_request' &&
+      (needs.changes.outputs.visual == 'true' ||
+       contains(join(github.event.pull_request.labels.*.name, ','), 'run-visual'))
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
 
-            - name: Set up SSH
-              uses: webfactory/ssh-agent@v0.5.4
-              with:
-                ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+      - name: Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: yarn
 
-            - name: Run deploy script
-              run: ./deploy.sh
-              env:
-                REMOTE_USER: ${{ secrets.REMOTE_USER }}
-                REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
-                REMOTE_PATH: ${{ secrets.REMOTE_PATH }}
-                LOCAL_PATH: ${{ secrets.LOCAL_PATH }}
+      - name: Enable Corepack
+        run: corepack enable
+
+      - name: Install dependencies
+        run: yarn install --immutable
+
+      - name: Install Playwright browsers
+        run: yarn exec playwright install chromium firefox webkit --with-deps
+
+      - name: Visual regression tests
+        run: yarn test:visual
+
+      - name: Upload Playwright report
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 7
+
+  deploy:
+    if: github.ref == 'refs/heads/main'
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Download dist
+        uses: actions/download-artifact@v4
+        with:
+          name: site-dist
+          path: dist
+
+      - name: Set up SSH
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Run deploy script
+        run: ./deploy.sh
+        env:
+          REMOTE_USER: ${{ secrets.REMOTE_USER }}
+          REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
+          REMOTE_PATH: ${{ secrets.REMOTE_PATH }}
+          LOCAL_PATH: ${{ secrets.LOCAL_PATH }}

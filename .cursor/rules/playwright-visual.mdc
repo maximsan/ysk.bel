@@ -10,9 +10,9 @@ alwaysApply: false
 
 ## Layout
 
-- **Site DOM** (ids, `data-*`, shared classes): modules under `src/scripts/constants/dom/*.cjs`; bundled JS imports the relevant file per feature. **`homePageDom.cjs`** is a barrel that re-exports the same API — **tests** use it via `require()` in `tests/visual/constants.js` and helpers.
+- **Site DOM** (ids, `data-*`, shared classes): modules under `src/scripts/constants/dom/*.js`; bundled JS imports the relevant file per feature. **`homePageDom.js`** is a barrel that re-exports the same API — **tests** import it from `tests/visual/constants.js` and helpers.
 - **Test-only**: `tests/visual/constants.js` — `VIEWPORTS`, `BLOCKED_THIRD_PARTY_URL_GLOBS`, screenshot timeouts, `LAYOUT.footerMinVisibleWidthPx`.
-- **Shared waits / routing**: `tests/visual/support/home-snapshot-helpers.cjs`.
+- **Shared waits / routing**: `tests/visual/support/home-snapshot-helpers.js`.
 - **Specs**: `tests/visual/home-header.spec.js` (header + mobile drawer), `tests/visual/home-sections.spec.js` (remaining sections).
 - **Baselines**: `tests/visual/home-snapshots/*-{darwin,linux}.png` — single folder for all home specs; `snapshotPathTemplate` appends `{platform}` so macOS and Linux have separate PNG sets (font rasterizers differ enough to cross the AA threshold). Keep both sets in sync when UI changes.
 - **Config**: `playwright.config.mjs` loads `VIEWPORTS` via `createRequire` from `tests/visual/constants.js`.

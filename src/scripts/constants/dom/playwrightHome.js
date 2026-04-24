@@ -1,23 +1,21 @@
-'use strict';
+import { idSelector } from './selectorsShared.js';
+import { SECTION_IDS } from './sections.js';
+import { STATE_CLASS } from './state.js';
+import { LAYOUT_CLASS } from './layout.js';
+import { MENU_CLASS } from './menu.js';
+import { STOCKING_CAROUSEL_CLASS } from './stockingCarousel.js';
+import { VIDEO_SHOWCASE_CLASS } from './videoShowcase.js';
 
-const { idSelector } = require('./selectorsShared.cjs');
-const { SECTION_IDS } = require('./sections.cjs');
-const { STATE_CLASS } = require('./state.cjs');
-const { LAYOUT_CLASS } = require('./layout.cjs');
-const { MENU_CLASS } = require('./menu.cjs');
-const { STOCKING_CAROUSEL_CLASS } = require('./stockingCarousel.cjs');
-const { VIDEO_SHOWCASE_CLASS } = require('./videoShowcase.cjs');
-
-function buildStockingActiveZoomSelector() {
+export function buildStockingActiveZoomSelector() {
   return `${idSelector(SECTION_IDS.stocking)} .${STOCKING_CAROUSEL_CLASS.slide}.${STATE_CLASS.active} .${STOCKING_CAROUSEL_CLASS.zoom}`;
 }
 
-function buildHomeActiveVideoHostSelector() {
+export function buildHomeActiveVideoHostSelector() {
   return `${idSelector(SECTION_IDS.videos)} .${VIDEO_SHOWCASE_CLASS.slide}.${STATE_CLASS.active} .${VIDEO_SHOWCASE_CLASS.lazyHost}`;
 }
 
 /** Locator strings for Playwright `page.locator(...)`. */
-const PLAYWRIGHT_HOME_LOCATORS = {
+export const PLAYWRIGHT_HOME_LOCATORS = {
   header: `${LAYOUT_CLASS.headerTag}.${LAYOUT_CLASS.headerBlock}`,
   menu: `.${MENU_CLASS.root}`,
   navbarToggler: `.${MENU_CLASS.toggler}`,
@@ -31,10 +29,4 @@ const PLAYWRIGHT_HOME_LOCATORS = {
   contacts: idSelector(SECTION_IDS.contacts),
   footer: `${LAYOUT_CLASS.footerTag}.${LAYOUT_CLASS.footerSocial}`,
   stockingActiveZoom: buildStockingActiveZoomSelector(),
-};
-
-module.exports = {
-  buildStockingActiveZoomSelector,
-  buildHomeActiveVideoHostSelector,
-  PLAYWRIGHT_HOME_LOCATORS,
 };

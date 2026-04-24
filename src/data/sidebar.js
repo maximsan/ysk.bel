@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   menus: [
     {
       text: '+375 (29) 149 59 89',

@@ -3,27 +3,32 @@
   "version": "3.0.0",
   "description": "Усадьба Серебряный Карась",
   "homepage": "www.уск.бел",
+  "type": "module",
+  "packageManager": "yarn@4.5.2",
   "scripts": {
-    "watch:eleventy": "eleventy --serve",
-    "build:eleventy": "eleventy",
-    "debug": "DEBUG=* eleventy --serve",
+    "watch:eleventy": "node run-with-import-aliases.mjs eleventy --serve",
+    "build:eleventy": "node run-with-import-aliases.mjs eleventy",
+    "debug": "DEBUG=* node run-with-import-aliases.mjs eleventy --serve",
     "dev": "npm-run-all clean watch:eleventy",
     "build": "npm-run-all clean build:eleventy",
     "clean": "rm -rf dist",
-    "format": "prettier --write src",
-    "deploy:sh": "npx surge dist ysk.surge.sh",
+    "format": "node run-with-import-aliases.mjs prettier --write src",
+    "deploy:sh": "node run-with-import-aliases.mjs npx surge dist ysk.surge.sh",
     "deploy": "npm-run-all clean build:eleventy deploy:sh",
     "deploy:rb": "./deploy.sh",
     "deploy:all": "npm-run-all clean build:eleventy deploy:rb",
-    "test:visual": "playwright test",
-    "test:visual:ui": "playwright test --ui",
-    "test:visual:update": "playwright test --update-snapshots",
-    "test:visual:report": "playwright show-report playwright-report",
-    "test:visual:open-report": "playwright show-report playwright-report",
-    "test:unit": "vitest run",
-    "test:unit:watch": "vitest",
-    "test:a11y": "playwright test -c playwright.a11y.config.mjs",
-    "lighthouse:home": "lighthouse http://127.0.0.1:4173/ --preset=desktop --output=html --output-path=./lighthouse-home.html --quiet"
+    "test": "npm-run-all test:unit test:a11y test:e2e",
+    "test:e2e": "node run-with-import-aliases.mjs playwright test -c playwright.e2e.config.mjs",
+    "test:e2e:ui": "node run-with-import-aliases.mjs playwright test -c playwright.e2e.config.mjs --ui",
+    "test:visual": "node run-with-import-aliases.mjs playwright test",
+    "test:visual:ui": "node run-with-import-aliases.mjs playwright test --ui",
+    "test:visual:update": "node run-with-import-aliases.mjs playwright test --update-snapshots",
+    "test:visual:report": "node run-with-import-aliases.mjs playwright show-report playwright-report",
+    "test:visual:open-report": "node run-with-import-aliases.mjs playwright show-report playwright-report",
+    "test:unit": "node run-with-import-aliases.mjs vitest run",
+    "test:unit:watch": "node run-with-import-aliases.mjs vitest",
+    "test:a11y": "node run-with-import-aliases.mjs playwright test -c playwright.a11y.config.mjs",
+    "lighthouse:home": "node run-with-import-aliases.mjs lighthouse http://127.0.0.1:4173/ --preset=desktop --output=html --output-path=./lighthouse-home.html --quiet"
   },
   "repository": {
     "type": "git",
@@ -35,17 +40,11 @@
     "popper.js": "1.16.1"
   },
   "devDependencies": {
-    "@11ty/eleventy": "^2.0.1",
+    "@11ty/eleventy": "^3.1.0",
     "@axe-core/playwright": "^4.11.2",
-    "@babel/core": "^7.21.4",
-    "@babel/preset-env": "7.2.3",
-    "@esbuild/darwin-arm64": "^0.20.0",
     "@playwright/test": "^1.59.1",
     "@shopify/prettier-plugin-liquid": "^1.5.0",
-    "babel-loader": "8.0.5",
-    "babel-plugin-syntax-dynamic-import": "6.18.0",
     "bootstrap": "4.5.3",
-    "cross-env": "5.2.0",
     "esbuild": "^0.20.0",
     "happy-dom": "^20.9.0",
     "lighthouse": "^12.8.2",
@@ -58,11 +57,10 @@
   "author": "maximsan",
   "license": "MIT",
   "engines": {
-    "node": "22.x"
+    "node": ">=20"
   },
   "volta": {
-    "node": "22.11.0",
-    "yarn": "4.3.1"
-  },
-  "packageManager": "yarn@4.5.2"
+    "node": "20.15.0",
+    "yarn": "4.5.2"
+  }
 }

@@ -42,11 +42,13 @@ jobs:
               uses: actions/setup-node@v4
               with:
                   node-version: 22.x
+                  cache: yarn
+
+            - name: Enable Corepack
+              run: corepack enable
 
             - name: install dependencies
-              run: |
-                  yarn set version 4.3.1
-                  yarn install --immutable
+              run: yarn install --immutable
 
             - name: install Playwright browsers
               run: yarn exec playwright install chromium firefox webkit --with-deps
