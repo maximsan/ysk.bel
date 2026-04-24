@@ -39,4 +39,4 @@ alwaysApply: false
 
 ## Docs
 
-- Full workflow and checklist: `docs/visual-regression-testing-plan.md`.
+- Workflow: `.github/workflows/ci.yaml` (visual job), `update-visual-snapshots.yaml`; index: `docs/README.md`.

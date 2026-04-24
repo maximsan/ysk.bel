@@ -16,6 +16,15 @@
     position: relative;
     z-index: 1;
   }
+
+  .hero__story {
+    font-size: var(--text-lead);
+    font-weight: 500;
+    max-width: 32rem;
+    margin: 0.25rem auto 0;
+    line-height: 1.5;
+    color: var(--color-text-primary);
+  }
 }
 
 @media only screen and (min-width: 320px) and (max-width: 767.98px) {
@@ -44,7 +53,7 @@
       flex-direction: column;
       gap: 0.75rem;
 
-      > * {
+      > h2 {
         font-size: var(--text-hero-tight);
       }
     }
@@ -74,7 +83,7 @@
       flex-direction: column;
       gap: 0.75rem;
 
-      > * {
+      > h2 {
         font-size: var(--text-hero-medium);
       }
     }
@@ -97,7 +106,7 @@
     &-header {
       margin: 4rem auto 0;
 
-      > * {
+      > h2 {
         font-size: var(--text-hero-large);
       }
     }
@@ -114,7 +123,7 @@
       margin-left: 24rem;
       gap: 4rem;
 
-      > * {
+      > h2 {
         text-align: center;
         font-size: var(--text-hero-wide);
       }
