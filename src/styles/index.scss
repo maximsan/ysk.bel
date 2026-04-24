@@ -1,6 +1,7 @@
-@import url('https://fonts.googleapis.com/css?family=Rubik:400,500,500i,700,700i&display=swap');
-
 @import 'modules/constants';
+@import 'modules/section-chapter';
+@import 'modules/motion-polish';
+@import 'modules/media-skeleton';
 @import 'modules/common';
 @import 'modules/mixins';
 @import 'modules/animations';
@@ -10,7 +11,8 @@
 @import 'partials/services';
 @import 'partials/hero';
 @import 'partials/contact-button';
-@import 'partials/video';
+@import 'partials/videos-showcase';
+@import 'partials/stocking-carousel';
 @import 'partials/header';
 @import 'partials/logo';
 @import 'partials/info-banner';
@@ -22,8 +24,9 @@
 @import 'partials/cooperation-banner';
 
 body {
-  font-family: var(--font-base);
-  color: var(--black);
+  font-family: var(--font-body);
+  color: var(--color-text-primary);
+  background-color: var(--color-bg-page);
   padding: 0 !important;
   margin: 0 !important;
 
@@ -32,9 +35,18 @@ body {
 }
 
 @supports (scroll-behavior: smooth) {
-  *,
-  html {
-    scroll-behavior: smooth !important;
+  @media (prefers-reduced-motion: no-preference) {
+    *,
+    html {
+      scroll-behavior: smooth !important;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    html {
+      scroll-behavior: auto !important;
+    }
   }
 }
 
@@ -49,15 +61,15 @@ body {
 
 .advertisement {
   font-weight: 500;
-  color: $orange;
+  color: var(--color-accent);
 }
 
 .tooltip-inner {
   max-width: 200px;
   padding: 3px 8px;
-  color: #fff;
+  color: var(--white);
   text-align: center;
-  background-color: #000;
+  background-color: var(--default-black);
   border-radius: 0.25rem;
 }
 
@@ -95,7 +107,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  color: $orange;
+  color: var(--color-accent);
   font-size: 1.75rem;
   font-weight: bold;
 }

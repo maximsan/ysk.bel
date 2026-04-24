@@ -5,6 +5,12 @@
   </div>
   <h3 class='info-banner__header'>{{ banner.intro }}</h3>
   {% for message in banner.messages %}
-    <div class='info-banner__text'>{{ message }}</div>
+    <div class='info-banner__text'>
+      {% if message.href %}
+        <a class='info-banner__link' href='{{ message.href }}'>{{ message.text }}</a>
+      {% else %}
+        {{ message.text }}
+      {% endif %}
+    </div>
   {% endfor %}
 </div>

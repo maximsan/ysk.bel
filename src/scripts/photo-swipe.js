@@ -1,18 +1,25 @@
 import PhotoSwipeLightbox from 'photoswipe/lightbox';
+import {
+  GALLERY_SELECTORS,
+  PHOTOSWIPE_CLASS,
+  PHOTOSWIPE_OPTIONS,
+  PHOTOSWIPE_STOCKING_CHILDREN,
+  PHOTOSWIPE_UI,
+} from './constants/dom/galleryPhotoswipe.cjs';
 
 const lightbox = new PhotoSwipeLightbox({
-  gallery: '.gallery',
-  children: '.gallery__url',
-  bgOpacity: 1,
+  gallery: GALLERY_SELECTORS.mainRoot,
+  children: GALLERY_SELECTORS.mainChild,
+  bgOpacity: PHOTOSWIPE_OPTIONS.mainBgOpacity,
   pswpModule: () => import('photoswipe'),
 });
 
 lightbox.on('uiRegister', function () {
   lightbox.pswp.ui.registerElement({
-    name: 'custom-caption',
-    order: 9,
+    name: PHOTOSWIPE_UI.customCaptionName,
+    order: PHOTOSWIPE_OPTIONS.customCaptionOrder,
     isButton: false,
-    appendTo: 'root',
+    appendTo: PHOTOSWIPE_UI.appendToRoot,
     html: '',
     onInit: (el, pswp) => {
       lightbox.pswp.on('change', () => {
@@ -20,26 +27,21 @@ lightbox.on('uiRegister', function () {
         let captionHTML = '';
 
         const caption = document.createElement('div');
-        caption.className = 'custom-caption__wrapper';
+        caption.className = PHOTOSWIPE_CLASS.captionWrapper;
 
         const oldCaption = el.childNodes?.[0];
-        console.log('oldCaption', oldCaption);
         if (currSlideElement) {
           const hiddenCaption = currSlideElement.querySelector(
-            '.gallery-caption__text',
+            GALLERY_SELECTORS.captionText,
           );
-          console.log('hiddenCaption', hiddenCaption);
           if (hiddenCaption) {
-            // get caption from element with class gallery-caption__text
             captionHTML = hiddenCaption.innerHTML;
           } else {
-            // get caption from alt attribute
             captionHTML = currSlideElement
               .querySelector('img')
-              .getAttribute('alt');
+              ?.getAttribute('alt');
           }
           caption.innerHTML = captionHTML || '';
-          console.log('caption', caption);
           if (oldCaption) {
             el.replaceChild(caption, oldCaption);
           } else {
@@ -51,17 +53,17 @@ lightbox.on('uiRegister', function () {
   });
 
   lightbox.pswp.ui.registerElement({
-    name: 'bulletsIndicator',
-    className: 'pswp__bullets-indicator',
-    appendTo: 'wrapper',
+    name: PHOTOSWIPE_UI.bulletsIndicatorName,
+    className: PHOTOSWIPE_CLASS.bulletsIndicator,
+    appendTo: PHOTOSWIPE_UI.appendToWrapper,
     onInit: (el, pswp) => {
       const bullets = [];
       let bullet;
       let prevIndex = -1;
 
-      for (let i = 0; i < pswp.getNumItems(); i++) {
+      for (let i = 0; i < pswp.getNumItems(); i += 1) {
         bullet = document.createElement('div');
-        bullet.className = 'pswp__bullet';
+        bullet.className = PHOTOSWIPE_CLASS.bullet;
         bullet.onclick = (e) => {
           pswp.goTo(bullets.indexOf(e.target));
         };
@@ -69,11 +71,11 @@ lightbox.on('uiRegister', function () {
         bullets.push(bullet);
       }
 
-      pswp.on('change', (a) => {
+      pswp.on('change', () => {
         if (prevIndex >= 0) {
-          bullets[prevIndex].classList.remove('pswp__bullet--active');
+          bullets[prevIndex].classList.remove(PHOTOSWIPE_CLASS.bulletActiveModifier);
         }
-        bullets[pswp.currIndex].classList.add('pswp__bullet--active');
+        bullets[pswp.currIndex].classList.add(PHOTOSWIPE_CLASS.bulletActiveModifier);
         prevIndex = pswp.currIndex;
       });
     },
@@ -81,3 +83,13 @@ lightbox.on('uiRegister', function () {
 });
 
 lightbox.init();
+
+document.querySelectorAll(GALLERY_SELECTORS.stockingHook).forEach((galleryEl) => {
+  const stockingPhotoSwipe = new PhotoSwipeLightbox({
+    gallery: galleryEl,
+    children: PHOTOSWIPE_STOCKING_CHILDREN,
+    bgOpacity: PHOTOSWIPE_OPTIONS.stockingBgOpacity,
+    pswpModule: () => import('photoswipe'),
+  });
+  stockingPhotoSwipe.init();
+});

@@ -54,7 +54,7 @@
 }
 
 .pswp__custom-caption {
-  background: #704936;
+  background: var(--color-gallery-caption-bg);
   font-size: var(--font-size-lg);
   font-weight: 600;
   color: var(--white);
@@ -84,7 +84,7 @@
   width: 16px;
   height: 16px;
   border-radius: 50%;
-  background: #fff;
+  background: var(--white);
   margin: 0 4px;
 
   &--active {

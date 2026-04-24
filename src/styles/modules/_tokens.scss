@@ -1,0 +1,93 @@
+// Peat & linen — semantic design tokens
+:root {
+  --color-bg-page: #f6f3ee;
+  --color-bg-elevated: #fffcf8;
+  --color-bg-inverse: #1e1814;
+  --color-text-primary: #2c241c;
+  --color-text-muted: #5c534a;
+  --color-text-inverse: #f2ebe3;
+  /* Viber on inverse footer: brand tint mixed toward readable on --color-bg-inverse. */
+  --color-social-viber-brand: #7360f2;
+  --color-social-viber-on-inverse: color-mix(
+    in srgb,
+    var(--color-social-viber-brand) 32%,
+    var(--color-text-inverse)
+  );
+  /* Copper accent: meet ≥4.5:1 on --color-bg-elevated / cream for body-sized text (axe). */
+  --color-accent: #a84d22;
+  --color-accent-hover: #8c411c;
+  --color-accent-muted: #9a5c3a;
+  --color-accent-light: #d4a27a;
+  --color-accent-shadow: #5c3d25;
+  --color-border: rgba(44, 36, 28, 0.12);
+  --color-border-strong: rgba(44, 36, 28, 0.22);
+  --color-focus-ring: var(--color-accent);
+  /* Video showcase — letterbox / stage (dark neutrals, not Peat & linen surfaces) */
+  --color-video-viewport-bg: #0d1117;
+  --color-video-host-bg: #0a0c10;
+  /* Mobile nav drawer: top rule on dark overlay */
+  --color-menu-border: #333333;
+  /* Services package carousel — idle dot (Bootstrap indicator) */
+  --color-carousel-indicator-idle: #c9c9c9;
+  /* Floating contact FAB — mauve / rose (mobile + desktop variants) */
+  --color-contact-accent: #b47572;
+  /* PhotoSwipe custom caption bar */
+  --color-gallery-caption-bg: #704936;
+  --space-section: 4rem;
+  /* Section block padding (vertical rhythm) — replaces ad-hoc per-breakpoint stacks */
+  --section-pad-block: clamp(1.75rem, 3.5vw, 3rem);
+  --section-gap-before: clamp(1.5rem, 2.5vw, 2.5rem);
+  --section-scroll-margin: 4.5rem;
+  --section-header-margin-bottom: clamp(1rem, 2.2vw, 1.75rem);
+  --section-subtitle-max-width: 40rem;
+  --section-title-color: var(--color-text-primary);
+  --section-subtitle-color: var(--color-text-muted);
+  /* Surfaces: two neutral “bands” + optional warm veil (no extra hue families) */
+  --surface-page: var(--color-bg-page);
+  --surface-elevated: var(--color-bg-elevated);
+  --surface-warm-veil: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--color-bg-elevated) 82%, var(--color-bg-page)) 0%,
+    var(--color-bg-page) 72%
+  );
+  --section-edge-border: 1px solid var(--color-border-strong);
+  --section-inset-highlight: inset 0 1px 0 color-mix(in srgb, var(--color-bg-elevated) 75%, transparent);
+  /* Carousel / media chrome (siblings: stocking, videos) */
+  --chrome-radius: 1.15rem;
+  --chrome-radius-lg: 1.35rem;
+  --chrome-radius-inner: 0.8rem;
+  --chrome-border: 2px solid var(--color-border-strong);
+  --chrome-shadow-ambient: 0 8px 32px color-mix(in srgb, var(--color-text-primary) 6%, transparent);
+  --radius-md: 0.5rem;
+  --radius-content-card: 2rem;
+  --shadow-sm: 0 1px 3px rgba(44, 36, 28, 0.08);
+  /* Typography — display / heading stack (body stack set in _constants with --font-base) */
+  --font-heading: 'Source Serif 4', 'Times New Roman', serif;
+  /* Header / nav */
+  --header-shadow: 0 5px 20px color-mix(in srgb, var(--color-bg-inverse) 35%, transparent);
+  --nav-link-active-color: var(--color-accent-light);
+  /* Hero — readability over photo */
+  --hero-scrim: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--color-bg-inverse) 18%, transparent) 0%,
+    transparent 42%,
+    color-mix(in srgb, var(--color-bg-inverse) 32%, transparent) 100%
+  );
+  /* Pricing / packages (replaces raw Bootstrap .text-danger) */
+  --color-price: var(--color-accent);
+  /* Map shell */
+  --map-shell-radius: 6px;
+  --map-shell-border: 1px solid var(--color-border);
+  --map-shell-placeholder-bg: color-mix(in srgb, var(--color-text-primary) 6%, var(--color-bg-page));
+  /* Modals: info banner */
+  --info-banner-surface: var(--color-bg-elevated);
+  --info-banner-border: 2px solid var(--color-border-strong);
+  --info-banner-accent: var(--color-accent-muted);
+  /* Phase 5 — motion & focus */
+  --motion-section-duration: 0.35s;
+  --motion-stagger: 70ms;
+  --motion-ease-out: cubic-bezier(0.33, 1, 0.68, 1);
+  --motion-link-hover-duration: 0.25s;
+  --focus-ring-width: 2px;
+  --focus-ring-offset: 2px;
+}

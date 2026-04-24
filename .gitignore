@@ -7,11 +7,20 @@
 log/
 dist/
 node_modules/
+playwright-report/
+blob-report/
+test-results/
 doc/
 temp/
 _site/
 
+## Local planning docs (not committed — work tracked as done in repo; keep copies locally if needed)
+docs/design-system-phase-0-audit.md
+docs/design-system-peat-linen-plan.md
+docs/visual-regression-testing-plan.md
+
 ## Files
+lighthouse-home.html
 result.xml
 npm-debug.log
 package-lock.json

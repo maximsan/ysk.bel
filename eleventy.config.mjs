@@ -11,6 +11,8 @@ import packages from './src/data/packages.js';
 import contacts from './src/data/contacts.js';
 import sidebar from './src/data/sidebar.js';
 import services from './src/data/services.js';
+import stockingStories from './src/data/stockingStories.js';
+import videosShowcase from './src/data/videosShowcase.js';
 
 /* For the given `content` string, generate an MD5 hash of `length` chars. */
 function getHash(content, length = 8) {
@@ -123,6 +125,8 @@ export default function (config) {
       contacts,
       sidebar,
       services,
+      stockingStories,
+      videosShowcase,
     },
   });
 

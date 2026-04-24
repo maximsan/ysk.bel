@@ -1,4 +1,4 @@
-<section class='section-container contacts' id='contacts'>
+<section class='section-container contacts section-chapter' id='contacts'>
   <div class='container'>
     <div class='row'>
       <div class='col-12 col-lg-6'>
@@ -36,6 +36,9 @@
                       alt='{{ phone.operator }}'
                       class='{{ phone.operator }}-icon'
                       src='{{ phone.iconUrl }}'
+                      width='24'
+                      height='24'
+                      decoding='async'
                     >
                     <span href='{{ phone.href }}' class='phone-number'>{{ phone.text }}</span>
                   </div>
@@ -46,7 +49,22 @@
         </div>
       </div>
       <div class='col-12 col-lg-6'>
-        <div class='map' id='map'></div>
+        <div
+          class='map-shell map-shell--loading'
+          id='map'
+        >
+          <div
+            class='map-shell__skeleton media-skeleton'
+            aria-hidden='true'
+            data-map-skeleton
+          ></div>
+          <div
+            class='map'
+            id='map-canvas'
+            role='application'
+            aria-label='Карта: расположение усадьбы'
+          ></div>
+        </div>
       </div>
     </div>
   </div>

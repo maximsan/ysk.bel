@@ -1,40 +1,103 @@
-<section class='primary-video-section container'>
-  <div
-    class='primary-video-wrapper'
-    data-video-url='assets/videos/main-video-compressed'
-    data-video-extensions='webm,mp4'
-    data-video-poster='assets/images/video-poster.webp'
-    style='
-      overflow: hidden;
-      padding-top: 56.25%;
-      position: relative;
-      width: 100%;
-    '
-  ></div>
-</section>
-<section class='secondary-video-section container'>
-  <div
-    class='secondary-video-wrapper'
-    data-video-url='assets/videos/fish-1'
-    data-video-extensions='webm,mp4'
-    data-video-poster='assets/images/video-poster-fish-1.webp'
-    style='
-      overflow: hidden;
-      padding-top: 56.25%;
-      position: relative;
-      width: 100%;
-    '
-  ></div>
-  <div
-    class='secondary-video-wrapper'
-    data-video-url='assets/videos/fish-2'
-    data-video-extensions='webm,mp4'
-    data-video-poster='assets/images/video-poster-fish-2.webp'
-    style='
-      overflow: hidden;
-      padding-top: 56.25%;
-      position: relative;
-      width: 100%;
-    '
-  ></div>
+{% assign videoItems = videosShowcase.videos %}
+{% assign videoTotal = videoItems.size %}
+<section
+  class='section-container videos-showcase videos-showcase--section section-chapter'
+  id='videos'
+  aria-labelledby='videos-showcase-heading'
+>
+  <div class='container'>
+    <header class='videos-showcase__header section-chapter__header'>
+      <h2 class='videos-showcase__title section-chapter__title' id='videos-showcase-heading'>
+        {{ videosShowcase.sectionTitle }}
+      </h2>
+      <p class='videos-showcase__subtitle section-chapter__subtitle'>
+        {{ videosShowcase.sectionSubtitle }}
+      </p>
+    </header>
+
+    <div
+      class='videos-showcase__carousel'
+      data-videos-showcase
+      role='region'
+      aria-roledescription='карусель'
+      aria-label='Видеоролики усадьбы'
+      tabindex='0'
+    >
+      <p class='sr-only' aria-live='polite' data-videos-live></p>
+
+      <div class='videos-showcase__chrome'>
+        <div class='videos-showcase__viewport'>
+          {% for item in videoItems %}
+            {% capture slideRegionId %}videos-slides-{{ item.id }}{% endcapture %}
+            <div
+              class='videos-showcase__slide{% if forloop.first %} is-active{% endif %}'
+              data-videos-slide
+              aria-hidden='{% if forloop.first %}false{% else %}true{% endif %}'
+              id='{{ slideRegionId }}'
+            >
+              <p class='videos-showcase__caption'>{{ item.caption }}</p>
+              {% if item.description %}
+                <p class='videos-showcase__description'>{{ item.description }}</p>
+              {% endif %}
+              <div class='videos-showcase__ratio'>
+                <div
+                  class='videos-showcase__lazy-host'
+                  data-video-lazy
+                  data-video-url='{{ item.baseUrl }}'
+                  data-video-poster='{{ item.poster }}'
+                  {% if item.posterWebp %}
+                    data-poster-webp='{{ item.posterWebp }}'
+                  {% endif %}
+                  data-video-extensions='{{ item.extensions }}'
+                  data-video-preload='{% if forloop.first %}auto{% else %}metadata{% endif %}'
+                >
+                  <div
+                    class='videos-showcase__skeleton media-skeleton'
+                    aria-hidden='true'
+                    data-video-skeleton
+                  ></div>
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+
+        <button
+          type='button'
+          class='videos-showcase__nav videos-showcase__nav--prev'
+          data-videos-prev
+          aria-label='Предыдущее видео'
+        >
+          <span class='videos-showcase__nav-icon' aria-hidden='true'>‹</span>
+        </button>
+        <button
+          type='button'
+          class='videos-showcase__nav videos-showcase__nav--next'
+          data-videos-next
+          aria-label='Следующее видео'
+        >
+          <span class='videos-showcase__nav-icon' aria-hidden='true'>›</span>
+        </button>
+      </div>
+
+      <div class='videos-showcase__footer'>
+        <div class='videos-showcase__dots' aria-label='Выбор видео'>
+          {% for item in videoItems %}
+            <button
+              type='button'
+              class='videos-showcase__dot{% if forloop.first %} is-active{% endif %}'
+              data-videos-dot
+              aria-pressed='{% if forloop.first %}true{% else %}false{% endif %}'
+              aria-label='Видео {{ forloop.index }}: {{ item.caption }}'
+            ></button>
+          {% endfor %}
+        </div>
+        <p class='videos-showcase__counter'>
+          <span data-videos-current>1</span>
+          <span aria-hidden='true'> / </span>
+          <span data-videos-total>{{ videoTotal }}</span>
+        </p>
+      </div>
+    </div>
+  </div>
 </section>

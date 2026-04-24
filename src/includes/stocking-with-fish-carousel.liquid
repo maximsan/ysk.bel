@@ -1,0 +1,252 @@
+{% assign stories = stockingStories.stories %}
+{% assign storyCount = stories.size %}
+<section
+  class='section-container stocking-with-fish stocking-with-fish--section section-chapter'
+  id='stocking'
+  aria-labelledby='stocking-heading'
+>
+  <div class='container'>
+    {% for story in stories %}
+      {% if storyCount == 1 %}
+        <header class='stocking-with-fish__header section-chapter__header'>
+          <div class='stocking-with-fish__title-row'>
+            <h2 class='stocking-with-fish__title section-chapter__title' id='stocking-heading'>
+              {{ stockingStories.sectionTitle }}
+            </h2>
+            <span class='stocking-with-fish__badge' title='{{ story.badgeTitleAttr }}'>
+              {{ story.badgeLabel }}
+            </span>
+          </div>
+          <p class='stocking-with-fish__lead section-chapter__lede'>
+            {{ story.lead.intro -}}
+            <span class='stocking-with-fish__lead-accent'>{{ story.lead.highlight }}</span>
+            {{- story.lead.outro }}
+          </p>
+        </header>
+
+        {% assign stockingImages = story.images %}
+        {% assign stockingTotal = stockingImages.size %}
+        {% capture slideRegionId %}stocking-slides-{{ story.id }}{% endcapture %}
+
+        {% if stockingTotal > 0 %}
+          <div
+            class='stocking-carousel'
+            data-stocking-carousel
+            role='region'
+            aria-roledescription='карусель'
+            aria-label='Фотографии зарыбления'
+            tabindex='0'
+          >
+            <p class='sr-only stocking-carousel__live' aria-live='polite' data-stocking-live></p>
+
+            <div class='stocking-carousel__chrome'>
+              <div
+                class='js-stocking-photoswipe stocking-carousel__viewport'
+                id='{{ slideRegionId }}'
+              >
+                {% for image in stockingImages %}
+                  <article
+                    class='stocking-carousel__slide{% if forloop.first %} is-active{% endif %}'
+                    data-stocking-slide
+                    aria-hidden='{% if forloop.first %}false{% else %}true{% endif %}'
+                  >
+                    <a
+                      class='stocking-carousel__zoom'
+                      href='{{ story.basePath }}/{{ image.file }}'
+                      data-pswp-width='{{ image.width }}'
+                      data-pswp-height='{{ image.height }}'
+                      target='_blank'
+                      rel='noopener noreferrer'
+                    >
+                      <span
+                        class='stocking-carousel__skeleton media-skeleton'
+                        aria-hidden='true'
+                        data-stock-skeleton
+                      ></span>
+                      <img
+                        src='{{ story.basePath }}/{{ image.file }}'
+                        alt='Зарыбление пруда: подготовка и выпуск рыбы, фото {{ forloop.index }}'
+                        width='{{ image.width }}'
+                        height='{{ image.height }}'
+                        loading='{% if forloop.first %}eager{% else %}lazy{% endif %}'
+                        decoding='{% if forloop.first %}sync{% else %}async{% endif %}'
+                        fetchpriority='{% if forloop.first %}high{% else %}low{% endif %}'
+                        class='stocking-carousel__img'
+                      >
+                    </a>
+                  </article>
+                {% endfor %}
+              </div>
+
+              <button
+                type='button'
+                class='stocking-carousel__nav stocking-carousel__nav--prev'
+                data-stocking-prev
+                aria-controls='{{ slideRegionId }}'
+                aria-label='Предыдущее фото'
+              >
+                <span class='stocking-carousel__nav-icon' aria-hidden='true'>‹</span>
+              </button>
+              <button
+                type='button'
+                class='stocking-carousel__nav stocking-carousel__nav--next'
+                data-stocking-next
+                aria-controls='{{ slideRegionId }}'
+                aria-label='Следующее фото'
+              >
+                <span class='stocking-carousel__nav-icon' aria-hidden='true'>›</span>
+              </button>
+            </div>
+
+            <div class='stocking-carousel__footer'>
+              <div class='stocking-carousel__dots' aria-label='Выбор фото'>
+                {% for image in stockingImages %}
+                  <button
+                    type='button'
+                    class='stocking-carousel__dot{% if forloop.first %} is-active{% endif %}'
+                    data-stocking-dot
+                    aria-pressed='{% if forloop.first %}true{% else %}false{% endif %}'
+                    aria-label='Фото {{ forloop.index }}'
+                  ></button>
+                {% endfor %}
+              </div>
+              <p class='stocking-carousel__counter'>
+                <span data-stocking-current>1</span>
+                <span aria-hidden='true'> / </span>
+                <span data-stocking-total>{{ stockingTotal }}</span>
+              </p>
+            </div>
+          </div>
+        {% endif %}
+
+      {% else %}
+        {% if forloop.first %}
+          <header class='stocking-with-fish__section-head section-chapter__header'>
+            <h2 class='stocking-with-fish__title section-chapter__title' id='stocking-heading'>
+              {{ stockingStories.sectionTitle }}
+            </h2>
+            <nav class='stocking-stories-toc' aria-label='События зарыбления'>
+              <span class='stocking-stories-toc__label'>События</span>
+              <ul class='stocking-stories-toc__list'>
+                {% for s in stories %}
+                  <li class='stocking-stories-toc__item'>
+                    <a class='stocking-stories-toc__link' href='#{{ s.id }}'>{{ s.badgeLabel }}</a>
+                  </li>
+                {% endfor %}
+              </ul>
+            </nav>
+          </header>
+        {% endif %}
+
+        {% assign stockingImages = story.images %}
+        {% assign stockingTotal = stockingImages.size %}
+        {% capture slideRegionId %}stocking-slides-{{ story.id }}{% endcapture %}
+
+        <article class='stocking-story' id='{{ story.id }}'>
+          <header class='stocking-story__header'>
+            <h3 class='stocking-story__title'>{{ story.storyTitle }}</h3>
+            <span class='stocking-with-fish__badge' title='{{ story.badgeTitleAttr }}'>
+              {{ story.badgeLabel }}
+            </span>
+          </header>
+          <p class='stocking-with-fish__lead stocking-story__lead section-chapter__lede'>
+            {{ story.lead.intro -}}
+            <span class='stocking-with-fish__lead-accent'>{{ story.lead.highlight }}</span>
+            {{- story.lead.outro }}
+          </p>
+
+          {% if stockingTotal > 0 %}
+            <div
+              class='stocking-carousel'
+              data-stocking-carousel
+              role='region'
+              aria-roledescription='карусель'
+              aria-label='Фотографии: {{ story.storyTitle }}'
+              tabindex='0'
+            >
+              <p class='sr-only stocking-carousel__live' aria-live='polite' data-stocking-live></p>
+
+              <div class='stocking-carousel__chrome'>
+                <div
+                  class='js-stocking-photoswipe stocking-carousel__viewport'
+                  id='{{ slideRegionId }}'
+                >
+                  {% for image in stockingImages %}
+                    <article
+                      class='stocking-carousel__slide{% if forloop.first %} is-active{% endif %}'
+                      data-stocking-slide
+                      aria-hidden='{% if forloop.first %}false{% else %}true{% endif %}'
+                    >
+                      <a
+                        class='stocking-carousel__zoom'
+                        href='{{ story.basePath }}/{{ image.file }}'
+                        data-pswp-width='{{ image.width }}'
+                        data-pswp-height='{{ image.height }}'
+                        target='_blank'
+                        rel='noopener noreferrer'
+                      >
+                        <span
+                          class='stocking-carousel__skeleton media-skeleton'
+                          aria-hidden='true'
+                          data-stock-skeleton
+                        ></span>
+                        <img
+                          src='{{ story.basePath }}/{{ image.file }}'
+                          alt='{{ story.storyTitle }}, фото {{ forloop.index }}'
+                          width='{{ image.width }}'
+                          height='{{ image.height }}'
+                          loading='{% if forloop.first %}eager{% else %}lazy{% endif %}'
+                          decoding='{% if forloop.first %}sync{% else %}async{% endif %}'
+                          fetchpriority='{% if forloop.first %}high{% else %}low{% endif %}'
+                          class='stocking-carousel__img'
+                        >
+                      </a>
+                    </article>
+                  {% endfor %}
+                </div>
+
+                <button
+                  type='button'
+                  class='stocking-carousel__nav stocking-carousel__nav--prev'
+                  data-stocking-prev
+                  aria-controls='{{ slideRegionId }}'
+                  aria-label='Предыдущее фото'
+                >
+                  <span class='stocking-carousel__nav-icon' aria-hidden='true'>‹</span>
+                </button>
+                <button
+                  type='button'
+                  class='stocking-carousel__nav stocking-carousel__nav--next'
+                  data-stocking-next
+                  aria-controls='{{ slideRegionId }}'
+                  aria-label='Следующее фото'
+                >
+                  <span class='stocking-carousel__nav-icon' aria-hidden='true'>›</span>
+                </button>
+              </div>
+
+              <div class='stocking-carousel__footer'>
+                <div class='stocking-carousel__dots' aria-label='Выбор фото'>
+                  {% for image in stockingImages %}
+                    <button
+                      type='button'
+                      class='stocking-carousel__dot{% if forloop.first %} is-active{% endif %}'
+                      data-stocking-dot
+                      aria-pressed='{% if forloop.first %}true{% else %}false{% endif %}'
+                      aria-label='Фото {{ forloop.index }}'
+                    ></button>
+                  {% endfor %}
+                </div>
+                <p class='stocking-carousel__counter'>
+                  <span data-stocking-current>1</span>
+                  <span aria-hidden='true'> / </span>
+                  <span data-stocking-total>{{ stockingTotal }}</span>
+                </p>
+              </div>
+            </div>
+          {% endif %}
+        </article>
+      {% endif %}
+    {% endfor %}
+  </div>
+</section>
