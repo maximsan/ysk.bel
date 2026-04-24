@@ -34,7 +34,7 @@ describe('homePageDom', () => {
   });
 
   it('idSelector prefixes hash', () => {
-    expect(idSelector(SECTION_IDS.services)).toBe('#desc');
+    expect(idSelector(SECTION_IDS.services)).toBe('#services');
   });
 
   it('exposes stable Playwright locators', () => {

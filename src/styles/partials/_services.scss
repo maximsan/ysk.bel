@@ -1,3 +1,9 @@
+.packages {
+  .text-danger {
+    color: var(--color-price) !important;
+  }
+}
+
 .section-container.services {
   .content {
     border-radius: var(--radius-content-card);

@@ -2,7 +2,7 @@
 
 /** Section element ids on the home page (`*.liquid` / Eleventy). */
 const SECTION_IDS = {
-  services: 'desc',
+  services: 'services',
   stocking: 'stocking',
   videos: 'videos',
   contacts: 'contacts',

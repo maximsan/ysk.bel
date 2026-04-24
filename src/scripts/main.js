@@ -9,6 +9,7 @@ import {
   googleMapInit,
   documentHeight,
   addScrollUpButton,
+  initNavScrollSpy,
   initStockingCarousel,
   initStockingImageSkeletons,
   initVideosShowcaseCarousel,
@@ -58,6 +59,7 @@ window.setTimeout(() => {
 toggleSideBar();
 
 function initCarouselsWhenDomReady() {
+  initNavScrollSpy();
   initVideosShowcaseCarousel();
   initStockingCarousel();
   initStockingImageSkeletons();

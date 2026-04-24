@@ -79,12 +79,12 @@ Tune hex values against real photography after Phase 1.
 
 ## Phase 4 — Component pass (order of impact)
 
-- [ ] **Header / nav** — background, link hover, active section.
-- [ ] **Hero** — optional scrim for contrast; headline colors from tokens.
-- [ ] **Services / packages** — borders and price color from tokens.
-- [ ] **Stocking + videos** — align chrome (radius, border, CTA-adjacent accents) so they read as **siblings**, not two themes.
-- [ ] **Contacts + map** — card surface `--color-bg-elevated`; map shell border `--color-border`.
-- [ ] **Footer + info banner** — tie to `--color-bg-inverse` or elevated surface so banner does not clash.
+- [x] **Header / nav** — `--header-shadow`, `--color-bg-inverse` bar, phone hover `--color-accent-light`, `initNavScrollSpy` + `[aria-current='true']` → `--nav-link-active-color`.
+- [x] **Hero** — `--hero-scrim` overlay, headlines `--color-text-primary`.
+- [x] **Services / packages** — card border tokenized; `.packages .text-danger` → `--color-price`; `.advertisement` / `.accommodation` → `--color-accent`; section id `services` (matches `#services`).
+- [x] **Stocking + videos** — sibling chrome via shared `--chrome-*` / surfaces (Phases 3–4).
+- [x] **Contacts + map** — contacts card `--color-bg-elevated`; `.map-shell` uses `--map-shell-*` tokens.
+- [x] **Footer + banners** — footer `--color-bg-inverse`; cooperation `--color-bg-elevated` + `--color-text-primary`; info modal `--info-banner-*` + `--color-focus-ring`.
 
 ---
 

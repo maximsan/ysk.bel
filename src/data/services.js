@@ -12,7 +12,7 @@ const services = {
     {
       header: 'Рыбалка',
       side: 'left',
-      id: 'services',
+      id: 'fishing',
       isFirst: true,
       class: 'fishing',
       gallery: {

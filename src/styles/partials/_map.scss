@@ -7,9 +7,10 @@
   max-height: var(--map--desktop-size);
   margin: 0 auto 1.875em;
   overflow: hidden;
-  border-radius: 6px;
+  border-radius: var(--map-shell-radius);
+  border: var(--map-shell-border);
   scroll-margin-top: 4.5rem;
-  background: rgba(20, 28, 40, 0.06);
+  background: var(--map-shell-placeholder-bg);
 
   @media only screen and (min-width: 320px) and (max-width: 767.98px) {
     min-height: var(--map--mobile-size);

@@ -51,7 +51,7 @@ body {
 
 .advertisement {
   font-weight: 500;
-  color: $orange;
+  color: var(--color-accent);
 }
 
 .tooltip-inner {
@@ -97,7 +97,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  color: $orange;
+  color: var(--color-accent);
   font-size: 1.75rem;
   font-weight: bold;
 }

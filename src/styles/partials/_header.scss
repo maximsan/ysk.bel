@@ -25,8 +25,8 @@
 .header {
   --_animationStartsAfter: 50vh;
   --_animationDistance: 500px;
-  --_backgroundColorStart: var(--light-black);
-  --_backgroundColorEnd: var(--light-black);
+  --_backgroundColorStart: var(--color-bg-inverse);
+  --_backgroundColorEnd: var(--color-bg-inverse);
   --_textColorStart: var(--white);
   --_textColorEnd: var(--white);
 
@@ -40,7 +40,7 @@
   z-index: 999;
   border-radius: 0px;
 
-  box-shadow: 0 5px 20px #311f1c;
+  box-shadow: var(--header-shadow);
 
   @supports (animation-timeline: view()) {
     top: -5.5rem;
@@ -94,6 +94,10 @@
         &:focus {
           color: var(--white-hover);
         }
+
+        &[aria-current='true'] {
+          color: var(--nav-link-active-color);
+        }
       }
 
       .house {
@@ -111,7 +115,7 @@
         font-size: var(--font-size-base);
 
         :hover {
-          color: var(--dirty-orange);
+          color: var(--color-accent-light);
           text-decoration: none;
         }
       }

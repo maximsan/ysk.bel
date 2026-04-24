@@ -44,4 +44,24 @@
   --shadow-sm: 0 1px 3px rgba(44, 36, 28, 0.08);
   /* Typography — display / heading stack (body stack set in _constants with --font-base) */
   --font-heading: 'Source Serif 4', 'Times New Roman', serif;
+  /* Header / nav */
+  --header-shadow: 0 5px 20px color-mix(in srgb, var(--color-bg-inverse) 35%, transparent);
+  --nav-link-active-color: var(--color-accent-light);
+  /* Hero — readability over photo */
+  --hero-scrim: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--color-bg-inverse) 18%, transparent) 0%,
+    transparent 42%,
+    color-mix(in srgb, var(--color-bg-inverse) 32%, transparent) 100%
+  );
+  /* Pricing / packages (replaces raw Bootstrap .text-danger) */
+  --color-price: var(--color-accent);
+  /* Map shell */
+  --map-shell-radius: 6px;
+  --map-shell-border: 1px solid var(--color-border);
+  --map-shell-placeholder-bg: color-mix(in srgb, var(--color-text-primary) 6%, var(--color-bg-page));
+  /* Modals: info banner */
+  --info-banner-surface: var(--color-bg-elevated);
+  --info-banner-border: 2px solid var(--color-border-strong);
+  --info-banner-accent: var(--color-accent-muted);
 }
