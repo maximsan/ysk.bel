@@ -30,6 +30,7 @@ jobs:
                           - '500.html'
                           - 'tests/visual/**'
                           - 'playwright.config.mjs'
+                          - 'playwright.width-pass.config.mjs'
                           - 'playwright.a11y.config.mjs'
                           - 'tests/a11y/**'
 

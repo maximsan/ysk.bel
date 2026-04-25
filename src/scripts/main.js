@@ -7,7 +7,6 @@ import {
   addInfoBanner,
   googleMapInit,
   documentHeight,
-  addScrollUpButton,
   initNavScrollSpy,
   initStockingCarousel,
   initStockingImageSkeletons,
@@ -26,22 +25,14 @@ function runMobileOnlyEnhancements() {
   closeSideBarOnTimeout();
 }
 
-function runDesktopOnlyEnhancements() {
-  addScrollUpButton();
-}
-
 mobileMediaQuery.addEventListener('change', (event) => {
   if (event.matches) {
     runMobileOnlyEnhancements();
-  } else {
-    runDesktopOnlyEnhancements();
   }
 });
 
 if (mobileMediaQuery.matches) {
   runMobileOnlyEnhancements();
-} else {
-  runDesktopOnlyEnhancements();
 }
 
 if (hasInfoBannerElement) {

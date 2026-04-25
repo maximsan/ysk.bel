@@ -27,6 +27,13 @@ module.exports = {
   lang: 'ru',
   locale: 'ru_RU',
   /**
+   * Default browser UI tint (status bar / `<meta name="theme-color">`).
+   * Per-page override: set `themeColor` / `themeColorDark` in the page’s front
+   * matter (see `src/pages/home/index.md`); `base.liquid` passes them into `head.liquid`.
+   */
+  themeColor: '#5f6f6d',
+  themeColorDark: '#1c2724',
+  /**
    * Hero eyebrow — малый подзаголовок над `h1` (редакционный тон, Peat & linen).
    * Если пусто — hero не рендерит строку eyebrow.
    */

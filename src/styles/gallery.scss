@@ -26,11 +26,14 @@
         justify-content: center;
       }
 
+      /* Thumbs sit at the row edge; inset so they don’t touch the card boundary */
       &--right-side {
         margin-left: 0.5rem;
+        margin-right: clamp(0.65rem, 1.6vw, 1.4rem);
       }
 
       &--left-side {
+        margin-left: clamp(0.65rem, 1.6vw, 1.4rem);
         margin-right: 0.5rem;
       }
     }

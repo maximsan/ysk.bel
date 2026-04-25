@@ -21,6 +21,8 @@ docs/visual-regression-testing-plan.md
 
 ## Files
 lighthouse-home.html
+lighthouse-*.html
+lighthouse-*.json
 result.xml
 npm-debug.log
 package-lock.json

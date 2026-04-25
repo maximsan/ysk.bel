@@ -1,7 +1,12 @@
 <!doctype html>
 <html class='no-js' lang='{{ meta.lang }}'>
   <head>
-    {% render 'head' %}
+    {% comment %}
+      Optional front matter: `themeColor` / `themeColorDark` per page (data cascade). Falls back to `meta`.
+    {% endcomment %}
+    {% assign pageThemeColor = themeColor | default: meta.themeColor %}
+    {% assign pageThemeColorDark = themeColorDark | default: meta.themeColorDark %}
+    {% render 'head', themeColor: pageThemeColor, themeColorDark: pageThemeColorDark %}
   </head>
   <body>
     <!-- Google Tag Manager (noscript) -->
@@ -22,10 +27,6 @@
           improve your experience and security.
       </p>
     <![endif]-->
-
-    <button class='scroll-up' id='scroll-up' title='Назад к меню' aria-label='Назад к меню'>
-      <span aria-hidden='true'>↑</span>
-    </button>
 
     {% render 'header' %}
 

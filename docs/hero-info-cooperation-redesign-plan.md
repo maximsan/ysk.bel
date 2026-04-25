@@ -104,9 +104,9 @@ Trackable plan for redesigning the three top-of-page sections on the home page. 
 - [x] `yarn test:visual` passes after baseline refresh
 - [x] `yarn test:a11y` passes — contrast, focus order, ARIA roles, tab traps, reduced-motion
 - [ ] Lighthouse home page (desktop + mobile): LCP ≤ 2.5s, CLS ≤ 0.05, INP ≤ 200ms
-  - Latest local run: desktop Performance 81, LCP 3.2s, CLS 0.007, TBT 0ms; mobile Performance 68, LCP 15.2s, CLS 0.009, TBT 60ms. CLS/TBT are healthy; LCP remains a follow-up performance item.
+  - Latest local run: desktop Performance 81, LCP 3.2s, CLS 0.007, TBT 0ms; mobile Performance 68, LCP 15.2s, CLS 0.009, TBT 60ms. CLS/TBT are healthy; LCP remains a follow-up performance item. **Re-run after `build` + `serve`:** `yarn lighthouse:home:json` and `yarn lighthouse:mobile:json` (uses `scripts/lighthouse-with-playwright.cjs`; output gitignored).
 - [ ] Manual QA on iOS Safari (verify removal of `background-attachment: fixed`), Android Chrome, Firefox desktop
-- [ ] Manual screenshot pass at widths: 320, 375, 414, 768, 1024, 1280, 1440, 1920
+- [x] Viewport pass at widths 320, 375, 414, 768, 1024, 1280, 1440, 1920 — automated: `yarn test:visual:widths` (see `playwright.width-pass.config.mjs` and `tests/visual/home-width-pass.spec.js`); first-time / design changes: `yarn test:visual:widths:update` then commit `tests/visual/width-snapshots/*-chromium-*.png`.
 
 ---
 
@@ -115,8 +115,8 @@ Trackable plan for redesigning the three top-of-page sections on the home page. 
 - [ ] Seasonal hero variant (winter photo + `--hero-scrim-winter`) driven by `meta.season`
 - [ ] Animated copper hairline underline on headings via `@property --p` + `background-clip: text`
 - [ ] Custom cursor variant over hero CTA (copper 24px dot → 40px on hover) on `pointer: fine` only
-- [ ] `<meta name="theme-color">` matched to hero average colour per route
-- [ ] Extract the `.cta` system into a documented entry in `docs/design-system-new-section-recipe.md`
+- [x] `<meta name="theme-color">` — defaults in `src/data/meta.js`, optional per-page `themeColor` / `themeColorDark` in front matter, passed from `base.liquid` to `head.liquid` (see `src/pages/home/index.md`)
+- [x] `.cta` system documented in `docs/design-system-new-section-recipe.md`
 
 ---
 

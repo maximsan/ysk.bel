@@ -1,13 +1,42 @@
 .section-container.contacts {
-  background: url(#{$images-path}/stones_1920x1080.webp) no-repeat center center
-    fixed;
+  $contacts-photo: url('#{$images-path}/stones_1920x1080.webp');
+  position: relative;
+  isolation: isolate;
+  /* Unify with map: both panels share one radius in this section. */
+  --contacts-surface-radius: var(--chrome-radius);
+  --map-shell-radius: var(--contacts-surface-radius);
+  /* Photo — light: single layer; dark: cool slate + peat scrim weds water/stones to UI */
+  background-color: var(--color-bg-page);
+  background-image: $contacts-photo;
+  background-repeat: no-repeat;
+  background-position: center center;
   background-size: cover;
+  background-attachment: fixed;
   --icon-size: 1.125em;
   --icon-size-md: 1.25em;
   --bg-color: var(--color-bg-elevated);
   --text-color: var(--black);
 
+  @media (prefers-color-scheme: dark) {
+    background-image:
+      linear-gradient(
+        165deg,
+        color-mix(in srgb, #0a0e12 58%, transparent) 0%,
+        color-mix(in srgb, #14110e 42%, #0c1318 58%) 48%,
+        color-mix(in srgb, var(--color-bg-page) 88%, #101820 12%) 100%
+      ),
+      $contacts-photo;
+    background-size: cover, cover;
+    background-repeat: no-repeat, no-repeat;
+    background-attachment: fixed, fixed;
+  }
+
   .our-contacts {
+    position: relative;
+    border-radius: var(--contacts-surface-radius);
+    overflow: hidden;
+    border: 1px solid var(--color-border);
+    box-shadow: var(--chrome-shadow-ambient);
     background-color: var(--bg-color);
     color: var(--text-color);
     min-height: 400px;
@@ -173,6 +202,45 @@
         flex: 1 1 auto;
         align-items: center;
       }
+    }
+  }
+}
+
+/*
+ * Dark theme — “lake stones” photo runs cool/blue; tint the image + use frosted
+ * panels with copper hairlines (same radius as .map-shell via --map-shell-radius).
+ */
+@media (prefers-color-scheme: dark) {
+  .section-container.contacts {
+    .our-contacts {
+      text-shadow: 0 1px 2px color-mix(in srgb, #000 45%, transparent);
+      /* Solid fallback (no muddled chocolate slab). */
+      background: color-mix(
+        in srgb,
+        var(--color-bg-elevated) 86%,
+        rgba(0, 0, 0, 0.18)
+      );
+      border: 1px solid color-mix(in srgb, var(--color-accent) 32%, var(--color-border));
+      box-shadow:
+        0 14px 48px color-mix(in srgb, #000 35%, transparent),
+        inset 0 1px 0 color-mix(in srgb, var(--color-text-primary) 10%, transparent);
+
+      @supports (backdrop-filter: blur(0.5px)) {
+        background: color-mix(
+          in srgb,
+          var(--color-bg-elevated) 45%,
+          rgba(0, 0, 0, 0.12)
+        );
+        backdrop-filter: blur(14px) saturate(1.12);
+        -webkit-backdrop-filter: blur(14px) saturate(1.12);
+      }
+    }
+
+    .map-shell {
+      border: 1px solid color-mix(in srgb, var(--color-accent) 32%, var(--color-border));
+      box-shadow:
+        0 14px 48px color-mix(in srgb, #000 35%, transparent),
+        inset 0 1px 0 color-mix(in srgb, var(--color-text-primary) 8%, transparent);
     }
   }
 }

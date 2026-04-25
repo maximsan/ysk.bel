@@ -1,5 +1,11 @@
+/*
+ * Theming: one “Peat & linen” palette, light by default. OS dark mode
+ * (`prefers-color-scheme: dark`) retints surfaces/text below — there is no
+ * in-app light/dark toggle. `color-scheme` keeps browser UI in sync.
+ */
 // Peat & linen — semantic design tokens
 :root {
+  color-scheme: light;
   --color-bg-page: #f6f3ee;
   --color-bg-elevated: #fffcf8;
   --color-bg-inverse: #1e1814;
@@ -94,6 +100,8 @@
   --info-banner-surface: var(--color-bg-elevated);
   --info-banner-border: 2px solid var(--color-border-strong);
   --info-banner-accent: var(--color-accent-muted);
+  /* Legacy .bg-creamy-white (services card); dark override lives in the media block below. */
+  --creamy-white: rgba(255, 252, 248, 0.78);
   /* Phase 5 — motion & focus */
   --motion-section-duration: 0.35s;
   --motion-stagger: 70ms;
@@ -141,6 +149,7 @@
  */
 @media (prefers-color-scheme: dark) {
   :root {
+    color-scheme: dark;
     --color-bg-page: #18130f;
     --color-bg-elevated: #211a15;
     --color-bg-inverse: #0f0c09;
@@ -169,5 +178,11 @@
     --info-banner-surface: var(--color-bg-elevated);
     --info-banner-accent: var(--color-accent-light);
     --paper-grain-opacity: 0.03;
+    /* Legacy utility — was fixed cream; keep warm cards readable on peat */
+    --creamy-white: color-mix(
+      in srgb,
+      var(--color-bg-elevated) 88%,
+      #ffffff 4%
+    );
   }
 }

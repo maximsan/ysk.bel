@@ -2,6 +2,7 @@
   position: relative;
   isolation: isolate;
   overflow: clip;
+  container-type: inline-size;
   padding: var(--section-pad-block) clamp(1rem, 4vw, 2rem);
 
   background:
@@ -166,8 +167,21 @@
       gap: clamp(0.85rem, 1.6vw, 1.35rem);
     }
 
+    &__cta.cta-row {
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-items: center;
+      max-width: none;
+      width: auto;
+    }
+
     &__cta {
       gap: 0.75rem;
+
+      .cta {
+        width: auto;
+        max-width: min(100%, 24rem);
+      }
     }
   }
 }
@@ -185,13 +199,24 @@
       gap: 0.5rem;
       letter-spacing: 0.16em;
     }
+  }
+}
 
-    &__cta {
-      inline-size: 100%;
+/* Equal-width pill stack on phones / narrow layout (viewport-based so it always runs). */
+@media (max-width: 767.98px) {
+  .cooperation-banner__cta.cta-row {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+    max-width: min(100%, 22rem);
+    margin-inline: auto;
+    gap: clamp(1rem, 3.2vw, 1.5rem);
+  }
 
-      .cta {
-        inline-size: min(100%, 24rem);
-      }
-    }
+  .cooperation-banner__cta .cta {
+    width: 100%;
+    max-width: none;
+    box-sizing: border-box;
+    justify-content: center;
   }
 }

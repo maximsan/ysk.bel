@@ -30,6 +30,7 @@ function buildProjects() {
 
 export default defineConfig({
   testDir: 'tests/visual',
+  testIgnore: '**/home-width-pass.spec.js',
   // Shared folder so home specs can be split across files without duplicating PNGs.
   // Platform suffix: macOS and Linux rasterize fonts differently; per-platform
   // baselines let the suite pass locally (`-darwin`) and in CI (`-linux`).

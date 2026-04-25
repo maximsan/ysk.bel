@@ -17,7 +17,6 @@ Object.assign(
   require('./dom/layout.cjs'),
   require('./dom/menu.cjs'),
   require('./dom/infoBanner.cjs'),
-  require('./dom/scroll.cjs'),
   require('./dom/form.cjs'),
   require('./dom/galleryPhotoswipe.cjs'),
   require('./dom/videoShowcase.cjs'),

@@ -1,6 +1,5 @@
 const PHONE_WITHOUT_PLUS = '375291495989';
 const PHONE_WITH_PLUS = `%2B${PHONE_WITHOUT_PLUS}`;
-const USER_NAME = 'oleg_miskevich';
 
 module.exports = {
   links: [
@@ -15,12 +14,6 @@ module.exports = {
       href: `https://wa.me/${PHONE_WITHOUT_PLUS}`,
       text: 'WhatsApp',
       ariaLabel: 'Открыть WhatsApp-чат с усадьбой',
-    },
-    {
-      class: 'skype',
-      href: `skype:${USER_NAME}?chat`,
-      text: 'Skype',
-      ariaLabel: 'Открыть Skype-чат с усадьбой',
     },
   ],
 };

@@ -60,7 +60,12 @@
     min-width: 0;
     font-size: clamp(0.95rem, 0.9rem + 0.25vw, 1.08rem);
     line-height: 1.35;
-    color: var(--color-text-muted);
+    /* Stronger than body-muted: banner is dense UI on a single surface. */
+    color: color-mix(
+      in srgb,
+      var(--color-text-muted) 45%,
+      var(--color-text-primary) 55%
+    );
   }
 
   &__date {

@@ -14,7 +14,6 @@ const LAYOUT_CLASS = {
   heroScrollCueHidden: 'is-hidden',
   footerTag: 'footer',
   footerSocial: 'footer-social',
-  scrollUp: 'scroll-up',
   overlay: 'overlay',
   crossIcon: 'cross-icon',
 };

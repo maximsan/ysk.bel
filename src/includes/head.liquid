@@ -29,7 +29,15 @@
 <link rel='icon' type='image/png' sizes='16x16' href='assets/icons/favicon-16x16.png'>
 <link rel='manifest' href='assets/icons/site.webmanifest'>
 
-<meta content='#f6f3ee' name='theme-color'>
+<meta
+  name='theme-color'
+  content='{{ themeColor | default: meta.themeColor | default: '#5f6f6d' }}'
+>
+<meta
+  name='theme-color'
+  content='{{ themeColorDark | default: meta.themeColorDark | default: '#1c2724' }}'
+  media='(prefers-color-scheme: dark)'
+>
 <!-- To run web application in full-screen -->
 <meta content='yes' name='apple-mobile-web-app-capable'>
 <!-- Status Bar Style (see Supported Meta Tags below for available values) -->
@@ -44,7 +52,7 @@
   rel='stylesheet'
 >
 
-<!-- Hero LCP preload — keep in sync with <picture> in `hero-section.liquid`. -->
+<!-- Hero LCP preload — keep in sync with hero photo assets in `hero-section` / `_hero.scss`. -->
 <link
   rel='preload'
   as='image'
