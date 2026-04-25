@@ -33,6 +33,7 @@ function initOneVideosCarousel(carouselRoot) {
   if (!slides.length) return;
 
   let activeSlideIndex = 0;
+  let canMountActiveVideo = false;
 
   function announce() {
     if (!live) return;
@@ -58,12 +59,14 @@ function initOneVideosCarousel(carouselRoot) {
     if (counterTotal) counterTotal.textContent = String(slides.length);
 
     pauseVideosExcept(slides, activeSlideIndex);
-    const activeSlide = slides[activeSlideIndex];
-    const lazyVideoHost = activeSlide?.querySelector(
-      VIDEO_SHOWCASE_QUERY.lazyHost,
-    );
-    if (lazyVideoHost) {
-      mountLazyVideoHost(lazyVideoHost);
+    if (canMountActiveVideo) {
+      const activeSlide = slides[activeSlideIndex];
+      const lazyVideoHost = activeSlide?.querySelector(
+        VIDEO_SHOWCASE_QUERY.lazyHost,
+      );
+      if (lazyVideoHost) {
+        mountLazyVideoHost(lazyVideoHost);
+      }
     }
 
     announce();
@@ -128,6 +131,25 @@ function initOneVideosCarousel(carouselRoot) {
     },
     { passive: true },
   );
+
+  const mountWhenVisible = () => {
+    canMountActiveVideo = true;
+    update();
+  };
+
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) return;
+        observer.disconnect();
+        mountWhenVisible();
+      },
+      { rootMargin: '600px 0px' },
+    );
+    observer.observe(carouselRoot);
+  } else {
+    mountWhenVisible();
+  }
 
   update();
 }

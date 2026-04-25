@@ -179,12 +179,22 @@ async function waitForVideoShowcaseReady(page) {
     if (!videoElement) {
       return;
     }
+    // Firefox mobile can expose native controls nondeterministically during
+    // element screenshots. The visual baseline covers the video poster/chrome,
+    // not browser-owned media controls, so hide them for stability.
+    videoElement.removeAttribute('controls');
     videoElement.pause();
     try {
       videoElement.currentTime = 0;
     } catch {
       /* ignore seek errors before metadata */
     }
+    // Browsers can paint different decoded frames even at currentTime=0.
+    // Remove sources after readiness so the poster is the deterministic visual.
+    videoElement.querySelectorAll('source').forEach((sourceElement) => {
+      sourceElement.remove();
+    });
+    videoElement.load();
   }, activeLazyVideoHostSelector);
 }
 

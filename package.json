@@ -23,7 +23,10 @@
     "test:unit": "vitest run",
     "test:unit:watch": "vitest",
     "test:a11y": "playwright test -c playwright.a11y.config.mjs",
-    "lighthouse:home": "lighthouse http://127.0.0.1:4173/ --preset=desktop --output=html --output-path=./lighthouse-home.html --quiet"
+    "lighthouse:home": "lighthouse http://127.0.0.1:4173/ --preset=desktop --output=html --output-path=./lighthouse-desktop-home.html --chrome-flags=\"--headless=new\" --quiet",
+    "lighthouse:home:json": "lighthouse http://127.0.0.1:4173/ -output=json --output-path=./lighthouse-desktop-home.json --chrome-flags=\"--headless=new --no-sandbox --disable-gpu --disable-dev-shm-usage\" --quiet",
+    "lighthouse:mobile": "lighthouse http://127.0.0.1:4173/ --preset=mobile --output=html --output-path=./lighthouse-home-mobile.html --quiet",
+    "lighthouse:mobile:json": "lighthouse http://127.0.0.1:4173/ -output=json --output-path=./lighthouse-home-mobile.json --chrome-flags=\"--headless=new --no-sandbox --disable-gpu --disable-dev-shm-usage\" --quiet"
   },
   "repository": {
     "type": "git",

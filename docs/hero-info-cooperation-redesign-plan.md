@@ -30,7 +30,7 @@ Trackable plan for redesigning the three top-of-page sections on the home page. 
 `src/includes/hero-section.liquid`, `src/styles/partials/_hero.scss`,
 `src/scripts/helpers/heroScrollCue.js`, `src/includes/head.liquid`
 
-- [x] Replace CSS `background-image` with a `<picture>` element (responsive WebP `srcset`, `fetchpriority="high"`, `decoding="async"`, `loading="eager"`). AVIF sources are a follow-up once asset pipeline generates them — see Group H.
+- [x] Use a preloaded responsive hero background image; a `<picture>` LCP experiment was reverted because mobile Lighthouse reported the decorative image as a delayed LCP candidate.
 - [x] Remove `background-attachment: fixed` and the `margin-left: 24rem` layout hack
 - [x] Switch hero layout to a CSS Grid single-cell stage (`.hero > * { grid-area: stage }`) — left-anchored well ≥992px, centered on mobile
 - [x] Promote the first heading to `<h1>`; add eyebrow `<p>` ("Минская область · Логойский р-н") with copper hairline rules flanking it
@@ -40,7 +40,7 @@ Trackable plan for redesigning the three top-of-page sections on the home page. 
 - [x] Add scroll cue (hairline + animated dot) below content; hides on first scroll via `heroScrollCue.js` (one-shot `passive` listener)
 - [x] Strengthen scrim: radial bottom scrim layered on top of existing linear gradient
 - [x] Stagger-reveal on load: eyebrow → title line 1 → title line 2 → lede → CTAs → trust → cue using `--motion-hero-stagger`
-- [x] Ken Burns zoom on `.hero__image` (24s, 1.07 → 1.00)
+- [x] Removed Ken Burns zoom from the hero photo after Lighthouse identified decorative image motion as risky for LCP stability.
 - [x] Gate all motion behind `@media (prefers-reduced-motion: no-preference)`
 - [x] Add hero LCP preload hint (`<link rel="preload" as="image" imagesrcset imagesizes fetchpriority="high">`) in `src/includes/head.liquid`
 - [ ] Verify text contrast ≥ 4.5:1 over the photo at every breakpoint (pending visual + axe pass in Group G)
@@ -99,11 +99,12 @@ Trackable plan for redesigning the three top-of-page sections on the home page. 
 
 ## Group G — Verification
 
-- [ ] Regenerate Playwright visual baselines in `tests/visual/home-snapshots/` for hero, info-banner, cooperation-banner across chromium / firefox / webkit × mobile / tablet / desktop
-- [ ] `yarn test:unit` passes (including any info-banner cookie test updates)
-- [ ] `yarn test:visual` passes after baseline refresh
-- [ ] `yarn test:a11y` passes — contrast, focus order, ARIA roles, tab traps, reduced-motion
+- [x] Regenerate Playwright visual baselines in `tests/visual/home-snapshots/` for hero, info-banner, cooperation-banner across chromium / firefox / webkit × mobile / tablet / desktop
+- [x] `yarn test:unit` passes (including any info-banner cookie test updates)
+- [x] `yarn test:visual` passes after baseline refresh
+- [x] `yarn test:a11y` passes — contrast, focus order, ARIA roles, tab traps, reduced-motion
 - [ ] Lighthouse home page (desktop + mobile): LCP ≤ 2.5s, CLS ≤ 0.05, INP ≤ 200ms
+  - Latest local run: desktop Performance 81, LCP 3.2s, CLS 0.007, TBT 0ms; mobile Performance 68, LCP 15.2s, CLS 0.009, TBT 60ms. CLS/TBT are healthy; LCP remains a follow-up performance item.
 - [ ] Manual QA on iOS Safari (verify removal of `background-attachment: fixed`), Android Chrome, Firefox desktop
 - [ ] Manual screenshot pass at widths: 320, 375, 414, 768, 1024, 1280, 1440, 1920
 

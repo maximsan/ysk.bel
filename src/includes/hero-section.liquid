@@ -2,8 +2,8 @@
   Hero — первый экран на главной.
 
   Group B редизайна (см. `docs/hero-info-cooperation-redesign-plan.md`):
-    - <picture> с responsive WebP srcset вместо CSS background-image,
-      одновременно элемент LCP (см. preload в `head.liquid`).
+    - Оптимизированная hero-фотография через CSS background + preload
+      (так Lighthouse не откладывает LCP на декоративном изображении).
     - Один <h1>, eyebrow-строка с копперной линейкой, CTA-ряд по единому
       словарю `_cta.scss`, trust strip, скролл-курсор.
     - Сетка и scrim полностью описаны в `_hero.scss` — здесь только разметка.
@@ -19,39 +19,6 @@
   class='section-container hero intro'
   aria-labelledby='hero-title'
 >
-  <picture class='hero__picture'>
-    <source
-      type='image/avif'
-      srcset='
-        assets/images/hero-fish-600.avif 600w,
-        assets/images/hero-fish-800.avif 800w,
-        assets/images/hero-fish-1200.avif 1200w,
-        assets/images/hero-fish-1600.avif 1600w
-      '
-      sizes='100vw'
-    >
-    <source
-      type='image/webp'
-      srcset='
-        assets/images/hero-fish-600.webp 600w,
-        assets/images/hero-fish-800.webp 800w,
-        assets/images/hero-fish-1200.webp 1200w,
-        assets/images/hero-fish-1600.webp 1600w
-      '
-      sizes='100vw'
-    >
-    <img
-      class='hero__image'
-      src='assets/images/hero-fish-800.webp'
-      alt=''
-      width='800'
-      height='1200'
-      fetchpriority='high'
-      decoding='async'
-      loading='eager'
-    >
-  </picture>
-
   <div class='hero__scrim' aria-hidden='true'></div>
 
   <div class='container hero-content'>
