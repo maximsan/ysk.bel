@@ -51,8 +51,8 @@
 ## P3 — Header: layout & breakpoints
 
 - [x] **Flexible nav width:** `_menu.scss` uses `max-width: min(…rem, 100%)`, `width: 100%`, `flex-wrap`, and `gap` instead of fixed `500px` / `650px` / `700px` widths.
-- [x] **Mobile (under 768px):** **Hamburger + drawer** (`_header.scss` / `_menu.scss`, max-width **767.98px**). **Scrolled desktop pill:** `--_headerWidth: min(max-content, 100%)` — compact centered bar, wide enough for the nav row, capped at the viewport so the last link is not clipped.
-- [x] **Fallback** for header when `animation-timeline` is unavailable — `@supports not (animation-timeline: view())` in `_header.scss`.
+- [x] **Mobile (under 768px):** **Hamburger + drawer** (`_header.scss` / `_menu.scss`, max-width **767.98px**). **Scrolled header:** `animation-timeline: view()` + range after ~1 viewport; bar tucks up then eases in as compact pill (`stickyNavigation` in `_header.scss`).
+- [x] **Fallback** for header when view timelines are unavailable — `@supports not (animation-timeline: view())` in `_header.scss`.
 - [ ] **Header CTA (optional):** One clear booking / call action on desktop (deferred).
 
 ---
@@ -68,9 +68,9 @@
 
 ## P5 — Visual polish
 
-- [ ] Logo typography vs nav (`_logo.scss`).
-- [ ] If the footer keeps links, style with design tokens (focus, contrast)—avoid looking like a second row of banner buttons.
-- [ ] Light depth / texture only where it fits (header, dark bands).
+- [x] **Logo vs nav:** Serif wordmark (`--font-heading`), weight 600, letter-spacing; Rubik stays on nav links (`_logo.scss`).
+- [x] **Footer links:** Muted inverse + subtle copper mix; `font-size-sm`, weight 500; underline only on hover; focus ring + `border-radius` (`_footer.scss`).
+- [x] **Depth / texture:** Layered `--header-shadow` + inset rim on `.navbar`; footer `--footer-band-shadow` + `paper-grain` (`_tokens.scss`, `_header.scss`, `_footer.scss`).
 
 ---
 

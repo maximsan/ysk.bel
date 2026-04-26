@@ -178,7 +178,7 @@ Short reference for terms and patterns used in **Phase 1** (footer/colophon) and
 
 ### Scroll-driven header animation (`animation-timeline`) — fallback
 
-**What:** On supporting browsers, the header can animate (e.g. “pill” width / position) based on **scroll progress** via `animation-timeline: view()`.
+**What:** On supporting browsers, the header can hide then animate in as a compact “pill” based on a **view progress** timeline: `animation-timeline: view()` with `animation-range-start/end` tied to scroll past the first viewport (see `_header.scss`).
 
 **Why a fallback:** In browsers **without** that API, the same keyframes would not run predictably. We keep an explicit **`@supports not (animation-timeline: view())`** rule so those users still get a **normal full-width sticky bar** (`width: auto`, `border-radius: 0`).
 

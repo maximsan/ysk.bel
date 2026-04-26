@@ -22,6 +22,40 @@ let scrollLockY = 0;
 let closeDelegationBound = false;
 let escapeBound = false;
 
+/** Where the page was scrolled when the drawer opened (visual restore on close). */
+function readScrollY() {
+  return window.scrollY ?? document.documentElement.scrollTop ?? 0;
+}
+
+/**
+ * After removing `body { position: fixed }`, jump back to the saved Y in one shot.
+ * `index.scss` sets `html { scroll-behavior: smooth !important }`, so a plain `scrollTo(x,y)`
+ * animates from ~0 — feels like the page “scrolls from the top” when you only close the drawer.
+ * Temporary `scroll-behavior: auto !important` on `<html>` wins for these calls only.
+ *
+ * The second `scrollTo` in rAF is for layout quirks after unlock — it must NOT run when we are
+ * about to scroll to a `#hash` target, or it would run after that navigation and cancel it.
+ */
+function restoreScrollPosition() {
+  const y = scrollLockY;
+  const html = document.documentElement;
+  html.style.setProperty('scroll-behavior', 'auto', 'important');
+  window.scrollTo(0, y);
+  requestAnimationFrame(() => {
+    window.scrollTo(0, y);
+    html.style.removeProperty('scroll-behavior');
+  });
+}
+
+/** One-shot restore (no follow-up rAF) — use before programmatic in-page scroll. */
+function restoreScrollPositionSyncOnly() {
+  const y = scrollLockY;
+  const html = document.documentElement;
+  html.style.setProperty('scroll-behavior', 'auto', 'important');
+  window.scrollTo(0, y);
+  html.style.removeProperty('scroll-behavior');
+}
+
 function setMenuButtonExpanded(isOpen) {
   if (!navButton) {
     return;
@@ -33,12 +67,80 @@ function setMenuButtonExpanded(isOpen) {
   );
 }
 
+function detachMenuListeners() {
+  if (escapeBound) {
+    escapeBound = false;
+    document.removeEventListener('keydown', onDocumentKeydown);
+  }
+}
+
+/** Close drawer UI + unlock scroll styles (shared by all close paths). */
+function teardownMenuDom() {
+  if (!sidebar || !header || !sidebarOpenIcon || !sidebarCloseIcon) {
+    return;
+  }
+  sidebar.classList.remove(MENU_CLASS.open);
+  if (menuScrim) {
+    menuScrim.classList.remove('menu-scrim--open');
+    menuScrim.setAttribute('aria-hidden', 'true');
+  }
+
+  document.body.style.position = '';
+  document.body.style.top = '';
+  document.body.style.left = '';
+  document.body.style.right = '';
+  document.body.style.width = '';
+
+  header.style.position = '';
+  header.style.top = '';
+  header.style.left = '';
+  header.style.right = '';
+  header.style.width = '';
+
+  sidebarCloseIcon.classList.add(CSS_UTILITY_CLASS.hidden);
+  sidebarOpenIcon.classList.remove(CSS_UTILITY_CLASS.hidden);
+  setMenuButtonExpanded(false);
+  detachMenuListeners();
+}
+
+function scrollToHashFromDrawer(href) {
+  if (href === '#' || href === '#top') {
+    window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+    try {
+      history.replaceState(null, '', href);
+    } catch {
+      /* ignore */
+    }
+    return;
+  }
+
+  const raw = href.slice(1);
+  let id;
+  try {
+    id = decodeURIComponent(raw);
+  } catch {
+    id = raw;
+  }
+
+  const el = document.getElementById(id);
+  if (el) {
+    el.scrollIntoView({ block: 'start', behavior: 'auto' });
+    try {
+      history.replaceState(null, '', href);
+    } catch {
+      /* ignore */
+    }
+  } else {
+    window.location.hash = href;
+  }
+}
+
 function openSideBar() {
   if (!sidebar || !header || !sidebarOpenIcon || !sidebarCloseIcon) {
     return;
   }
   // Scroll lock: remember position, fix body so background doesn’t scroll.
-  scrollLockY = window.scrollY;
+  scrollLockY = readScrollY();
   document.body.style.position = 'fixed';
   document.body.style.top = `-${scrollLockY}px`;
   document.body.style.left = '0';
@@ -51,8 +153,12 @@ function openSideBar() {
     menuScrim.setAttribute('aria-hidden', 'false');
   }
 
+  /* Pin the bar to the top only — `inset: 0` stretched `<header>` to full viewport and felt like a scroll jump. */
   header.style.position = 'fixed';
-  header.style.inset = '0';
+  header.style.top = '0';
+  header.style.left = '0';
+  header.style.right = '0';
+  header.style.width = '100%';
 
   sidebarOpenIcon.classList.add(CSS_UTILITY_CLASS.hidden);
   sidebarCloseIcon.classList.remove(CSS_UTILITY_CLASS.hidden);
@@ -68,29 +174,20 @@ function closeSideBar() {
   if (!sidebar || !header || !sidebarOpenIcon || !sidebarCloseIcon) {
     return;
   }
-  sidebar.classList.remove(MENU_CLASS.open);
-  if (menuScrim) {
-    menuScrim.classList.remove('menu-scrim--open');
-    menuScrim.setAttribute('aria-hidden', 'true');
+  teardownMenuDom();
+  restoreScrollPosition();
+}
+
+/** Close drawer then scroll to in-page target (avoid rAF `scrollTo(lockY)` undoing hash scroll). */
+function closeSideBarForHashLink(href) {
+  if (!sidebar || !header || !sidebarOpenIcon || !sidebarCloseIcon) {
+    return;
   }
-
-  document.body.style.position = '';
-  document.body.style.top = '';
-  document.body.style.left = '';
-  document.body.style.right = '';
-  document.body.style.width = '';
-  window.scrollTo(0, scrollLockY);
-
-  header.style.position = 'sticky';
-
-  sidebarCloseIcon.classList.add(CSS_UTILITY_CLASS.hidden);
-  sidebarOpenIcon.classList.remove(CSS_UTILITY_CLASS.hidden);
-  setMenuButtonExpanded(false);
-
-  if (escapeBound) {
-    escapeBound = false;
-    document.removeEventListener('keydown', onDocumentKeydown);
-  }
+  teardownMenuDom();
+  restoreScrollPositionSyncOnly();
+  requestAnimationFrame(() => {
+    scrollToHashFromDrawer(href);
+  });
 }
 
 function onDocumentKeydown(event) {
@@ -114,7 +211,12 @@ function onMenuLinkClick(event) {
   if (!href) {
     return;
   }
-  if (href.startsWith('#') || href.startsWith('tel:')) {
+  if (href.startsWith('#')) {
+    event.preventDefault();
+    closeSideBarForHashLink(href);
+    return;
+  }
+  if (href.startsWith('tel:')) {
     closeSideBar();
   }
 }

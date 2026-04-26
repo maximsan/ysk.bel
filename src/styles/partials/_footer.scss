@@ -1,16 +1,27 @@
 /* Footer: colophon — responsive band; CTAs stay in cooperation-banner. */
 
 .footer-social {
+  position: relative;
+  isolation: isolate;
+  overflow: clip;
   background-color: var(--color-bg-inverse);
   color: var(--color-text-inverse);
   display: flex;
+  box-shadow: var(--footer-band-shadow);
   padding-block: clamp(1.25rem, 3vw, 1.75rem);
   padding-inline: max(1rem, env(safe-area-inset-left))
     max(1rem, env(safe-area-inset-right));
   padding-bottom: max(1.25rem, env(safe-area-inset-bottom));
+
+  &::after {
+    @include paper-grain(0.028);
+    z-index: 0;
+  }
 }
 
 .footer-site {
+  position: relative;
+  z-index: 1;
   display: flex;
   flex-direction: column;
   align-items: stretch;
@@ -56,20 +67,33 @@
 }
 
 .footer-site__link {
-  font-size: var(--font-size-base);
-  font-weight: var(--font-weight-semibold);
-  color: var(--color-accent-light);
-  text-decoration: underline;
-  text-underline-offset: 0.15em;
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  color: color-mix(
+    in srgb,
+    var(--color-text-inverse) 86%,
+    var(--color-accent-muted) 14%
+  );
+  text-decoration: none;
+  text-underline-offset: 0.2em;
+  transition:
+    color var(--motion-link-hover-duration) var(--motion-ease-out),
+    text-decoration-color var(--motion-link-hover-duration) var(--motion-ease-out);
 
   &:hover {
-    color: var(--white-hover);
-    text-decoration: none;
+    color: var(--color-text-inverse);
+    text-decoration: underline;
+    text-decoration-color: color-mix(
+      in srgb,
+      var(--color-accent-light) 55%,
+      var(--color-text-inverse)
+    );
   }
 
   &:focus-visible {
     outline: var(--focus-ring-width) solid var(--color-focus-ring);
     outline-offset: var(--focus-ring-offset);
+    border-radius: var(--radius-md);
   }
 }
 

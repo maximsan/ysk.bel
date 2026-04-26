@@ -80,8 +80,13 @@
   --shadow-sm: 0 1px 3px rgba(44, 36, 28, 0.08);
   /* Typography — display / heading stack (body stack set in _constants with --font-base) */
   --font-heading: 'Source Serif 4', 'Times New Roman', serif;
-  /* Header / nav */
-  --header-shadow: 0 5px 20px color-mix(in srgb, var(--color-bg-inverse) 35%, transparent);
+  /* Header / nav — soft lift + hairline rim (P5 depth) */
+  --header-shadow:
+    0 1px 0 color-mix(in srgb, var(--color-text-inverse) 8%, transparent),
+    0 10px 28px color-mix(in srgb, var(--color-bg-inverse) 30%, transparent);
+  /* Footer inverse band — top edge + lift (pairs with inset highlight) */
+  --footer-band-shadow: inset 0 1px 0
+    color-mix(in srgb, var(--color-text-inverse) 8%, transparent);
   --nav-link-active-color: var(--color-accent-light);
   /* Hero — readability over photo */
   --hero-scrim: linear-gradient(
