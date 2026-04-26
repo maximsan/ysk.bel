@@ -50,10 +50,10 @@
 
 ## P3 — Header: layout & breakpoints
 
-- [ ] **Flexible nav width:** Fewer hard `width` values in `_menu.scss`, more `max-width` and `gap`.
-- [ ] **Tablet:** Balance logo, in-nav phone, and links.
-- [ ] **Fallback** for header behavior when `animation-timeline` is unavailable (if scroll-linked animation is used).
-- [ ] **Header CTA (optional):** One clear booking / call action on desktop.
+- [x] **Flexible nav width:** `_menu.scss` uses `max-width: min(…rem, 100%)`, `width: 100%`, `flex-wrap`, and `gap` instead of fixed `500px` / `650px` / `700px` widths.
+- [x] **Mobile (under 768px):** **Hamburger + drawer** (`_header.scss` / `_menu.scss`, max-width **767.98px**). **Scrolled desktop pill:** `--_headerWidth: min(max-content, 100%)` — compact centered bar, wide enough for the nav row, capped at the viewport so the last link is not clipped.
+- [x] **Fallback** for header when `animation-timeline` is unavailable — `@supports not (animation-timeline: view())` in `_header.scss`.
+- [ ] **Header CTA (optional):** One clear booking / call action on desktop (deferred).
 
 ---
 
@@ -86,5 +86,5 @@
 
 1. **P1:** Define the footer’s new role (no duplicate CTAs), then mobile visibility.
 2. **P2 → P4** as needed after footer UX is settled.
-3. **P3, P5** for header and visual polish.
+3. **P5** for further visual polish (P3 complete).
 4. **P6** before merge.

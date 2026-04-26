@@ -23,14 +23,16 @@
 // }
 
 .header {
-  --_animationStartsAfter: 50vh;
-  --_animationDistance: 500px;
+  /* Longer range + `ease-out` → gentle transition; short range + early width keyframe felt instant. */
+  --_headerScrollRange: min(52vh, 520px);
   --_backgroundColorStart: var(--color-bg-inverse);
   --_backgroundColorEnd: var(--color-bg-inverse);
   --_textColorStart: var(--white);
   --_textColorEnd: var(--white);
 
+  box-sizing: border-box;
   width: var(--_headerWidth, auto);
+  max-width: 100%;
   margin-inline: auto;
   /* Safe area: keep bar clear of notched phone side edges (see docs/ui-accessibility-glossary.md). */
   padding-inline: max(0px, env(safe-area-inset-left))
@@ -45,29 +47,54 @@
 
   box-shadow: var(--header-shadow);
 
-  @supports (animation-timeline: view()) {
-    top: -5.5rem;
-
-    // backdrop-filter: blur(0.35rem);
-
-    animation: stickyNavigation linear forwards;
-    animation-timeline: view();
-    animation-range-start: calc(100vh + var(--_animationStartsAfter));
-    animation-range-end: calc(
-      100vh + var(--_animationStartsAfter) + var(--_animationDistance)
-    );
+  /* Browsers without scroll-driven animations: keep a normal full-width sticky bar (no “pill” shrink). */
+  @supports not (animation-timeline: scroll(root block)) {
+    width: auto;
+    border-radius: 0;
   }
 
-  @keyframes stickyNavigation {
-    0%,
-    100% {
-      --_headerWidth: fit-content;
-    }
-    100% {
-      top: 1rem;
-      color: var(--_textColorEnd);
-      background-color: var(--_backgroundColorEnd);
-      border-radius: 100vw;
+  @supports (animation-timeline: scroll(root block)) {
+    top: -5.5rem;
+
+    animation: stickyNavigationMobile ease-out both;
+    animation-timeline: scroll(root block);
+    animation-range: 0 var(--_headerScrollRange);
+  }
+}
+
+/*
+ * Scroll-driven header: mobile keeps full width; desktop goes from full-width bar to compact pill.
+ * Pill width must use `fit-content` + shrink-wrapped `.navbar` (see `_menu.scss`: no flex-grow on `.menu`).
+ */
+@keyframes stickyNavigationMobile {
+  100% {
+    top: 1rem;
+    color: var(--_textColorEnd);
+    background-color: var(--_backgroundColorEnd);
+    border-radius: 100vw;
+  }
+}
+
+@keyframes stickyNavigationDesktop {
+  0% {
+    --_headerWidth: 100%;
+    --_navbarShrinkWidth: 100%;
+  }
+
+  100% {
+    --_headerWidth: fit-content;
+    --_navbarShrinkWidth: max-content;
+    top: 1rem;
+    color: var(--_textColorEnd);
+    background-color: var(--_backgroundColorEnd);
+    border-radius: 100vw;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  @supports (animation-timeline: scroll(root block)) {
+    .header {
+      animation-name: stickyNavigationDesktop;
     }
   }
 }
@@ -115,6 +142,10 @@
   position: relative;
   z-index: 1100;
   border-radius: 100vw;
+  box-sizing: border-box;
+  width: var(--_navbarShrinkWidth, auto);
+  max-width: 100%;
+  overflow-x: visible;
   padding: 1.5rem 1rem;
   /* Safe area: clear status bar / notch on phones. */
   padding-top: max(1.5rem, env(safe-area-inset-top));
@@ -160,7 +191,7 @@
       & .phone {
         font-size: var(--font-size-base);
 
-        :hover {
+        &:hover {
           color: var(--color-accent-light);
           text-decoration: none;
         }
@@ -211,7 +242,7 @@
   }
 
   @media only screen and (min-width: 768px) {
-    padding: 1rem 0.5rem;
+    padding: 1rem 0.75rem;
     padding-top: max(1rem, env(safe-area-inset-top));
 
     &.navbar-expand-md {
@@ -227,6 +258,22 @@
     }
   }
 
+  /*
+   * Viewports under 1200px: extra air between logo and nav, logo may shrink in flex so the pill
+   * doesn’t clip; padding keeps the last link off the rounded ends.
+   */
+  @media only screen and (min-width: 768px) and (max-width: 1199.98px) {
+    gap: clamp(0.6rem, 1.5vw + 0.25rem, 1.25rem);
+    align-items: center;
+    padding: 0.85rem 1.15rem;
+    padding-top: max(0.85rem, env(safe-area-inset-top));
+
+    .navbar-logo {
+      min-width: 0;
+      flex: 0 1 auto;
+    }
+  }
+
   @media (min-width: 992px) {
     padding: 1.5rem 1rem;
     padding-top: max(1.5rem, env(safe-area-inset-top));
@@ -235,6 +282,11 @@
       margin-left: 1rem;
       margin-inline-end: auto;
     }
+  }
+
+  @media (min-width: 992px) and (max-width: 1199.98px) {
+    padding: 1rem 1.25rem;
+    padding-top: max(1rem, env(safe-area-inset-top));
   }
 
   @media (min-width: 1200px) {

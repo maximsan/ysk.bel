@@ -14,7 +14,8 @@ import {
   initHeroScrollCue,
 } from './helpers';
 
-const MOBILE_BREAKPOINT = '(max-width: 768px)';
+/** Keep in sync with slide-out nav in `_menu.scss` / `_header.scss` (`max-width: 767.98px`). */
+const MOBILE_BREAKPOINT = '(max-width: 767.98px)';
 const mobileMediaQuery = window.matchMedia(MOBILE_BREAKPOINT);
 
 const hasInfoBannerElement = Boolean(

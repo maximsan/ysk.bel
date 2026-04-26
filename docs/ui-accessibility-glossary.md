@@ -176,11 +176,22 @@ Short reference for terms and patterns used in **Phase 1** (footer/colophon) and
 
 ---
 
+### Scroll-driven header animation (`animation-timeline`) — fallback
+
+**What:** On supporting browsers, the header can animate (e.g. “pill” width / position) based on **scroll progress** via `animation-timeline: view()`.
+
+**Why a fallback:** In browsers **without** that API, the same keyframes would not run predictably. We keep an explicit **`@supports not (animation-timeline: view())`** rule so those users still get a **normal full-width sticky bar** (`width: auto`, `border-radius: 0`).
+
+**Where:** [`src/styles/partials/_header.scss`](../src/styles/partials/_header.scss) (`.header`).
+
+---
+
 ## Related files (by topic)
 
 | Topic | Files |
 |--------|--------|
 | Drawer open/close, scrim, scroll lock, Escape | `src/scripts/helpers/sideBar.js` |
+| Nav width / tablet layout, header scroll-timeline fallback | `src/styles/partials/_menu.scss`, `src/styles/partials/_header.scss` |
 | Scroll spy / `aria-current` | `src/scripts/helpers/navScrollSpy.js`, `src/scripts/main.js` |
 | Scrim + safe-area + toggler size | `src/styles/partials/_header.scss` |
 | Drawer slide, safe-area bottom, link hit area | `src/styles/partials/_menu.scss` |

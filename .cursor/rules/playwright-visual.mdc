@@ -25,7 +25,7 @@ alwaysApply: false
 
 ## Behaviour notes
 
-- **Header — mobile menu open** runs only below 768px; dismiss info-banner overlay first (`dismissInfoBannerForInteraction`) so `.navbar-toggler` is clickable.
+- **Header — mobile menu open** runs only below `LAYOUT.footerMinVisibleWidthPx` (768px — slide-out nav through 767.98px); dismiss info-banner overlay first (`dismissInfoBannerForInteraction`) so `.navbar-toggler` is clickable.
 - Waits: stocking zoom `is-loaded`, video host `is-media-ready` / `readyState`, map `#map` → `map-shell--ready`.
 - `contacts` screenshot **masks `#map`** — Google Maps tiles/labels/watermarks vary by region and API-key usage, so the map region is painted over in the screenshot to keep the gate deterministic. The rest of `#contacts` is still compared.
 - Third-party blocking for stability: list in `BLOCKED_THIRD_PARTY_URL_GLOBS` (analytics only — Google Fonts are **not** blocked so Rubik/Source Serif 4 load in both environments; maps/video CDN also kept unblocked).

@@ -7,7 +7,7 @@ const homePageDom = require('../../src/scripts/constants/homePageDom.cjs');
  * Keep in sync with critical CSS (e.g. expanded nav vs hamburger in `_menu.scss`).
  */
 const LAYOUT = {
-  /** Viewports ≥ this width: desktop/tablet nav; below: slide-out menu (`home-header.spec.js`). */
+  /** Viewports ≥ this width: expanded inline nav; below: hamburger + slide-out (`home-header.spec.js`). */
   footerMinVisibleWidthPx: 768,
 };
 
