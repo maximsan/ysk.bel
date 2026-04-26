@@ -4,10 +4,10 @@ const homePageDom = require('../../src/scripts/constants/homePageDom.cjs');
 
 /**
  * Shared layout breakpoints for visual tests.
- * Keep in sync with critical CSS where relevant (e.g. footer visibility).
+ * Keep in sync with critical CSS (e.g. expanded nav vs hamburger in `_menu.scss`).
  */
 const LAYOUT = {
-  /** Viewports at or above this width show `footer.footer-social` (see `_footer.scss`). */
+  /** Viewports ≥ this width: desktop/tablet nav; below: slide-out menu (`home-header.spec.js`). */
   footerMinVisibleWidthPx: 768,
 };
 

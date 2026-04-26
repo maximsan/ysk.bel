@@ -1,5 +1,4 @@
 const { test, expect } = require('@playwright/test');
-const { LAYOUT } = require('./constants');
 const {
   locators,
   classMap,
@@ -86,12 +85,6 @@ test.describe('home — sections', () => {
   });
 
   test('footer', async ({ page }) => {
-    const viewportWidthPx = page.viewportSize()?.width ?? 1440;
-    test.skip(
-      viewportWidthPx < LAYOUT.footerMinVisibleWidthPx,
-      '.footer-social is hidden below 768px (see _footer.scss)',
-    );
-
     const screenshotRegion = page.locator(locators.footer);
     await screenshotRegion.scrollIntoViewIfNeeded();
     await expect(screenshotRegion).toHaveScreenshot('footer.png', {

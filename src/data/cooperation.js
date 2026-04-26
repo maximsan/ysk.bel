@@ -6,7 +6,7 @@
  * остальные — ghost.
  *
  * Телефон — живой `tel:` + `viber://` + `https://wa.me/…` якорь.
- * При изменении номера — обновить также `src/data/contacts.js` и `footer.js`.
+ * При изменении номера — обновить также `src/data/contacts.js` и `sidebar.js`.
  */
 const PHONE_DIGITS = '375291495989';
 const PHONE_DISPLAY = '+375 (29) 149 59 89';

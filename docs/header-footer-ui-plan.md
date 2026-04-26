@@ -1,70 +1,88 @@
-# План — шапка и подвал (UI/UX, адаптив)
+# Header & footer — UI/UX and responsive plan
 
-Цель: усилить навигацию, контакты и визуальную целостность **header** и **footer** в духе Peat & linen (редакционный «усадебный» тон, без шаблонной эстетики), с упором на **responsive / adaptive** поведение.
+**Goal:** Navigation and contact paths stay clear and calm—no redundant repeats of the same actions, solid mobile behavior, and good accessibility.
 
-**Как пользоваться:** отмечайте `- [ ]` → `- [x]` по мере выполнения. Критерий «готово v1»: блок **P1** + хотя бы пункты про safe-area и текущую секцию в nav из **P2**.
+**How to use:** Check off `- [ ]` → `- [x]` as you complete items.
 
-**Контекст кода:** `src/includes/header.liquid`, `src/includes/menu.liquid`, `src/includes/footer.liquid`, `src/styles/partials/_header.scss`, `_menu.scss`, `_footer.scss`, `src/scripts/helpers/sideBar.js`, визуальные тесты в `tests/visual/`.
-
----
-
-## P1 — критично для пользователей (сначала)
-
-- [ ] **Подвал на мобильных:** убрать или заменить `display: none` у `.footer-social` на узких экранах (`_footer.scss`) — сейчас мессенджеры пропадают на телефонах.
-- [ ] **Структура подвала:** полоса с повтором бренда / коротким слоганом, ряд чипов Viber / WhatsApp / Skype + текст, дублирование `tel:` и ссылка «Как добраться» на `#map` при необходимости (`footer.liquid`, `footer.js` при расширении data).
-- [ ] **Логотип как ссылка «домой»:** обернуть название в `<a href="#top">` (или корень сайта) + `id="top"` на обёртке страницы; сохранить одну осмысленную иерархию заголовков (`header.liquid`, при конфликте с hero — обсудить h1).
-- [ ] **Отступы под sticky:** проверить `scroll-margin-top` / `--section-scroll-margin` у всех якорей из меню, чтобы заголовки не прятались под шапкой.
+**Key files:** `src/includes/header.liquid`, `src/includes/menu.liquid`, `src/includes/footer.liquid`, `src/includes/cooperation-banner.liquid`, `src/data/footer.js`, `src/data/cooperation.js`, `src/styles/partials/_footer.scss`, `_header.scss`, `_menu.scss`, `src/scripts/helpers/sideBar.js`, `tests/visual/`.
 
 ---
 
-## P2 — доступность, клавиатура, безопасные зоны
+## Current site behavior (baseline)
 
-- [ ] **Кнопка меню:** для иконок `menu.svg` / `close.svg` — `alt=""` или `aria-hidden="true"`, опора на `aria-label` / `aria-expanded` у кнопки (`header.liquid`).
-- [ ] **Текущий раздел в навигации:** `aria-current` для активного пункта (hash / IntersectionObserver) — стили `[aria-current='true']` уже есть в `_header.scss`.
-- [ ] **Safe area:** `padding` с `env(safe-area-inset-*)` для фиксированной шапки, выезжающего меню и подвала (notch / home indicator).
-- [ ] **Фокус:** видимое `:focus-visible` у переключателя и ссылок; при открытом меню — ловушка фокуса или логичный порядок таба (по желанию — закрытие по Escape).
-
----
-
-## P3 — шапка: сетка и брейкпоинты
-
-- [ ] **Гибкая ширина nav:** заменить жёсткие `width: 500px` / `700px` на `max-width` + отступы/`gap`, чтобы длинные подписи по-русски не ломали ряд (`_menu.scss`, `_header.scss`).
-- [ ] **Планшет 768–991px:** отдельный проход — баланс логотипа, телефона и ссылок; при необходимости телефон в компактный pill.
-- [ ] **Fallback без `animation-timeline`:** если скролл-анимация шапки недоступна — предсказуемый вид (статичный sticky или упрощённый переход тени/фона).
-- [ ] **CTA в шапке (опционально):** одна заметная кнопка брони/звонка на desktop, согласованная с отключённым modal в комментариях.
+- **Partnership strip** (`cooperation-banner` + `cooperation.js`): Primary B2B contact block—**WhatsApp** (primary), **Viber**, and **Call** with the estate phone. Rendered **directly above the footer** in `base.liquid`.
+- **Footer** (`footer.liquid` + `footer.js`): Dark closing band with **estate name + tagline**, neutral links **Contacts** / **How to get here** (`#contacts`, `#map`), and **colophon** (`sidebar.author`). **No** messenger row—avoids duplicating the strip above.
+- **Mobile:** Footer is **visible** on all widths (safe-area padding on notched devices).
+- **Header:** Logo links to `#top` (`body id="top"`). Sticky header and mobile menu—see later phases.
 
 ---
 
-## P4 — мобильное меню: ощущение качества
+## Principle: avoid annoying repetition
 
-- [ ] **Затемнение фона (scrim):** клик по подложке закрывает меню; согласовать с `sideBar.js` и при необходимости `@mixin overlay` (`_mixins.scss`).
-- [ ] **Мotion:** вместо `linear` — `--motion-ease-out`; ступенчатое появление пунктов с уважением к `prefers-reduced-motion`.
-- [ ] **Scroll lock:** пересмотреть `body { position: fixed }` при открытом меню — проверить прыжок скролла на iOS при закрытии; при необходимости `scrollbar-gutter` или helper.
-- [ ] **Touch targets:** минимум ~44×44px для `.nav-link` и toggler на мобильных.
+**Rule:** Offer “write / call” clearly **once** in the partnership zone (**cooperation-banner**). The footer should **not** mirror the same messenger row as a second tier.
 
----
+**Chosen approach (Phase 1):**
 
-## P5 — визуал и характер (тонко)
-
-- [ ] **Типографика логотипа:** опционально Source Serif 4 (или один display) только для `.logo`, навигация остаётся на Rubik (`_logo.scss`, `head.liquid` при новых начертаниях).
-- [ ] **Чипы мессенджеров:** единый радиус (`--chrome-radius`), тень/hover, кольцо фокуса по токенам (`_footer.scss`).
-- [ ] **Глубина:** лёгкий `backdrop-filter` / бордер для «таблетки» шапки после скролла — не перебивая hero (`_header.scss`).
-- [ ] **Текстура (опционально):** сдержанный noise/градиент на тёмных полосах header/footer — только CSS, без тяжёлых ассетов.
+- [x] **Colophon footer:** Estate name + short tagline, neutral **Contacts** / **How to get here** links, and author lines from `sidebar`—**no** messenger list under the partnership strip.
 
 ---
 
-## P6 — QA и регрессии
+## P1 — Footer & contacts (priority)
 
-- [ ] Обновить визуальные снимки Playwright (`tests/visual/home-header.spec.js`, footer / mobile menu open).
-- [ ] Проверить таб-навигацию: шапка → выезжающее меню → подвал.
-- [ ] Контраст и имена ссылок (axe / Lighthouse): иконки + видимый текст.
+- [x] **Stop duplicating the cooperation banner:** Rework `footer.liquid` / `footer.js` so the footer is not a second Viber/WhatsApp row under the banner CTAs.
+- [x] **Footer on mobile:** Footer visible on all breakpoints (removed `display: none` below 768px).
+- [x] **Single source of truth for the phone number:** Footer has no phone/messenger links; comments in `cooperation.js` and `footer.js` list `cooperation.js`, `contacts.js`, `sidebar.js` for number updates.
+- [x] **Logo as home link:** `href="#top"` on the logo, `id="top"` on `body` in `base.liquid`.
+- [x] **Anchors & sticky header:** `#prices` (`.packages`) uses `--section-scroll-margin`; section chapters and `#map` already had scroll margins.
 
 ---
 
-## Порядок внедрения (рекомендация)
+## P2 — Accessibility, keyboard, safe area
 
-1. P1 (подвал на mobile + структура).
-2. P2 (ссылка логотипа, якоря, a11y, safe-area).
-3. P4 (drawer + scrim + motion).
-4. P3 (сетка шапки, планшет, fallback).
-5. P5 → P6.
+- [ ] **Menu button:** `aria-hidden` on decorative icons; `aria-label` / `aria-expanded` on the toggler.
+- [ ] **Current section in nav:** `aria-current` (hash / `IntersectionObserver`); styles in `_header.scss`.
+- [ ] **Safe area:** `env(safe-area-inset-*)` where chrome is flush to the screen edge.
+- [ ] **Menu:** Escape to close / scrim behavior aligned with `sideBar.js`.
+
+---
+
+## P3 — Header: layout & breakpoints
+
+- [ ] **Flexible nav width:** Fewer hard `width` values in `_menu.scss`, more `max-width` and `gap`.
+- [ ] **Tablet:** Balance logo, in-nav phone, and links.
+- [ ] **Fallback** for header behavior when `animation-timeline` is unavailable (if scroll-linked animation is used).
+- [ ] **Header CTA (optional):** One clear booking / call action on desktop.
+
+---
+
+## P4 — Mobile menu
+
+- [ ] **Scrim** and tap-outside to close.
+- [ ] **Motion:** Easing, respect `prefers-reduced-motion`.
+- [ ] **Scroll lock** without jank on iOS.
+- [ ] **Touch targets** ~44px minimum for items and toggler.
+
+---
+
+## P5 — Visual polish
+
+- [ ] Logo typography vs nav (`_logo.scss`).
+- [ ] If the footer keeps links, style with design tokens (focus, contrast)—avoid looking like a second row of banner buttons.
+- [ ] Light depth / texture only where it fits (header, dark bands).
+
+---
+
+## P6 — QA
+
+- [ ] Playwright: run `yarn test:visual:update` locally after this footer change (new mobile `footer.png` baselines + desktop/tablet diffs); commit `*-darwin.png` and use CI label for `*-linux.png` if applicable.
+- [ ] Tab order: header → menu → main → partnership strip → footer.
+- [ ] Run `yarn test:a11y` after substantive changes.
+
+---
+
+## Suggested order
+
+1. **P1:** Define the footer’s new role (no duplicate CTAs), then mobile visibility.
+2. **P2 → P4** as needed after footer UX is settled.
+3. **P3, P5** for header and visual polish.
+4. **P6** before merge.

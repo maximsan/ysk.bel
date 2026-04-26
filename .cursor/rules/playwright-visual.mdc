@@ -11,7 +11,7 @@ alwaysApply: false
 ## Layout
 
 - **Site DOM** (ids, `data-*`, shared classes): modules under `src/scripts/constants/dom/*.cjs`; bundled JS imports the relevant file per feature. **`homePageDom.cjs`** is a barrel that re-exports the same API — **tests** use it via `require()` in `tests/visual/constants.js` and helpers.
-- **Test-only**: `tests/visual/constants.js` — `VIEWPORTS`, `BLOCKED_THIRD_PARTY_URL_GLOBS`, screenshot timeouts, `LAYOUT.footerMinVisibleWidthPx`.
+- **Test-only**: `tests/visual/constants.js` — `VIEWPORTS`, `BLOCKED_THIRD_PARTY_URL_GLOBS`, screenshot timeouts, `LAYOUT.footerMinVisibleWidthPx` (expanded-nav breakpoint for header specs).
 - **Shared waits / routing**: `tests/visual/support/home-snapshot-helpers.cjs`.
 - **Specs**: `tests/visual/home-header.spec.js` (header + mobile drawer), `tests/visual/home-sections.spec.js` (remaining sections).
 - **Baselines**: `tests/visual/home-snapshots/*-{darwin,linux}.png` — single folder for all home specs; `snapshotPathTemplate` appends `{platform}` so macOS and Linux have separate PNG sets (font rasterizers differ enough to cross the AA threshold). Keep both sets in sync when UI changes.
@@ -25,7 +25,6 @@ alwaysApply: false
 
 ## Behaviour notes
 
-- Footer screenshot is **skipped** when viewport width `< 768` (`.footer-social` hidden in CSS).
 - **Header — mobile menu open** runs only below 768px; dismiss info-banner overlay first (`dismissInfoBannerForInteraction`) so `.navbar-toggler` is clickable.
 - Waits: stocking zoom `is-loaded`, video host `is-media-ready` / `readyState`, map `#map` → `map-shell--ready`.
 - `contacts` screenshot **masks `#map`** — Google Maps tiles/labels/watermarks vary by region and API-key usage, so the map region is painted over in the screenshot to keep the gate deterministic. The rest of `#contacts` is still compared.

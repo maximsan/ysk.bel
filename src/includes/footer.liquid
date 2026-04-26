@@ -1,19 +1,31 @@
-<footer class='footer-social'>
-  <div class='container container-flex-center'>
-    <ul class='footer'>
-      {% for link in footer.links %}
-        <li class='footer-item'>
-          <a
-            class='footer-link {{ link.class }}'
-            href='{{ link.href }}'
-            {% if link.ariaLabel %}
-            aria-label='{{ link.ariaLabel }}'
-            {% endif %}
-          >
-            <span class='icon-text'>{{ link.text }}</span>
-          </a>
-        </li>
-      {% endfor %}
-    </ul>
+<footer class='footer-social' aria-label='Подвал сайта'>
+  <div class='container footer-site'>
+    <div class='footer-site__brand'>
+      <p class='footer-site__name'>{{ footer.brandName }}</p>
+      <p class='footer-site__tagline'>{{ footer.tagline }}</p>
+    </div>
+
+    <nav class='footer-site__nav' aria-label='Навигация в подвале'>
+      <ul class='footer-site__links'>
+        {% for link in footer.links %}
+          <li>
+            <a
+              class='footer-site__link'
+              href='{{ link.href }}'
+              {% if link.ariaLabel %}
+              aria-label='{{ link.ariaLabel }}'
+              {% endif %}
+            >
+              {{ link.text }}
+            </a>
+          </li>
+        {% endfor %}
+      </ul>
+    </nav>
+
+    <div class='footer-site__meta'>
+      <p class='footer-site__credit'>{{ sidebar.author.co }}</p>
+      <p class='footer-site__credit'>{{ sidebar.author.by }}</p>
+    </div>
   </div>
 </footer>

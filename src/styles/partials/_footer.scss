@@ -1,61 +1,146 @@
-/*----------------------- FOOTER ------------------------*/
+/* Footer: colophon — responsive band; CTAs stay in cooperation-banner. */
 
 .footer-social {
   background-color: var(--color-bg-inverse);
+  color: var(--color-text-inverse);
   display: flex;
-  min-height: 6rem;
+  padding-block: clamp(1.25rem, 3vw, 1.75rem);
+  padding-inline: max(1rem, env(safe-area-inset-left))
+    max(1rem, env(safe-area-inset-right));
+  padding-bottom: max(1.25rem, env(safe-area-inset-bottom));
+}
 
-  .footer {
-    display: flex;
+.footer-site {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: clamp(1rem, 2.5vw, 1.35rem);
+  width: 100%;
+}
+
+.footer-site__brand {
+  text-align: center;
+}
+
+.footer-site__name {
+  font-family: var(--font-heading);
+  font-size: var(--font-size-md);
+  font-weight: 600;
+  margin: 0;
+  line-height: 1.25;
+  color: var(--color-text-inverse);
+}
+
+.footer-site__tagline {
+  margin: 0.35rem 0 0;
+  font-size: var(--font-size-sm);
+  line-height: 1.45;
+  color: color-mix(in srgb, var(--color-text-inverse) 78%, transparent);
+}
+
+.footer-site__nav {
+  display: flex;
+  justify-content: center;
+}
+
+.footer-site__links {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 0.35rem 1.25rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.footer-site__link {
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-accent-light);
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+
+  &:hover {
+    color: var(--white-hover);
+    text-decoration: none;
+  }
+
+  &:focus-visible {
+    outline: var(--focus-ring-width) solid var(--color-focus-ring);
+    outline-offset: var(--focus-ring-offset);
+  }
+}
+
+.footer-site__meta {
+  text-align: center;
+  padding-top: 0.5rem;
+  border-top: 1px solid color-mix(in srgb, var(--color-text-inverse) 12%, transparent);
+}
+
+.footer-site__credit {
+  margin: 0;
+  font-size: var(--font-size-sm);
+  line-height: 1.5;
+  color: color-mix(in srgb, var(--color-text-inverse) 58%, transparent);
+
+  & + & {
+    margin-top: 0.2rem;
+  }
+}
+
+/* Tablet: brand + nav share a row; credits full width below */
+@media only screen and (min-width: 768px) {
+  .footer-site {
     flex-direction: row;
-    margin: 0;
-  }
-
-  .footer-item {
-    list-style: none;
-    padding: 0 0.5rem;
-  }
-
-  .footer-link {
-    display: flex;
+    flex-wrap: wrap;
     align-items: center;
-    font-weight: var(--font-weight-bold);
-    padding: 0.5rem;
-
-    &:hover {
-      text-decoration: none;
-    }
-
-    &.viber {
-      color: var(--color-social-viber-on-inverse);
-    }
-
-    &.whatsapp {
-      color: var(--color-social-whatsapp-on-inverse);
-    }
-
-    .icon-text {
-      font-size: var(--font-size-base);
-    }
+    justify-content: space-between;
   }
 
-  @media only screen and (min-width: 320px) and (max-width: 767.98px) {
-    display: none;
+  .footer-site__brand {
+    text-align: left;
+    flex: 1 1 12rem;
   }
 
-  @media only screen and (min-width: 768px) {
-    .container-flex-center {
-      justify-content: space-around;
-    }
+  .footer-site__nav {
+    flex: 1 1 auto;
+    justify-content: center;
   }
 
-  @media only screen and (min-width: 992px) {
-    .container-flex-center {
-      justify-content: flex-end;
+  .footer-site__links {
+    gap: 0.5rem 1.5rem;
+  }
 
-      .footer {
-        padding: 0;
-      }
-    }
+  .footer-site__meta {
+    flex: 1 1 100%;
+    text-align: center;
+    padding-top: 0.75rem;
+  }
+}
+
+/* Desktop: one row — brand | links | colophon */
+@media only screen and (min-width: 992px) {
+  .footer-site {
+    flex-wrap: nowrap;
+    gap: 1.25rem;
+  }
+
+  .footer-site__brand {
+    flex: 0 1 auto;
+  }
+
+  .footer-site__nav {
+    flex: 0 0 auto;
+    justify-content: flex-end;
+  }
+
+  .footer-site__meta {
+    flex: 0 0 auto;
+    padding-top: 0;
+    border-top: none;
+    text-align: right;
+    max-width: 16rem;
   }
 }
