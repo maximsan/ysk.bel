@@ -32,6 +32,9 @@
 
   width: var(--_headerWidth, auto);
   margin-inline: auto;
+  /* Safe area: keep bar clear of notched phone side edges (see docs/ui-accessibility-glossary.md). */
+  padding-inline: max(0px, env(safe-area-inset-left))
+    max(0px, env(safe-area-inset-right));
 
   color: var(--_textColorStart);
   background-color: var(--_backgroundColorStart);
@@ -69,9 +72,52 @@
   }
 }
 
+/*
+ * Menu scrim: full-viewport dim behind the drawer; z-index below .menu (1095) and navbar chrome (1100+).
+ * prefers-reduced-motion: instant show/hide (glossary: docs/ui-accessibility-glossary.md).
+ */
+.menu-scrim {
+  display: none;
+}
+
+@media only screen and (max-width: 767.98px) {
+  .menu-scrim {
+    display: block;
+    position: fixed;
+    inset: 0;
+    z-index: 1090;
+    border: none;
+    margin: 0;
+    padding: 0;
+    background-color: color-mix(in srgb, var(--color-bg-inverse) 45%, black);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition:
+      opacity 0.25s var(--motion-ease-out),
+      visibility 0.25s linear;
+  }
+
+  .menu-scrim--open {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .menu-scrim {
+      transition: none;
+    }
+  }
+}
+
 .navbar {
+  position: relative;
+  z-index: 1100;
   border-radius: 100vw;
   padding: 1.5rem 1rem;
+  /* Safe area: clear status bar / notch on phones. */
+  padding-top: max(1.5rem, env(safe-area-inset-top));
 
   .navbar-logo {
     display: flex;
@@ -123,9 +169,17 @@
     }
   }
 
+  /* ~44px touch target (see glossary). */
   .navbar-toggler {
+    position: relative;
+    z-index: 1101;
     border: none;
     padding: 0.25rem;
+    min-width: 2.75rem;
+    min-height: 2.75rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 
     @include outline;
 
@@ -138,6 +192,13 @@
   @media only screen and (min-width: 320px) and (max-width: 767.98px) {
     gap: 0.5rem;
     padding: 1.5rem;
+    padding-inline: max(1rem, env(safe-area-inset-left))
+      max(1rem, env(safe-area-inset-right));
+
+    .navbar-logo {
+      position: relative;
+      z-index: 1101;
+    }
 
     .navbar-nav {
       flex-direction: column;
@@ -151,6 +212,7 @@
 
   @media only screen and (min-width: 768px) {
     padding: 1rem 0.5rem;
+    padding-top: max(1rem, env(safe-area-inset-top));
 
     &.navbar-expand-md {
       justify-content: center;
@@ -167,6 +229,7 @@
 
   @media (min-width: 992px) {
     padding: 1.5rem 1rem;
+    padding-top: max(1.5rem, env(safe-area-inset-top));
 
     .navbar-logo {
       margin-left: 1rem;

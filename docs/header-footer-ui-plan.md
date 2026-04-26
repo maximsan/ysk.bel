@@ -6,6 +6,8 @@
 
 **Key files:** `src/includes/header.liquid`, `src/includes/menu.liquid`, `src/includes/footer.liquid`, `src/includes/cooperation-banner.liquid`, `src/data/footer.js`, `src/data/cooperation.js`, `src/styles/partials/_footer.scss`, `_header.scss`, `_menu.scss`, `src/scripts/helpers/sideBar.js`, `tests/visual/`.
 
+**Glossary (terms & patterns):** [`docs/ui-accessibility-glossary.md`](ui-accessibility-glossary.md).
+
 ---
 
 ## Current site behavior (baseline)
@@ -39,10 +41,10 @@
 
 ## P2 — Accessibility, keyboard, safe area
 
-- [ ] **Menu button:** `aria-hidden` on decorative icons; `aria-label` / `aria-expanded` on the toggler.
-- [ ] **Current section in nav:** `aria-current` (hash / `IntersectionObserver`); styles in `_header.scss`.
-- [ ] **Safe area:** `env(safe-area-inset-*)` where chrome is flush to the screen edge.
-- [ ] **Menu:** Escape to close / scrim behavior aligned with `sideBar.js`.
+- [x] **Menu button:** Decorative menu/close icons use `alt=""` and `aria-hidden="true"`; toggler has Russian `aria-label` and **`aria-expanded` updated in JS** (`sideBar.js`); `nav` has `aria-label`.
+- [x] **Current section in nav:** `initNavScrollSpy()` sets `aria-current` on in-page `.nav-link`s; styles in `_header.scss`.
+- [x] **Safe area:** `env(safe-area-inset-*)` on `.header` (horizontal), `.navbar` (top + mobile horizontal padding), mobile drawer / `.nav-footer` bottom, and footer (already from Phase 1).
+- [x] **Menu:** **Escape** closes drawer; **`data-menu-scrim`** tap closes; scroll lock uses **`position: fixed` + `top: -scrollY`** and **`scrollTo` on close** to reduce iOS jump.
 
 ---
 
@@ -57,10 +59,10 @@
 
 ## P4 — Mobile menu
 
-- [ ] **Scrim** and tap-outside to close.
-- [ ] **Motion:** Easing, respect `prefers-reduced-motion`.
-- [ ] **Scroll lock** without jank on iOS.
-- [ ] **Touch targets** ~44px minimum for items and toggler.
+- [x] **Scrim** (`.menu-scrim`) and tap-outside to close — wired in `header.liquid` + `_header.scss` + `sideBar.js`.
+- [x] **Motion:** Drawer slide uses `--motion-ease-out`; **`prefers-reduced-motion: reduce`** disables scrim/drawer transitions.
+- [x] **Scroll lock:** See P2 (body `top` offset + restore scroll position).
+- [x] **Touch targets:** Toggler `min-width` / `min-height` **2.75rem**; mobile `.nav-link` **min-height 2.75rem** with padding.
 
 ---
 
