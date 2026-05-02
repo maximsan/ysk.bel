@@ -9,7 +9,7 @@
  * - lead.intro | lead.highlight | lead.outro: paragraph split for accent styling on highlight
  * - basePath + images: filename order in `images`; use `images: []` if there are no photos yet (carousel is hidden)
  */
-module.exports = {
+export default {
   sectionTitle: 'Зарыбление водоёма',
   stories: [
     {

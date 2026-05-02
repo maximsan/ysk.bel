@@ -6,7 +6,7 @@
  * - description: optional short line under the caption
  * Preload strategy: first slide uses preload auto via template (not stored here).
  */
-module.exports = {
+export default {
   sectionTitle: 'Видео с усадьбы',
   sectionSubtitle:
     'Прогулка по территории, атмосфера пруда и рыбалка — включите ролик и загляните к нам в гости. Листайте, чтобы посмотреть все записи.',

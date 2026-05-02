@@ -1,19 +1,17 @@
-'use strict';
-
-const {
+import { createRequire } from 'node:module';
+import * as homePageDom from '@constants/homePageDom.js';
+import {
   HOME_SELECTORS,
   homeActiveVideoHostSelector,
   BLOCKED_THIRD_PARTY_URL_GLOBS,
-} = require('../constants');
-const homePageDom = require('../../../src/scripts/constants/homePageDom.cjs');
-const {
-  applyDisabledMotionStyle,
-  disablePageMotion,
-} = require('../../support/e2e-page-setup.cjs');
+} from '../constants.js';
+
+const require = createRequire(import.meta.url);
+const { applyDisabledMotionStyle, disablePageMotion } = require('../../support/e2e-page-setup.cjs');
 
 const { locators, classMap, timeouts } = HOME_SELECTORS;
 
-async function blockThirdPartyNoise(page) {
+export async function blockThirdPartyNoise(page) {
   for (const urlPattern of BLOCKED_THIRD_PARTY_URL_GLOBS) {
     await page.route(urlPattern, (interceptedRoute) =>
       interceptedRoute.abort(),
@@ -21,7 +19,7 @@ async function blockThirdPartyNoise(page) {
   }
 }
 
-async function waitForLayout(page) {
+export async function waitForLayout(page) {
   await page.evaluate(() => document.fonts.ready);
 }
 
@@ -36,7 +34,7 @@ async function dismissInfoBannerBeforePageScripts(page) {
   });
 }
 
-async function setHomeChromeVisibility(
+export async function setHomeChromeVisibility(
   page,
   { showHeader = false, showInfoBanner = false } = {},
 ) {
@@ -86,7 +84,7 @@ async function setHomeChromeVisibility(
 }
 
 /** Wait until `document.querySelector(selector)` has `className` in classList. */
-async function waitForSelectorHasClass(page, selector, className, timeoutMs) {
+export async function waitForSelectorHasClass(page, selector, className, timeoutMs) {
   await page.waitForFunction(
     ([sel, cls]) => {
       const element = document.querySelector(sel);
@@ -98,7 +96,7 @@ async function waitForSelectorHasClass(page, selector, className, timeoutMs) {
 }
 
 /** Wait until `#elementId` has `className` in classList. */
-async function waitForElementIdHasClass(page, elementId, className, timeoutMs) {
+export async function waitForElementIdHasClass(page, elementId, className, timeoutMs) {
   await page.waitForFunction(
     ([id, cls]) => {
       const element = document.getElementById(id);
@@ -110,7 +108,7 @@ async function waitForElementIdHasClass(page, elementId, className, timeoutMs) {
 }
 
 /** Wait for images inside a root selector so layout stops shifting (services gallery, etc.). */
-async function waitForImagesLoaded(page, rootSelector) {
+export async function waitForImagesLoaded(page, rootSelector) {
   await page.evaluate(
     async ({ rootSelector: selector, perImageTimeoutMs }) => {
       const rootElement = document.querySelector(selector);
@@ -143,7 +141,7 @@ async function waitForImagesLoaded(page, rootSelector) {
 }
 
 /** Stocking carousel: first slide eager, others lazy; skeleton hides after load (`is-loaded`). */
-async function waitForStockingCarouselStable(page) {
+export async function waitForStockingCarouselStable(page) {
   await waitForImagesLoaded(page, locators.stocking);
   await waitForSelectorHasClass(
     page,
@@ -154,7 +152,7 @@ async function waitForStockingCarouselStable(page) {
 }
 
 /** Active slide: `<video>` mounted, first frame / poster ready (skeleton removed → `is-media-ready`). */
-async function waitForVideoShowcaseReady(page) {
+export async function waitForVideoShowcaseReady(page) {
   const activeLazyVideoHostSelector = homeActiveVideoHostSelector();
   await page.waitForFunction(
     ([lazyHostSelector, mediaReadyClassName]) => {
@@ -199,7 +197,7 @@ async function waitForVideoShowcaseReady(page) {
 }
 
 /** Google Maps: `idle` removes loading state → `map-shell--ready` on `#map`. */
-async function waitForMapReady(page) {
+export async function waitForMapReady(page) {
   await waitForElementIdHasClass(
     page,
     classMap.mapShellId,
@@ -217,7 +215,7 @@ async function waitForMapReady(page) {
  * under the overlay. Also hides the modal so a full-viewport `header` shot
  * (menu open) does not include the centered banner.
  */
-async function dismissInfoBannerForInteraction(page) {
+export async function dismissInfoBannerForInteraction(page) {
   const { SITE_SELECTORS, INFO_BANNER_STATE_CLASS } = homePageDom;
   await page.evaluate(
     ([overlaySelector, bannerSelector, showClass, hideClass]) => {
@@ -248,7 +246,7 @@ async function dismissInfoBannerForInteraction(page) {
   );
 }
 
-async function setupHomeVisualPage(page, options = {}) {
+export async function setupHomeVisualPage(page, options = {}) {
   await blockThirdPartyNoise(page);
   await disablePageMotion(page);
   if (!options.showInfoBanner) {
@@ -260,19 +258,4 @@ async function setupHomeVisualPage(page, options = {}) {
   await waitForLayout(page);
 }
 
-module.exports = {
-  locators,
-  classMap,
-  timeouts,
-  blockThirdPartyNoise,
-  setHomeChromeVisibility,
-  waitForLayout,
-  waitForSelectorHasClass,
-  waitForElementIdHasClass,
-  waitForImagesLoaded,
-  waitForStockingCarouselStable,
-  waitForVideoShowcaseReady,
-  waitForMapReady,
-  dismissInfoBannerForInteraction,
-  setupHomeVisualPage,
-};
+export { locators, classMap, timeouts };

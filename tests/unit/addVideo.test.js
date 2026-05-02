@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest';
 import {
   normalizeVideoPreload,
   parseVideoExtensionTokens,
-} from '../../src/scripts/helpers/addVideo.js';
+} from '@scripts/helpers/addVideo.js';
 
 describe('addVideo', () => {
   describe('parseVideoExtensionTokens', () => {

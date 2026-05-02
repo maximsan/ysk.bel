@@ -1,7 +1,5 @@
-'use strict';
-
 /** Global layout / landmark class fragments (no leading dot). */
-const LAYOUT_CLASS = {
+export const LAYOUT_CLASS = {
   headerTag: 'header',
   headerBlock: 'header',
   cooperationBanner: 'cooperation-banner',
@@ -14,13 +12,12 @@ const LAYOUT_CLASS = {
   heroScrollCueHidden: 'is-hidden',
   footerTag: 'footer',
   footerSocial: 'footer-social',
+  scrollUp: 'scroll-up',
   overlay: 'overlay',
   crossIcon: 'cross-icon',
 };
 
 /** Bootstrap / utility classes referenced from JS. */
-const CSS_UTILITY_CLASS = {
+export const CSS_UTILITY_CLASS = {
   hidden: 'hidden',
 };
-
-module.exports = { LAYOUT_CLASS, CSS_UTILITY_CLASS };

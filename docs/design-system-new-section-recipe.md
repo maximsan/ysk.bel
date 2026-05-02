@@ -20,8 +20,8 @@ Use this when adding a **new block** to `base.liquid` (or a new page that should
 
 ## 3. Data & scripts (if needed)
 
-- If the section is in the in-page nav, add the **`id`** to **`src/scripts/constants/dom/sections.cjs`** (`SECTION_IDS`) and any Playwright / scroll helpers.
-- Reuse **DOM hooks** in `src/scripts/constants/dom/*.cjs` and **`homePageDom.cjs`** so tests do not depend on restyle-fragile selectors.
+- If the section is in the in-page nav, add the **`id`** to **`src/scripts/constants/dom/sections.js`** (`SECTION_IDS`) and any Playwright / scroll helpers.
+- Reuse **DOM hooks** in `src/scripts/constants/dom/*.js` and **`homePageDom.js`** so tests do not depend on restyle-fragile selectors.
 
 ## 4. Quality gates (run before commit)
 

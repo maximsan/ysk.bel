@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest';
 import {
   buildInfoBannerDismissCookie,
   hasInfoBannerDismissCookie,
-} from '../../src/scripts/helpers/infoBannerCookie.js';
+} from '@scripts/helpers/infoBannerCookie.js';
 
 describe('infoBannerCookie', () => {
   describe('hasInfoBannerDismissCookie', () => {

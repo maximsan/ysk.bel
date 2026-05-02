@@ -7,9 +7,9 @@
  * - Scroll restore: save `scrollY`, set `body.top = -scrollY`, then `scrollTo` on close to avoid jump.
  * - aria-expanded / aria-label on the toggler for screen readers.
  */
-import { CSS_UTILITY_CLASS } from '../constants/dom/layout.cjs';
-import { MENU_CLASS } from '../constants/dom/menu.cjs';
-import { SITE_SELECTORS } from '../constants/dom/siteSelectors.cjs';
+import { CSS_UTILITY_CLASS } from '@constants/dom/layout.js';
+import { MENU_CLASS } from '@constants/dom/menu.js';
+import { SITE_SELECTORS } from '@constants/dom/siteSelectors.js';
 
 const header = document.querySelector(SITE_SELECTORS.header);
 const sidebar = document.querySelector(SITE_SELECTORS.menu);

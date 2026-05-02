@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@constants/*": ["src/scripts/constants/*"],
+      "@scripts/*": ["src/scripts/*"],
+      "@data/*": ["src/data/*"]
+    }
+  },
+  "exclude": ["node_modules", "dist"]
+}

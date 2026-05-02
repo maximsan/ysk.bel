@@ -6,7 +6,7 @@
  * When the phone number changes, update: `cooperation.js`, `contacts.js`,
  * `sidebar.js` (not this file).
  */
-module.exports = {
+export default {
   brandName: 'Усадьба Серебряный Карась',
   tagline: 'Рыбалка, баня и отдых на природе',
   links: [

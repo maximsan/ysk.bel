@@ -1,137 +1,158 @@
 name: CI
 
 on:
-    push:
-        branches: [main]
-    pull_request:
-        branches: [main]
-        types: [opened, synchronize, reopened, labeled, unlabeled]
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize, reopened, labeled, unlabeled]
 
 concurrency:
-    group: ci-${{ github.workflow }}-${{ github.event.pull_request.number || github.sha }}
-    cancel-in-progress: true
+  group: ci-${{ github.workflow }}-${{ github.event.pull_request.number || github.sha }}
+  cancel-in-progress: true
 
 jobs:
-    changes:
+  changes:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    outputs:
+      visual: ${{ steps.filter.outputs.visual }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dorny/paths-filter@v3
+        id: filter
+        with:
+          filters: |
+            visual:
+              - 'src/styles/**'
+              - 'src/pages/**'
+              - 'src/data/**'
+              - 'src/scripts/**'
+              - 'src/assets/**'
+              - 'eleventy.config.mjs'
+              - '404.html'
+              - '500.html'
+              - 'tests/visual/**'
+              - 'playwright.config.mjs'
+              - 'playwright.e2e.config.mjs'
+              - 'import-aliases-register.mjs'
+              - 'import-aliases-hooks.mjs'
+              - 'run-with-import-aliases.mjs'
+              - 'jsconfig.json'
+              - 'vitest.config.mjs'
+              - 'tests/a11y/**'
+              - 'e2e/**'
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Visual baseline parity
+        run: |
+          cd tests/visual/home-snapshots
+          darwin=$(ls *-darwin.png 2>/dev/null | sed 's/-darwin\.png$//' | sort)
+          linux=$(ls *-linux.png 2>/dev/null | sed 's/-linux\.png$//' | sort)
+          if ! diff <(echo "$darwin") <(echo "$linux") > /tmp/parity.diff; then
+            echo "::error::Visual baseline mismatch — every test must have both '-darwin.png' and '-linux.png'."
+            echo "Missing on one side (left = darwin-only, right = linux-only):"
+            cat /tmp/parity.diff
+            echo ""
+            echo "Fix: run 'yarn test:visual:update' locally for '-darwin' and apply the 'update-visual-snapshots' label for '-linux'."
+            exit 1
+          fi
+          echo "Baselines in parity ($(echo "$darwin" | wc -l | tr -d ' ') tests × 2 platforms)."
+
+      - name: Setup toolchain (Node, Yarn, Playwright Chromium)
+        uses: ./.github/actions/setup-yarn-playwright
+
+      - name: Build
+        run: yarn build
+
+      - name: Unit tests
+        run: yarn test:unit
+
+      - name: Accessibility tests
+        run: yarn test:a11y
+
+      - name: E2E tests
+        run: yarn test:e2e
+
+      - name: Upload site dist (pull requests — visual job)
         if: github.event_name == 'pull_request'
-        runs-on: ubuntu-latest
-        outputs:
-            visual: ${{ steps.filter.outputs.visual }}
-        steps:
-            - uses: actions/checkout@v4
-            - uses: dorny/paths-filter@v3
-              id: filter
-              with:
-                  filters: |
-                      visual:
-                          - 'src/styles/**'
-                          - 'src/pages/**'
-                          - 'src/data/**'
-                          - 'src/scripts/**'
-                          - 'src/assets/**'
-                          - 'eleventy.config.js'
-                          - '404.html'
-                          - '500.html'
-                          - 'tests/visual/**'
-                          - 'playwright.config.mjs'
-                          - 'tests/a11y/**'
+        uses: actions/upload-artifact@v4
+        with:
+          name: site-dist
+          path: dist/
+          retention-days: 1
+          compression-level: 9
 
-    build:
-        runs-on: ubuntu-latest
-
-        steps:
-            - name: checkout code
-              uses: actions/checkout@v4
-
-            - name: visual baseline parity
-              run: |
-                  cd tests/visual/home-snapshots
-                  darwin=$(ls *-darwin.png 2>/dev/null | sed 's/-darwin\.png$//' | sort)
-                  linux=$(ls *-linux.png 2>/dev/null | sed 's/-linux\.png$//' | sort)
-                  if ! diff <(echo "$darwin") <(echo "$linux") > /tmp/parity.diff; then
-                    echo "::error::Visual baseline mismatch — every test must have both '-darwin.png' and '-linux.png'."
-                    echo "Missing on one side (left = darwin-only, right = linux-only):"
-                    cat /tmp/parity.diff
-                    echo ""
-                    echo "Fix: run 'yarn test:visual:update' locally for '-darwin' and apply the 'update-visual-snapshots' label for '-linux'."
-                    exit 1
-                  fi
-                  echo "Baselines in parity ($(echo "$darwin" | wc -l | tr -d ' ') tests × 2 platforms)."
-
-            - name: install toolchain (Node, Yarn, Playwright Chromium)
-              uses: ./.github/actions/setup-yarn-playwright
-
-            - name: build app
-              run: yarn build
-
-            - name: unit tests
-              run: yarn test:unit
-
-            - name: accessibility tests
-              run: yarn test:a11y
-
-            - name: upload dist for visual job
-              if: github.event_name == 'pull_request'
-              uses: actions/upload-artifact@v4
-              with:
-                  name: site-dist
-                  path: dist/
-                  retention-days: 1
-                  compression-level: 9
-
-    visual:
-        needs: [changes, build]
-        if: |
-            github.event_name == 'pull_request' &&
-            (needs.changes.outputs.visual == 'true' ||
-             contains(join(github.event.pull_request.labels.*.name, ','), 'run-visual'))
-        runs-on: ubuntu-latest
-
-        steps:
-            - name: checkout code
-              uses: actions/checkout@v4
-
-            - name: download built site
-              uses: actions/download-artifact@v4
-              with:
-                  name: site-dist
-                  path: dist
-
-            - name: install toolchain (Node, Yarn, Playwright Chromium)
-              uses: ./.github/actions/setup-yarn-playwright
-
-            - name: visual regression tests
-              env:
-                  PLAYWRIGHT_PREBUILT_DIST: '1'
-              run: yarn test:visual
-
-            - name: upload Playwright failure artifacts
-              if: failure()
-              uses: actions/upload-artifact@v4
-              with:
-                  name: playwright-failures
-                  path: test-results/
-                  retention-days: 3
-                  compression-level: 9
-                  if-no-files-found: ignore
-
-    deploy:
+      - name: Upload site dist (deploy)
         if: github.ref == 'refs/heads/main'
-        runs-on: ubuntu-latest
+        uses: actions/upload-artifact@v4
+        with:
+          name: site-dist
+          path: dist/
 
-        steps:
-            - name: checkout code
-              uses: actions/checkout@v4
+  visual:
+    needs: [changes, build]
+    if: |
+      github.event_name == 'pull_request' &&
+      (needs.changes.outputs.visual == 'true' ||
+       contains(join(github.event.pull_request.labels.*.name, ','), 'run-visual'))
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
 
-            - name: Set up SSH
-              uses: webfactory/ssh-agent@v0.5.4
-              with:
-                ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+      - name: Download built site
+        uses: actions/download-artifact@v4
+        with:
+          name: site-dist
+          path: dist
 
-            - name: Run deploy script
-              run: ./deploy.sh
-              env:
-                REMOTE_USER: ${{ secrets.REMOTE_USER }}
-                REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
-                REMOTE_PATH: ${{ secrets.REMOTE_PATH }}
-                LOCAL_PATH: ${{ secrets.LOCAL_PATH }}
+      - name: Setup toolchain (Node, Yarn, Playwright Chromium)
+        uses: ./.github/actions/setup-yarn-playwright
+
+      - name: Visual regression tests
+        env:
+          PLAYWRIGHT_PREBUILT_DIST: '1'
+        run: yarn test:visual
+
+      - name: Upload Playwright failure artifacts
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-failures
+          path: test-results/
+          retention-days: 3
+          compression-level: 9
+          if-no-files-found: ignore
+
+  deploy:
+    if: github.ref == 'refs/heads/main'
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Download site dist
+        uses: actions/download-artifact@v4
+        with:
+          name: site-dist
+          path: dist
+
+      - name: Set up SSH
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Run deploy script
+        run: ./deploy.sh
+        env:
+          REMOTE_USER: ${{ secrets.REMOTE_USER }}
+          REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
+          REMOTE_PATH: ${{ secrets.REMOTE_PATH }}
+          LOCAL_PATH: ${{ secrets.LOCAL_PATH }}

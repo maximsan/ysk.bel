@@ -2,8 +2,8 @@ import {
   FORM_DEFAULTS,
   FORM_FIELD_NAME,
   FORM_QUERY,
-} from '../constants/dom/form.cjs';
-import { isSpamHoneypot, validEmail } from './formSubmissionCore.cjs';
+} from '@constants/dom/form.js';
+import { isSpamHoneypot, validEmail } from '@scripts/form-submission/formSubmissionCore.js';
 
 /**
  * Google Apps Script–style `.gform` handler (see `modal.liquid`).

@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { stepCarouselIndex } from '../../src/scripts/helpers/carouselIndex.js';
+import { stepCarouselIndex } from '@scripts/helpers/carouselIndex.js';
 
 describe('carouselIndex', () => {
   it('steps forward and wraps', () => {

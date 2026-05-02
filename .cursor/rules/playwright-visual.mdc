@@ -16,9 +16,12 @@ Single **`playwright.config.mjs`**. **Projects:** `chromium-{mobile|tablet|deskt
 
 ## Layout
 
-- DOM: `src/scripts/constants/dom/*.cjs` → **`homePageDom.cjs`**; tests use **`require()`** in `tests/visual/constants.js` + `home-snapshot-helpers.cjs`.
-- **constants.js:** `VIEWPORTS`, `BLOCKED_THIRD_PARTY_URL_GLOBS`, `LAYOUT.footerMinVisibleWidthPx`.
-- **Baselines:** `home-snapshots/` — consolidated **`main-content`**, **`cooperation-banner`**, **`footer`** (× Chromium × viewport × `{darwin|linux}`); **`width-snapshots/`** for width pass only.
+- **DOM:** `src/scripts/constants/dom/*.js` → **`homePageDom.js`**; tests ES-import from `tests/visual/constants.js`, `tests/visual/support/home-snapshot-helpers.js`.
+- **`constants.js`:** `VIEWPORTS`, `BLOCKED_THIRD_PARTY_URL_GLOBS`, `LAYOUT.footerMinVisibleWidthPx`, `HOME_SELECTORS`.
+- **Shared waits:** `tests/visual/support/home-snapshot-helpers.js`.
+- **Specs:** `tests/visual/home-header.spec.js`, `tests/visual/home-sections.spec.js`; width sweep: **`home-width-pass.spec.js`**.
+- **Baselines:** `tests/visual/home-snapshots/*-{darwin,linux}.png` (`snapshotPathTemplate` → `{platform}`). **`width-snapshots/`** for width-pass only.
+- **`playwright.config.mjs`** imports **`VIEWPORTS`** from `tests/visual/constants.js`.
 
 ## Scripts
 
@@ -35,7 +38,7 @@ Single **`playwright.config.mjs`**. **Projects:** `chromium-{mobile|tablet|deskt
 ## CI
 
 - **`.github/actions/setup-yarn-playwright`:** `actions/setup-node` + **`cache:yarn`**, **`actions/cache`** on **`~/.cache/ms-playwright`**, `yarn install --immutable`, **`playwright install chromium --with-deps`**.
-- **build** `ci.yaml`: parity → composite → `yarn build` → unit → **`yarn test:a11y`** → PR upload **`site-dist`**.
+- **build** `ci.yaml`: parity → composite → `yarn build` → unit → **`yarn test:a11y`** → **`yarn test:e2e`** → PR upload **`site-dist`** · main uploads **`site-dist`** for deploy.
 - **visual:** download **`dist/`** → composite → **`PLAYWRIGHT_PREBUILT_DIST=1` `yarn test:visual`** → on failure upload **`test-results/`**.
 - **update-visual-snapshots:** composite → **`yarn test:visual --update-snapshots`** → commit **`home-snapshots`** + **`width-snapshots`** `*-linux.png`.
 

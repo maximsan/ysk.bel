@@ -1,43 +1,43 @@
-module.exports = {
+export default {
   columns: [
     {
       header: 'Рыбалка',
       subheaders: ['20BYN зимой, 40BYN летом'],
       packages: [
         {
-          icon: '✔\uFE0F',
+          icon: '✔️',
           text: 'рыбалка в клевом месте',
           additional: '(пруд 6га,',
           highlighted: 'до 8 видов рыбы',
           end: ')',
         },
         {
-          icon: '✔\uFE0F',
+          icon: '✔️',
           text: 'экологически чистый водоем',
         },
         {
-          icon: '✔\uFE0F',
+          icon: '✔️',
           text: 'скидка',
           additional: '',
           highlighted: '50%',
           end: 'в зимнее время',
         },
         {
-          icon: '✔\uFE0F',
+          icon: '✔️',
           text: 'тишина и незабываемые виды природы',
         },
         {
-          icon: '✔\uFE0F',
+          icon: '✔️',
           text: 'ночевка в уютном ',
           additional: '',
           highlighted: 'домике',
         },
         {
-          icon: '✔\uFE0F',
+          icon: '✔️',
           text: 'скважина с целебной артезианской водой',
         },
         {
-          icon: '✔\uFE0F',
+          icon: '✔️',
           text: 'удобная парковка',
         },
       ],
@@ -48,36 +48,36 @@ module.exports = {
       infos: ['Заезд с 15.00', 'Выезд до 13.00'],
       packages: [
         {
-          icon: '✔\uFE0F',
+          icon: '✔️',
           text: 'аренда деревянной усадьбы',
           additional: '(8 спальных мест, камин, пруд, территория - 12,5га)',
         },
         {
-          icon: '✔\uFE0F',
+          icon: '✔️',
           text: 'отдых в экологически чистом месте',
         },
         {
-          icon: '✔\uFE0F',
+          icon: '✔️',
           text: 'баня в новом срубе',
         },
         {
-          icon: '✔\uFE0F',
+          icon: '✔️',
           text: 'прогулки по живописной местности, которая станет чудесным фоном для ваших фотографий',
         },
         {
-          icon: '✔\uFE0F',
+          icon: '✔️',
           text: 'мангалы для шашлыков, беседки',
         },
         {
-          icon: '✔\uFE0F',
+          icon: '✔️',
           text: 'рыбалка с пирсов',
         },
         {
-          icon: '✔\uFE0F',
+          icon: '✔️',
           text: 'скважина с целебной артезианской водой',
         },
         {
-          icon: '✔\uFE0F',
+          icon: '✔️',
           text: 'удобная парковка',
         },
       ],

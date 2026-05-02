@@ -1,5 +1,5 @@
-import { LAYOUT_CLASS } from '../constants/dom/layout.cjs';
-import { SITE_SELECTORS } from '../constants/dom/siteSelectors.cjs';
+import { LAYOUT_CLASS } from '@constants/dom/layout.js';
+import { SITE_SELECTORS } from '@constants/dom/siteSelectors.js';
 
 /**
  * Hide the hero scroll-cue the moment the page starts scrolling.

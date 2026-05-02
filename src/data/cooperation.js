@@ -12,7 +12,7 @@ const PHONE_DIGITS = '375291495989';
 const PHONE_DISPLAY = '+375 (29) 149 59 89';
 const PHONE_HREF_WITH_PLUS = `%2B${PHONE_DIGITS}`;
 
-module.exports = {
+export default {
   eyebrow: 'Партнёрство',
   title: 'Усадьба ищет партнёров и инвесторов',
   lede:

@@ -1,5 +1,5 @@
-const { test, expect } = require('@playwright/test');
-const {
+import { test, expect } from '@playwright/test';
+import {
   locators,
   classMap,
   setupHomeVisualPage,
@@ -7,7 +7,7 @@ const {
   waitForStockingCarouselStable,
   waitForVideoShowcaseReady,
   waitForMapReady,
-} = require('./support/home-snapshot-helpers.cjs');
+} from './support/home-snapshot-helpers.js';
 
 test.beforeEach(async ({ page }) => {
   await setupHomeVisualPage(page, { showInfoBanner: false });

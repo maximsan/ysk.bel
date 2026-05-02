@@ -1,11 +1,7 @@
-'use strict';
-
 /** Section element ids on the home page (`*.liquid` / Eleventy). */
-const SECTION_IDS = {
+export const SECTION_IDS = {
   services: 'services',
   stocking: 'stocking',
   videos: 'videos',
   contacts: 'contacts',
 };
-
-module.exports = { SECTION_IDS };

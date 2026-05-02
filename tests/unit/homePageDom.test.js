@@ -1,8 +1,5 @@
-import { createRequire } from 'node:module';
 import { describe, it, expect } from 'vitest';
-
-const require = createRequire(import.meta.url);
-const homePageDom = require('../../src/scripts/constants/homePageDom.cjs');
+import * as homePageDom from '@constants/homePageDom.js';
 
 const {
   SECTION_IDS,

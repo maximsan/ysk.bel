@@ -1,18 +1,15 @@
-'use strict';
-
-const homePageDom = require('../../src/scripts/constants/homePageDom.cjs');
+import * as homePageDom from '@constants/homePageDom.js';
 
 /**
  * Shared layout breakpoints for visual tests.
- * Keep in sync with critical CSS (e.g. expanded nav vs hamburger in `_menu.scss`).
+ * Match `_menu.scss` (expanded nav vs hamburger at 768px), `_footer.scss` (`footer-social` visibility).
  */
-const LAYOUT = {
-  /** Viewports ≥ this width: expanded inline nav; below: hamburger + slide-out (`home-header.spec.js`). */
+export const LAYOUT = {
   footerMinVisibleWidthPx: 768,
 };
 
 /** Viewport sizes for Playwright projects (also used from `playwright.config.mjs`). */
-const VIEWPORTS = {
+export const VIEWPORTS = {
   mobile: { width: 390, height: 844 },
   tablet: { width: 768, height: 1024 },
   desktop: { width: 1440, height: 900 },
@@ -22,14 +19,14 @@ const VIEWPORTS = {
  * Third-party URLs blocked during screenshots (noise / non-determinism).
  * Not part of site DOM — lives here next to other test runtime config.
  */
-const BLOCKED_THIRD_PARTY_URL_GLOBS = [
+export const BLOCKED_THIRD_PARTY_URL_GLOBS = [
   '**/*googletagmanager.com/**',
   '**/*google-analytics.com/**',
   '**/*analytics.google.com/**',
   '**/*mc.yandex.ru/**',
 ];
 
-const HOME_SELECTORS = {
+export const HOME_SELECTORS = {
   sectionIds: homePageDom.SECTION_IDS,
   locators: { ...homePageDom.PLAYWRIGHT_HOME_LOCATORS },
   classMap: {
@@ -53,14 +50,6 @@ const HOME_SELECTORS = {
   },
 };
 
-function homeActiveVideoHostSelector() {
+export function homeActiveVideoHostSelector() {
   return homePageDom.buildHomeActiveVideoHostSelector();
 }
-
-module.exports = {
-  LAYOUT,
-  VIEWPORTS,
-  BLOCKED_THIRD_PARTY_URL_GLOBS,
-  HOME_SELECTORS,
-  homeActiveVideoHostSelector,
-};

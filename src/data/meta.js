@@ -10,7 +10,7 @@ const ogBody =
 const PHONE_DIGITS = '+375291495989';
 const PHONE_DISPLAY = '+375 (29) 149 59 89';
 
-module.exports = {
+export default {
   /**
    * Одно предложение — история бренда (Peat & linen): вода, тишина, близость к Минску.
    * См. герой (`hero-section.liquid`). При смене текста обновить визуальные снимки (hero).
