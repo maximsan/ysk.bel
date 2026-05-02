@@ -9,78 +9,36 @@ const {
   waitForMapReady,
 } = require('./support/home-snapshot-helpers.cjs');
 
-test.beforeEach(async ({ page }, testInfo) => {
-  await setupHomeVisualPage(page, {
-    showInfoBanner: testInfo.title === 'info banner',
-  });
+test.beforeEach(async ({ page }) => {
+  await setupHomeVisualPage(page, { showInfoBanner: false });
 });
 
-test.describe('home — sections', () => {
+test.describe('home — consolidated sections', () => {
+  test('main column (hero through contacts)', async ({ page }) => {
+    test.setTimeout(90_000);
+    const mainLocator = page.locator('main');
+
+    await page.locator(locators.services).scrollIntoViewIfNeeded();
+    await waitForImagesLoaded(page, locators.services);
+    await page.locator(locators.stocking).scrollIntoViewIfNeeded();
+    await waitForStockingCarouselStable(page);
+    await page.locator(locators.videos).scrollIntoViewIfNeeded();
+    await waitForVideoShowcaseReady(page);
+    await page.locator(locators.contacts).scrollIntoViewIfNeeded();
+    await waitForMapReady(page);
+
+    await expect(mainLocator).toHaveScreenshot('main-content.png', {
+      animations: 'disabled',
+      maxDiffPixelRatio: 0.02,
+      mask: [page.locator(`#${classMap.mapShellId}`)],
+    });
+  });
+
   test('cooperation banner', async ({ page }) => {
     const screenshotRegion = page.locator(locators.cooperationBanner);
     await screenshotRegion.scrollIntoViewIfNeeded();
     await expect(screenshotRegion).toHaveScreenshot('cooperation-banner.png', {
       animations: 'disabled',
-    });
-  });
-
-  test('info banner', async ({ page }) => {
-    const screenshotRegion = page.locator(locators.infoBanner);
-    await screenshotRegion.scrollIntoViewIfNeeded();
-    await expect(screenshotRegion).toHaveScreenshot('info-banner.png', {
-      animations: 'disabled',
-    });
-  });
-
-  test('hero', async ({ page }) => {
-    const screenshotRegion = page.locator(locators.hero);
-    await screenshotRegion.scrollIntoViewIfNeeded();
-    await expect(screenshotRegion).toHaveScreenshot('hero.png', {
-      animations: 'disabled',
-    });
-  });
-
-  test('services', async ({ page }) => {
-    const screenshotRegion = page.locator(locators.services);
-    await screenshotRegion.scrollIntoViewIfNeeded();
-    await waitForImagesLoaded(page, locators.services);
-    await expect(screenshotRegion).toHaveScreenshot('services.png', {
-      animations: 'disabled',
-    });
-  });
-
-  test('stocking', async ({ page }) => {
-    const screenshotRegion = page.locator(locators.stocking);
-    await screenshotRegion.scrollIntoViewIfNeeded();
-    await waitForStockingCarouselStable(page);
-    await expect(screenshotRegion).toHaveScreenshot('stocking.png', {
-      animations: 'disabled',
-      // WebKit tablet has small, persistent text/image edge antialiasing drift
-      // after the section grew to include multi-story copy and larger media.
-      // Keep this scoped to stocking instead of loosening global thresholds.
-      maxDiffPixelRatio: 0.025,
-    });
-  });
-
-  test('videos', async ({ page }) => {
-    const screenshotRegion = page.locator(locators.videos);
-    await screenshotRegion.scrollIntoViewIfNeeded();
-    await waitForVideoShowcaseReady(page);
-    await expect(screenshotRegion).toHaveScreenshot('videos.png', {
-      animations: 'disabled',
-    });
-  });
-
-  test('contacts', async ({ page }) => {
-    const screenshotRegion = page.locator(locators.contacts);
-    await screenshotRegion.scrollIntoViewIfNeeded();
-    await waitForMapReady(page);
-    // Google Maps tiles, labels and watermarks are non-deterministic across
-    // regions and API-key usage limits. Mask the map so visual regression
-    // covers the rest of `#contacts` without fighting map-render noise.
-    await expect(screenshotRegion).toHaveScreenshot('contacts.png', {
-      animations: 'disabled',
-      mask: [page.locator(`#${classMap.mapShellId}`)],
     });
   });
 

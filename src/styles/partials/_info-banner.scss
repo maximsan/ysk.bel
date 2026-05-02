@@ -222,18 +222,12 @@
   }
 }
 
+/*
+ * Narrow *section* width: tighten message stack only. Grid / close placement for
+ * viewports <768px is handled in the media query below so it wins in cascade.
+ */
 @container (max-width: 36rem) {
   .info-banner:not(.info-banner--modal) {
-    .info-banner__inner {
-      grid-template-columns: minmax(0, 1fr) auto;
-      gap: 0.65rem;
-      padding-inline: 1rem;
-    }
-
-    .info-banner__intro {
-      align-items: flex-start;
-    }
-
     .info-banner__messages {
       display: grid;
       gap: 0.55rem;
@@ -242,6 +236,54 @@
     .info-banner__text {
       display: flex;
       flex-wrap: wrap;
+    }
+  }
+}
+
+/* Strip variant <768px: close is last in DOM — grid auto-placement drops it on a
+   new row (reads as bottom-left). Pin it to the inner top-right; center copy. */
+@media (max-width: 767.98px) {
+  .info-banner:not(.info-banner--modal) {
+    .info-banner__inner {
+      grid-template-columns: 1fr;
+      grid-template-rows: auto auto;
+      align-items: start;
+      justify-items: center;
+      gap: 0.65rem;
+      padding-inline: clamp(1rem, 4vw, 2rem);
+      padding-inline-end: calc(
+        clamp(1rem, 4vw, 2rem) + var(--cta-min-hit) + 0.35rem
+      );
+    }
+
+    .info-banner__intro {
+      grid-column: 1;
+      justify-content: center;
+      text-align: center;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .info-banner__header {
+      text-align: center;
+    }
+
+    .info-banner__messages {
+      grid-column: 1;
+      justify-content: center;
+      justify-items: center;
+      text-align: center;
+    }
+
+    .info-banner__text {
+      justify-content: center;
+      text-align: center;
+    }
+
+    .info-banner__close {
+      position: absolute;
+      inset-block-start: clamp(0.45rem, 2vw, 0.65rem);
+      inset-inline-end: clamp(0.65rem, 3vw, 1rem);
     }
   }
 }

@@ -34,6 +34,9 @@ module.exports = function (config) {
     config.addPassthroughCopy('src/assets/images');
     config.addPassthroughCopy('src/assets/icons');
 
+    /* Rebuild when any Sass partial changes (watch deps alone can miss HTML hash refresh). */
+    config.addWatchTarget(path.join(__dirname, 'src', 'styles'));
+
     // css
     /* Watch for changes in .scss files. */
     config.addTemplateFormats('scss');
@@ -49,7 +52,7 @@ module.exports = function (config) {
             if (path.basename(inputPath).startsWith('_')) {
                 return false;
             }
-            const { css, loadedUrls, sourceMap } = sass.compile(inputPath);
+            const { css } = sass.compile(inputPath);
             return {
                 /* Exclude .scss files from `collections.all` so they don't show up in sitemaps, RSS feeds, etc. */
                 eleventyExcludeFromCollections: true,
@@ -69,9 +72,18 @@ module.exports = function (config) {
                 return (data) => `${data.page.filePathStem}.${data._hash}.css`;
             },
         },
-        /* Read the processed CSS content from the data object produced with `.getData()`. */
-        compile: () => (data) => {
-            return data._content;
+        /*
+         * Register @import partials so --watch/--serve recompiles entry SCSS when they change.
+         * (getData already compiles once for permalink hash; this second compile is cheap for two entries.)
+         */
+        compile: function (inputContent, inputPath) {
+            if (path.basename(inputPath).startsWith('_')) {
+                return;
+            }
+            const { loadedUrls } = sass.compile(inputPath);
+            this.addDependencies(inputPath, loadedUrls);
+
+            return (data) => data._content;
         },
     });
 

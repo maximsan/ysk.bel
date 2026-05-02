@@ -12,16 +12,19 @@
     yarn run build
 ```
 
-### Visual regression (Playwright)
+### Visual regression + a11y (Playwright, Chromium)
 
-Runs against a production build served locally. Baselines live in `tests/visual/home-snapshots/` (shared by `home-header.spec.js` and `home-sections.spec.js`).
+One config: [`playwright.config.mjs`](playwright.config.mjs) — home visuals: **`<main>`** (hero→contacts; map masked) + cooperation + footer in [`tests/visual/home-snapshots/`](tests/visual/home-snapshots/), optional width pass (`yarn test:visual` includes it; or `yarn exec playwright test --project=width-pass` alone), and axe (`yarn test:a11y`). Timeouts / viewports in [`tests/visual/constants.js`](tests/visual/constants.js).
 
 ```bash
-yarn test:visual
-yarn test:visual:update   # after intentional layout/CSS changes; commit updated PNGs
+yarn test:visual          # home (3 viewports) + width pass
+yarn test:visual:home     # home screenshots only
+yarn test:a11y            # accessibility (needs dist/ or let Playwright build)
+yarn test:playwright      # all of the above
+yarn test:visual:update   # refresh local -darwin PNGs; use PR label for -linux
 ```
 
-Playwright-only config (timeouts, blocked URLs, viewports) lives in [`tests/visual/constants.js`](tests/visual/constants.js). Shared waits are in [`tests/visual/support/home-snapshot-helpers.cjs`](tests/visual/support/home-snapshot-helpers.cjs). Shared **DOM ids, `data-*` attributes, and class hooks** are organized in [`src/scripts/constants/dom/`](src/scripts/constants/dom/) (one module per area); the site bundle imports those files directly. [`src/scripts/constants/homePageDom.cjs`](src/scripts/constants/homePageDom.cjs) re-exports the full flat API for tests and any code that wants a single import. See [docs/README.md](docs/README.md), [`playwright.config.mjs`](playwright.config.mjs), and [`.github/workflows/ci.yaml`](.github/workflows/ci.yaml) for the visual matrix, CI (visual job on **PRs only**: path filters + optional **`run-visual`** label), and snapshot updates via **`update-visual-snapshots`** (`.github/workflows/update-visual-snapshots.yaml`).
+Shared waits: [`tests/visual/support/home-snapshot-helpers.cjs`](tests/visual/support/home-snapshot-helpers.cjs). DOM hooks: [`src/scripts/constants/dom/`](src/scripts/constants/dom/) → [`homePageDom.cjs`](src/scripts/constants/homePageDom.cjs). CI uses [`.github/actions/setup-yarn-playwright`](.github/actions/setup-yarn-playwright). See [docs/README.md](docs/README.md), [`.github/workflows/ci.yaml`](.github/workflows/ci.yaml), [`update-visual-snapshots`](.github/workflows/update-visual-snapshots.yaml).
 
 ### Unit tests (Vitest)
 

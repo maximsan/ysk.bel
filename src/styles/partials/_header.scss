@@ -123,7 +123,8 @@
 .navbar {
   position: relative;
   z-index: 1100;
-  border-radius: 100vw;
+  /* Match `.header`: square when flush to the viewport top, pill radius when scrolled (animated on parent). */
+  border-radius: inherit;
   box-sizing: border-box;
   width: auto;
   max-width: 100%;

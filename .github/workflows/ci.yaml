@@ -7,6 +7,10 @@ on:
         branches: [main]
         types: [opened, synchronize, reopened, labeled, unlabeled]
 
+concurrency:
+    group: ci-${{ github.workflow }}-${{ github.event.pull_request.number || github.sha }}
+    cancel-in-progress: true
+
 jobs:
     changes:
         if: github.event_name == 'pull_request'
@@ -30,8 +34,6 @@ jobs:
                           - '500.html'
                           - 'tests/visual/**'
                           - 'playwright.config.mjs'
-                          - 'playwright.width-pass.config.mjs'
-                          - 'playwright.a11y.config.mjs'
                           - 'tests/a11y/**'
 
     build:
@@ -56,15 +58,8 @@ jobs:
                   fi
                   echo "Baselines in parity ($(echo "$darwin" | wc -l | tr -d ' ') tests × 2 platforms)."
 
-            - name: setup Node.js
-              uses: actions/setup-node@v4
-              with:
-                  node-version: 22.x
-
-            - name: install dependencies
-              run: |
-                  yarn set version 4.3.1
-                  yarn install --immutable
+            - name: install toolchain (Node, Yarn, Playwright Chromium)
+              uses: ./.github/actions/setup-yarn-playwright
 
             - name: build app
               run: yarn build
@@ -72,11 +67,17 @@ jobs:
             - name: unit tests
               run: yarn test:unit
 
-            - name: install Playwright (Chromium for a11y)
-              run: yarn exec playwright install chromium --with-deps
-
             - name: accessibility tests
               run: yarn test:a11y
+
+            - name: upload dist for visual job
+              if: github.event_name == 'pull_request'
+              uses: actions/upload-artifact@v4
+              with:
+                  name: site-dist
+                  path: dist/
+                  retention-days: 1
+                  compression-level: 9
 
     visual:
         needs: [changes, build]
@@ -90,29 +91,29 @@ jobs:
             - name: checkout code
               uses: actions/checkout@v4
 
-            - name: setup Node.js
-              uses: actions/setup-node@v4
+            - name: download built site
+              uses: actions/download-artifact@v4
               with:
-                  node-version: 22.x
+                  name: site-dist
+                  path: dist
 
-            - name: install dependencies
-              run: |
-                  yarn set version 4.3.1
-                  yarn install --immutable
-
-            - name: install Playwright browsers
-              run: yarn exec playwright install chromium firefox webkit --with-deps
+            - name: install toolchain (Node, Yarn, Playwright Chromium)
+              uses: ./.github/actions/setup-yarn-playwright
 
             - name: visual regression tests
+              env:
+                  PLAYWRIGHT_PREBUILT_DIST: '1'
               run: yarn test:visual
 
-            - name: upload Playwright report
+            - name: upload Playwright failure artifacts
               if: failure()
               uses: actions/upload-artifact@v4
               with:
-                  name: playwright-report
-                  path: playwright-report/
-                  retention-days: 7
+                  name: playwright-failures
+                  path: test-results/
+                  retention-days: 3
+                  compression-level: 9
+                  if-no-files-found: ignore
 
     deploy:
         if: github.ref == 'refs/heads/main'

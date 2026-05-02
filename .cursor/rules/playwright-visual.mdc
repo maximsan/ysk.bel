@@ -1,41 +1,44 @@
 ---
-description: Playwright visual regression for this repo — config, DOM constants, scripts, CI. @mention this rule when editing or debugging Playwright tests.
+description: Playwright (Chromium) — one playwright.config.mjs, DOM constants, CI. @mention when editing Playwright tests or CI setup.
 globs:
   - tests/visual/**
+  - tests/a11y/**
   - playwright.config.mjs
+  - .github/actions/setup-yarn-playwright/**
 alwaysApply: false
 ---
 
-# Playwright visual tests (ysk.bel)
+# Playwright (ysk.bel)
+
+Single **`playwright.config.mjs`**. **Projects:** `chromium-{mobile|tablet|desktop}` (home screenshots, `testIgnore` width spec), **`width-pass`** (`**/home-width-pass.spec.js`, `width-snapshots/`), **`a11y`** (`tests/a11y/`).
+
+**One static server** on **4173** for all projects (width pass no longer uses a second port).
 
 ## Layout
 
-- **Site DOM** (ids, `data-*`, shared classes): modules under `src/scripts/constants/dom/*.cjs`; bundled JS imports the relevant file per feature. **`homePageDom.cjs`** is a barrel that re-exports the same API — **tests** use it via `require()` in `tests/visual/constants.js` and helpers.
-- **Test-only**: `tests/visual/constants.js` — `VIEWPORTS`, `BLOCKED_THIRD_PARTY_URL_GLOBS`, screenshot timeouts, `LAYOUT.footerMinVisibleWidthPx` (expanded-nav breakpoint for header specs).
-- **Shared waits / routing**: `tests/visual/support/home-snapshot-helpers.cjs`.
-- **Specs**: `tests/visual/home-header.spec.js` (header + mobile drawer), `tests/visual/home-sections.spec.js` (remaining sections).
-- **Baselines**: `tests/visual/home-snapshots/*-{darwin,linux}.png` — single folder for all home specs; `snapshotPathTemplate` appends `{platform}` so macOS and Linux have separate PNG sets (font rasterizers differ enough to cross the AA threshold). Keep both sets in sync when UI changes.
-- **Config**: `playwright.config.mjs` loads `VIEWPORTS` via `createRequire` from `tests/visual/constants.js`.
+- DOM: `src/scripts/constants/dom/*.cjs` → **`homePageDom.cjs`**; tests use **`require()`** in `tests/visual/constants.js` + `home-snapshot-helpers.cjs`.
+- **constants.js:** `VIEWPORTS`, `BLOCKED_THIRD_PARTY_URL_GLOBS`, `LAYOUT.footerMinVisibleWidthPx`.
+- **Baselines:** `home-snapshots/` — consolidated **`main-content`**, **`cooperation-banner`**, **`footer`** (× Chromium × viewport × `{darwin|linux}`); **`width-snapshots/`** for width pass only.
 
-## Commands
+## Scripts
 
-- `yarn test:visual` — run against `yarn build` + static server (see `webServer` in config).
-- `yarn test:visual:update` — refresh **`-darwin.png`** baselines locally after intentional UI changes. Apply the `update-visual-snapshots` label to the PR to regenerate `-linux.png` in CI (see `.github/workflows/update-visual-snapshots.yaml`). Commit both sets together.
-- `yarn test:visual:ui` / `yarn test:visual:open-report` (alias: `yarn test:visual:report`) — UI mode / open last HTML report in `playwright-report/` (generate with `playwright test --reporter=html` first).
+| Command | Scope |
+|---------|--------|
+| `yarn test:visual` | Home 3 viewports + width-pass |
+| `yarn test:visual:home` | Home snapshots only (`chromium-{mobile|tablet|desktop}`, no width-pass) |
+| `yarn exec playwright test --project=width-pass` | Width pass alone |
+| `yarn test:a11y` | Axe only |
+| `yarn test:playwright` | All projects |
 
-## Behaviour notes
-
-- **Header — mobile menu open** runs only below `LAYOUT.footerMinVisibleWidthPx` (768px — slide-out nav through 767.98px); dismiss info-banner overlay first (`dismissInfoBannerForInteraction`) so `.navbar-toggler` is clickable.
-- Waits: stocking zoom `is-loaded`, video host `is-media-ready` / `readyState`, map `#map` → `map-shell--ready`.
-- `contacts` screenshot **masks `#map`** — Google Maps tiles/labels/watermarks vary by region and API-key usage, so the map region is painted over in the screenshot to keep the gate deterministic. The rest of `#contacts` is still compared.
-- Third-party blocking for stability: list in `BLOCKED_THIRD_PARTY_URL_GLOBS` (analytics only — Google Fonts are **not** blocked so Rubik/Source Serif 4 load in both environments; maps/video CDN also kept unblocked).
+**`PLAYWRIGHT_PREBUILT_DIST=1`** — `webServer` serves **`dist/`** only (CI visual job).
 
 ## CI
 
-- **Build** job: baseline parity check (every test must have both `-darwin.png` and `-linux.png`), `yarn build`, then `yarn test:unit` (Vitest).
-- **Visual** job (PRs only): path filter or `run-visual` label; `yarn exec playwright install …`, `yarn test:visual`; uploads `playwright-report` on failure.
-- **Update-snapshots** workflow (`.github/workflows/update-visual-snapshots.yaml`): apply the `update-visual-snapshots` label → Linux runner executes `yarn test:visual --update-snapshots` and commits refreshed `*-linux.png` back to the PR branch.
+- **`.github/actions/setup-yarn-playwright`:** `actions/setup-node` + **`cache:yarn`**, **`actions/cache`** on **`~/.cache/ms-playwright`**, `yarn install --immutable`, **`playwright install chromium --with-deps`**.
+- **build** `ci.yaml`: parity → composite → `yarn build` → unit → **`yarn test:a11y`** → PR upload **`site-dist`**.
+- **visual:** download **`dist/`** → composite → **`PLAYWRIGHT_PREBUILT_DIST=1` `yarn test:visual`** → on failure upload **`test-results/`**.
+- **update-visual-snapshots:** composite → **`yarn test:visual --update-snapshots`** → commit **`home-snapshots`** + **`width-snapshots`** `*-linux.png`.
 
-## Docs
+## Notes
 
-- Workflow: `.github/workflows/ci.yaml` (visual job), `update-visual-snapshots.yaml`; index: `docs/README.md`.
+Header mobile menu, waits, map mask, blocked URLs — see **`tests/visual/constants.js`** and helpers.

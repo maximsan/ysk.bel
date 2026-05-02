@@ -99,14 +99,14 @@ Trackable plan for redesigning the three top-of-page sections on the home page. 
 
 ## Group G — Verification
 
-- [x] Regenerate Playwright visual baselines in `tests/visual/home-snapshots/` for hero, info-banner, cooperation-banner across chromium / firefox / webkit × mobile / tablet / desktop
+- [x] Regenerate Playwright visual baselines in `tests/visual/home-snapshots/` for **`main-content`** (hero→contacts inside `<main>`; map masked), cooperation-banner (Chromium × mobile / tablet / desktop × Darwin/Linux)
 - [x] `yarn test:unit` passes (including any info-banner cookie test updates)
 - [x] `yarn test:visual` passes after baseline refresh
 - [x] `yarn test:a11y` passes — contrast, focus order, ARIA roles, tab traps, reduced-motion
 - [ ] Lighthouse home page (desktop + mobile): LCP ≤ 2.5s, CLS ≤ 0.05, INP ≤ 200ms
   - Latest local run: desktop Performance 81, LCP 3.2s, CLS 0.007, TBT 0ms; mobile Performance 68, LCP 15.2s, CLS 0.009, TBT 60ms. CLS/TBT are healthy; LCP remains a follow-up performance item. **Re-run after `build` + `serve`:** `yarn lighthouse:home:json` and `yarn lighthouse:mobile:json` (uses `scripts/lighthouse-with-playwright.cjs`; output gitignored).
 - [ ] Manual QA on iOS Safari (verify removal of `background-attachment: fixed`), Android Chrome, Firefox desktop
-- [x] Viewport pass at widths 320, 375, 414, 768, 1024, 1280, 1440, 1920 — automated: `yarn test:visual:widths` (see `playwright.width-pass.config.mjs` and `tests/visual/home-width-pass.spec.js`); first-time / design changes: `yarn test:visual:widths:update` then commit `tests/visual/width-snapshots/*-chromium-*.png`.
+- [x] Viewport pass at widths 320, 375, 414, 768, 1024, 1280, 1440, 1920 — **`yarn test:visual:widths`** (`playwright.config.mjs` project **`width-pass`**, `tests/visual/home-width-pass.spec.js`); **`yarn test:visual:widths:update`**; commit **`tests/visual/width-snapshots/*-chromium-*.png`** + **`update-visual-snapshots`** for `*-linux.png`.
 
 ---
 

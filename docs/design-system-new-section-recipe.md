@@ -28,8 +28,8 @@ Use this when adding a **new block** to `base.liquid` (or a new page that should
 1. `yarn build`
 2. `yarn test:unit` (if JS changed)
 3. `yarn test:a11y` (accessibility; requires built `dist/`)
-4. `yarn test:visual` — add or extend a **locator screenshot** in `tests/visual/home-sections.spec.js` (or a dedicated spec) and update baselines: `yarn test:visual:update` (then commit `*-darwin.png` / refresh `*-linux.png` via the **`update-visual-snapshots`** PR label — see `.github/workflows/update-visual-snapshots.yaml`).
-5. Optional: **`yarn test:visual:widths`** — first-screen viewport at `320, 375, 414, 768, 1024, 1280, 1440, 1920` (Chromium; see `playwright.width-pass.config.mjs`). After UI changes, **`yarn test:visual:widths:update`**.
+4. `yarn test:visual` — extend **`tests/visual/home-sections.spec.js`** (consolidated `main-content` screenshot, or cooperation / footer strips) or add a focused spec + update baselines: `yarn test:visual:update` (commit `*-darwin.png` / refresh `*-linux.png` via **`update-visual-snapshots`** — `.github/workflows/update-visual-snapshots.yaml`).
+5. Optional: **`yarn test:visual:widths`** — first-screen viewport at `320 … 1920` (`playwright.config.mjs` project **`width-pass`**). **`yarn test:visual:widths:update`** after UI changes.
 
 ## 5. Optional lab performance
 
