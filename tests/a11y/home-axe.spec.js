@@ -1,9 +1,10 @@
 import AxeBuilder from '@axe-core/playwright';
 import { test, expect } from '@playwright/test';
-import e2ePageSetup from '../support/e2e-page-setup.cjs';
-import homePageDom from '../../src/scripts/constants/homePageDom.cjs';
-
-const { applyDisabledMotionStyle, disablePageMotion } = e2ePageSetup;
+import {
+  applyDisabledMotionStyle,
+  disablePageMotion,
+} from '../support/e2e-page-setup.js';
+import * as homePageDom from '@constants/homePageDom.js';
 const { SITE_SELECTORS, INFO_BANNER_STATE_CLASS } = homePageDom;
 
 function formatViolations(violations) {

@@ -1,5 +1,3 @@
-'use strict';
-
 const DISABLED_MOTION_STYLE = `
 *,
 *::before,
@@ -14,7 +12,7 @@ const DISABLED_MOTION_STYLE = `
 }
 `;
 
-async function disablePageMotion(page) {
+export async function disablePageMotion(page) {
   await page.emulateMedia({ reducedMotion: 'reduce' });
   await page.addInitScript((cssText) => {
     const installStyle = () => {
@@ -37,11 +35,6 @@ async function disablePageMotion(page) {
   }, DISABLED_MOTION_STYLE);
 }
 
-async function applyDisabledMotionStyle(page) {
+export async function applyDisabledMotionStyle(page) {
   await page.addStyleTag({ content: DISABLED_MOTION_STYLE });
 }
-
-module.exports = {
-  applyDisabledMotionStyle,
-  disablePageMotion,
-};

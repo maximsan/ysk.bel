@@ -1,5 +1,5 @@
-const { test, expect } = require('@playwright/test');
-const { setupHomeVisualPage } = require('./support/home-snapshot-helpers.cjs');
+import { test, expect } from '@playwright/test';
+import { setupHomeVisualPage } from './support/home-snapshot-helpers.js';
 
 /** Group G manual checklist widths — viewport chrome, first screen. */
 const WIDTHS = [320, 375, 414, 768, 1024, 1280, 1440, 1920];

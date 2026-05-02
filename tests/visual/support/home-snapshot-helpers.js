@@ -1,13 +1,13 @@
-import { createRequire } from 'node:module';
 import * as homePageDom from '@constants/homePageDom.js';
+import {
+  applyDisabledMotionStyle,
+  disablePageMotion,
+} from '../../support/e2e-page-setup.js';
 import {
   HOME_SELECTORS,
   homeActiveVideoHostSelector,
   BLOCKED_THIRD_PARTY_URL_GLOBS,
 } from '../constants.js';
-
-const require = createRequire(import.meta.url);
-const { applyDisabledMotionStyle, disablePageMotion } = require('../../support/e2e-page-setup.cjs');
 
 const { locators, classMap, timeouts } = HOME_SELECTORS;
 
