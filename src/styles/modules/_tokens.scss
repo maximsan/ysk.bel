@@ -105,6 +105,21 @@
   --info-banner-surface: var(--color-bg-elevated);
   --info-banner-border: 2px solid var(--color-border-strong);
   --info-banner-accent: var(--color-accent-muted);
+  /* Strip — warm “announcement” wash + lift (see _info-banner.scss) */
+  --info-banner-gradient: linear-gradient(
+    115deg,
+    color-mix(in srgb, var(--color-accent-light) 30%, var(--color-bg-elevated)) 0%,
+    var(--color-bg-elevated) 40%,
+    color-mix(in srgb, var(--color-accent) 10%, var(--color-bg-elevated)) 100%
+  );
+  --info-banner-accent-bar: 4px solid var(--color-accent);
+  --info-banner-shadow:
+    0 8px 32px color-mix(in srgb, var(--color-accent-shadow) 18%, transparent),
+    0 2px 0 color-mix(in srgb, var(--color-accent-light) 35%, transparent),
+    var(--section-inset-highlight);
+  --info-banner-lead-bg: color-mix(in srgb, var(--color-accent) 9%, var(--color-bg-elevated));
+  --info-banner-lead-border: 1px solid
+    color-mix(in srgb, var(--color-accent) 28%, transparent);
   /* Legacy .bg-creamy-white (services card); dark override lives in the media block below. */
   --creamy-white: rgba(255, 252, 248, 0.78);
   /* Phase 5 — motion & focus */
@@ -182,6 +197,19 @@
     );
     --info-banner-surface: var(--color-bg-elevated);
     --info-banner-accent: var(--color-accent-light);
+    --info-banner-gradient: linear-gradient(
+      118deg,
+      color-mix(in srgb, var(--color-accent) 16%, var(--color-bg-elevated)) 0%,
+      var(--color-bg-elevated) 42%,
+      color-mix(in srgb, var(--color-accent-light) 14%, var(--color-bg-elevated)) 100%
+    );
+    --info-banner-shadow:
+      0 10px 36px color-mix(in srgb, var(--color-bg-inverse) 55%, transparent),
+      0 1px 0 color-mix(in srgb, var(--color-accent-muted) 28%, transparent),
+      var(--section-inset-highlight);
+    --info-banner-lead-bg: color-mix(in srgb, var(--color-accent) 14%, var(--color-bg-elevated));
+    --info-banner-lead-border: 1px solid
+      color-mix(in srgb, var(--color-accent-light) 32%, transparent);
     --paper-grain-opacity: 0.03;
     /* Legacy utility — was fixed cream; keep warm cards readable on peat */
     --creamy-white: color-mix(

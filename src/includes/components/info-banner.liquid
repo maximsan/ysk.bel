@@ -29,7 +29,7 @@
 
     <div class='info-banner__messages'>
       {% for message in banner.messages %}
-        <p class='info-banner__text'>
+        <p class='info-banner__text {% if forloop.first %}info-banner__text--lead{% endif %}'>
           {% if message.date %}
             <span class='info-banner__date'>{{ message.date }}</span>
           {% endif %}

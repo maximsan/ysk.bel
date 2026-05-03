@@ -1,9 +1,11 @@
 .info-banner {
   display: none;
+  position: relative;
   color: var(--info-banner-accent);
-  background-color: var(--info-banner-surface);
-  border-block: var(--hairline-copper);
-  box-shadow: var(--section-inset-highlight);
+  background: var(--info-banner-gradient);
+  border-block: var(--hairline-copper-strong);
+  border-inline-start: var(--info-banner-accent-bar);
+  box-shadow: var(--info-banner-shadow);
   z-index: 998;
 
   &__inner {
@@ -14,7 +16,7 @@
     gap: clamp(0.75rem, 2vw, 1.5rem);
     width: min(100%, 72rem);
     margin-inline: auto;
-    padding: clamp(0.75rem, 2vw, 1rem) clamp(1rem, 4vw, 2rem);
+    padding: clamp(0.9rem, 2.2vw, 1.2rem) clamp(1rem, 4vw, 2rem);
   }
 
   &__intro {
@@ -29,17 +31,26 @@
     align-items: center;
     justify-content: center;
     flex: 0 0 auto;
+    padding: 0.42rem;
+    border-radius: 50%;
     color: var(--color-accent);
-    font-size: 1.65rem;
+    font-size: 1.55rem;
+    background: color-mix(in srgb, var(--color-accent) 12%, transparent);
+    box-shadow: inset 0 1px 0 color-mix(in srgb, var(--color-bg-elevated) 65%, transparent);
   }
 
   &__header {
     margin: 0;
     font-family: var(--font-heading);
-    font-size: clamp(1.15rem, 0.9rem + 1.1vw, 1.75rem);
+    font-size: clamp(0.92rem, 0.86rem + 0.42vw, 1.12rem);
     font-weight: 600;
-    line-height: 1.15;
-    color: var(--color-text-primary);
+    line-height: 1.2;
+    letter-spacing: 0.02em;
+    color: color-mix(
+      in srgb,
+      var(--color-text-muted) 38%,
+      var(--color-text-primary) 62%
+    );
     text-wrap: balance;
   }
 
@@ -97,6 +108,27 @@
     @include outline;
   }
 
+  /* First news line — primary hook for first-time visitors */
+  &__text--lead {
+    padding: 0.4rem 0.75rem;
+    border-radius: var(--radius-md);
+    background: var(--info-banner-lead-bg);
+    border: var(--info-banner-lead-border);
+    box-shadow: 0 1px 0 color-mix(in srgb, var(--color-bg-elevated) 55%, transparent);
+
+    .info-banner__link {
+      font-size: clamp(1.08rem, 1rem + 0.55vw, 1.42rem);
+      line-height: 1.25;
+      text-decoration-thickness: 2px;
+      text-underline-offset: 4px;
+    }
+
+    .info-banner__date {
+      border-color: color-mix(in srgb, var(--color-accent) 40%, transparent);
+      background: color-mix(in srgb, var(--color-accent-light) 18%, transparent);
+    }
+  }
+
   &__close {
     display: inline-flex;
     align-items: center;
@@ -129,6 +161,7 @@
     transform: translate(-50%, -50%);
     width: min(90vw, 50rem);
     border: var(--info-banner-border);
+    border-inline-start: var(--info-banner-accent-bar);
     border-radius: var(--radius-md);
     box-shadow: 0 24px 80px color-mix(in srgb, var(--color-bg-inverse) 30%, transparent);
     z-index: 1000;
@@ -191,7 +224,7 @@
 @keyframes infoBannerStripIn {
   0% {
     opacity: 0;
-    transform: translateY(-0.75rem);
+    transform: translateY(-1rem);
   }
   100% {
     opacity: 1;
