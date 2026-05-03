@@ -24,6 +24,7 @@
     "test:visual:report": "node run-with-import-aliases.mjs playwright show-report playwright-report",
     "test:visual:open-report": "node run-with-import-aliases.mjs playwright show-report playwright-report",
     "test:visual:home": "node run-with-import-aliases.mjs playwright test --project=chromium-mobile --project=chromium-tablet --project=chromium-desktop",
+    "test:visual:home:update": "node run-with-import-aliases.mjs playwright test --project=chromium-mobile --project=chromium-tablet --project=chromium-desktop --update-snapshots",
     "test:unit": "node run-with-import-aliases.mjs vitest run",
     "test:unit:watch": "node run-with-import-aliases.mjs vitest",
     "test:a11y": "node run-with-import-aliases.mjs playwright test --project=a11y",

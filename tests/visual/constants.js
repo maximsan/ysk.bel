@@ -47,6 +47,10 @@ export const HOME_SELECTORS = {
     menuDrawerOpenMs: 10_000,
     /** `.menu` uses `transition: left 0.2s` when opening (`_mixins.scss`). */
     menuDrawerTransitionMs: 300,
+    /** Element screenshots: fonts / flex / carousel can shrinkwrap after first paint — wait until box stops moving. */
+    screenshotLayoutStableTimeoutMs: 20_000,
+    screenshotLayoutStablePollMs: 120,
+    screenshotLayoutStableRounds: 4,
   },
 };
 

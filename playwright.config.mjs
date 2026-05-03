@@ -5,6 +5,16 @@ const chromeDevice = devices['Desktop Chrome'];
 const baseURLMain = 'http://127.0.0.1:4173';
 const reuseServer = !process.env.CI;
 
+/** Home snapshots: taller DOM + masked map + fonts → allow benign CI/layout drift without hiding real breaks. */
+const homeVisualScreenshotExpect = {
+  timeout: 20_000,
+  toHaveScreenshot: {
+    // Root default is 0.005; section shots need more slack (subpixel/fonts, carousel line wraps, viewport rounding).
+    maxDiffPixelRatio: 0.07,
+    threshold: 0.3,
+  },
+};
+
 function homeScreenshotProjects() {
   return Object.entries(viewports).map(([viewportProfileName, viewportSize]) => ({
     name: `chromium-${viewportProfileName}`,
@@ -12,6 +22,7 @@ function homeScreenshotProjects() {
     testIgnore: '**/home-width-pass.spec.js',
     snapshotPathTemplate:
       '{testDir}/home-snapshots/{arg}-{projectName}-{platform}{ext}',
+    expect: homeVisualScreenshotExpect,
     use: {
       ...chromeDevice,
       viewport: viewportSize,

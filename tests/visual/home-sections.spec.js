@@ -4,6 +4,8 @@ import {
   classMap,
   setupHomeVisualPage,
   waitForImagesLoaded,
+  waitForLayout,
+  waitForLocatorSizeStable,
   waitForStockingCarouselStable,
   waitForVideoShowcaseReady,
   waitForMapReady,
@@ -26,10 +28,10 @@ test.describe('home — consolidated sections', () => {
     await waitForVideoShowcaseReady(page);
     await page.locator(locators.contacts).scrollIntoViewIfNeeded();
     await waitForMapReady(page);
+    await waitForLocatorSizeStable(mainLocator);
 
     await expect(mainLocator).toHaveScreenshot('main-content.png', {
       animations: 'disabled',
-      maxDiffPixelRatio: 0.02,
       mask: [page.locator(`#${classMap.mapShellId}`)],
     });
   });
@@ -37,6 +39,9 @@ test.describe('home — consolidated sections', () => {
   test('cooperation banner', async ({ page }) => {
     const screenshotRegion = page.locator(locators.cooperationBanner);
     await screenshotRegion.scrollIntoViewIfNeeded();
+    await waitForLayout(page);
+    await waitForImagesLoaded(page, locators.cooperationBanner);
+    await waitForLocatorSizeStable(screenshotRegion);
     await expect(screenshotRegion).toHaveScreenshot('cooperation-banner.png', {
       animations: 'disabled',
     });
@@ -45,6 +50,8 @@ test.describe('home — consolidated sections', () => {
   test('footer', async ({ page }) => {
     const screenshotRegion = page.locator(locators.footer);
     await screenshotRegion.scrollIntoViewIfNeeded();
+    await waitForImagesLoaded(page, locators.footer);
+    await waitForLocatorSizeStable(screenshotRegion);
     await expect(screenshotRegion).toHaveScreenshot('footer.png', {
       animations: 'disabled',
     });

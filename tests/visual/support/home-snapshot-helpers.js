@@ -246,6 +246,56 @@ export async function dismissInfoBannerForInteraction(page) {
   );
 }
 
+/** After scroll/hydration, wait until `<locator>` width×height stays fixed (rounded), then one extra paint. */
+export async function waitForLocatorSizeStable(
+  locator,
+  {
+    timeoutMs = timeouts.screenshotLayoutStableTimeoutMs,
+    sampleIntervalMs = timeouts.screenshotLayoutStablePollMs,
+    stableRoundsNeeded = timeouts.screenshotLayoutStableRounds,
+  } = {},
+) {
+  const pageRef = locator.page();
+  const deadline = Date.now() + timeoutMs;
+  let lastKey = '';
+  let stableStreak = 0;
+
+  while (Date.now() < deadline) {
+    await pageRef.evaluate(() =>
+      new Promise((resolve) => {
+        requestAnimationFrame(() => requestAnimationFrame(resolve));
+      }),
+    );
+
+    const box = await locator.boundingBox();
+    const key =
+      box && box.height > 0 && box.width > 0
+        ? `${Math.round(box.width)}×${Math.round(box.height)}`
+        : '';
+
+    if (key && key === lastKey) {
+      stableStreak += 1;
+      if (stableStreak >= stableRoundsNeeded) {
+        await pageRef.evaluate(() =>
+          new Promise((resolve) => {
+            requestAnimationFrame(() => requestAnimationFrame(resolve));
+          }),
+        );
+        return;
+      }
+    } else {
+      lastKey = key;
+      stableStreak = key ? 1 : 0;
+    }
+
+    await pageRef.waitForTimeout(sampleIntervalMs);
+  }
+
+  throw new Error(
+    `Screenshot region size did not stabilize within ${timeoutMs}ms (last box key: "${lastKey || 'none'}")`,
+  );
+}
+
 export async function setupHomeVisualPage(page, options = {}) {
   await blockThirdPartyNoise(page);
   await disablePageMotion(page);
