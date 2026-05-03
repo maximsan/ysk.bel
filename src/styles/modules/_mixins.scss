@@ -35,7 +35,8 @@
     box-shadow: 0px 0px 0.3rem 0.1rem var(--orange-shadow);
     visibility: hidden;
     transform: scaleX(0);
-    transition: transform var(--motion-link-hover-duration) var(--motion-ease-out);
+    transition: transform var(--motion-link-hover-duration)
+      var(--motion-ease-out);
   }
 
   &:hover::before {
@@ -103,12 +104,10 @@
     to right,
     transparent 0,
     color-mix(in srgb, #{$color} 60%, transparent) 18%,
-    color-mix(in srgb, #{$color} 60%, transparent)
-      calc(50% - #{$gap} / 2),
+    color-mix(in srgb, #{$color} 60%, transparent) calc(50% - #{$gap} / 2),
     transparent calc(50% - #{$gap} / 2),
     transparent calc(50% + #{$gap} / 2),
-    color-mix(in srgb, #{$color} 60%, transparent)
-      calc(50% + #{$gap} / 2),
+    color-mix(in srgb, #{$color} 60%, transparent) calc(50% + #{$gap} / 2),
     color-mix(in srgb, #{$color} 60%, transparent) 82%,
     transparent 100%
   );

@@ -3,7 +3,10 @@ import {
   FORM_FIELD_NAME,
   FORM_QUERY,
 } from '@constants/dom/form.js';
-import { isSpamHoneypot, validEmail } from '@scripts/form-submission/formSubmissionCore.js';
+import {
+  isSpamHoneypot,
+  validEmail,
+} from '@scripts/form-submission/formSubmissionCore.js';
 
 /**
  * Google Apps Script–style `.gform` handler (see `modal.liquid`).
@@ -25,7 +28,9 @@ function getFormData(form) {
       }
       return undefined;
     })
-    .filter((item, index, self) => Boolean(item) && self.indexOf(item) === index);
+    .filter(
+      (item, index, self) => Boolean(item) && self.indexOf(item) === index,
+    );
 
   const formData = {};
   fields.forEach((name) => {
@@ -96,10 +101,7 @@ function handleFormSubmit(event) {
   };
 
   const encoded = Object.keys(data)
-    .map(
-      (key) =>
-        `${encodeURIComponent(key)}=${encodeURIComponent(data[key])}`,
-    )
+    .map((key) => `${encodeURIComponent(key)}=${encodeURIComponent(data[key])}`)
     .join('&');
   xhr.send(encoded);
 
