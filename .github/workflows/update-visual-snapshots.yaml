@@ -45,7 +45,7 @@ jobs:
         run: yarn test:visual --update-snapshots
 
       - name: commit updated baselines
-        uses: stefanzweifel/git-auto-commit-action@v5
+        uses: stefanzweifel/git-auto-commit-action@v7
         with:
           # No [skip ci]: if this is PR HEAD, GitHub would skip CI and the PR
           # would never get a fresh visual/build run on the baseline commit.
