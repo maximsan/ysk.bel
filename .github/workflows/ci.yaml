@@ -50,19 +50,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Visual baseline parity
-        run: |
-          cd tests/visual/home-snapshots
-          darwin=$(ls *-darwin.png 2>/dev/null | sed 's/-darwin\.png$//' | sort)
-          linux=$(ls *-linux.png 2>/dev/null | sed 's/-linux\.png$//' | sort)
-          if ! diff <(echo "$darwin") <(echo "$linux") > /tmp/parity.diff; then
-            echo "::error::Visual baseline mismatch — every test must have both '-darwin.png' and '-linux.png'."
-            echo "Missing on one side (left = darwin-only, right = linux-only):"
-            cat /tmp/parity.diff
-            echo ""
-            echo "Fix: run 'yarn test:visual:update' locally for '-darwin' and apply the 'update-visual-snapshots' label for '-linux'."
-            exit 1
-          fi
-          echo "Baselines in parity ($(echo "$darwin" | wc -l | tr -d ' ') tests × 2 platforms)."
+        run: bash .github/scripts/check-visual-baseline-parity.sh
 
       - name: Setup toolchain (Node, Yarn, Playwright Chromium)
         uses: ./.github/actions/setup-yarn-playwright
