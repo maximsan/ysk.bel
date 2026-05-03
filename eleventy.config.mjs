@@ -28,6 +28,7 @@ function pathAliasesEsbuildPlugin() {
 }
 
 import banner from '@data/banner.js';
+import cooperation from '@data/cooperation.js';
 import history from '@data/estate-history.js';
 import footer from '@data/footer.js';
 import meta from '@data/meta.js';
@@ -147,6 +148,7 @@ export default function (config) {
     strict_filters: true,
     globals: {
       banner,
+      cooperation,
       history,
       footer,
       meta,

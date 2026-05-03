@@ -1,11 +1,7 @@
 /**
- * Cooperation block — B2B-полоса «усадьба ищет партнёров и инвесторов».
- *
- * Отображается у подвала (см. Group D/E плана redesign). Единый словарь CTA
- * (`src/styles/partials/_cta.scss`): один primary «Написать в WhatsApp»,
- * остальные — ghost.
- *
- * Телефон — живой `tel:` + `viber://` + `https://wa.me/…` якорь.
+ * Cooperation block
+ * Отображается у подвала. Единый словарь CTA
+ * (`src/styles/partials/_cta.scss`)
  * При изменении номера — обновить также `src/data/contacts.js` и `sidebar.js`.
  */
 const PHONE_DIGITS = '375291495989';
