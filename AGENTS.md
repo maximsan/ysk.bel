@@ -8,7 +8,7 @@ Static marketing site for **Усадьба Серебряный Карась** (
 - **Templates:** Liquid (primary), Markdown and Nunjucks also allowed
 - **Styles:** Sass/SCSS; entry SCSS files emit hashed filenames (see `eleventy.config.mjs`)
 - **Client JS:** esbuild (in Eleventy) bundles **`src/scripts/index.js` only**; that file imports Bootstrap, `main`, PhotoSwipe. No Babel in the build pipeline.
-- **Import aliases:** `@constants/*` → `src/scripts/constants/*`, `@scripts/*` → `src/scripts/*`, `@data/*` → `src/data/*`. Resolved by esbuild (`eleventy.config.mjs`), Vitest (`vitest.config.mjs`), IDE (`jsconfig.json`), and Node’s `--import ./import-aliases-hooks.mjs` (self-registers via `register()` at load). **npm scripts** run Node CLIs through `node run-with-import-aliases.mjs …` so that flag is set in one place (`package.json`).
+- **Import aliases:** `@constants/*` → `src/scripts/constants/*`, `@scripts/*` → `src/scripts/*`, `@data/*` → `src/data/*`.
 - **Libraries:** Bootstrap 4, jQuery, Popper 1.x, PhotoSwipe 5
 - **E2E:** [Playwright](https://playwright.dev/) (`e2e/`, `playwright.config.mjs`) — builds the site and serves `dist/` via `serve` during tests.
 
@@ -16,26 +16,26 @@ Static marketing site for **Усадьба Серебряный Карась** (
 
 ## Layout of `src/`
 
-| Path | Role |
-|------|------|
-| `src/pages/` | Page content (e.g. `home/index.md`) |
-| `src/layouts/` | Layouts (e.g. `base.liquid`) |
-| `src/includes/` | Liquid partials |
-| `src/data/` | Site data modules; many are imported in `eleventy.config.mjs` and exposed as **Liquid globals** (`banner`, `meta`, `footer`, etc.) |
-| `src/styles/` | SCSS; files starting with `_` are partials only |
-| `src/scripts/` | JS; bundle entry is `index.js` |
-| `src/assets/` | Images, icons, videos, `public/` passthrough |
+| Path            | Role                                                                                                                               |
+| --------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| `src/pages/`    | Page content (e.g. `home/index.md`)                                                                                                |
+| `src/layouts/`  | Layouts (e.g. `base.liquid`)                                                                                                       |
+| `src/includes/` | Liquid partials                                                                                                                    |
+| `src/data/`     | Site data modules; many are imported in `eleventy.config.mjs` and exposed as **Liquid globals** (`banner`, `meta`, `footer`, etc.) |
+| `src/styles/`   | SCSS; files starting with `_` are partials only                                                                                    |
+| `src/scripts/`  | JS; bundle entry is `index.js`                                                                                                     |
+| `src/assets/`   | Images, icons, videos, `public/` passthrough                                                                                       |
 
 Build output: **`dist/`** (`vercel.json` → `outputDirectory` for Vercel).
 
 ## Common commands
 
-| Command | Use |
-|---------|-----|
-| `yarn dev` | Default local work (`clean` + Eleventy serve) |
-| `yarn build` | Production build to `dist/` |
-| `yarn format` | Prettier on `src/` |
-| `yarn test` | Unit + a11y + E2E (see README / Playwright configs) |
+| Command       | Use                                                 |
+| ------------- | --------------------------------------------------- |
+| `yarn dev`    | Default local work (`clean` + Eleventy serve)       |
+| `yarn build`  | Production build to `dist/`                         |
+| `yarn format` | Prettier on `src/`                                  |
+| `yarn test`   | Unit + a11y + E2E (see README / Playwright configs) |
 
 Everything else: **`package.json`** / **[README.md](README.md)**.
 

@@ -20,7 +20,7 @@ After **`yarn install`**, a Yarn plugin runs **`pre-commit install`** when the *
 
 ### Tests (CI default)
 
-Unit, accessibility, E2E, and visual regressions share Node tooling (`run-with-import-aliases.mjs` for `@constants/` in tests).
+Unit, accessibility, E2E, and visual regressions share Node tooling (`scripts/run-with-import-aliases.mjs` for `@constants/` in tests).
 
 ```bash
 yarn test               # unit + a11y + e2e (after `yarn build` in CI)
@@ -73,7 +73,7 @@ yarn run deploy:all
 - **Package manager:** yarn berry
 - **SSG:** [Eleventy](https://www.11ty.dev/) 3.x (ESM config: `eleventy.config.mjs`)
 - **Bundler:** [esbuild](https://esbuild.github.io/) (via Eleventy for client JS)
-- **JS path aliases:** `@constants/*` → `src/scripts/constants/*`, `@scripts/*` → `src/scripts/*`, `@data/*` → `src/data/*` (see `jsconfig.json`, `eleventy.config.mjs`, `vitest.config.mjs`; Node loads `import-aliases-hooks.mjs` via `run-with-import-aliases.mjs` in `package.json` scripts)
+- **JS path aliases:** `@constants/*` → `src/scripts/constants/*`, `@scripts/*` → `src/scripts/*`, `@data/*` → `src/data/*` (see `jsconfig.json`, `eleventy.config.mjs`, `vitest.config.mjs`; Node loads `scripts/import-aliases-hooks.mjs` via `scripts/run-with-import-aliases.mjs` in `package.json` scripts)
 - **Sass:** For stylesheets
 - **Testing:** [Playwright](https://playwright.dev/) — visual regression, a11y, E2E; [Vitest](https://vitest.dev/) for unit tests (see `docs/migration-to-esm.md`)
 
