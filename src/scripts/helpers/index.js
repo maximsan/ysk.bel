@@ -1,5 +1,4 @@
 export * from './addVideo';
-export * from './heroScrollCue';
 export * from './infoBanner';
 export * from './sideBar';
 export * from './googleMapInit';

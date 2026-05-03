@@ -5,7 +5,7 @@
     - Оптимизированная hero-фотография через CSS background + preload
       (так Lighthouse не откладывает LCP на декоративном изображении).
     - Один <h1>, eyebrow-строка с копперной линейкой, CTA-ряд по единому
-      словарю `_cta.scss`, trust strip, скролл-курсор.
+      словарю `_cta.scss`, trust strip.
     - Сетка и scrim полностью описаны в `_hero.scss` — здесь только разметка.
 
   Данные:
@@ -76,13 +76,4 @@
       {% endif %}
     </div>
   </div>
-
-  <a
-    class='hero__scroll-cue'
-    href='#services'
-    aria-label='Прокрутить к разделу услуг'
-  >
-    <span class='hero__scroll-cue-line' aria-hidden='true'></span>
-    <span class='hero__scroll-cue-dot' aria-hidden='true'></span>
-  </a>
 </section>

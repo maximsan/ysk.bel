@@ -28,7 +28,7 @@ Trackable plan for redesigning the three top-of-page sections on the home page. 
 ## Group B — Hero rebuild
 
 `src/includes/hero-section.liquid`, `src/styles/partials/_hero.scss`,
-`src/scripts/helpers/heroScrollCue.js`, `src/includes/head.liquid`
+`src/includes/head.liquid`
 
 - [x] Use a preloaded responsive hero background image; a `<picture>` LCP experiment was reverted because mobile Lighthouse reported the decorative image as a delayed LCP candidate.
 - [x] Remove `background-attachment: fixed` and the `margin-left: 24rem` layout hack
@@ -37,9 +37,8 @@ Trackable plan for redesigning the three top-of-page sections on the home page. 
 - [x] Apply Source Serif 4 with `font-optical-sizing: auto` + `font-variant-numeric: oldstyle-nums`; fluid scale via `clamp()`; `text-wrap: balance` on title, `pretty` on lede
 - [x] Add primary CTA (`tel:+375291495989`) and secondary CTA (`#services`) via `.cta` system
 - [x] Add trust strip row ("30 мин от Минска · Рыбалка круглый год · Баня до 8 чел.") with middle-dot `::after` separators
-- [x] Add scroll cue (hairline + animated dot) below content; hides on first scroll via `heroScrollCue.js` (one-shot `passive` listener)
 - [x] Strengthen scrim: radial bottom scrim layered on top of existing linear gradient
-- [x] Stagger-reveal on load: eyebrow → title line 1 → title line 2 → lede → CTAs → trust → cue using `--motion-hero-stagger`
+- [x] Stagger-reveal on load: eyebrow → title line 1 → title line 2 → lede → CTAs → trust using `--motion-hero-stagger`
 - [x] Removed Ken Burns zoom from the hero photo after Lighthouse identified decorative image motion as risky for LCP stability.
 - [x] Gate all motion behind `@media (prefers-reduced-motion: no-preference)`
 - [x] Add hero LCP preload hint (`<link rel="preload" as="image" imagesrcset imagesizes fetchpriority="high">`) in `src/includes/head.liquid`
@@ -92,7 +91,7 @@ Trackable plan for redesigning the three top-of-page sections on the home page. 
 - [x] Replace per-breakpoint font-size rules in the three partials with `clamp()` scales; add `font-optical-sizing: auto`
 - [x] Add a paper-grain SVG overlay (2–4% opacity), gated by `@media (prefers-reduced-transparency: no-preference)`
 - [x] Add `@media (prefers-color-scheme: dark)` token overrides in `_tokens.scss` (no UI toggle yet)
-- [x] Confirm 44×44 minimum touch targets on every new interactive element (CTA system, info close button, hero scroll cue hit area)
+- [x] Confirm 44×44 minimum touch targets on every new interactive element (CTA system, info close button)
 - [x] Hero image: provide AVIF + WebP at 600 / 800 / 1200 / 1600 widths; add a low-quality dominant-colour fallback background
 
 ---

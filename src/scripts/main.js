@@ -11,7 +11,6 @@ import {
   initStockingCarousel,
   initStockingImageSkeletons,
   initVideosShowcaseCarousel,
-  initHeroScrollCue,
 } from '@scripts/helpers/index.js';
 
 /** Keep in sync with slide-out nav in `_menu.scss` / `_header.scss` (`max-width: 767.98px`). */
@@ -48,8 +47,6 @@ window.setTimeout(() => {
 }, GOOGLE_MAP_INIT_DELAY_MS);
 
 toggleSideBar();
-
-initHeroScrollCue();
 
 function initCarouselsWhenDomReady() {
   initNavScrollSpy();

@@ -57,9 +57,7 @@
 .hero__scrim {
   pointer-events: none;
   z-index: 1;
-  background:
-    var(--hero-scrim-radial),
-    var(--hero-scrim);
+  background: var(--hero-scrim-radial), var(--hero-scrim);
 }
 
 .hero-content {
@@ -149,7 +147,6 @@
   text-wrap: pretty;
 }
 
-/* CTA row — spacing handled by the shared .cta-row primitive. */
 .hero__cta {
   justify-content: center;
   margin-block-start: 0.5rem;
@@ -185,57 +182,6 @@
   &:last-child {
     padding-inline-end: 0;
   }
-}
-
-/* Scroll cue — 1px copper hairline with a static dot to keep first paint stable. */
-.hero__scroll-cue {
-  position: absolute;
-  inset-block-end: clamp(1rem, 3vh, 2.25rem);
-  inset-inline: 0;
-  z-index: 3;
-  justify-self: center;
-  inline-size: var(--cta-min-hit);
-  block-size: clamp(2rem, 5vh, 3.25rem);
-  margin-inline: auto;
-  opacity: 0.85;
-  transition:
-    opacity var(--motion-link-hover-duration) var(--motion-ease-out),
-    transform var(--motion-link-hover-duration) var(--motion-ease-out);
-
-  @include outline;
-
-  &:hover {
-    opacity: 1;
-  }
-
-  &.is-hidden {
-    opacity: 0;
-    transform: translateY(0.5rem);
-    pointer-events: none;
-  }
-}
-
-.hero__scroll-cue-line {
-  position: absolute;
-  inset-block: 0;
-  inset-inline-start: 50%;
-  inline-size: 1px;
-  transform: translateX(-50%);
-  background: linear-gradient(
-    to bottom,
-    transparent 0%,
-    color-mix(in srgb, var(--color-accent-light) 85%, transparent) 100%
-  );
-}
-
-.hero__scroll-cue-dot {
-  position: absolute;
-  inset-inline-start: calc(50% - 3.5px);
-  inset-block-start: -2px;
-  inline-size: 7px;
-  block-size: 7px;
-  border-radius: 50%;
-  background: var(--color-accent-light);
 }
 
 /*
@@ -316,12 +262,8 @@
 /* ~iPhone SE / narrow width: tighter vertical rhythm so bottom-anchored stack fits */
 @media only screen and (max-width: 399.98px) {
   .hero {
-    padding-block-start: calc(
-      0.875rem + env(safe-area-inset-top, 0px)
-    );
-    padding-block-end: calc(
-      1rem + env(safe-area-inset-bottom, 0px)
-    );
+    padding-block-start: calc(0.875rem + env(safe-area-inset-top, 0px));
+    padding-block-end: calc(1rem + env(safe-area-inset-bottom, 0px));
   }
 
   .hero__eyebrow {

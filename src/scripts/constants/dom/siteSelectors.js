@@ -14,5 +14,4 @@ export const SITE_SELECTORS = {
   infoBanner: PLAYWRIGHT_HOME_LOCATORS.infoBanner,
   crossIcon: `.${LAYOUT_CLASS.crossIcon}`,
   intro: `.${LAYOUT_CLASS.heroIntro}`,
-  heroScrollCue: `.${LAYOUT_CLASS.heroScrollCue}`,
 };
