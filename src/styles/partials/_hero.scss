@@ -18,6 +18,15 @@
  *   prefers-reduced-motion.
  */
 
+@mixin hero-cover-photo ($widthPx) {
+  $avif: '../assets/images/hero-fish-#{$widthPx}.avif';
+  $webp: '../assets/images/hero-fish-#{$widthPx}.webp';
+
+  background-image: url('#{$webp}');
+  background-image:
+    image-set(url('#{$avif}') type('image/avif'), url('#{$webp}') type('image/webp'));
+}
+
 .hero {
   position: relative;
   isolation: isolate;
@@ -38,7 +47,7 @@
     position: absolute;
     inset: 0;
     z-index: 0;
-    background-image: url('../assets/images/hero-fish-800.webp');
+    @include hero-cover-photo('800');
     background-position: center 35%;
     background-size: cover;
     background-repeat: no-repeat;
@@ -307,7 +316,7 @@
     min-block-size: max(42rem, 88svh);
 
     &::before {
-      background-image: url('../assets/images/hero-fish-1200.webp');
+      @include hero-cover-photo('1200');
     }
   }
 
@@ -375,7 +384,7 @@
 
 @media (min-width: 1200px) {
   .hero::before {
-    background-image: url('../assets/images/hero-fish-1600.webp');
+    @include hero-cover-photo('1600');
   }
 
   .hero-content {
