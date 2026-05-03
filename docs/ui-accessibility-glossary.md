@@ -188,19 +188,13 @@ Short reference for terms and patterns used in **Phase 1** (footer/colophon) and
 
 ## Related files (by topic)
 
-| Topic | Files |
-|--------|--------|
-| Drawer open/close, scrim, scroll lock, Escape | `src/scripts/helpers/sideBar.js` |
-| Nav width / tablet layout, header scroll-timeline fallback | `src/styles/partials/_menu.scss`, `src/styles/partials/_header.scss` |
-| Scroll spy / `aria-current` | `src/scripts/helpers/navScrollSpy.js`, `src/scripts/main.js` |
-| Scrim + safe-area + toggler size | `src/styles/partials/_header.scss` |
-| Drawer slide, safe-area bottom, link hit area | `src/styles/partials/_menu.scss` |
-| Footer content model | `src/data/footer.js`, `src/includes/footer.liquid`, `src/styles/partials/_footer.scss` |
-| `#top` / logo | `src/layouts/base.liquid`, `src/includes/header.liquid` |
-| Anchor offset for `#prices` | `src/styles/partials/_services.scss` |
-
----
-
-## Plan checklist
-
-Implementation status and next phases: [`header-footer-ui-plan.md`](header-footer-ui-plan.md).
+| Topic                                                      | Files                                                                                  |
+| ---------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| Drawer open/close, scrim, scroll lock, Escape              | `src/scripts/helpers/sideBar.js`                                                       |
+| Nav width / tablet layout, header scroll-timeline fallback | `src/styles/partials/_menu.scss`, `src/styles/partials/_header.scss`                   |
+| Scroll spy / `aria-current`                                | `src/scripts/helpers/navScrollSpy.js`, `src/scripts/main.js`                           |
+| Scrim + safe-area + toggler size                           | `src/styles/partials/_header.scss`                                                     |
+| Drawer slide, safe-area bottom, link hit area              | `src/styles/partials/_menu.scss`                                                       |
+| Footer content model                                       | `src/data/footer.js`, `src/includes/footer.liquid`, `src/styles/partials/_footer.scss` |
+| `#top` / logo                                              | `src/layouts/base.liquid`, `src/includes/header.liquid`                                |
+| Anchor offset for `#prices`                                | `src/styles/partials/_services.scss`                                                   |
