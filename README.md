@@ -88,7 +88,7 @@ yarn run deploy:all
 
 ### Requirements
 
-- Node.js 20+ required.
+- Node.js 20.x required (`package.json` `engines`).
 
 ## Optimizations:
 

@@ -6,6 +6,15 @@ const TAG = 'yarn install [pre-commit]';
 /**
  * Never fail `yarn install`. Run `pre-commit install` when Git uses `.git/hooks`.
  */
+const isCi =
+  process.env.VERCEL === '1' ||
+  process.env.CI === 'true' ||
+  process.env.CI === '1';
+if (isCi) {
+  process.stdout.write(`${TAG}: skipped — CI / Vercel\n`);
+  process.exit(0);
+}
+
 process.stdout.write(`${TAG}: running…\n`);
 
 if (!existsSync('.git')) {
@@ -38,6 +47,14 @@ if (result.error) {
     process.exit(0);
   }
   throw result.error;
+}
+
+// With shell: true, a missing `pre-commit` yields exit 127 (or 126) and no `error`.
+if (result.status === 127 || result.status === 126) {
+  process.stdout.write(
+    `${TAG}: skipped — \`pre-commit\` not on PATH\n`,
+  );
+  process.exit(0);
 }
 
 if (result.status !== 0) {

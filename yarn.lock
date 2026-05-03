@@ -5062,7 +5062,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"playwright-core@npm:1.59.1":
+"playwright-core@npm:1.59.1, playwright-core@npm:^1.59.1":
   version: 1.59.1
   resolution: "playwright-core@npm:1.59.1"
   bin:
@@ -6840,6 +6840,7 @@ __metadata:
     lighthouse: "npm:^12.8.2"
     npm-run-all: "npm:^4.1.5"
     photoswipe: "npm:^5.4.3"
+    playwright-core: "npm:^1.59.1"
     popper.js: "npm:1.16.1"
     prettier: "npm:^3.2.5"
     sass: "npm:1.69.5"

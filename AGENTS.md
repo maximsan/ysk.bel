@@ -12,7 +12,7 @@ Static marketing site for **Усадьба Серебряный Карась** (
 - **Libraries:** Bootstrap 4, jQuery, Popper 1.x, PhotoSwipe 5
 - **E2E:** [Playwright](https://playwright.dev/) (`e2e/`, `playwright.config.mjs`) — builds the site and serves `dist/` via `serve` during tests.
 
-**Runtime:** Node **20+** (`package.json` `engines`). **Yarn Berry 4** (`.yarn/releases/`, `nodeLinker: node-modules`). Full script list and local setup: [`README.md`](README.md), [`package.json`](package.json).
+**Runtime:** Node **20.x** (`package.json` `engines`). **Yarn Berry 4** (`.yarn/releases/`, `nodeLinker: node-modules`). Full script list and local setup: [`README.md`](README.md), [`package.json`](package.json).
 
 ## Layout of `src/`
 
