@@ -73,9 +73,13 @@ lightbox.on('uiRegister', function () {
 
       pswp.on('change', () => {
         if (prevIndex >= 0) {
-          bullets[prevIndex].classList.remove(PHOTOSWIPE_CLASS.bulletActiveModifier);
+          bullets[prevIndex].classList.remove(
+            PHOTOSWIPE_CLASS.bulletActiveModifier,
+          );
         }
-        bullets[pswp.currIndex].classList.add(PHOTOSWIPE_CLASS.bulletActiveModifier);
+        bullets[pswp.currIndex].classList.add(
+          PHOTOSWIPE_CLASS.bulletActiveModifier,
+        );
         prevIndex = pswp.currIndex;
       });
     },
@@ -84,12 +88,14 @@ lightbox.on('uiRegister', function () {
 
 lightbox.init();
 
-document.querySelectorAll(GALLERY_SELECTORS.stockingHook).forEach((galleryEl) => {
-  const stockingPhotoSwipe = new PhotoSwipeLightbox({
-    gallery: galleryEl,
-    children: PHOTOSWIPE_STOCKING_CHILDREN,
-    bgOpacity: PHOTOSWIPE_OPTIONS.stockingBgOpacity,
-    pswpModule: () => import('photoswipe'),
+document
+  .querySelectorAll(GALLERY_SELECTORS.stockingHook)
+  .forEach((galleryEl) => {
+    const stockingPhotoSwipe = new PhotoSwipeLightbox({
+      gallery: galleryEl,
+      children: PHOTOSWIPE_STOCKING_CHILDREN,
+      bgOpacity: PHOTOSWIPE_OPTIONS.stockingBgOpacity,
+      pswpModule: () => import('photoswipe'),
+    });
+    stockingPhotoSwipe.init();
   });
-  stockingPhotoSwipe.init();
-});

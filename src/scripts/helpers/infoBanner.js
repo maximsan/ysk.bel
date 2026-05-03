@@ -87,7 +87,10 @@ function dismissBannerPermanently() {
 }
 
 function handleModalKeyboard(event) {
-  if (!isModalBanner() || !banner?.classList.contains(INFO_BANNER_STATE_CLASS.show)) {
+  if (
+    !isModalBanner() ||
+    !banner?.classList.contains(INFO_BANNER_STATE_CLASS.show)
+  ) {
     return;
   }
 

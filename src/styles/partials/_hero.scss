@@ -18,13 +18,15 @@
  *   prefers-reduced-motion.
  */
 
-@mixin hero-cover-photo ($widthPx) {
+@mixin hero-cover-photo($widthPx) {
   $avif: '../assets/images/hero-fish-#{$widthPx}.avif';
   $webp: '../assets/images/hero-fish-#{$widthPx}.webp';
 
   background-image: url('#{$webp}');
-  background-image:
-    image-set(url('#{$avif}') type('image/avif'), url('#{$webp}') type('image/webp'));
+  background-image: image-set(
+    url('#{$avif}') type('image/avif'),
+    url('#{$webp}') type('image/webp')
+  );
 }
 
 .hero {

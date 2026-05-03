@@ -19,7 +19,10 @@ export function parseVideoExtensionTokens(raw) {
     raw == null || String(raw).trim() === ''
       ? DEFAULT_VIDEO_EXTENSIONS
       : String(raw);
-  const tokens = source.split(',').map((t) => t.trim()).filter(Boolean);
+  const tokens = source
+    .split(',')
+    .map((t) => t.trim())
+    .filter(Boolean);
   return tokens.length > 0 ? tokens : ['webm', 'mp4'];
 }
 
@@ -69,15 +72,16 @@ export function mountLazyVideoHost(lazyVideoHostElement) {
     LAZY_VIDEO_HOST_DATA_ATTR.videoUrl,
   );
   const posterFallback =
-    lazyVideoHostElement.getAttribute(
-      LAZY_VIDEO_HOST_DATA_ATTR.videoPoster,
-    ) || '';
+    lazyVideoHostElement.getAttribute(LAZY_VIDEO_HOST_DATA_ATTR.videoPoster) ||
+    '';
   const posterWebp = lazyVideoHostElement.getAttribute(
     LAZY_VIDEO_HOST_DATA_ATTR.posterWebp,
   );
   const posterForVideo = posterWebp || posterFallback;
   const extensions = parseVideoExtensionTokens(
-    lazyVideoHostElement.getAttribute(LAZY_VIDEO_HOST_DATA_ATTR.videoExtensions),
+    lazyVideoHostElement.getAttribute(
+      LAZY_VIDEO_HOST_DATA_ATTR.videoExtensions,
+    ),
   );
   const preload = normalizeVideoPreload(
     lazyVideoHostElement.getAttribute(LAZY_VIDEO_HOST_DATA_ATTR.videoPreload),

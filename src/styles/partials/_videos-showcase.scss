@@ -8,9 +8,7 @@
     border-block: var(--section-edge-border);
     background-color: var(--surface-page);
     background-image: var(--surface-warm-veil);
-    box-shadow:
-      var(--section-inset-highlight),
-      var(--chrome-shadow-ambient);
+    box-shadow: var(--section-inset-highlight), var(--chrome-shadow-ambient);
   }
 
   &::after {
@@ -64,7 +62,8 @@
     background: linear-gradient(
       155deg,
       color-mix(in srgb, var(--color-bg-elevated) 95%, transparent) 0%,
-      color-mix(in srgb, var(--color-text-primary) 6%, var(--color-bg-page)) 100%
+      color-mix(in srgb, var(--color-text-primary) 6%, var(--color-bg-page))
+        100%
     );
     border: var(--chrome-border);
     box-shadow:

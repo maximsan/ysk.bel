@@ -44,9 +44,11 @@
                       href='{{ phone.href }}'
                       class='phone-number'
                       {% if phone.ariaLabel %}
-                      aria-label='{{ phone.ariaLabel }}'
+                        aria-label='{{ phone.ariaLabel }}'
                       {% endif %}
-                    >{{ phone.text }}</a>
+                    >
+                      {{- phone.text -}}
+                    </a>
                   </div>
                 {% endfor %}
               </div>

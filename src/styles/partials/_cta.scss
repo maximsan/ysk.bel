@@ -94,11 +94,7 @@
     &:focus-visible {
       color: var(--cta-ghost-fg-hover);
       border-color: var(--cta-ghost-border-hover);
-      background-color: color-mix(
-        in srgb,
-        var(--color-accent) 8%,
-        transparent
-      );
+      background-color: color-mix(in srgb, var(--color-accent) 8%, transparent);
     }
   }
 

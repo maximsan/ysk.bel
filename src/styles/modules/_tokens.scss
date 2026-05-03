@@ -68,21 +68,23 @@
     var(--color-bg-page) 72%
   );
   --section-edge-border: 1px solid var(--color-border-strong);
-  --section-inset-highlight: inset 0 1px 0 color-mix(in srgb, var(--color-bg-elevated) 75%, transparent);
+  --section-inset-highlight: inset 0 1px 0
+    color-mix(in srgb, var(--color-bg-elevated) 75%, transparent);
   /* Carousel / media chrome (siblings: stocking, videos) */
   --chrome-radius: 1.15rem;
   --chrome-radius-lg: 1.35rem;
   --chrome-radius-inner: 0.8rem;
   --chrome-border: 2px solid var(--color-border-strong);
-  --chrome-shadow-ambient: 0 8px 32px color-mix(in srgb, var(--color-text-primary) 6%, transparent);
+  --chrome-shadow-ambient: 0 8px 32px
+    color-mix(in srgb, var(--color-text-primary) 6%, transparent);
   --radius-md: 0.5rem;
   --radius-content-card: 2rem;
   --shadow-sm: 0 1px 3px rgba(44, 36, 28, 0.08);
   /* Typography — display / heading stack (body stack set in _constants with --font-base) */
   --font-heading: 'Source Serif 4', 'Times New Roman', serif;
   /* Header / nav — soft lift + hairline rim (P5 depth) */
-  --header-shadow:
-    0 1px 0 color-mix(in srgb, var(--color-text-inverse) 8%, transparent),
+  --header-shadow: 0 1px 0
+      color-mix(in srgb, var(--color-text-inverse) 8%, transparent),
     0 10px 28px color-mix(in srgb, var(--color-bg-inverse) 30%, transparent);
   /* Footer inverse band — top edge + lift (pairs with inset highlight) */
   --footer-band-shadow: inset 0 1px 0
@@ -100,7 +102,11 @@
   /* Map shell */
   --map-shell-radius: 6px;
   --map-shell-border: 1px solid var(--color-border);
-  --map-shell-placeholder-bg: color-mix(in srgb, var(--color-text-primary) 6%, var(--color-bg-page));
+  --map-shell-placeholder-bg: color-mix(
+    in srgb,
+    var(--color-text-primary) 6%,
+    var(--color-bg-page)
+  );
   /* Modals: info banner */
   --info-banner-surface: var(--color-bg-elevated);
   --info-banner-border: 2px solid var(--color-border-strong);
@@ -108,7 +114,8 @@
   /* Strip — warm “announcement” wash + lift (see _info-banner.scss) */
   --info-banner-gradient: linear-gradient(
     115deg,
-    color-mix(in srgb, var(--color-accent-light) 30%, var(--color-bg-elevated)) 0%,
+    color-mix(in srgb, var(--color-accent-light) 30%, var(--color-bg-elevated))
+      0%,
     var(--color-bg-elevated) 40%,
     color-mix(in srgb, var(--color-accent) 10%, var(--color-bg-elevated)) 100%
   );
@@ -117,7 +124,11 @@
      block-start/block-end borders match visually (see _info-banner.scss). */
   --info-banner-shadow: 0 8px 32px
     color-mix(in srgb, var(--color-accent-shadow) 18%, transparent);
-  --info-banner-lead-bg: color-mix(in srgb, var(--color-accent) 9%, var(--color-bg-elevated));
+  --info-banner-lead-bg: color-mix(
+    in srgb,
+    var(--color-accent) 9%,
+    var(--color-bg-elevated)
+  );
   --info-banner-lead-border: 1px solid
     color-mix(in srgb, var(--color-accent) 28%, transparent);
   /* Legacy .bg-creamy-white (services card); dark override lives in the media block below. */
@@ -201,11 +212,20 @@
       118deg,
       color-mix(in srgb, var(--color-accent) 16%, var(--color-bg-elevated)) 0%,
       var(--color-bg-elevated) 42%,
-      color-mix(in srgb, var(--color-accent-light) 14%, var(--color-bg-elevated)) 100%
+      color-mix(
+          in srgb,
+          var(--color-accent-light) 14%,
+          var(--color-bg-elevated)
+        )
+        100%
     );
     --info-banner-shadow: 0 10px 36px
       color-mix(in srgb, var(--color-bg-inverse) 55%, transparent);
-    --info-banner-lead-bg: color-mix(in srgb, var(--color-accent) 14%, var(--color-bg-elevated));
+    --info-banner-lead-bg: color-mix(
+      in srgb,
+      var(--color-accent) 14%,
+      var(--color-bg-elevated)
+    );
     --info-banner-lead-border: 1px solid
       color-mix(in srgb, var(--color-accent-light) 32%, transparent);
     --paper-grain-opacity: 0.03;
