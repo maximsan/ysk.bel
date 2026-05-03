@@ -1,11 +1,11 @@
 /**
- * Prepends `--import ./import-aliases-register.mjs` to NODE_OPTIONS, then spawns
+ * Prepends `--import ./import-aliases-hooks.mjs` to NODE_OPTIONS, then spawns
  * the given command. Use from npm scripts so `@constants/*`, `@scripts/*`, and
  * `@data/*` resolve via `import-aliases-hooks.mjs` in one place.
  */
 import { spawnSync } from 'node:child_process';
 
-const importFlag = '--import ./import-aliases-register.mjs';
+const importFlag = '--import ./import-aliases-hooks.mjs';
 const prev = process.env.NODE_OPTIONS?.trim();
 process.env.NODE_OPTIONS = prev ? `${importFlag} ${prev}` : importFlag;
 

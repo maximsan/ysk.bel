@@ -35,7 +35,6 @@ jobs:
               - 'tests/visual/**'
               - 'playwright.config.mjs'
               - 'playwright.e2e.config.mjs'
-              - 'import-aliases-register.mjs'
               - 'import-aliases-hooks.mjs'
               - 'run-with-import-aliases.mjs'
               - 'jsconfig.json'

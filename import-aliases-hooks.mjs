@@ -1,12 +1,17 @@
 /**
- * Node customizations hook: resolve `@constants/*`, `@scripts/*`, and `@data/*`
- * the same way as esbuild (Eleventy bundle) and Vitest. Loaded via `import-aliases-register.mjs`.
+ * Node module hook: resolve `@constants/*`, `@scripts/*`, and `@data/*` like
+ * esbuild (Eleventy bundle) and Vitest. Preload with:
+ * `node --import ./import-aliases-hooks.mjs …` (see `run-with-import-aliases.mjs`).
  */
+import { register } from 'node:module';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';
 
+register(import.meta.url, import.meta.url);
+
+const cwd = process.cwd();
+
 export async function resolve(specifier, context, nextResolve) {
-  const cwd = process.cwd();
   if (specifier.startsWith('@constants/')) {
     const filePath = path.join(
       cwd,
