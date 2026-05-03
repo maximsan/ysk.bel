@@ -43,12 +43,13 @@ jobs:
 
       - name: regenerate Linux baselines
         run: yarn test:visual --update-snapshots
-        continue-on-error: true
 
       - name: commit updated baselines
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: 'chore(visual): update -linux baselines [skip ci]'
+          # No [skip ci]: if this is PR HEAD, GitHub would skip CI and the PR
+          # would never get a fresh visual/build run on the baseline commit.
+          commit_message: 'chore(visual): update Linux Playwright baselines'
           file_pattern: |
             tests/visual/home-snapshots/*-linux.png
             tests/visual/width-snapshots/*-linux.png
