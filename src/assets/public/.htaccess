@@ -1,0 +1,33 @@
+# Browser caching — requires Apache mod_headers (+ mod_setenvif, usually bundled).
+# HTML stays at the server default so new deploys ship fresh markup immediately.
+#
+# nginx does not read this file — mirror roughly with location blocks and add_header Cache-Control
+# using the same max-age semantics as below (immutable for /styles/*.css, etc.).
+
+<IfModule mod_headers.c>
+
+  SetEnvIf Request_URI "^/styles/.*\.css$" ysk_asset_hashed_styles=1
+
+  SetEnvIf Request_URI "^/assets/images/" ysk_asset_images=1
+
+  SetEnvIf Request_URI "^/assets/icons/" ysk_asset_icons=1
+
+  SetEnvIf Request_URI "^/assets/videos/" ysk_asset_video=1
+
+  SetEnvIf Request_URI "^/assets/(bootstrap|main|photoswipe)\.css$" ysk_asset_vendor_css=1
+
+  SetEnvIf Request_URI "^/scripts/index\.js$" ysk_asset_bundle_js=1
+
+  Header set Cache-Control "public, max-age=31536000, immutable" env=ysk_asset_hashed_styles
+
+  Header set Cache-Control "public, max-age=2592000" env=ysk_asset_images
+
+  Header set Cache-Control "public, max-age=2592000" env=ysk_asset_icons
+
+  Header set Cache-Control "public, max-age=2592000" env=ysk_asset_video
+
+  Header set Cache-Control "public, max-age=604800" env=ysk_asset_vendor_css
+
+  Header set Cache-Control "public, max-age=86400" env=ysk_asset_bundle_js
+
+</IfModule>
