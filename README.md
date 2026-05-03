@@ -14,6 +14,10 @@
     yarn run build
 ```
 
+### Git hooks ([pre-commit](https://pre-commit.com/))
+
+After **`yarn install`**, a Yarn plugin runs **`pre-commit install`** when the **`pre-commit`** CLI is on your `PATH` and Git is using **`.git/hooks`** (not a custom `core.hooksPath`). See [`.yarn/plugins/yarn-plugin-pre-commit-install.cjs`](.yarn/plugins/yarn-plugin-pre-commit-install.cjs), [`scripts/postinstall-pre-commit.mjs`](scripts/postinstall-pre-commit.mjs), and [`.pre-commit-config.yaml`](.pre-commit-config.yaml) (GitGuardian [ggshield](https://docs.gitguardian.com/ggshield-docs/integrations/git-hooks/pre-commit)). Set **`GITGUARDIAN_API_KEY`** in **`.env`** (see [`.env.example`](.env.example)).
+
 ### Tests (CI default)
 
 Unit, accessibility, E2E, and visual regressions share Node tooling (`run-with-import-aliases.mjs` for `@constants/` in tests).
@@ -56,8 +60,12 @@ Tests live under [`tests/unit/`](tests/unit/); config: [`vitest.config.mjs`](vit
 
 ### Deploy to the hosting server
 
+Scripts: `deploy`, `deploy:rb` (`./deploy.sh` only), `deploy:all` — see [`package.json`](package.json).
+
+**GitHub Actions (`main`):** the **deploy** job runs after **build** (including Playwright). It downloads the **`dist/`** artifact from that run, then runs **`deploy.sh`**. Repo secrets (`LOCAL_PATH`, SSH, remote paths) must match the artifact layout (typically `dist` or `./dist`).
+
 ```bash
-    yarn run deploy:all
+yarn run deploy:all
 ```
 
 ## Main technologies used in project

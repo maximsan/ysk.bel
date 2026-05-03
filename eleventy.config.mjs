@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import * as sass from 'sass';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -122,6 +123,7 @@ export default function (config) {
       }
 
       return async () => {
+        const googleMapsApiKey = (process.env.GOOGLE_MAPS_API_KEY ?? '').trim();
         let output = await esbuild.build({
           target: 'es2020',
           entryPoints: [path],
@@ -130,6 +132,9 @@ export default function (config) {
           write: false,
           sourcemap: true,
           plugins: [pathAliasesEsbuildPlugin()],
+          define: {
+            __GOOGLE_MAPS_API_KEY__: JSON.stringify(googleMapsApiKey),
+          },
         });
 
         return output.outputFiles[0].text;

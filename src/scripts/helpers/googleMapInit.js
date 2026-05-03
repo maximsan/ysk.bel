@@ -2,8 +2,12 @@ import { MAP_ELEMENT } from '@constants/dom/map.js';
 import { GOOGLE_MAP_EMBED_STYLES } from './googleMapStyles';
 
 const ESTATE_COORDINATES = { lat: 54.291652, lng: 27.480454 };
-const GOOGLE_MAPS_API_SRC =
-  'https://maps.googleapis.com/maps/api/js?key=AIzaSyCEjXw1mbGTXw12jnM_YTAveRGb1I4c3gQ';
+
+/** Injected at build time by esbuild (`eleventy.config.mjs`); empty when unset. */
+const GOOGLE_MAPS_API_KEY = __GOOGLE_MAPS_API_KEY__;
+const GOOGLE_MAPS_API_SRC = GOOGLE_MAPS_API_KEY
+  ? `https://maps.googleapis.com/maps/api/js?key=${encodeURIComponent(GOOGLE_MAPS_API_KEY)}`
+  : '';
 
 /** Fallback if `idle` never fires (offline API, blocked maps, etc.). */
 const MAP_READY_FALLBACK_MS = 15_000;
@@ -13,6 +17,10 @@ let googleMapsApiPromise;
 function loadGoogleMapsApi() {
   if (typeof google !== 'undefined' && google.maps) {
     return Promise.resolve();
+  }
+
+  if (!GOOGLE_MAPS_API_SRC) {
+    return Promise.reject(new Error('Google Maps API key is not configured'));
   }
 
   if (googleMapsApiPromise) {
@@ -37,6 +45,12 @@ export function googleMapInit() {
   const shell = document.getElementById(MAP_ELEMENT.shellId);
 
   if (!mapEl) {
+    return;
+  }
+
+  if (!GOOGLE_MAPS_API_SRC) {
+    shell?.classList.add(MAP_ELEMENT.shellReadyClass);
+    shell?.classList.remove(MAP_ELEMENT.shellLoadingClass);
     return;
   }
 

@@ -12,25 +12,7 @@ Static marketing site for **Усадьба Серебряный Карась** (
 - **Libraries:** Bootstrap 4, jQuery, Popper 1.x, PhotoSwipe 5
 - **E2E:** [Playwright](https://playwright.dev/) (`e2e/`, `playwright.config.mjs`) — builds the site and serves `dist/` via `serve` during tests.
 
-## npm scripts (`package.json`)
-
-| Script | Use |
-|--------|-----|
-| `yarn dev` | `clean` then `eleventy --serve` — default local work |
-| `yarn build` | `clean` then one-off production build to `dist/` |
-| `yarn clean` | Remove `dist/` only |
-| `yarn watch:eleventy` | Serve without running `clean` first (faster restarts if you manage `dist/` yourself) |
-| `yarn build:eleventy` | Run Eleventy once without `clean` |
-| `yarn debug` | `DEBUG=* eleventy --serve` — noisy Eleventy logging when diagnosing build/serve |
-| `yarn format` | Prettier write on `src/` (Liquid via `@shopify/prettier-plugin-liquid`) |
-| `yarn deploy:sh` | `npx surge dist ysk.surge.sh` (expects built `dist/`) |
-| `yarn deploy` | `clean` → build → Surge deploy |
-| `yarn deploy:rb` | `./deploy.sh` only (no build) |
-| `yarn deploy:all` | `clean` → build → `deploy:rb` |
-| `yarn test` / `yarn test:e2e` | Playwright against a fresh build (see `playwright.config.mjs`) |
-| `yarn test:e2e:ui` | Playwright UI mode |
-
-Node **20+** (`engines` in `package.json`); Volta pins Node 20.15.0 and Yarn 4.5.x. **Yarn Berry 4** (`.yarn/releases/`, `nodeLinker: node-modules`). After cloning, run `yarn playwright install chromium` once if you run E2E locally outside CI.
+**Runtime:** Node **20+** (`package.json` `engines`). **Yarn Berry 4** (`.yarn/releases/`, `nodeLinker: node-modules`). Full script list and local setup: [`README.md`](README.md), [`package.json`](package.json).
 
 ## Layout of `src/`
 
@@ -44,7 +26,18 @@ Node **20+** (`engines` in `package.json`); Volta pins Node 20.15.0 and Yarn 4.5
 | `src/scripts/` | JS; bundle entry is `index.js` |
 | `src/assets/` | Images, icons, videos, `public/` passthrough |
 
-Build output: **`dist/`** (Vercel uses this via `vercel.json` `outputDirectory`).
+Build output: **`dist/`** (`vercel.json` → `outputDirectory` for Vercel).
+
+## Common commands
+
+| Command | Use |
+|---------|-----|
+| `yarn dev` | Default local work (`clean` + Eleventy serve) |
+| `yarn build` | Production build to `dist/` |
+| `yarn format` | Prettier on `src/` |
+| `yarn test` | Unit + a11y + E2E (see README / Playwright configs) |
+
+Everything else: **`package.json`** / **[README.md](README.md)**.
 
 ## Conventions agents should follow
 
@@ -53,12 +46,6 @@ Build output: **`dist/`** (Vercel uses this via `vercel.json` `outputDirectory`)
 3. **SCSS:** Partial files must use a leading underscore; non-partials get content-hashed output URLs.
 4. **Asset URLs:** The `hashed` filter maps `src`-relative paths to built URLs; keep `outputMap` transforms in mind when referencing generated CSS/JS paths in Liquid.
 5. **Passthrough assets:** Static files and some CSS paths are configured in `addPassthroughCopy` — check there before assuming a path lands in `dist/`.
-
-## Deployment
-
-Scripts are listed in the table above (`deploy`, `deploy:sh`, `deploy:rb`, `deploy:all`). Do not commit secrets; deployment is environment-specific.
-
-On **GitHub Actions** (`main`), the **deploy** job runs only after the **build** job passes (including Playwright). It downloads the **`dist/`** artifact from that run, then runs `deploy.sh` — ensure `LOCAL_PATH` in secrets matches the artifact layout (typically `dist` or `./dist`).
 
 ## Scope discipline
 
