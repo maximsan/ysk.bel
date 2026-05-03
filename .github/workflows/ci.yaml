@@ -18,7 +18,7 @@ jobs:
     outputs:
       visual: ${{ steps.filter.outputs.visual }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - uses: dorny/paths-filter@v3
         id: filter
         with:
@@ -46,7 +46,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Visual baseline parity
         run: bash .github/scripts/check-visual-baseline-parity.sh
@@ -68,7 +68,7 @@ jobs:
 
       - name: Upload site dist (pull requests — visual job)
         if: github.event_name == 'pull_request'
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: site-dist
           path: dist/
@@ -77,7 +77,7 @@ jobs:
 
       - name: Upload site dist (deploy)
         if: github.ref == 'refs/heads/main'
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: site-dist
           path: dist/
@@ -91,10 +91,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Download built site
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8
         with:
           name: site-dist
           path: dist
@@ -109,7 +109,7 @@ jobs:
 
       - name: Upload Playwright failure artifacts
         if: failure()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: playwright-failures
           path: test-results/
@@ -123,10 +123,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Download site dist
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8
         with:
           name: site-dist
           path: dist
