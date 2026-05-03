@@ -2,10 +2,9 @@ import * as homePageDom from '@constants/homePageDom.js';
 
 /**
  * Shared layout breakpoints for visual tests.
- * Keep in sync with critical CSS where relevant (e.g. footer visibility).
+ * Match `_menu.scss` (expanded nav vs hamburger at 768px), `_footer.scss` (`footer-social` visibility).
  */
 export const LAYOUT = {
-  /** Viewports at or above this width show `footer.footer-social` (see `_footer.scss`). */
   footerMinVisibleWidthPx: 768,
 };
 
@@ -48,6 +47,10 @@ export const HOME_SELECTORS = {
     menuDrawerOpenMs: 10_000,
     /** `.menu` uses `transition: left 0.2s` when opening (`_mixins.scss`). */
     menuDrawerTransitionMs: 300,
+    /** Element screenshots: fonts / flex / carousel can shrinkwrap after first paint — wait until box stops moving. */
+    screenshotLayoutStableTimeoutMs: 20_000,
+    screenshotLayoutStablePollMs: 120,
+    screenshotLayoutStableRounds: 4,
   },
 };
 

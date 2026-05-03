@@ -14,33 +14,40 @@
     yarn run build
 ```
 
+### Git hooks ([pre-commit](https://pre-commit.com/))
+
+After **`yarn install`**, a Yarn plugin runs **`pre-commit install`** when the **`pre-commit`** CLI is on your `PATH` and Git is using **`.git/hooks`** (not a custom `core.hooksPath`). See [`.yarn/plugins/yarn-plugin-pre-commit-install.cjs`](.yarn/plugins/yarn-plugin-pre-commit-install.cjs), [`scripts/postinstall-pre-commit.mjs`](scripts/postinstall-pre-commit.mjs), and [`.pre-commit-config.yaml`](.pre-commit-config.yaml) (GitGuardian [ggshield](https://docs.gitguardian.com/ggshield-docs/integrations/git-hooks/pre-commit)). Set **`GITGUARDIAN_API_KEY`** in **`.env`** (see [`.env.example`](.env.example)).
+
 ### Tests (CI default)
 
-Unit, accessibility, and E2E smoke tests (requires a prior `yarn build` for a11y/e2e — the `test` script runs them in one go after `build` in CI).
+Unit, accessibility, E2E, and visual regressions share Node tooling (`scripts/run-with-import-aliases.mjs` for `@constants/` in tests).
 
 ```bash
-yarn test
+yarn test               # unit + a11y + e2e (after `yarn build` in CI)
 ```
 
 ### E2E smoke (Playwright)
 
-Uses `playwright.e2e.config.mjs` and the built site in `dist/`.
+Uses [`playwright.e2e.config.mjs`](playwright.e2e.config.mjs) and the built site in `dist/`.
 
 ```bash
 yarn build && yarn test:e2e
 yarn test:e2e:ui
 ```
 
-### Visual regression (Playwright)
+### Visual regression + a11y (Playwright)
 
-Runs against a production build served locally. Baselines live in `tests/visual/home-snapshots/` (shared by `home-header.spec.js` and `home-sections.spec.js`).
+One config: [`playwright.config.mjs`](playwright.config.mjs) — home visuals: **`<main>`** (hero→contacts; map masked) + cooperation + footer in [`tests/visual/home-snapshots/`](tests/visual/home-snapshots/), optional width pass (`yarn test:visual` includes it; or `yarn exec playwright test --project=width-pass` alone), and axe (`yarn test:a11y`). Timeouts / viewports in [`tests/visual/constants.js`](tests/visual/constants.js).
 
 ```bash
-yarn test:visual
-yarn test:visual:update   # after intentional layout/CSS changes; commit updated PNGs
+yarn test:visual          # home (3 viewports) + width pass
+yarn test:visual:home     # home screenshots only
+yarn test:a11y            # accessibility (needs dist/ or let Playwright build)
+yarn test:playwright      # all of the above
+yarn test:visual:update   # refresh local -darwin PNGs; use PR label for -linux
 ```
 
-Playwright-only config (timeouts, blocked URLs, viewports) lives in [`tests/visual/constants.js`](tests/visual/constants.js). Shared waits are in [`tests/visual/support/home-snapshot-helpers.js`](tests/visual/support/home-snapshot-helpers.js). Shared **DOM ids, `data-*` attributes, and class hooks** are organized in [`src/scripts/constants/dom/`](src/scripts/constants/dom/) (one module per area); the site bundle imports those files directly. [`src/scripts/constants/homePageDom.js`](src/scripts/constants/homePageDom.js) re-exports the full flat API for tests and any code that wants a single import. See [docs/README.md](docs/README.md), [`playwright.config.mjs`](playwright.config.mjs), and [`.github/workflows/ci.yaml`](.github/workflows/ci.yaml) for the visual matrix, CI (visual job on **PRs only**: path filters + optional **`run-visual`** label), and snapshot updates via **`update-visual-snapshots`** (`.github/workflows/update-visual-snapshots.yaml`).
+Playwright-only config (timeouts, blocked URLs, viewports): [`tests/visual/constants.js`](tests/visual/constants.js). Shared waits: [`tests/visual/support/home-snapshot-helpers.js`](tests/visual/support/home-snapshot-helpers.js). DOM hooks: [`src/scripts/constants/dom/`](src/scripts/constants/dom/) → [`homePageDom.js`](src/scripts/constants/homePageDom.js). CI uses [`.github/actions/setup-yarn-playwright`](.github/actions/setup-yarn-playwright). See [docs/README.md](docs/README.md), [`playwright.config.mjs`](playwright.config.mjs), [`.github/workflows/ci.yaml`](.github/workflows/ci.yaml), and [`update-visual-snapshots`](.github/workflows/update-visual-snapshots.yaml) (visual job on **PRs**: path filters + optional **`run-visual`** label).
 
 ### Unit tests (Vitest)
 
@@ -53,8 +60,12 @@ Tests live under [`tests/unit/`](tests/unit/); config: [`vitest.config.mjs`](vit
 
 ### Deploy to the hosting server
 
+Scripts: `deploy`, `deploy:rb` (`./deploy.sh` only), `deploy:all` — see [`package.json`](package.json).
+
+**GitHub Actions (`main`):** the **deploy** job runs after **build** (including Playwright). It downloads the **`dist/`** artifact from that run, then runs **`deploy.sh`**. Repo secrets (`LOCAL_PATH`, SSH, remote paths) must match the artifact layout (typically `dist` or `./dist`).
+
 ```bash
-    yarn run deploy:all
+yarn run deploy:all
 ```
 
 ## Main technologies used in project
@@ -62,7 +73,7 @@ Tests live under [`tests/unit/`](tests/unit/); config: [`vitest.config.mjs`](vit
 - **Package manager:** yarn berry
 - **SSG:** [Eleventy](https://www.11ty.dev/) 3.x (ESM config: `eleventy.config.mjs`)
 - **Bundler:** [esbuild](https://esbuild.github.io/) (via Eleventy for client JS)
-- **JS path aliases:** `@constants/*` → `src/scripts/constants/*`, `@scripts/*` → `src/scripts/*`, `@data/*` → `src/data/*` (see `jsconfig.json`, `eleventy.config.mjs`, `vitest.config.mjs`; Node loads `import-aliases-register.mjs` via `run-with-import-aliases.mjs` in `package.json` scripts)
+- **JS path aliases:** `@constants/*` → `src/scripts/constants/*`, `@scripts/*` → `src/scripts/*`, `@data/*` → `src/data/*` (see `jsconfig.json`, `eleventy.config.mjs`, `vitest.config.mjs`; Node loads `scripts/import-aliases-hooks.mjs` via `scripts/run-with-import-aliases.mjs` in `package.json` scripts)
 - **Sass:** For stylesheets
 - **Testing:** [Playwright](https://playwright.dev/) — visual regression, a11y, E2E; [Vitest](https://vitest.dev/) for unit tests (see `docs/migration-to-esm.md`)
 

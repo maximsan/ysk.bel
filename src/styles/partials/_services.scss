@@ -1,13 +1,35 @@
+/* #prices: offset for sticky header when jumping from nav/footer (`--section-scroll-margin` in tokens). */
 .packages {
+  scroll-margin-top: var(--section-scroll-margin);
+
   .text-danger {
     color: var(--color-price) !important;
   }
 }
 
 .section-container.services {
+  /* One continuous “paper” band (matches stocking / videos) — no stark white void around the card. */
+  background-color: var(--surface-page);
+  background-image: var(--surface-warm-veil);
+  border-block: var(--section-edge-border);
+  box-shadow: var(--section-inset-highlight);
+
   .content {
     border-radius: var(--radius-content-card);
-    border: 2px solid var(--color-border-strong);
+    border: 1px solid var(--color-border);
+
+    &.bg-creamy-white {
+      color: var(--color-text-primary);
+      /* Card = page + elevated mix so it sits in the same family as the section (not a separate brown slab). */
+      background: color-mix(
+        in srgb,
+        var(--color-bg-elevated) 70%,
+        var(--color-bg-page) 30%
+      );
+      box-shadow:
+        var(--section-inset-highlight),
+        0 10px 36px color-mix(in srgb, var(--color-text-primary) 6%, transparent);
+    }
 
     &-header {
       font-weight: 400;

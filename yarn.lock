@@ -2461,6 +2461,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"dotenv@npm:^17.4.2":
+  version: 17.4.2
+  resolution: "dotenv@npm:17.4.2"
+  checksum: 10/ca1b6f54d58e39914901e1518958e86083aca8deb5aa2e7f2a51acd53291d97852479b0ab26ed949b6a45a0e9adcc7b0d1c3c72375e8ea670f7005e341c6daba
+  languageName: node
+  linkType: hard
+
 "eastasianwidth@npm:^0.2.0":
   version: 0.2.0
   resolution: "eastasianwidth@npm:0.2.0"
@@ -6817,15 +6824,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"yck.surge.sh@workspace:.":
+"ysk-bel@workspace:.":
   version: 0.0.0-use.local
-  resolution: "yck.surge.sh@workspace:."
+  resolution: "ysk-bel@workspace:."
   dependencies:
     "@11ty/eleventy": "npm:^3.1.0"
     "@axe-core/playwright": "npm:^4.11.2"
     "@playwright/test": "npm:^1.59.1"
     "@shopify/prettier-plugin-liquid": "npm:^1.5.0"
     bootstrap: "npm:4.5.3"
+    dotenv: "npm:^17.4.2"
     esbuild: "npm:^0.20.0"
     happy-dom: "npm:^20.9.0"
     jquery: "npm:^3.7.1"

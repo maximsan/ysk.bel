@@ -29,20 +29,20 @@
 <link rel='icon' type='image/png' sizes='16x16' href='assets/icons/favicon-16x16.png'>
 <link rel='manifest' href='assets/icons/site.webmanifest'>
 
-<meta content='#f6f3ee' name='theme-color'>
+<meta
+  name='theme-color'
+  content='{{ themeColor | default: meta.themeColor | default: '#5f6f6d' }}'
+>
+<meta
+  name='theme-color'
+  content='{{ themeColorDark | default: meta.themeColorDark | default: '#1c2724' }}'
+  media='(prefers-color-scheme: dark)'
+>
 <!-- To run web application in full-screen -->
 <meta content='yes' name='apple-mobile-web-app-capable'>
 <!-- Status Bar Style (see Supported Meta Tags below for available values) -->
 <!-- Has no effect unless you have the previous meta tag -->
 <meta content='black' name='apple-mobile-web-app-status-bar-style'>
-
-<!-- Bootstrap core CSS -->
-
-<!-- Icons -->
-<script
-  defer
-  src='https://use.fontawesome.com/releases/v5.5.0/js/all.js'
-></script>
 
 <!-- Fonts: Rubik (400/500/700 + 500 italic) + Source Serif 4 (600) — single request, Cyrillic + Latin via font subsetting -->
 <link rel='preconnect' href='https://fonts.googleapis.com'>
@@ -52,12 +52,23 @@
   rel='stylesheet'
 >
 
+<!-- Hero LCP preload — AVIF with WebP/CSS fallback (`image-set`) in `_hero.scss`. Unsupported `type`s skip preload. -->
+<link
+  rel='preload'
+  as='image'
+  type='image/avif'
+  href='assets/images/hero-fish-800.avif'
+  imagesrcset='assets/images/hero-fish-600.avif 600w, assets/images/hero-fish-800.avif 800w, assets/images/hero-fish-1200.avif 1200w, assets/images/hero-fish-1600.avif 1600w'
+  imagesizes='100vw'
+  fetchpriority='high'
+>
+
 <!-- Document Title -->
 <title>{{ meta.title }}</title>
 
 <!-- Google Tag Manager -->
 <script>
-  (function (w, d, s, l, i) {
+  function loadGoogleTagManager(w, d, s, l, i) {
     w[l] = w[l] || [];
     w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
     var f = d.getElementsByTagName(s)[0],
@@ -66,13 +77,19 @@
     j.async = true;
     j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
     f.parentNode.insertBefore(j, f);
-  })(window, document, 'script', 'dataLayer', 'GTM-5W4KDDW');
+  }
+
+  window.addEventListener('load', function () {
+    window.setTimeout(function () {
+      loadGoogleTagManager(window, document, 'script', 'dataLayer', 'GTM-5W4KDDW');
+    }, 4000);
+  });
 </script>
 <!-- End Google Tag Manager -->
 
 <!-- Yandex.Metrika counter -->
 <script type='text/javascript'>
-  (function (m, e, t, r, i, k, a) {
+  function loadYandexMetrika(m, e, t, r, i, k, a) {
     m[i] =
       m[i] ||
       function () {
@@ -84,13 +101,18 @@
       (k.async = 1),
       (k.src = r),
       a.parentNode.insertBefore(k, a);
-  })(window, document, 'script', 'https://mc.yandex.ru/metrika/tag.js', 'ym');
+  }
 
-  ym(67016224, 'init', {
-    clickmap: true,
-    trackLinks: true,
-    accurateTrackBounce: true,
-    webvisor: true,
+  window.addEventListener('load', function () {
+    window.setTimeout(function () {
+      loadYandexMetrika(window, document, 'script', 'https://mc.yandex.ru/metrika/tag.js', 'ym');
+      ym(67016224, 'init', {
+        clickmap: true,
+        trackLinks: true,
+        accurateTrackBounce: true,
+        webvisor: true,
+      });
+    }, 4500);
   });
 </script>
 <noscript>

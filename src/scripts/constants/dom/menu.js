@@ -8,7 +8,7 @@ export const MENU_CLASS = {
 };
 
 /**
- * Drawer: auto-close when these links are used.
+ * Drawer: auto-close when these links are used (legacy delegation hook).
  * Keep in sync with `menu.liquid` / `sidebar` data.
  */
 export const SITE_NAV_MENU_LINK_SELECTORS = [

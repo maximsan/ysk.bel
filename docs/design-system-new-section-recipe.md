@@ -28,10 +28,27 @@ Use this when adding a **new block** to `base.liquid` (or a new page that should
 1. `yarn build`
 2. `yarn test:unit` (if JS changed)
 3. `yarn test:a11y` (accessibility; requires built `dist/`)
-4. `yarn test:visual` — add or extend a **locator screenshot** in `tests/visual/home-sections.spec.js` (or a dedicated spec) and update baselines: `yarn test:visual:update` (then commit `*-darwin.png` / refresh `*-linux.png` via the **`update-visual-snapshots`** PR label — see `.github/workflows/update-visual-snapshots.yaml`).
+4. `yarn test:visual` — extend **`tests/visual/home-sections.spec.js`** (consolidated `main-content` screenshot, or cooperation / footer strips) or add a focused spec + update baselines: `yarn test:visual:update` (commit `*-darwin.png` / refresh `*-linux.png` via **`update-visual-snapshots`** — `.github/workflows/update-visual-snapshots.yaml`).
+5. Optional: **`yarn test:visual:widths`** — first-screen viewport at `320 … 1920` (`playwright.config.mjs` project **`width-pass`**). **`yarn test:visual:widths:update`** after UI changes.
 
 ## 5. Optional lab performance
 
-- With **`yarn build && yarn exec serve dist -l 4173`** running: **`yarn lighthouse:home`** (writes gitignored `lighthouse-home.html`; see `package.json`). **WCAG gating** stays on **`yarn test:a11y`**, not Lighthouse.
+- With **`yarn build && yarn exec serve dist -l 4173`** running: **`JSON` metrics:** **`yarn lighthouse:home:json`** / **`yarn lighthouse:mobile:json`** (use Playwright’s Chromium via `scripts/lighthouse-with-playwright.cjs`; output is gitignored). **WCAG gating** stays on **`yarn test:a11y`**, not Lighthouse.
 
 **Related:** semantic tokens and section patterns in `src/styles/modules/_tokens.scss`, `_section-chapter.scss`, and the checklist in this file.
+
+## CTA system (`.cta` / `cta-row`)
+
+**Source of truth for styles:** `src/styles/partials/_cta.scss` (imported from `src/styles/index.scss`).
+
+| Markup | Role |
+|--------|------|
+| `.cta` | Base: min touch target, radius, focus ring, transition. Add to the interactive element. |
+| `.cta--primary` | One dominant action (call, main booking). Solid copper. |
+| `.cta--ghost` | Secondary; on dark bands use with `.on-inverse` so tokens stay legible. |
+| `.cta--link` | Text link that still shares focus/hit-area behaviour with the system. |
+| `.cta-row` | Horizontal row with gap; for brand-coloured messengers, scope overrides in the section partial (see cooperation banner). |
+
+- **Ornaments** (line-art) live in `src/includes/ornaments/*.liquid`; they use `currentColor` and are meant for editorial accents, not CTAs.
+- **Data:** use additive fields on `src/data/*.js` (e.g. `meta.heroCta`, `cooperation.cta`) for label, `href`, and optional `ariaLabel`.
+- **Accessibility:** if the visible label is short (phone, icon-only), set `aria-label` on the anchor that carries `.cta`.

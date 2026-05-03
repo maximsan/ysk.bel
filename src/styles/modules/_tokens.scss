@@ -1,5 +1,11 @@
+/*
+ * Theming: one “Peat & linen” palette, light by default. OS dark mode
+ * (`prefers-color-scheme: dark`) retints surfaces/text below — there is no
+ * in-app light/dark toggle. `color-scheme` keeps browser UI in sync.
+ */
 // Peat & linen — semantic design tokens
 :root {
+  color-scheme: light;
   --color-bg-page: #f6f3ee;
   --color-bg-elevated: #fffcf8;
   --color-bg-inverse: #1e1814;
@@ -11,6 +17,17 @@
   --color-social-viber-on-inverse: color-mix(
     in srgb,
     var(--color-social-viber-brand) 32%,
+    var(--color-text-inverse)
+  );
+  --color-social-whatsapp-brand: #25d366;
+  --color-social-whatsapp-on-inverse: color-mix(
+    in srgb,
+    var(--color-social-whatsapp-brand) 34%,
+    var(--color-text-inverse)
+  );
+  --color-social-tel-on-inverse: color-mix(
+    in srgb,
+    var(--color-accent-light) 55%,
     var(--color-text-inverse)
   );
   /* Copper accent: meet ≥4.5:1 on --color-bg-elevated / cream for body-sized text (axe). */
@@ -63,8 +80,13 @@
   --shadow-sm: 0 1px 3px rgba(44, 36, 28, 0.08);
   /* Typography — display / heading stack (body stack set in _constants with --font-base) */
   --font-heading: 'Source Serif 4', 'Times New Roman', serif;
-  /* Header / nav */
-  --header-shadow: 0 5px 20px color-mix(in srgb, var(--color-bg-inverse) 35%, transparent);
+  /* Header / nav — soft lift + hairline rim (P5 depth) */
+  --header-shadow:
+    0 1px 0 color-mix(in srgb, var(--color-text-inverse) 8%, transparent),
+    0 10px 28px color-mix(in srgb, var(--color-bg-inverse) 30%, transparent);
+  /* Footer inverse band — top edge + lift (pairs with inset highlight) */
+  --footer-band-shadow: inset 0 1px 0
+    color-mix(in srgb, var(--color-text-inverse) 8%, transparent);
   --nav-link-active-color: var(--color-accent-light);
   /* Hero — readability over photo */
   --hero-scrim: linear-gradient(
@@ -83,6 +105,23 @@
   --info-banner-surface: var(--color-bg-elevated);
   --info-banner-border: 2px solid var(--color-border-strong);
   --info-banner-accent: var(--color-accent-muted);
+  /* Strip — warm “announcement” wash + lift (see _info-banner.scss) */
+  --info-banner-gradient: linear-gradient(
+    115deg,
+    color-mix(in srgb, var(--color-accent-light) 30%, var(--color-bg-elevated)) 0%,
+    var(--color-bg-elevated) 40%,
+    color-mix(in srgb, var(--color-accent) 10%, var(--color-bg-elevated)) 100%
+  );
+  --info-banner-accent-bar: 4px solid var(--color-accent);
+  /* Ambient lift only — avoid inset top highlight + bottom hairline shadow so
+     block-start/block-end borders match visually (see _info-banner.scss). */
+  --info-banner-shadow: 0 8px 32px
+    color-mix(in srgb, var(--color-accent-shadow) 18%, transparent);
+  --info-banner-lead-bg: color-mix(in srgb, var(--color-accent) 9%, var(--color-bg-elevated));
+  --info-banner-lead-border: 1px solid
+    color-mix(in srgb, var(--color-accent) 28%, transparent);
+  /* Legacy .bg-creamy-white (services card); dark override lives in the media block below. */
+  --creamy-white: rgba(255, 252, 248, 0.78);
   /* Phase 5 — motion & focus */
   --motion-section-duration: 0.35s;
   --motion-stagger: 70ms;
@@ -90,4 +129,91 @@
   --motion-link-hover-duration: 0.25s;
   --focus-ring-width: 2px;
   --focus-ring-offset: 2px;
+
+  /* Redesign — shared primitives (Group A · foundations) */
+  /* CTA system — primary copper pill, ghost outlined pill, plain link */
+  --cta-primary-bg: var(--color-accent);
+  --cta-primary-bg-hover: var(--color-accent-hover);
+  --cta-primary-fg: var(--color-text-inverse);
+  --cta-primary-shadow: 0 8px 24px
+    color-mix(in srgb, var(--color-accent) 24%, transparent);
+  --cta-ghost-border: color-mix(in srgb, var(--color-accent) 55%, transparent);
+  --cta-ghost-border-hover: var(--color-accent);
+  --cta-ghost-fg: var(--color-accent);
+  --cta-ghost-fg-hover: var(--color-accent-hover);
+  --cta-radius: 999px;
+  --cta-min-hit: 2.75rem; /* 44px — baseline touch target */
+  --cta-gap: clamp(0.5rem, 1vw, 0.75rem);
+  /* Thin copper rules used as editorial separators in hero / banners */
+  --hairline-copper: 1px solid
+    color-mix(in srgb, var(--color-accent) 55%, transparent);
+  --hairline-copper-strong: 1px solid var(--color-accent-muted);
+  /* Paper grain overlay — subtle, opt-in via .has-grain or mixin */
+  --paper-grain-opacity: 0.04;
+  /* Hero reinforcements — radial bottom scrim and ornament stagger */
+  --hero-scrim-radial: radial-gradient(
+    120% 80% at 50% 115%,
+    color-mix(in srgb, var(--color-bg-inverse) 55%, transparent) 0%,
+    transparent 60%
+  );
+  --motion-hero-stagger: 120ms;
+}
+
+/*
+ * Dark-mode hook — no UI toggle yet.
+ *
+ * The redesign uses semantic tokens, so this preference block can tune the
+ * overall surface/text/accent system without per-component rewrites. Keep the
+ * palette in the same Peat & linen family: peat background, warm inverse text,
+ * copper accents.
+ */
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+    --color-bg-page: #18130f;
+    --color-bg-elevated: #211a15;
+    --color-bg-inverse: #0f0c09;
+    --color-text-primary: #f2ebe3;
+    --color-text-muted: #d1c4b7;
+    --color-text-inverse: #fff7ee;
+    --color-accent: #d68a58;
+    --color-accent-hover: #e3a174;
+    --color-accent-muted: #c1764c;
+    --color-accent-light: #f0bf93;
+    --color-accent-shadow: #2a1810;
+    --color-border: rgba(242, 235, 227, 0.14);
+    --color-border-strong: rgba(242, 235, 227, 0.24);
+    --color-focus-ring: var(--color-accent-light);
+    --hero-scrim: linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--color-bg-inverse) 28%, transparent) 0%,
+      transparent 38%,
+      color-mix(in srgb, var(--color-bg-inverse) 52%, transparent) 100%
+    );
+    --hero-scrim-radial: radial-gradient(
+      120% 85% at 50% 115%,
+      color-mix(in srgb, var(--color-bg-inverse) 72%, transparent) 0%,
+      transparent 62%
+    );
+    --info-banner-surface: var(--color-bg-elevated);
+    --info-banner-accent: var(--color-accent-light);
+    --info-banner-gradient: linear-gradient(
+      118deg,
+      color-mix(in srgb, var(--color-accent) 16%, var(--color-bg-elevated)) 0%,
+      var(--color-bg-elevated) 42%,
+      color-mix(in srgb, var(--color-accent-light) 14%, var(--color-bg-elevated)) 100%
+    );
+    --info-banner-shadow: 0 10px 36px
+      color-mix(in srgb, var(--color-bg-inverse) 55%, transparent);
+    --info-banner-lead-bg: color-mix(in srgb, var(--color-accent) 14%, var(--color-bg-elevated));
+    --info-banner-lead-border: 1px solid
+      color-mix(in srgb, var(--color-accent-light) 32%, transparent);
+    --paper-grain-opacity: 0.03;
+    /* Legacy utility — was fixed cream; keep warm cards readable on peat */
+    --creamy-white: color-mix(
+      in srgb,
+      var(--color-bg-elevated) 88%,
+      #ffffff 4%
+    );
+  }
 }

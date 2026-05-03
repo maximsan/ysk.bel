@@ -77,3 +77,15 @@
     padding: $i * 1px;
   }
 }
+
+/*
+ * Shared section container query hook.
+ *
+ * Sections can now adapt to their rendered inline size, not only viewport
+ * width. This is intentionally lightweight: existing viewport media queries
+ * keep working, while redesigned sections (hero / info / cooperation) can
+ * layer @container refinements where useful.
+ */
+.section-container {
+  container-type: inline-size;
+}

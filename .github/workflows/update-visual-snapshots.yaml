@@ -13,67 +13,59 @@ name: Update Visual Snapshots
 # workflow is the equivalent for `-linux.png`.
 
 on:
-    pull_request:
-        types: [labeled]
-    workflow_dispatch:
+  pull_request:
+    types: [labeled]
+  workflow_dispatch:
 
 jobs:
-    update-snapshots:
-        if: |
-            github.event_name == 'workflow_dispatch' ||
-            (github.event_name == 'pull_request' &&
-             github.event.label.name == 'update-visual-snapshots')
-        runs-on: ubuntu-latest
-        permissions:
-            contents: write
-            pull-requests: write
+  update-snapshots:
+    if: |
+      github.event_name == 'workflow_dispatch' ||
+      (github.event_name == 'pull_request' &&
+       github.event.label.name == 'update-visual-snapshots')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
 
-        steps:
-            - name: checkout PR head
-              uses: actions/checkout@v4
-              with:
-                  ref: ${{ github.event.pull_request.head.ref || github.ref }}
-                  repository:
-                      ${{ github.event.pull_request.head.repo.full_name ||
-                      github.repository }}
-                  token: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - name: checkout PR head
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.ref || github.ref }}
+          repository:
+            ${{ github.event.pull_request.head.repo.full_name ||
+            github.repository }}
+          token: ${{ secrets.GITHUB_TOKEN }}
 
-            - name: setup Node.js
-              uses: actions/setup-node@v4
-              with:
-                  node-version: 22.x
-                  cache: yarn
+      - name: Setup toolchain (Node, Yarn, Playwright Chromium)
+        uses: ./.github/actions/setup-yarn-playwright
 
-            - name: Enable Corepack
-              run: corepack enable
+      - name: regenerate Linux baselines
+        run: yarn test:visual --update-snapshots
 
-            - name: install dependencies
-              run: yarn install --immutable
+      - name: commit updated baselines
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          # No [skip ci]: if this is PR HEAD, GitHub would skip CI and the PR
+          # would never get a fresh visual/build run on the baseline commit.
+          commit_message: 'chore(visual): update Linux Playwright baselines'
+          # Must be one line: git-auto-commit splits file_pattern with read <<< "",
+          # which only consumes the first line — a second path on a new line was ignored
+          # (width-pass *-linux.png never got committed).
+          file_pattern: tests/visual/home-snapshots/*-linux.png tests/visual/width-snapshots/*-linux.png
+          commit_user_name: github-actions[bot]
+          commit_user_email: 41898282+github-actions[bot]@users.noreply.github.com
 
-            - name: install Playwright browsers
-              run: yarn exec playwright install chromium firefox webkit --with-deps
-
-            - name: regenerate Linux baselines
-              run: yarn test:visual --update-snapshots
-              continue-on-error: true
-
-            - name: commit updated baselines
-              uses: stefanzweifel/git-auto-commit-action@v5
-              with:
-                  commit_message: 'chore(visual): update -linux baselines [skip ci]'
-                  file_pattern: 'tests/visual/home-snapshots/*-linux.png'
-                  commit_user_name: github-actions[bot]
-                  commit_user_email: 41898282+github-actions[bot]@users.noreply.github.com
-
-            - name: remove label
-              if: github.event_name == 'pull_request'
-              uses: actions/github-script@v7
-              continue-on-error: true
-              with:
-                  script: |
-                      await github.rest.issues.removeLabel({
-                        owner: context.repo.owner,
-                        repo: context.repo.repo,
-                        issue_number: context.issue.number,
-                        name: 'update-visual-snapshots',
-                      });
+      - name: remove label
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        continue-on-error: true
+        with:
+          script: |
+            await github.rest.issues.removeLabel({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              name: 'update-visual-snapshots',
+            });

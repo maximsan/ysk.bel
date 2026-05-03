@@ -33,14 +33,20 @@
                 {% for phone in contacts.contactUs.phones %}
                   <div class='contact-us__{{ phone.operator }}'>
                     <img
-                      alt='{{ phone.operator }}'
+                      alt=''
                       class='{{ phone.operator }}-icon'
                       src='{{ phone.iconUrl }}'
                       width='24'
                       height='24'
                       decoding='async'
                     >
-                    <span href='{{ phone.href }}' class='phone-number'>{{ phone.text }}</span>
+                    <a
+                      href='{{ phone.href }}'
+                      class='phone-number'
+                      {% if phone.ariaLabel %}
+                      aria-label='{{ phone.ariaLabel }}'
+                      {% endif %}
+                    >{{ phone.text }}</a>
                   </div>
                 {% endfor %}
               </div>

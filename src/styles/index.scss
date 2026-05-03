@@ -6,6 +6,7 @@
 @import 'modules/mixins';
 @import 'modules/animations';
 @import 'gallery';
+@import 'partials/cta';
 @import 'partials/footer';
 @import 'partials/contacts';
 @import 'partials/services';
@@ -17,11 +18,19 @@
 @import 'partials/logo';
 @import 'partials/info-banner';
 @import 'partials/map';
-@import 'partials/scroll-up';
 @import 'partials/button-send';
 @import 'partials/modal';
 @import 'partials/menu';
 @import 'partials/cooperation-banner';
+
+/* Avoid default UA white on overscroll / unstyled main regions. */
+html {
+  background-color: var(--color-bg-page);
+}
+
+main {
+  background-color: var(--color-bg-page);
+}
 
 body {
   font-family: var(--font-body);

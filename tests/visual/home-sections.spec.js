@@ -1,93 +1,57 @@
 import { test, expect } from '@playwright/test';
-import { LAYOUT } from './constants.js';
 import {
   locators,
   classMap,
   setupHomeVisualPage,
   waitForImagesLoaded,
+  waitForLayout,
+  waitForLocatorSizeStable,
   waitForStockingCarouselStable,
   waitForVideoShowcaseReady,
   waitForMapReady,
 } from './support/home-snapshot-helpers.js';
 
 test.beforeEach(async ({ page }) => {
-  await setupHomeVisualPage(page);
+  await setupHomeVisualPage(page, { showInfoBanner: false });
 });
 
-test.describe('home — sections', () => {
-  test('cooperation banner', async ({ page }) => {
-    const screenshotRegion = page.locator(locators.cooperationBanner);
-    await screenshotRegion.scrollIntoViewIfNeeded();
-    await expect(screenshotRegion).toHaveScreenshot('cooperation-banner.png', {
-      animations: 'disabled',
-    });
-  });
+test.describe('home — consolidated sections', () => {
+  test('main column (hero through contacts)', async ({ page }) => {
+    test.setTimeout(90_000);
+    const mainLocator = page.locator('main');
 
-  test('info banner', async ({ page }) => {
-    const screenshotRegion = page.locator(locators.infoBanner);
-    await screenshotRegion.scrollIntoViewIfNeeded();
-    await expect(screenshotRegion).toHaveScreenshot('info-banner.png', {
-      animations: 'disabled',
-    });
-  });
-
-  test('hero', async ({ page }) => {
-    const screenshotRegion = page.locator(locators.hero);
-    await screenshotRegion.scrollIntoViewIfNeeded();
-    await expect(screenshotRegion).toHaveScreenshot('hero.png', {
-      animations: 'disabled',
-    });
-  });
-
-  test('services', async ({ page }) => {
-    const screenshotRegion = page.locator(locators.services);
-    await screenshotRegion.scrollIntoViewIfNeeded();
+    await page.locator(locators.services).scrollIntoViewIfNeeded();
     await waitForImagesLoaded(page, locators.services);
-    await expect(screenshotRegion).toHaveScreenshot('services.png', {
-      animations: 'disabled',
-    });
-  });
-
-  test('stocking', async ({ page }) => {
-    const screenshotRegion = page.locator(locators.stocking);
-    await screenshotRegion.scrollIntoViewIfNeeded();
+    await page.locator(locators.stocking).scrollIntoViewIfNeeded();
     await waitForStockingCarouselStable(page);
-    await expect(screenshotRegion).toHaveScreenshot('stocking.png', {
-      animations: 'disabled',
-    });
-  });
-
-  test('videos', async ({ page }) => {
-    const screenshotRegion = page.locator(locators.videos);
-    await screenshotRegion.scrollIntoViewIfNeeded();
+    await page.locator(locators.videos).scrollIntoViewIfNeeded();
     await waitForVideoShowcaseReady(page);
-    await expect(screenshotRegion).toHaveScreenshot('videos.png', {
-      animations: 'disabled',
-    });
-  });
-
-  test('contacts', async ({ page }) => {
-    const screenshotRegion = page.locator(locators.contacts);
-    await screenshotRegion.scrollIntoViewIfNeeded();
+    await page.locator(locators.contacts).scrollIntoViewIfNeeded();
     await waitForMapReady(page);
-    // Google Maps tiles, labels and watermarks are non-deterministic across
-    // regions and API-key usage limits. Mask the map so visual regression
-    // covers the rest of `#contacts` without fighting map-render noise.
-    await expect(screenshotRegion).toHaveScreenshot('contacts.png', {
+    await waitForLocatorSizeStable(mainLocator);
+
+    await expect(mainLocator).toHaveScreenshot('main-content.png', {
       animations: 'disabled',
       mask: [page.locator(`#${classMap.mapShellId}`)],
     });
   });
 
-  test('footer', async ({ page }) => {
-    const viewportWidthPx = page.viewportSize()?.width ?? 1440;
-    test.skip(
-      viewportWidthPx < LAYOUT.footerMinVisibleWidthPx,
-      '.footer-social is hidden below 768px (see _footer.scss)',
-    );
+  test('cooperation banner', async ({ page }) => {
+    const screenshotRegion = page.locator(locators.cooperationBanner);
+    await screenshotRegion.scrollIntoViewIfNeeded();
+    await waitForLayout(page);
+    await waitForImagesLoaded(page, locators.cooperationBanner);
+    await waitForLocatorSizeStable(screenshotRegion);
+    await expect(screenshotRegion).toHaveScreenshot('cooperation-banner.png', {
+      animations: 'disabled',
+    });
+  });
 
+  test('footer', async ({ page }) => {
     const screenshotRegion = page.locator(locators.footer);
     await screenshotRegion.scrollIntoViewIfNeeded();
+    await waitForImagesLoaded(page, locators.footer);
+    await waitForLocatorSizeStable(screenshotRegion);
     await expect(screenshotRegion).toHaveScreenshot('footer.png', {
       animations: 'disabled',
     });

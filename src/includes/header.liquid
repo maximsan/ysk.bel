@@ -1,36 +1,46 @@
-<!-- Navigation -->
+{% comment %}
+  Mobile drawer: .menu-scrim = dimmed overlay (tap/Escape closes — sideBar.js).
+  Toggler: aria-expanded + aria-label updated in JS; icons aria-hidden (decorative).
+{% endcomment %}
 <header class='header'>
-  <nav class='navbar'>
+  <div
+    class='menu-scrim'
+    data-menu-scrim
+    aria-hidden='true'
+  ></div>
+  <nav class='navbar' aria-label='Основная навигация'>
     <button
       aria-controls='navbar-collapse'
       aria-expanded='false'
-      aria-label='toggle navigation'
+      aria-label='Открыть меню'
       class='navbar-toggler'
       type='button'
     >
       <img
         src='assets/images/icons/menu.svg'
-        alt='open-menu'
+        alt=''
         class='open-menu'
         width='24'
         height='24'
         decoding='async'
+        aria-hidden='true'
       >
       <img
         src='assets/images/icons/close.svg'
-        alt='close-menu'
+        alt=''
         class='close-menu hidden'
         width='24'
         height='24'
         decoding='async'
+        aria-hidden='true'
       >
     </button>
     <div class='navbar-logo'>
-      <h1 class='logo'>
+      <a class='logo' href='#top' aria-label='На главную: Усадьба Серебряный Карась'>
         <span class='logo-item'>Усадьба&nbsp;</span>
         <span class='logo-item'>Серебряный&nbsp;</span>
         <span class='logo-item'>Карась</span>
-      </h1>
+      </a>
     </div>
     {% render 'menu' %}
   </nav>

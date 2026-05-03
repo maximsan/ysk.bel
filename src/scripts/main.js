@@ -5,17 +5,16 @@ import {
   closeSideBarOnTimeout,
   toggleSideBar,
   addInfoBanner,
-  hideInfoBannerOnScroll,
   googleMapInit,
   documentHeight,
-  addScrollUpButton,
   initNavScrollSpy,
   initStockingCarousel,
   initStockingImageSkeletons,
   initVideosShowcaseCarousel,
 } from '@scripts/helpers/index.js';
 
-const MOBILE_BREAKPOINT = '(max-width: 768px)';
+/** Keep in sync with slide-out nav in `_menu.scss` / `_header.scss` (`max-width: 767.98px`). */
+const MOBILE_BREAKPOINT = '(max-width: 767.98px)';
 const mobileMediaQuery = window.matchMedia(MOBILE_BREAKPOINT);
 
 const hasInfoBannerElement = Boolean(
@@ -26,27 +25,18 @@ function runMobileOnlyEnhancements() {
   closeSideBarOnTimeout();
 }
 
-function runDesktopOnlyEnhancements() {
-  addScrollUpButton();
-}
-
 mobileMediaQuery.addEventListener('change', (event) => {
   if (event.matches) {
     runMobileOnlyEnhancements();
-  } else {
-    runDesktopOnlyEnhancements();
   }
 });
 
 if (mobileMediaQuery.matches) {
   runMobileOnlyEnhancements();
-} else {
-  runDesktopOnlyEnhancements();
 }
 
 if (hasInfoBannerElement) {
   addInfoBanner();
-  hideInfoBannerOnScroll();
 }
 
 documentHeight();

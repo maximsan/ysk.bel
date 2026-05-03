@@ -1,6 +1,7 @@
 /**
- * Sets `aria-current="true"` on in-page nav links whose section intersects
- * the viewport center (token-driven active style in `_header.scss`).
+ * Scroll spy: marks the navbar link for the section nearest the viewport center.
+ * Uses IntersectionObserver (see docs/ui-accessibility-glossary.md — aria-current).
+ * Styles: `_header.scss` `[aria-current='true']`. Hash in URL also activates a link.
  */
 export function initNavScrollSpy() {
   const navLinks = Array.from(

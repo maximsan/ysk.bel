@@ -1,23 +1,24 @@
-const PHONE_WITHOUT_PLUS = '375291495989';
-const PHONE_WITH_PLUS = `%2B${PHONE_WITHOUT_PLUS}`;
-const USER_NAME = 'oleg_miskevich';
-
+/**
+ * Site footer — colophon and in-page navigation only.
+ * Messenger and call CTAs live in `cooperation.js` (partnership strip) and
+ * `contacts.js` / `sidebar.js`; do not duplicate them here.
+ *
+ * When the phone number changes, update: `cooperation.js`, `contacts.js`,
+ * `sidebar.js` (not this file).
+ */
 export default {
+  brandName: 'Усадьба Серебряный Карась',
+  tagline: 'Рыбалка, баня и отдых на природе',
   links: [
     {
-      class: 'viber',
-      href: `viber://chat/?number=${PHONE_WITH_PLUS}`,
-      text: 'Viber',
+      text: 'Контакты',
+      href: '#contacts',
+      ariaLabel: 'Перейти к разделу контакты',
     },
     {
-      class: 'whatsapp',
-      href: `https://api.whatsapp.com/send?phone=${PHONE_WITHOUT_PLUS}`,
-      text: 'WhatsApp',
-    },
-    {
-      class: 'skype',
-      href: `skype:${USER_NAME}?chat`,
-      text: 'Skype',
+      text: 'Как добраться',
+      href: '#map',
+      ariaLabel: 'Перейти к карте — как добраться до усадьбы',
     },
   ],
 };

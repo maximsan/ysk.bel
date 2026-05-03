@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import * as sass from 'sass';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -27,6 +28,7 @@ function pathAliasesEsbuildPlugin() {
 }
 
 import banner from '@data/banner.js';
+import cooperation from '@data/cooperation.js';
 import history from '@data/estate-history.js';
 import footer from '@data/footer.js';
 import meta from '@data/meta.js';
@@ -122,6 +124,7 @@ export default function (config) {
       }
 
       return async () => {
+        const googleMapsApiKey = (process.env.GOOGLE_MAPS_API_KEY ?? '').trim();
         let output = await esbuild.build({
           target: 'es2020',
           entryPoints: [path],
@@ -130,6 +133,9 @@ export default function (config) {
           write: false,
           sourcemap: true,
           plugins: [pathAliasesEsbuildPlugin()],
+          define: {
+            __GOOGLE_MAPS_API_KEY__: JSON.stringify(googleMapsApiKey),
+          },
         });
 
         return output.outputFiles[0].text;
@@ -142,6 +148,7 @@ export default function (config) {
     strict_filters: true,
     globals: {
       banner,
+      cooperation,
       history,
       footer,
       meta,

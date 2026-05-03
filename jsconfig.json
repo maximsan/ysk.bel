@@ -7,5 +7,6 @@
       "@data/*": ["src/data/*"]
     }
   },
+  "include": ["src/**/*.js", "build-globals.d.ts"],
   "exclude": ["node_modules", "dist"]
 }

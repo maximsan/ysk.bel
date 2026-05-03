@@ -7,6 +7,9 @@ const descriptionBody =
 const ogBody =
   '✓Рыбалка круглый год ✓карп, щука, окунь, амур ✓Скидка зимой ✓Парковка ✓Ночлежки ✓Беседки ✓Баня до 8 человек, 150BYN ☎ +375 (29) 149 59 89';
 
+const PHONE_DIGITS = '+375291495989';
+const PHONE_DISPLAY = '+375 (29) 149 59 89';
+
 export default {
   /**
    * Одно предложение — история бренда (Peat & linen): вода, тишина, близость к Минску.
@@ -23,4 +26,42 @@ export default {
   url: 'https://уск.бел',
   lang: 'ru',
   locale: 'ru_RU',
+  /**
+   * Default browser UI tint (status bar / `<meta name="theme-color">`).
+   * Per-page override: set `themeColor` / `themeColorDark` in the page’s front
+   * matter (see `src/pages/home/index.md`); `base.liquid` passes them into `head.liquid`.
+   */
+  themeColor: '#5f6f6d',
+  themeColorDark: '#1c2724',
+  /**
+   * Hero eyebrow — малый подзаголовок над `h1` (редакционный тон, Peat & linen).
+   * Если пусто — hero не рендерит строку eyebrow.
+   */
+  heroEyebrow: 'Минская область · Логойский р-н',
+  /**
+   * Hero CTAs — единый словарь вызовов к действию (см. `src/styles/partials/_cta.scss`).
+   * `primary` — доминантная кнопка (звонок), `secondary` — мягкий якорь на услуги.
+   * `ariaLabel` используется, когда текст кнопки короче, чем смысл действия.
+   */
+  heroCta: {
+    primary: {
+      label: `Забронировать · ${PHONE_DISPLAY}`,
+      href: `tel:${PHONE_DIGITS}`,
+      ariaLabel: `Позвонить по номеру ${PHONE_DISPLAY} чтобы забронировать`,
+    },
+    secondary: {
+      label: 'Посмотреть услуги',
+      href: '#services',
+      ariaLabel: 'Перейти к разделу услуг',
+    },
+  },
+  /**
+   * Trust strip — три короткие опорные подписи под hero CTAs.
+   * Разделяются middle-dot в шаблоне; длина каждой ≤ 28 символов.
+   */
+  heroTrustStrip: [
+    '30 мин от Минска',
+    'Рыбалка круглый год',
+    'Баня до 8 человек',
+  ],
 };

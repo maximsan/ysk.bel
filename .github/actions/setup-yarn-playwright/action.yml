@@ -1,0 +1,33 @@
+name: Setup Yarn + Playwright Chromium
+description: Node (Yarn cache), immutable install, Playwright browser cache, Chromium with system deps
+
+inputs:
+    node-version:
+        description: Node.js major version
+        required: false
+        default: '22.x'
+
+runs:
+    using: composite
+    steps:
+        - name: Setup Node.js
+          uses: actions/setup-node@v4
+          with:
+              node-version: ${{ inputs.node-version }}
+              cache: yarn
+
+        - name: Install dependencies
+          shell: bash
+          run: |
+              yarn set version 4.3.1
+              yarn install --immutable
+
+        - name: Cache Playwright browsers
+          uses: actions/cache@v4
+          with:
+              path: ~/.cache/ms-playwright
+              key: playwright-browsers-${{ runner.os }}-${{ hashFiles('yarn.lock') }}
+
+        - name: Install Playwright Chromium
+          shell: bash
+          run: yarn exec playwright install chromium --with-deps

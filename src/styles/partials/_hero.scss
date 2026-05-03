@@ -1,132 +1,431 @@
+/*
+ * Hero (Group B of the home redesign).
+ *
+ * Layout model:
+ *   .hero is a single-cell CSS Grid. <picture>, the scrim overlay and the
+ *   content well all occupy the same cell (grid-area: 1 / 1), letting the
+ *   photo remains a decorative, preloaded background while text layers sit on top.
+ *
+ * Responsive model:
+ *   Mobile (<768px): centered; grid row auto + align-content:end keeps the
+ *   stack at the bottom of the hero without overflow clipping CTAs.
+ *   Tablet/desktop: content anchored bottom-left, copy ragged-left, CTAs
+ *   wrap on narrow widths. Replaces the previous ad-hoc
+ *   `margin-left: 24rem` hack with a proper max-width column.
+ *
+ * Motion:
+ *   On-load staggered reveal using --motion-hero-stagger, gated by
+ *   prefers-reduced-motion.
+ */
+
+@mixin hero-cover-photo ($widthPx) {
+  $avif: '../assets/images/hero-fish-#{$widthPx}.avif';
+  $webp: '../assets/images/hero-fish-#{$widthPx}.webp';
+
+  background-image: url('#{$webp}');
+  background-image:
+    image-set(url('#{$avif}') type('image/avif'), url('#{$webp}') type('image/webp'));
+}
+
 .hero {
   position: relative;
   isolation: isolate;
+  display: grid;
+  grid-template-areas: 'stage';
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: minmax(0, 1fr);
+
+  min-block-size: max(38rem, 80svh);
+  color: var(--color-text-inverse);
+  background-color: #5f6f6d; /* Dominant lake/forest tone while hero image loads. */
+  overflow: clip;
+  padding-block-start: clamp(3rem, 8vh, 6rem);
+  padding-block-end: clamp(3rem, 8vh, 6rem);
 
   &::before {
     content: '';
     position: absolute;
     inset: 0;
     z-index: 0;
-    pointer-events: none;
-    background: var(--hero-scrim);
+    @include hero-cover-photo('800');
+    background-position: center 35%;
+    background-size: cover;
+    background-repeat: no-repeat;
   }
 
-  .hero-content,
-  .hero-header {
-    position: relative;
+  &::after {
+    @include paper-grain(0.025);
     z-index: 1;
+  }
+}
+
+.hero > * {
+  grid-area: stage;
+}
+
+.hero__scrim {
+  pointer-events: none;
+  z-index: 1;
+  background: var(--hero-scrim-radial), var(--hero-scrim);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  align-items: end;
+  padding-inline: clamp(1.25rem, 4vw, 3rem);
+}
+
+.hero-header {
+  display: grid;
+  gap: clamp(0.85rem, 1.4vw, 1.25rem);
+  max-inline-size: 38rem;
+  text-align: center;
+  margin-inline: auto;
+  justify-items: center;
+}
+
+/* Eyebrow — small uppercase label flanked by a copper hairline. */
+.hero__eyebrow {
+  display: grid;
+  grid-template-columns: minmax(1rem, 1fr) auto minmax(1rem, 1fr);
+  align-items: center;
+  gap: 0.75rem;
+
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--color-text-inverse) 80%, transparent);
+}
+
+.hero__eyebrow-rule {
+  block-size: 1px;
+  inline-size: 100%;
+  background: linear-gradient(
+    to right,
+    transparent 0%,
+    color-mix(in srgb, var(--color-accent-light) 70%, transparent) 50%,
+    transparent 100%
+  );
+}
+
+.hero__eyebrow-text {
+  white-space: nowrap;
+}
+
+/* Title — Source Serif 4, oldstyle-nums, fluid clamp scale. */
+.hero__title {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-variant-numeric: oldstyle-nums;
+  font-optical-sizing: auto;
+  font-size: clamp(2rem, 1rem + 4.25vw, 4.25rem);
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+  color: var(--color-text-inverse);
+  text-wrap: balance;
+
+  display: flex;
+  flex-direction: column;
+  gap: 0.15em;
+}
+
+.hero__title-line {
+  display: block;
+
+  &--accent {
+    color: var(--color-accent-light);
+    font-style: italic;
+    font-size: 0.78em;
+  }
+}
+
+.hero__story {
+  margin: 0;
+  max-inline-size: 32rem;
+
+  font-family: var(--font-body);
+  font-size: clamp(1rem, 0.9rem + 0.4vw, 1.2rem);
+  font-weight: 500;
+  line-height: 1.55;
+  color: color-mix(in srgb, var(--color-text-inverse) 92%, transparent);
+  text-wrap: pretty;
+}
+
+.hero__cta {
+  justify-content: center;
+  margin-block-start: 0.5rem;
+}
+
+/* Trust strip — three-up caption row with middle-dot separators. */
+.hero__trust {
+  list-style: none;
+  margin: 0.25rem 0 1rem;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.25rem 1rem;
+
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  letter-spacing: 0.04em;
+  color: color-mix(in srgb, var(--color-text-inverse) 75%, transparent);
+}
+
+.hero__trust-item {
+  position: relative;
+  padding-inline-end: 1rem;
+
+  &:not(:last-child)::after {
+    content: '·';
+    position: absolute;
+    inset-inline-end: 0;
+    color: color-mix(in srgb, var(--color-accent-light) 65%, transparent);
+  }
+
+  &:last-child {
+    padding-inline-end: 0;
+  }
+}
+
+/*
+ * Narrow viewports: full-width stacked CTAs so primary + ghost share one width
+ * (container query above only kicks in below ~36rem *section* width; 576–768px
+ * viewports were missing that and looked misaligned).
+ */
+@media only screen and (max-width: 767.98px) {
+  /*
+   * Short viewports: `1fr` caps the stage and `overflow: clip` can shear CTAs.
+   * Auto rows + `overflow: visible` let the hero grow with the stack so nothing
+   * is clipped; the page scrolls if the stack is taller than the screen.
+   *
+   * `align-content: end` keeps the stage row at the bottom of the hero (same
+   * visual as before) without stretching `.hero-content` and pinning copy with
+   * `align-items: end` under the fold.
+   *
+   * `bootstrap.css` loads after this bundle — two-class selector beats
+   * `.container` padding.
+   */
+  .hero {
+    grid-template-rows: auto;
+    align-content: end;
+    min-block-size: 100svh;
+    min-block-size: 100dvh;
+    padding-block-start: calc(
+      clamp(1.125rem, 3.5vw, 2rem) + env(safe-area-inset-top, 0px)
+    );
+    padding-block-end: calc(
+      clamp(1.25rem, 5vh, 2.5rem) + env(safe-area-inset-bottom, 0px)
+    );
+    overflow: visible;
+  }
+
+  .hero .hero-content {
+    padding-left: clamp(1.125rem, 4vw, 2.75rem);
+    padding-right: clamp(1.125rem, 4vw, 2.75rem);
+  }
+
+  .hero-header {
+    gap: clamp(0.5rem, 3vw, 0.85rem);
+  }
+
+  .hero__title {
+    font-size: clamp(1.65rem, 1.1rem + 3.2vw, 2.85rem);
+    line-height: 1.06;
   }
 
   .hero__story {
-    font-size: var(--text-lead);
-    font-weight: 500;
-    max-width: 32rem;
-    margin: 0.25rem auto 0;
-    line-height: 1.5;
-    color: var(--color-text-primary);
+    font-size: clamp(0.9375rem, 0.85rem + 0.35vw, 1.1rem);
+    line-height: 1.45;
   }
-}
 
-@media only screen and (min-width: 320px) and (max-width: 767.98px) {
-  .hero {
-    background-image: url(#{$images-path}/fish-600.webp);
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-size: cover !important;
+  .hero__cta {
+    inline-size: 100%;
+    flex-direction: column;
+    align-items: stretch;
+    margin-block-start: 0.35rem;
 
-    color: var(--color-text-primary);
-    text-align: center;
-
-    height: max(50rem, var(--doc-height));
-
-    &-content {
-      position: static;
-      display: flex;
-      align-items: flex-end;
+    .cta {
+      inline-size: 100%;
+      max-inline-size: none;
       justify-content: center;
-      height: 100%;
+      text-align: center;
+      white-space: normal;
+      --_cta-pad-block: 0.55rem;
+      font-size: clamp(0.875rem, 0.8rem + 0.35vw, 1rem);
     }
+  }
 
-    &-header {
-      margin: 0 4rem 8rem 4rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0.75rem;
-
-      > h2 {
-        font-size: var(--text-hero-tight);
-      }
-    }
+  .hero__trust {
+    margin: 0.2rem 0 0.75rem;
+    font-size: 0.8rem;
+    gap: 0.2rem 0.75rem;
   }
 }
 
-@media only screen and (min-width: 768px) {
+/* ~iPhone SE / narrow width: tighter vertical rhythm so bottom-anchored stack fits */
+@media only screen and (max-width: 399.98px) {
   .hero {
-    background-image: url(#{$images-path}/fish-600.webp);
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-size: cover !important;
+    padding-block-start: calc(0.875rem + env(safe-area-inset-top, 0px));
+    padding-block-end: calc(1rem + env(safe-area-inset-bottom, 0px));
+  }
 
-    color: var(--color-text-primary);
-    text-align: center;
+  .hero__eyebrow {
+    font-size: 0.72rem;
+    gap: 0.5rem;
+  }
 
-    min-height: max(50rem, var(--doc-height));
+  .hero-header {
+    gap: 0.4rem;
+  }
 
-    &-content {
-      display: flex;
-      justify-content: flex-end;
+  .hero__title {
+    font-size: clamp(1.4rem, 0.92rem + 2.35vw, 2.35rem);
+    line-height: 1.05;
+  }
+
+  .hero__story {
+    font-size: 0.9rem;
+    line-height: 1.38;
+  }
+
+  .hero__cta {
+    margin-block-start: 0.25rem;
+
+    .cta {
+      --_cta-pad-block: 0.45rem;
+      font-size: 0.82rem;
     }
+  }
 
-    &-header {
-      margin: 2rem auto 0;
-      display: flex;
-      flex-direction: column;
-      gap: 0.75rem;
+  .hero__trust {
+    margin: 0.15rem 0 0.55rem;
+    font-size: 0.74rem;
+    gap: 0.15rem 0.65rem;
+  }
+}
 
-      > h2 {
-        font-size: var(--text-hero-medium);
-      }
+/* Breakpoint refinements — left-anchor content on wider viewports. */
+@media (min-width: 768px) {
+  .hero {
+    min-block-size: max(42rem, 88svh);
+
+    &::before {
+      @include hero-cover-photo('1200');
     }
+  }
+
+  .hero-header {
+    max-inline-size: 44rem;
   }
 }
 
 @media (min-width: 992px) {
   .hero {
-    background-image: url(#{$images-path}/fish-800.webp);
-    background-repeat: no-repeat;
-    background-attachment: fixed;
+    min-block-size: max(46rem, 92svh);
+  }
 
-    &-content {
-      position: sticky;
-      top: 1rem;
-      display: flex;
-      margin-bottom: 2rem;
-    }
+  .hero-content {
+    align-items: end;
+    justify-content: start;
+    padding-inline: clamp(2rem, 5vw, 5rem);
+  }
 
-    &-header {
-      margin: 4rem auto 0;
+  .hero-header {
+    text-align: start;
+    justify-items: start;
+    max-inline-size: 32rem;
+    margin-inline: 0;
+  }
 
-      > h2 {
-        font-size: var(--text-hero-large);
-      }
-    }
+  .hero__eyebrow {
+    grid-template-columns: auto 1fr;
+  }
+
+  .hero__eyebrow-rule:first-child {
+    display: none;
+  }
+
+  .hero__cta {
+    justify-content: flex-start;
+  }
+
+  .hero__trust {
+    justify-content: flex-start;
+  }
+}
+
+/*
+ * Tablet-wide hero: ghost must match the primary pill’s width (primary sets the
+ * intrinsic width via the long tel label). Column + max-content shrink-wraps
+ * to that width; both CTAs stretch to the same inline size — not 50/50 row split.
+ */
+@media (min-width: 992px) and (max-width: 1199.98px) {
+  .hero__cta {
+    flex-direction: column;
+    align-items: stretch;
+    align-self: start;
+    inline-size: max-content;
+    max-inline-size: 100%;
+  }
+
+  .hero__cta .cta {
+    justify-content: center;
+    text-align: center;
+    white-space: normal;
+    inline-size: 100%;
   }
 }
 
 @media (min-width: 1200px) {
-  .hero {
-    background-image: url(#{$images-path}/fish.webp);
-    background-repeat: no-repeat;
-    background-attachment: fixed;
+  .hero::before {
+    @include hero-cover-photo('1600');
+  }
 
-    &-header {
-      margin-left: 24rem;
-      gap: 4rem;
+  .hero-content {
+    padding-inline: clamp(3rem, 8vw, 8rem);
+  }
 
-      > h2 {
-        text-align: center;
-        font-size: var(--text-hero-wide);
-      }
+  .hero-header {
+    max-inline-size: 38rem;
+    gap: clamp(1rem, 1.6vw, 1.5rem);
+  }
+
+  .hero__title {
+    font-size: clamp(3rem, 1.5rem + 2.5vw, 4.75rem);
+  }
+}
+
+@container (max-width: 36rem) {
+  .hero__cta {
+    inline-size: 100%;
+    flex-direction: column;
+    align-items: stretch;
+
+    .cta {
+      inline-size: 100%;
+      max-inline-size: none;
+      justify-content: center;
+      text-align: center;
+      white-space: normal;
+    }
+  }
+
+  .hero__trust {
+    display: grid;
+    gap: 0.35rem;
+  }
+
+  .hero__trust-item {
+    padding-inline-end: 0;
+
+    &::after {
+      content: none;
     }
   }
 }

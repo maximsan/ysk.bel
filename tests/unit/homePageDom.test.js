@@ -57,7 +57,6 @@ describe('homePageDom', () => {
   });
 
   it('SITE_SELECTORS align with layout classes', () => {
-    expect(SITE_SELECTORS.scrollUp).toBe('.scroll-up');
     expect(SITE_SELECTORS.overlay).toBe('.overlay');
     expect(SITE_SELECTORS.openMenu).toBe('.open-menu');
   });

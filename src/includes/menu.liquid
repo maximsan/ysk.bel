@@ -18,7 +18,13 @@
             <div class='{{ showOnlyOn }}'>
               {{ sidebar.cta.text }}
             </div>
-            <a class='nav-link phone' href='{{ menu.href }}'>
+            <a
+              class='nav-link phone'
+              href='{{ menu.href }}'
+              {% if menu.ariaLabel %}
+              aria-label='{{ menu.ariaLabel }}'
+              {% endif %}
+            >
               <span>{{ menu.text }}</span>
             </a>
           {% endif %}

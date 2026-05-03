@@ -81,3 +81,53 @@
   left: 0;
   z-index: 999;
 }
+
+/*
+ * editorial-rule — a thin copper hairline with a centered ornament gap.
+ * Use on <span> / <hr> / ::before pseudo-elements inside banners and hero
+ * eyebrows to separate an eyebrow label from a headline, or to flank a
+ * small caption. Honours `prefers-reduced-motion` by not animating.
+ *
+ * Parameters:
+ *   $width  — total rule width (default: 100%).
+ *   $gap    — transparent gap in the middle (default: 0 for solid rule).
+ *   $color  — rule colour (default: the copper hairline token).
+ */
+@mixin editorial-rule($width: 100%, $gap: 0, $color: var(--color-accent)) {
+  display: block;
+  width: $width;
+  block-size: 1px;
+  border: 0;
+  margin: 0;
+  background: linear-gradient(
+    to right,
+    transparent 0,
+    color-mix(in srgb, #{$color} 60%, transparent) 18%,
+    color-mix(in srgb, #{$color} 60%, transparent)
+      calc(50% - #{$gap} / 2),
+    transparent calc(50% - #{$gap} / 2),
+    transparent calc(50% + #{$gap} / 2),
+    color-mix(in srgb, #{$color} 60%, transparent)
+      calc(50% + #{$gap} / 2),
+    color-mix(in srgb, #{$color} 60%, transparent) 82%,
+    transparent 100%
+  );
+}
+
+/*
+ * paper-grain — subtle noise overlay (SVG filter baked into a data URI).
+ * Apply to a layered ::after pseudo-element of a section to add tactile
+ * depth without shipping a raster asset. Respects reduced-transparency.
+ */
+@mixin paper-grain($opacity: var(--paper-grain-opacity)) {
+  @media (prefers-reduced-transparency: no-preference) {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: #{$opacity};
+    mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.55 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+    background-size: 220px 220px;
+  }
+}

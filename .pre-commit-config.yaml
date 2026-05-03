@@ -1,0 +1,10 @@
+# https://docs.gitguardian.com/ggshield-docs/integrations/git-hooks/pre-commit
+minimum_pre_commit_version: '3.2.0'
+
+repos:
+  - repo: https://github.com/gitguardian/ggshield
+    rev: v1.50.3
+    hooks:
+      - id: ggshield
+        language_version: python3
+        stages: [pre-commit]

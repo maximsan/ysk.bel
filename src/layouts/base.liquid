@@ -1,9 +1,14 @@
 <!doctype html>
 <html class='no-js' lang='{{ meta.lang }}'>
   <head>
-    {% render 'head' %}
+    {% comment %}
+      Optional front matter: `themeColor` / `themeColorDark` per page (data cascade). Falls back to `meta`.
+    {% endcomment %}
+    {% assign pageThemeColor = themeColor | default: meta.themeColor %}
+    {% assign pageThemeColorDark = themeColorDark | default: meta.themeColorDark %}
+    {% render 'head', themeColor: pageThemeColor, themeColorDark: pageThemeColorDark %}
   </head>
-  <body>
+  <body id='top'>
     <!-- Google Tag Manager (noscript) -->
     <noscript>
       <iframe
@@ -23,21 +28,15 @@
       </p>
     <![endif]-->
 
-    <button class='scroll-up' id='scroll-up' title='Назад к меню'>
-      <i class='fas fa-arrow-up'></i>
-    </button>
-
     {% render 'header' %}
-
-    {% render 'cooperation-banner' %}
 
     <main style='display: flex; flex-direction: column;'>
       {{ content }}
 
-      <!-- Banner with important info -->
-      {% render 'components/info-banner' %}
       <!-- Page Content -->
       {% render 'hero-section' %}
+      <!-- Banner with important info -->
+      {% render 'components/info-banner' %}
       <!-- Services section -->
       {% render 'services' %}
       <!-- Stocking with fish (carousel) -->
@@ -54,6 +53,8 @@
       <h2>Thanks for contacting us! We will get back to you soon!</h2>
     </div>
 
+    {% render 'cooperation-banner' %}
+
     <!-- Footer navigation start -->
     {% render 'footer' %}
     <!-- Footer navigation end -->
@@ -69,14 +70,5 @@
       gtag('config', 'G-0MVEPHZ43W');
     </script>
 
-    <!-- Google maps -->
-    <script
-      async
-      defer
-      src='https://maps.googleapis.com/maps/api/js?key=AIzaSyCEjXw1mbGTXw12jnM_YTAveRGb1I4c3gQ'
-    ></script>
-    <!-- end Google Maps -->
-
-    <script src='https://vjs.zencdn.net/8.10.0/video.min.js'></script>
   </body>
 </html>

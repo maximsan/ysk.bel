@@ -1,24 +1,101 @@
 .info-banner {
   display: none;
-  padding: 3rem;
+  position: relative;
   color: var(--info-banner-accent);
+  background: var(--info-banner-gradient);
+  border-block: var(--hairline-copper-strong);
+  border-inline-start: var(--info-banner-accent-bar);
+  box-shadow: var(--info-banner-shadow);
+  z-index: 998;
 
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  &__inner {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: clamp(0.75rem, 2vw, 1.5rem);
+    width: min(100%, 72rem);
+    margin-inline: auto;
+    padding: clamp(1.2rem, 3vw, 1.75rem) clamp(1rem, 4vw, 2rem);
+  }
 
-  border: var(--info-banner-border);
-  border-radius: var(--radius-md);
-  background-color: var(--info-banner-surface);
-  z-index: 1000;
+  &__intro {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    min-width: 0;
+  }
+
+  &__glyph {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 auto;
+    padding: clamp(0.45rem, 1.2vw, 0.58rem);
+    border-radius: 50%;
+    color: var(--color-accent);
+    /* Drives .ornament 1em box — 2× prior 1.55rem for a clearer carp mark */
+    font-size: 3.1rem;
+    background: color-mix(in srgb, var(--color-accent) 12%, transparent);
+    box-shadow: inset 0 1px 0 color-mix(in srgb, var(--color-bg-elevated) 65%, transparent);
+  }
 
   &__header {
-    font-size: 1.75rem;
+    margin: 0;
+    font-family: var(--font-heading);
+    font-size: clamp(0.92rem, 0.86rem + 0.42vw, 1.12rem);
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: 0.02em;
+    color: color-mix(
+      in srgb,
+      var(--color-text-muted) 38%,
+      var(--color-text-primary) 62%
+    );
+    text-wrap: balance;
+  }
+
+  &__messages {
+    grid-column: 1 / -1;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem 0.65rem;
+    align-items: center;
+    min-width: 0;
+  }
+
+  &__text {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.4rem;
+    margin: 0;
+    min-width: 0;
+    font-size: clamp(0.95rem, 0.9rem + 0.25vw, 1.08rem);
+    line-height: 1.35;
+    /* Stronger than body-muted: banner is dense UI on a single surface. */
+    color: color-mix(
+      in srgb,
+      var(--color-text-muted) 45%,
+      var(--color-text-primary) 55%
+    );
+  }
+
+  &__date {
+    display: inline-flex;
+    align-items: center;
+    min-height: 1.45rem;
+    padding: 0.12rem 0.45rem;
+    border: var(--hairline-copper);
+    border-radius: var(--cta-radius);
+    color: var(--color-accent-muted);
+    background: color-mix(in srgb, var(--color-accent-light) 12%, transparent);
+    font-size: 0.78em;
+    font-weight: var(--font-weight-bold);
+    white-space: nowrap;
   }
 
   &__link {
-    color: inherit;
+    color: var(--color-accent);
     font-weight: var(--font-weight-bold);
     text-decoration: underline;
     text-decoration-thickness: 1px;
@@ -29,68 +106,223 @@
       color: var(--color-accent-hover);
     }
 
+    @include outline;
+  }
+
+  /* First news line — primary hook for first-time visitors */
+  &__text--lead {
+    padding: 0.4rem 0.75rem;
+    border-radius: var(--radius-md);
+    background: var(--info-banner-lead-bg);
+    border: var(--info-banner-lead-border);
+    box-shadow: 0 1px 0 color-mix(in srgb, var(--color-bg-elevated) 55%, transparent);
+
+    .info-banner__link {
+      font-size: clamp(1.08rem, 1rem + 0.55vw, 1.42rem);
+      line-height: 1.25;
+      text-decoration-thickness: 2px;
+      text-underline-offset: 4px;
+    }
+
+    .info-banner__date {
+      border-color: color-mix(in srgb, var(--color-accent) 40%, transparent);
+      background: color-mix(in srgb, var(--color-accent-light) 18%, transparent);
+    }
+  }
+
+  &__close {
+    display: grid;
+    place-items: center;
+    inline-size: var(--cta-min-hit);
+    block-size: var(--cta-min-hit);
+    padding: 0;
+    border: 1px solid transparent;
+    border-radius: 50%;
+    background: transparent;
+    color: var(--color-accent-muted);
+    cursor: pointer;
+
+    &-icon {
+      display: block;
+      inline-size: 1.375rem;
+      block-size: 1.375rem;
+      object-fit: contain;
+      pointer-events: none;
+    }
+
+    @include outline;
+
+    &:hover,
     &:focus-visible {
-      outline: var(--focus-ring-width) solid var(--color-focus-ring);
-      outline-offset: var(--focus-ring-offset);
+      border-color: var(--cta-ghost-border);
+      color: var(--color-accent-hover);
+      background: color-mix(in srgb, var(--color-accent) 8%, transparent);
+    }
+  }
+
+  &--modal {
+    position: fixed;
+    inset-block-start: 50%;
+    inset-inline-start: 50%;
+    transform: translate(-50%, -50%);
+    width: min(90vw, 50rem);
+    border: var(--info-banner-border);
+    border-inline-start: var(--info-banner-accent-bar);
+    border-radius: var(--radius-md);
+    box-shadow: 0 24px 80px color-mix(in srgb, var(--color-bg-inverse) 30%, transparent);
+    z-index: 1000;
+
+    .info-banner__inner {
+      grid-template-columns: minmax(0, 1fr) auto;
+      width: 100%;
+      padding: clamp(2rem, 5vw, 3rem);
+      text-align: center;
+    }
+
+    .info-banner__intro,
+    .info-banner__messages {
+      justify-content: center;
+    }
+
+    .info-banner__intro,
+    .info-banner__messages {
+      grid-column: 1 / -1;
+    }
+
+    .info-banner__close {
+      position: absolute;
+      inset-block-start: 0.5rem;
+      inset-inline-end: 0.5rem;
     }
   }
 }
 
-.hide-banner {
-  animation: fadeOutAnimation ease 1.5s;
+.show-banner {
+  display: block !important;
+
+  @media (prefers-reduced-motion: no-preference) {
+    animation: infoBannerStripIn 0.32s var(--motion-ease-out) both;
+  }
 }
 
-.show-banner {
-  animation: fadeInAnimation ease 1s;
+.hide-banner {
+  @media (prefers-reduced-motion: no-preference) {
+    animation: fadeOutAnimation ease 0.2s;
+  }
+}
 
-  display: flex !important;
-  flex-flow: column;
-  align-items: center;
-  justify-content: center;
-
-  text-align: center;
+.info-banner--modal.show-banner {
+  @media (prefers-reduced-motion: no-preference) {
+    animation: infoBannerModalIn 0.24s var(--motion-ease-out) both;
+  }
 }
 
 .overlay {
   @include overlay;
 }
 
-@media only screen and (min-width: 320px) and (max-width: 767.98px) {
-  .info-banner {
-    width: 90%;
+.info-banner__overlay {
+  opacity: 1;
+  background-color: color-mix(in srgb, var(--color-bg-inverse) 55%, transparent);
+  backdrop-filter: blur(0.25rem);
+}
 
-    &__text {
-      font-size: 1rem;
+@keyframes infoBannerStripIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-1rem);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes infoBannerModalIn {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -48%) scale(0.96);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+@media (min-width: 768px) {
+  .info-banner:not(.info-banner--modal) {
+    .info-banner__inner {
+      grid-template-columns: auto minmax(0, 1fr) auto;
+    }
+
+    .info-banner__messages {
+      grid-column: auto;
     }
   }
 }
 
-@media only screen and (min-width: 480px) {
-  .info-banner {
-    width: 90%;
+/*
+ * Narrow *section* width: tighten message stack only. Grid / close placement for
+ * viewports <768px is handled in the media query below so it wins in cascade.
+ */
+@container (max-width: 36rem) {
+  .info-banner:not(.info-banner--modal) {
+    .info-banner__messages {
+      display: grid;
+      gap: 0.55rem;
+    }
 
-    &__text {
-      font-size: 1rem;
+    .info-banner__text {
+      display: flex;
+      flex-wrap: wrap;
     }
   }
 }
 
-@media only screen and (min-width: 768px) {
-  .info-banner {
-    width: 90%;
-
-    &__text {
-      font-size: 1rem;
+/* Strip variant <768px: close is last in DOM — grid auto-placement drops it on a
+   new row (reads as bottom-left). Pin it to the inner top-right; center copy. */
+@media (max-width: 767.98px) {
+  .info-banner:not(.info-banner--modal) {
+    .info-banner__inner {
+      grid-template-columns: 1fr;
+      grid-template-rows: auto auto;
+      align-items: start;
+      justify-items: center;
+      gap: 0.65rem;
+      padding-inline: clamp(1rem, 4vw, 2rem);
+      padding-inline-end: calc(
+        clamp(1rem, 4vw, 2rem) + var(--cta-min-hit) + 0.35rem
+      );
     }
-  }
-}
 
-@media (min-width: 992px) {
-  .info-banner {
-    width: 50rem;
+    .info-banner__intro {
+      grid-column: 1;
+      justify-content: center;
+      text-align: center;
+      align-items: center;
+      flex-wrap: wrap;
+    }
 
-    &__text {
-      font-size: 1.5rem;
+    .info-banner__header {
+      text-align: center;
+    }
+
+    .info-banner__messages {
+      grid-column: 1;
+      justify-content: center;
+      justify-items: center;
+      text-align: center;
+    }
+
+    .info-banner__text {
+      justify-content: center;
+      text-align: center;
+    }
+
+    .info-banner__close {
+      position: absolute;
+      inset-block-start: clamp(0.45rem, 2vw, 0.65rem);
+      inset-inline-end: clamp(0.65rem, 3vw, 1rem);
     }
   }
 }
