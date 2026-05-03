@@ -113,10 +113,10 @@
     color-mix(in srgb, var(--color-accent) 10%, var(--color-bg-elevated)) 100%
   );
   --info-banner-accent-bar: 4px solid var(--color-accent);
-  --info-banner-shadow:
-    0 8px 32px color-mix(in srgb, var(--color-accent-shadow) 18%, transparent),
-    0 2px 0 color-mix(in srgb, var(--color-accent-light) 35%, transparent),
-    var(--section-inset-highlight);
+  /* Ambient lift only — avoid inset top highlight + bottom hairline shadow so
+     block-start/block-end borders match visually (see _info-banner.scss). */
+  --info-banner-shadow: 0 8px 32px
+    color-mix(in srgb, var(--color-accent-shadow) 18%, transparent);
   --info-banner-lead-bg: color-mix(in srgb, var(--color-accent) 9%, var(--color-bg-elevated));
   --info-banner-lead-border: 1px solid
     color-mix(in srgb, var(--color-accent) 28%, transparent);
@@ -203,10 +203,8 @@
       var(--color-bg-elevated) 42%,
       color-mix(in srgb, var(--color-accent-light) 14%, var(--color-bg-elevated)) 100%
     );
-    --info-banner-shadow:
-      0 10px 36px color-mix(in srgb, var(--color-bg-inverse) 55%, transparent),
-      0 1px 0 color-mix(in srgb, var(--color-accent-muted) 28%, transparent),
-      var(--section-inset-highlight);
+    --info-banner-shadow: 0 10px 36px
+      color-mix(in srgb, var(--color-bg-inverse) 55%, transparent);
     --info-banner-lead-bg: color-mix(in srgb, var(--color-accent) 14%, var(--color-bg-elevated));
     --info-banner-lead-border: 1px solid
       color-mix(in srgb, var(--color-accent-light) 32%, transparent);

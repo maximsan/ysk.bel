@@ -16,7 +16,7 @@
     gap: clamp(0.75rem, 2vw, 1.5rem);
     width: min(100%, 72rem);
     margin-inline: auto;
-    padding: clamp(0.9rem, 2.2vw, 1.2rem) clamp(1rem, 4vw, 2rem);
+    padding: clamp(1.2rem, 3vw, 1.75rem) clamp(1rem, 4vw, 2rem);
   }
 
   &__intro {
@@ -31,10 +31,11 @@
     align-items: center;
     justify-content: center;
     flex: 0 0 auto;
-    padding: 0.42rem;
+    padding: clamp(0.45rem, 1.2vw, 0.58rem);
     border-radius: 50%;
     color: var(--color-accent);
-    font-size: 1.55rem;
+    /* Drives .ornament 1em box — 2× prior 1.55rem for a clearer carp mark */
+    font-size: 3.1rem;
     background: color-mix(in srgb, var(--color-accent) 12%, transparent);
     box-shadow: inset 0 1px 0 color-mix(in srgb, var(--color-bg-elevated) 65%, transparent);
   }
@@ -130,9 +131,8 @@
   }
 
   &__close {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
+    display: grid;
+    place-items: center;
     inline-size: var(--cta-min-hit);
     block-size: var(--cta-min-hit);
     padding: 0;
@@ -140,9 +140,15 @@
     border-radius: 50%;
     background: transparent;
     color: var(--color-accent-muted);
-    font-size: 1.75rem;
-    line-height: 1;
     cursor: pointer;
+
+    &-icon {
+      display: block;
+      inline-size: 1.375rem;
+      block-size: 1.375rem;
+      object-fit: contain;
+      pointer-events: none;
+    }
 
     @include outline;
 
