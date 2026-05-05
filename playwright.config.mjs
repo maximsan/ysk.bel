@@ -16,19 +16,21 @@ const homeVisualScreenshotExpect = {
 };
 
 function homeScreenshotProjects() {
-  return Object.entries(viewports).map(([viewportProfileName, viewportSize]) => ({
-    name: `chromium-${viewportProfileName}`,
-    testDir: 'tests/visual',
-    testIgnore: '**/home-width-pass.spec.js',
-    snapshotPathTemplate:
-      '{testDir}/home-snapshots/{arg}-{projectName}-{platform}{ext}',
-    expect: homeVisualScreenshotExpect,
-    use: {
-      ...chromeDevice,
-      viewport: viewportSize,
-      baseURL: baseURLMain,
-    },
-  }));
+  return Object.entries(viewports).map(
+    ([viewportProfileName, viewportSize]) => ({
+      name: `chromium-${viewportProfileName}`,
+      testDir: 'tests/visual',
+      testIgnore: '**/home-width-pass.spec.js',
+      snapshotPathTemplate:
+        '{testDir}/home-snapshots/{arg}-{projectName}-{platform}{ext}',
+      expect: homeVisualScreenshotExpect,
+      use: {
+        ...chromeDevice,
+        viewport: viewportSize,
+        baseURL: baseURLMain,
+      },
+    }),
+  );
 }
 
 export default defineConfig({
@@ -95,6 +97,16 @@ export default defineConfig({
         ...chromeDevice,
         baseURL: baseURLMain,
         trace: 'retain-on-failure',
+      },
+    },
+    {
+      name: 'e2e',
+      testDir: 'tests/e2e',
+      testMatch: '**/*.@(spec|test).?(c|m)[jt]s?(x)',
+      use: {
+        ...chromeDevice,
+        baseURL: baseURLMain,
+        trace: 'on-first-retry',
       },
     },
   ],

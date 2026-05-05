@@ -4,15 +4,20 @@ Static marketing site for **Усадьба Серебряный Карась** (
 
 ## Stack
 
-- **SSG:** [Eleventy](https://www.11ty.dev/) 3.x (`eleventy.config.mjs`, ESM)
-- **Templates:** Liquid (primary), Markdown and Nunjucks also allowed
-- **Styles:** Sass/SCSS; entry SCSS files emit hashed filenames (see `eleventy.config.mjs`)
-- **Client JS:** esbuild (in Eleventy) bundles **`src/scripts/index.js` only**; that file imports Bootstrap, `main`, PhotoSwipe. No Babel in the build pipeline.
-- **Import aliases:** `@constants/*` → `src/scripts/constants/*`, `@scripts/*` → `src/scripts/*`, `@data/*` → `src/data/*`.
+- **SSG:** [Eleventy](https://www.11ty.dev/) 3.x (`eleventy.config.mjs`)
+- **Templates:** Liquid
+- **Styles:** Sass/SCSS
+- **Client JS:** esbuild bundles **`src/scripts/index.js` only**; that file imports Bootstrap, `main`, PhotoSwipe. No Babel in the build pipeline.
+- **Import aliases:** Check out `jsconfig.json`.
 - **Libraries:** Bootstrap 4, jQuery, Popper 1.x, PhotoSwipe 5
-- **E2E:** [Playwright](https://playwright.dev/) (`e2e/`, `playwright.config.mjs`) — builds the site and serves `dist/` via `serve` during tests.
+- **E2E:** [Playwright](https://playwright.dev/) (`playwright.config.mjs`) — builds the site and serves `dist/` via `serve` during tests.
+- **Runtime:** Node **20.x** (`package.json` `engines`).
+- **Yarn Berry 4** (`.yarn/releases/`, `nodeLinker: node-modules`).
 
-**Runtime:** Node **20.x** (`package.json` `engines`). **Yarn Berry 4** (`.yarn/releases/`, `nodeLinker: node-modules`). Full script list and local setup: [`README.md`](README.md), [`package.json`](package.json).
+## Full script list and local setup
+
+- [`README.md`](README.md),
+- [`package.json`](package.json).
 
 ## Layout of `src/`
 
@@ -41,8 +46,8 @@ Everything else: **`package.json`** / **[README.md](README.md)**.
 
 ## Conventions agents should follow
 
-1. **Liquid globals:** Adding or renaming keys in `src/data/*.js` may require updating `eleventy.config.mjs` (`setLiquidOptions({ globals: … })`) so templates can use them.
-2. **New client-side code:** Prefer wiring through `src/scripts/index.js` (or modules it imports). The Eleventy `js` extension only compiles that entry path.
+1. **Liquid globals:** Adding or renaming keys in `src/data/*.js` may require updating `eleventy.config.mjs`.
+2. **New client-side code:** Prefer wiring through `src/scripts/index.js` (or modules it imports).
 3. **SCSS:** Partial files must use a leading underscore; non-partials get content-hashed output URLs.
 4. **Asset URLs:** The `hashed` filter maps `src`-relative paths to built URLs; keep `outputMap` transforms in mind when referencing generated CSS/JS paths in Liquid.
 5. **Passthrough assets:** Static files and some CSS paths are configured in `addPassthroughCopy` — check there before assuming a path lands in `dist/`.

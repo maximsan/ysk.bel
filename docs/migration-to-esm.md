@@ -38,7 +38,7 @@ The site uses **native ESM** (`"type": "module"` in `package.json`), **Eleventy 
 
 ## Phase 4 — Tests and CI
 
-- [x] **Playwright** (`@playwright/test`) with `playwright.config.mjs`: `webServer` runs `yarn build` then **`serve`** on port 4173; tests in `e2e/`.
+- [x] **Playwright** (`@playwright/test`) with `playwright.config.mjs`: `webServer` runs `yarn build` then **`serve`** on port 4173; build smoke in `tests/e2e/`.
 - [x] `package.json` scripts: `yarn test` / `yarn test:e2e` / `yarn test:e2e:ui`.
 - [x] GitHub Actions: Node **20**, Corepack Yarn, `yarn install --immutable`, `yarn playwright install chromium --with-deps`, `yarn test`; on **`main`**, **`dist/`** is uploaded as an artifact and the **deploy** job downloads it before `deploy.sh` (so the remote always matches the tested build).
 - [x] `engines.node` `>=20` in `package.json`; Volta pins aligned with Yarn 4.x.

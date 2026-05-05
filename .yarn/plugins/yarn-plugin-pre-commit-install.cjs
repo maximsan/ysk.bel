@@ -11,12 +11,16 @@ module.exports = {
         afterAllInstalled(project) {
           const { spawnSync } = require('node:child_process');
           const path = require('node:path');
-          const script = path.join(project.cwd, 'scripts/postinstall-pre-commit.mjs');
+          const script = path.join(
+            project.cwd,
+            'scripts/postinstall-pre-commit.mjs',
+          );
           const result = spawnSync(process.execPath, [script], {
             cwd: project.cwd,
             stdio: 'inherit',
             env: { ...process.env },
           });
+
           if (result.error) {
             throw result.error;
           }

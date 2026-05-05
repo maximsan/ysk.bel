@@ -34,13 +34,12 @@ jobs:
               - '500.html'
               - 'tests/visual/**'
               - 'playwright.config.mjs'
-              - 'playwright.e2e.config.mjs'
               - 'scripts/import-aliases-hooks.mjs'
               - 'scripts/run-with-import-aliases.mjs'
               - 'jsconfig.json'
               - 'vitest.config.mjs'
               - 'tests/a11y/**'
-              - 'e2e/**'
+              - 'tests/e2e/**'
 
   build:
     runs-on: ubuntu-latest

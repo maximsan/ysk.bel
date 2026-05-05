@@ -3,6 +3,7 @@ description: Playwright (Chromium) — one playwright.config.mjs, DOM constants,
 globs:
   - tests/visual/**
   - tests/a11y/**
+  - tests/e2e/**
   - playwright.config.mjs
   - .github/actions/setup-yarn-playwright/**
 alwaysApply: false
@@ -10,7 +11,7 @@ alwaysApply: false
 
 # Playwright (ysk.bel)
 
-Single **`playwright.config.mjs`**. **Projects:** `chromium-{mobile|tablet|desktop}` (home screenshots, `testIgnore` width spec), **`width-pass`** (`**/home-width-pass.spec.js`, `width-snapshots/`), **`a11y`** (`tests/a11y/`).
+Single **`playwright.config.mjs`**. **Projects:** `chromium-{mobile|tablet|desktop}` (home screenshots, `testIgnore` width spec), **`width-pass`** (`**/home-width-pass.spec.js`, `width-snapshots/`), **`a11y`** (`tests/a11y/`), **`e2e`** (`tests/e2e/`, build smoke).
 
 **One static server** on **4173** for all projects (width pass no longer uses a second port).
 
@@ -31,6 +32,7 @@ Single **`playwright.config.mjs`**. **Projects:** `chromium-{mobile|tablet|deskt
 | `yarn test:visual:home` | Home snapshots only (`chromium-{mobile|tablet|desktop}`, no width-pass) |
 | `yarn exec playwright test --project=width-pass` | Width pass alone |
 | `yarn test:a11y` | Axe only |
+| `yarn test:e2e` | Build smoke (`tests/e2e/`) |
 | `yarn test:playwright` | All projects |
 
 **`PLAYWRIGHT_PREBUILT_DIST=1`** — `webServer` serves **`dist/`** only (CI visual job).
