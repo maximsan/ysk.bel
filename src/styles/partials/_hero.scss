@@ -13,7 +13,7 @@
  *   On-load stagger uses `--motion-hero-stagger`; respects `prefers-reduced-motion` (see docs/glossary.md).
  */
 
-@mixin hero-cover-photo ($widthPx) {
+@mixin hero-cover-photo($widthPx) {
   $avif: '../assets/images/hero-fish-#{$widthPx}.avif';
   $webp: '../assets/images/hero-fish-#{$widthPx}.webp';
 
@@ -24,32 +24,30 @@
 
 .hero {
   position: relative;
-  isolation: isolate;
   display: grid;
-  grid-template-areas: 'stage';
-  grid-template-columns: minmax(0, 1fr);
-  grid-template-rows: minmax(0, 1fr);
-
+  grid-template: 'stage' minmax(0, 1fr) / minmax(0, 1fr);
   min-block-size: max(38rem, 80svh);
+  padding-block: clamp(3rem, 8vh, 6rem);
+  overflow: clip;
   color: var(--color-text-inverse);
   background-color: #5f6f6d; /* Dominant lake/forest tone while hero image loads. */
-  overflow: clip;
-  padding-block-start: clamp(3rem, 8vh, 6rem);
-  padding-block-end: clamp(3rem, 8vh, 6rem);
+  isolation: isolate;
 
   &::before {
-    content: '';
     position: absolute;
     inset: 0;
     z-index: 0;
-    @include hero-cover-photo('800');
+    content: '';
+    background-repeat: no-repeat;
     background-position: center 35%;
     background-size: cover;
-    background-repeat: no-repeat;
+
+    @include hero-cover-photo('800');
   }
 
   &::after {
     @include paper-grain(0.025);
+
     z-index: 1;
   }
 }
@@ -59,8 +57,8 @@
 }
 
 .hero__scrim {
-  pointer-events: none;
   z-index: 1;
+  pointer-events: none;
   background: var(--hero-scrim-radial), var(--hero-scrim);
 }
 
@@ -75,30 +73,29 @@
 .hero-header {
   display: grid;
   gap: clamp(0.85rem, 1.4vw, 1.25rem);
-  max-inline-size: 38rem;
-  text-align: center;
-  margin-inline: auto;
   justify-items: center;
+  max-inline-size: 38rem;
+  margin-inline: auto;
+  text-align: center;
 }
 
 /* Eyebrow — small uppercase label flanked by a copper hairline. */
 .hero__eyebrow {
   display: grid;
   grid-template-columns: minmax(1rem, 1fr) auto minmax(1rem, 1fr);
-  align-items: center;
   gap: 0.75rem;
-
+  align-items: center;
   margin: 0;
   font-family: var(--font-body);
   font-size: 0.8rem;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
   color: color-mix(in srgb, var(--color-text-inverse) 80%, transparent);
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
 }
 
 .hero__eyebrow-rule {
-  block-size: 1px;
   inline-size: 100%;
+  block-size: 1px;
   background: linear-gradient(
     to right,
     transparent 0%,
@@ -113,36 +110,34 @@
 
 /* Title — Source Serif 4, oldstyle-nums, fluid clamp scale. */
 .hero__title {
-  margin: 0;
-  font-family: var(--font-heading);
-  font-weight: 600;
-  font-variant-numeric: oldstyle-nums;
-  font-optical-sizing: auto;
-  font-size: clamp(2rem, 1rem + 4.25vw, 4.25rem);
-  line-height: 1.05;
-  letter-spacing: -0.01em;
-  color: var(--color-text-inverse);
-  text-wrap: balance;
-
   display: flex;
   flex-direction: column;
   gap: 0.15em;
+  margin: 0;
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 1rem + 4.25vw, 4.25rem);
+  font-weight: 600;
+  font-optical-sizing: auto;
+  font-variant-numeric: oldstyle-nums;
+  line-height: 1.05;
+  color: var(--color-text-inverse);
+  letter-spacing: -0.01em;
+  text-wrap: balance;
 }
 
 .hero__title-line {
   display: block;
 
   &--accent {
-    color: var(--color-accent-light);
-    font-style: italic;
     font-size: 0.78em;
+    font-style: italic;
+    color: var(--color-accent-light);
   }
 }
 
 .hero__story {
-  margin: 0;
   max-inline-size: 32rem;
-
+  margin: 0;
   font-family: var(--font-body);
   font-size: clamp(1rem, 0.9rem + 0.4vw, 1.2rem);
   font-weight: 500;
@@ -158,18 +153,17 @@
 
 /* Trust strip — three-up caption row with middle-dot separators. */
 .hero__trust {
-  list-style: none;
-  margin: 0.25rem 0 1rem;
-  padding: 0;
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
   gap: 0.25rem 1rem;
-
+  justify-content: center;
+  padding: 0;
+  margin: 0.25rem 0 1rem;
   font-family: var(--font-body);
   font-size: 0.85rem;
-  letter-spacing: 0.04em;
   color: color-mix(in srgb, var(--color-text-inverse) 75%, transparent);
+  letter-spacing: 0.04em;
+  list-style: none;
 }
 
 .hero__trust-item {
@@ -177,10 +171,10 @@
   padding-inline-end: 1rem;
 
   &:not(:last-child)::after {
-    content: '·';
     position: absolute;
     inset-inline-end: 0;
     color: color-mix(in srgb, var(--color-accent-light) 65%, transparent);
+    content: '·';
   }
 
   &:last-child {
@@ -193,7 +187,7 @@
  * Needed where the `@container` rule above only fires below ~36rem section width —
  * portrait tablets around 576–768px were skipping it and buttons looked uneven.
  */
-@media only screen and (max-width: 767.98px) {
+@media only screen and (width <= 767.98px) {
   /*
    * Short viewports: a fixed `1fr` row plus `overflow: clip` on `.hero` can crop tall CTA stacks.
    * Switch to auto rows and `overflow: visible` so the block grows with content; the document scrolls instead.
@@ -207,18 +201,17 @@
     align-content: end;
     min-block-size: 100svh;
     min-block-size: 100dvh;
-    padding-block-start: calc(
+    padding-block: calc(
       clamp(1.125rem, 3.5vw, 2rem) + env(safe-area-inset-top, 0px)
-    );
-    padding-block-end: calc(
+    ) calc(
       clamp(1.25rem, 5vh, 2.5rem) + env(safe-area-inset-bottom, 0px)
     );
     overflow: visible;
   }
 
   .hero .hero-content {
-    padding-left: clamp(1.125rem, 4vw, 2.75rem);
     padding-right: clamp(1.125rem, 4vw, 2.75rem);
+    padding-left: clamp(1.125rem, 4vw, 2.75rem);
   }
 
   .hero-header {
@@ -236,39 +229,39 @@
   }
 
   .hero__cta {
-    inline-size: 100%;
     flex-direction: column;
     align-items: stretch;
+    inline-size: 100%;
     margin-block-start: 0.35rem;
 
     .cta {
+      justify-content: center;
       inline-size: 100%;
       max-inline-size: none;
-      justify-content: center;
+      font-size: clamp(0.875rem, 0.8rem + 0.35vw, 1rem);
       text-align: center;
       white-space: normal;
+
       --_cta-pad-block: 0.55rem;
-      font-size: clamp(0.875rem, 0.8rem + 0.35vw, 1rem);
     }
   }
 
   .hero__trust {
+    gap: 0.2rem 0.75rem;
     margin: 0.2rem 0 0.75rem;
     font-size: 0.8rem;
-    gap: 0.2rem 0.75rem;
   }
 }
 
 /* Very narrow width (~iPhone SE): tighten vertical rhythm so the bottom-anchored stack still fits. */
-@media only screen and (max-width: 399.98px) {
+@media only screen and (width <= 399.98px) {
   .hero {
-    padding-block-start: calc(0.875rem + env(safe-area-inset-top, 0px));
-    padding-block-end: calc(1rem + env(safe-area-inset-bottom, 0px));
+    padding-block: calc(0.875rem + env(safe-area-inset-top, 0px)) calc(1rem + env(safe-area-inset-bottom, 0px));
   }
 
   .hero__eyebrow {
-    font-size: 0.72rem;
     gap: 0.5rem;
+    font-size: 0.72rem;
   }
 
   .hero-header {
@@ -290,19 +283,20 @@
 
     .cta {
       --_cta-pad-block: 0.45rem;
+
       font-size: 0.82rem;
     }
   }
 
   .hero__trust {
+    gap: 0.15rem 0.65rem;
     margin: 0.15rem 0 0.55rem;
     font-size: 0.74rem;
-    gap: 0.15rem 0.65rem;
   }
 }
 
 /* Wider breakpoints: move hero copy from centered to left-anchored. */
-@media (min-width: 768px) {
+@media (width >= 768px) {
   .hero {
     min-block-size: max(42rem, 88svh);
 
@@ -316,7 +310,7 @@
   }
 }
 
-@media (min-width: 992px) {
+@media (width >= 992px) {
   .hero {
     min-block-size: max(46rem, 92svh);
   }
@@ -328,10 +322,10 @@
   }
 
   .hero-header {
-    text-align: start;
     justify-items: start;
     max-inline-size: 32rem;
     margin-inline: 0;
+    text-align: start;
   }
 
   .hero__eyebrow {
@@ -355,7 +349,7 @@
  * Mid-width hero: ghost CTA should match the primary button width — the tel label sets the intrinsic width.
  * `grid-template-columns: max-content` shrink-wraps to that column; both buttons stretch equally (not a 50/50 row).
  */
-@media (min-width: 992px) and (max-width: 1199.98px) {
+@media (width >= 992px) and (width <= 1199.98px) {
   .hero__cta {
     flex-direction: column;
     align-items: stretch;
@@ -366,13 +360,13 @@
 
   .hero__cta .cta {
     justify-content: center;
+    inline-size: 100%;
     text-align: center;
     white-space: normal;
-    inline-size: 100%;
   }
 }
 
-@media (min-width: 1200px) {
+@media (width >= 1200px) {
   .hero::before {
     @include hero-cover-photo('1600');
   }
@@ -382,8 +376,8 @@
   }
 
   .hero-header {
-    max-inline-size: 38rem;
     gap: clamp(1rem, 1.6vw, 1.5rem);
+    max-inline-size: 38rem;
   }
 
   .hero__title {
@@ -393,14 +387,14 @@
 
 @container (max-width: 36rem) {
   .hero__cta {
-    inline-size: 100%;
     flex-direction: column;
     align-items: stretch;
+    inline-size: 100%;
 
     .cta {
+      justify-content: center;
       inline-size: 100%;
       max-inline-size: none;
-      justify-content: center;
       text-align: center;
       white-space: normal;
     }

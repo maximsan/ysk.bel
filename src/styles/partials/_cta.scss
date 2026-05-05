@@ -15,27 +15,23 @@
   --_cta-pad-inline: clamp(1.1rem, 1.2vw + 0.8rem, 1.6rem);
 
   display: inline-flex;
+  gap: 0.5rem;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
-
   min-block-size: var(--cta-min-hit);
   padding: var(--_cta-pad-block) var(--_cta-pad-inline);
-
   font-family: var(--font-body);
   font-size: var(--font-size-base);
   font-weight: var(--font-weight-bold);
   line-height: 1.2;
+  color: inherit;
   letter-spacing: 0.01em;
-  text-decoration: none;
   white-space: nowrap;
-
+  text-decoration: none;
+  cursor: pointer;
+  background: transparent;
   border: 2px solid transparent;
   border-radius: var(--cta-radius);
-  background: transparent;
-  color: inherit;
-  cursor: pointer;
-
   transition:
     background-color var(--motion-link-hover-duration) var(--motion-ease-out),
     color var(--motion-link-hover-duration) var(--motion-ease-out),
@@ -53,21 +49,21 @@
     flex: 0 0 auto;
     inline-size: 1.1em;
     block-size: 1.1em;
-    fill: currentColor;
+    fill: currentcolor;
   }
 
   /* Primary — solid copper pill, dominant action per surface */
   &--primary {
-    background-color: var(--cta-primary-bg);
     color: var(--cta-primary-fg);
+    background-color: var(--cta-primary-bg);
     border-color: var(--cta-primary-bg);
     box-shadow: var(--cta-primary-shadow);
 
     &:hover,
     &:focus-visible {
+      color: var(--cta-primary-fg);
       background-color: var(--cta-primary-bg-hover);
       border-color: var(--cta-primary-bg-hover);
-      color: var(--cta-primary-fg);
 
       @media (prefers-reduced-motion: no-preference) {
         transform: translateY(-1px);
@@ -75,26 +71,26 @@
     }
 
     &:active {
-      transform: translateY(0);
       box-shadow: none;
+      transform: translateY(0);
     }
   }
 
   /* Ghost — bordered pill, quiet secondary action */
   &--ghost {
-    background-color: transparent;
     color: var(--cta-ghost-fg);
+    background-color: transparent;
     border-color: var(--cta-ghost-border);
 
     &:hover,
     &:focus-visible {
       color: var(--cta-ghost-fg-hover);
-      border-color: var(--cta-ghost-border-hover);
       background-color: color-mix(
         in srgb,
         var(--color-accent) 8%,
         transparent
       );
+      border-color: var(--cta-ghost-border-hover);
     }
   }
 
@@ -102,14 +98,14 @@
   &--link {
     min-block-size: auto;
     padding: 0.25rem 0;
-    border-radius: 0;
-    border: 0;
-    background: transparent;
+    font-weight: var(--font-weight-semibold);
     color: var(--color-accent);
     text-decoration: underline;
     text-decoration-thickness: 1px;
     text-underline-offset: 3px;
-    font-weight: var(--font-weight-semibold);
+    background: transparent;
+    border: 0;
+    border-radius: 0;
 
     &:hover,
     &:focus-visible {
@@ -129,12 +125,12 @@
     &:hover,
     &:focus-visible {
       color: var(--color-text-inverse);
-      border-color: var(--color-text-inverse);
       background-color: color-mix(
         in srgb,
         var(--color-text-inverse) 8%,
         transparent
       );
+      border-color: var(--color-text-inverse);
     }
   }
 }
@@ -143,8 +139,8 @@
 .cta-row {
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
   gap: var(--cta-gap);
+  align-items: center;
 }
 
 /*
@@ -155,11 +151,11 @@
  */
 .ornament {
   display: inline-block;
-  vertical-align: middle;
+  flex: 0 0 auto;
   inline-size: 1em;
   block-size: 1em;
-  color: currentColor;
-  flex: 0 0 auto;
+  vertical-align: middle;
+  color: currentcolor;
 
   &--lg {
     font-size: 2.5rem;

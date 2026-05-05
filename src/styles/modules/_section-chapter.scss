@@ -12,22 +12,22 @@
 }
 
 .section-chapter__title {
+  margin: 0;
   font-family: var(--font-heading);
   font-size: var(--text-h2);
   font-weight: 600;
   line-height: 1.2;
-  letter-spacing: -0.02em;
   color: var(--section-title-color);
-  margin: 0;
+  letter-spacing: -0.02em;
 }
 
 .section-chapter__subtitle,
 .section-chapter__lede {
-  margin: 0.75rem auto 0;
   max-width: var(--section-subtitle-max-width);
-  color: var(--section-subtitle-color);
-  line-height: 1.65;
+  margin: 0.75rem auto 0;
   font-size: var(--text-body);
+  line-height: 1.65;
+  color: var(--section-subtitle-color);
 }
 
 /* Center the services intro paragraph; stocking blocks keep their intro start-aligned in `_stocking-carousel.scss`. */

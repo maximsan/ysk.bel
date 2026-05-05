@@ -5,19 +5,20 @@
 
 .footer-social {
   position: relative;
-  isolation: isolate;
-  overflow: clip;
-  background-color: var(--color-bg-inverse);
-  color: var(--color-text-inverse);
   display: flex;
-  box-shadow: var(--footer-band-shadow);
   padding-block: clamp(1.25rem, 3vw, 1.75rem);
   padding-inline: max(1rem, env(safe-area-inset-left))
     max(1rem, env(safe-area-inset-right));
   padding-bottom: max(1.25rem, env(safe-area-inset-bottom));
+  overflow: clip;
+  color: var(--color-text-inverse);
+  background-color: var(--color-bg-inverse);
+  box-shadow: var(--footer-band-shadow);
+  isolation: isolate;
 
   &::after {
     @include paper-grain(0.028);
+
     z-index: 0;
   }
 }
@@ -27,8 +28,8 @@
   z-index: 1;
   display: flex;
   flex-direction: column;
-  align-items: stretch;
   gap: clamp(1rem, 2.5vw, 1.35rem);
+  align-items: stretch;
   width: 100%;
 }
 
@@ -37,10 +38,10 @@
 }
 
 .footer-site__name {
+  margin: 0;
   font-family: var(--font-heading);
   font-size: var(--font-size-md);
   font-weight: 600;
-  margin: 0;
   line-height: 1.25;
   color: var(--color-text-inverse);
 }
@@ -59,13 +60,12 @@
 
 .footer-site__links {
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
+  flex-flow: row wrap;
   gap: 0.35rem 1.25rem;
-  margin: 0;
+  align-items: center;
+  justify-content: center;
   padding: 0;
+  margin: 0;
   list-style: none;
 }
 
@@ -101,8 +101,8 @@
 }
 
 .footer-site__meta {
-  text-align: center;
   padding-top: 0.5rem;
+  text-align: center;
   border-top: 1px solid color-mix(in srgb, var(--color-text-inverse) 12%, transparent);
 }
 
@@ -118,17 +118,16 @@
 }
 
 /* Tablet layout: brand row + nav row; legal / tagline full width below. */
-@media only screen and (min-width: 768px) {
+@media only screen and (width >= 768px) {
   .footer-site {
-    flex-direction: row;
-    flex-wrap: wrap;
+    flex-flow: row wrap;
     align-items: center;
     justify-content: space-between;
   }
 
   .footer-site__brand {
-    text-align: left;
     flex: 1 1 12rem;
+    text-align: left;
   }
 
   .footer-site__nav {
@@ -142,13 +141,13 @@
 
   .footer-site__meta {
     flex: 1 1 100%;
-    text-align: center;
     padding-top: 0.75rem;
+    text-align: center;
   }
 }
 
 /* Desktop layout: one row — brand | navigation | colophon line. */
-@media only screen and (min-width: 992px) {
+@media only screen and (width >= 992px) {
   .footer-site {
     flex-wrap: nowrap;
     gap: 1.25rem;
@@ -165,9 +164,9 @@
 
   .footer-site__meta {
     flex: 0 0 auto;
-    padding-top: 0;
-    border-top: none;
-    text-align: right;
     max-width: 16rem;
+    padding-top: 0;
+    text-align: right;
+    border-top: none;
   }
 }

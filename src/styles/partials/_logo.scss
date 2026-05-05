@@ -1,11 +1,11 @@
 .logo {
-  cursor: pointer;
   font-family: var(--font-heading);
+  font-size: var(--font-size-base);
   font-weight: 600;
   color: var(--dirty-orange);
-  font-size: var(--font-size-base);
-  text-decoration: none;
   letter-spacing: 0.02em;
+  text-decoration: none;
+  cursor: pointer;
   transition: color var(--motion-link-hover-duration) var(--motion-ease-out);
 
   &:hover {
@@ -18,28 +18,28 @@
     outline-offset: var(--focus-ring-offset);
   }
 
-  @media only screen and (min-width: 320px) and (max-width: 767.98px) {
-    letter-spacing: 0.015em;
+  @media only screen and (width >= 320px) and (width <= 767.98px) {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-flow: row wrap;
     flex: 0 1 auto;
+    flex-flow: row wrap;
+    align-items: center;
+    justify-content: center;
     text-align: center;
+    letter-spacing: 0.015em;
   }
 
   /*
    * Mid-width nav: slightly smaller serif logo so the wordmark reads as a “title”
    * beside the sans-serif nav links (Rubik at this breakpoint).
    */
-  @media only screen and (min-width: 768px) and (max-width: 1199.98px) {
-    font-size: clamp(0.75rem, 0.72rem + 0.32vw, 0.92rem);
-    font-weight: 600;
+  @media only screen and (width >= 768px) and (width <= 1199.98px) {
     display: flex;
     flex-flow: row nowrap;
+    gap: 0.06em;
     align-items: center;
     justify-content: flex-start;
-    gap: 0.06em;
+    font-size: clamp(0.75rem, 0.72rem + 0.32vw, 0.92rem);
+    font-weight: 600;
     line-height: 1.2;
     letter-spacing: 0.03em;
     white-space: nowrap;
@@ -49,13 +49,13 @@
     }
   }
 
-  @media (min-width: 1200px) {
-    font-size: var(--font-size-lg);
-    font-weight: 600;
-    letter-spacing: 0.025em;
-    margin-bottom: 0;
+  @media (width >= 1200px) {
     display: flex;
     flex-flow: row nowrap;
     justify-content: center;
+    margin-bottom: 0;
+    font-size: var(--font-size-lg);
+    font-weight: 600;
+    letter-spacing: 0.025em;
   }
 }

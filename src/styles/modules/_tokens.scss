@@ -6,12 +6,14 @@
 // Peat & linen — semantic design tokens
 :root {
   color-scheme: light;
+
   --color-bg-page: #f6f3ee;
   --color-bg-elevated: #fffcf8;
   --color-bg-inverse: #1e1814;
   --color-text-primary: #2c241c;
   --color-text-muted: #5c534a;
   --color-text-inverse: #f2ebe3;
+
   /* Viber on inverse footer: brand tint mixed toward readable on --color-bg-inverse. */
   --color-social-viber-brand: #7360f2;
   --color-social-viber-on-inverse: color-mix(
@@ -30,27 +32,34 @@
     var(--color-accent-light) 55%,
     var(--color-text-inverse)
   );
+
   /* Copper accent: meet ≥4.5:1 on --color-bg-elevated / cream for body-sized text (axe). */
   --color-accent: #a84d22;
   --color-accent-hover: #8c411c;
   --color-accent-muted: #9a5c3a;
   --color-accent-light: #d4a27a;
   --color-accent-shadow: #5c3d25;
-  --color-border: rgba(44, 36, 28, 0.12);
-  --color-border-strong: rgba(44, 36, 28, 0.22);
+  --color-border: rgb(44 36 28 / 12%);
+  --color-border-strong: rgb(44 36 28 / 22%);
   --color-focus-ring: var(--color-accent);
+
   /* Video showcase — letterbox / stage (dark neutrals, not Peat & linen surfaces) */
   --color-video-viewport-bg: #0d1117;
   --color-video-host-bg: #0a0c10;
+
   /* Mobile nav drawer: top rule on dark overlay */
-  --color-menu-border: #333333;
+  --color-menu-border: #333;
+
   /* Services package carousel — idle dot (Bootstrap indicator) */
   --color-carousel-indicator-idle: #c9c9c9;
+
   /* Floating contact FAB — mauve / rose (mobile + desktop variants) */
   --color-contact-accent: #b47572;
+
   /* PhotoSwipe custom caption bar */
   --color-gallery-caption-bg: #704936;
   --space-section: 4rem;
+
   /* Section block padding (vertical rhythm) — replaces ad-hoc per-breakpoint stacks */
   --section-pad-block: clamp(1.75rem, 3.5vw, 3rem);
   --section-gap-before: clamp(1.5rem, 2.5vw, 2.5rem);
@@ -59,6 +68,7 @@
   --section-subtitle-max-width: 40rem;
   --section-title-color: var(--color-text-primary);
   --section-subtitle-color: var(--color-text-muted);
+
   /* Surfaces: two neutral “bands” + optional warm veil (no extra hue families) */
   --surface-page: var(--color-bg-page);
   --surface-elevated: var(--color-bg-elevated);
@@ -69,6 +79,7 @@
   );
   --section-edge-border: 1px solid var(--color-border-strong);
   --section-inset-highlight: inset 0 1px 0 color-mix(in srgb, var(--color-bg-elevated) 75%, transparent);
+
   /* Carousel / media chrome (siblings: stocking, videos) */
   --chrome-radius: 1.15rem;
   --chrome-radius-lg: 1.35rem;
@@ -77,17 +88,21 @@
   --chrome-shadow-ambient: 0 8px 32px color-mix(in srgb, var(--color-text-primary) 6%, transparent);
   --radius-md: 0.5rem;
   --radius-content-card: 2rem;
-  --shadow-sm: 0 1px 3px rgba(44, 36, 28, 0.08);
+  --shadow-sm: 0 1px 3px rgb(44 36 28 / 8%);
+
   /* Typography — display / heading stack (body stack set in _constants with --font-base) */
   --font-heading: 'Source Serif 4', 'Times New Roman', serif;
+
   /* Header chrome: soft drop shadow + light top hairline for separation from the hero. */
   --header-shadow:
     0 1px 0 color-mix(in srgb, var(--color-text-inverse) 8%, transparent),
     0 10px 28px color-mix(in srgb, var(--color-bg-inverse) 30%, transparent);
+
   /* Footer inverse band — top edge + lift (pairs with inset highlight) */
   --footer-band-shadow: inset 0 1px 0
     color-mix(in srgb, var(--color-text-inverse) 8%, transparent);
   --nav-link-active-color: var(--color-accent-light);
+
   /* Hero — readability over photo */
   --hero-scrim: linear-gradient(
     180deg,
@@ -95,16 +110,20 @@
     transparent 42%,
     color-mix(in srgb, var(--color-bg-inverse) 32%, transparent) 100%
   );
+
   /* Pricing / packages (replaces raw Bootstrap .text-danger) */
   --color-price: var(--color-accent);
+
   /* Map shell */
   --map-shell-radius: 6px;
   --map-shell-border: 1px solid var(--color-border);
   --map-shell-placeholder-bg: color-mix(in srgb, var(--color-text-primary) 6%, var(--color-bg-page));
+
   /* Modals: info banner */
   --info-banner-surface: var(--color-bg-elevated);
   --info-banner-border: 2px solid var(--color-border-strong);
   --info-banner-accent: var(--color-accent-muted);
+
   /* Strip — warm “announcement” wash + lift (see _info-banner.scss) */
   --info-banner-gradient: linear-gradient(
     115deg,
@@ -113,6 +132,7 @@
     color-mix(in srgb, var(--color-accent) 10%, var(--color-bg-elevated)) 100%
   );
   --info-banner-accent-bar: 4px solid var(--color-accent);
+
   /* Ambient lift only — avoid inset top highlight + bottom hairline shadow so
      block-start/block-end borders match visually (see _info-banner.scss). */
   --info-banner-shadow: 0 8px 32px
@@ -120,8 +140,10 @@
   --info-banner-lead-bg: color-mix(in srgb, var(--color-accent) 9%, var(--color-bg-elevated));
   --info-banner-lead-border: 1px solid
     color-mix(in srgb, var(--color-accent) 28%, transparent);
+
   /* Legacy .bg-creamy-white (services card); dark override lives in the media block below. */
-  --creamy-white: rgba(255, 252, 248, 0.78);
+  --creamy-white: rgb(255 252 248 / 78%);
+
   /* Motion + focus tokens (`prefers-reduced-motion` respected in components). */
   --motion-section-duration: 0.35s;
   --motion-stagger: 70ms;
@@ -143,12 +165,15 @@
   --cta-radius: 999px;
   --cta-min-hit: 2.75rem; /* 44px — baseline touch target */
   --cta-gap: clamp(0.5rem, 1vw, 0.75rem);
+
   /* Thin copper rules used as editorial separators in hero / banners */
   --hairline-copper: 1px solid
     color-mix(in srgb, var(--color-accent) 55%, transparent);
   --hairline-copper-strong: 1px solid var(--color-accent-muted);
+
   /* Paper grain overlay — subtle, opt-in via .has-grain or mixin */
   --paper-grain-opacity: 0.04;
+
   /* Hero reinforcements — radial bottom scrim and ornament stagger */
   --hero-scrim-radial: radial-gradient(
     120% 80% at 50% 115%,
@@ -169,6 +194,7 @@
 @media (prefers-color-scheme: dark) {
   :root {
     color-scheme: dark;
+
     --color-bg-page: #18130f;
     --color-bg-elevated: #211a15;
     --color-bg-inverse: #0f0c09;
@@ -180,8 +206,8 @@
     --color-accent-muted: #c1764c;
     --color-accent-light: #f0bf93;
     --color-accent-shadow: #2a1810;
-    --color-border: rgba(242, 235, 227, 0.14);
-    --color-border-strong: rgba(242, 235, 227, 0.24);
+    --color-border: rgb(242 235 227 / 14%);
+    --color-border-strong: rgb(242 235 227 / 24%);
     --color-focus-ring: var(--color-accent-light);
     --hero-scrim: linear-gradient(
       180deg,
@@ -208,11 +234,12 @@
     --info-banner-lead-border: 1px solid
       color-mix(in srgb, var(--color-accent-light) 32%, transparent);
     --paper-grain-opacity: 0.03;
+
     /* Legacy utility — was fixed cream; keep warm cards readable on peat */
     --creamy-white: color-mix(
       in srgb,
       var(--color-bg-elevated) 88%,
-      #ffffff 4%
+      #fff 4%
     );
   }
 }

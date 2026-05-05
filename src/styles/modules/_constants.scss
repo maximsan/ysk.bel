@@ -11,14 +11,17 @@
   --font-size-3xl: 2.5rem;
   --font-weight-semibold: 500;
   --font-weight-bold: 600;
-  --default-black: #000000;
+  --default-black: #000;
+
   /* Legacy — map to semantic (Peat & linen); keep names for existing partials */
   --black: var(--color-text-primary);
-  --white: #ffffff;
-  --white-hover: rgba(255, 255, 255, 0.75);
+  --white: #fff;
+  --white-hover: rgb(255 255 255 / 75%);
   --light-black: var(--color-bg-inverse);
+
   /* Surfaces / text “brown” labels — must track `prefers-color-scheme` via tokens (see `_tokens.scss`). */
   --lighter-black: var(--color-bg-inverse);
+
   /* --creamy-white: set in _tokens only so dark `prefers-color-scheme` can override it. */
   --dirty-orange: var(--color-accent-muted);
   --dirty-orange-hover: var(--color-accent-hover);
@@ -31,6 +34,7 @@
   --map--mobile-size: 400px;
   --font-base: 'Rubik', sans-serif;
   --font-body: var(--font-base);
+
   /* Type scale — use for new/changed rules; existing sizes can migrate gradually */
   --text-h1: var(--font-size-3xl);
   --text-h2: var(--font-size-2xl);
@@ -56,7 +60,6 @@ $blue-white: #ebe6df;
 $orange: #a84d22;
 $red: #dc3545;
 $whatsapp: #25d366;
-
 $images-path: '../../assets/images' !default;
 
 .bg-light-black {

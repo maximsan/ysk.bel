@@ -1,7 +1,7 @@
 .header {
   /*
    * Scroll-driven animation (where supported): bar starts off-screen, then eases into a compact pill
-   * after roughly one viewport height + `--_animationStartsAfter` (see `stickyNavigation` keyframes).
+   * after roughly one viewport height + `--_animationStartsAfter` (see `sticky-navigation` keyframes).
    */
   --_animationStartsAfter: 50vh;
   --_animationDistance: 500px;
@@ -10,21 +10,20 @@
   --_textColorStart: var(--white);
   --_textColorEnd: var(--white);
 
+  position: sticky;
+  top: 0;
+  z-index: 999;
   box-sizing: border-box;
   width: var(--_headerWidth, auto);
   max-width: 100%;
-  margin-inline: auto;
+
   /* Safe area: keep bar clear of notched phone side edges (see docs/glossary.md). */
   padding-inline: max(0px, env(safe-area-inset-left))
     max(0px, env(safe-area-inset-right));
-
+  margin-inline: auto;
   color: var(--_textColorStart);
   background-color: var(--_backgroundColorStart);
-  position: sticky;
-  top: 0rem;
-  z-index: 999;
-  border-radius: 0px;
-
+  border-radius: 0;
   box-shadow: var(--header-shadow);
 
   /* Browsers without scroll-driven animations: full-width sticky bar (no hide / pill). */
@@ -35,8 +34,7 @@
 
   @supports (animation-timeline: view()) {
     top: -5.5rem;
-
-    animation: stickyNavigation linear forwards;
+    animation: sticky-navigation linear forwards;
     animation-timeline: view();
     animation-range-start: calc(100vh + var(--_animationStartsAfter));
     animation-range-end: calc(
@@ -46,16 +44,17 @@
 }
 
 /*
- * `stickyNavigation`: one animation range moves the bar from hidden to sticky pill.
+ * `sticky-navigation`: one animation range moves the bar from hidden to sticky pill.
  * `width: fit-content` is held for both keyframe endpoints so only position, color, and radius change.
  */
-@keyframes stickyNavigation {
-  0%,
-  100% {
+@keyframes sticky-navigation {
+  0% {
     --_headerWidth: fit-content;
   }
 
   100% {
+    --_headerWidth: fit-content;
+
     top: 1rem;
     color: var(--_textColorEnd);
     background-color: var(--_backgroundColorEnd);
@@ -72,28 +71,28 @@
   display: none;
 }
 
-@media only screen and (max-width: 767.98px) {
+@media only screen and (width <= 767.98px) {
   .menu-scrim {
-    display: block;
     position: fixed;
     inset: 0;
     z-index: 1090;
-    border: none;
-    margin: 0;
-    padding: 0;
-    background-color: color-mix(in srgb, var(--color-bg-inverse) 45%, black);
-    opacity: 0;
+    display: block;
     visibility: hidden;
+    padding: 0;
+    margin: 0;
     pointer-events: none;
+    background-color: color-mix(in srgb, var(--color-bg-inverse) 45%, black);
+    border: none;
+    opacity: 0;
     transition:
       opacity 0.25s var(--motion-ease-out),
       visibility 0.25s linear;
   }
 
   .menu-scrim--open {
-    opacity: 1;
     visibility: visible;
     pointer-events: auto;
+    opacity: 1;
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -106,18 +105,21 @@
 .navbar {
   position: relative;
   z-index: 1100;
-  /* Inherit pill vs square radius from animated `.header`. */
-  border-radius: inherit;
   box-sizing: border-box;
   width: auto;
   max-width: 100%;
+  padding: 1.5rem 1rem;
+
+  /* Safe area: clear status bar / notch on phones. */
+  padding-top: max(1.5rem, env(safe-area-inset-top));
   overflow-x: visible;
+
+  /* Inherit pill vs square radius from animated `.header`. */
+  border-radius: inherit;
+
   /* Light top inset on the dark navbar bar (subtle separation from the viewport edge). */
   box-shadow: inset 0 1px 0
     color-mix(in srgb, var(--color-text-inverse) 10%, transparent);
-  padding: 1.5rem 1rem;
-  /* Safe area: clear status bar / notch on phones. */
-  padding-top: max(1.5rem, env(safe-area-inset-top));
 
   .navbar-logo {
     display: flex;
@@ -130,11 +132,11 @@
     .nav-item {
       position: relative;
 
-      @include linkHoverAnimation;
+      @include link-hover-animation;
 
       .nav-link {
-        font-size: 1.25rem;
         margin-right: 1.25rem;
+        font-size: 1.25rem;
 
         &:hover,
         &:focus {
@@ -167,13 +169,13 @@
   .navbar-toggler {
     position: relative;
     z-index: 1101;
-    border: none;
-    padding: 0.25rem;
-    min-width: 2.75rem;
-    min-height: 2.75rem;
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    min-width: 2.75rem;
+    min-height: 2.75rem;
+    padding: 0.25rem;
+    border: none;
 
     @include outline;
 
@@ -183,15 +185,15 @@
     }
   }
 
-  @media only screen and (min-width: 320px) and (max-width: 767.98px) {
+  @media only screen and (width >= 320px) and (width <= 767.98px) {
     /*
      * `.menu` is position:fixed (off-canvas), so only toggler + logo participate in flex.
      * `space-between` was pinning the logo to the right — center the wordmark instead.
      */
     position: relative;
-    justify-content: center;
-    align-items: center;
     gap: 0;
+    align-items: center;
+    justify-content: center;
     padding-inline: max(1rem, env(safe-area-inset-left))
       max(1rem, env(safe-area-inset-right));
     padding-top: max(0.75rem, env(safe-area-inset-top));
@@ -199,24 +201,26 @@
 
     .navbar-toggler {
       position: absolute;
-      left: max(0.75rem, env(safe-area-inset-left));
       top: 50%;
-      transform: translateY(-50%);
+      left: max(0.75rem, env(safe-area-inset-left));
+
       /* Hamburger sits above the centered logo row so it receives taps (logo row uses `pointer-events: none`). */
       z-index: 1110;
+      transform: translateY(-50%);
     }
 
     .navbar-logo {
       z-index: 0;
+      box-sizing: border-box;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       width: 100%;
       max-width: 100%;
-      margin: 0;
-      display: flex;
-      justify-content: center;
-      padding-inline: clamp(2.75rem, 18vw, 3.5rem);
-      box-sizing: border-box;
       min-height: 2.75rem;
-      align-items: center;
+      padding-inline: clamp(2.75rem, 18vw, 3.5rem);
+      margin: 0;
+
       /*
        * Logo row spans full width for centering; disable hit-testing on the wrapper so the area
        * beside the wordmark still passes clicks to the toggler. `.logo` re-enables pointer events.
@@ -233,7 +237,7 @@
     }
   }
 
-  @media only screen and (min-width: 768px) {
+  @media only screen and (width >= 768px) {
     padding: 1rem 0.75rem;
     padding-top: max(1rem, env(safe-area-inset-top));
 
@@ -254,34 +258,34 @@
      * Between tablet and 1200px: add space between wordmark and links; allow the logo to shrink in flex
      * so the pill-shaped bar does not clip text; extra padding keeps the last nav link off the curved ends.
      */
-  @media only screen and (min-width: 768px) and (max-width: 1199.98px) {
+  @media only screen and (width >= 768px) and (width <= 1199.98px) {
     gap: clamp(0.6rem, 1.5vw + 0.25rem, 1.25rem);
     align-items: center;
     padding: 0.85rem 1.15rem;
     padding-top: max(0.85rem, env(safe-area-inset-top));
 
     .navbar-logo {
-      min-width: 0;
       flex: 0 1 auto;
+      min-width: 0;
     }
   }
 
-  @media (min-width: 992px) {
+  @media (width >= 992px) {
     padding: 1.5rem 1rem;
     padding-top: max(1.5rem, env(safe-area-inset-top));
 
     .navbar-logo {
-      margin-left: 1rem;
       margin-inline-end: auto;
+      margin-left: 1rem;
     }
   }
 
-  @media (min-width: 992px) and (max-width: 1199.98px) {
+  @media (width >= 992px) and (width <= 1199.98px) {
     padding: 1rem 1.25rem;
     padding-top: max(1rem, env(safe-area-inset-top));
   }
 
-  @media (min-width: 1200px) {
+  @media (width >= 1200px) {
     .navbar-logo {
       margin-left: 2rem;
     }

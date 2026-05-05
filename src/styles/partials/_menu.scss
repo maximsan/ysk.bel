@@ -1,18 +1,17 @@
 .menu {
   /* Narrow screens: slide-in drawer; safe-area bottom; motion + reduced-motion (see docs/glossary.md). */
-  @media only screen and (min-width: 320px) and (max-width: 767.98px) {
-    background-color: var(--color-bg-inverse);
-
-    @include menu;
-
+  @media only screen and (width >= 320px) and (width <= 767.98px) {
+    top: 5rem;
     z-index: 1095;
     min-height: calc(100dvh - 5rem);
     padding: 10px 30px;
     padding-bottom: max(30px, env(safe-area-inset-bottom));
-    top: 5rem;
+    background-color: var(--color-bg-inverse);
     transition:
       left 0.28s var(--motion-ease-out),
       visibility 0.28s linear;
+
+    @include menu;
 
     @media (prefers-reduced-motion: reduce) {
       transition: none;
@@ -39,7 +38,7 @@
           max-width: max-content;
 
           &::before {
-            bottom: 0px;
+            bottom: 0;
           }
 
           .house-order {
@@ -53,11 +52,11 @@
 
           /* Touch targets: comfortable row height for finger taps. */
           .nav-link {
-            margin: 0;
-            min-height: 2.75rem;
-            padding: 0.5rem 0;
             display: inline-flex;
             align-items: center;
+            min-height: 2.75rem;
+            padding: 0.5rem 0;
+            margin: 0;
           }
         }
       }
@@ -71,11 +70,11 @@
           margin-bottom: 1rem;
 
           .fa-icon {
+            display: inline-block;
             width: 32px;
             height: 32px;
-            display: inline-block;
-            line-height: 32px;
             font-size: 15px;
+            line-height: 32px;
             text-align: center;
 
             &:nth-child(2) {
@@ -87,7 +86,7 @@
     }
   }
 
-  @media only screen and (min-width: 768px) {
+  @media only screen and (width >= 768px) {
     /* No flex-grow: `flex: 1` made max-content / fit-content as wide as the viewport (no compact pill). */
     flex: 0 1 auto;
     min-width: 0;
@@ -97,12 +96,12 @@
     .navbar-collapse {
       .navbar-nav {
         flex: 0 1 auto;
-        justify-content: space-evenly;
-        align-items: center;
         flex-wrap: wrap;
+        gap: 0.35rem 0.75rem;
+        align-items: center;
+        justify-content: space-evenly;
         width: auto;
         max-width: 100%;
-        gap: 0.35rem 0.75rem;
 
         .nav-item {
           &.desktop {
@@ -136,8 +135,8 @@
               align-self: center;
 
               .house-order {
-                margin-right: 0.5rem;
                 align-self: center;
+                margin-right: 0.5rem;
               }
             }
 
@@ -154,7 +153,7 @@
     }
   }
 
-  @media (min-width: 768px) and (max-width: 1199.98px) {
+  @media (width >= 768px) and (width <= 1199.98px) {
     min-width: 0;
 
     .navbar-collapse {
@@ -170,8 +169,8 @@
           flex: 0 0 auto;
 
           .nav-link {
-            font-size: clamp(0.78rem, 0.72rem + 0.22vw, 0.9rem);
             padding-inline: clamp(0.12rem, 0.08rem + 0.2vw, 0.28rem);
+            font-size: clamp(0.78rem, 0.72rem + 0.22vw, 0.9rem);
           }
 
           &:nth-child(1) {
@@ -187,12 +186,12 @@
     }
   }
 
-  @media (min-width: 1200px) {
+  @media (width >= 1200px) {
     .navbar-collapse {
       .navbar-nav {
-        margin-left: clamp(1rem, 3vw, 4rem);
-        max-width: 100%;
         gap: 0.35rem 0.85rem;
+        max-width: 100%;
+        margin-left: clamp(1rem, 3vw, 4rem);
 
         .nav-item {
           margin-right: 0;
@@ -206,10 +205,10 @@
           }
 
           .nav-link {
-            font-size: var(--font-size-md);
-            margin-right: 0;
-            padding-left: 0.5rem;
             padding-right: 0.5rem;
+            padding-left: 0.5rem;
+            margin-right: 0;
+            font-size: var(--font-size-md);
           }
         }
       }

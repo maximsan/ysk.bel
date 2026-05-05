@@ -19,48 +19,48 @@
   z-index: 0;
   overflow: hidden;
   pointer-events: none;
-  border-radius: inherit;
   background: linear-gradient(
     110deg,
-    rgba(112, 73, 54, 0.12) 0%,
-    rgba(230, 218, 205, 0.45) 42%,
-    rgba(112, 73, 54, 0.1) 84%
+    rgb(112 73 54 / 12%) 0%,
+    rgb(230 218 205 / 45%) 42%,
+    rgb(112 73 54 / 10%) 84%
   );
   background-size: 200% 100%;
+  border-radius: inherit;
   animation: media-skeleton-shimmer 1.35s ease-in-out infinite;
 
   @media (prefers-reduced-motion: reduce) {
+    background: rgb(112 73 54 / 8%);
     animation: none;
-    background: rgba(112, 73, 54, 0.08);
   }
 }
 
 .map-shell__skeleton.media-skeleton {
   background: linear-gradient(
     110deg,
-    rgba(180, 168, 152, 0.4) 0%,
-    rgba(236, 230, 220, 0.55) 45%,
-    rgba(168, 155, 138, 0.38) 100%
+    rgb(180 168 152 / 40%) 0%,
+    rgb(236 230 220 / 55%) 45%,
+    rgb(168 155 138 / 38%) 100%
   );
   background-size: 200% 100%;
   animation: media-skeleton-shimmer 1.35s ease-in-out infinite;
 
   @media (prefers-reduced-motion: reduce) {
+    background: rgb(210 200 188 / 40%);
     animation: none;
-    background: rgba(210, 200, 188, 0.4);
   }
 }
 
 .videos-showcase__skeleton.media-skeleton {
   background: linear-gradient(
     110deg,
-    rgba(36, 30, 26, 0.4) 0%,
-    rgba(90, 72, 58, 0.28) 45%,
-    rgba(28, 24, 20, 0.36) 100%
+    rgb(36 30 26 / 40%) 0%,
+    rgb(90 72 58 / 28%) 45%,
+    rgb(28 24 20 / 36%) 100%
   );
   background-size: 200% 100%;
 
   @media (prefers-reduced-motion: reduce) {
-    background: rgba(28, 24, 20, 0.55);
+    background: rgb(28 24 20 / 55%);
   }
 }

@@ -1,19 +1,19 @@
 @mixin contact {
+  position: absolute;
+  top: 50px;
+  right: 100px;
+  z-index: 999;
   display: block;
-  background-color: inherit;
-  color: var(--white);
-  text-decoration: none;
-  font-size: 1.2rem;
-  border: 2px solid var(--white);
-  border-radius: 10px;
   padding: 8px 10px;
   margin: 10px;
-  position: absolute;
-  right: 100px;
-  top: 50px;
+  font-size: 1.2rem;
+  color: var(--white);
+  text-decoration: none;
   cursor: pointer;
-  z-index: 999;
-  box-shadow: 6px 7px 40px -4px rgba(255, 255, 255, 0.4);
+  background-color: inherit;
+  border: 2px solid var(--white);
+  border-radius: 10px;
+  box-shadow: 6px 7px 40px -4px rgb(255 255 255 / 40%);
 
   &:hover {
     color: var(--dirty-orange);
@@ -25,19 +25,20 @@
   }
 }
 
-@media only screen and (min-width: 320px) and (max-width: 767.98px) {
+@media only screen and (width >= 320px) and (width <= 767.98px) {
   .contact-btn {
     @include contact;
+
     position: relative;
-    right: 0.625rem;
     top: 1rem;
+    right: 0.625rem;
     color: var(--color-contact-accent);
     border: 4px solid var(--color-contact-accent);
 
     & > .message-icon {
       width: 26px;
-      color: var(--color-contact-accent);
       margin-right: 0.75rem;
+      color: var(--color-contact-accent);
     }
 
     & > .message-text {
@@ -46,34 +47,34 @@
   }
 }
 
-@media only screen and (min-width: 480px) {
+@media only screen and (width >= 480px) {
   .contact-btn {
     max-width: 320px;
   }
 }
 
-@media only screen and (min-width: 768px) {
+@media only screen and (width >= 768px) {
   .contact-btn {
     @include contact;
 
+    position: fixed;
+    top: 120px;
+    right: 20px;
     color: var(--color-contact-accent);
-    border: 4px solid var(--color-contact-accent);
     background: color-mix(
       in srgb,
       var(--color-contact-accent) 10%,
       transparent
     );
-    position: fixed;
-    right: 20px;
-    top: 120px;
+    border: 4px solid var(--color-contact-accent);
 
     & > .message-text {
       display: none;
     }
 
     & > .message-icon {
-      margin: 0;
       width: 26px;
+      margin: 0;
       color: var(--color-contact-accent);
     }
 

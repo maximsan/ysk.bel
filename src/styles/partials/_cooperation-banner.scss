@@ -4,11 +4,11 @@
    * Uses `@container` for eyebrow density; narrow viewports stack CTAs full-width (matches cooperation data in `cooperation.js`).
    */
   position: relative;
-  isolation: isolate;
-  overflow: clip;
-  container-type: inline-size;
   padding: var(--section-pad-block) clamp(1rem, 4vw, 2rem);
-
+  container-type: inline-size;
+  overflow: clip;
+  color: var(--color-text-inverse);
+  text-align: center;
   background:
     radial-gradient(
       80% 130% at 50% 0%,
@@ -16,13 +16,13 @@
       transparent 62%
     ),
     var(--color-bg-inverse);
-  color: var(--color-text-inverse);
   border-block: var(--hairline-copper);
   box-shadow: var(--section-inset-highlight);
-  text-align: center;
+  isolation: isolate;
 
   &::after {
     @include paper-grain(0.035);
+
     z-index: 0;
   }
 
@@ -30,8 +30,8 @@
     position: relative;
     z-index: 1;
     display: grid;
-    justify-items: center;
     gap: clamp(0.75rem, 1.8vw, 1.2rem);
+    justify-items: center;
     width: min(100%, 58rem);
     margin-inline: auto;
   }
@@ -54,19 +54,19 @@
   &__eyebrow {
     display: inline-grid;
     grid-template-columns: minmax(2rem, 4rem) auto minmax(2rem, 4rem);
-    align-items: center;
     gap: 0.75rem;
+    align-items: center;
     margin: 0;
-    color: color-mix(in srgb, var(--color-accent-light) 78%, var(--color-text-inverse));
     font-size: 0.78rem;
     font-weight: var(--font-weight-bold);
-    letter-spacing: 0.22em;
+    color: color-mix(in srgb, var(--color-accent-light) 78%, var(--color-text-inverse));
     text-transform: uppercase;
+    letter-spacing: 0.22em;
 
     &::before,
     &::after {
-      content: '';
       block-size: 1px;
+      content: '';
       background: linear-gradient(
         to right,
         transparent,
@@ -77,25 +77,25 @@
   }
 
   &__title {
-    margin: 0;
     max-inline-size: 48rem;
+    margin: 0;
     font-family: var(--font-heading);
     font-size: clamp(2rem, 1.25rem + 3.2vw, 4.25rem);
     font-weight: 600;
     font-optical-sizing: auto;
     line-height: 1.06;
-    letter-spacing: -0.01em;
     color: var(--color-text-inverse);
+    letter-spacing: -0.01em;
     text-wrap: balance;
   }
 
   &__lede {
     max-inline-size: 42rem;
     margin: 0;
-    color: color-mix(in srgb, var(--color-text-inverse) 78%, transparent);
     font-size: clamp(1rem, 0.92rem + 0.45vw, 1.2rem);
     font-weight: var(--font-weight-semibold);
     line-height: 1.55;
+    color: color-mix(in srgb, var(--color-text-inverse) 78%, transparent);
     text-wrap: pretty;
     white-space: pre-line;
   }
@@ -165,18 +165,17 @@
   }
 }
 
-@media (min-width: 768px) {
+@media (width >= 768px) {
   .cooperation-banner {
     &__inner {
       gap: clamp(0.85rem, 1.6vw, 1.35rem);
     }
 
     &__cta.cta-row {
-      flex-direction: row;
-      flex-wrap: wrap;
+      flex-flow: row wrap;
       align-items: center;
-      max-width: none;
       width: auto;
+      max-width: none;
     }
 
     &__cta {
@@ -190,7 +189,7 @@
   }
 }
 
-@media (min-width: 1200px) {
+@media (width >= 1200px) {
   .cooperation-banner {
     padding-block: clamp(3rem, 6vw, 5rem);
   }
@@ -210,20 +209,20 @@
  * Full-width CTA buttons on small screens — viewport media query (not `@container`) so it always runs
  * even when the section is wide but the device is a phone in landscape.
  */
-@media (max-width: 767.98px) {
+@media (width <= 767.98px) {
   .cooperation-banner__cta.cta-row {
     flex-direction: column;
+    gap: clamp(1rem, 3.2vw, 1.5rem);
     align-items: stretch;
     width: 100%;
     max-width: min(100%, 22rem);
     margin-inline: auto;
-    gap: clamp(1rem, 3.2vw, 1.5rem);
   }
 
   .cooperation-banner__cta .cta {
-    width: 100%;
-    max-width: none;
     box-sizing: border-box;
     justify-content: center;
+    width: 100%;
+    max-width: none;
   }
 }

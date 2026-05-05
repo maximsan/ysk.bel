@@ -53,6 +53,9 @@ jobs:
       - name: Setup toolchain (Node, Yarn, Playwright Chromium)
         uses: ./.github/actions/setup-yarn-playwright
 
+      - name: Stylelint
+        run: yarn lint:styles
+
       - name: Build
         run: yarn build
 

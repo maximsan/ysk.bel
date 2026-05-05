@@ -7,16 +7,18 @@
    *   • `prefers-color-scheme: dark`: cool gradient scrim layered over the photo so blue water/stones marry the peat UI palette.
    */
   $contacts-photo: url('#{$images-path}/stones_1920x1080.webp');
+
   position: relative;
-  isolation: isolate;
-  --contacts-surface-radius: var(--chrome-radius);
-  --map-shell-radius: var(--contacts-surface-radius);
   background-color: var(--color-bg-page);
   background-image: $contacts-photo;
   background-repeat: no-repeat;
+  background-attachment: fixed;
   background-position: center center;
   background-size: cover;
-  background-attachment: fixed;
+  isolation: isolate;
+
+  --contacts-surface-radius: var(--chrome-radius);
+  --map-shell-radius: var(--contacts-surface-radius);
   --icon-size: 1.125em;
   --icon-size-md: 1.25em;
   --bg-color: var(--color-bg-elevated);
@@ -31,20 +33,20 @@
         color-mix(in srgb, var(--color-bg-page) 88%, #101820 12%) 100%
       ),
       $contacts-photo;
-    background-size: cover, cover;
     background-repeat: no-repeat, no-repeat;
     background-attachment: fixed, fixed;
+    background-size: cover, cover;
   }
 
   .our-contacts {
     position: relative;
-    border-radius: var(--contacts-surface-radius);
-    overflow: hidden;
-    border: 1px solid var(--color-border);
-    box-shadow: var(--chrome-shadow-ambient);
-    background-color: var(--bg-color);
-    color: var(--text-color);
     min-height: 400px;
+    overflow: hidden;
+    color: var(--text-color);
+    background-color: var(--bg-color);
+    border: 1px solid var(--color-border);
+    border-radius: var(--contacts-surface-radius);
+    box-shadow: var(--chrome-shadow-ambient);
 
     .address {
       &-desc-item {
@@ -53,8 +55,8 @@
     }
 
     .contact-us__mail > .mail-icon {
-      height: var(--icon-size-md);
       width: var(--icon-size-md);
+      height: var(--icon-size-md);
     }
 
     .contact-us__phones .phone-number {
@@ -79,8 +81,8 @@
     .contact-us__mts,
     .contact-us__a1 {
       display: flex;
-      align-items: center;
       gap: 0.5em;
+      align-items: center;
     }
 
     .contact-us,
@@ -95,25 +97,22 @@
     }
   }
 
-  @media only screen and (min-width: 320px) and (max-width: 767.98px) {
+  @media only screen and (width >= 320px) and (width <= 767.98px) {
     margin: 0;
 
     .our-contacts {
-      background: var(--creamy-white);
-      color: var(--black);
-
-      @include flex-column;
-
-      justify-content: center;
       flex: 1 1 auto;
       gap: 0.75rem;
-
-      margin: 1.5rem auto;
-      padding: 1rem;
-
-      max-height: 600px;
-      max-width: 600px;
+      justify-content: center;
       width: 100%;
+      max-width: 600px;
+      max-height: 600px;
+      padding: 1rem;
+      margin: 1.5rem auto;
+      color: var(--black);
+      background: var(--creamy-white);
+
+      @include flex-column;
 
       .address {
         @include flex-column;
@@ -129,6 +128,7 @@
 
         &-desc {
           @include flex-column;
+
           align-items: center;
           font-size: var(--font-size-base);
         }
@@ -149,35 +149,34 @@
     }
   }
 
-  @media only screen and (min-width: 480px) {
+  @media only screen and (width >= 480px) {
     padding: 1rem 0 2rem;
   }
 
-  @media only screen and (min-width: 768px) {
+  @media only screen and (width >= 768px) {
     padding: 6rem 0;
 
     .col-12 {
       @include flex-column;
+
       align-items: center;
 
       .our-contacts {
         @include flex-column;
 
-        justify-content: center;
         gap: 0.75rem;
-
-        margin: 2rem 0;
-        padding: 2rem;
+        justify-content: center;
+        width: 100%;
+        max-width: 600px;
         height: 400px;
         max-height: 600px;
-        max-width: 600px;
-        width: 100%;
+        padding: 2rem;
+        margin: 2rem 0;
 
         .address {
           @include flex-column;
 
           align-items: center;
-
           width: 100%;
 
           &-desc {
@@ -187,8 +186,8 @@
               font-size: var(--font-size-md);
 
               & .phone-number {
-                font-weight: 500;
                 font-size: var(--font-size-base);
+                font-weight: 500;
               }
             }
           }
@@ -197,15 +196,15 @@
     }
   }
 
-  @media (min-width: 992px) {
+  @media (width >= 992px) {
     .col-12 {
       flex-flow: column nowrap;
       justify-content: unset;
 
       .our-contacts {
-        margin: 0;
         flex: 1 1 auto;
         align-items: center;
+        margin: 0;
       }
     }
   }
@@ -219,13 +218,14 @@
   .section-container.contacts {
     .our-contacts {
       text-shadow: 0 1px 2px color-mix(in srgb, #000 45%, transparent);
+
       /*
        * Solid mix first: `backdrop-filter` is optional; without it we still avoid a flat “chocolate” panel.
        */
       background: color-mix(
         in srgb,
         var(--color-bg-elevated) 86%,
-        rgba(0, 0, 0, 0.18)
+        rgb(0 0 0 / 18%)
       );
       border: 1px solid color-mix(in srgb, var(--color-accent) 32%, var(--color-border));
       box-shadow:
@@ -236,10 +236,9 @@
         background: color-mix(
           in srgb,
           var(--color-bg-elevated) 45%,
-          rgba(0, 0, 0, 0.12)
+          rgb(0 0 0 / 12%)
         );
         backdrop-filter: blur(14px) saturate(1.12);
-        -webkit-backdrop-filter: blur(14px) saturate(1.12);
       }
     }
 

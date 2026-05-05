@@ -4,35 +4,34 @@
 }
 
 @mixin menu {
-  display: block;
-  border-top: 1px solid var(--color-menu-border);
   position: fixed;
-  bottom: 0;
   top: 0;
-  width: 100%;
-  overflow-x: hidden;
-  overflow-y: auto;
-  z-index: 999;
-  transition: left 0.2s linear;
+  bottom: 0;
   left: -100%;
+  z-index: 999;
+  display: block;
+  width: 100%;
   padding: 30px;
+  overflow: hidden auto;
+  border-top: 1px solid var(--color-menu-border);
+  transition: left 0.2s linear;
 
   &.open {
     left: 0;
   }
 }
 
-@mixin linkHoverAnimation {
+@mixin link-hover-animation {
   &::before {
-    content: '';
     position: absolute;
-    width: 100%;
-    height: 2px;
     bottom: -4px;
     left: 0;
-    background-color: var(--color-accent-muted);
-    box-shadow: 0px 0px 0.3rem 0.1rem var(--orange-shadow);
     visibility: hidden;
+    width: 100%;
+    height: 2px;
+    content: '';
+    background-color: var(--color-accent-muted);
+    box-shadow: 0 0 0.3rem 0.1rem var(--orange-shadow);
     transform: scaleX(0);
     transition: transform var(--motion-link-hover-duration) var(--motion-ease-out);
   }
@@ -70,15 +69,15 @@
 }
 
 @mixin overlay {
-  display: none;
-  opacity: 0.5;
-  background-color: black;
   position: fixed;
-  width: 100%;
-  height: 100%;
   top: 0;
   left: 0;
   z-index: 999;
+  display: none;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  opacity: 0.5;
 }
 
 /*
@@ -96,7 +95,6 @@
   display: block;
   width: $width;
   block-size: 1px;
-  border: 0;
   margin: 0;
   background: linear-gradient(
     to right,
@@ -111,6 +109,7 @@
     color-mix(in srgb, #{$color} 60%, transparent) 82%,
     transparent 100%
   );
+  border: 0;
 }
 
 /*
@@ -120,13 +119,13 @@
  */
 @mixin paper-grain($opacity: var(--paper-grain-opacity)) {
   @media (prefers-reduced-transparency: no-preference) {
-    content: '';
     position: absolute;
     inset: 0;
     pointer-events: none;
-    opacity: #{$opacity};
-    mix-blend-mode: multiply;
+    content: '';
     background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.55 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
     background-size: 220px 220px;
+    mix-blend-mode: multiply;
+    opacity: #{$opacity};
   }
 }

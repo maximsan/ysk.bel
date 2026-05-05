@@ -23,11 +23,12 @@
   box-shadow: var(--section-inset-highlight);
 
   .content {
-    border-radius: var(--radius-content-card);
     border: 1px solid var(--color-border);
+    border-radius: var(--radius-content-card);
 
     &.bg-creamy-white {
       color: var(--color-text-primary);
+
       /*
        * Main content card on the textured band — blend `--color-bg-elevated` toward the page color
        * so the card feels part of the section, not a separate heavy slab.
@@ -57,10 +58,10 @@
     }
 
     &-cell-text {
-      line-height: 26px;
+      align-self: center;
       padding: 10px 20px;
       font-size: 1.25rem;
-      align-self: center;
+      line-height: 26px;
       color: var(--lighter-brown);
 
       &-rubric {
@@ -70,11 +71,11 @@
       .fish-list {
         display: flex;
         flex-direction: column;
-        align-items: center;
-        text-align: initial;
-        margin-left: 0.5em !important;
-        list-style: none;
         gap: 0.5rem;
+        align-items: center;
+        margin-left: 0.5em !important;
+        text-align: initial;
+        list-style: none;
       }
     }
   }
@@ -90,7 +91,7 @@
   }
 }
 
-@media only screen and (min-width: 320px) and (max-width: 767.98px) {
+@media only screen and (width >= 320px) and (width <= 767.98px) {
   .section-container.services {
     /*
      * Vertical padding comes from `.section-chapter` + `--section-pad-block` on the section wrapper;
@@ -106,11 +107,11 @@
 
     .container {
       .content {
-        padding: 20px 20px 0 20px;
+        padding: 20px 20px 0;
 
         &-header {
-          text-align: center;
           margin-bottom: 1rem;
+          text-align: center;
         }
 
         &-text {
@@ -124,9 +125,9 @@
 
           .package {
             display: flex;
+            flex: 1 1 auto;
             flex-flow: column wrap;
             align-items: center;
-            flex: 1 1 auto;
             padding: 0;
             margin: 0;
 
@@ -141,14 +142,14 @@
 
             &-list {
               padding: 0;
-              list-style: none;
               margin-bottom: 0;
+              list-style: none;
 
               &-item {
+                margin-bottom: 0.2rem;
                 font-size: 1rem;
                 line-height: 28px;
                 letter-spacing: -0.6px;
-                margin-bottom: 0.2rem;
 
                 &-disc {
                   position: relative;
@@ -171,7 +172,7 @@
 
         &-cell {
           padding: 0;
-          margin: 0 0 1.5rem 0;
+          margin: 0 0 1.5rem;
 
           &-header {
             margin-bottom: 1rem;
@@ -186,8 +187,8 @@
 
           &-element {
             display: flex;
-            justify-content: center;
             flex: 1 1 auto;
+            justify-content: center;
             margin-top: 1.5rem;
 
             &:nth-child(2) {
@@ -197,21 +198,22 @@
 
           &-text {
             @include flex-column;
-            align-items: center;
+
             flex: 1 1 280px;
+            align-items: center;
             max-width: 280px;
             padding: 0;
 
             h4 {
+              margin-bottom: 0;
               font-size: 1rem;
               font-weight: 500;
-              margin-bottom: 0;
               text-align: center;
             }
 
             .fish-list {
-              margin: 0 auto;
               padding: 0;
+              margin: 0 auto;
               font-size: 1.15rem;
               text-align: center;
 
@@ -222,12 +224,12 @@
           }
 
           &-rubric {
-            text-align: center;
-            font-size: 1.15rem;
-            word-wrap: break-word;
-            margin-bottom: 0.25rem;
             max-width: 240px;
+            margin-bottom: 0.25rem;
+            font-size: 1.15rem;
             line-height: 20px;
+            text-align: center;
+            overflow-wrap: break-word;
           }
         }
       }
@@ -235,7 +237,7 @@
   }
 }
 
-@media only screen and (min-width: 480px) {
+@media only screen and (width >= 480px) {
   .section-container.services {
     h1 {
       font-size: 2rem;
@@ -251,13 +253,14 @@
 
         .col-12 {
           @include flex-column;
+
           align-items: center;
         }
 
         &-text {
-          font-size: 1.15rem;
-          margin-bottom: 0;
           max-width: 440px;
+          margin-bottom: 0;
+          font-size: 1.15rem;
         }
 
         .packages {
@@ -290,16 +293,16 @@
                 }
 
                 padding: 0 0 0 12px;
-                list-style: none;
                 margin-bottom: 0;
+                list-style: none;
 
                 &-item {
                   position: relative;
-                  line-height: 36px;
-                  letter-spacing: -0.6px;
                   width: 400px;
                   margin-bottom: 1rem;
                   font-size: 1.25rem;
+                  line-height: 36px;
+                  letter-spacing: -0.6px;
 
                   .second-row {
                     margin-left: 2rem;
@@ -330,9 +333,9 @@
         }
 
         &-cell {
-          margin: 0 0 1.5rem 0;
-          padding: 0;
           justify-content: center;
+          padding: 0;
+          margin: 0 0 1.5rem;
 
           &-header {
             margin-bottom: 2rem;
@@ -361,19 +364,20 @@
             }
 
             .fish-list {
+              margin: 1rem 0 0;
               font-size: 1.25rem;
-              margin: 1rem 0 0 0;
               text-align: center;
             }
           }
 
           &-rubric {
-            font-size: 1.25rem;
             max-width: 100%;
+            font-size: 1.25rem;
           }
 
           &-subrubric {
             @include flex-column;
+
             align-items: center;
             margin: 1rem 0;
           }
@@ -387,7 +391,7 @@
   }
 }
 
-@media only screen and (min-width: 768px) {
+@media only screen and (width >= 768px) {
   .section-container.services {
     h1 {
       font-size: 2rem;
@@ -412,9 +416,9 @@
         }
 
         &-cell {
+          padding-right: 0;
           margin-bottom: 2rem;
           margin-left: 0;
-          padding-right: 0;
 
           &.nature .img,
           &.lake .img {
@@ -439,13 +443,14 @@
 
           &-text {
             @include flex-column;
+
             align-items: center;
-            padding: 0;
             max-width: 260px;
+            padding: 0;
 
             .fish-list {
-              margin: 0;
               padding: 0;
+              margin: 0;
 
               li {
                 margin: 0.25rem 0;
@@ -455,8 +460,8 @@
           }
 
           &-rubric {
-            text-align: center;
             font-size: 1.15rem;
+            text-align: center;
           }
 
           &-subrubric {
@@ -486,21 +491,21 @@
               }
 
               &-list {
-                list-style: none;
                 padding: 0 0 0 1.5rem;
+                list-style: none;
 
                 &-item {
                   position: relative;
-                  line-height: 36px;
-                  letter-spacing: -0.6px;
                   max-width: 320px;
                   margin-bottom: 0.25rem;
                   font-size: 1rem;
+                  line-height: 36px;
+                  letter-spacing: -0.6px;
 
                   &-disc {
-                    display: inline-block;
                     position: relative;
                     top: 1px;
+                    display: inline-block;
                     margin-right: 0.5rem;
                     vertical-align: bottom;
                   }
@@ -514,7 +519,7 @@
   }
 }
 
-@media (min-width: 992px) {
+@media (width >= 992px) {
   .section-container.services {
     h1 {
       font-size: 2.5rem;
@@ -527,8 +532,8 @@
     .container {
       .content {
         &-text {
-          line-height: 32px;
           max-width: 800px;
+          line-height: 32px;
         }
 
         &-cell {
@@ -579,13 +584,10 @@
         .packages {
           .package-wrapper {
             .package {
-              &-header {
-              }
-
               &-list {
                 &-item {
-                  font-size: 1.25rem;
                   max-width: 420px;
+                  font-size: 1.25rem;
                 }
               }
             }
@@ -596,7 +598,7 @@
   }
 }
 
-@media (min-width: 1200px) {
+@media (width >= 1200px) {
   .section-container.services {
     .container {
       .content {
