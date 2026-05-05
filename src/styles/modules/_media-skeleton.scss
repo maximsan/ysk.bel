@@ -1,4 +1,7 @@
-/* Shared placeholder layer: fixed layout, shimmer until media is ready (avoids CLS). */
+/*
+ * Placeholder “shimmer” layer for map shell, video hosts, and stocking images.
+ * Holds space to avoid cumulative layout shift; animation removed when `prefers-reduced-motion: reduce`.
+ */
 
 @keyframes media-skeleton-shimmer {
   0% {

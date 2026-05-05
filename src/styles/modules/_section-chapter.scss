@@ -1,4 +1,4 @@
-/* Token-driven section “chapters”: rhythm + shared title stack (Phase 3) */
+/* Section “chapters”: shared vertical rhythm and title stack (see `--section-pad-block`, `.section-chapter__header`). */
 
 .section-chapter {
   box-sizing: border-box;
@@ -30,7 +30,7 @@
   font-size: var(--text-body);
 }
 
-/* Center the services intro; stocking leads stay start-aligned in their partials */
+/* Center the services intro paragraph; stocking blocks keep their intro start-aligned in `_stocking-carousel.scss`. */
 .services .section-chapter__lede {
   text-align: center;
 }

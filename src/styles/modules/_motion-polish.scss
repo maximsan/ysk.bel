@@ -1,4 +1,7 @@
-/* Motion polish + prefers-reduced-motion (Peat & linen) */
+/*
+ * Section-chapter enter animation (staggered delays for first few siblings).
+ * Disabled entirely when `prefers-reduced-motion: reduce` (docs/glossary.md).
+ */
 
 @media (prefers-reduced-motion: no-preference) {
   @keyframes section-chapter-in {

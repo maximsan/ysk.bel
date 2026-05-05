@@ -1,21 +1,16 @@
 /*
- * Hero (Group B of the home redesign).
+ * Home hero: full-bleed photo stage with overlaid copy and CTAs (`hero-section.liquid`).
  *
- * Layout model:
- *   .hero is a single-cell CSS Grid. <picture>, the scrim overlay and the
- *   content well all occupy the same cell (grid-area: 1 / 1), letting the
- *   photo remains a decorative, preloaded background while text layers sit on top.
+ * Layout:
+ *   `.hero` is a single-cell grid. `<picture>` / background, the readable scrim, and `.hero-content`
+ *   share that cell (`grid-area: stage`) so the image stays a decorative layer and text stacks above.
  *
- * Responsive model:
- *   Mobile (<768px): centered; grid row auto + align-content:end keeps the
- *   stack at the bottom of the hero without overflow clipping CTAs.
- *   Tablet/desktop: content anchored bottom-left, copy ragged-left, CTAs
- *   wrap on narrow widths. Replaces the previous ad-hoc
- *   `margin-left: 24rem` hack with a proper max-width column.
+ * Responsive:
+ *   • <768px: content centered; `align-content: end` keeps the block near the bottom without clipping CTAs.
+ *   • Tablet/desktop: bottom-left anchor, ragged-left copy, CTAs wrap inside a max-width column.
  *
  * Motion:
- *   On-load staggered reveal using --motion-hero-stagger, gated by
- *   prefers-reduced-motion.
+ *   On-load stagger uses `--motion-hero-stagger`; respects `prefers-reduced-motion` (see docs/glossary.md).
  */
 
 @mixin hero-cover-photo ($widthPx) {
@@ -194,22 +189,18 @@
 }
 
 /*
- * Narrow viewports: full-width stacked CTAs so primary + ghost share one width
- * (container query above only kicks in below ~36rem *section* width; 576–768px
- * viewports were missing that and looked misaligned).
+ * Narrow viewports: stack primary + ghost CTAs full width so both share one column.
+ * Needed where the `@container` rule above only fires below ~36rem section width —
+ * portrait tablets around 576–768px were skipping it and buttons looked uneven.
  */
 @media only screen and (max-width: 767.98px) {
   /*
-   * Short viewports: `1fr` caps the stage and `overflow: clip` can shear CTAs.
-   * Auto rows + `overflow: visible` let the hero grow with the stack so nothing
-   * is clipped; the page scrolls if the stack is taller than the screen.
+   * Short viewports: a fixed `1fr` row plus `overflow: clip` on `.hero` can crop tall CTA stacks.
+   * Switch to auto rows and `overflow: visible` so the block grows with content; the document scrolls instead.
    *
-   * `align-content: end` keeps the stage row at the bottom of the hero (same
-   * visual as before) without stretching `.hero-content` and pinning copy with
-   * `align-items: end` under the fold.
+   * `align-content: end` keeps the content band at the bottom of the hero without stretching it full height.
    *
-   * `bootstrap.css` loads after this bundle — two-class selector beats
-   * `.container` padding.
+   * Bootstrap’s `.container` loads after this bundle — use a two-class selector so these rules win over its padding.
    */
   .hero {
     grid-template-rows: auto;
@@ -268,7 +259,7 @@
   }
 }
 
-/* ~iPhone SE / narrow width: tighter vertical rhythm so bottom-anchored stack fits */
+/* Very narrow width (~iPhone SE): tighten vertical rhythm so the bottom-anchored stack still fits. */
 @media only screen and (max-width: 399.98px) {
   .hero {
     padding-block-start: calc(0.875rem + env(safe-area-inset-top, 0px));
@@ -310,7 +301,7 @@
   }
 }
 
-/* Breakpoint refinements — left-anchor content on wider viewports. */
+/* Wider breakpoints: move hero copy from centered to left-anchored. */
 @media (min-width: 768px) {
   .hero {
     min-block-size: max(42rem, 88svh);
@@ -361,9 +352,8 @@
 }
 
 /*
- * Tablet-wide hero: ghost must match the primary pill’s width (primary sets the
- * intrinsic width via the long tel label). Column + max-content shrink-wraps
- * to that width; both CTAs stretch to the same inline size — not 50/50 row split.
+ * Mid-width hero: ghost CTA should match the primary button width — the tel label sets the intrinsic width.
+ * `grid-template-columns: max-content` shrink-wraps to that column; both buttons stretch equally (not a 50/50 row).
  */
 @media (min-width: 992px) and (max-width: 1199.98px) {
   .hero__cta {

@@ -23,7 +23,10 @@
 @import 'partials/menu';
 @import 'partials/cooperation-banner';
 
-/* Avoid default UA white on overscroll / unstyled main regions. */
+/*
+ * Global page canvas color — prevents bright white overscroll gaps around `<main>`
+ * when the browser paints areas outside the main flow.
+ */
 html {
   background-color: var(--color-bg-page);
 }
@@ -38,9 +41,6 @@ body {
   background-color: var(--color-bg-page);
   padding: 0 !important;
   margin: 0 !important;
-
-  // height: 100vh; /* fallback for Js load */
-  // height: var(--doc-height);
 }
 
 @supports (scroll-behavior: smooth) {
@@ -84,7 +84,7 @@ body {
 
 #honeypot {
   display: none;
-  /* makes the field not visible to humans */
+/* Placeholder for anti-spam honeypot fields — must stay hidden from sighted users (`formSubmissionCore.js`). */
 }
 
 .container-flex-center {

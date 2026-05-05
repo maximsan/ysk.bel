@@ -1,10 +1,14 @@
 .videos-showcase {
+  /*
+   * Home video carousel (`videos.liquid`): letterboxed player + caption stack.
+   * Section padding / `scroll-margin-top` come from `.section-chapter` (`_section-chapter.scss`)
+   * and `--section-scroll-margin`.
+   */
   position: relative;
   overflow: hidden;
-  /* padding + scroll margin: .section-chapter */
 
   &--section {
-    /* Vertical rhythm: `.section-chapter` already provides `--section-pad-block` */
+    /* Band surface matches services / stocking (`--surface-page`, edges, chrome shadow). */
     border-block: var(--section-edge-border);
     background-color: var(--surface-page);
     background-image: var(--surface-warm-veil);
@@ -13,6 +17,7 @@
       var(--chrome-shadow-ambient);
   }
 
+  /* Ultra-light diagonal hatch — breaks up flat gradients on long band sections. */
   &::after {
     content: '';
     position: absolute;
@@ -31,7 +36,7 @@
   &__header {
     position: relative;
     z-index: 1;
-    /* margin + text-align: .section-chapter__header */
+    /* Title margin + alignment: prefer rules on `.section-chapter__header` when this block sits in a chapter. */
   }
 
   &__title {
@@ -108,7 +113,9 @@
     font-size: clamp(0.95rem, 2vw, 1.05rem);
     font-weight: var(--font-weight-bold);
     text-align: center;
-    /* Sits on `&__chrome` (theme surface), not the letterboxed video. */
+    /*
+     * Caption sits on `&__chrome`’s tinted frame (readable on peat tones), not inside the letterboxed viewport.
+     */
     color: var(--color-text-primary);
     text-shadow: none;
   }

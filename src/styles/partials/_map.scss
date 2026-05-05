@@ -1,5 +1,11 @@
-/* Map block: fixed footprint + shimmer until Google Maps fires `idle`. */
-
+/*
+ * Google Maps embed (`contacts.liquid`, `googleMapInit.js`):
+ *
+ *   • `.map-shell` reserves a fixed height/width footprint + placeholder color so layout does not jump.
+ *   • `.map-shell__skeleton` (see `_media-skeleton.scss`) shimmers until the API fires `idle` or the JS timeout hides it.
+ *
+ * Reduced motion removes skeleton transitions (docs/glossary.md).
+ */
 .map-shell {
   position: relative;
   width: 100%;

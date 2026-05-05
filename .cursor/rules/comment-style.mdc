@@ -1,0 +1,68 @@
+---
+description: >-
+  Comment prose for any file — English blocks, glossary links, contracts over noise.
+  Attaches when working in-repo (`**/*`); `@` the rule if Cursor does not load it.
+alwaysApply: false
+globs:
+  - "**/*"
+---
+
+# Comment style (ysk.bel)
+
+Explanatory comments are for **maintainers and editors**. User-facing strings stay whatever language the site needs; **the comment itself is English**.
+
+**Scope:** the **whole repository** — any file kind that can carry comments (JS/SCSS/Liquid `{% comment %}`, config, Markdown, YAML, shells, …).
+
+## Write comments when
+
+- Behaviour or **contracts** are not obvious from names (variants, toggles, cross-file wiring).
+- Editors must **sync** values across files (phone, anchors, carousel order, CI env).
+- There is a **browser / a11y / motion** or **build** constraint worth preserving.
+
+## Prefer not to comment when
+
+- The next line fully explains itself.
+- The comment only **repeats identifiers** or duplicates typings.
+
+## Shape and readability
+
+- Use **`/** … */`**, Liquid `{% comment %}`, or aligned `*` / `#` lines so prose can wrap. **Do not cram** unrelated sentences on one long line.
+- **One idea per line** after the opening summary is fine.
+- Optional bullets (`•` or `-`) for variants, steps, or file lists.
+
+## Link the glossary
+
+- Unusual UX/publishing or shared UI terms (**scrim**, **colophon**, **prefers-reduced-motion**, **`aria-current`**, …) → **`docs/glossary.md`**, cite the heading, e.g. `docs/glossary.md («Scrim»)`.
+
+## By kind of file
+
+- **Data / config (JS, JSON where commented, Eleventy):** what consumes it; field contracts; **propagation** (other files to update).
+- **Scripts:** **why** timing or overrides exist; **where** SCSS/tests must stay aligned.
+- **Styles:** file or section opener (template + tokens + layout intent); glossary when explaining behaviour, not only a token name.
+- **Liquid:** short blocks for editorial structure (banner variants, duplication rules); link glossary for colophon etc.
+- **CI / tooling:** intent of non-obvious steps; avoid secrets in comments.
+
+```js
+/** GOOD — variants + linkage */
+/**
+ * Announcement banner (see `components/info-banner.liquid`).
+ *
+ * `variant`:
+ *   • `strip` — under the navbar; everyday notices.
+ *   • `modal` — overlay + dialog UX; rare, major news only.
+ */
+```
+
+```scss
+/* GOOD — glossary when behaviour matters */
+/*
+ * Drawer scrim — docs/glossary.md («Scrim»).
+ * Below `.menu` and navbar; no transition when prefers-reduced-motion.
+ */
+```
+
+## Hygiene
+
+- Fix **grammar** in comments you touch.
+- Remove **dead commented-out code** unless it documents an intentional rollback.
+- No **opaque roadmap labels** (`Group B`, `P5`) unless you replace them with a stable description in the same comment.

@@ -1,4 +1,9 @@
-/* #prices: offset for sticky header when jumping from nav/footer (`--section-scroll-margin` in tokens). */
+/*
+ * Services / packages section (`services.liquid`).
+ *
+ * `#prices` (`.packages`) uses `scroll-margin-top` so in-page jumps clear the sticky header
+ * (same token as other sections — see `--section-scroll-margin` in `_tokens.scss`; glossary: «scroll-margin-top»).
+ */
 .packages {
   scroll-margin-top: var(--section-scroll-margin);
 
@@ -8,7 +13,10 @@
 }
 
 .section-container.services {
-  /* One continuous “paper” band (matches stocking / videos) — no stark white void around the card. */
+  /*
+   * Visual alignment with stocking + videos: continuous “paper” band (tokens `--surface-page`,
+   * `--surface-warm-veil`) instead of a stark white box floating on the peat background.
+   */
   background-color: var(--surface-page);
   background-image: var(--surface-warm-veil);
   border-block: var(--section-edge-border);
@@ -20,7 +28,10 @@
 
     &.bg-creamy-white {
       color: var(--color-text-primary);
-      /* Card = page + elevated mix so it sits in the same family as the section (not a separate brown slab). */
+      /*
+       * Main content card on the textured band — blend `--color-bg-elevated` toward the page color
+       * so the card feels part of the section, not a separate heavy slab.
+       */
       background: color-mix(
         in srgb,
         var(--color-bg-elevated) 70%,
@@ -81,8 +92,10 @@
 
 @media only screen and (min-width: 320px) and (max-width: 767.98px) {
   .section-container.services {
-    /* vertical padding: .section-chapter + --section-pad-block */
-
+    /*
+     * Vertical padding comes from `.section-chapter` + `--section-pad-block` on the section wrapper;
+     * this block only tweaks type scale for small screens.
+     */
     h1 {
       font-size: 2rem;
     }

@@ -80,7 +80,7 @@
   --shadow-sm: 0 1px 3px rgba(44, 36, 28, 0.08);
   /* Typography — display / heading stack (body stack set in _constants with --font-base) */
   --font-heading: 'Source Serif 4', 'Times New Roman', serif;
-  /* Header / nav — soft lift + hairline rim (P5 depth) */
+  /* Header chrome: soft drop shadow + light top hairline for separation from the hero. */
   --header-shadow:
     0 1px 0 color-mix(in srgb, var(--color-text-inverse) 8%, transparent),
     0 10px 28px color-mix(in srgb, var(--color-bg-inverse) 30%, transparent);
@@ -122,7 +122,7 @@
     color-mix(in srgb, var(--color-accent) 28%, transparent);
   /* Legacy .bg-creamy-white (services card); dark override lives in the media block below. */
   --creamy-white: rgba(255, 252, 248, 0.78);
-  /* Phase 5 — motion & focus */
+  /* Motion + focus tokens (`prefers-reduced-motion` respected in components). */
   --motion-section-duration: 0.35s;
   --motion-stagger: 70ms;
   --motion-ease-out: cubic-bezier(0.33, 1, 0.68, 1);
@@ -130,8 +130,7 @@
   --focus-ring-width: 2px;
   --focus-ring-offset: 2px;
 
-  /* Redesign — shared primitives (Group A · foundations) */
-  /* CTA system — primary copper pill, ghost outlined pill, plain link */
+  /* Shared layout tokens: CTA pills, hairlines, grain, hero scrim. */
   --cta-primary-bg: var(--color-accent);
   --cta-primary-bg-hover: var(--color-accent-hover);
   --cta-primary-fg: var(--color-text-inverse);

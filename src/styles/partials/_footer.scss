@@ -1,4 +1,7 @@
-/* Footer: colophon — responsive band; CTAs stay in cooperation-banner. */
+/*
+ * Footer closing band (colophon): brand + light in-page links — no messengers.
+ * Primary CTAs stay in the cooperation banner. See docs/glossary.md («Colophon footer»).
+ */
 
 .footer-social {
   position: relative;
@@ -114,7 +117,7 @@
   }
 }
 
-/* Tablet: brand + nav share a row; credits full width below */
+/* Tablet layout: brand row + nav row; legal / tagline full width below. */
 @media only screen and (min-width: 768px) {
   .footer-site {
     flex-direction: row;
@@ -144,7 +147,7 @@
   }
 }
 
-/* Desktop: one row — brand | links | colophon */
+/* Desktop layout: one row — brand | navigation | colophon line. */
 @media only screen and (min-width: 992px) {
   .footer-site {
     flex-wrap: nowrap;

@@ -29,7 +29,8 @@
   }
 
   /*
-   * Inline nav (tablet / small laptop): serif wordmark reads as “estate” vs Rubik nav (P5).
+   * Mid-width nav: slightly smaller serif logo so the wordmark reads as a “title”
+   * beside the sans-serif nav links (Rubik at this breakpoint).
    */
   @media only screen and (min-width: 768px) and (max-width: 1199.98px) {
     font-size: clamp(0.75rem, 0.72rem + 0.32vw, 0.92rem);

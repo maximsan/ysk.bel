@@ -1,13 +1,18 @@
 .stocking-with-fish {
+  /*
+   * Stocking / fish-release stories carousel (`stocking-with-fish-carousel.liquid`).
+   * Vertical rhythm: outer wrapper is usually `.section-chapter` → `--section-pad-block`; this block paints the textured band only.
+   */
   position: relative;
   overflow: hidden;
-  /* padding: .section-chapter (token --section-pad-block) */
-
   background-color: var(--surface-page);
   background-image: var(--surface-warm-veil);
   border-block: var(--section-edge-border);
   box-shadow: var(--section-inset-highlight);
 
+  /*
+   * Very subtle fractal-noise veil (multiply) — tactile paper feel without raster assets (`paper-grain` mixin sibling).
+   */
   &::before {
     content: '';
     position: absolute;
@@ -129,7 +134,9 @@
     list-style: none;
   }
 
-  /* Date chips: peat surface + copper hairline (no frosted white — reads as “gray” on dark) */
+  /*
+   * TOC pills (dark layout): peat-tint fills + copper border — avoids frosted white chips that read as dull gray on this band.
+   */
   &__link {
     display: inline-flex;
     align-items: center;

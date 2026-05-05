@@ -44,7 +44,10 @@
   --text-hero-wide: 2.75rem;
 }
 
-// SCSS-only (compile-time); keep in sync with --color-* above
+/*
+ * SCSS variables (compile-time) shared with legacy `@import` math in older partials — keep hue steps aligned with `--color-*` tokens above.
+ */
+
 $light-grey: #a5a5a5;
 $light-blue: #8a7d72;
 $brown: #2c241c;

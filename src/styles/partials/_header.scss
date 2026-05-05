@@ -1,5 +1,8 @@
 .header {
-  /* View timeline: bar hides (`top: -5.5rem`), then animates in as compact pill after ~1 viewport + offset. */
+  /*
+   * Scroll-driven animation (where supported): bar starts off-screen, then eases into a compact pill
+   * after roughly one viewport height + `--_animationStartsAfter` (see `stickyNavigation` keyframes).
+   */
   --_animationStartsAfter: 50vh;
   --_animationDistance: 500px;
   --_backgroundColorStart: var(--color-bg-inverse);
@@ -42,7 +45,10 @@
   }
 }
 
-/* Original single timeline: width stays `fit-content` for the pill; position + radius animate in range. */
+/*
+ * `stickyNavigation`: one animation range moves the bar from hidden to sticky pill.
+ * `width: fit-content` is held for both keyframe endpoints so only position, color, and radius change.
+ */
 @keyframes stickyNavigation {
   0%,
   100% {
@@ -58,9 +64,9 @@
 }
 
 /*
- * Scrim (menu): full-viewport dim behind the drawer — see docs/glossary.md § Scrim.
- * Z-index below .menu (1095) and navbar chrome (1100+).
- * prefers-reduced-motion: instant show/hide (same doc).
+ * Scrim (menu): full-viewport dim behind the drawer — see docs/glossary.md («Scrim»).
+ * Z-index below `.menu` (1095) and navbar chrome (1100+).
+ * `prefers-reduced-motion`: transitions removed (same doc).
  */
 .menu-scrim {
   display: none;
@@ -100,13 +106,13 @@
 .navbar {
   position: relative;
   z-index: 1100;
-  /* Match `.header`: square when flush to the viewport top, pill radius when scrolled (animated on parent). */
+  /* Inherit pill vs square radius from animated `.header`. */
   border-radius: inherit;
   box-sizing: border-box;
   width: auto;
   max-width: 100%;
   overflow-x: visible;
-  /* P5: faint top rim on dark chrome (reads depth on the pill). */
+  /* Light top inset on the dark navbar bar (subtle separation from the viewport edge). */
   box-shadow: inset 0 1px 0
     color-mix(in srgb, var(--color-text-inverse) 10%, transparent);
   padding: 1.5rem 1rem;
@@ -146,11 +152,6 @@
         }
       }
 
-      // .phones {
-      //     display: flex;
-      //     flex-direction: column;
-      //     padding-right: 1.2rem;
-
       & .phone {
         font-size: var(--font-size-base);
 
@@ -159,7 +160,6 @@
           text-decoration: none;
         }
       }
-      // }
     }
   }
 
@@ -202,7 +202,7 @@
       left: max(0.75rem, env(safe-area-inset-left));
       top: 50%;
       transform: translateY(-50%);
-      /* Above full-width `.navbar-logo`; same z-index + later DOM stole taps from the button. */
+      /* Hamburger sits above the centered logo row so it receives taps (logo row uses `pointer-events: none`). */
       z-index: 1110;
     }
 
@@ -217,7 +217,10 @@
       box-sizing: border-box;
       min-height: 2.75rem;
       align-items: center;
-      /* Let taps reach the hamburger in the blank band; link stays clickable. */
+      /*
+       * Logo row spans full width for centering; disable hit-testing on the wrapper so the area
+       * beside the wordmark still passes clicks to the toggler. `.logo` re-enables pointer events.
+       */
       pointer-events: none;
 
       .logo {
@@ -247,10 +250,10 @@
     }
   }
 
-  /*
-   * Viewports under 1200px: extra air between logo and nav, logo may shrink in flex so the pill
-   * doesn’t clip; padding keeps the last link off the rounded ends.
-   */
+    /*
+     * Between tablet and 1200px: add space between wordmark and links; allow the logo to shrink in flex
+     * so the pill-shaped bar does not clip text; extra padding keeps the last nav link off the curved ends.
+     */
   @media only screen and (min-width: 768px) and (max-width: 1199.98px) {
     gap: clamp(0.6rem, 1.5vw + 0.25rem, 1.25rem);
     align-items: center;

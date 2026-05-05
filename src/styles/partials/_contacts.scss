@@ -1,11 +1,16 @@
 .section-container.contacts {
+  /*
+   * Contacts + map (`contacts.liquid`): full-bleed lake-stones photo with frosted contact card and map shell.
+   *
+   *   • `--contacts-surface-radius` / `--map-shell-radius` stay in sync so both panels share one corner language.
+   *   • Light mode: hero photo only.
+   *   • `prefers-color-scheme: dark`: cool gradient scrim layered over the photo so blue water/stones marry the peat UI palette.
+   */
   $contacts-photo: url('#{$images-path}/stones_1920x1080.webp');
   position: relative;
   isolation: isolate;
-  /* Unify with map: both panels share one radius in this section. */
   --contacts-surface-radius: var(--chrome-radius);
   --map-shell-radius: var(--contacts-surface-radius);
-  /* Photo — light: single layer; dark: cool slate + peat scrim weds water/stones to UI */
   background-color: var(--color-bg-page);
   background-image: $contacts-photo;
   background-repeat: no-repeat;
@@ -207,14 +212,16 @@
 }
 
 /*
- * Dark theme — “lake stones” photo runs cool/blue; tint the image + use frosted
- * panels with copper hairlines (same radius as .map-shell via --map-shell-radius).
+ * Dark mode: cool photo needs a frosted, copper-edged card — `_tokens.scss` palette stays “Peat & linen”.
+ * Keeps `.our-contacts` readable without a muddy brown rectangle (`backdrop-filter` enhancement when supported).
  */
 @media (prefers-color-scheme: dark) {
   .section-container.contacts {
     .our-contacts {
       text-shadow: 0 1px 2px color-mix(in srgb, #000 45%, transparent);
-      /* Solid fallback (no muddled chocolate slab). */
+      /*
+       * Solid mix first: `backdrop-filter` is optional; without it we still avoid a flat “chocolate” panel.
+       */
       background: color-mix(
         in srgb,
         var(--color-bg-elevated) 86%,

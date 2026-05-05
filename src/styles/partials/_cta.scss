@@ -1,17 +1,13 @@
 /*
- * .cta — shared CTA vocabulary used by hero, info-banner, cooperation-banner
- * and anywhere a call-to-action appears. Three variants:
+ * `.cta` — shared button / link styles for hero, banners, and modals.
  *
- *   .cta.cta--primary  → solid copper pill (one per surface, dominant action)
- *   .cta.cta--ghost    → transparent pill with copper border (secondary)
- *   .cta.cta--link     → underlined copper link (tertiary / inline)
+ * Variants:
+ *   `.cta--primary` — solid copper pill (one dominant action per surface)
+ *   `.cta--ghost`   — outlined pill (secondary)
+ *   `.cta--link`    — underlined text link (tertiary)
  *
- * Size / a11y guarantees:
- *   - Minimum hit area --cta-min-hit (≥ 44×44).
- *   - Visible focus ring via @mixin outline.
- *   - Optical alignment of optional leading icon via currentColor SVG.
- *
- * Motion gated by prefers-reduced-motion.
+ * Hit area at least `--cta-min-hit` (~44px); focus ring via `@mixin outline`; optional leading SVG uses `currentColor`.
+ * Transitions respect `prefers-reduced-motion` (docs/glossary.md).
  */
 
 .cta {

@@ -51,6 +51,7 @@ Everything else: **`package.json`** / **[README.md](README.md)**.
 3. **SCSS:** Partial files must use a leading underscore; non-partials get content-hashed output URLs.
 4. **Asset URLs:** The `hashed` filter maps `src`-relative paths to built URLs; keep `outputMap` transforms in mind when referencing generated CSS/JS paths in Liquid.
 5. **Passthrough assets:** Static files and some CSS paths are configured in `addPassthroughCopy` — check there before assuming a path lands in `dist/`.
+6. **Comments:** When adding or rewriting comments in **any** file, follow **[`.cursor/rules/comment-style.mdc`](.cursor/rules/comment-style.mdc)** (`globs: **/*`, `alwaysApply: false`; **`@`** that rule when it is not already in context). For domain jargon in UI/accessibility/copy, use **`docs/glossary.md`** — link or align wording instead of opaque shorthand.
 
 ## Scope discipline
 

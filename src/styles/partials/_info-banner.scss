@@ -1,3 +1,8 @@
+/*
+ * Announcement banner under the header (`info-banner.liquid`; data in `banner.js`).
+ * Supports `strip` vs `modal` layouts — modal overlay tokens live in `_tokens.scss`.
+ */
+
 .info-banner {
   display: none;
   position: relative;
@@ -34,7 +39,9 @@
     padding: clamp(0.45rem, 1.2vw, 0.58rem);
     border-radius: 50%;
     color: var(--color-accent);
-    /* Drives .ornament 1em box — 2× prior 1.55rem for a clearer carp mark */
+    /*
+     * `font-size` sets the 1em square for the SVG ornament — larger than body text so the carp badge reads at a glance.
+     */
     font-size: 3.1rem;
     background: color-mix(in srgb, var(--color-accent) 12%, transparent);
     box-shadow: inset 0 1px 0 color-mix(in srgb, var(--color-bg-elevated) 65%, transparent);
@@ -72,7 +79,9 @@
     min-width: 0;
     font-size: clamp(0.95rem, 0.9rem + 0.25vw, 1.08rem);
     line-height: 1.35;
-    /* Stronger than body-muted: banner is dense UI on a single surface. */
+    /*
+     * Slightly heavier than general body muted text — small surface, many links; needs crisper contrast than long-form copy.
+     */
     color: color-mix(
       in srgb,
       var(--color-text-muted) 45%,
@@ -109,7 +118,9 @@
     @include outline;
   }
 
-  /* First news line — primary hook for first-time visitors */
+  /*
+   * Highlight the first message (stocking hook, etc.) with a filled “chip” surface so it reads above the rest of the stack.
+   */
   &__text--lead {
     padding: 0.4rem 0.75rem;
     border-radius: var(--radius-md);
@@ -262,8 +273,8 @@
 }
 
 /*
- * Narrow *section* width: tighten message stack only. Grid / close placement for
- * viewports <768px is handled in the media query below so it wins in cascade.
+ * Container query: narrow *section* width only tightens the message stack.
+ * Placement of the close button for <768px lives in the `@media` block below so those rules win in the cascade.
  */
 @container (max-width: 36rem) {
   .info-banner:not(.info-banner--modal) {
@@ -279,8 +290,10 @@
   }
 }
 
-/* Strip variant <768px: close is last in DOM — grid auto-placement drops it on a
-   new row (reads as bottom-left). Pin it to the inner top-right; center copy. */
+/*
+ * Strip variant on small viewports: DOM order puts the close button last, so auto-placement would drop it
+ * on its own row (bottom-left). Pin it to the top-right of `.info-banner__inner` and center the copy block.
+ */
 @media (max-width: 767.98px) {
   .info-banner:not(.info-banner--modal) {
     .info-banner__inner {

@@ -1,5 +1,9 @@
 @import 'modules/mixins';
 
+/*
+ * Main gallery grid + PhotoSwipe caption/bullet chrome (`photo-swipe.js`, gallery includes).
+ */
+
 .gallery {
   flex-flow: row nowrap !important;
   align-items: initial !important;
@@ -26,7 +30,9 @@
         justify-content: center;
       }
 
-      /* Thumbs sit at the row edge; inset so they don’t touch the card boundary */
+      /*
+       * Thumb columns kiss the carousel card — small horizontal inset so thumbnails do not collide with rounded edges.
+       */
       &--right-side {
         margin-left: 0.5rem;
         margin-right: clamp(0.65rem, 1.6vw, 1.4rem);

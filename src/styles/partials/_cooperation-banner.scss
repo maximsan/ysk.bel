@@ -1,4 +1,8 @@
 .cooperation-banner {
+  /*
+   * Partnership strip above the footer (`cooperation-banner.liquid`): inverse band + social CTAs.
+   * Uses `@container` for eyebrow density; narrow viewports stack CTAs full-width (matches cooperation data in `cooperation.js`).
+   */
   position: relative;
   isolation: isolate;
   overflow: clip;
@@ -202,7 +206,10 @@
   }
 }
 
-/* Equal-width pill stack on phones / narrow layout (viewport-based so it always runs). */
+/*
+ * Full-width CTA buttons on small screens — viewport media query (not `@container`) so it always runs
+ * even when the section is wide but the device is a phone in landscape.
+ */
 @media (max-width: 767.98px) {
   .cooperation-banner__cta.cta-row {
     flex-direction: column;
