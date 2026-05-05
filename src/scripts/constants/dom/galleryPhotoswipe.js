@@ -1,4 +1,3 @@
-/** Main gallery (`photo-swipe.js`, gallery includes). */
 export const GALLERY_CLASS = {
   root: 'gallery',
   url: 'gallery__url',

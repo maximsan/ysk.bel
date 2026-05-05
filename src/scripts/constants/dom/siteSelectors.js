@@ -2,7 +2,6 @@ import { LAYOUT_CLASS } from './layout.js';
 import { MENU_CLASS } from './menu.js';
 import { PLAYWRIGHT_HOME_LOCATORS } from './playwrightHome.js';
 
-/** Document query selectors shared by layout scripts (`sideBar`, `scrollUp`, …). */
 export const SITE_SELECTORS = {
   header: PLAYWRIGHT_HOME_LOCATORS.header,
   menu: PLAYWRIGHT_HOME_LOCATORS.menu,

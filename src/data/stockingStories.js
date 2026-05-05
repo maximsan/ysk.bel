@@ -1,13 +1,10 @@
 /**
- * Stories about fish stocking events (one or many).
- * Add a new object to `stories` for each event; order is display order (newest first is typical).
+ * Stocking / fish-release stories for the home section (`stocking-with-fish-carousel.liquid`).
  *
- * Fields:
- * - id: stable anchor for links, e.g. #stocking-2026-04-14
- * - storyTitle: short heading shown when there are 2+ stories (hidden when only one story)
- * - badgeLabel / badgeTitleAttr: pill next to title
- * - lead.intro | lead.highlight | lead.outro: paragraph split for accent styling on highlight
- * - basePath + images: filename order in `images`; use `images: []` if there are no photos yet (carousel is hidden)
+ *   • `stories[].id` becomes the fragment target for in-page links (e.g. from the info banner).
+ *   • Two or more stories → each shows `storyTitle`; a single story hides that secondary heading.
+ *   • `lead.intro` / `lead.highlight` / `lead.outro` map to typographic emphasis in the template.
+ *   • `images: []` skips the photo carousel for that story only.
  */
 export default {
   sectionTitle: 'Зарыбление водоёма',

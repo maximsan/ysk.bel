@@ -14,7 +14,6 @@ export function buildHomeActiveVideoHostSelector() {
   return `${idSelector(SECTION_IDS.videos)} .${VIDEO_SHOWCASE_CLASS.slide}.${STATE_CLASS.active} .${VIDEO_SHOWCASE_CLASS.lazyHost}`;
 }
 
-/** Locator strings for Playwright `page.locator(...)`. */
 export const PLAYWRIGHT_HOME_LOCATORS = {
   header: `${LAYOUT_CLASS.headerTag}.${LAYOUT_CLASS.headerBlock}`,
   menu: `.${MENU_CLASS.root}`,
@@ -22,7 +21,10 @@ export const PLAYWRIGHT_HOME_LOCATORS = {
   cooperationBanner: `.${LAYOUT_CLASS.cooperationBanner}`,
   infoBanner: `.${LAYOUT_CLASS.infoBannerSection}.${LAYOUT_CLASS.infoBannerBlock}`,
   hero: `${LAYOUT_CLASS.heroTag}.${LAYOUT_CLASS.hero}.${LAYOUT_CLASS.heroIntro}`,
-  // `section#…` avoids strict-mode collisions if a subsection heading reuses the same id as the band.
+  /**
+   * Playwright selectors run in strict mode: duplicate visible `#id`s break `page.locator`.
+   * `section#services` scopes the band so it cannot clash with nested headings that reused the services id.
+   */
   services: `section${idSelector(SECTION_IDS.services)}`,
   stocking: idSelector(SECTION_IDS.stocking),
   videos: idSelector(SECTION_IDS.videos),

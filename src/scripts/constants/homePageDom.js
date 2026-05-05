@@ -1,11 +1,3 @@
-/**
- * Barrel: re-exports all DOM / selector constants for the site.
- *
- * Definitions live in `./dom/*.js` by area (layout, menu, forms, gallery, …).
- * Import this file for the full API (Playwright, Vitest, bundled ESM), or
- * import a specific `@constants/dom/<module>.js` to depend on one domain only.
- */
-
 export * from '@constants/dom/selectorsShared.js';
 export * from '@constants/dom/sections.js';
 export * from '@constants/dom/state.js';

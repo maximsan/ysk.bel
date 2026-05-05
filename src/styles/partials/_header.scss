@@ -11,7 +11,7 @@
   width: var(--_headerWidth, auto);
   max-width: 100%;
   margin-inline: auto;
-  /* Safe area: keep bar clear of notched phone side edges (see docs/ui-accessibility-glossary.md). */
+  /* Safe area: keep bar clear of notched phone side edges (see docs/glossary.md). */
   padding-inline: max(0px, env(safe-area-inset-left))
     max(0px, env(safe-area-inset-right));
 
@@ -58,8 +58,9 @@
 }
 
 /*
- * Menu scrim: full-viewport dim behind the drawer; z-index below .menu (1095) and navbar chrome (1100+).
- * prefers-reduced-motion: instant show/hide (glossary: docs/ui-accessibility-glossary.md).
+ * Scrim (menu): full-viewport dim behind the drawer — see docs/glossary.md § Scrim.
+ * Z-index below .menu (1095) and navbar chrome (1100+).
+ * prefers-reduced-motion: instant show/hide (same doc).
  */
 .menu-scrim {
   display: none;
@@ -162,7 +163,7 @@
     }
   }
 
-  /* ~44px touch target (see glossary). */
+  /* ~44px touch target (see docs/glossary.md). */
   .navbar-toggler {
     position: relative;
     z-index: 1101;

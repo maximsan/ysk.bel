@@ -13,7 +13,10 @@ import {
   initVideosShowcaseCarousel,
 } from '@scripts/helpers/index.js';
 
-/** Keep in sync with slide-out nav in `_menu.scss` / `_header.scss` (`max-width: 767.98px`). */
+/**
+ * Must match CSS that switches the markup to slide-out navigation (`max-width: 767.98px`).
+ * `_menu.scss` / `_header.scss` own the breakpoints; JavaScript gates drawer-only enhancements on the same value.
+ */
 const MOBILE_BREAKPOINT = '(max-width: 767.98px)';
 const mobileMediaQuery = window.matchMedia(MOBILE_BREAKPOINT);
 

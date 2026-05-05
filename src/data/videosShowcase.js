@@ -1,10 +1,9 @@
 /**
- * Unified video block: order in `videos` = carousel order (left / first = main tour).
- * - baseUrl: path without extension
- * - poster: fallback poster URL (e.g. JPEG for older engines)
- * - posterWebp: optional; if set, used for <video poster> (smaller WebP). If omitted, `poster` is used as-is.
- * - description: optional short line under the caption
- * Preload strategy: first slide uses preload auto via template (not stored here).
+ * Videos carousel content (`videos.liquid`, `videoShowcaseCarousel.js`).
+ *
+ *   • Array order in `videos` is slide order; the first entry is the “main” tour.
+ *   • If `posterWebp` is set on an item, it replaces `poster` on the `<video poster>` attribute.
+ *   • First-slide `preload` is chosen in Liquid; this file only stores metadata and sources.
  */
 export default {
   sectionTitle: 'Видео с усадьбы',

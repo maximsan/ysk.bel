@@ -1,10 +1,9 @@
 /**
- * Site footer — colophon and in-page navigation only.
- * Messenger and call CTAs live in `cooperation.js` (partnership strip) and
- * `contacts.js` / `sidebar.js`; do not duplicate them here.
+ * Footer band: brand line + a few in-page anchor links.
  *
- * When the phone number changes, update: `cooperation.js`, `contacts.js`,
- * `sidebar.js` (not this file).
+ * Do not duplicate phone/messenger CTAs here — those live in the partnership strip and contact surfaces:
+ * `cooperation.js`, `contacts.js`, `sidebar.js`.
+ * Phone edits belong in those files, not here.
  */
 export default {
   brandName: 'Усадьба Серебряный Карась',

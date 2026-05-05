@@ -10,11 +10,16 @@ const ogBody =
 const PHONE_DIGITS = '+375291495989';
 const PHONE_DISPLAY = '+375 (29) 149 59 89';
 
+/**
+ * Head tags, Open Graph, and hero copy defaults (`head.liquid`, `hero-section.liquid`, `base.liquid`).
+ *
+ * Key fields:
+ *   • `brandStory` — single sentence reused in `<meta>` text and hero; update visual snapshots if it changes.
+ *   • `themeColor` / `themeColorDark` — browser chrome tint; override per route via page front matter.
+ *   • `heroCta` / `heroTrustStrip` — wired into the hero; keep trust lines short so the dotted row does not wrap.
+ */
 export default {
-  /**
-   * Одно предложение — история бренда (Peat & linen): вода, тишина, близость к Минску.
-   * См. герой (`hero-section.liquid`). При смене текста обновить визуальные снимки (hero).
-   */
+  /** Same text as hero lede / meta description opener. */
   brandStory,
   title: 'Усадьба серебряный карась. Рыбалка. Баня. Минская Область',
   keywords:
@@ -26,22 +31,18 @@ export default {
   url: 'https://уск.бел',
   lang: 'ru',
   locale: 'ru_RU',
-  /**
-   * Default browser UI tint (status bar / `<meta name="theme-color">`).
-   * Per-page override: set `themeColor` / `themeColorDark` in the page’s front
-   * matter (see `src/pages/home/index.md`); `base.liquid` passes them into `head.liquid`.
+  /** Browser UI tint (`<meta name="theme-color">`).
+   * Per-page override: set `themeColor` / `themeColorDark` in front matter — values flow through
+   * `base.liquid` into `head.liquid`.
    */
   themeColor: '#5f6f6d',
   themeColorDark: '#1c2724',
-  /**
-   * Hero eyebrow — малый подзаголовок над `h1` (редакционный тон, Peat & linen).
-   * Если пусто — hero не рендерит строку eyebrow.
-   */
+  /** Accent line shown above the hero `h1`; leave empty to hide that row entirely. */
   heroEyebrow: 'Минская область · Логойский р-н',
   /**
-   * Hero CTAs — единый словарь вызовов к действию (см. `src/styles/partials/_cta.scss`).
-   * `primary` — доминантная кнопка (звонок), `secondary` — мягкий якорь на услуги.
-   * `ariaLabel` используется, когда текст кнопки короче, чем смысл действия.
+   * Hero button pair (styles: `_cta.scss`).
+   *   • `primary` — main conversion (usually `tel:`); label can be shortened if `ariaLabel` carries the rest.
+   *   • `secondary` — soft anchor deeper on the page.
    */
   heroCta: {
     primary: {
@@ -56,8 +57,8 @@ export default {
     },
   },
   /**
-   * Trust strip — три короткие опорные подписи под hero CTAs.
-   * Разделяются middle-dot в шаблоне; длина каждой ≤ 28 символов.
+   * Three short captions beneath the CTAs.
+   * Liquid joins them with a middle-dot; keep each phrase ≤28 characters for the single-line layout.
    */
   heroTrustStrip: [
     '30 мин от Минска',

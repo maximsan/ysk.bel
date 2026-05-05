@@ -1,8 +1,10 @@
 /**
- * Cooperation block
- * Отображается у подвала. Единый словарь CTA
- * (`src/styles/partials/_cta.scss`)
- * При изменении номера — обновить также `src/data/contacts.js` и `sidebar.js`.
+ * Partnership banner directly above the footer (`cooperation-banner.liquid`).
+ *
+ * Holds secondary CTAs (WhatsApp, Viber, phone).
+ *
+ * When the phone number changes, also update:
+ * `src/data/contacts.js` and `src/data/sidebar.js` so every surface stays aligned.
  */
 const PHONE_DIGITS = '375291495989';
 const PHONE_DISPLAY = '+375 (29) 149 59 89';

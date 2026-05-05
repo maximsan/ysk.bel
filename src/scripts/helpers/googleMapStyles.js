@@ -1,4 +1,3 @@
-/** Snazzy Maps–style light overlay (used with `mapTypeId: 'satellite'`). */
 export const GOOGLE_MAP_EMBED_STYLES = [
   {
     elementType: 'geometry',

@@ -3,13 +3,19 @@ import { GOOGLE_MAP_EMBED_STYLES } from './googleMapStyles';
 
 const ESTATE_COORDINATES = { lat: 54.291652, lng: 27.480454 };
 
-/** Injected at build time by esbuild (`eleventy.config.mjs`); empty when unset. */
+/**
+ * Passed through Eleventy’s esbuild define (`eleventy.config.mjs`).
+ * When absent locally builds omit Maps altogether (`GOOGLE_MAPS_API_SRC` stays empty).
+ */
 const GOOGLE_MAPS_API_KEY = __GOOGLE_MAPS_API_KEY__;
 const GOOGLE_MAPS_API_SRC = GOOGLE_MAPS_API_KEY
   ? `https://maps.googleapis.com/maps/api/js?key=${encodeURIComponent(GOOGLE_MAPS_API_KEY)}`
   : '';
 
-/** Fallback if `idle` never fires (offline API, blocked maps, etc.). */
+/**
+ * Maps JS sometimes never reaches `idle` when the script is blocked or offline.
+ * After this timeout we still swap the loading skeleton for the map container so the UI finishes settling.
+ */
 const MAP_READY_FALLBACK_MS = 15_000;
 
 let googleMapsApiPromise;

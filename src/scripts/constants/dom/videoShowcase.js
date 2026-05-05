@@ -1,8 +1,5 @@
 import { bracketAttribute } from './selectorsShared.js';
 
-/**
- * Videos showcase carousel (`videos.liquid`, `videoShowcaseCarousel.js`).
- */
 export const VIDEO_SHOWCASE_DATA_ATTR = {
   showcase: 'data-videos-showcase',
   slide: 'data-videos-slide',

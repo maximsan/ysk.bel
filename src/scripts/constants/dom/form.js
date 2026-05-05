@@ -1,4 +1,3 @@
-/** `.gform` (`initGoogleForm.js`, `modal.liquid`). */
 export const FORM_CLASS = {
   gform: 'gform',
   emailInvalid: 'email-invalid',

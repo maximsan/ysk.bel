@@ -1,16 +1,12 @@
-/**
- * Mobile navigation drawer — open/close, scrim, scroll lock, keyboard.
- *
- * Concepts (see docs/ui-accessibility-glossary.md):
- * - Scrim: dimmed full-screen layer; tap closes menu.
- * - Scroll lock: body `position: fixed` so the page doesn’t scroll under the drawer.
- * - Scroll restore: save `scrollY`, set `body.top = -scrollY`, then `scrollTo` on close to avoid jump.
- * - aria-expanded / aria-label on the toggler for screen readers.
- */
 import { CSS_UTILITY_CLASS } from '@constants/dom/layout.js';
 import { MENU_CLASS } from '@constants/dom/menu.js';
 import { SITE_SELECTORS } from '@constants/dom/siteSelectors.js';
 
+/**
+ * Mobile drawer (`menu.liquid`): opens from the navbar toggle, locks body scroll while open.
+ *
+ * Scroll restore is subtle because `html` uses global smooth scrolling — see `restoreScrollPosition`.
+ */
 const header = document.querySelector(SITE_SELECTORS.header);
 const sidebar = document.querySelector(SITE_SELECTORS.menu);
 const navButton = document.querySelector(SITE_SELECTORS.navbarToggler);
@@ -22,19 +18,17 @@ let scrollLockY = 0;
 let closeDelegationBound = false;
 let escapeBound = false;
 
-/** Where the page was scrolled when the drawer opened (visual restore on close). */
 function readScrollY() {
   return window.scrollY ?? document.documentElement.scrollTop ?? 0;
 }
 
 /**
- * After removing `body { position: fixed }`, jump back to the saved Y in one shot.
- * `index.scss` sets `html { scroll-behavior: smooth !important }`, so a plain `scrollTo(x,y)`
- * animates from ~0 — feels like the page “scrolls from the top” when you only close the drawer.
- * Temporary `scroll-behavior: auto !important` on `<html>` wins for these calls only.
+ * Closing the drawer restores the pre-open scroll position while `html { scroll-behavior: smooth }` is active.
  *
- * The second `scrollTo` in rAF is for layout quirks after unlock — it must NOT run when we are
- * about to scroll to a `#hash` target, or it would run after that navigation and cancel it.
+ *   • `scroll-behavior: auto` is forced briefly so `scrollTo` snaps immediately instead of animating from y=0.
+ *   • The extra `requestAnimationFrame` `scrollTo` fixes leftover layout shift after `position:fixed` is removed.
+ *   • Do not use this path immediately before a `#hash` jump — use `restoreScrollPositionSyncOnly` instead so the
+ *     second `scrollTo` does not fight in-page navigation (see `closeSideBarForHashLink`).
  */
 function restoreScrollPosition() {
   const y = scrollLockY;
@@ -47,7 +41,10 @@ function restoreScrollPosition() {
   });
 }
 
-/** One-shot restore (no follow-up rAF) — use before programmatic in-page scroll. */
+/**
+ * Variant of `restoreScrollPosition` that omits the follow-up `requestAnimationFrame` `scrollTo`.
+ * Call this when unlocking the drawer and then scrolling to `href="#…"` inside the SPA shell.
+ */
 function restoreScrollPositionSyncOnly() {
   const y = scrollLockY;
   const html = document.documentElement;
@@ -74,7 +71,6 @@ function detachMenuListeners() {
   }
 }
 
-/** Close drawer UI + unlock scroll styles (shared by all close paths). */
 function teardownMenuDom() {
   if (!sidebar || !header || !sidebarOpenIcon || !sidebarCloseIcon) {
     return;
@@ -139,7 +135,6 @@ function openSideBar() {
   if (!sidebar || !header || !sidebarOpenIcon || !sidebarCloseIcon) {
     return;
   }
-  // Scroll lock: remember position, fix body so background doesn’t scroll.
   scrollLockY = readScrollY();
   document.body.style.position = 'fixed';
   document.body.style.top = `-${scrollLockY}px`;
@@ -153,7 +148,10 @@ function openSideBar() {
     menuScrim.setAttribute('aria-hidden', 'false');
   }
 
-  /* Pin the bar to the top only — `inset: 0` stretched `<header>` to full viewport and felt like a scroll jump. */
+  /*
+   * Pin the bar to the top only — `inset: 0` stretched `<header>` to the full viewport
+   * and felt like a scroll jump.
+   */
   header.style.position = 'fixed';
   header.style.top = '0';
   header.style.left = '0';
@@ -178,7 +176,6 @@ function closeSideBar() {
   restoreScrollPosition();
 }
 
-/** Close drawer then scroll to in-page target (avoid rAF `scrollTo(lockY)` undoing hash scroll). */
 function closeSideBarForHashLink(href) {
   if (!sidebar || !header || !sidebarOpenIcon || !sidebarCloseIcon) {
     return;
@@ -197,7 +194,6 @@ function onDocumentKeydown(event) {
   }
 }
 
-/** Close drawer when user follows an in-page or tel: link inside the panel. */
 function onMenuLinkClick(event) {
   const target = event.target;
   if (!(target instanceof Element)) {

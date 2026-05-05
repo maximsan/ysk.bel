@@ -5,7 +5,10 @@ import {
 import { LAZY_VIDEO_HOST_QUERY } from '@constants/dom/videoShowcase.js';
 import { STATE_CLASS } from '@constants/dom/state.js';
 
-/** Normalizes `preload` attribute for `<video>` (lazy host data attribute). */
+/**
+ * Hydrates carousel placeholders emitted by `videos.liquid`:
+ * reads `data-video-*` attributes and injects `<video>` + `<source>` tags at runtime.
+ */
 export function normalizeVideoPreload(preloadRaw) {
   const lower = (preloadRaw || 'metadata').toLowerCase();
   return ['none', 'metadata', 'auto'].includes(lower) ? lower : 'metadata';
@@ -13,7 +16,6 @@ export function normalizeVideoPreload(preloadRaw) {
 
 const DEFAULT_VIDEO_EXTENSIONS = 'webm,mp4';
 
-/** Parses comma-separated `data-video-extensions` (e.g. `webm, mp4`). */
 export function parseVideoExtensionTokens(raw) {
   const source =
     raw == null || String(raw).trim() === ''
@@ -27,7 +29,11 @@ function createVideoTag({ poster = '', preload = 'metadata' }) {
   const video = document.createElement('video');
   video.poster = poster;
   video.controls = true;
-  /* Muted by default: satisfies autoplay policies (incl. Firefox) so `loadeddata` / poster can paint. */
+  /*
+   * Starts muted even without user gesture:
+   *   • Satisfies autoplay policies (Firefox is strict).
+   *   • Allows `preload`/`loadeddata` to resolve so the carousel poster does not shimmer forever.
+   */
   video.muted = true;
   video.loop = false;
   video.preload = preload;
@@ -50,12 +56,6 @@ function setNotSupportJS({ parentNode: videoParentNode }) {
   videoParentNode.appendChild(fallbackMessage);
 }
 
-/**
- * Injects a <video> into a placeholder host (used by the videos showcase carousel).
- * Host: data-video-url, data-video-poster, data-video-extensions;
- * optional data-poster-webp (preferred for video.poster when set),
- * data-video-preload: none | metadata | auto.
- */
 export function mountLazyVideoHost(lazyVideoHostElement) {
   const mountedKey = LAZY_VIDEO_HOST_DATASET.videoMounted;
   if (

@@ -1,4 +1,7 @@
-/** Global layout / landmark class fragments (no leading dot). */
+/**
+ * BEM / layout class *tokens* (no leading `.`).
+ * Concatenate a dot when turning them into selectors (`layout.js` imports are building blocks for Playwright + DOM scripts).
+ */
 export const LAYOUT_CLASS = {
   headerTag: 'header',
   headerBlock: 'header',
@@ -15,7 +18,6 @@ export const LAYOUT_CLASS = {
   crossIcon: 'cross-icon',
 };
 
-/** Bootstrap / utility classes referenced from JS. */
 export const CSS_UTILITY_CLASS = {
   hidden: 'hidden',
 };

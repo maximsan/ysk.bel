@@ -153,10 +153,8 @@ export function addInfoBanner() {
 }
 
 /**
- * Previous behaviour reopened the banner when a user scrolled back up. The
- * redesigned banner is intentionally one-shot: show if no dismissal cookie,
- * stay dismissed after close / link click. Kept as a no-op export for any
- * older import sites while Group C removes the call from `main.js`.
+ * Legacy export: older bundles called this to hide the banner again when scrolling upward.
+ * The current banner is cookie-dismissed and never reopens on scroll — keep the symbol so imports do not break.
  */
 export function hideInfoBannerOnScroll() {
   return undefined;

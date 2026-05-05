@@ -1,7 +1,10 @@
 /**
- * Scroll spy: marks the navbar link for the section nearest the viewport center.
- * Uses IntersectionObserver (see docs/ui-accessibility-glossary.md — aria-current).
- * Styles: `_header.scss` `[aria-current='true']`. Hash in URL also activates a link.
+ * Navbar “scroll spy”: keeps `aria-current` on the `#section` link that matches the viewport.
+ *
+ *   • Sections are tracked with `IntersectionObserver` (most visible/intersecting wins).
+ *   • On load, if `location.hash` matches a tracked section, that link stays active initially.
+ *
+ * Styles: `_header.scss` styling for `[aria-current="true"]` on `.nav-link`.
  */
 export function initNavScrollSpy() {
   const navLinks = Array.from(

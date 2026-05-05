@@ -101,9 +101,6 @@ export function initStockingCarousel() {
   });
 }
 
-/**
- * Hides image skeleton layers after decode/load to avoid layout shift.
- */
 export function initStockingImageSkeletons() {
   document.querySelectorAll(STOCKING_QUERY.img).forEach((img) => {
     const zoom = img.closest(`.${STOCKING_CAROUSEL_CLASS.zoom}`);

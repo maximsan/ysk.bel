@@ -1,12 +1,14 @@
-# UI glossary — header, footer, mobile menu
+# Project glossary
 
-Short reference for terms and patterns used in **Phase 1** (footer/colophon) and **Phase 2** (accessibility, drawer behavior) of [`header-footer-ui-plan.md`](header-footer-ui-plan.md). Use this when reading comments in `sideBar.js`, `_header.scss`, `_menu.scss`, and related templates.
+Definitions for **terms, patterns, and jargon** used in this repository—UI, accessibility, content, publishing words, tooling, or anything else worth explaining in one place.
+
+Many entries below started with **Phase 1** (footer/colophon) and **Phase 2** (accessibility, drawer behavior) from [`header-footer-ui-plan.md`](header-footer-ui-plan.md). Add new headings as needed; the **What / Why / Where** shape is optional but works well for implementation-linked concepts.
 
 ---
 
 ## How to read this doc
 
-- **Glossary** — alphabetically grouped concepts (what it is, why we use it, where it lives).
+- **Glossary** — grouped concepts (what it is, why we use it, where it lives).
 - **Related files** — quick map from idea → path in the repo.
 
 ---
@@ -55,7 +57,9 @@ Short reference for terms and patterns used in **Phase 1** (footer/colophon) and
 
 ### Colophon footer
 
-**What:** A short **closing** strip at the bottom: who/what the site is, optional neutral links, credits—not a second row of “call us on WhatsApp” buttons.
+**Word:** *Colophon* comes from publishing: the short note at the **end** of a book about who produced it and how. On websites people use it informally for a **small closing strip**—identity, credits, light navigation—not the main calls to action.
+
+**What (this site):** A short **closing** strip at the bottom: who/what the site is, optional neutral links, credits—not a second row of “call us on WhatsApp” buttons.
 
 **Why:** The **partnership strip** (`cooperation-banner`) already holds primary messengers/call actions. The footer avoids repeating those channels.
 
@@ -83,14 +87,16 @@ Short reference for terms and patterns used in **Phase 1** (footer/colophon) and
 
 ---
 
-### Menu scrim
+### Scrim
 
-**What:** A **full-screen semi-transparent layer** behind the sliding menu, usually darkened (“dimmed”).
+**Word:** In UI, a *scrim* is a **semi-transparent layer** over the page (usually a dark tint) that **dims** whatever sits behind a modal, drawer, or dialog so the top layer reads as “in front.” The English word comes from theater/film (a light‑softening cloth); design systems such as **Material Design** reused it for these overlays.
+
+**What (menu on this site):** A **full-viewport** scrim lives **behind** the slide-out navigation and **above** the page. It is not the drawer itself—only the dimmed sheet you tap to dismiss.
 
 **Why:**
 
-- Signals that the page underneath is **inactive**.
-- **Tap outside** the panel (on the dim area) closes the menu—common mobile pattern.
+- Makes the page underneath feel **inactive** while the menu is open.
+- **Tap on the dimmed area** closes the menu (standard mobile pattern).
 
 **Where:** Markup [`src/includes/header.liquid`](../src/includes/header.liquid) (`data-menu-scrim`); styles [`src/styles/partials/_header.scss`](../src/styles/partials/_header.scss) (`.menu-scrim`); show/hide in [`src/scripts/helpers/sideBar.js`](../src/scripts/helpers/sideBar.js).
 

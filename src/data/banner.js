@@ -1,15 +1,14 @@
 /**
- * Info banner data — редакционная новостная полоса у шапки.
+ * Top-of-site announcement banner (see `components/info-banner.liquid`).
  *
  * `variant`:
- *   - 'strip' (по умолчанию) — тонкая лента под шапкой, слайдится вниз на первом
- *     показе (см. Group C плана). Дружелюбно к рутинным апдейтам: зарыбление,
- *     акции.
- *   - 'modal'  — полноэкранный диалог поверх hero. Использовать редко, для
- *     действительно важных объявлений (закрытие сезона, события).
+ *   • `strip` (default) — narrow bar directly under the header; animates open on first show.
+ *     Suited to routine notices (stocking, offers).
+ *   • `modal` — blocks the viewport with a dimmed overlay + dialog semantics (focus trap, Escape).
+ *     Use only for uncommon, high-impact news (e.g. season closure, urgent changes).
  *
- * Каждое сообщение может нести короткий `date` (ISO или свободный текст) —
- * в шаблоне он рендерится в виде чипа перед текстом.
+ * Each message may set optional `date` (ISO string or readable label).
+ * Liquid renders `date` as a compact chip ahead of the message text.
  */
 export default {
   variant: 'strip',

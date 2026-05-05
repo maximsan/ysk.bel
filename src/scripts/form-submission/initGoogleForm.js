@@ -6,8 +6,10 @@ import {
 import { isSpamHoneypot, validEmail } from '@scripts/form-submission/formSubmissionCore.js';
 
 /**
- * Google Apps Script–style `.gform` handler (see `modal.liquid`).
- * Submits `application/x-www-form-urlencoded` to `form.action`.
+ * Wires Bootstrap-style `.gform` markup from `modal.liquid` into a plain form POST:
+ *
+ *   • Encodes the body as `application/x-www-form-urlencoded` at `form.action` (Apps Script / Google Sheet backends).
+ *   • Basic client validation + honeypot spam guard reuse `formSubmissionCore.js`.
  */
 
 function getFormData(form) {

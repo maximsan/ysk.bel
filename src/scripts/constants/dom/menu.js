@@ -1,4 +1,3 @@
-/** Mobile nav drawer (`sideBar.js`, `menu.liquid`). */
 export const MENU_CLASS = {
   root: 'menu',
   open: 'open',
@@ -8,8 +7,10 @@ export const MENU_CLASS = {
 };
 
 /**
- * Drawer: auto-close when these links are used (legacy delegation hook).
- * Keep in sync with `menu.liquid` / `sidebar` data.
+ * Selectors for in-drawer links that should auto-close the mobile menu after navigation.
+ *
+ * The href suffixes must stay in sync with real routes in `menu.liquid` and the link list in `sidebar.js`
+ * (same targets the user can tap from the drawer).
  */
 export const SITE_NAV_MENU_LINK_SELECTORS = [
   `a[href$='services']`,

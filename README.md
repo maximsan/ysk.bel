@@ -68,7 +68,7 @@ yarn run deploy:all
 - **Sass:** For stylesheets
 - **Testing:**
   - [Playwright](https://playwright.dev/) — visual regression, a11y, E2E;
-  - [Vitest](https://vitest.dev/) for unit tests (see `docs/migration-to-esm.md`)
+  - [Vitest](https://vitest.dev/) for unit tests
 
 ## Optimizations
 
