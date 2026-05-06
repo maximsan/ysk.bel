@@ -11,6 +11,7 @@ import {
   initStockingCarousel,
   initStockingImageSkeletons,
   initVideosShowcaseCarousel,
+  initCooperationViberDesktopFallback,
 } from '@scripts/helpers/index.js';
 
 /**
@@ -56,6 +57,7 @@ function initCarouselsWhenDomReady() {
   initVideosShowcaseCarousel();
   initStockingCarousel();
   initStockingImageSkeletons();
+  initCooperationViberDesktopFallback();
 }
 
 if (document.readyState !== 'loading') {

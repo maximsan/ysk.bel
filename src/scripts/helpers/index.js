@@ -6,3 +6,4 @@ export * from './calculateDocumentHeight';
 export * from './navScrollSpy';
 export * from './stockingCarousel';
 export * from './videoShowcaseCarousel';
+export * from './viberCooperationLink';

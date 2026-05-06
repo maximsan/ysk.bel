@@ -30,7 +30,13 @@
           <a
             class='cta cta--{{ cta.variant }} cooperation-banner__link cooperation-banner__link--{{ cta.channel }}'
             href='{{ cta.href }}'
-            {% if cta.ariaLabel %}
+            {% if cta.channel == 'viber' and cta.viberAppHref %}
+              data-viber-app-href='{{ cta.viberAppHref }}'
+            {% endif %}
+            {% if cta.channel == 'viber' and cta.ariaLabelWeb %}
+              aria-label='{{ cta.ariaLabelWeb }}'
+              data-viber-app-aria-label='{{ cta.ariaLabel }}'
+            {% elsif cta.ariaLabel %}
               aria-label='{{ cta.ariaLabel }}'
             {% endif %}
           >

@@ -8,7 +8,8 @@
  */
 const PHONE_DIGITS = '375291495989';
 const PHONE_DISPLAY = '+375 (29) 149 59 89';
-const PHONE_HREF_WITH_PLUS = `%2B${PHONE_DIGITS}`;
+/** HTTPS only — `viber://` in the initial `href` triggers Chromium errors without a handler. */
+const VIBER_WEB_HREF = 'https://www.viber.com/download/';
 
 export default {
   eyebrow: 'Партнёрство',
@@ -27,9 +28,13 @@ export default {
     {
       variant: 'ghost',
       label: 'Написать в Viber',
-      href: `viber://chat/?number=${PHONE_HREF_WITH_PLUS}`,
+      href: VIBER_WEB_HREF,
+      /** E.164 digits only; applied to `href` on phone-class clients via `viberCooperationLink.js`. */
+      viberAppHref: `viber://chat?number=${PHONE_DIGITS}`,
       channel: 'viber',
       ariaLabel: 'Открыть Viber-чат с усадьбой',
+      ariaLabelWeb:
+        'Перейти на страницу загрузки Viber. Чат с усадьбой доступен в приложении на телефоне.',
     },
     {
       variant: 'ghost',
