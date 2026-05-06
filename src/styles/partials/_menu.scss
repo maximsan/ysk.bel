@@ -306,7 +306,7 @@
             }
 
             .phone {
-              font-size: clamp(0.72rem, 0.68rem + 0.12vw, var(--font-size-sm));
+              font-size: var(--font-size-sm);
               white-space: nowrap;
             }
           }
@@ -315,7 +315,7 @@
             padding-right: 0.35rem;
             padding-left: 0.35rem;
             margin-right: 0;
-            font-size: clamp(0.8125rem, 0.76rem + 0.16vw, var(--font-size-md));
+            font-size: var(--font-size-md);
             white-space: nowrap;
           }
         }

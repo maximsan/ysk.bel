@@ -192,9 +192,10 @@
   /* Inherit pill vs square radius from animated `.header`. */
   border-radius: inherit;
 
-  /* Light top inset on the dark navbar bar (subtle separation from the viewport edge). */
-  box-shadow: inset 0 1px 0
-    color-mix(in srgb, var(--color-text-inverse) 10%, transparent);
+  /*
+   * Divider line lives on `.header` via `--header-shadow` only — navbar inset duplicated a second hairline
+   * visible in narrow/tablet snapshots.
+   */
 
   .navbar-logo {
     display: flex;
@@ -376,5 +377,14 @@
 
   @media (width >= 1200px) {
     padding-inline: 4.5rem;
+  }
+}
+
+@media only screen and (width <= 767.98px) {
+  /*
+   * Chrome hairline + blur stacks badly on very narrow widths; hero already provides separation.
+   */
+  .header {
+    box-shadow: none;
   }
 }
