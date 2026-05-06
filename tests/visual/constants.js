@@ -8,7 +8,7 @@ export const LAYOUT = {
   footerMinVisibleWidthPx: 768,
 };
 
-/** Viewport sizes for Playwright projects (also used from `playwright.config.mjs`). */
+/** Viewport sizes for Playwright projects (also used from `playwright.config.js`). */
 export const VIEWPORTS = {
   mobile: { width: 390, height: 844 },
   tablet: { width: 768, height: 1024 },

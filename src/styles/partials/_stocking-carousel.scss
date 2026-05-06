@@ -81,7 +81,11 @@
     color: var(--white);
     letter-spacing: 0.03em;
     white-space: nowrap;
-    background: linear-gradient(135deg, var(--dirty-orange) 0%, var(--orange) 100%);
+    background: linear-gradient(
+      135deg,
+      var(--dirty-orange) 0%,
+      var(--orange) 100%
+    );
     border-radius: 999px;
     box-shadow:
       0 2px 8px rgb(158 97 50 / 35%),
@@ -150,10 +154,15 @@
       var(--color-accent) 7%
     );
     border: 1px solid
-      color-mix(in srgb, var(--color-accent-muted) 55%, var(--color-border-strong));
+      color-mix(
+        in srgb,
+        var(--color-accent-muted) 55%,
+        var(--color-border-strong)
+      );
     border-radius: 999px;
     box-shadow:
-      inset 0 1px 0 color-mix(in srgb, var(--color-text-primary) 7%, transparent),
+      inset 0 1px 0
+        color-mix(in srgb, var(--color-text-primary) 7%, transparent),
       0 1px 0 color-mix(in srgb, var(--color-text-primary) 4%, transparent);
     transition:
       background 0.2s ease,
@@ -170,7 +179,8 @@
       );
       border-color: var(--color-accent);
       box-shadow:
-        inset 0 1px 0 color-mix(in srgb, var(--color-accent-light) 22%, transparent),
+        inset 0 1px 0
+          color-mix(in srgb, var(--color-accent-light) 22%, transparent),
         0 4px 16px color-mix(in srgb, var(--color-accent) 22%, transparent);
     }
 
@@ -239,12 +249,9 @@
     padding: 0.5rem;
     background: linear-gradient(
       145deg,
-      color-mix(in srgb, var(--color-bg-elevated) 94%, var(--color-accent) 2%) 0%,
-      color-mix(
-          in srgb,
-          var(--color-bg-elevated) 78%,
-          var(--color-accent) 4%
-        )
+      color-mix(in srgb, var(--color-bg-elevated) 94%, var(--color-accent) 2%)
+        0%,
+      color-mix(in srgb, var(--color-bg-elevated) 78%, var(--color-accent) 4%)
         100%
     );
     border: var(--chrome-border);
@@ -443,7 +450,8 @@
       background: var(--color-accent);
       box-shadow:
         0 0 0 2px var(--color-bg-page),
-        0 0 0 3px color-mix(in srgb, var(--color-accent-light) 70%, var(--color-accent));
+        0 0 0 3px
+          color-mix(in srgb, var(--color-accent-light) 70%, var(--color-accent));
       transform: scale(1.25);
     }
   }

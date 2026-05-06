@@ -9,8 +9,7 @@
   overflow: clip;
   color: var(--color-text-inverse);
   text-align: center;
-  background:
-    radial-gradient(
+  background: radial-gradient(
       80% 130% at 50% 0%,
       color-mix(in srgb, var(--color-accent-shadow) 32%, transparent) 0%,
       transparent 62%
@@ -59,7 +58,11 @@
     margin: 0;
     font-size: 0.78rem;
     font-weight: var(--font-weight-bold);
-    color: color-mix(in srgb, var(--color-accent-light) 78%, var(--color-text-inverse));
+    color: color-mix(
+      in srgb,
+      var(--color-accent-light) 78%,
+      var(--color-text-inverse)
+    );
     text-transform: uppercase;
     letter-spacing: 0.22em;
 

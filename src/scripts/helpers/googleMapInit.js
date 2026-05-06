@@ -4,7 +4,7 @@ import { GOOGLE_MAP_EMBED_STYLES } from './googleMapStyles';
 const ESTATE_COORDINATES = { lat: 54.291652, lng: 27.480454 };
 
 /**
- * Passed through Eleventy’s esbuild define (`eleventy.config.mjs`).
+ * Passed through Eleventy’s esbuild define (`eleventy.config.js`).
  * When absent locally builds omit Maps altogether (`GOOGLE_MAPS_API_SRC` stays empty).
  */
 const GOOGLE_MAPS_API_KEY = __GOOGLE_MAPS_API_KEY__;

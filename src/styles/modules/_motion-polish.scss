@@ -17,7 +17,8 @@
   }
 
   section.section-chapter {
-    animation: section-chapter-in var(--motion-section-duration) var(--motion-ease-out) both;
+    animation: section-chapter-in var(--motion-section-duration)
+      var(--motion-ease-out) both;
   }
 
   section.section-chapter ~ section.section-chapter {

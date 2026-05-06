@@ -1,22 +1,22 @@
-'use strict';
-
 /**
  * Runs Lighthouse using Playwright’s bundled Chromium (sets CHROME_PATH), so
  * `yarn build && npx serve dist` does not require a system Chrome install.
  *
- * Usage: node scripts/lighthouse-with-playwright.cjs [desktop|mobile]
+ * Usage: node scripts/lighthouse-with-playwright.js [desktop|mobile]
  * Outputs: ./lighthouse-home.json (desktop) or ./lighthouse-home-mobile.json (mobile)
  * Add to .gitignore in this repo; compare metrics manually or in CI.
  */
+import { spawnSync } from 'node:child_process';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { chromium } from 'playwright';
 
-const { spawnSync } = require('node:child_process');
-const path = require('node:path');
-const { chromium } = require('playwright');
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const mode = (process.argv[2] || 'desktop').toLowerCase();
 if (!['desktop', 'mobile'].includes(mode)) {
   process.stderr.write(
-    `Usage: node scripts/lighthouse-with-playwright.cjs [desktop|mobile]\n`,
+    `Usage: node scripts/lighthouse-with-playwright.js [desktop|mobile]\n`,
   );
   process.exit(1);
 }

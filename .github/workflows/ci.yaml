@@ -29,15 +29,17 @@ jobs:
               - 'src/data/**'
               - 'src/scripts/**'
               - 'src/assets/**'
-              - 'eleventy.config.mjs'
+              - 'eleventy.config.js'
               - '404.html'
               - '500.html'
               - 'tests/visual/**'
-              - 'playwright.config.mjs'
-              - 'scripts/import-aliases-hooks.mjs'
-              - 'scripts/run-with-import-aliases.mjs'
+              - 'playwright.config.js'
+              - 'scripts/import-aliases-hooks.js'
+              - 'scripts/run-with-import-aliases.js'
               - 'jsconfig.json'
-              - 'vitest.config.mjs'
+              - 'vitest.config.js'
+              - 'stylelint.config.js'
+              - 'eslint.config.js'
               - 'tests/a11y/**'
               - 'tests/e2e/**'
 
@@ -52,6 +54,9 @@ jobs:
 
       - name: Setup toolchain (Node, Yarn, Playwright Chromium)
         uses: ./.github/actions/setup-yarn-playwright
+
+      - name: ESLint
+        run: yarn lint
 
       - name: Stylelint
         run: yarn lint:styles

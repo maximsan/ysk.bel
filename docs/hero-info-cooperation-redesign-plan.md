@@ -11,7 +11,7 @@ Most of the redesign has shipped. This document tracks **what remains**: verific
 - [ ] Hero: confirm text contrast ≥ 4.5:1 over the photo at every breakpoint (visual + axe).
 - [ ] Info banner: keyboard-only flow (Tab, Shift+Tab, Esc) for strip + modal variants.
 - [ ] Cooperation block: text + CTA contrast ≥ 4.5:1 on peat surface (visual / axe).
-- [ ] Lighthouse on home (desktop + mobile): LCP ≤ 2.5s, CLS ≤ 0.05, INP ≤ 200ms — **Re-run after `build` + `serve`:** `yarn lighthouse:home:json` and `yarn lighthouse:mobile:json` (`scripts/lighthouse-with-playwright.cjs`; output gitignored). Last noted gap was LCP (CLS/TBT were healthy).
+- [ ] Lighthouse on home (desktop + mobile): LCP ≤ 2.5s, CLS ≤ 0.05, INP ≤ 200ms — **Re-run after `build` + `serve`:** `yarn lighthouse:home:json` and `yarn lighthouse:mobile:json` (`scripts/lighthouse-with-playwright.js`; output gitignored). Last noted gap was LCP (CLS/TBT were healthy).
 - [ ] Manual QA: iOS Safari (`background-attachment: fixed` removed), Android Chrome, Firefox desktop.
 
 ---

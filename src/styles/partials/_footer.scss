@@ -81,7 +81,8 @@
   text-underline-offset: 0.2em;
   transition:
     color var(--motion-link-hover-duration) var(--motion-ease-out),
-    text-decoration-color var(--motion-link-hover-duration) var(--motion-ease-out);
+    text-decoration-color var(--motion-link-hover-duration)
+      var(--motion-ease-out);
 
   &:hover {
     color: var(--color-text-inverse);
@@ -103,7 +104,8 @@
 .footer-site__meta {
   padding-top: 0.5rem;
   text-align: center;
-  border-top: 1px solid color-mix(in srgb, var(--color-text-inverse) 12%, transparent);
+  border-top: 1px solid
+    color-mix(in srgb, var(--color-text-inverse) 12%, transparent);
 }
 
 .footer-site__credit {

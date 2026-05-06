@@ -40,7 +40,8 @@
       );
       box-shadow:
         var(--section-inset-highlight),
-        0 10px 36px color-mix(in srgb, var(--color-text-primary) 6%, transparent);
+        0 10px 36px
+          color-mix(in srgb, var(--color-text-primary) 6%, transparent);
     }
 
     &-header {

@@ -29,11 +29,11 @@ Use this when adding a **new block** to `base.liquid` (or a new page that should
 2. `yarn test:unit` (if JS changed)
 3. `yarn test:a11y` (accessibility; requires built `dist/`)
 4. `yarn test:visual` — extend **`tests/visual/home-sections.spec.js`** (consolidated `main-content` screenshot, or cooperation / footer strips) or add a focused spec + update baselines: `yarn test:visual:update` (commit `*-darwin.png` / refresh `*-linux.png` via **`update-visual-snapshots`** — `.github/workflows/update-visual-snapshots.yaml`).
-5. Optional: **`yarn test:visual:widths`** — first-screen viewport at `320 … 1920` (`playwright.config.mjs` project **`width-pass`**). **`yarn test:visual:widths:update`** after UI changes.
+5. Optional: **`yarn test:visual:widths`** — first-screen viewport at `320 … 1920` (`playwright.config.js` project **`width-pass`**). **`yarn test:visual:widths:update`** after UI changes.
 
 ## 5. Optional lab performance
 
-- With **`yarn build && yarn exec serve dist -l 4173`** running: **`JSON` metrics:** **`yarn lighthouse:home:json`** / **`yarn lighthouse:mobile:json`** (use Playwright’s Chromium via `scripts/lighthouse-with-playwright.cjs`; output is gitignored). **WCAG gating** stays on **`yarn test:a11y`**, not Lighthouse.
+- With **`yarn build && yarn exec serve dist -l 4173`** running: **`JSON` metrics:** **`yarn lighthouse:home:json`** / **`yarn lighthouse:mobile:json`** (use Playwright’s Chromium via `scripts/lighthouse-with-playwright.js`; output is gitignored). **WCAG gating** stays on **`yarn test:a11y`**, not Lighthouse.
 
 **Related:** semantic tokens and section patterns in `src/styles/modules/_tokens.scss`, `_section-chapter.scss`, and the checklist in this file.
 

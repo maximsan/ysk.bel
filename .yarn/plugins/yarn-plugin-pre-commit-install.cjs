@@ -13,7 +13,7 @@ module.exports = {
           const path = require('node:path');
           const script = path.join(
             project.cwd,
-            'scripts/postinstall-pre-commit.mjs',
+            'scripts/postinstall-pre-commit.js',
           );
           const result = spawnSync(process.execPath, [script], {
             cwd: project.cwd,

@@ -1,8 +1,8 @@
 /**
  * Node module hook: resolve `@constants/*`, `@scripts/*`, and `@data/*` like
  * esbuild (Eleventy bundle) and Vitest. Preload with:
- * `node --import ./scripts/import-aliases-hooks.mjs …` (from repo root);
- * see `scripts/run-with-import-aliases.mjs`.
+ * `node --import ./scripts/import-aliases-hooks.js …` (from repo root);
+ * see `scripts/run-with-import-aliases.js`.
  */
 import { register } from 'node:module';
 import path from 'node:path';

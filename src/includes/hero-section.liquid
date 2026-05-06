@@ -33,9 +33,7 @@
 
       <h1 id='hero-title' class='hero__title'>
         <span class='hero__title-line'>Мечтали порыбачить и отдохнуть?</span>
-        <span class='hero__title-line hero__title-line--accent'>
-          Усадьба Серебряный Карась ждёт Вас
-        </span>
+        <span class='hero__title-line hero__title-line--accent'> Усадьба Серебряный Карась ждёт Вас </span>
       </h1>
 
       <p class='hero__story'>{{ meta.brandStory }}</p>
@@ -51,18 +49,22 @@
               class='cta cta--primary hero__cta-primary'
               href='{{ meta.heroCta.primary.href }}'
               {% if meta.heroCta.primary.ariaLabel %}
-              aria-label='{{ meta.heroCta.primary.ariaLabel }}'
+                aria-label='{{ meta.heroCta.primary.ariaLabel }}'
               {% endif %}
-            >{{ meta.heroCta.primary.label }}</a>
+            >
+              {{- meta.heroCta.primary.label -}}
+            </a>
           {% endif %}
           {% if meta.heroCta.secondary %}
             <a
               class='cta cta--ghost hero__cta-secondary'
               href='{{ meta.heroCta.secondary.href }}'
               {% if meta.heroCta.secondary.ariaLabel %}
-              aria-label='{{ meta.heroCta.secondary.ariaLabel }}'
+                aria-label='{{ meta.heroCta.secondary.ariaLabel }}'
               {% endif %}
-            >{{ meta.heroCta.secondary.label }}</a>
+            >
+              {{- meta.heroCta.secondary.label -}}
+            </a>
           {% endif %}
         </div>
       {% endif %}

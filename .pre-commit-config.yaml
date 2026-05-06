@@ -8,9 +8,15 @@ repos:
       - id: ggshield
         language_version: python3
         stages: [pre-commit]
-
   - repo: local
     hooks:
+      - id: eslint
+        name: eslint (eslint-comments hygiene)
+        entry: yarn exec eslint
+        language: system
+        pass_filenames: true
+        files: \.js$
+        exclude: ^(\.yarn/|dist/|node_modules/|coverage/|playwright-report/|test-results/)
       - id: stylelint
         name: stylelint
         entry: node_modules/.bin/stylelint

@@ -18,8 +18,10 @@
   $webp: '../assets/images/hero-fish-#{$widthPx}.webp';
 
   background-image: url('#{$webp}');
-  background-image:
-    image-set(url('#{$avif}') type('image/avif'), url('#{$webp}') type('image/webp'));
+  background-image: image-set(
+    url('#{$avif}') type('image/avif'),
+    url('#{$webp}') type('image/webp')
+  );
 }
 
 .hero {
@@ -202,10 +204,9 @@
     min-block-size: 100svh;
     min-block-size: 100dvh;
     padding-block: calc(
-      clamp(1.125rem, 3.5vw, 2rem) + env(safe-area-inset-top, 0px)
-    ) calc(
-      clamp(1.25rem, 5vh, 2.5rem) + env(safe-area-inset-bottom, 0px)
-    );
+        clamp(1.125rem, 3.5vw, 2rem) + env(safe-area-inset-top, 0px)
+      )
+      calc(clamp(1.25rem, 5vh, 2.5rem) + env(safe-area-inset-bottom, 0px));
     overflow: visible;
   }
 
@@ -256,7 +257,8 @@
 /* Very narrow width (~iPhone SE): tighten vertical rhythm so the bottom-anchored stack still fits. */
 @media only screen and (width <= 399.98px) {
   .hero {
-    padding-block: calc(0.875rem + env(safe-area-inset-top, 0px)) calc(1rem + env(safe-area-inset-bottom, 0px));
+    padding-block: calc(0.875rem + env(safe-area-inset-top, 0px))
+      calc(1rem + env(safe-area-inset-bottom, 0px));
   }
 
   .hero__eyebrow {
