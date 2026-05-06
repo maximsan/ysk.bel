@@ -92,6 +92,11 @@ function teardownMenuDom() {
   header.style.left = '';
   header.style.right = '';
   header.style.width = '';
+  header.style.maxWidth = '';
+  header.style.borderRadius = '';
+  header.style.animation = '';
+  header.style.animationTimeline = '';
+  header.style.animationRange = '';
 
   sidebarCloseIcon.classList.add(CSS_UTILITY_CLASS.hidden);
   sidebarOpenIcon.classList.remove(CSS_UTILITY_CLASS.hidden);
@@ -157,6 +162,11 @@ function openSideBar() {
   header.style.left = '0';
   header.style.right = '0';
   header.style.width = '100%';
+  header.style.maxWidth = '100%';
+  header.style.borderRadius = '0';
+  header.style.animation = 'none';
+  header.style.animationTimeline = 'auto';
+  header.style.animationRange = 'normal';
 
   sidebarOpenIcon.classList.add(CSS_UTILITY_CLASS.hidden);
   sidebarCloseIcon.classList.remove(CSS_UTILITY_CLASS.hidden);

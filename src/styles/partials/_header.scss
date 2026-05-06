@@ -1,10 +1,23 @@
 .header {
-  /*
-   * Scroll-driven animation (where supported): bar starts off-screen, then eases into a compact pill
-   * after roughly one viewport height + `--_animationStartsAfter` (see `sticky-navigation` keyframes).
+  /**
+   * Scroll-driven header — behaviour:
+   *   • <768px — `scroll(root)`: width + radius + `top` animate; floated pill uses `--_stickyNavPillTopOffset` (~1rem).
+   *   • ≥768px — `view()` + `sticky-navigation` (fit-content pill).
+   *
+   * Length tokens are decomposed so totals stay obvious in DevTools (e.g. hidden `top` = bar estimate + breathing room).
    */
-  --_animationStartsAfter: 50vh;
-  --_animationDistance: 500px;
+  --_stickyNavHiddenOffsetBar: 4rem;
+  --_stickyNavHiddenOffsetBreathing: 1.5rem;
+  --_stickyNavHiddenTop: calc(
+    -1 * (var(--_stickyNavHiddenOffsetBar) + var(--_stickyNavHiddenOffsetBreathing))
+  );
+
+  /* Desktop: start the pill transition after one full screen + this pause; span is the scroll distance for keyframes. */
+  --_stickyNavViewRangeStartVh: 50vh;
+  --_stickyNavDesktopKeyframeSpan: 500px;
+
+  /* Pill offset from top edge once settled. */
+  --_stickyNavPillTopOffset: 1rem;
   --_backgroundColorStart: var(--color-bg-inverse);
   --_backgroundColorEnd: var(--color-bg-inverse);
   --_textColorStart: var(--white);
@@ -32,22 +45,60 @@
     border-radius: 0;
   }
 
-  @supports (animation-timeline: view()) {
-    top: -5.5rem;
-    animation: sticky-navigation linear forwards;
-    animation-timeline: view();
-    animation-range-start: calc(100vh + var(--_animationStartsAfter));
-    animation-range-end: calc(
-      100vh + var(--_animationStartsAfter) + var(--_animationDistance)
+  /* Pill `max-width`: Bootstrap `.container` inner width at `sm` (540px → 33.75rem) minus mirrored horizontal gutters. */
+  @media only screen and (width <= 767.98px) {
+    --_headerMobilePillAlignMaxWidth: 33.75rem;
+    --_headerMobileHorizontalGutter: clamp(0.75rem, 4vw, 1.25rem);
+    --_header-mobile-scrolled-max-w: min(
+      var(--_headerMobilePillAlignMaxWidth),
+      calc(100vw - env(safe-area-inset-left) - env(safe-area-inset-right) - 2 * var(--_headerMobileHorizontalGutter))
     );
+  }
+
+  @supports not (animation-timeline: scroll(root block)) {
+    @media only screen and (width <= 767.98px) {
+      width: auto;
+      border-radius: 0;
+    }
+  }
+
+  @supports (animation-timeline: view()) {
+    @media only screen and (width >= 768px) {
+      --_stickyNavDesktopSideInset: 4rem;
+
+      top: var(--_stickyNavHiddenTop);
+      animation: sticky-navigation-desktop linear forwards;
+      animation-timeline: view();
+      animation-range-start: calc(100vh + var(--_stickyNavViewRangeStartVh));
+      animation-range-end: calc(
+        100vh + var(--_stickyNavViewRangeStartVh) + var(--_stickyNavDesktopKeyframeSpan)
+      );
+    }
+
+    @media (width >= 992px) {
+      --_stickyNavDesktopSideInset: 6rem;
+    }
+
+    @media (width >= 1200px) {
+      --_stickyNavDesktopSideInset: 9rem;
+    }
+
+  }
+
+  @supports (animation-timeline: scroll(root block)) {
+    @media only screen and (width <= 767.98px) {
+      /* Narrow bar + pill radius over the first ~1/3 viewport of scroll (`sticky-navigation-mobile`). */
+      animation: sticky-navigation-mobile 1s var(--motion-ease-out) both;
+      animation-timeline: scroll(root block);
+      animation-range: 0 33vh;
+    }
   }
 }
 
 /*
- * `sticky-navigation`: one animation range moves the bar from hidden to sticky pill.
- * `width: fit-content` is held for both keyframe endpoints so only position, color, and radius change.
+ * Desktop / tablet (`view()`): `fit-content` width; at 100% add pill radius, `top`, and `max-width` cap so narrow viewports keep side margins.
  */
-@keyframes sticky-navigation {
+@keyframes sticky-navigation-desktop {
   0% {
     --_headerWidth: fit-content;
   }
@@ -55,9 +106,33 @@
   100% {
     --_headerWidth: fit-content;
 
-    top: 1rem;
+    top: var(--_stickyNavPillTopOffset);
+    max-width: min(
+      100%,
+      calc(
+        100vw - env(safe-area-inset-left) - env(safe-area-inset-right) - var(--_stickyNavDesktopSideInset)
+      )
+    );
     color: var(--_textColorEnd);
     background-color: var(--_backgroundColorEnd);
+    border-radius: 100vw;
+  }
+}
+
+/*
+ * Mobile (`scroll(root)`): flush full-width bar → floated pill (width cap, `100vw` radius, `top` → `--_stickyNavPillTopOffset`).
+ * `margin-inline: auto` on `.header` centers the narrower strip.
+ */
+@keyframes sticky-navigation-mobile {
+  from {
+    top: 0;
+    max-width: 100%;
+    border-radius: 0;
+  }
+
+  to {
+    top: var(--_stickyNavPillTopOffset);
+    max-width: var(--_header-mobile-scrolled-max-w);
     border-radius: 100vw;
   }
 }
@@ -188,7 +263,7 @@
   @media only screen and (width >= 320px) and (width <= 767.98px) {
     /*
      * `.menu` is position:fixed (off-canvas), so only toggler + logo participate in flex.
-     * `space-between` was pinning the logo to the right — center the wordmark instead.
+     * `space-between` was pinning the logo to the right — center the text logo instead.
      */
     position: relative;
     gap: 0;
@@ -199,13 +274,26 @@
     padding-top: max(0.75rem, env(safe-area-inset-top));
     padding-bottom: 0.75rem;
 
+    /*
+     * Full-height drawer uses this as its `top` inset (`_menu.scss`) so the text logo stays in the bar above the sheet.
+     * Matches navbar vertical padding plus the logo row tap target (~2.75rem).
+     */
+    --mobile-nav-bar-block-size: calc(
+      max(0.75rem, env(safe-area-inset-top)) + 0.75rem + 2.75rem
+    );
+
     .navbar-toggler {
       position: absolute;
       top: 50%;
-      left: max(0.75rem, env(safe-area-inset-left));
+      right: max(0.75rem, env(safe-area-inset-right));
+      left: auto;
 
-      /* Hamburger sits above the centered logo row so it receives taps (logo row uses `pointer-events: none`). */
+      /* Toggle sits above the centred text logo (`z-index`) so taps always hit it; mirrored end padding lives on `.navbar-logo`. */
       z-index: 1110;
+      background-color: transparent;
+      border: none;
+      border-radius: 0;
+      box-shadow: none;
       transform: translateY(-50%);
     }
 
@@ -218,12 +306,12 @@
       width: 100%;
       max-width: 100%;
       min-height: 2.75rem;
-      padding-inline: clamp(2.75rem, 18vw, 3.5rem);
+      padding-inline: clamp(0.75rem, 5vw, 1.25rem) clamp(2.75rem, 16vw, 3.75rem);
       margin: 0;
 
       /*
        * Logo row spans full width for centering; disable hit-testing on the wrapper so the area
-       * beside the wordmark still passes clicks to the toggler. `.logo` re-enables pointer events.
+       * beside the text logo still passes clicks to the toggler. `.logo` re-enables pointer events.
        */
       pointer-events: none;
 
@@ -238,11 +326,11 @@
   }
 
   @media only screen and (width >= 768px) {
-    padding: 1rem 0.75rem;
-    padding-top: max(1rem, env(safe-area-inset-top));
+    padding-block: 1rem;
+    padding-inline: 2rem;
 
     &.navbar-expand-md {
-      justify-content: center;
+      justify-content: space-between;
     }
 
     .nav-footer {
@@ -250,44 +338,43 @@
     }
 
     .navbar-toggler {
-      visibility: hidden;
+      display: none;
+    }
+
+    .navbar-logo {
+      flex: 0 1 auto;
+      min-width: 0;
+      margin-inline-end: 1rem;
+      margin-right: 0;
     }
   }
 
   /*
-     * Between tablet and 1200px: add space between wordmark and links; allow the logo to shrink in flex
+     * Between tablet and 1200px: add space between text logo and links; allow the logo to shrink in flex
      * so the pill-shaped bar does not clip text; extra padding keeps the last nav link off the curved ends.
      */
   @media only screen and (width >= 768px) and (width <= 1199.98px) {
     gap: clamp(0.6rem, 1.5vw + 0.25rem, 1.25rem);
     align-items: center;
-    padding: 0.85rem 1.15rem;
-    padding-top: max(0.85rem, env(safe-area-inset-top));
 
     .navbar-logo {
       flex: 0 1 auto;
       min-width: 0;
+      margin-inline-end: 0.85rem;
     }
   }
 
   @media (width >= 992px) {
-    padding: 1.5rem 1rem;
-    padding-top: max(1.5rem, env(safe-area-inset-top));
+    padding-inline: 3rem;
 
     .navbar-logo {
-      margin-inline-end: auto;
-      margin-left: 1rem;
+      flex: 0 1 auto;
+      min-width: 0;
+      margin-inline-end: 1rem;
     }
-  }
-
-  @media (width >= 992px) and (width <= 1199.98px) {
-    padding: 1rem 1.25rem;
-    padding-top: max(1rem, env(safe-area-inset-top));
   }
 
   @media (width >= 1200px) {
-    .navbar-logo {
-      margin-left: 2rem;
-    }
+    padding-inline: 4.5rem;
   }
 }

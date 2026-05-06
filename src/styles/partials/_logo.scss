@@ -21,15 +21,28 @@
   @media only screen and (width >= 320px) and (width <= 767.98px) {
     display: flex;
     flex: 0 1 auto;
-    flex-flow: row wrap;
+    flex-flow: row nowrap;
+    gap: 0.04em;
     align-items: center;
     justify-content: center;
+    font-size: clamp(0.625rem, 0.42rem + 1.5vw, var(--font-size-base));
+    line-height: 1.15;
     text-align: center;
-    letter-spacing: 0.015em;
+    letter-spacing: 0.01em;
+    white-space: nowrap;
+
+    /*
+     * One-line text logo in the floating pill: scale through the narrow band (hamburger + horizontal padding).
+     * `clamp` floor (~10px) keeps copy legible; raise the floor only if copy changes.
+     */
+
+    &-item {
+      flex: 0 0 auto;
+    }
   }
 
   /*
-   * Mid-width nav: slightly smaller serif logo so the wordmark reads as a “title”
+   * Mid-width nav: slightly smaller serif logo so the text logo reads as a “title”
    * beside the sans-serif nav links (Rubik at this breakpoint).
    */
   @media only screen and (width >= 768px) and (width <= 1199.98px) {
@@ -38,7 +51,7 @@
     gap: 0.06em;
     align-items: center;
     justify-content: flex-start;
-    font-size: clamp(0.75rem, 0.72rem + 0.32vw, 0.92rem);
+    font-size: 0.85rem;
     font-weight: 600;
     line-height: 1.2;
     letter-spacing: 0.03em;

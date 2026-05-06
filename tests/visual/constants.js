@@ -45,7 +45,7 @@ export const HOME_SELECTORS = {
     stockingCarouselReadyMs: 20_000,
     imageLoadPerImageMs: 8_000,
     menuDrawerOpenMs: 10_000,
-    /** `.menu` uses `transition: left 0.2s` when opening (`_mixins.scss`). */
+    /** Drawer slide timing — `_menu.scss` (`left`, ~0.28s ease-out; allow small buffer). */
     menuDrawerTransitionMs: 300,
     /** Element screenshots: fonts / flex / carousel can shrinkwrap after first paint — wait until box stops moving. */
     screenshotLayoutStableTimeoutMs: 20_000,
