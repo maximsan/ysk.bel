@@ -259,6 +259,11 @@
       width: 1.2em;
       height: 1.2em;
     }
+
+    .open-menu,
+    .close-menu {
+      color: var(--color-icon);
+    }
   }
 
   @media only screen and (width >= 320px) and (width <= 767.98px) {

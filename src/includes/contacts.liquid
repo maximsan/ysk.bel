@@ -1,10 +1,13 @@
 <section class='section-container contacts section-chapter' id='contacts'>
   <div class='container'>
+    <div class='content-header section-chapter__header'>
+      <h2 class='section-chapter__title'>Контакты</h2>
+    </div>
     <div class='row'>
       <div class='col-12 col-lg-6'>
         <div class='our-contacts'>
           <div class='address'>
-            <h4 class='address-header'>{{ contacts.header }}</h4>
+            <h3 class='address-header'>{{ contacts.header }}</h3>
             <div class='address-desc'>
               <div class='address-desc-item'>
                 {{ contacts.region }}
@@ -27,19 +30,28 @@
             </div>
           </div>
           <div class='address'>
-            <h4 class='address-header'>{{ contacts.contactUs.header }}</h4>
+            <h3 class='address-header'>{{ contacts.contactUs.header }}</h3>
             <div class='address-desc'>
               <div class='contact-us'>
                 {% for phone in contacts.contactUs.phones %}
                   <div class='contact-us__{{ phone.operator }}'>
-                    <img
-                      alt=''
-                      class='{{ phone.operator }}-icon'
-                      src='{{ phone.iconUrl }}'
-                      width='24'
-                      height='24'
-                      decoding='async'
-                    >
+                    {% if phone.icon %}
+                      <i
+                        data-lucide='{{ phone.icon }}'
+                        class='{{ phone.operator }}-icon'
+                        aria-hidden='true'
+                      ></i>
+                    {% elsif phone.svgIcon %}
+                      <img
+                        src='assets/images/icons/{{ phone.svgIcon }}'
+                        class='{{ phone.operator }}-icon'
+                        alt=''
+                        aria-hidden='true'
+                        width='24'
+                        height='24'
+                        decoding='async'
+                      >
+                    {% endif %}
                     <a
                       href='{{ phone.href }}'
                       class='phone-number'

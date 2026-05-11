@@ -50,6 +50,8 @@
                             src='{{ imgItem.srcSet[0] }}'
                             srcSet='{{ imgItem.srcSet | join: ', ' }}'
                             alt='{{ imgItem.alt }}'
+                            width='75'
+                            height='100'
                             loading='lazy'
                             decoding='async'
                             class='gallery__img card-img-top'

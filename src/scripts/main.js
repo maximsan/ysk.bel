@@ -12,6 +12,7 @@ import {
   initStockingImageSkeletons,
   initVideosShowcaseCarousel,
   initCooperationViberDesktopFallback,
+  initLucideIcons,
 } from '@scripts/helpers/index.js';
 
 /**
@@ -58,6 +59,7 @@ function initCarouselsWhenDomReady() {
   initStockingCarousel();
   initStockingImageSkeletons();
   initCooperationViberDesktopFallback();
+  initLucideIcons();
 }
 
 if (document.readyState !== 'loading') {
@@ -67,3 +69,30 @@ if (document.readyState !== 'loading') {
 }
 
 initGoogleFormHandlers();
+
+function initConversionTracking() {
+  document.querySelectorAll('a[href^="tel:"]').forEach((el) => {
+    el.addEventListener('click', () => {
+      if (typeof ym === 'function') ym(67016224, 'reachGoal', 'phone_click');
+      if (typeof gtag === 'function') gtag('event', 'phone_click', { event_category: 'conversion' });
+    });
+  });
+  document.querySelectorAll('a[href*="wa.me"]').forEach((el) => {
+    el.addEventListener('click', () => {
+      if (typeof ym === 'function') ym(67016224, 'reachGoal', 'whatsapp_click');
+      if (typeof gtag === 'function') gtag('event', 'whatsapp_click', { event_category: 'conversion' });
+    });
+  });
+  document.querySelectorAll('a[data-viber-app-href], a[href*="viber.com"]').forEach((el) => {
+    el.addEventListener('click', () => {
+      if (typeof ym === 'function') ym(67016224, 'reachGoal', 'viber_click');
+      if (typeof gtag === 'function') gtag('event', 'viber_click', { event_category: 'conversion' });
+    });
+  });
+}
+
+if (document.readyState !== 'loading') {
+  initConversionTracking();
+} else {
+  document.addEventListener('DOMContentLoaded', initConversionTracking);
+}

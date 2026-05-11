@@ -10,8 +10,8 @@ import { SITE_SELECTORS } from '@constants/dom/siteSelectors.js';
 const header = document.querySelector(SITE_SELECTORS.header);
 const sidebar = document.querySelector(SITE_SELECTORS.menu);
 const navButton = document.querySelector(SITE_SELECTORS.navbarToggler);
-const sidebarOpenIcon = document.querySelector(SITE_SELECTORS.openMenu);
-const sidebarCloseIcon = document.querySelector(SITE_SELECTORS.closeMenu);
+const getSidebarOpenIcon = () => document.querySelector(SITE_SELECTORS.openMenu);
+const getSidebarCloseIcon = () => document.querySelector(SITE_SELECTORS.closeMenu);
 const menuScrim = document.querySelector('[data-menu-scrim]');
 
 let scrollLockY = 0;
@@ -72,7 +72,7 @@ function detachMenuListeners() {
 }
 
 function teardownMenuDom() {
-  if (!sidebar || !header || !sidebarOpenIcon || !sidebarCloseIcon) {
+  if (!sidebar || !header || !getSidebarOpenIcon() || !getSidebarCloseIcon()) {
     return;
   }
   sidebar.classList.remove(MENU_CLASS.open);
@@ -98,8 +98,8 @@ function teardownMenuDom() {
   header.style.animationTimeline = '';
   header.style.animationRange = '';
 
-  sidebarCloseIcon.classList.add(CSS_UTILITY_CLASS.hidden);
-  sidebarOpenIcon.classList.remove(CSS_UTILITY_CLASS.hidden);
+  getSidebarCloseIcon().classList.add(CSS_UTILITY_CLASS.hidden);
+  getSidebarOpenIcon().classList.remove(CSS_UTILITY_CLASS.hidden);
   setMenuButtonExpanded(false);
   detachMenuListeners();
 }
@@ -137,7 +137,7 @@ function scrollToHashFromDrawer(href) {
 }
 
 function openSideBar() {
-  if (!sidebar || !header || !sidebarOpenIcon || !sidebarCloseIcon) {
+  if (!sidebar || !header || !getSidebarOpenIcon() || !getSidebarCloseIcon()) {
     return;
   }
   scrollLockY = readScrollY();
@@ -168,8 +168,8 @@ function openSideBar() {
   header.style.animationTimeline = 'auto';
   header.style.animationRange = 'normal';
 
-  sidebarOpenIcon.classList.add(CSS_UTILITY_CLASS.hidden);
-  sidebarCloseIcon.classList.remove(CSS_UTILITY_CLASS.hidden);
+  getSidebarOpenIcon().classList.add(CSS_UTILITY_CLASS.hidden);
+  getSidebarCloseIcon().classList.remove(CSS_UTILITY_CLASS.hidden);
   setMenuButtonExpanded(true);
 
   if (!escapeBound) {
@@ -179,7 +179,7 @@ function openSideBar() {
 }
 
 function closeSideBar() {
-  if (!sidebar || !header || !sidebarOpenIcon || !sidebarCloseIcon) {
+  if (!sidebar || !header || !getSidebarOpenIcon() || !getSidebarCloseIcon()) {
     return;
   }
   teardownMenuDom();
@@ -187,7 +187,7 @@ function closeSideBar() {
 }
 
 function closeSideBarForHashLink(href) {
-  if (!sidebar || !header || !sidebarOpenIcon || !sidebarCloseIcon) {
+  if (!sidebar || !header || !getSidebarOpenIcon() || !getSidebarCloseIcon()) {
     return;
   }
   teardownMenuDom();
@@ -236,7 +236,7 @@ export function closeSideBarOnTimeout() {
 }
 
 export function toggleSideBar() {
-  if (!navButton || !sidebarOpenIcon || !sidebarCloseIcon) {
+  if (!navButton || !getSidebarOpenIcon() || !getSidebarCloseIcon()) {
     return;
   }
 
@@ -251,7 +251,7 @@ export function toggleSideBar() {
   navButton.addEventListener('click', (event) => {
     event.preventDefault();
 
-    if (!sidebarOpenIcon.classList.contains(CSS_UTILITY_CLASS.hidden)) {
+    if (!getSidebarOpenIcon().classList.contains(CSS_UTILITY_CLASS.hidden)) {
       openSideBar();
     } else {
       closeSideBar();

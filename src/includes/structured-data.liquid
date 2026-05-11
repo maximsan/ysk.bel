@@ -1,0 +1,30 @@
+{% comment %}
+  LocalBusiness JSON-LD — consumed by Google and Yandex for rich results (business panel, map card).
+  Data sources: contacts.js (address, coordinates), meta.js (url, description).
+  Update `openingHoursSpecification` and `priceRange` if operating hours are confirmed.
+{% endcomment %}
+<script type='application/ld+json'>
+{
+  "@context": "https://schema.org",
+  "@type": "LodgingBusiness",
+  "name": "Усадьба Серебряный Карась",
+  "url": "{{ meta.url }}",
+  "telephone": "+375291495989",
+  "email": "oleg-magnat@tut.by",
+  "description": "Тихая усадьба у воды недалеко от Минска — рыбалка, баня и тёплый отдых в духе загородного дома.",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "ул. Тихая 3а",
+    "addressLocality": "д. Вепраты",
+    "addressRegion": "Минская область",
+    "addressCountry": "BY"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 54.291652,
+    "longitude": 27.480454
+  },
+  "priceRange": "20–150 BYN",
+  "image": "{{ meta.url }}/assets/images/hero-fish-1600.avif"
+}
+</script>

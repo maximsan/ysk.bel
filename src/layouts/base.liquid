@@ -7,6 +7,7 @@
     {% assign pageThemeColor = themeColor | default: meta.themeColor %}
     {% assign pageThemeColorDark = themeColorDark | default: meta.themeColorDark %}
     {% render 'head', themeColor: pageThemeColor, themeColorDark: pageThemeColorDark %}
+    {% render 'structured-data' %}
   </head>
   <body id='top'>
     <!-- Google Tag Manager (noscript) -->
@@ -47,7 +48,6 @@
       {% render 'contacts' %}
     </main>
 
-    <!-- TODO: feedback section -->
     <!-- Thank you page -->
     <div id='thankyou_message' style='display:none;'>
       <h2>Thanks for contacting us! We will get back to you soon!</h2>
@@ -59,15 +59,5 @@
     {% render 'footer' %}
     <!-- Footer navigation end -->
 
-    <script>
-      window.dataLayer = window.dataLayer || [];
-
-      function gtag() {
-        dataLayer.push(arguments);
-      }
-
-      gtag('js', new Date());
-      gtag('config', 'G-0MVEPHZ43W');
-    </script>
   </body>
 </html>

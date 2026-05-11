@@ -28,7 +28,7 @@ const services = {
             img: {
               src: 'assets/images/man-with-fish-2/thumbnail-75x100.webp',
               srcSet: ['assets/images/man-with-fish-2/thumbnail-75x100.webp'],
-              alt: 'Man with fish in hands 1',
+              alt: 'Рыбак с уловом у пруда усадьбы',
               caption: 'Весенний улов',
             },
           },
@@ -43,7 +43,7 @@ const services = {
             img: {
               src: 'assets/images/man-with-fish-1/thumbnail-75x100.webp',
               srcSet: ['assets/images/man-with-fish-1/thumbnail-75x100.webp'],
-              alt: 'Man with fish in hands 2',
+              alt: 'Рыбак держит крупного карпа в руках',
               caption: 'Весенний улов',
             },
           },
@@ -58,7 +58,7 @@ const services = {
             img: {
               src: 'assets/images/man-with-fish-3/thumbnail-75x100.webp',
               srcSet: ['assets/images/man-with-fish-3/thumbnail-75x100.webp'],
-              alt: 'Man with fish in hands 3',
+              alt: 'Зимняя рыбалка на пруду усадьбы',
               caption: 'Зимняя рыбалка',
             },
           },
@@ -75,7 +75,7 @@ const services = {
               srcSet: [
                 'https://live.staticflickr.com/65535/50365463911_178aa89654_t.jpg',
               ],
-              alt: 'Man with fish in hands 4',
+              alt: 'Летняя рыбалка — удачный улов',
               caption: 'Летняя рыбалка',
             },
           },
@@ -102,7 +102,7 @@ const services = {
               '(max-width: 1200px) 500px',
               '580px',
             ],
-            alt: 'Pike as child',
+            alt: 'Ребёнок на рыбалке — щука у берега пруда',
             caption: 'Крупный улов',
           },
         },
@@ -148,7 +148,7 @@ const services = {
               '(max-width: 1200px) 500px',
               '580px',
             ],
-            alt: 'view 1',
+            alt: 'Вид на озеро с территории усадьбы',
             caption: 'Вид на озеро',
           },
         },
@@ -166,7 +166,7 @@ const services = {
               srcSet: [
                 'https://live.staticflickr.com/65535/50360482948_ed74ebaf91_t.jpg',
               ],
-              alt: 'view 2',
+              alt: 'Вид на дамбу пруда',
               caption: 'Вид на дамбу',
             },
           },
@@ -183,7 +183,7 @@ const services = {
               srcSet: [
                 'https://live.staticflickr.com/65535/50361345967_a8e801962a_t.jpg',
               ],
-              alt: 'view',
+              alt: 'Вид на дамбу с берега',
               caption: 'Вид на дамбу',
             },
           },
@@ -200,7 +200,7 @@ const services = {
               srcSet: [
                 'https://live.staticflickr.com/65535/50361345327_728a825d79_t.jpg',
               ],
-              alt: 'forest with mushrooms',
+              alt: 'Лес вокруг озера с грибами',
               caption: 'Лес вокруг озера с грибами',
             },
           },
@@ -217,7 +217,7 @@ const services = {
               srcSet: [
                 'https://live.staticflickr.com/65535/50360481958_c522434877_t.jpg',
               ],
-              alt: 'sign',
+              alt: 'Знак деревни Вепраты на въезде',
               caption: 'Знак д.Вяпраты',
             },
           },
@@ -248,7 +248,7 @@ const services = {
               srcSet: [
                 'https://live.staticflickr.com/65535/50361345907_db88327615_t.jpg',
               ],
-              alt: 'living room',
+              alt: 'Гостиная усадьбы, первый этаж',
               caption: 'Гостинная, 1-ый этаж',
             },
           },
@@ -265,7 +265,7 @@ const services = {
               srcSet: [
                 'https://live.staticflickr.com/65535/50361345682_bab8504d89_t.jpg',
               ],
-              alt: 'house window',
+              alt: 'Спальная комната на втором этаже усадьбы',
               caption: 'Спальная комната на 2-м этаже',
             },
           },
@@ -282,7 +282,7 @@ const services = {
               srcSet: [
                 'https://live.staticflickr.com/65535/50361180181_e64b528883_t.jpg',
               ],
-              alt: 'steam room',
+              alt: 'Парилка в деревянной бане усадьбы',
               caption: 'Парилка',
             },
           },
@@ -298,7 +298,7 @@ const services = {
               srcSet: [
                 'https://live.staticflickr.com/65535/50360482768_f597727093_t.jpg',
               ],
-              alt: 'bucket scoop',
+              alt: 'Ковш и печь — интерьер парилки',
               caption: 'Парилка',
             },
           },
@@ -325,8 +325,7 @@ const services = {
               '(max-width: 1200px) 500px',
               '580px',
             ],
-            alt: 'bath house',
-            caption: 'Баня',
+            alt: 'Домик с баней и беседка с мангалом на территории усадьбы',
             caption: 'Вид на домик с баней и беседку с мангалом',
           },
         },
@@ -363,7 +362,7 @@ const services = {
               '(max-width: 1200px) 500px',
               '580px',
             ],
-            alt: 'lake',
+            alt: 'Вид на пруд с берега усадьбы',
             caption: 'Вид на озеро',
           },
         },
@@ -414,7 +413,7 @@ const services = {
               srcSet: [
                 'https://live.staticflickr.com/65535/50361347217_5582a695cb_t.jpg',
               ],
-              alt: 'parking',
+              alt: 'Парковочная территория усадьбы',
               caption: 'Парковочная территория',
             },
           },
@@ -430,7 +429,7 @@ const services = {
               srcSet: [
                 'https://live.staticflickr.com/65535/50361180946_cf3549919c_t.jpg',
               ],
-              alt: 'house',
+              alt: 'Домик рыбака на территории усадьбы',
               caption: 'Домик рыбака',
             },
           },
@@ -446,7 +445,7 @@ const services = {
               srcSet: [
                 'https://live.staticflickr.com/65535/50361346522_8fc1134ed2_t.jpg',
               ],
-              alt: 'protected area',
+              alt: 'Огороженная охраняемая территория усадьбы',
               caption: 'Огороженная, охраняемая территория',
             },
           },
@@ -462,7 +461,7 @@ const services = {
               srcSet: [
                 'https://live.staticflickr.com/65535/50361181391_a96455272d_t.jpg',
               ],
-              alt: 'own well',
+              alt: 'Скважина с артезианской водой на территории усадьбы',
               caption: 'Скважина с артезианской водой',
             },
           },

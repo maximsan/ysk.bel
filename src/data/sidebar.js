@@ -51,7 +51,7 @@ export default {
     text: 'Заказать баню',
   },
   author: {
-    co: '© Untitled | Website created with 🍺',
+    co: '© Усадьба Серебряный Карась',
     by: 'by @maximsan',
   },
 };

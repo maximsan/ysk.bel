@@ -14,6 +14,22 @@
   content='{{ meta.description }}'
 >
 <meta
+  property='og:type'
+  content='website'
+>
+<meta
+  property='og:url'
+  content='{{ meta.url }}'
+>
+<meta
+  property='og:locale'
+  content='{{ meta.locale }}'
+>
+<meta
+  property='og:site_name'
+  content='Усадьба Серебряный Карась'
+>
+<meta
   property='og:title'
   content='{{ meta.ogTitle }}'
 >
@@ -22,6 +38,7 @@
   content='{{ meta.ogDescription }}'
 >
 <meta name='author' content='{{ meta.author }}'>
+<link rel='canonical' href='{{ meta.url }}'>
 
 <!-- favicon -->
 <link rel='apple-touch-icon' sizes='180x180' href='assets/icons/apple-touch-icon.png'>
@@ -82,9 +99,7 @@
   }
 
   window.addEventListener('load', function () {
-    window.setTimeout(function () {
-      loadGoogleTagManager(window, document, 'script', 'dataLayer', 'GTM-5W4KDDW');
-    }, 4000);
+    loadGoogleTagManager(window, document, 'script', 'dataLayer', 'GTM-5W4KDDW');
   });
 </script>
 <!-- End Google Tag Manager -->
@@ -106,15 +121,13 @@
   }
 
   window.addEventListener('load', function () {
-    window.setTimeout(function () {
-      loadYandexMetrika(window, document, 'script', 'https://mc.yandex.ru/metrika/tag.js', 'ym');
-      ym(67016224, 'init', {
-        clickmap: true,
-        trackLinks: true,
-        accurateTrackBounce: true,
-        webvisor: true,
-      });
-    }, 4500);
+    loadYandexMetrika(window, document, 'script', 'https://mc.yandex.ru/metrika/tag.js', 'ym');
+    ym(67016224, 'init', {
+      clickmap: true,
+      trackLinks: true,
+      accurateTrackBounce: true,
+      webvisor: true,
+    });
   });
 </script>
 <noscript>
@@ -135,4 +148,4 @@
 <link rel='stylesheet' type='text/css' href='{{ 'assets/main.css' | url }}'>
 <link rel='stylesheet' type='text/css' href='{{ 'assets/photoswipe.css' | url }}'>
 
-<script defer src='scripts/index.js'></script>
+<script defer src='{{ "/scripts/index.js" | url }}'></script>

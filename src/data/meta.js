@@ -30,7 +30,7 @@ export default {
   author: 'maximsan.com',
   url: 'https://уск.бел',
   lang: 'ru',
-  locale: 'ru_RU',
+  locale: 'ru_BY',
   /** Browser UI tint (`<meta name="theme-color">`).
    * Per-page override: set `themeColor` / `themeColorDark` in front matter — values flow through
    * `base.liquid` into `head.liquid`.

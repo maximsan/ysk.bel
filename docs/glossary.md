@@ -192,6 +192,58 @@ Many entries below started with **Phase 1** (footer/colophon) and **Phase 2** (a
 
 ---
 
+---
+
+### GA4 (Google Analytics 4)
+
+**What:** Google's current web analytics platform. Tracks page views, user behaviour, and custom events, storing them in Google's data warehouse. Replaced Universal Analytics (UA) in 2023.
+
+**Why:** Used on this site to measure traffic sources, sessions, and conversion events (phone clicks, messenger opens). Measurement ID: `G-0MVEPHZ43W`.
+
+**How it loads here:** Through Google Tag Manager (GTM-5W4KDDW) — GA4 is not loaded directly. GTM injects the `gtag.js` library and fires the GA4 config tag. The inline `gtag()` snippet that was previously in `base.liquid` was removed to prevent double-counting.
+
+**Where:** GTM container configuration (external, not in repo). Conversion events emitted from [`src/scripts/main.js`](../src/scripts/main.js) (`initConversionTracking`).
+
+---
+
+### `gtag` / `gtag()`
+
+**What:** A global JavaScript function provided by the Google Tag (`gtag.js`) library. It is the low-level API for sending events and config to Google products (GA4, Google Ads). Syntax: `gtag('event', 'event_name', { parameters })`.
+
+**Why:** Used to fire named conversion events (`phone_click`, `whatsapp_click`, `viber_click`) directly from JS, which appear as events in GA4 reports and can be used as Google Ads conversion actions.
+
+**Important detail:** `gtag` is only available after GTM has loaded and the GA4 tag inside it has executed. The code guards against this: `if (typeof gtag === 'function') gtag(...)`.
+
+**Where:** [`src/scripts/main.js`](../src/scripts/main.js) (`initConversionTracking`).
+
+---
+
+### GTM (Google Tag Manager)
+
+**What:** A tag management system — a single `<script>` container loaded on the page that can deploy and configure third-party analytics, marketing, and tracking scripts without code changes. Container ID: `GTM-5W4KDDW`.
+
+**Why:** Lets GA4, Google Ads, and other tags be added or changed without a site rebuild. Also fires the `gtag.js` library that `gtag()` calls depend on.
+
+**How it loads here:** Fires immediately on the `load` event (previously had a 4-second delay). Includes a `<noscript>` iframe fallback in `base.liquid`.
+
+**Where:** [`src/includes/head.liquid`](../src/includes/head.liquid) (script loader), [`src/layouts/base.liquid`](../src/layouts/base.liquid) (noscript iframe).
+
+---
+
+### `ym` / Yandex Metrika
+
+**What:** `ym(counterId, method, ...)` is the global JS API for Yandex Metrika — Yandex's web analytics platform, widely used in Russia and Belarus. Counter ID: `67016224`.
+
+**Why:** Yandex Metrika is the primary analytics tool for the Belarusian audience. It provides session replay (Webvisor), click maps, scroll maps, and named conversion goal funnels. It also feeds Yandex.Direct advertising attribution.
+
+**Named goals:** `phone_click`, `whatsapp_click`, `viber_click` are fired as conversion events in `main.js`. These must also be **created manually in the Metrika web UI** (Метрика → Цели) to appear in funnel reports and ad attribution.
+
+**How it loads here:** Fires immediately on the `load` event (previously had a 4.5-second delay). Includes a `<noscript>` pixel fallback.
+
+**Where:** [`src/includes/head.liquid`](../src/includes/head.liquid) (init); [`src/scripts/main.js`](../src/scripts/main.js) (`initConversionTracking`, goal events).
+
+---
+
 ## Related files (by topic)
 
 | Topic                                                      | Files                                                                                  |
