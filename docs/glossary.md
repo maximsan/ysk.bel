@@ -1,10 +1,6 @@
 # Project glossary
 
-Definitions for **terms, patterns, and jargon** used in this repository—UI, accessibility, content, publishing words, tooling, or anything else worth explaining in one place.
-
-Many entries below started with **Phase 1** (footer/colophon) and **Phase 2** (accessibility, drawer behavior) from [`header-footer-ui-plan.md`](header-footer-ui-plan.md). Add new headings as needed; the **What / Why / Where** shape is optional but works well for implementation-linked concepts.
-
----
+Definitions for **terms, patterns, and jargon** used in this repository
 
 ## How to read this doc
 
@@ -57,23 +53,13 @@ Many entries below started with **Phase 1** (footer/colophon) and **Phase 2** (a
 
 ### Colophon footer
 
-**Word:** *Colophon* comes from publishing: the short note at the **end** of a book about who produced it and how. On websites people use it informally for a **small closing strip**—identity, credits, light navigation—not the main calls to action.
+**Word:** _Colophon_ comes from publishing: the short note at the **end** of a book about who produced it and how. On websites people use it informally for a **small closing strip**—identity, credits, light navigation—not the main calls to action.
 
 **What (this site):** A short **closing** strip at the bottom: who/what the site is, optional neutral links, credits—not a second row of “call us on WhatsApp” buttons.
 
 **Why:** The **partnership strip** (`cooperation-banner`) already holds primary messengers/call actions. The footer avoids repeating those channels.
 
 **Where:** [`src/data/footer.js`](../src/data/footer.js), [`src/includes/footer.liquid`](../src/includes/footer.liquid), [`src/styles/partials/_footer.scss`](../src/styles/partials/_footer.scss).
-
----
-
-### Event delegation (menu link close)
-
-**What:** One `click` listener on the **drawer container** checks whether the click target was a link inside it (`closest('a')`), instead of attaching listeners to every link.
-
-**Why:** Fewer moving parts; any `#…` or `tel:` link in the drawer closes the menu consistently.
-
-**Where:** [`src/scripts/helpers/sideBar.js`](../src/scripts/helpers/sideBar.js) (`onMenuLinkClick`).
 
 ---
 
@@ -89,7 +75,7 @@ Many entries below started with **Phase 1** (footer/colophon) and **Phase 2** (a
 
 ### Scrim
 
-**Word:** In UI, a *scrim* is a **semi-transparent layer** over the page (usually a dark tint) that **dims** whatever sits behind a modal, drawer, or dialog so the top layer reads as “in front.” The English word comes from theater/film (a light‑softening cloth); design systems such as **Material Design** reused it for these overlays.
+**Word:** In UI, a _scrim_ is a **semi-transparent layer** over the page (usually a dark tint) that **dims** whatever sits behind a modal, drawer, or dialog so the top layer reads as “in front.” The English word comes from theater/film (a light‑softening cloth); design systems such as **Material Design** reused it for these overlays.
 
 **What (menu on this site):** A **full-viewport** scrim lives **behind** the slide-out navigation and **above** the page. It is not the drawer itself—only the dimmed sheet you tap to dismiss.
 
@@ -192,8 +178,6 @@ Many entries below started with **Phase 1** (footer/colophon) and **Phase 2** (a
 
 ---
 
----
-
 ### GA4 (Google Analytics 4)
 
 **What:** Google's current web analytics platform. Tracks page views, user behaviour, and custom events, storing them in Google's data warehouse. Replaced Universal Analytics (UA) in 2023.
@@ -220,11 +204,14 @@ Many entries below started with **Phase 1** (footer/colophon) and **Phase 2** (a
 
 ### GTM (Google Tag Manager)
 
-**What:** A tag management system — a single `<script>` container loaded on the page that can deploy and configure third-party analytics, marketing, and tracking scripts without code changes. Container ID: `GTM-5W4KDDW`.
+**What:** A tag management system — a single `<script>` container loaded on the page that can deploy and configure third-party analytics, marketing, and tracking scripts without code changes.
+Container ID: `GTM-5W4KDDW`.
 
-**Why:** Lets GA4, Google Ads, and other tags be added or changed without a site rebuild. Also fires the `gtag.js` library that `gtag()` calls depend on.
+**Why:** Lets GA4, Google Ads, and other tags be added or changed without a site rebuild.
+Also fires the `gtag.js` library that `gtag()` calls depend on.
 
-**How it loads here:** Fires immediately on the `load` event (previously had a 4-second delay). Includes a `<noscript>` iframe fallback in `base.liquid`.
+**How it loads here:** Fires immediately on the `load` event (previously had a 4-second delay).
+Includes a `<noscript>` iframe fallback in `base.liquid`.
 
 **Where:** [`src/includes/head.liquid`](../src/includes/head.liquid) (script loader), [`src/layouts/base.liquid`](../src/layouts/base.liquid) (noscript iframe).
 
@@ -232,27 +219,13 @@ Many entries below started with **Phase 1** (footer/colophon) and **Phase 2** (a
 
 ### `ym` / Yandex Metrika
 
-**What:** `ym(counterId, method, ...)` is the global JS API for Yandex Metrika — Yandex's web analytics platform, widely used in Russia and Belarus. Counter ID: `67016224`.
+**What:** `ym(counterId, method, ...)` is the global JS API for Yandex Metrika — Yandex's web analytics platform.
+Counter ID: `67016224`.
 
-**Why:** Yandex Metrika is the primary analytics tool for the Belarusian audience. It provides session replay (Webvisor), click maps, scroll maps, and named conversion goal funnels. It also feeds Yandex.Direct advertising attribution.
+**Why:** Yandex Metrika is the primary analytics tool. It provides session replay (Webvisor), click maps, scroll maps, and named conversion goal funnels. It also feeds Yandex.Direct advertising attribution.
 
 **Named goals:** `phone_click`, `whatsapp_click`, `viber_click` are fired as conversion events in `main.js`. These must also be **created manually in the Metrika web UI** (Метрика → Цели) to appear in funnel reports and ad attribution.
 
 **How it loads here:** Fires immediately on the `load` event (previously had a 4.5-second delay). Includes a `<noscript>` pixel fallback.
 
 **Where:** [`src/includes/head.liquid`](../src/includes/head.liquid) (init); [`src/scripts/main.js`](../src/scripts/main.js) (`initConversionTracking`, goal events).
-
----
-
-## Related files (by topic)
-
-| Topic                                                      | Files                                                                                  |
-| ---------------------------------------------------------- | -------------------------------------------------------------------------------------- |
-| Drawer open/close, scrim, scroll lock, Escape              | `src/scripts/helpers/sideBar.js`                                                       |
-| Nav width / tablet layout, header scroll-timeline fallback | `src/styles/partials/_menu.scss`, `src/styles/partials/_header.scss`                   |
-| Scroll spy / `aria-current`                                | `src/scripts/helpers/navScrollSpy.js`, `src/scripts/main.js`                           |
-| Scrim + safe-area + toggler size                           | `src/styles/partials/_header.scss`                                                     |
-| Drawer slide, safe-area bottom, link hit area              | `src/styles/partials/_menu.scss`                                                       |
-| Footer content model                                       | `src/data/footer.js`, `src/includes/footer.liquid`, `src/styles/partials/_footer.scss` |
-| `#top` / logo                                              | `src/layouts/base.liquid`, `src/includes/header.liquid`                                |
-| Anchor offset for `#prices`                                | `src/styles/partials/_services.scss`                                                   |
