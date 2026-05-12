@@ -1,10 +1,9 @@
 {
   "compilerOptions": {
-    "baseUrl": ".",
     "paths": {
-      "@constants/*": ["src/scripts/constants/*"],
-      "@scripts/*": ["src/scripts/*"],
-      "@data/*": ["src/data/*"]
+      "@constants/*": ["./src/scripts/constants/*"],
+      "@scripts/*": ["./src/scripts/*"],
+      "@data/*": ["./src/data/*"]
     }
   },
   "include": ["src/**/*.js", "build-globals.d.ts"],
