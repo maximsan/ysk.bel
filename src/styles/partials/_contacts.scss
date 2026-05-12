@@ -27,7 +27,7 @@
 
   // Section title floats on the photo — needs contrast against lake stones
   & > .container > .content-header .section-chapter__title {
-    color: #fff;
+    color: var(--white);
     text-shadow:
       0 1px 3px rgb(0 0 0 / 55%),
       0 2px 8px rgb(0 0 0 / 30%);
@@ -120,18 +120,7 @@
     .contact-us__viber > img {
       box-sizing: content-box;
       flex-shrink: 0;
-      width: 18px;
-      height: 18px;
       padding: 4px;
-      border-radius: 50%;
-    }
-
-    .contact-us__whatsapp > img {
-      background-color: var(--color-social-whatsapp-brand);
-    }
-
-    .contact-us__viber > img {
-      background-color: var(--color-social-viber-brand);
     }
   }
 
