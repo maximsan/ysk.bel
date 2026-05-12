@@ -2,14 +2,14 @@
  * Partnership banner directly above the footer (`cooperation-banner.liquid`).
  *
  * Holds secondary CTAs (WhatsApp, Viber, phone).
- *
- * When the phone number changes, also update:
- * `src/data/contacts.js` and `src/data/sidebar.js` so every surface stays aligned.
  */
-const PHONE_DIGITS = '375291495989';
-const PHONE_DISPLAY = '+375 (29) 149 59 89';
-/** HTTPS only — `viber://` in the initial `href` triggers Chromium errors without a handler. */
-const VIBER_WEB_HREF = 'https://www.viber.com/download/';
+import {
+  PHONE_DISPLAY,
+  VIBER_WEB_HREF,
+  WA_HREF,
+  VIBER_APP_HREF,
+  TEL_HREF,
+} from './channels.js';
 
 export default {
   eyebrow: 'Партнёрство',
@@ -21,7 +21,7 @@ export default {
     {
       variant: 'primary',
       label: 'Написать в WhatsApp',
-      href: `https://wa.me/${PHONE_DIGITS}`,
+      href: WA_HREF,
       channel: 'whatsapp',
       ariaLabel: 'Открыть WhatsApp-чат с усадьбой',
     },
@@ -29,8 +29,7 @@ export default {
       variant: 'ghost',
       label: 'Написать в Viber',
       href: VIBER_WEB_HREF,
-      /** E.164 digits only; applied to `href` on phone-class clients via `viberCooperationLink.js`. */
-      viberAppHref: `viber://chat?number=${PHONE_DIGITS}`,
+      viberAppHref: VIBER_APP_HREF,
       channel: 'viber',
       ariaLabel: 'Открыть Viber-чат с усадьбой',
       ariaLabelWeb:
@@ -39,7 +38,7 @@ export default {
     {
       variant: 'ghost',
       label: `Позвонить · ${PHONE_DISPLAY}`,
-      href: `tel:+${PHONE_DIGITS}`,
+      href: TEL_HREF,
       channel: 'tel',
       ariaLabel: `Позвонить по номеру ${PHONE_DISPLAY}`,
     },

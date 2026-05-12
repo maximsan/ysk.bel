@@ -1,9 +1,11 @@
+import { PHONE_DISPLAY, TEL_HREF } from './channels.js';
+
 export default {
   menus: [
     {
-      text: '+375 (29) 149 59 89',
-      href: 'tel:+375291495989',
-      ariaLabel: 'Позвонить по номеру +375 (29) 149 59 89',
+      text: PHONE_DISPLAY,
+      href: TEL_HREF,
+      ariaLabel: `Позвонить по номеру ${PHONE_DISPLAY}`,
       type: 'phone',
       showOnlyOn: 'desktop',
     },
@@ -34,9 +36,9 @@ export default {
     },
 
     {
-      text: '+375 (29) 149 59 89',
-      href: 'tel:+375291495989',
-      ariaLabel: 'Позвонить по номеру +375 (29) 149 59 89',
+      text: PHONE_DISPLAY,
+      href: TEL_HREF,
+      ariaLabel: `Позвонить по номеру ${PHONE_DISPLAY}`,
       type: 'phone',
       showOnlyOn: 'mobile',
     },

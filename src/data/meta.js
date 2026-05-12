@@ -1,14 +1,13 @@
+import { PHONE_DISPLAY, TEL_HREF } from './channels.js';
+
 const brandStory =
   'Тихая усадьба у воды недалеко от Минска — рыбалка, баня и тёплый отдых в духе загородного дома.';
 
 const descriptionBody =
-  '✓Рыбалка круглый год - карп, щука, окунь, амур. ✓Скидка зимой 50%. ✓Удобные ночлежки и бесплатные беседки. ✓Баня до 8 человек - 150BYN. Звоните: ☎ +375 (29) 149 59 89.';
+  `✓Рыбалка круглый год - карп, щука, окунь, амур. ✓Скидка зимой 50%. ✓Удобные ночлежки и бесплатные беседки. ✓Баня до 8 человек - 150BYN. Звоните: ☎ ${PHONE_DISPLAY}.`;
 
 const ogBody =
-  '✓Рыбалка круглый год ✓карп, щука, окунь, амур ✓Скидка зимой ✓Парковка ✓Ночлежки ✓Беседки ✓Баня до 8 человек, 150BYN ☎ +375 (29) 149 59 89';
-
-const PHONE_DIGITS = '+375291495989';
-const PHONE_DISPLAY = '+375 (29) 149 59 89';
+  `✓Рыбалка круглый год ✓карп, щука, окунь, амур ✓Скидка зимой ✓Парковка ✓Ночлежки ✓Беседки ✓Баня до 8 человек, 150BYN ☎ ${PHONE_DISPLAY}`;
 
 /**
  * Head tags, Open Graph, and hero copy defaults (`head.liquid`, `hero-section.liquid`, `base.liquid`).
@@ -47,7 +46,7 @@ export default {
   heroCta: {
     primary: {
       label: `Забронировать · ${PHONE_DISPLAY}`,
-      href: `tel:${PHONE_DIGITS}`,
+      href: TEL_HREF,
       ariaLabel: `Позвонить по номеру ${PHONE_DISPLAY} чтобы забронировать`,
     },
     secondary: {

@@ -1,3 +1,5 @@
+import { PHONE_DISPLAY, TEL_HREF, WA_HREF, VIBER_WEB_HREF } from './channels.js';
+
 const lat = 54.291652;
 const lng = 27.480454;
 
@@ -22,22 +24,22 @@ export default {
         icon: 'mail',
       },
       {
-        text: '+375 (29) 149 59 89',
-        href: 'tel:+375291495989',
-        ariaLabel: 'Позвонить по номеру +375 (29) 149 59 89',
+        text: PHONE_DISPLAY,
+        href: TEL_HREF,
+        ariaLabel: `Позвонить по номеру ${PHONE_DISPLAY}`,
         operator: 'a1',
         icon: 'phone',
       },
       {
         text: 'WhatsApp',
-        href: 'https://wa.me/375291495989',
+        href: WA_HREF,
         ariaLabel: 'Написать в WhatsApp',
         operator: 'whatsapp',
         svgIcon: 'whatsapp.svg',
       },
       {
         text: 'Viber',
-        href: 'https://www.viber.com/download/',
+        href: VIBER_WEB_HREF,
         ariaLabel: 'Написать в Viber',
         operator: 'viber',
         svgIcon: 'viber.svg',
