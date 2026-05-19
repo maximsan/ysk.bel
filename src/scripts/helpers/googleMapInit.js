@@ -20,6 +20,24 @@ const MAP_READY_FALLBACK_MS = 15_000;
 
 let googleMapsApiPromise;
 
+function markMapUnavailable(shell = document.getElementById(MAP_ELEMENT.shellId)) {
+  const fallback = document.getElementById(MAP_ELEMENT.fallbackId);
+  shell?.classList.add(
+    MAP_ELEMENT.shellReadyClass,
+    MAP_ELEMENT.shellUnavailableClass,
+  );
+  shell?.classList.remove(MAP_ELEMENT.shellLoadingClass);
+  fallback?.removeAttribute('hidden');
+}
+
+/**
+ * Google Maps JS calls `window.gm_authFailure` when the key/referrer is rejected.
+ * Treat that the same as a blocked script so visitors get the route fallback.
+ */
+if (typeof window !== 'undefined') {
+  window.gm_authFailure = () => markMapUnavailable();
+}
+
 function loadGoogleMapsApi() {
   if (typeof google !== 'undefined' && google.maps) {
     return Promise.resolve();
@@ -55,18 +73,14 @@ export function googleMapInit() {
   }
 
   if (!GOOGLE_MAPS_API_SRC) {
-    shell?.classList.add(MAP_ELEMENT.shellReadyClass);
-    shell?.classList.remove(MAP_ELEMENT.shellLoadingClass);
+    markMapUnavailable(shell);
     return;
   }
 
   if (!mapEl || typeof google === 'undefined' || !google.maps) {
     loadGoogleMapsApi()
       .then(googleMapInit)
-      .catch(() => {
-        shell?.classList.add(MAP_ELEMENT.shellReadyClass);
-        shell?.classList.remove(MAP_ELEMENT.shellLoadingClass);
-      });
+      .catch(() => markMapUnavailable(shell));
     return;
   }
 
@@ -84,8 +98,11 @@ export function googleMapInit() {
   });
 
   function markMapReady() {
+    const fallback = document.getElementById(MAP_ELEMENT.fallbackId);
     shell?.classList.add(MAP_ELEMENT.shellReadyClass);
+    shell?.classList.remove(MAP_ELEMENT.shellUnavailableClass);
     shell?.classList.remove(MAP_ELEMENT.shellLoadingClass);
+    fallback?.setAttribute('hidden', '');
   }
 
   google.maps.event.addListenerOnce(map, 'idle', markMapReady);

@@ -1,22 +1,18 @@
 import * as homePageDom from '@constants/homePageDom.js';
 import {
   applyDisabledMotionStyle,
+  blockThirdPartyRequests,
   disablePageMotion,
 } from '../../support/e2e-page-setup.js';
 import {
   HOME_SELECTORS,
   homeActiveVideoHostSelector,
-  BLOCKED_THIRD_PARTY_URL_GLOBS,
 } from '../constants.js';
 
 const { locators, classMap, timeouts } = HOME_SELECTORS;
 
 export async function blockThirdPartyNoise(page) {
-  for (const urlPattern of BLOCKED_THIRD_PARTY_URL_GLOBS) {
-    await page.route(urlPattern, (interceptedRoute) =>
-      interceptedRoute.abort(),
-    );
-  }
+  await blockThirdPartyRequests(page);
 }
 
 export async function waitForLayout(page) {

@@ -14,6 +14,12 @@
     yarn run build
 ```
 
+### Google Maps API key
+
+`GOOGLE_MAPS_API_KEY` is a public browser key for the Maps JavaScript API. Eleventy reads it during `yarn build` and bundles it into `dist/scripts/index.js`, so protect it in Google Cloud with HTTP referrer restrictions and an API restriction for Maps JavaScript API only.
+
+Production CI sets `REQUIRE_GOOGLE_MAPS_API_KEY=1`; main-branch deploy builds fail when the `GOOGLE_MAPS_API_KEY` GitHub Actions secret is missing. Local and pull-request builds may omit the key, in which case the contacts section shows a fallback route link instead of the embedded map.
+
 ### Git hooks ([pre-commit](https://pre-commit.com/))
 
 After **`yarn install`**, a Yarn plugin runs **`pre-commit install`** when the **`pre-commit`** CLI is on your `PATH` and Git is using **`.git/hooks`** (not a custom `core.hooksPath`). See [`.yarn/plugins/yarn-plugin-pre-commit-install.cjs`](.yarn/plugins/yarn-plugin-pre-commit-install.cjs), [`scripts/postinstall-pre-commit.js`](scripts/postinstall-pre-commit.js), and [`.pre-commit-config.yaml`](.pre-commit-config.yaml). When configured, hooks include **GitGuardian**, **ESLint** (directive comments), and **Stylelint** on staged SCSS.

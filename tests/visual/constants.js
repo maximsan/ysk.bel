@@ -15,17 +15,6 @@ export const VIEWPORTS = {
   desktop: { width: 1440, height: 900 },
 };
 
-/**
- * Third-party URLs blocked during screenshots (noise / non-determinism).
- * Not part of site DOM — lives here next to other test runtime config.
- */
-export const BLOCKED_THIRD_PARTY_URL_GLOBS = [
-  '**/*googletagmanager.com/**',
-  '**/*google-analytics.com/**',
-  '**/*analytics.google.com/**',
-  '**/*mc.yandex.ru/**',
-];
-
 export const HOME_SELECTORS = {
   sectionIds: homePageDom.SECTION_IDS,
   locators: { ...homePageDom.PLAYWRIGHT_HOME_LOCATORS },

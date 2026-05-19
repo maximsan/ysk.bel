@@ -1,6 +1,11 @@
 import { test, expect } from '@playwright/test';
+import { blockThirdPartyRequests } from '../support/e2e-page-setup.js';
 
 test.describe('Home (built site)', () => {
+  test.beforeEach(async ({ page }) => {
+    await blockThirdPartyRequests(page);
+  });
+
   test('document title matches marketing copy', async ({ page }) => {
     await page.goto('/');
 
@@ -33,5 +38,14 @@ test.describe('Home (built site)', () => {
     );
 
     expect(scriptRes.ok()).toBeTruthy();
+  });
+
+  test('map fallback appears when Google Maps is unavailable', async ({ page }) => {
+    await page.goto('/');
+
+    await expect(page.locator('#map-fallback')).toBeVisible({ timeout: 20_000 });
+    await expect(
+      page.locator('#map-fallback a[href*="google.com/maps/dir"]'),
+    ).toHaveText(/google maps/i);
   });
 });

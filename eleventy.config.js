@@ -125,6 +125,12 @@ export default function (config) {
 
       return async () => {
         const googleMapsApiKey = (process.env.GOOGLE_MAPS_API_KEY ?? '').trim();
+        if (process.env.REQUIRE_GOOGLE_MAPS_API_KEY === '1' && !googleMapsApiKey) {
+          throw new Error(
+            'GOOGLE_MAPS_API_KEY is required when REQUIRE_GOOGLE_MAPS_API_KEY=1. Add the restricted production browser key to CI secrets.',
+          );
+        }
+
         let output = await esbuild.build({
           target: 'es2020',
           entryPoints: [path],

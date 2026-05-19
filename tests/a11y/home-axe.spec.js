@@ -2,6 +2,7 @@ import AxeBuilder from '@axe-core/playwright';
 import { test, expect } from '@playwright/test';
 import {
   applyDisabledMotionStyle,
+  blockThirdPartyRequests,
   disablePageMotion,
 } from '../support/e2e-page-setup.js';
 import * as homePageDom from '@constants/homePageDom.js';
@@ -73,6 +74,7 @@ test.describe('home — automated accessibility', () => {
   test('no serious/critical WCAG 2.0/2.1 A & AA issues (axe)', async ({
     page,
   }) => {
+    await blockThirdPartyRequests(page);
     await disablePageMotion(page);
     await hideGlobalChrome(page);
     await page.goto('/', { waitUntil: 'domcontentloaded' });
@@ -85,8 +87,8 @@ test.describe('home — automated accessibility', () => {
 
     const results = await new AxeBuilder({ page })
       .withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa'])
-      // Google Maps embed is third-party; we do not assert on tile contrast.
-      .exclude('#map')
+      // Google Maps canvas is third-party; the local fallback remains in scope.
+      .exclude('#map-canvas')
       .exclude('iframe[src*="googletagmanager.com"]')
       .analyze();
 

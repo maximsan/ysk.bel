@@ -12,6 +12,25 @@ const DISABLED_MOTION_STYLE = `
 }
 `;
 
+export const BLOCKED_THIRD_PARTY_URL_GLOBS = [
+  '**/*googletagmanager.com/**',
+  '**/*google-analytics.com/**',
+  '**/*analytics.google.com/**',
+  '**/*mc.yandex.ru/**',
+  '**/*maps.googleapis.com/**',
+  '**/*maps.gstatic.com/**',
+  '**/*googleapis.com/maps/**',
+  '**/*google.com/maps/**',
+];
+
+export async function blockThirdPartyRequests(page) {
+  for (const urlPattern of BLOCKED_THIRD_PARTY_URL_GLOBS) {
+    await page.route(urlPattern, (interceptedRoute) =>
+      interceptedRoute.abort(),
+    );
+  }
+}
+
 export async function disablePageMotion(page) {
   await page.emulateMedia({ reducedMotion: 'reduce' });
   await page.addInitScript((cssText) => {

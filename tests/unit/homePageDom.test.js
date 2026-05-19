@@ -47,6 +47,7 @@ describe('homePageDom', () => {
     expect(STATE_CLASS.mediaReady).toBe('is-media-ready');
     expect(MENU_CLASS.open).toBe('open');
     expect(MAP_ELEMENT.shellReadyClass).toBe('map-shell--ready');
+    expect(MAP_ELEMENT.shellUnavailableClass).toBe('map-shell--unavailable');
   });
 
   it('exposes gallery and PhotoSwipe selectors used by photo-swipe.js', () => {
