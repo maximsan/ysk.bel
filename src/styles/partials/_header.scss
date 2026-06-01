@@ -275,14 +275,6 @@
     padding-top: max(0.75rem, env(safe-area-inset-top));
     padding-bottom: 0.75rem;
 
-    /*
-     * Full-height drawer uses this as its `top` inset (`_menu.scss`) so the text logo stays in the bar above the sheet.
-     * Matches navbar vertical padding plus the logo row tap target (~2.75rem).
-     */
-    --mobile-nav-bar-block-size: calc(
-      max(0.75rem, env(safe-area-inset-top)) + 0.75rem + 2.75rem
-    );
-
     .navbar-toggler {
       position: absolute;
       top: 50%;

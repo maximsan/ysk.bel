@@ -5,7 +5,7 @@
     - Оптимизированная hero-фотография через CSS background + preload
       (так Lighthouse не откладывает LCP на декоративном изображении).
     - Один <h1>, eyebrow-строка с копперной линейкой, CTA-ряд по единому
-      словарю `_cta.scss`, trust strip.
+      словарю `_cta.scss`, trust chips.
     - Сетка и scrim полностью описаны в `_hero.scss` — здесь только разметка.
 
   Данные:
@@ -13,7 +13,7 @@
     - `meta.brandStory`       — lede под заголовком
     - `meta.heroCta.primary`  — доминантная кнопка (обычно tel:)
     - `meta.heroCta.secondary`— ghost-кнопка (обычно #services)
-    - `meta.heroTrustStrip`   — 3 короткие подписи через middle-dot
+    - `meta.heroTrustStrip`   — 3 коротких преимущества в chip-строке
 {%- endcomment -%}
 <section
   class='section-container hero intro'

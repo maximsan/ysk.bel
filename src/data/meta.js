@@ -58,7 +58,7 @@ export default {
   },
   /**
    * Three short captions beneath the CTAs.
-   * Liquid joins them with a middle-dot; keep each phrase ≤28 characters for the single-line layout.
+   * Liquid renders them as compact hero chips; keep each phrase ≤28 characters.
    */
   heroTrustStrip: [
     '30 мин от Минска',

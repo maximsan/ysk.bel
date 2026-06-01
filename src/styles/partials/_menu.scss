@@ -2,7 +2,7 @@
   /* Narrow screens: slide-in drawer; safe-area bottom; motion + reduced-motion (see docs/glossary.md). */
   @media only screen and (width >= 320px) and (width <= 767.98px) {
     /*
-     * Full-viewport sheet below fixed navbar chrome — sync `top` / `min-height` with `--mobile-nav-bar-block-size` (`_header.scss`).
+     * Full-viewport sheet below fixed navbar chrome — sync `top` / `min-height` with `--mobile-nav-bar-block-size` (`_tokens.scss`).
      * docs/glossary.md («Scrim») — pinned bar while open (`sideBar.js`).
      */
     position: fixed;
@@ -323,4 +323,3 @@
     }
   }
 }
-
