@@ -22,6 +22,13 @@ function formatViolations(violations) {
     .join('\n\n');
 }
 
+function seriousOrCriticalViolations(results) {
+  return results.violations.filter(
+    (violation) =>
+      violation.impact === 'serious' || violation.impact === 'critical',
+  );
+}
+
 async function hideGlobalChrome(page) {
   await page.addInitScript(() => {
     document.cookie = [
@@ -92,9 +99,28 @@ test.describe('home — automated accessibility', () => {
       .exclude('iframe[src*="googletagmanager.com"]')
       .analyze();
 
-    const serious = results.violations.filter(
-      (v) => v.impact === 'serious' || v.impact === 'critical',
-    );
+    const serious = seriousOrCriticalViolations(results);
+    expect(serious, formatViolations(serious)).toEqual([]);
+  });
+
+  test('visible info strip has no serious/critical WCAG 2.0/2.1 A & AA issues (axe)', async ({
+    context,
+    page,
+  }) => {
+    await context.clearCookies();
+    await blockThirdPartyRequests(page);
+    await disablePageMotion(page);
+    await page.goto('/', { waitUntil: 'domcontentloaded' });
+    await applyDisabledMotionStyle(page);
+    await expect(page.locator(SITE_SELECTORS.infoBanner)).toBeVisible();
+    await page.evaluate(() => document.fonts.ready);
+
+    const results = await new AxeBuilder({ page })
+      .withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa'])
+      .include(SITE_SELECTORS.infoBanner)
+      .analyze();
+
+    const serious = seriousOrCriticalViolations(results);
     expect(serious, formatViolations(serious)).toEqual([]);
   });
 });

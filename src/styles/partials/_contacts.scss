@@ -4,7 +4,7 @@
    *
    *   • `--contacts-surface-radius` / `--map-shell-radius` stay in sync so both panels share one corner language.
    *   • Light mode: hero photo only.
-   *   • `prefers-color-scheme: dark`: cool gradient scrim layered over the photo so blue water/stones marry the peat UI palette.
+   *   • `prefers-color-scheme: dark`: cool gradient scrim (docs/glossary.md «Scrim») layered over the photo so blue water/stones marry the peat UI palette.
    */
   $contacts-photo: url('#{$images-path}/stones_1920x1080.webp');
 
@@ -35,6 +35,18 @@
     background-repeat: no-repeat, no-repeat;
     background-attachment: fixed, fixed;
     background-size: cover, cover;
+  }
+
+  /*
+   * Mobile Safari can repaint fixed backgrounds poorly while scrolling.
+   * Keep the desktop atmosphere, but use normal document scrolling on phones.
+   */
+  @media only screen and (width <= 767.98px) {
+    background-attachment: scroll;
+
+    @media (prefers-color-scheme: dark) {
+      background-attachment: scroll, scroll;
+    }
   }
 
   .our-contacts {

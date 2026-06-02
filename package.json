@@ -7,7 +7,7 @@
   "packageManager": "yarn@4.5.2",
   "scripts": {
     "watch:eleventy": "node scripts/run-with-import-aliases.js eleventy --serve",
-    "build:eleventy": "node scripts/run-with-import-aliases.js eleventy",
+    "build:eleventy": "NODE_ENV=production node scripts/run-with-import-aliases.js eleventy",
     "debug": "DEBUG=* node scripts/run-with-import-aliases.js eleventy --serve",
     "dev": "npm-run-all clean watch:eleventy",
     "build": "npm-run-all clean build:eleventy",

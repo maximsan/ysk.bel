@@ -29,13 +29,21 @@ Use this when adding a **new block** to `base.liquid` (or a new page that should
 2. `yarn test:unit` (if JS changed)
 3. `yarn test:a11y` (accessibility; requires built `dist/`)
 4. `yarn test:visual` — extend **`tests/visual/home-sections.spec.js`** (consolidated `main-content` screenshot, or cooperation / footer strips) or add a focused spec + update baselines: `yarn test:visual:update` (commit `*-darwin.png` / refresh `*-linux.png` via **`update-visual-snapshots`** — `.github/workflows/update-visual-snapshots.yaml`).
-5. Optional: **`yarn test:visual:widths`** — first-screen viewport at `320 … 1920` (`playwright.config.js` project **`width-pass`**). **`yarn test:visual:widths:update`** after UI changes.
+5. Responsive first-screen coverage runs inside **`yarn test:visual`**: viewport snapshots at `320 … 1920` plus compact-phone bounds assertions (`playwright.config.js` project **`width-pass`**). Refresh with **`yarn test:visual:update`** after intentional UI changes.
 
 ## 5. Optional lab performance
 
-- With **`yarn build && yarn exec serve dist -l 4173`** running: **`JSON` metrics:** **`yarn lighthouse:home:json`** / **`yarn lighthouse:mobile:json`** (use Playwright’s Chromium via `scripts/lighthouse-with-playwright.js`; output is gitignored). **WCAG gating** stays on **`yarn test:a11y`**, not Lighthouse.
+- With **`yarn build && yarn exec serve dist -l 4173`** running: **`JSON` metrics:** **`yarn lighthouse:home:json`** / **`yarn lighthouse:mobile:json`** (use Playwright’s Chromium via `scripts/lighthouse-with-playwright.js`; output is gitignored).
+- For the home-page lab pass, target **LCP ≤ 2.5s**, **CLS ≤ 0.05**, and **TBT ≤ 200ms**. INP is a production field metric, so do not report it as a local Lighthouse pass.
+- **WCAG gating** stays on **`yarn test:a11y`**, not Lighthouse.
 
-**Related:** semantic tokens and section patterns in `src/styles/modules/_tokens.scss`, `_section-chapter.scss`, and the checklist in this file.
+## 6. Manual UI QA
+
+- Sample hero text-over-photo contrast in light and dark schemes at `320`, `375`, `414`, `768`, `1024`, `1280`, `1440`, and `1920px`. Axe cannot validate contrast against raster-photo pixels reliably.
+- Check keyboard focus, hover states, and reduced-motion behaviour for changed interactive surfaces.
+- Spot-check Firefox desktop, Android Chrome, and iOS Safari after layout changes. Fixed photo backgrounds must degrade to normal scrolling on phone widths.
+
+**Related:** semantic tokens and section patterns in `src/styles/modules/_tokens.scss`, `_section-chapter.scss`, and the quality gates above.
 
 ## CTA system (`.cta` / `cta-row`)
 

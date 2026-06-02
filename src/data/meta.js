@@ -16,7 +16,7 @@ const PHONE_DISPLAY = '+375 (29) 149 59 89';
  * Key fields:
  *   • `brandStory` — single sentence reused in `<meta>` text and hero; update visual snapshots if it changes.
  *   • `themeColor` / `themeColorDark` — browser chrome tint; override per route via page front matter.
- *   • `heroCta` / `heroTrustStrip` — wired into the hero; keep trust lines short so the dotted row does not wrap.
+ *   • `heroCta` / `heroTrustStrip` — wired into the hero; keep trust lines short so the chip row does not wrap.
  */
 export default {
   /** Same text as hero lede / meta description opener. */

@@ -2,8 +2,9 @@
  * Home hero: full-bleed photo stage with overlaid copy and CTAs (`hero-section.liquid`).
  *
  * Layout:
- *   `.hero` is a single-cell grid. `<picture>` / background, the readable scrim, and `.hero-content`
- *   share that cell (`grid-area: stage`) so the image stays a decorative layer and text stacks above.
+ *   `.hero` is a single-cell grid. The CSS background and readable scrim
+ *   (docs/glossary.md «Scrim») are full-bleed decorative layers; `.hero-content`
+ *   owns the grid cell and stacks above them.
  *
  * Responsive:
  *   • <768px: content centered; `align-content: end` keeps the block near the bottom without clipping CTAs.
@@ -54,11 +55,13 @@
   }
 }
 
-.hero > * {
+.hero-content {
   grid-area: stage;
 }
 
 .hero__scrim {
+  position: absolute;
+  inset: 0;
   z-index: 1;
   pointer-events: none;
   background:

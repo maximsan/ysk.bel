@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 import { setupHomeVisualPage } from './support/home-snapshot-helpers.js';
 
-/** Group G manual checklist widths — viewport chrome, first screen. */
+/** First-screen responsive audit widths: viewport chrome, hero actions, and benefit chips. */
 const WIDTHS = [320, 375, 414, 768, 1024, 1280, 1440, 1920];
 const HEIGHT = 900;
 const COMPACT_PHONE = { width: 375, height: 667 };

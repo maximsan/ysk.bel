@@ -1,19 +1,17 @@
 {%- comment -%}
-  Hero — первый экран на главной.
+  Home hero: first-screen photo, headline, CTA row, and trust chips.
 
-  Group B редизайна (см. `docs/hero-info-cooperation-redesign-plan.md`):
-    - Оптимизированная hero-фотография через CSS background + preload
-      (так Lighthouse не откладывает LCP на декоративном изображении).
-    - Один <h1>, eyebrow-строка с копперной линейкой, CTA-ряд по единому
-      словарю `_cta.scss`, trust chips.
-    - Сетка и scrim полностью описаны в `_hero.scss` — здесь только разметка.
+  The optimized responsive photo is a decorative CSS background with an
+  explicit preload so the browser can discover the LCP image early.
+  `_hero.scss` owns the layout and readable scrim (docs/glossary.md «Scrim»);
+  this partial keeps the semantic markup.
 
-  Данные:
-    - `meta.heroEyebrow`      — опциональная строка над заголовком
-    - `meta.brandStory`       — lede под заголовком
-    - `meta.heroCta.primary`  — доминантная кнопка (обычно tel:)
-    - `meta.heroCta.secondary`— ghost-кнопка (обычно #services)
-    - `meta.heroTrustStrip`   — 3 коротких преимущества в chip-строке
+  Data:
+    - `meta.heroEyebrow`       — optional line above the heading
+    - `meta.brandStory`        — lede below the heading
+    - `meta.heroCta.primary`   — dominant action, usually `tel:`
+    - `meta.heroCta.secondary` — ghost action, usually `#services`
+    - `meta.heroTrustStrip`    — three short benefit chips
 {%- endcomment -%}
 <section
   class='section-container hero intro'

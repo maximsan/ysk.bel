@@ -6,6 +6,7 @@ import { createHash } from 'node:crypto';
 import esbuild from 'esbuild';
 
 const repoRoot = path.dirname(fileURLToPath(import.meta.url));
+const isProductionBuild = process.env.NODE_ENV === 'production';
 
 function pathAliasesEsbuildPlugin() {
   const constantsRoot = path.join(repoRoot, 'src/scripts/constants');
@@ -73,7 +74,9 @@ export default function (config) {
       if (path.basename(inputPath).startsWith('_')) {
         return false;
       }
-      const { css } = sass.compile(inputPath);
+      const { css } = sass.compile(inputPath, {
+        style: isProductionBuild ? 'compressed' : 'expanded',
+      });
       return {
         /* Exclude .scss files from `collections.all` so they don't show up in sitemaps, RSS feeds, etc. */
         eleventyExcludeFromCollections: true,
@@ -137,7 +140,7 @@ export default function (config) {
           minify: true,
           bundle: true,
           write: false,
-          sourcemap: true,
+          sourcemap: !isProductionBuild,
           plugins: [pathAliasesEsbuildPlugin()],
           define: {
             __GOOGLE_MAPS_API_KEY__: JSON.stringify(googleMapsApiKey),
@@ -164,6 +167,7 @@ export default function (config) {
       services,
       stockingStories,
       videosShowcase,
+      isProductionBuild,
     },
   });
 
